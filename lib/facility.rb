@@ -14,4 +14,10 @@ class Facility
   def add_service(service)
     @services << service
   end
+
+  def register_vehicle(car)
+    if services.include?('Vehicle Registration')
+      self.registered_vehicles << car
+    end
+  end
 end
