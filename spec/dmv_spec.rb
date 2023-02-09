@@ -67,11 +67,18 @@ RSpec.describe Dmv do
       expect(@facility_1.registered_vehicles).to eq([@cruz])
     end
 
-    it 'stores current date and time of registration' do
+    it 'stores current date of registration' do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
 
       expect(@cruz.registration_date).to eq(Date.today)
+    end
+
+    it 'generates and stores plate type' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@cruz.plate_type).to eq(:regular)
     end
 
     
