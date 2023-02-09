@@ -60,6 +60,13 @@ RSpec.describe Dmv do
       expect(@facility_1.collected_fees).to eq(0)
     end
 
-    
+    it 'can register vehicles' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+    end
+
+ 
   end
 end
