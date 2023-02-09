@@ -81,6 +81,11 @@ RSpec.describe Dmv do
       expect(@cruz.plate_type).to eq(:regular)
     end
 
-    
+    it 'collects fees' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+
+      expect(facility_1.collected_fees).to eq(100)
+    end
   end
 end
