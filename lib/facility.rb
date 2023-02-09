@@ -17,6 +17,7 @@ class Facility
 
   def register_vehicle(car)
     if services.include?('Vehicle Registration')
+      car.registration_date = Date.today
       self.registered_vehicles << car
     end
   end
