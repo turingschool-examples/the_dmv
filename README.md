@@ -4,7 +4,7 @@ This is the starter repo for the BE Mod1 DMV project.
 
 1. Describe the steps you took to dig in to this code base. What was your process? If you don’t feel you had a process, define one that you might like to try next time.
 
-  - My first step was to peruse each spec file and run rspec to see what types of errors pop up.  I decided to work in the same order that was in the spec_helper.rb for debugging.  Then I tried to see which data types each class was using or wanted to have as an output.  
+  - My first step was to peruse each spec file and run rspec to see what types of errors pop up.  I decided to work in the same order that was in the spec_helper.rb for debugging.  This proved to not be the correct order because dmv had instances of facilities in it's test.  After rechoosing the order to work on I used pry then moved on to debugging.
 
 2. What was hard about working with code you did not write?
 
