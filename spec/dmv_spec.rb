@@ -87,5 +87,19 @@ RSpec.describe Dmv do
 
       expect(facility_1.collected_fees).to eq(100)
     end
+
+    it 'can add second and third vehicles and stores all data' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+
+      expect(@camaro.registration_date).to eq(Date.today)
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@bolt.registration_date).to eq(Date.today)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+      expect(facility_1.collected_fees).to eq(325)
+    end
   end
 end
