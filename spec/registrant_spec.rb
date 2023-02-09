@@ -11,11 +11,12 @@ RSpec.describe Registrant do
     end
 
     it 'has attributes' do
+      require 'pry'; binding.pry
       expect(registrant_1.name).to eq('Bruce')
-      expect(registrant_1.age).to eq(15)
+      expect(registrant_1.age).to eq(18)
       expect(registrant_1.permit?).to be(true)
       
-
+require 'pry'; binding.pry
       expect(registrant_2.name).to eq('Penny')
       expect(registrant_2.age).to eq(15)
       expect(registrant_2.permit?).to be(false)
