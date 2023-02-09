@@ -45,7 +45,7 @@ RSpec.describe Dmv do
     end
   end
 
-  describe '#Iteration 2' do
+  describe '#Iteration 2: Vehicle Registration' do
     it 'can add vehicle registration service and initialize cars' do
       @facility_1.add_service('Vehicle Registration')
 
