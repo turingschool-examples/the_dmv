@@ -12,4 +12,8 @@ class Registrant
   def permit?
     permit
   end
+
+  def earn_permit
+    self.permit = true
+  end
 end
