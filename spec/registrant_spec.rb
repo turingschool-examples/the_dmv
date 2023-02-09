@@ -21,7 +21,7 @@ RSpec.describe Registrant do
     end
 
     it 'licensed_data is all false by default' do
-      expect(registrant_1.licensed_data).to eq({ 
+      expect(registrant_1.license_data).to eq({ 
         written: false, 
         license: false, 
         renewed: false 
