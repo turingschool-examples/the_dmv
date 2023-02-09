@@ -26,6 +26,20 @@ RSpec.describe Registrant do
         license: false, 
         renewed: false 
       })
+
+      expect(registrant_2.license_data).to eq({ 
+        written: false, 
+        license: false, 
+        renewed: false 
+      })
+    end
+  end
+
+  describe '#earn_permit' do
+    it 'lets registrant earn their permit' do
+      registrant_2.earn_permit
+
+      expect(registrant_2.permit?).to be(true)
     end
   end
 end
