@@ -69,7 +69,11 @@ class Facility
   end
 
   def administer_road_test(registrant)
-    registrant.license_data[:license] = true
+    if registrant.license_data[:written] == true
+      registrant.license_data[:license] = true
+    else
+      'Need to pass written test first.'
+    end
   end
 
 end
