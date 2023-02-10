@@ -37,4 +37,9 @@ RSpec.describe Facility do
       expect(@cruz.registration_date).to be nil
     end
 
+    it 'starts with no registered vehicles or fees' do
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_1.collected_fees).to eq(0)
+    end
+
 end
