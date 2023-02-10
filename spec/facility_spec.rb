@@ -92,5 +92,13 @@ RSpec.describe Facility do
     it 'cannot administer a written test if the facility does not have it as a service' do
       expect(facility_1.administer_written_test(registrant_1)).to be(false)
     end
+
+    it 'changes written_test in registrant license_data to true if the facility offeres the service' do
+      facility_1.add_service('Written test')
+      require 'pry'; binding.pry
+      facility_1.administer_written_test(registrant_1)
+require 'pry'; binding.pry
+      expect(registrant_1.license_data[:written]).to be(true)
+    end
   end
 end
