@@ -46,4 +46,14 @@ RSpec.describe Registrant do
       expect(@registrant_2.age).to eq(@person_2[:age])
     end
   end
+
+  describe '#permit?' do
+    it 'has a permit' do
+      expect(@registrant_1.permit?).to eq(true)
+    end
+
+    it 'does not have a permit' do
+      expect(@registrant_2.permit?).to eq(false)
+    end
+  end
 end
