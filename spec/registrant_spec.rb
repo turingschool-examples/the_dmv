@@ -28,4 +28,17 @@ RSpec.describe Registrant do
       expect(registrant_2.permit?).to be false
     end
   end
+
+  describe '#earn_permit' do
+    it 'allows a registrant to earn a permit' do
+      registrant_1 = Registrant.new('Bruce', 18, true)
+      registrant_2 = Registrant.new('Penny', 15)
+
+      expect(registrant_2.permit?).to be false
+
+      registrant_2.earn_permit
+
+      expect(registrant_2.permit?).to be true
+    end
+  end
 end
