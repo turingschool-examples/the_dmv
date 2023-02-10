@@ -40,4 +40,10 @@ RSpec.describe Dmv do
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
+
+  describe 'Registrant' do
+    it 'exists' do
+
+    end
+  end
 end
