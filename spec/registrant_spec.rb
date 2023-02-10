@@ -4,7 +4,7 @@ RSpec.describe Registrant do
   before(:each) do
     @person_1 = {
       name: 'Bruce',
-      age: 18
+      age: 18,
       permit: true
     }
 
