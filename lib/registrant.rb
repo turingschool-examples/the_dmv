@@ -9,7 +9,7 @@ class Registrant
     @permit = permit
   end
 
-
+  
 
 
 
