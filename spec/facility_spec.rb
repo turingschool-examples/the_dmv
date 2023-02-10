@@ -10,7 +10,7 @@ RSpec.describe Facility do
   let(:camaro) { Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} ) }
 
   let(:registrant_1) { Registrant.new('Bruce', 18, true ) }
-  let(:registrant_2) { Registrant.new('Penny', 15 ) }
+  let(:registrant_2) { Registrant.new('Penny', 16 ) }
   let(:registrant_3) { Registrant.new('Tucker', 15 ) }
 
   describe '#initialize' do
@@ -90,15 +90,37 @@ RSpec.describe Facility do
 
   describe '#administer_written_test' do
     it 'cannot administer a written test if the facility does not have it as a service' do
+      facility_1.administer_written_test(registrant_1)
+
       expect(facility_1.administer_written_test(registrant_1)).to be(false)
     end
 
     it 'changes written_test in registrant license_data to true if the facility offeres the service' do
       facility_1.add_service('Written test')
-      require 'pry'; binding.pry
       facility_1.administer_written_test(registrant_1)
-require 'pry'; binding.pry
+
       expect(registrant_1.license_data[:written]).to be(true)
+    end
+
+    it 'will not allow a registrant with permit == false administer_written_permit' do
+      facility_1.add_service('Written test')
+      facility_1.administer_written_test(registrant_2)
+
+      expect(registrant_2.license_data[:written]).to be(false)
+
+      registrant_2.earn_permit
+
+      expect(facility_1.administer_written_test(registrant_2)).to be(true)
+    end
+
+    it 'will not allow a registrant who is not 16 to take written test' do
+      facility_1.add_service('Written test')
+
+      expect(facility_1.administer_written_test(registrant_3)).to be(false)
+
+      registrant_3.earn_permit
+
+      expect(facility_1.administer_written_test(registrant_3)).to be(false)
     end
   end
 end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Registrant do
   let(:registrant_1) { Registrant.new('Bruce', 18, true ) }
-  let(:registrant_2) { Registrant.new('Penny', 15 ) }
+  let(:registrant_2) { Registrant.new('Penny', 16 ) }
 
   describe '#initialize' do
     it 'exitsts' do
@@ -16,7 +16,7 @@ RSpec.describe Registrant do
       expect(registrant_1.permit?).to be(true)
 
       expect(registrant_2.name).to eq('Penny')
-      expect(registrant_2.age).to eq(15)
+      expect(registrant_2.age).to eq(16)
       expect(registrant_2.permit?).to be(false)
     end
 
