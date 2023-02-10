@@ -22,7 +22,9 @@ class Facility
   def register_vehicle(vehicle)
     vehicle.registration_date = Date.today
     @collected_fees += 100
-    if vehicle.engine == :ice
+    if Date.today.year - vehicle.year >= 25
+      vehicle.plate_type = :antique
+    else
       vehicle.plate_type = :regular
     end
     @registered_vehicles << vehicle
