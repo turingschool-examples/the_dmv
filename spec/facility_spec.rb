@@ -44,6 +44,31 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([@cruz])
       expect(@facility_1.collected_fees).to be(100)
     end
+
+    it 'can register another vehicle' do 
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.register_vehicle(@cruz)).to eq(@facility_1.registered_vehicles)
+      expect(@cruz.registration_date).to eq(Date.today)
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+      expect(@facility_1.collected_fees).to be(100)
+      expect(@facility_1.register_vehicle(@camaro)).to eq(@facility_1.registered_vehicles)
+      expect(@camaro.registration_date).to eq(Date.today)
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@facility_1.register_vehicle(@bolt)).to eq(@facility_1.registered_vehicles)
+      expect(@bolt.registration_date).to eq(Date.today)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+      expect(@facility_1.collected_fees).to be(325)
+    end
+
+    it 'has other facility that starts empty' do
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.services).to eq([])
+      expect(@facility_2.register_vehicle(@bolt)).to be(nil)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to be(0)
+    end
     
   end
 end
