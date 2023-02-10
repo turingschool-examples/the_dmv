@@ -1,4 +1,5 @@
 require './lib/vehicle'
+require './lib/registrant'
 
 class Facility
   attr_reader :name,
@@ -55,6 +56,22 @@ class Facility
     end
     @collected_fees += fee
   end
-end
 
-require 'pry'; binding.pry
+  def administer_written_test(registrant)
+    return false unless @services.include?('Written Test') && registrant.permit?
+
+    registrant.license_data[:written] = true
+  end
+
+  def administer_road_test(registrant)
+    return false unless @services.include?('Road Test') && registrant.license_data[:written] == true
+
+    registrant.license_data[:license] = true
+  end
+
+  def renew_drivers_license(registrant)
+    return false unless @services.include?('Renew License') && registrant.license_data[:road] == true
+
+    registrant.license_data[:renewed] = true
+  end
+end
