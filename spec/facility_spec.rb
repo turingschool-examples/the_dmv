@@ -58,7 +58,7 @@ RSpec.describe Facility do
       expect(@bolt.registration_date).to eq(Date.today)
       expect(@bolt.plate_type).to eq(:ev)
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
-      expect(@facility.collected_fees).to eq(325)
+      expect(@facility_1.collected_fees).to eq(325)
     end
   end
 end
