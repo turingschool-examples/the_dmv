@@ -14,4 +14,12 @@ class Registrant
   # @license = @license_data[:license]
   # @renewed = @license_data[:renewed]
   end
+
+  def permit?
+    @permit
+  end
+
+  def earn_permit
+    @permit = true
+  end
 end
