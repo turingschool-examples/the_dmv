@@ -21,4 +21,19 @@ RSpec.describe Registrant do
       expect(@registrant_2.permit?).to eq(false)
     end
   end
+
+  describe '#earn_permit' do
+    it 'can change a permit to true if registrant is at least 15 years old' do
+      @registrant_2.earn_permit
+
+      expect(@registrant_2.permit?).to eq(true)
+    end
+
+    it 'does not allow registrant to earn permit if under 15 years old' do
+      registrant_3 = Registrant.new('Sally', 10)
+      registrant_3.earn_permit
+
+      expect(registrant_3.permit?).to eq(false)
+    end
+  end
 end
