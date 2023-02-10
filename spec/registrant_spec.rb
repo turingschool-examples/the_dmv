@@ -26,9 +26,9 @@ RSpec.describe Registrant do
   expect(registrant_2.permit?).to eq(true)
   end
 
-  xit 'stores license data in a hash' do
+  it 'stores license data in a hash' do
     registrant_2 = Registrant.new('Penny', 15)
     
-    expect(registrant_2.licence_data).to eq
+    expect(registrant_2.license_data).to eq({:written => false, :license => false, :renewed => false})
   end
 end
