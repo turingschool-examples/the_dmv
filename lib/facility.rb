@@ -21,14 +21,16 @@ class Facility
   end
 
   def register_vehicle(current_vehicle)
-    current_vehicle.registration_date = Time.now.strftime("%m/%d/%Y")
-    @registered_vehicles << current_vehicle
-    if current_vehicle.antique?
-      @collected_fees += 25
-    elsif current_vehicle.electric_vehicle?
-      @collected_fees +=200
-    else
-      @collected_fees += 100
+    if @services.include?("Vehicle Registration")
+      current_vehicle.registration_date = Time.now.strftime("%m/%d/%Y")
+      @registered_vehicles << current_vehicle
+      if current_vehicle.antique?
+        @collected_fees += 25
+      elsif current_vehicle.electric_vehicle?
+        @collected_fees +=200
+      else
+        @collected_fees += 100
+      end
     end
   end
 

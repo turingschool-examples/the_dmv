@@ -7,7 +7,7 @@ RSpec.describe Facility do
     @facility = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
   end
   describe '#initialize' do
-    xit 'can initialize' do
+    it 'can initialize' do
       expect(@facility).to be_an_instance_of(Facility)
       expect(@facility.name).to eq('Albany DMV Office')
       expect(@facility.address).to eq('2242 Santiam Hwy SE Albany OR 97321')
@@ -17,7 +17,7 @@ RSpec.describe Facility do
   end
 
   describe '#add service' do
-    xit 'can add available services' do
+    it 'can add available services' do
       expect(@facility.services).to eq([])
       @facility.add_service('New Drivers License')
       @facility.add_service('Renew Drivers License')
@@ -66,7 +66,7 @@ RSpec.describe "Facility Functionality" do
     expect(@facility_1.collected_fees).to eq(325)
   end
 
-  xit "only registers vehicles when the option is available" do
+  it "only registers vehicles when the option is available" do
     expect(@facility_2.registered_vehicles).to eq([])
     expect(@facility_2.services).to eq([])
 
