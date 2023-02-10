@@ -5,7 +5,7 @@ This is the starter repo for the BE Mod1 DMV project.
 1. Describe the steps you took to dig in to this code base. What was your process? If you don’t feel you had a process, define one that you might like to try next time.
     I wrote everything I understood about the code on whiteboard sticky notes on my whiteboard in a hierarchy color coded by class. 
 
-      ![Board Iteration 1](IMG_1122_2.jpg)
+      ![Original Understanding](https://user-images.githubusercontent.com/56466345/217983264-9234d501-27e9-421a-a132-5a23ac5c5512.jpg)
 
 2. What was hard about working with code you did not write?
     It was easier to work with code that I did not write. Debugging is fun and simple for me. Writing code is escaping me at the moment. Reading code is easier. 
