@@ -85,6 +85,10 @@ RSpec.describe Facility do
     end
 
     it 'only administers written test if registrant has a permit' do
+      @facility_1.add_service('Written Test')
+
+      expect(@facility_1.administer_written_test(@registrant_2)).to eq('You are not eligible for a written test.')
+      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
 
     end
 
