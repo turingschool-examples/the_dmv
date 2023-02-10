@@ -111,5 +111,13 @@ RSpec.describe Facility do
       expect(@facility_1.administer_road_test(@registrant_1)).to be true
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
     end
+
+    it 'can only administer road test if registrant passed written test' do
+      @facility_1.add_service('Written Test') 
+      @facility_1.add_service('Road Test')
+      
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq('Need to pass written test first.')
+      expect(@registrant_1.license_data).to eq({:written=>false,:license=>false, :renewed=>false})
+    end
   end
 end
