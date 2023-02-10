@@ -11,6 +11,7 @@ RSpec.describe Registrant do
       expect(registrant_2).to be_a(Registrant)
       expect(registrant_1.name).to eq('Bruce')
       expect(registrant_1.age).to eq(18)
+      expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
 
