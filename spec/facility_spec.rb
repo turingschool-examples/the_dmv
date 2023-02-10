@@ -79,4 +79,101 @@ RSpec.describe Facility do
       expect(facility_2.collected_fees).to eq(0)
     end
   end
+
+  describe 'Can manage License data properly' do
+    it 'has working written test' do
+    registrant_1 = Registrant.new('Bruce', 18, true)
+    registrant_2 = Registrant.new('Penny', 16)
+    registrant_3 = Registrant.new('Tucker', 15)
+    facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+    facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+    
+    expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    expect(registrant_1.permit?).to eq(true)
+    expect(facility_1.administer_written_test(registrant_1)).to eq(false)
+    expect(facility_1.add_service('Written Test')).to eq(["Written Test"])
+    expect(facility_1.administer_written_test(registrant_1)).to eq(true)
+    expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    expect(facility_1.administer_written_test(registrant_2)).to eq(false)
+
+    registrant_2.earn_permit
+
+    expect(facility_1.administer_written_test(registrant_2)).to eq(true)
+    expect(registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+
+    registrant_3.earn_permit
+
+    expect(facility_1.administer_written_test(registrant_3)).to eq(false)
+    end
+  end
+
+  describe 'Can adminiter road test' do
+    it 'Cannot take test without service' do
+    registrant_1 = Registrant.new('Bruce', 18, true)
+    registrant_2 = Registrant.new('Penny', 16)
+    registrant_3 = Registrant.new('Tucker', 15)
+    facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+    facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+    registrant_3.earn_permit
+
+    expect(facility_1.administer_road_test(registrant_3)).to eq(false)
+    expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    expect(facility_1.administer_road_test(registrant_1)).to eq(false)
+    end
+
+    it 'can take road test with service' do
+      registrant_1 = Registrant.new('Bruce', 18, true)
+      registrant_2 = Registrant.new('Penny', 16)
+      registrant_3 = Registrant.new('Tucker', 15)
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })        
+      facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+      registrant_2.earn_permit
+      facility_1.add_service('Road Test')
+      facility_1.add_service('Written Test')
+      facility_1.administer_written_test(registrant_1)
+      facility_1.administer_written_test(registrant_2)
+
+      expect(facility_1.administer_road_test(registrant_1)).to eq(true)
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+      expect(facility_1.administer_road_test(registrant_2)).to eq(true)
+      expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+    end
+    
+    it 'cannot renew license without service' do
+      registrant_1 = Registrant.new('Bruce', 18, true)
+      registrant_2 = Registrant.new('Penny', 16)
+      registrant_3 = Registrant.new('Tucker', 15)
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })        
+      facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+      registrant_2.earn_permit
+      facility_1.add_service('Written Test')
+      facility_1.administer_written_test(registrant_1)
+      facility_1.administer_written_test(registrant_2)
+
+      expect(facility_1.renew_drivers_license(registrant_1)).to eq(false)
+    end
+
+    it 'can renew license' do
+      registrant_1 = Registrant.new('Bruce', 18, true)
+      registrant_2 = Registrant.new('Penny', 16)
+      registrant_3 = Registrant.new('Tucker', 15)
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })        
+      facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+      registrant_2.earn_permit
+      facility_1.add_service('Written Test')
+      facility_1.administer_written_test(registrant_1)
+      facility_1.administer_written_test(registrant_2)
+      facility_1.add_service('Road Test')
+      facility_1.administer_road_test(registrant_1)
+      facility_1.administer_road_test(registrant_2)
+      facility_1.add_service('Renew License')
+
+      expect(facility_1.services).to eq(["Written Test", "Road Test", "Renew License"])
+      expect(facility_1.renew_drivers_license(registrant_1)).to eq(true)
+      expect(facility_1.renew_drivers_license(registrant_2)).to eq(true)
+      expect(facility_1.renew_drivers_license(registrant_3)).to eq(false)
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+      expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+    end
+  end
 end
