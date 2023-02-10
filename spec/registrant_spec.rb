@@ -13,7 +13,7 @@ RSpec.describe Registrant do
     expect(registrant_2.permit?).to eq(false)
   end
 
-  it '#licence_data' do
+  it '#license_data' do
     registrant_1 = Registrant.new('Bruce', 18, true )
     registrant_2 = Registrant.new('Penny', 15 )
 
