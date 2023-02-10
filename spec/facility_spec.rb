@@ -86,8 +86,8 @@ RSpec.describe Facility do
       expect(@registrant_1.permit?).to eq(true)
 
       @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@registrant_1)
 
-      expect(@facility_1.administer_written_test(@registrant_1)). to eq(true)
       expect(@registrant_1.license_data).to eq({ written: true, license: false, renewed: false })
     end
 
@@ -104,6 +104,36 @@ RSpec.describe Facility do
 
       @facility_1.add_service('Written Test')
       @facility_1.administer_written_test(@registrant_2)
+
+      expect(@registrant_2.license_data).to eq({ written: false, license: false, renewed: false })
+    end
+  end
+
+  describe '#administer_road_test' do
+    before(:each) do
+      @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@registrant_1)
+    end
+  
+    it 'cannot administer road test if road test is not a service' do
+      expect(@facility_1.services).to eq(['Written Test'])
+      expect(@registrant_1.license_data).to eq({ written: true, license: false, renewed: false })
+
+      @facility_1.administer_road_test(@registrant_1)
+
+      expect(@registrant_1.license_data).to eq({ written: true, license: false, renewed: false })
+    end
+
+    it 'can administer road test if registrant has completed written test' do
+      @facility_1.add_service('Road Test')
+      @facility_1.administer_road_test(@registrant_1)
+
+      expect(@registrant_1.license_data).to eq({ written: true, license: true, renewed: false })
+    end
+
+    it 'cannot administer road test if registrant has not completed written test' do
+      @facility_1.add_service('Road Test')
+      @facility_1.administer_road_test(@registrant_2)
 
       expect(@registrant_2.license_data).to eq({ written: false, license: false, renewed: false })
     end
