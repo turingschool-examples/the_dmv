@@ -18,5 +18,13 @@ RSpec.describe VehicleFactory do
 
     expect(cowans_vehicle_factory.vehicle_data.length).to eq(1000)
     end
+
+    it 'can manufacture vehicles' do
+    cowans_vehicle_factory = VehicleFactory.new
+    wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+    cowans_vehicle_factory.manufacture_vehicles(wa_ev_registrations)
+
+    expect(cowans_vehicle_factory.manufactured_vehicle_count).to eq(1000)
+    end
   end
 end
