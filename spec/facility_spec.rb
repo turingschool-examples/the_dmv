@@ -81,6 +81,7 @@ RSpec.describe Facility do
     @facility_2 = Facility.new({ name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
   end
 
+  describe '#administer_written_test' do
     it 'can administer written test if registrant has permit and facility has service' do
       expect(@registrant_1.permit?).to eq(true)
 
@@ -90,7 +91,7 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq({ written: true, license: false, renewed: false })
     end
 
-    it 'can not administer written test if facility does not have service' do
+    it 'cannot administer written test if facility does not have service' do
       expect(@facility_1.services).to eq([])
 
       @facility_1.administer_written_test(@registrant_2)
@@ -98,7 +99,7 @@ RSpec.describe Facility do
       expect(@registrant_2.license_data).to eq({ written: false, license: false, renewed: false })
     end
 
-    it 'can not administer written test if registrant does not have permit' do
+    it 'cannot administer written test if registrant does not have permit' do
       expect(@registrant_2.license_data).to eq({ written: false, license: false, renewed: false })
 
       @facility_1.add_service('Written Test')
@@ -106,4 +107,5 @@ RSpec.describe Facility do
 
       expect(@registrant_2.license_data).to eq({ written: false, license: false, renewed: false })
     end
+  end
 end
