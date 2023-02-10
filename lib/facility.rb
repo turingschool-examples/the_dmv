@@ -22,11 +22,13 @@ class Facility
   end
 
   def register_vehicle(vehicle)
+    return nil unless @services.include?('Vehicle Registration')
+
     vehicle.registration_date = Date.today
     make_plate!(vehicle)
     @registered_vehicles << vehicle
     collect_fee(vehicle)
-    vehicle
+    @registered_vehicles
   end
 
   def make_plate!(vehicle)
@@ -54,3 +56,5 @@ class Facility
     @collected_fees += fee
   end
 end
+
+require 'pry'; binding.pry
