@@ -47,4 +47,17 @@ class Facility
     end
     false
   end
+
+  def administer_road_test(registrant)
+    service_check = services.any? {|service| service == 'Road Test'}
+    if service_check == true
+      if registrant.license_data[:written] = true
+        registrant.license_data[:license] = true
+        return true
+      else
+        false
+      end
+    end
+    false
+  end
 end
