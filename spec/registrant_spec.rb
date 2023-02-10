@@ -22,7 +22,7 @@ RSpec.describe Registrant do
       expect(@registrant_1).to be_a(Registrant)
     end
 
-    it 'can initialize without a permit argument' do
+    it 'can still initialize without a permit argument' do
       expect(@registrant_2).to be_a(Registrant)
     end
   end
@@ -98,20 +98,20 @@ RSpec.describe Registrant do
     end
 
     describe '#earn_permit' do
-      it 'always sets the @has_permit attribute to true' do
+      it 'changes #permit? from false to true' do
         expect(@registrant_2.permit?).to be(false)
         @registrant_2.earn_permit
         expect(@registrant_2.permit?).to be(true)
       end
 
-      it 'does nothing if the @has_permit attribute is already true' do
+      it 'does nothing if #permit? is already true' do
         expect(@registrant_1.permit?).to be(true)
         @registrant_1.earn_permit
         expect(@registrant_1.permit?).to be(true)
       end
 
-      it 'returns nil' do
-        expect(@registrant_1.earn_permit).to be(nil)
+      it 'returns true' do
+        expect(@registrant_1.earn_permit).to be(true)
       end
     end
   end
