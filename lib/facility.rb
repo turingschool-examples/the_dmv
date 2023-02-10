@@ -12,6 +12,7 @@ class Facility
 
   def add_service(service)
     @services << service
+    @services
   end
 
   def register_vehicle(vehicle)
@@ -40,6 +41,32 @@ class Facility
     if service_check == true
       if (registrant.permit == true) && (registrant.age >= 16)
         registrant.license_data[:written] = true
+        return true
+      else
+        false
+      end
+    end
+    false
+  end
+
+  def administer_road_test(registrant)
+    service_check = services.any? {|service| service == 'Road Test'}
+    if service_check == true
+      if registrant.license_data[:written] == true
+        registrant.license_data[:license] = true
+        return true
+      else
+        false
+      end
+    end
+    false
+  end
+
+  def renew_drivers_license(registrant)
+    service_check = services.any? {|service| service == 'Renew License'}
+    if service_check == true
+      if registrant.license_data[:license] == true 
+        registrant.license_data[:renewed] = true
         return true
       else
         false
