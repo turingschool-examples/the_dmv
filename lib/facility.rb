@@ -23,5 +23,29 @@ class Facility
     @registered_vehicles << car
     car.registration_date = '2/9/2023'
     # fill in today's date?
+    car.plate_type = check_plate_type(car)
+    # require 'pry'; binding.pry
+    @collected_fees += check_registration_fees(car)
   end
+
+  def check_plate_type(car)
+    if 2023 - car.year >= 25
+      :antique
+    elsif car.engine == :ev
+      :ev
+    else
+      :regular
+    end
+  end
+
+  def check_registration_fees(car)
+    if car.plate_type == :antique
+      25
+    elsif car.plate_type == :ev
+      200
+    else
+      100
+    end
+  end
+
 end
