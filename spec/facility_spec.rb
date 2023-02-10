@@ -34,14 +34,16 @@ RSpec.describe Facility do
 
   describe '#registered_vehicles' do
     it 'can hold registered vehicles in an array' do
+      @facility_1.add_service('Vehicle Registration')
       expect(@cruz.registration_date).to eq(nil)
       expect(@facility_1.registered_vehicles).to eq([])
     end
-  end
-  it 'will collect registration fees' do
-    expect(@facility_1.collected_fees).to eq(0)
-  end
-  it 'can register vehicles' do
-    expect(@facility_1.register_vehicle(@camero)).to eq([@camero])
+    it 'will collect registration fees' do
+      expect(@facility_1.collected_fees).to eq(0)
+    end
+    it 'can register vehicles' do
+      expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
+      expect(@cruz.registration_date).to eq(Date.today)
+    end
   end
 end
