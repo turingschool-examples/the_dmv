@@ -29,18 +29,22 @@ RSpec.describe Facility do
       @facility_1.add_service('Vehicle Registration')
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
       expect(@facility_1.services).to eq(['Vehicle Registration'])
+      expect(@facility_2.services).to eq([])
     end
   end
 
   describe '#vehicle registration' do
     it 'facilities start with no registered vehicles' do
       @facility_1.add_service('Vehicle Registration')
+      @facility_2.add_service('Vehicle Registration')
       expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_2.registered_vehicles).to eq([])
     end
     it 'facilities gain registered vehicles upon vehicle registration' do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.registered_vehicles).to eq([@cruz])
+      expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
     end
   end
 
@@ -62,6 +66,7 @@ RSpec.describe Facility do
       expect(@cruz.registration_date).to eq(nil)
     end
     it 'vehicles get registration date once registered' do 
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       expect(@cruz.registration_date).to be_an_instance_of(Date)
       @facility_1.register_vehicle(@camaro)
@@ -76,6 +81,7 @@ RSpec.describe Facility do
       expect(@cruz.plate_type).to eq(nil)
     end
     it 'vehicles are assigned plate type upon registration' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       expect(@cruz.plate_type).to eq(:regular)
       @facility_1.register_vehicle(@camaro)
