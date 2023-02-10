@@ -24,7 +24,6 @@ class Facility
     car.registration_date = '2/9/2023'
     # fill in today's date?
     car.plate_type = check_plate_type(car)
-    # require 'pry'; binding.pry
     @collected_fees += check_registration_fees(car)
   end
 
