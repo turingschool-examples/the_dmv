@@ -179,4 +179,22 @@ RSpec.describe Facility do
       expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
     end
   end
+
+  describe 'Can import facilities' do
+    it 'can use external facility data' do
+    new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+    @facility.add_facilities(new_york_facilities)
+
+    expect(@facility.facility_count).to eq(169)
+    end
+
+    it 'can use multiple external facility datasets' do
+    new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+    missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+    @facility.add_facilities(new_york_facilities)
+    @facility.add_facilities(missouri_facilities)
+      
+    expect(@facility.facility_count).to eq(169 + 178)
+    end
+  end
 end

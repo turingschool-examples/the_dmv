@@ -1,5 +1,7 @@
 class VehicleFactory
-  attr_reader :manufactured_vehicles, :manufactured_vehicle_count, :vehicle_data
+  attr_reader :manufactured_vehicles, 
+              :manufactured_vehicle_count, 
+              :vehicle_data
   def initialize
     @vehicle_data = []
     @manufactured_vehicles = []
