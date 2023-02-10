@@ -67,6 +67,20 @@ RSpec.describe Facility do
       expect(bolt.plate_type).to eq(:ev)
       expect(camaro.plate_type).to eq(:antique)
     end
+
+    it 'can collect fees' do
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+    
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+
+      facility_1.add_service('Vehicle Registration')
+      facility_1.register_vehicle(cruz)
+      facility_1.register_vehicle(bolt)
+      facility_1.register_vehicle(camaro)
+
+      expect(facility_1.collected_fees).to eq(325)
   end
 
 end
