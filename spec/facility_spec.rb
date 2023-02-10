@@ -57,19 +57,19 @@ RSpec.describe Facility do
     end
   end
 
-  # describe '#registration date' do
-  #   it 'vehicles start with no registration date' do
-  #     expect(@cruz.registration_date).to eq(nil)
-  #   end
-  #   it 'vehicles get registration date once registered' do 
-  #     @facility_1.register_vehicle(cruz)
-  #     expect(cruz.registration_date).to be_an_instance_of(Date.today.month)
-  #     @facility_1.register_vehicle(camaro)
-  #     expect(camaro.registration_date).to be_an_instance_of(Date.today.month)
-  #     @facility_1.register_vehicle(bolt)
-  #     expect(bolt.registration_date).to be_an_instance_of(Date.today.month)
-  #   end
-  # end
+  describe '#registration date' do
+    it 'vehicles start with no registration date' do
+      expect(@cruz.registration_date).to eq(nil)
+    end
+    it 'vehicles get registration date once registered' do 
+      @facility_1.register_vehicle(@cruz)
+      expect(@cruz.registration_date).to be_an_instance_of(Date)
+      @facility_1.register_vehicle(@camaro)
+      expect(@camaro.registration_date).to be_an_instance_of(Date)
+      @facility_1.register_vehicle(@bolt)
+      expect(@bolt.registration_date).to be_an_instance_of(Date)
+    end
+  end
 
   describe '#plate_type' do
     it 'vehicles start with no plate type' do
