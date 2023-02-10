@@ -26,4 +26,20 @@ RSpec.describe Registrant do
       expect(@registrant_2).to be_a(Registrant)
     end
   end
+
+  describe '#name' do
+    it 'has a name' do
+      expect(@registrant_1.name).to eq(@person_1[:name])
+    end
+
+    it 'has a different name' do
+      expect(@registrant_2.name).to eq(@person_2[:name])
+    end
+  end
+
+  describe '#age' do
+    it 'has an age' do
+
+    end
+  end
 end
