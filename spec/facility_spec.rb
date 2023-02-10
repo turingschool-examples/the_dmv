@@ -52,7 +52,7 @@ RSpec.describe "Facility Functionality" do
     expect(@facility_1.collected_fees).to eq(100)
   end
 
-  xit "can register three vehicles" do
+  it "can register three vehicles" do
     @facility_1.register_vehicle(@cruz)
     @facility_1.register_vehicle(@camaro)
     expect(@camaro.registration_date).to eq(Time.now.strftime("%m/%d/%Y"))
