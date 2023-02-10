@@ -40,6 +40,8 @@ RSpec.describe Registrant do
       @facility_1.add_service('Written Test')
 
       expect(@facility_1.administer_written_test(@registrant_1)).to be true
+      
+      @facility_1.administer_written_test(@registrant_1)
       expect(@registrant_1.license_data[:written]).to be true
     end
 
@@ -51,6 +53,7 @@ RSpec.describe Registrant do
       @registrant_2.earn_permit
 
       expect(@facility_1.administer_written_test(@registrant_2)).to be true
+      @facility_1.administer_written_test(@registrant_2)
       expect(@registrant_2.license_data[:written]).to be true
     end
 
@@ -62,6 +65,7 @@ RSpec.describe Registrant do
       @registrant_3.earn_permit
 
       expect(@facility_1.administer_written_test(@registrant_3)).to be false
+      @facility_1.administer_written_test(@registrant_3)
       expect(@registrant_3.license_data[:written]).to be false
     end
 
@@ -71,6 +75,7 @@ RSpec.describe Registrant do
 
       @facility_1.add_service('Road Test')
       expect(@facility_1.administer_road_test(registrant_1)).to be true
+      @facility_1.administer_road_test(registrant_1)
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
     end
 
@@ -79,6 +84,7 @@ RSpec.describe Registrant do
       @facility_1.add_service('Road Test')
 
       expect(@facility_1.administer_road_test(registrant_3)).to be false
+      @facility_1.administer_road_test(registrant_3)
       expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
 
@@ -90,6 +96,7 @@ RSpec.describe Registrant do
 
       @facility_1.add_service('Renew License')
       expect(@facility_1.renew_drivers_license(registrant_1)).to be true
+      @facility_1.renew_drivers_license(registrant_1)
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
     end
   end
