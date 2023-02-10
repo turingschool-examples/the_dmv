@@ -36,6 +36,14 @@ class Facility
     end
   end
 
+  def administer_road_test(person)
+    if @services.include?('Road Test')
+      if person.license_data[:written]
+        person.license_data[:license] = true
+      end
+    end
+  end
+
 private #helper methods
   def determine_vehicle_plate(car)
     if car.antique?
