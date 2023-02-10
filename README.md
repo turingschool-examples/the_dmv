@@ -1,3 +1,8 @@
 # The DMV
 
-This is the starter repo for the BE Mod1 DMV project.
+1) The first thing I did when starting this project was explore the different files and determine which ones will be edited. I felt I could ignore the spec files that don't have a corresponding class file. I still looked inside them to see what they contained and try to determine how they are linked to everything else.
+I determined that the dmv file was calling on methods from the facility file so that told me I needed to leave dmv for last. I noticed the vehicle class file had a more complete initialize method so I started there. I used the vehicle initialize as a template for the other two classes. Unfortunately the error codes rarely helped me because they always mentioned missing arguments when I did have arguments in place (they were just wrong). So it was misleading when it said it was expecting 3, but I gave it 0.
+
+2) As of the beginning of Iteration 1, I like working with code that I did not write. It takes a minute to figure out what is going on, but I like seeing different ways that tests can be written. Like using before(:each) in the spec file. Initially, the number of files was a little overwhelming but not too bad.
+
+3) I expected there to be a lot more method errors so it was nice that the debugging went as well as it did. Error messages did not help me much as mentioned. It was nice having multiple classes that needed to be set up in a similar way. I was able to use a completed one as a template. Argument errors were frustrating though.
