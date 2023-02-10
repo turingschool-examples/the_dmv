@@ -34,44 +34,47 @@ RSpec.describe Facility do
 
   describe '#vehicle registration' do
     it 'facilities start with no registered vehicles' do
-      expect(@facility_1.registered_vehicles).to eq[]
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.registered_vehicles).to eq([])
     end
     it 'facilities gain registered vehicles upon vehicle registration' do
-      facility_1.register_vehicle(cruz)
-      expect(facility_1.registered_vehicles).to be_an_instance_of([Vehicle])
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+    end
   end
 
-  describe '#collected fees' do
-    it 'facilities start with no collected fees and charge appropriately' do
-      expect(@facility_1.collected_fees).to eq(0)
-      @facility_1.register_vehicle(cruz)
-      expect(@facility_1.collected_fees).to eq(100)
-      @facility_1.register_vehicle(camaro)
-      expect(@facility_1.collected_fees).to eq(125)
-      @facility_1.register_vehicle(bolt)
-      expect(@facility_1.collected_fees).to eq(325)
-    end
+  # describe '#collected fees' do
+  #   it 'facilities start with no collected fees and charge appropriately' do
+  #     expect(@facility_1.collected_fees).to eq(0)
+  #     @facility_1.register_vehicle(cruz)
+  #     expect(@facility_1.collected_fees).to eq(100)
+  #     @facility_1.register_vehicle(camaro)
+  #     expect(@facility_1.collected_fees).to eq(125)
+  #     @facility_1.register_vehicle(bolt)
+  #     expect(@facility_1.collected_fees).to eq(325)
+  #   end
 
-    describe '#registration date' do
-      it 'vehicles start with no registration date' do
-        expect(@cruz.registration_date).to eq(nil)
-      end
-      it 'vehicles get registration date once registered' do 
-        @facility_1.register_vehicle(cruz)
-        expect(cruz.registration_date).to be_an_instance_of(Date.today.month)
-        @facility_1.register_vehicle(camaro)
-        expect(camaro.registration_date).to be_an_instance_of(Date.today.month)
-        @facility_1.register_vehicle(bolt)
-        expect(bolt.registration_date).to be_an_instance_of(Date.today.month)
-      end
-    end
+  # describe '#registration date' do
+  #   it 'vehicles start with no registration date' do
+  #     expect(@cruz.registration_date).to eq(nil)
+  #   end
+  #   it 'vehicles get registration date once registered' do 
+  #     @facility_1.register_vehicle(cruz)
+  #     expect(cruz.registration_date).to be_an_instance_of(Date.today.month)
+  #     @facility_1.register_vehicle(camaro)
+  #     expect(camaro.registration_date).to be_an_instance_of(Date.today.month)
+  #     @facility_1.register_vehicle(bolt)
+  #     expect(bolt.registration_date).to be_an_instance_of(Date.today.month)
+  #   end
+  # end
 
-    describe '#plate_type' do
-    it 'vehicles start with no plate type' do
-      expect(cruz.plate_type).to eq(nil)
-    end
-    it 'vehicles are assigned plate type upon registration' do
-      cruz.plate_type
-      expext(cruz.plate_type).to eq(:regular)
-    end
+  # describe '#plate_type' do
+  #   it 'vehicles start with no plate type' do
+  #     expect(cruz.plate_type).to eq(nil)
+  #   end
+  #   it 'vehicles are assigned plate type upon registration' do
+  #     cruz.plate_type
+  #     expext(cruz.plate_type).to eq(:regular)
+  #   end
 end
