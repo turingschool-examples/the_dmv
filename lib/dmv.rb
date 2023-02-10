@@ -13,22 +13,4 @@ class Dmv
       facility.services.include?(service)
     end
   end
-
-  def or_create_facilites(data)
-    data.each do |facility|
-      facility_details = {
-        name: facility[:title],
-        address: or_find_address(facility),
-        phone: facility[:phone_number]
-      }
-      facility_sorted = Facility.new(facility_details)
-      self.facilities << facility_sorted
-    end
-    @facilities
-  end
-
-  def or_find_address(data)
-    address_h = eval(data[:location_1][:human_address])
-    address_s = address_h.values.join(' ')
-  end
 end
