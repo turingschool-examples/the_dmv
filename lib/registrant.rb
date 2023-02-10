@@ -10,4 +10,8 @@ class Registrant
       :renewed => false
     }
   end
+
+  def permit?
+    @permit == true
+  end
 end
