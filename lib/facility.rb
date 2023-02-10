@@ -1,9 +1,9 @@
 require './lib/vehicle'
 
 class Facility
-  attr_reader :name, 
-              :address, 
-              :phone, 
+  attr_reader :name,
+              :address,
+              :phone,
               :services,
               :registered_vehicles,
               :collected_fees
@@ -30,6 +30,8 @@ class Facility
   end
 
   def make_plate!(vehicle)
+    return nil if vehicle.registration_date.nil?
+
     if vehicle.electric_vehicle?
       vehicle.plate_type = :ev
     elsif vehicle.antique?
@@ -40,6 +42,8 @@ class Facility
   end
 
   def collect_fee(vehicle)
+    return 0 if vehicle.registration_date.nil?
+
     if vehicle.electric_vehicle?
       fee = 200
     elsif vehicle.antique?
@@ -49,5 +53,4 @@ class Facility
     end
     @collected_fees += fee
   end
-
 end
