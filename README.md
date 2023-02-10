@@ -19,9 +19,14 @@ How long I spend reviewing a code base in this manner is dependant on several fa
 
 Knowing where to begin was one challenge. Ideally, I would start at the highest abstractions of the code, such as higher-order classes and methods. However, without any guidance from someone who is already familiar with the code base, it is impossible to know what these are, or what the ideal order to review the code is. So one of the first things I try to get a sense of is these levels of abstraction, their order, and how they fit together.
 
-Another challenge is not being able to understand certain parts of the code base. For example, in the instance of this code base, I am not familiar with the faraday gem and what it is doing in the DmvDataService class. My best guess is only that it is handling API calls for us and returning JSON data from the responses.
+Another challenge is not being able to understand certain parts of the code base. For example, in the instance of this code base, I am not familiar with the `faraday` gem and what it is doing in the `DmvDataService` class. My best guess is only that it is handling API calls for us and returning JSON data from the responses.
 
 Finally are stylistic differences between myself and other authors of code. I have to start getting familiar with others style for writing code.
 
 ## Other Takeaways
 
+Nothing was easier than I expected to be, but I expected it to be relatively easy. Any difficult I had in debugging felt like it had more to do with just being a bit rusty with debugging rather than due to any unfamiliarity with the code base or it being someone else's code.
+
+The easy part of reviewing this code base was its size, and mostly familiar code. The size of it is still rather small, which means I was able to pretty much wrap my head around the entire program, rather than having to break it up into pieces.
+
+Another easy part was my familiarity with Ruby code and RSpec by now. The only part I am not familiar with was the `faraday` gem in the `DMVDataService` class. None of the code here is terribly difficult or tricky.
