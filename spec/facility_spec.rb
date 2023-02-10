@@ -104,10 +104,11 @@ RSpec.describe Facility do
 
   describe '#administer_road_test' do
     it 'changes license value on registrant license data' do
-      @facility_1.add_service('Written Test', 'Road Test')
+      @facility_1.add_service('Written Test') 
+      @facility_1.add_service('Road Test')
       @facility_1.administer_written_test(@registrant_1)
       
-      expect(@facility_1.administer_road_test).to be true
+      expect(@facility_1.administer_road_test(@registrant_1)).to be true
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
     end
   end
