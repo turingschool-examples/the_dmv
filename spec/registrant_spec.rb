@@ -17,10 +17,18 @@ RSpec.describe Registrant do
     end
   end
 
-  describe '#permit' do
+  describe '#permit?' do
     it 'checks permit status' do
       expect(@registrant.permit?).to eq(true)
       expect(@registrant_2.permit?).to eq(false)
+    end
+  end
+
+  describe '#earn_permit' do
+    it 'changes permit status to true' do
+      expect(@registrant_2.permit?).to eq(false)
+      @registrant_2.earn_permit
+      expect(@registrant_2.permit?).to eq(true)
     end
   end
 
