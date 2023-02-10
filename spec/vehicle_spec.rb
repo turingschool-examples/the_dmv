@@ -16,6 +16,12 @@ RSpec.describe Vehicle do
       expect(@cruz.engine).to eq(:ice)
       expect(@cruz.registration_date).to eq(nil)
     end
+
+    it 'has a plate type' do
+      expect(@cruz.plate_type).to eq(nil)
+      expect(@bolt.plate_type).to eq(nil)
+      expect(@camaro.plate_type).to eq(nil)
+    end
   end
 
   describe '#antique?' do
