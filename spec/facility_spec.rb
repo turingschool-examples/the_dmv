@@ -49,6 +49,8 @@ RSpec.describe Facility do
       expect(cruz.registration_date).to eq(nil)
       expect(facility_1.registered_vehicles).to eq([])
       expect(facility_1.collected_fees).to eq(0)
+      expect(facility_1.register_vehicle(cruz)).to eq([cruz]) # In order to get the return value of the hash and not just the class, "cruz" had to be placed in []
+      expect(facility_1.registration_date).to eq("Date: 2023-01-12")
     end
   end
 end
