@@ -9,7 +9,7 @@ RSpec.describe VehicleFactory do
     it 'can create vehicles' do
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
 
-      expect(factory.create_vehicles(wa_ev_registrations)[0]).to be_an_instance_of(Vehicle)
+      expect(@factory.create_vehicles(wa_ev_registrations)[0]).to be_an_instance_of(Vehicle)
     end
   end
 end
