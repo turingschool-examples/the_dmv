@@ -20,9 +20,19 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    vehicle.set_plate_type
+    vehicle.set_plate_type(vehicle)
+    self.collect_fees(vehicle)
     @registered_vehicles << vehicle
   end
 
-
+  def collect_fees(vehicle)
+    if vehicle.antique? == true
+      @collected_fees += 25
+    elsif 
+      vehicle.electric_vehicle? == true
+      @collected_fees += 200
+    else 
+      @collected_fees += 100
+    end
+  end
 end

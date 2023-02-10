@@ -44,18 +44,18 @@ RSpec.describe Facility do
     end
   end
 
-  # describe '#collected fees' do
-  #   it 'facilities start with no collected fees and charge appropriately' do
-  #     @facility_1.add_service('Vehicle Registration')
-  #     expect(@facility_1.collected_fees).to eq(0)
-  #     @facility_1.register_vehicle(@cruz)
-  #     expect(@facility_1.collected_fees).to eq(100)
-  #     @facility_1.register_vehicle(@camaro)
-  #     expect(@facility_1.collected_fees).to eq(125)
-  #     @facility_1.register_vehicle(@bolt)
-  #     expect(@facility_1.collected_fees).to eq(325)
-  #   end
-  # end
+  describe '#collected fees' do
+    it 'facilities start with no collected fees and charge appropriately' do
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.collected_fees).to eq(0)
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.collected_fees).to eq(100)
+      @facility_1.register_vehicle(@camaro)
+      expect(@facility_1.collected_fees).to eq(125)
+      @facility_1.register_vehicle(@bolt)
+      expect(@facility_1.collected_fees).to eq(325)
+    end
+  end
 
   # describe '#registration date' do
   #   it 'vehicles start with no registration date' do
@@ -78,6 +78,10 @@ RSpec.describe Facility do
     it 'vehicles are assigned plate type upon registration' do
       @facility_1.register_vehicle(@cruz)
       expect(@cruz.plate_type).to eq(:regular)
+      @facility_1.register_vehicle(@camaro)
+      expect(@camaro.plate_type).to eq(:antique)
+      @facility_1.register_vehicle(@bolt)
+      expect(@bolt.plate_type).to eq(:ev)
     end
   end
 end
