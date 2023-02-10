@@ -123,4 +123,27 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#renew a license' do
+    it 'can renew a license' do
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      registrant_1 = Registrant.new('Bruce', 18, true )
+
+      facility_1.renew_drivers_license(registrant_1)
+      expect(registrant_1.license_data[:renewed]).to eq(false)
+
+      facility_1.add_service('Written Test')
+      facility_1.administer_written_test(registrant_1)
+      
+      facility_1.add_service('Road Test')
+      facility_1.administer_road_test(registrant_1)
+      
+      facility_1.add_service('Renew License')
+      facility_1.renew_drivers_license(registrant_1)
+
+      expect(registrant_1.license_data[:renewed]).to eq(true)
+    end
+  end
+
+     
+
 end
