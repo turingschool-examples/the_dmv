@@ -81,4 +81,42 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(325)
     end
   end
+
+  describe '#administer_written_test' do
+    it 'can administer written test if available' do
+      @facility_1.administer_written_test(@registrant_1)
+
+      expect(@registrant_1.license_data[:written]).to be false 
+
+      @facility_1.add_service("Written Test")
+      @facility_1.administer_written_test(@registrant_1)
+
+      expect(@registrant_1.license_data[:written]).to be true
+    end
+
+    it 'can only administer written tests if registrant has permit' do
+      @facility_1.add_service("Written Test")
+      @facility_1.administer_written_test(@registrant_2)
+
+      expect(@registrant_2.license_data[:written]).to be false
+      
+      @registrant_2.earn_permit
+
+      @facility_1.administer_written_test(@registrant_2)
+
+      expect(@registrant_2.license_data[:written]).to be true
+    end
+
+    it 'cannot administer written tests if registrant is under the age of 16' do
+      @facility_1.add_service("Written Test")
+      @facility_1.administer_written_test(@registrant_3)
+
+      expect(@registrant_3.license_data[:written]).to be false
+      
+      @registrant_3.earn_permit
+      @facility_1.administer_written_test(@registrant_3)
+
+      expect(@registrant_3.license_data[:written]).to be false
+    end
+  end
 end
