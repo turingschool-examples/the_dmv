@@ -19,4 +19,5 @@ class Registrant
     @permit = true
   end
 
+  
 end
