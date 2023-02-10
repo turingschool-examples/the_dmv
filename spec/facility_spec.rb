@@ -32,6 +32,7 @@ RSpec.describe Facility do
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
+    # add other services
   end
 
   describe '#register_vehicle' do
@@ -99,5 +100,15 @@ RSpec.describe Facility do
       expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
     # checks that capitalization won't matter?
+  end
+
+  describe '#administer_road_test' do
+    it 'changes license value on registrant license data' do
+      @facility_1.add_service('Written Test', 'Road Test')
+      @facility_1.administer_written_test(@registrant_1)
+      
+      expect(@facility_1.administer_road_test).to be true
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+    end
   end
 end
