@@ -31,7 +31,8 @@ RSpec.describe Facility do
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.services).to eq(['Vehicle Registration'])
     end
-
+  end
+  describe '#register vehicles' do
     it 'can register vehicles' do
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.registered_vehicles).to eq([])
@@ -69,6 +70,6 @@ RSpec.describe Facility do
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.collected_fees).to be(0)
     end
-    
   end
+  
 end
