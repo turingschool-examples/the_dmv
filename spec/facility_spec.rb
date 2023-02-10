@@ -119,4 +119,33 @@ RSpec.describe Facility do
       expect(@registrant_3.license_data[:written]).to be false
     end
   end
+
+  describe '#administer_road_test' do
+    it 'can issue a Road test if available at facility and registrant has taken the written test' do
+      @facility_1.add_service("Written Test")
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+      
+      expect(@registrant_1.license_data[:license]).to be false
+
+      @facility_1.add_service("Road Test")
+      @facility_1.administer_road_test(@registrant_1)
+
+      expect(@registrant_1.license_data[:license]).to be true
+    end
+    
+    it 'cannot issue Road test if registrant has not completed the written test' do
+      @facility_1.add_service("Written Test")
+      @facility_1.add_service("Road Test")
+      @registrant_2.earn_permit
+      @facility_1.administer_road_test(@registrant_2)
+      
+      expect(@registrant_2.license_data[:license]).to be false
+      
+      @facility_1.administer_written_test(@registrant_2)
+      @facility_1.administer_road_test(@registrant_2)
+      
+      expect(@registrant_2.license_data[:license]).to be true
+    end
+  end
 end
