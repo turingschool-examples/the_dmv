@@ -49,12 +49,23 @@ RSpec.describe Facility do
   end
 
   describe '#make_plate' do
-    it '' do
+    it 'can assign a plate type based on the engine type' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@facility_1.make_plate!(@cruz)).to eq(:regular)
+      expect(@facility_1.make_plate!(@bolt)).to be_nil
     end
   end
 
   describe '#collect_fee' do
-    it '' do
+    it 'can collect the fee based on the engine type' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@facility_1.collect_fee(@cruz)).to eq(200)
+      expect(@facility_1.collect_fee(@bolt)).to eq(0)
+      expect(@facility_1.collected_fees).to eq(200)
     end
   end
 end
