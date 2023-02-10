@@ -19,15 +19,16 @@ RSpec.describe Registrant do
     expect(registrant_2.permit?).to eq(false)
   end
 
-  xit 'allows registrants to earn permits' do
+  it 'allows registrants to earn permits' do
   registrant_2 = Registrant.new('Penny', 15 )
-  require 'pry'; binding.pry
-  expect(registrant_2.earn_permit.permit?).to eq(true)
+  registrant_2.earn_permit
+  
+  expect(registrant_2.permit?).to eq(true)
   end
 
   xit 'stores license data in a hash' do
     registrant_2 = Registrant.new('Penny', 15)
     
-    expect(registrant_2.licence_data).to eq{:written=>false, :license=>false, :renewed=>false}
+    expect(registrant_2.licence_data).to eq
   end
 end
