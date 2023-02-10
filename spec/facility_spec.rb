@@ -97,7 +97,7 @@ RSpec.describe Facility do
 
       expect(@facility_1.administer_written_test(@registrant_3)).to eq('You are not eligible for a written test.')
       expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-
     end
+    # checks that capitalization won't matter?
   end
 end
