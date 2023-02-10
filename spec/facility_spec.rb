@@ -42,10 +42,21 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(0)
     end
 
-    it 'has a cruz that can be registered with a dat and plate type' do
+    it 'has a cruz that can be registered with a date and plate type' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       
       expect(@facility_1.registered_vehicles).to eq([@cruz])
+    end
+
+    it 'has a registration date' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+    
+      
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+      # expect(@cruz.plate_type).to eq()
+      expect(@cruz.registration_date).to eq(Date.today)
     end
 
 end

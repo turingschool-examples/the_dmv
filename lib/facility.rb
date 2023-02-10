@@ -20,7 +20,11 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    registered_vehicles << vehicle
-    # require 'pry'; binding.pry
+    if services.include?('Vehicle Registration')
+      vehicle.set_registration_date
+      @registered_vehicles << vehicle
+  else
+    "service not provided"
+  end
   end
 end
