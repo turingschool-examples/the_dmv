@@ -36,7 +36,9 @@ RSpec.describe Facility do
     it 'facilities start with no registered vehicles' do
       expect(@facility_1.registered_vehicles).to eq[]
     end
-    it ''
+    it 'facilities gain registered vehicles upon vehicle registration' do
+      facility_1.register_vehicle(cruz)
+      expect(facility_1.registered_vehicles).to be_an_instance_of([Vehicle])
   end
 
   describe '#collected fees' do
@@ -62,5 +64,14 @@ RSpec.describe Facility do
         @facility_1.register_vehicle(bolt)
         expect(bolt.registration_date).to be_an_instance_of(Date.today.month)
       end
+    end
+
+    describe '#plate_type' do
+    it 'vehicles start with no plate type' do
+      expect(cruz.plate_type).to eq(nil)
+    end
+    it 'vehicles are assigned plate type upon registration' do
+      cruz.plate_type
+      expext(cruz.plate_type).to eq(:regular)
     end
 end
