@@ -53,5 +53,16 @@ RSpec.describe Registrant do
       expect(@facility_1.administer_written_test(@registrant_2)).to be true
       expect(@registrant_2.license_data[:written]).to be true
     end
+
+    it 'will not administer test to a registrant under 16' do
+      @facility_1.add_service('Written Test')
+
+      expect(@facility_1.administer_written_test(@registrant_3)).to be false
+
+      @registrant_3.earn_permit
+
+      expect(@facility_1.administer_written_test(@registrant_3)).to be false
+      expect(@registrant_3.license_data[:written]).to be false
+    end
   end
 end
