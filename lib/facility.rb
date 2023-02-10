@@ -11,4 +11,8 @@ class Facility
   def add_service(service)
     @services << service
   end
+
+  def add_service(service)
+    @services << service
+  end
 end
