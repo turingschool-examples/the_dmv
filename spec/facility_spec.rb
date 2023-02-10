@@ -46,7 +46,7 @@ RSpec.describe "Facility Functionality" do
   it "can register a vehicle" do
     @facility_1.register_vehicle(@cruz)
 
-    expect(@cruz.registration_date).to eq(Time.now.strftime("%d/%m/%Y"))
+    expect(@cruz.registration_date).to eq(Time.now.strftime("%m/%d/%Y"))
     expect(@cruz.plate_type).to eq(:regular)
     expect(@facility_1.registered_vehicles).to eq([@cruz])
     expect(@facility_1.collected_fees).to eq(100)
@@ -55,13 +55,12 @@ RSpec.describe "Facility Functionality" do
   xit "can register three vehicles" do
     @facility_1.register_vehicle(@cruz)
     @facility_1.register_vehicle(@camaro)
-
-    expect(@camaro.registration_date).to eq(Time.now.strftime("%d/%m/%Y"))
+    expect(@camaro.registration_date).to eq(Time.now.strftime("%m/%d/%Y"))
     expect(@camaro.plate_type).to eq(:antique)
 
     @facility_1.register_vehicle(@bolt)
 
-    expect(@bolt.registration_date).to eq(Time.now.strftime("%d/%m/%Y"))
+    expect(@bolt.registration_date).to eq(Time.now.strftime("%m/%d/%Y"))
     expect(@bolt.plate_type).to eq(:ev)
     expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
     expect(@facility_1.collected_fees).to eq(325)

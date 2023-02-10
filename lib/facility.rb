@@ -1,5 +1,11 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :collected_fees
+  attr_reader :name, 
+              :address, 
+              :phone, 
+              :services, 
+              :collected_fees,
+              :registered_vehicles
+
 
   def initialize(facility_info)
     @name = facility_info.fetch(:name)
@@ -15,7 +21,7 @@ class Facility
   end
 
   def register_vehicle(current_vehicle)
-    current_vehicle.registration_date = Time.now.strftime("%d/%m/%Y")
+    current_vehicle.registration_date = Time.now.strftime("%m/%d/%Y")
     @registered_vehicles << current_vehicle
     if current_vehicle.antique?
       @collected_fees += 25
