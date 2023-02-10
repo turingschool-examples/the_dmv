@@ -13,8 +13,8 @@ class VehicleFactory
         year: car[:model_year].to_i,
         engine: :ev
       }
-      vehicle = Vehicle.new(vehicle_details)
-      self.vehicles << vehicle
+      vehicle_sorted = Vehicle.new(vehicle_details)
+      self.vehicles << vehicle_sorted
     end
     @vehicles
   end
