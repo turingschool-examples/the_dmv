@@ -39,7 +39,23 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([@cruz])
       expect(@facility_1.collected_fees).to eq(100)
     end
-    it 'can register and collect fees on antique vehicle'
+    it 'can register and collect fees on antique vehicle' do
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@facility_1.register_vehicle(@camaro)).to eq([@cruz, @camaro])
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro])
+      expect(@facility_1.collected_fees).to eq(125)
+    end
+    it 'can register and collect fees on electric vehicle' do
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+
+      expect(@facility_1.register_vehicle(@bolt)).to eq([@cruz, @camaro, @bolt])
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@facility_1.collected_fees).to eq(325)
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+    end
   end
 
   describe '#administer written test' do
