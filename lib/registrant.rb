@@ -6,4 +6,8 @@ class Registrant
     @age = age
     @has_permit = has_permit
   end
+
+  def permit?
+    @has_permit
+  end
 end
