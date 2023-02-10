@@ -25,8 +25,8 @@ class Facility
 
     if vehicle.year <= 1998
        @collected_fees += 25
-    else
-      @collected_fees += 100
+      else
+        @collected_fees += 100
     end
   end
 end

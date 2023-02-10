@@ -34,12 +34,24 @@ RSpec.describe Facility do
   end
 
   describe '#register_vehicle' do
-    it 'can add a vehicle to registered_vehicles array' do
+    it 'does this when registered vehicle is not 25 years old' do
+      facility_1.add_service('Vehicle Registration')
       facility_1.register_vehicle(cruz)
 
       expect(facility_1.registered_vehicles).to eq([cruz])
       expect(cruz.registration_date).to be_a(Date)
       expect(facility_1.collected_fees).to eq(100)
+      expect(cruz.plate_type).to eq(:regular)
+    end
+
+    it 'does this when registered vehicle is 25 years old' do
+      facility_1.add_service('Vehicle Registration')
+      facility_1.register_vehicle(camaro)
+
+      expect(facility_1.registered_vehicles).to eq([camaro])
+      expect(camaro.registration_date).to be_a(Date)
+      expect(facility_1.collected_fees).to eq(25)
+      expect(camaro.plate_type).to eq(:antique)
     end
   end
 end
