@@ -17,4 +17,8 @@ class Registrant
   def permit?
     @has_permit
   end
+
+  def earn_permit
+    @has_permit = true
+  end
 end
