@@ -36,9 +36,16 @@ RSpec.describe Facility do
   it 'starts with 0 collected fees' do
     expect(@facility_1.collected_fees).to eq(0)
   end
+  describe '#register_vehicle' do
+    it 'can register a vehicle if the facility has that service' do
+      @facility_1.register_vehicle(@cruz)
 
-  it 'can register a vehicle if the facility has that service' do
-    
+      expect(@facility_1.registered_vehicles).to eq([])
 
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+    end
   end
 end
