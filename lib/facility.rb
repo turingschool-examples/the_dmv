@@ -69,17 +69,6 @@ class Facility
     end
   end
 
-  def add_facilities(facilities)
-    facilities.each do |facility|
-      facility[:name] = facility[:office_name]
-      facility[:address] = facility[:street_address_line_1]
-      facility[:phone] = facility[:public_phone_number]
-      @facility_count += 1
-      added_facility = Facility.new(facility)
-      @facility_list << added_facility
-    end
-  end
-
   def name!(name)
     @name = name
   end
