@@ -1,4 +1,4 @@
-class Dmv
+class Dmv 
 
   attr_reader :facilities
 
