@@ -42,7 +42,7 @@ RSpec.describe Registrant do
       
       @registrant_2.earn_permit
       
-      expect(@registrant_2.permit?).to be false
+      expect(@registrant_2.permit?).to be true
     end
   end
 
