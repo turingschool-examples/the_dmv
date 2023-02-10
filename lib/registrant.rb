@@ -1,9 +1,25 @@
 class Registrant
-  attr_reader :name, :age, :license_data
+  attr_reader :name, :age
+  attr_accessor :license_data, :permit, :written, :license, :renewed
+
   
-  def initialize(name, age, license_data)
+  def initialize(name, age, permit = false)
     @name = name
     @age = age
-    @license_data = @license_data
+    @permit = permit
+  end
+
+  def permit? 
+    p @permit
+  end
+
+  def license_data(written, license, renewed)
+    #This is somehow a hash. HOW.
+  end
+
+  def earn_permit
+    if @permit == false
+    @permit = true
+    end
   end
 end
