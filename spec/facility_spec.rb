@@ -4,6 +4,9 @@ RSpec.describe Facility do
   before(:each) do
     @facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
     @facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+    @registrant_1 = Registrant.new('Bruce', 18, true )
+    @registrant_2 = Registrant.new('Penny', 16 )
+    @registrant_3 = Registrant.new('Tucker', 15)
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
@@ -66,5 +69,35 @@ RSpec.describe Facility do
 
     end
 
+  end
+
+  describe '#administer_written_test' do
+    it 'changes written value on registrant license_data' do
+      @facility_1.add_service('Written Test')
+
+      expect(@facility_1.administer_written_test(@registrant_1)).to be true
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
+
+    it 'only administers written test if service provided at facility' do
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq('Service not available at this location.')
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+
+    it 'only administers written test if registrant has a permit' do
+      @facility_1.add_service('Written Test')
+
+      expect(@facility_1.administer_written_test(@registrant_2)).to eq('You are not eligible for a written test.')
+      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+
+    end
+
+    it 'only administers written test if registrant at least 16' do
+      @facility_1.add_service('Written Test')
+
+      expect(@facility_1.administer_written_test(@registrant_3)).to eq('You are not eligible for a written test.')
+      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+    # checks that capitalization won't matter?
   end
 end

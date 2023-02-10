@@ -52,4 +52,20 @@ class Facility
     end
   end
 
+  def administer_written_test(registrant)
+    if @services.include?('Written Test')
+      if eligible_for_written_test?(registrant) == true
+        registrant.license_data[:written] = true
+      else 
+        'You are not eligible for a written test.'
+      end
+    else
+      'Service not available at this location.'
+    end
+  end
+
+  def eligible_for_written_test?(registrant)
+    registrant.age >= 16 && registrant.permit?
+  end
+
 end
