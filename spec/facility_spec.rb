@@ -123,4 +123,45 @@ RSpec.describe Facility do
       expect(facility_1.administer_written_test(registrant_3)).to be(false)
     end
   end
+
+  describe '#administer_road_test' do
+    it 'cannot adminster road test if the facility does not offer the service' do
+      facility_1.add_service('Written test')
+
+      expect(facility_1.administer_road_test(registrant_3)).to be(false)
+
+      registrant_3.earn_permit
+
+      expect(facility_1.administer_road_test(registrant_3)).to be(false)
+      expect(facility_1.administer_road_test(registrant_1)).to be(false)
+    end
+
+    xit '' do
+      facility_1.add_service('')
+      facility_1.administer_road_test()
+
+      expect(.license_data[:]).to be(true)
+    end
+
+    xit '' do
+      facility_1.add_service('')
+      facility_1.administer_road_test()
+
+      expect(.license_data[:]).to be()
+
+      .earn_permit
+
+      expect(facility_1.administer_road_test()).to be()
+    end
+
+    xit '' do
+      facility_1.add_service('')
+
+      expect(facility_1.administer_road_test()).to be()
+
+      .earn_permit
+
+      expect(facility_1.administer_road_test()).to be()
+    end
+  end
 end
