@@ -19,6 +19,13 @@ class Facility
     if services.include?('Vehicle Registration')
       car.registration_date = Date.today
       self.registered_vehicles << car
+      if car.antique?
+        self.collected_fees += 25
+      elsif car.electric_vehicle?
+        self.collected_fees += 200
+      else
+        self.collected_fees += 100
+      end
     end
   end
 end
