@@ -146,25 +146,10 @@ RSpec.describe Facility do
       expect(registrant_1.license_data[:license]).to be(true)
     end
 
-    # xit '' do
-    #   facility_1.add_service('')
-    #   facility_1.administer_road_test()
-
-    #   expect(.license_data[:]).to be()
-
-    #   .earn_permit
-
-    #   expect(facility_1.administer_road_test()).to be()
-    # end
-
-    # xit '' do
-    #   facility_1.add_service('')
-
-    #   expect(facility_1.administer_road_test()).to be()
-
-    #   .earn_permit
-
-    #   expect(facility_1.administer_road_test()).to be()
-    # end
+    describe '#renew_drivers_license' do
+      it 'cannot renew drivers license if the facility does not offer it' do
+        expect(facility_1.renew_drivers_license(registrant_1)).to be(false)
+      end
+    end
   end
 end
