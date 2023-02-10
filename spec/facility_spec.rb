@@ -81,6 +81,7 @@ RSpec.describe Facility do
       facility_1.register_vehicle(camaro)
 
       expect(facility_1.collected_fees).to eq(325)
+    end
   end
 
 end

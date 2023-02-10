@@ -2,7 +2,12 @@ require 'date'
 require 'vehicle'
 
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles
+  attr_reader :name,
+              :address,
+              :phone,
+              :services,
+              :registered_vehicles,
+              :collected_fees
 
   def initialize(facility_details)
     @name = facility_details[:name]
@@ -10,6 +15,7 @@ class Facility
     @phone = facility_details[:phone]
     @services = []
     @registered_vehicles = []
+    @collected_fees = 0 
   end
 
   def add_service(service)
@@ -21,12 +27,15 @@ class Facility
     vehicle.registration_date = Date.today
       if vehicle.antique? == true
         vehicle.plate_type = :antique
+        @collected_fees += 25
       elsif vehicle.electric_vehicle? == true
         vehicle.plate_type = :ev
+        @collected_fees += 200
       else 
         vehicle.plate_type = :regular
+        @collected_fees += 100
       end
   end
 
-  
+
 end
