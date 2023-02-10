@@ -24,9 +24,14 @@ class Facility
       vehicle.set_registration_date
       @registered_vehicles << vehicle
       vehicle.set_plate_type
+      @collected_fees += vehicle.set_fees
     else
       "service not provided at this location"
-
     end
   end
+
+  
+  
+
+
 end

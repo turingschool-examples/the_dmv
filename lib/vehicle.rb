@@ -40,4 +40,14 @@ class Vehicle
         :regular
     end
   end
+
+  def set_fees
+    if set_plate_type == :antique
+      25
+    elsif set_plate_type == :ev
+      200
+    else
+      100
+    end
+  end
 end

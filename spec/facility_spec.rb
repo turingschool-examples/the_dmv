@@ -42,7 +42,7 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(0)
     end
 
-    it 'has a cruz that can be registered with a date and plate type' do
+    it 'has a vehicle that can be registered' do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       
@@ -54,8 +54,7 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@cruz)
     
       expect(@facility_1.registered_vehicles).to eq([@cruz])
-      expect(@cruz.registration_date).to eq(Date.today)
-     
+      expect(@cruz.registration_date).to eq(Date.today) 
   end
 
     it 'has a plate type' do
@@ -63,6 +62,13 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@cruz)
 
       expect(@cruz.plate_type).to eq(:regular)
+    end
+
+    it 'collects fees for plates upon registration' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@facility_1.collected_fees).to eq(100)
 
     end
 end
