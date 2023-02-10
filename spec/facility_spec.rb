@@ -53,5 +53,15 @@ RSpec.describe Facility do
       expect(facility_1.collected_fees).to eq(25)
       expect(camaro.plate_type).to eq(:antique)
     end
+
+    it 'does this when registered vehicle is an electric car' do
+      facility_1.add_service('Vehicle Registration')
+      facility_1.register_vehicle(bolt)
+
+      expect(facility_1.registered_vehicles).to eq([bolt])
+      expect(bolt.registration_date).to be_a(Date)
+      expect(facility_1.collected_fees).to eq(200)
+      expect(bolt.plate_type).to eq(:ev)
+    end
   end
 end
