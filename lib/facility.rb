@@ -37,4 +37,12 @@ class Facility
       end
     end
   end
+
+  def administer_written_test(registrant)
+    if services.include?('Written test')
+      registrant.license_data['written_test'] = true
+    else 
+      false
+    end
+  end
 end
