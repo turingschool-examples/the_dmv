@@ -31,11 +31,14 @@ RSpec.describe Facility do
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
-  describe '#registered_vehiceles' do
+
+  describe '#registered_vehicles' do
     it 'can hold registered vehicles in an array' do
-      require 'pry'; binding.pry
       expect(@cruz.registration_date).to eq(nil)
       expect(@facility_1.registered_vehicles).to eq([])
     end
+  end
+  it 'will collect registration fees' do
+    expect(@facility_1.collected_fees).to eq(0)
   end
 end
