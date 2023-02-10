@@ -45,6 +45,7 @@ RSpec.describe Facility do
       expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
       expect(@cruz.registration_date).to eq(Date.today)
       expect(@cruz.plate_type).to be(:regular)
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
     end
   end
 end
