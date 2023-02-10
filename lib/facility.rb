@@ -18,7 +18,6 @@ class Facility
 
   def register_vehicle(vehicle)
     if vehicle.registration_date.nil?
-      @registered_vehicles << vehicle
       vehicle.registration_date = Date.today
       if Date.today.year - vehicle.year > 25
         @collected_fees += 25
@@ -27,7 +26,7 @@ class Facility
       else
         @collected_fees += 100
       end
-    @registered_vehicles
+    @registered_vehicles << vehicle
     else
       nil
     end

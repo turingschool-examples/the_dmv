@@ -12,15 +12,15 @@ class Vehicle
     @engine = vehicle_details[:engine]
   end
 
-  def vin(data)
+  def vin!(data)
     @vin = data
   end 
 
-  def engine(data)
+  def engine!(data)
     @engine = data 
   end
 
-  def year(year)
+  def year!(year)
     @year = year
   end
   
