@@ -9,9 +9,9 @@ class Registrant
     @name = name
     @permit = permit
     @license_data = {
-      "written" => false,
-      "license" => false,
-      "renewed" => false
+      :written => false,
+      :license => false,
+      :renewed => false
     }
   end
 
