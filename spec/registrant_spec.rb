@@ -35,6 +35,11 @@ RSpec.describe Registrant do
     it 'has a different name' do
       expect(@registrant_2.name).to eq(@person_2[:name])
     end
+
+    it 'returns a string' do
+      expect(@registrant_1.name).to be_a(String)
+      expect(@registrant_2.name).to be_a(String)
+    end
   end
 
   describe '#age' do
@@ -45,15 +50,20 @@ RSpec.describe Registrant do
     it 'has a different age' do
       expect(@registrant_2.age).to eq(@person_2[:age])
     end
+
+    it 'returns an integer' do
+      expect(@registrant_1.age).to be_a(Integer)
+      expect(@registrant_2.age).to be_a(Integer)
+    end
   end
 
   describe '#permit?' do
     it 'has a permit' do
-      expect(@registrant_1.permit?).to eq(true)
+      expect(@registrant_1.permit?).to be(true)
     end
 
     it 'does not have a permit' do
-      expect(@registrant_2.permit?).to eq(false)
+      expect(@registrant_2.permit?).to be(false)
     end
   end
 
