@@ -38,6 +38,11 @@ RSpec.describe Facility do
         expect(facility_1.registered_vehicles).to eq([])
         expect(facility_1.collected_fees).to eq(0)
 
+        facility_1.register_vehicle(cruz)
+
+        expect(facility_1.registered_vehicles).to eq([cruz])
+
+
       end
     end
 end
