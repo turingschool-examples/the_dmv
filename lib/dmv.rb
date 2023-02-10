@@ -14,11 +14,11 @@ class Dmv
     end
   end
 
-  def create_facilites(data)
+  def or_create_facilites(data)
     data.each do |facility|
       facility_details = {
         name: facility[:title],
-        address: find_address(facility),
+        address: or_find_address(facility),
         phone: facility[:phone_number]
       }
       facility_sorted = Facility.new(facility_details)
@@ -27,7 +27,7 @@ class Dmv
     @facilities
   end
 
-  def find_address(data)
+  def or_find_address(data)
     address_h = eval(data[:location_1][:human_address])
     address_s = address_h.values.join(' ')
   end
