@@ -39,7 +39,11 @@ RSpec.describe Registrant do
 
   describe '#age' do
     it 'has an age' do
+      expect(@registrant_1.age).to eq(@person_1[:age])
+    end
 
+    it 'has a different age' do
+      expect(@registrant_2.age).to eq(@person_2[:age])
     end
   end
 end
