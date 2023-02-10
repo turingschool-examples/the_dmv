@@ -34,8 +34,8 @@ RSpec.describe Facility do
       camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
 
       facility_1.add_service('Vehicle Registration')
-
-      expect(facility_1.register_vehicle(cruz)).to eq([cruz])
+      facility_1.register_vehicle(cruz)
+      expect(facility_1.registered_vehicles).to eq([cruz])
     end
 
   end
