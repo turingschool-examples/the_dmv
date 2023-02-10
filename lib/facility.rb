@@ -28,6 +28,15 @@ class Facility
     end
   end
 
+  def administer_written_test(person)
+    if @services.include?('Written Test')
+      if person.permit? && person.age > 15
+        person.license_data[:written] = true
+      end
+    end
+  end
+
+private #helper methods
   def determine_vehicle_plate(car)
     if car.antique?
       car.plate_type = :antique
