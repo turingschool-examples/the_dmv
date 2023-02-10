@@ -26,5 +26,23 @@ RSpec.describe Facility do
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
+
+    it 'can add available services' do
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.services).to eq(['Vehicle Registration'])
+    end
+
+    it 'can register vehicles' do
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_1.collected_fees).to be(0)
+      expect(@cruz.registration_date).to be(nil)
+      expect(@cruz.plate_type).to be(nil)
+      expect(@facility_1.register_vehicle(@cruz)).to eq(facility_1.registered_vehicles)
+      expect(@cruz.registration_date).to eq(Time.now)
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+    end
+    
   end
 end
