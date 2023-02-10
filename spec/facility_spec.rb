@@ -45,5 +45,16 @@ RSpec.describe Facility do
       expect(@facility_2.registered_vehicles).to be_a(Array)
     end
 
+    describe '#collected_fees' do
+      it 'starts at 0' do
+        expect(@facility_1.collected_fees).to eq(0)
+        expect(@facility_2.collected_fees).to eq(0)
+      end
+
+      it 'returns an integer' do
+        expect(@facility_1.collected_fees).to be_a(Integer)
+        expect(@facility_2.collected_fees).to be_a(Integer)
+      end
+    end
   end
 end
