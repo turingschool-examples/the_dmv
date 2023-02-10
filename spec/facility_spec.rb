@@ -149,9 +149,6 @@ RSpec.describe Facility do
       facility_1.add_service('Written Test')
       facility_1.administer_written_test(registrant_1)
       facility_1.administer_written_test(registrant_2)
-      facility_1.add_service('Road Test')
-      facility_1.administer_road_test(registrant_1)
-      facility_1.administer_road_test(registrant_2)
 
       expect(facility_1.renew_drivers_license(registrant_1)).to eq(false)
     end
