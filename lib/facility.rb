@@ -18,4 +18,10 @@ class Facility
   def add_service(service)
     @services << service
   end
+
+  def register_vehicle(car)
+    @registered_vehicles << car
+    car.registration_date = '2/9/2023'
+    # fill in today's date?
+  end
 end
