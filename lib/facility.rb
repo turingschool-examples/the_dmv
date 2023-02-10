@@ -20,10 +20,10 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    @registered_vehicles << vehicle
-    vehicle.registration_date = Date.today
+      @registered_vehicles << vehicle
+      vehicle.registration_date = Date.today
 
-    if vehicle.year <= 1998
+   if vehicle.year <= 1998
        @collected_fees += 25
        vehicle.plate_type = :antique
     elsif vehicle.engine == :ev
