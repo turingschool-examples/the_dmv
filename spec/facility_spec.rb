@@ -43,7 +43,6 @@ RSpec.describe Facility do
 
     it 'can track successfully registered vehicles' do
       expect(@facility_1.registered_vehicles).to eq([])
-      expect(@facility_2.registered_vehicle).to eq([])
 
       @facility_1.register_vehicle(@cruz)
       @facility_2.register_vehicle(@cruz)
@@ -52,8 +51,14 @@ RSpec.describe Facility do
       expect(@facility_2.registered_vehicles).to eq([])
     end
 
-    it 'updates collected fees' do
+    it 'can update total collected fees' do
+      expect(@facility_1.collected_fees).to eq(0)
 
+      @facility_1.register_vehicle(@cruz)
+      @facility_2.register_vehicle(@cruz)
+
+      expect(@facility_1.collected_fees).to eq(100)
+      expect(@facility_2.collected_fees).to eq(0)
     end
 
     it 'sets vehicle registration date' do
