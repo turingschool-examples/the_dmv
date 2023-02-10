@@ -1,3 +1,9 @@
 # The DMV
 
-This is the starter repo for the BE Mod1 DMV project.
+## Debugging Reflection
+
+1. Before starting to debug, I took an exploratory tour of the files available in the directory. I viewed the lib file and the spec file for each class together side-by-side, and followed along with the tests to see what each method in the class was intending to do. I also took note of what instance variables were available to each class, and which were initialized with default values. I opened the Gemfile to see which gems the project is using and checked out the README to note if it contained any (or any useful!) information. After this first scan, I ran `rspec` to see which tests passed and failed, and started to review and fix the bugs. I went through the test failures in order from first to last, reviewing the error messages and stack trace for each one as I went. Once I edited the code to address an error, I re-ran `rspec` until I had a passing test, then commited my code and moved to the next failing test.
+
+2. Since I did not originally write this code, I was initially less comfortable with the variable and parameter names. I actually went back to edit one name that I added once I realized that code in another class was similar but used a much more specific name. I also noted that without writing the tests myself, I had to pay particular attention to each of the expected assertions to ensure I understood what the methods were supposed to be doing and returning.
+
+3. Being able to recognize the basics of a Class structure made it easier than I thought it would be to read new, unfamiliar code. The syntax we know (initialize methods, attr_reader lines at the tops of the file, etc.) made it pretty simple to follow what information a new class was storing. The patterns that each class followed and the similarities between them in terms of file setup, syntax, and inputs also helped me understand what was happening in the code.
