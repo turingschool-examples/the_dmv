@@ -1,5 +1,6 @@
 require 'rspec'
 require './lib/registrant'
+
 RSpec.describe Registrant do
   describe '#initialize' do
     it 'can initialize' do
@@ -48,6 +49,7 @@ RSpec.describe Registrant do
   describe '#earn_permit' do
     it 'can earn permit' do
       registrant_2 = Registrant.new('Penny', 15 )
+
       registrant_2.earn_permit
 
       expect(registrant_2.permit?).to eq(true)
