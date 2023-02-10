@@ -42,6 +42,7 @@ RSpec.describe Facility do
       expect(@cruz.registration_date).to eq(Time.now)
       expect(@cruz.plate_type).to eq(:regular)
       expect(@facility_1.registered_vehicles).to eq([@cruz])
+      expect(facility_1.collected_fees).to be(100)
     end
     
   end
