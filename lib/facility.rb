@@ -20,7 +20,7 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    unless services.include?("Vehicle Registration") != true
+    unless services.include?('Vehicle Registration') != true
       vehicle.registration_date = Date.today
       if Date.today.year - vehicle.year >= 25
         vehicle.plate_type = :antique
@@ -37,6 +37,12 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    return false
+    unless services.include?('Written Test') != true
+      if registrant.age >= 18 == true
+        registrant.license_data[:written] = true
+        return true
+      end
+    end
+    false
   end
 end
