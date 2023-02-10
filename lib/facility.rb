@@ -39,8 +39,13 @@ class Facility
 
   def administer_written_test(applicant)
     if self.services.include?('Written Test') && applicant.age > 15 && applicant.permit?
-      applicant.license_data[:written] = true
+        applicant.license_data[:written] = true
     end
   end
 
+  def administer_road_test(applicant)
+    if self.services.include?('Road Test') && applicant.license_data[:written] == true
+        applicant.license_data[:license] = true
+    end
+  end
 end
