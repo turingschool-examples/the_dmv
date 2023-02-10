@@ -52,4 +52,10 @@ class Facility
     end
   end
 
+  def administer_written_test(registrant)
+    if @services.include?('Written Test')
+      registrant.license_data[:written] = true
+    end
+  end
+
 end
