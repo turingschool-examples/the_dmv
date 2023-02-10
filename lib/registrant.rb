@@ -1,4 +1,4 @@
-class Registrant
+class Registrant 
   
   attr_reader :name, :age, :permit
   def initialize(name, age, permit = false)
