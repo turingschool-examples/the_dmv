@@ -44,4 +44,13 @@ RSpec.describe Dmv do
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
+
+  describe '#Iteration 3' do
+    it 'can create Facility class from Oregon DMV data' do
+      or_dmv_offices = DmvDataService.new.or_dmv_office_locations
+
+      @dmv.create_facilites(or_dmv_offices)
+      expect(@dmv.facilities[0]).to be_an_instance_of(Facility)
+    end
+  end
 end
