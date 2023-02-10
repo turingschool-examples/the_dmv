@@ -18,4 +18,9 @@ class Facility
   def add_service(service)
     @services << service
   end
+
+  def register_vehicle(vehicle)
+    registered_vehicles << vehicle
+    # require 'pry'; binding.pry
+  end
 end
