@@ -9,6 +9,9 @@ RSpec.describe Facility do
   let(:bolt) { Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} ) }
   let(:camaro) { Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} ) }
 
+  let(:registrant_1) { Registrant.new('Bruce', 18, true ) }
+  let(:registrant_2) { Registrant.new('Penny', 15 ) }
+  let(:registrant_3) { Registrant.new('Tucker', 15 ) }
 
   describe '#initialize' do
     it 'can initialize' do
@@ -82,6 +85,12 @@ RSpec.describe Facility do
 
       expect(facility_2.registered_vehicles).to eq([])
       expect(facility_2.collected_fees).to eq(0)
+    end
+  end
+
+  describe '#administer_written_test' do
+    it 'cannot administer a written test if the facility does not have it as a service' do
+      expect(facility_1.administer_written_test(registrant_1)).to be(false)
     end
   end
 end

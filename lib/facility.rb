@@ -20,6 +20,7 @@ class Facility
   end
 
   def register_vehicle(vehicle)
+    # write helper methods for this method 
     if services.include?('Vehicle Registration')
       @registered_vehicles << vehicle
       vehicle.registration_date = Date.today
