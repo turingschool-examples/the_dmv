@@ -136,12 +136,15 @@ RSpec.describe Facility do
       expect(facility_1.administer_road_test(registrant_1)).to be(false)
     end
 
-    # xit '' do
-    #   facility_1.add_service('')
-    #   facility_1.administer_road_test()
+    it 'can administer the road test if it is offered in services' do
+      facility_1.add_service('Written test')
+      facility_1.add_service('Road test')
+    
+      facility_1.administer_written_test(registrant_1)
+      facility_1.administer_road_test(registrant_1)
 
-    #   expect(.license_data[:]).to be(true)
-    # end
+      expect(registrant_1.license_data[:license]).to be(true)
+    end
 
     # xit '' do
     #   facility_1.add_service('')
