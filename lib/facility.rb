@@ -17,17 +17,21 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    if vehicle.registration_date.nil?
-      vehicle.registration_date = Date.today
-      if Date.today.year - vehicle.year > 25
-        @collected_fees += 25
-      elsif vehicle.engine == :ev
-        @collected_fees += 200
+    if @services.include?("Vehicle Registration")
+      if vehicle.registration_date.nil?
+        vehicle.registration_date = Date.today
+        if Date.today.year - vehicle.year > 25
+          @collected_fees += 25
+        elsif vehicle.engine == :ev
+          @collected_fees += 200
+        else
+          @collected_fees += 100
+        end
+      @registered_vehicles << vehicle
       else
-        @collected_fees += 100
+        nil
       end
-    @registered_vehicles << vehicle
-    else
+    else 
       nil
     end
   end
