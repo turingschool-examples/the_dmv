@@ -56,4 +56,36 @@ RSpec.describe Registrant do
       expect(@registrant_2.permit?).to eq(false)
     end
   end
+
+  describe '#license_data' do
+    it 'is a hash' do
+      expect(@registrant_1.license_data).to be_a(Hash)
+    end
+
+    it 'has a written key' do
+      expect(@registrant_1.license_data.include?(:written)).to eq(true)
+      expect(@registrant_2.license_data.include?(:written)).to eq(true)
+    end
+
+    it 'has a license key' do
+      expect(@registrant_1.license_data.include?(:license)).to eq(true)
+      expect(@registrant_2.license_data.include?(:license)).to eq(true)
+    end
+
+    it 'has a renewed key' do
+      expect(@registrant_1.license_data.include?(:renewed)).to eq(true)
+      expect(@registrant_2.license_data.include?(:renewed)).to eq(true)
+    end
+
+    it 'sets its default values correctly' do
+      expected = {
+        written: false,
+        license: false,
+        renewed: false
+      }
+
+      expect(@registrant_1.license_data).to eq(expected)
+      expect(@registrant_2.license_data).to eq(expected)
+    end
+  end
 end
