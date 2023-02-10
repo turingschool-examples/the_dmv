@@ -69,8 +69,18 @@ RSpec.describe Facility do
       expect(@cruz.registration_date).to eq(Date.today)
     end
 
-    it 'sets vehicle plate type' do
+    it 'can set vehicle plate type' do
+      expect(@cruz.plate_type).to eq(nil)
+      expect(@bolt.plate_type).to eq(nil)
+      expect(@camaro.plate_type).to eq(nil)
 
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@camaro)
+
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@camaro.plate_type).to eq(:antique)
     end
   end
 end
