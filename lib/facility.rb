@@ -5,6 +5,7 @@ class Facility
               :services, 
               :registered_vehicles,
               :collected_fees
+              
 
   def initialize(facility_info)
     @name = facility_info[:name]
@@ -20,6 +21,14 @@ class Facility
   end
 
   def register_vehicle(vehicle)
+    vehicle.registration_date = Date.today
+    
+
+
     @registered_vehicles << vehicle
+    
+    
   end
+
+  
 end
