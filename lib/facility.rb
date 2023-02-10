@@ -1,5 +1,5 @@
 class Facility
-  attr_reader :address, :phone, :add_service, :registered_vehicles, :collected_fees
+  attr_reader :address, :phone, :add_service, :registered_vehicles, :collected_fees, :administer_written_test
   attr_accessor :services, :name
   def initialize(facility_info)
     @name = facility_info[:name]
@@ -33,5 +33,18 @@ class Facility
     else 
       return nil
     end
+  end
+
+  def administer_written_test(registrant)
+    service_check = services.any? {|service| service == 'Written Test'}
+    if service_check == true
+      if (registrant.permit == true) && (registrant.age >= 16)
+        registrant.license_data[:written] = true
+        return true
+      else
+        false
+      end
+    end
+    false
   end
 end
