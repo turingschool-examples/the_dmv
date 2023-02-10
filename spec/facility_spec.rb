@@ -35,14 +35,21 @@ RSpec.describe Facility do
       @facility_1.add_service('Vehicle Registration')
     end
 
-    it 'registers vehicle if facility offers this service' do
+    it 'can register vehicle if facility offers the service' do
       expect(@facility_1).registered_vehicles.to eq([])
       expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
       expect(@facility_2.register_vehicle(@cruz)).to eq(nil)
     end
 
-    it 'adds vehicles to registered vehicles list' do
+    it 'can track successfully registered vehicles' do
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_2.registered_vehicle).to eq([])
 
+      @facility_1.register_vehicle(@cruz)
+      @facility_2.register_vehicle(@cruz)
+
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+      expect(@facility_2.registered_vehicles).to eq([])
     end
 
     it 'updates collected fees' do
