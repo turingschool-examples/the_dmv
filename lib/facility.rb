@@ -68,4 +68,8 @@ class Facility
     registrant.age >= 16 && registrant.permit?
   end
 
+  def administer_road_test(registrant)
+    registrant.license_data[:license] = true
+  end
+
 end
