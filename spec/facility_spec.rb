@@ -32,6 +32,29 @@ RSpec.describe Facility do
       @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
       @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+      @facility_1.add_service('Vehicle Registration')
+    end
+
+    it 'registers vehicle if facility offers this service' do
+      expect(@facility_1).registered_vehicles.to eq([])
+      expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
+      expect(@facility_2.register_vehicle(@cruz)).to eq(nil)
+    end
+
+    it 'adds vehicles to registered vehicles list' do
+
+    end
+
+    it 'updates collected fees' do
+
+    end
+
+    it 'sets vehicle registration date' do
+
+    end
+
+    it 'sets vehicle plate type' do
+
     end
   end
 end
