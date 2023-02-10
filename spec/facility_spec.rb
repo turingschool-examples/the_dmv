@@ -136,32 +136,32 @@ RSpec.describe Facility do
       expect(facility_1.administer_road_test(registrant_1)).to be(false)
     end
 
-    xit '' do
-      facility_1.add_service('')
-      facility_1.administer_road_test()
+    # xit '' do
+    #   facility_1.add_service('')
+    #   facility_1.administer_road_test()
 
-      expect(.license_data[:]).to be(true)
-    end
+    #   expect(.license_data[:]).to be(true)
+    # end
 
-    xit '' do
-      facility_1.add_service('')
-      facility_1.administer_road_test()
+    # xit '' do
+    #   facility_1.add_service('')
+    #   facility_1.administer_road_test()
 
-      expect(.license_data[:]).to be()
+    #   expect(.license_data[:]).to be()
 
-      .earn_permit
+    #   .earn_permit
 
-      expect(facility_1.administer_road_test()).to be()
-    end
+    #   expect(facility_1.administer_road_test()).to be()
+    # end
 
-    xit '' do
-      facility_1.add_service('')
+    # xit '' do
+    #   facility_1.add_service('')
 
-      expect(facility_1.administer_road_test()).to be()
+    #   expect(facility_1.administer_road_test()).to be()
 
-      .earn_permit
+    #   .earn_permit
 
-      expect(facility_1.administer_road_test()).to be()
-    end
+    #   expect(facility_1.administer_road_test()).to be()
+    # end
   end
 end
