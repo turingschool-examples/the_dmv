@@ -55,6 +55,8 @@ class Facility
   def administer_written_test(registrant)
     if @services.include?('Written Test')
       registrant.license_data[:written] = true
+    else
+      'Service not available at this location.'
     end
   end
 
