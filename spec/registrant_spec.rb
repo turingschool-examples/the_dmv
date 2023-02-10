@@ -1,4 +1,4 @@
-require './lib/registrant'
+require 'spec_helper'
 
 RSpec.describe Registrant do
   let(:registrant_1) { Registrant.new('Bruce', 18, true ) }
