@@ -96,14 +96,14 @@ RSpec.describe Facility do
     end
 
     it 'changes written_test in registrant license_data to true if the facility offeres the service' do
-      facility_1.add_service('Written test')
+      facility_1.add_service('Written Test')
       facility_1.administer_written_test(registrant_1)
 
       expect(registrant_1.license_data[:written]).to be(true)
     end
 
     it 'will not allow a registrant with permit == false administer_written_permit' do
-      facility_1.add_service('Written test')
+      facility_1.add_service('Written Test')
       facility_1.administer_written_test(registrant_2)
 
       expect(registrant_2.license_data[:written]).to be(false)
@@ -114,7 +114,7 @@ RSpec.describe Facility do
     end
 
     it 'will not allow a registrant who is not 16 to take written test' do
-      facility_1.add_service('Written test')
+      facility_1.add_service('Written Test')
 
       expect(facility_1.administer_written_test(registrant_3)).to be(false)
 
@@ -126,7 +126,7 @@ RSpec.describe Facility do
 
   describe '#administer_road_test' do
     it 'cannot adminster road test if the facility does not offer the service' do
-      facility_1.add_service('Written test')
+      facility_1.add_service('Written Test')
 
       expect(facility_1.administer_road_test(registrant_3)).to be(false)
 
@@ -137,8 +137,8 @@ RSpec.describe Facility do
     end
 
     it 'can administer the road test if it is offered in services' do
-      facility_1.add_service('Written test')
-      facility_1.add_service('Road test')
+      facility_1.add_service('Written Test')
+      facility_1.add_service('Road Test')
     
       facility_1.administer_written_test(registrant_1)
       facility_1.administer_road_test(registrant_1)
