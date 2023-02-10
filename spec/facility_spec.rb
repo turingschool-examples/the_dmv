@@ -39,6 +39,7 @@ RSpec.describe Facility do
 
       expect(facility_1.registered_vehicles).to eq([cruz])
       expect(cruz.registration_date).to be_a(Date)
+      expect(facility_1.collected_fees).to eq(100)
     end
   end
 end

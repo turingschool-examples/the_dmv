@@ -22,5 +22,11 @@ class Facility
   def register_vehicle(vehicle)
     @registered_vehicles << vehicle
     vehicle.registration_date = Date.today
+
+    if vehicle.year <= 1998
+       @collected_fees += 25
+    else
+      @collected_fees += 100
+    end
   end
 end
