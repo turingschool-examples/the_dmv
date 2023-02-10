@@ -33,6 +33,7 @@ RSpec.describe Facility do
 
   describe '#register_vehicle' do
     it 'adds vehicle to registered vehicles' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
 
       expect(@facility_1.registered_vehicles).to eq([@cruz])
@@ -53,6 +54,16 @@ RSpec.describe Facility do
       expect(@bolt.registration_date).to eq('2/9/2023')
       expect(@bolt.plate_type).to eq(:ev)
       expect(@facility_1.collected_fees).to eq 325
+    end
+
+    it 'only registers vehicle if service provided at facility' do
+      expect(@facility_1.register_vehicle(@cruz)).to eq('Service not available at this location.')
+
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@bolt.registration_date).to eq(nil)
+      expect(@bolt.plate_type).to eq(nil)
+      expect(@facility_1.collected_fees).to eq 0
+
     end
 
   end
