@@ -33,4 +33,17 @@ RSpec.describe Facility do
       expect(@facility_1.services.all? { |service| service.is_a?(String) }).to be(true)
     end
   end
+
+  describe '#registered_vehicles' do
+    it 'starts empty' do
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_2.registered_vehicles).to eq([])
+    end
+
+    it 'returns an array' do
+      expect(@facility_1.registered_vehicles).to be_a(Array)
+      expect(@facility_2.registered_vehicles).to be_a(Array)
+    end
+
+  end
 end
