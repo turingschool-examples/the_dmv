@@ -1,7 +1,14 @@
 require 'date'
 
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
+  attr_reader :name, 
+              :address, 
+              :phone, 
+              :services, 
+              :registered_vehicles, 
+              :collected_fees,
+              :facility_count,
+              :facility_list
 
   def initialize(information)
     @name = information.fetch(:name)
@@ -10,6 +17,8 @@ class Facility
     @services = []
     @collected_fees = 0
     @registered_vehicles = []
+    @facility_list = []
+    @facility_count = 0
   end
 
   def add_service(service)
@@ -58,5 +67,20 @@ class Facility
     else 
       false
     end
+  end
+
+  def add_facilities(facilities)
+    facilities.each do |facility|
+      facility[:name] = facility[:office_name]
+      facility[:address] = facility[:street_address_line_1]
+      facility[:phone] = facility[:public_phone_number]
+      @facility_count += 1
+      added_facility = Facility.new(facility)
+      @facility_list << added_facility
+    end
+  end
+
+  def name!(name)
+    @name = name
   end
 end
