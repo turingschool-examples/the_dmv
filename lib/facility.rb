@@ -23,8 +23,10 @@ class Facility
     if services.include?('Vehicle Registration')
       vehicle.set_registration_date
       @registered_vehicles << vehicle
-  else
-    "service not provided"
-  end
+      vehicle.set_plate_type
+    else
+      "service not provided at this location"
+
+    end
   end
 end
