@@ -36,6 +36,7 @@ RSpec.describe Facility do
   it 'starts with 0 collected fees' do
     expect(@facility_1.collected_fees).to eq(0)
   end
+
   describe '#register_vehicle' do
     it 'can register a vehicle if the facility has that service' do
       @facility_1.register_vehicle(@cruz)
@@ -46,6 +47,33 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@cruz)
 
       expect(@facility_1.registered_vehicles).to eq([@cruz])
+    end
+    
+    it 'can add a registration date to a vehicle that is registered' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      
+      expect(@cruz.registration_date).to be_an_instance_of(Date)
+    end
+    
+    it 'can issue a plate type based on engine' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@camaro)
+      
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@camaro.plate_type).to eq(:antique)
+    end
+    
+    it 'can collect fees when registering vehicles' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@camaro)
+      
+      expect(@facility_1.collected_fees).to eq(325)
     end
   end
 end

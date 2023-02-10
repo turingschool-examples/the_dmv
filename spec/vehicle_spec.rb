@@ -33,4 +33,20 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  it 'can change the registration date' do
+    expect(@cruz.registration_date).to eq(nil)
+
+    @cruz.registration_date = Date.today
+
+    expect(@cruz.registration_date).to be_an_instance_of(Date)
+  end 
+
+  it 'can change the plate type' do
+    expect(@cruz.plate_type).to eq(nil)
+
+    @cruz.plate_type = :regular
+
+    expect(@cruz.plate_type).to eq(:regular)
+  end
 end
