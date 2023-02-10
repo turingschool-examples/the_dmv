@@ -38,4 +38,19 @@ RSpec.describe Registrant do
     expected = {:written=>false, :license=>false, :renewed=>false}
     expect(registrant_2.license_data).to eq(expected)
   end
+
+  it 'starts with no permit, but can earn one' do
+    registrant_1 = Registrant.new('Bruce', 18, true )
+    registrant_2 = Registrant.new('Penny', 15 )
+
+    expect(registrant_2.permit?).to eq(false)
+
+    registrant_2.earn_permit
+
+    expect(registrant_2.permit?).to eq(true)
+
+
+
+
+  end
 end
