@@ -6,5 +6,8 @@ RSpec.describe do Registrant
     registrant_1 = Registrant.new('Bruce', 18, true)
 
     expect(registrant_1).to be_an_instance_of(Registrant)
+    expect(registrant_1.age).to eq(18)
+    expect(registrant_1.name).to eq('Bruce')
+    expect(registrant_1.permit).to eq(true)
   end
 end
