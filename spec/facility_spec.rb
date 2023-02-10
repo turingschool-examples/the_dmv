@@ -36,7 +36,7 @@ RSpec.describe Facility do
     end
 
     it 'can register vehicle if facility offers the service' do
-      expect(@facility_1).registered_vehicles.to eq([])
+      expect(@facility_1.registered_vehicles).to eq([])
       expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
       expect(@facility_2.register_vehicle(@cruz)).to eq(nil)
     end
