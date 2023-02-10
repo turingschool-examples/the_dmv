@@ -42,6 +42,7 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(0)
     end
     it 'can register vehicles' do
+      @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
       expect(@cruz.registration_date).to eq(Date.today)
       expect(@cruz.plate_type).to be(:regular)
@@ -50,6 +51,7 @@ RSpec.describe Facility do
     end
 
     it 'can register multiple vehicles' do
+      @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
       expect(@facility_1.register_vehicle(@camaro)).to eq([@cruz, @camaro])
       expect(@camaro.registration_date).to eq(Date.today)
@@ -61,6 +63,7 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(325)
     end
     it 'only allows facilities with the service to do complete' do
+      @facility_1.add_service('Vehicle Registration')
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.services).to eq([])
       expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
