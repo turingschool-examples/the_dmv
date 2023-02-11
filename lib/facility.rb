@@ -27,12 +27,20 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    if (!@services.include?('Written Test') ||
+    if !@services.include?('Written Test') ||
        registrant.age < 16 ||
-       !registrant.permit?)
+       !registrant.permit?
       return false
     end
     registrant.set_license_data(:written, true)
+    true
+  end
+
+  def administer_road_test(registrant)
+    if !@services.include?('Road Test') || !registrant.license_data[:written]
+      return false
+    end
+    registrant.set_license_data(:license, true)
     true
   end
 
