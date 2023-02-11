@@ -22,6 +22,14 @@ RSpec.describe VehicleFactory do
   it "can use extracted hash to instantiate new vehicle into array with attributes" do
     expect(@factory.state_vehicles[0].vin).to eq("JTDKN3DP8D")
   end
+
+  it "pulls in all specified information from remote data" do
+    expect(@factory.state_vehicles[0].vin).to eq("JTDKN3DP8D")
+    expect(@factory.state_vehicles[0].year).to eq(2013)
+    expect(@factory.state_vehicles[0].make).to eq("TOYOTA")
+    expect(@factory.state_vehicles[0].model).to eq("Prius Plug-in")
+    expect(@factory.state_vehicles[0].engine).to eq("Plug-in Hybrid Electric Vehicle (PHEV)")
+  end
 end
  
   # it "all hashes have the same keys" do  ***ALL HASHES DO NOT HAVE IDENTICAL KEYS ****
