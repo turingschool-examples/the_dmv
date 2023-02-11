@@ -1,5 +1,10 @@
 class Facility
-  attr_reader :address, :phone, :add_service, :registered_vehicles, :collected_fees, :administer_written_test
+  attr_reader :address, 
+              :phone, 
+              :add_service, 
+              :registered_vehicles, 
+              :collected_fees, 
+              :administer_written_test
   attr_accessor :services, :name
   def initialize(facility_info)
     @name = facility_info[:name]
@@ -26,37 +31,25 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    if @services.include?("Written Test")
-      if (registrant.permit == true) && (registrant.age >= 16)
-        registrant.license_data[:written] = true
-        return true
-      else
-        false
-      end
+    if @services.include?("Written Test") && (registrant.permit?)
+      registrant.license_data[:written] = true
+      return true
     end
     false
   end
 
   def administer_road_test(registrant)
-    if @services.include?("Road Test")
-      if registrant.license_data[:written] == true
-        registrant.license_data[:license] = true
-        return true
-      else
-        false
-      end
+    if @services.include?("Road Test") && registrant.license_data[:written] == true
+      registrant.license_data[:license] = true
+      return true
     end
     false
   end
 
   def renew_drivers_license(registrant)
-    if @services.include?("Renew License")
-      if registrant.license_data[:license] == true 
-        registrant.license_data[:renewed] = true
-        return true
-      else
-        false
-      end
+    if @services.include?("Renew License") && registrant.license_data[:license] == true 
+      registrant.license_data[:renewed] = true
+      return true
     end
     false
   end
@@ -75,3 +68,10 @@ class Facility
     end
   end
 end
+        # title: office[:title],
+        # zip_code: office[:zip_code]
+        # website: office[:website],
+        # type: office[:type],
+        # phone_number: office[:phone_number],
+        # agency: office[:agency],
+        # location_1: office[:location_1]

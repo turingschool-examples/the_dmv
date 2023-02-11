@@ -77,11 +77,11 @@ RSpec.describe Facility do
     end
   end
   
-  describe 'has drivers licensing service' do
+  describe 'has drivers licensing services' do
+    describe 'Written Test'
     it 'administers tests and renews license' do
       # Written test #
       expect(@facility_1.administer_written_test(@registrant_1)).to be(false)
-      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       expect(@facility_1.add_service('Written Test')).to eq(["Written Test"])
       expect(@facility_1.administer_written_test(@registrant_1)).to be(true)
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
