@@ -133,7 +133,7 @@ RSpec.describe Facility do
       expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
     end
 
-    it 'registrant_2 can ear their permit' do
+    it 'registrant_2 can ear their permit and take written test' do
       @facility_1.add_service('Written_Test')
       @registrant_2.earn_permit
 
@@ -151,14 +151,15 @@ RSpec.describe Facility do
       expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
     end
 
-    it 'registrant_3'
+    it 'registrant_3 can earn their permit, but can not take written test' do
+      @facility_1.add_service('Written_Test')
       @registrant_3.earn_permit
 
+      expect(@registrant_3.permit?).to eq(true)
       expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
 
       expected = {:written=>false, :license=>false, :renewed=>false}
 
       expect(@registrant_3.license_data).to eq(expected)
-      
     end
   end
