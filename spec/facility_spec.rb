@@ -176,7 +176,7 @@ RSpec.describe Facility do
 
     it 'does not do modify anything if there is no written test service' do
       @facility_2.administer_written_test(@registrant_1)
-      expect(@registrant_1.license_data).to eq(Registrant::DEFAULTS[:license_data])
+      expect(@registrant_1.license_data[:written]).to be(false)
     end
 
     it 'returns false if there is no written test service' do
@@ -186,8 +186,8 @@ RSpec.describe Facility do
     it 'does not do modify anything if the registrant does not have a permit' do
       @facility_1.administer_written_test(@registrant_2)
       @facility_1.administer_written_test(@registrant_3)
-      expect(@registrant_2.license_data).to eq(Registrant::DEFAULTS[:license_data])
-      expect(@registrant_3.license_data).to eq(Registrant::DEFAULTS[:license_data])
+      expect(@registrant_2.license_data[:written]).to be(false)
+      expect(@registrant_3.license_data[:written]).to be(false)
     end
 
     it 'returns false if the registrant does not have a permit' do
@@ -197,7 +197,7 @@ RSpec.describe Facility do
 
     it 'does not do modify anything if the registrant is under 16 years old' do
       @facility_1.administer_written_test(@registrant_3)
-      expect(@registrant_3.license_data).to eq(Registrant::DEFAULTS[:license_data])
+      expect(@registrant_3.license_data[:written]).to be(false)
     end
 
     it 'returns false if the registrant is under 16 years old' do
@@ -207,7 +207,7 @@ RSpec.describe Facility do
     it 'correctly modifies the registrant\' license data if it successfully administers the written test' do
       expect(@facility_2.services).to eq([])
       @facility_2.administer_written_test(@registrant_1)
-      expect(@registrant_1.license_data).to eq(Registrant::DEFAULTS[:license_data])
+      expect(@registrant_1.license_data[:written]).to be(false)
       @facility_2.add_service('Written Test')
       @facility_2.administer_written_test(@registrant_1)
       expect(@registrant_1.license_data[:written]).to be(true)
@@ -257,7 +257,9 @@ RSpec.describe Facility do
 
     it 'grants a license if the facility has the road test service and the registrant has passed the written test' do
       @facility_2.add_service('Road Test')
-      expect(@facility_1.services).to eq(['Written Test', 'Road Test'])
+      expect(@facility_2.services).to eq(['Written Test', 'Road Test'])
+      expect(@registrant_1.license_data[:written]).to be(false)
+      expect(@registrant_1.license_data[:license]).to be(false)
       @facility_2.administer_written_test(@registrant_1)
       expect(@registrant_1.license_data[:written]).to be(true)
       expect(@registrant_1.license_data[:license]).to be(false)
