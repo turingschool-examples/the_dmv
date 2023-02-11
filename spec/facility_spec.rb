@@ -162,4 +162,8 @@ RSpec.describe Facility do
 
       expect(@registrant_3.license_data).to eq(expected)
     end
+
+    it 'verifies if registrant can be administered a road test' do
+      expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
+    end
   end

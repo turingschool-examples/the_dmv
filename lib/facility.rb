@@ -37,4 +37,11 @@ class Facility
       false
     end
   end
+
+  def administer_road_test(person)
+    if services.include?("Road_Test") && administer_written_test(person)
+    else
+      false
+    end
+  end
 end
