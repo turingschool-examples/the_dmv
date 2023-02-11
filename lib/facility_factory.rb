@@ -25,7 +25,7 @@ class FacilityFactory
   def ny_create_facilities(data)
     data.each do |facility|
       facility_details = {
-        name: facility[:office_namee],
+        name: facility[:office_name],
         address: ny_find_address(facility),
         phone: facility[:public_phone_number]
       }
@@ -41,6 +41,28 @@ class FacilityFactory
     address_c << facility[:city]
     address_c << facility[:state]
     address_c << facility[:zip_code]
+    address_c.join(' ')
+  end
+
+  def mo_create_facilities(data)
+    data.each do |facility|
+      facility_details = {
+        name: facility[:name],
+        address: ny_find_address(facility),
+        phone: facility[:phone]
+      }
+      facility_sorted = Facility.new(facility_details)
+      self.facilities << facility_sorted
+    end
+    @facilities
+  end
+
+  def mo_find_address(facility)
+    address_c = []
+    address_c << facility[:address1]
+    address_c << facility[:city]
+    address_c << facility[:state]
+    address_c << facility[:zipcode]
     address_c.join(' ')
   end
 end
