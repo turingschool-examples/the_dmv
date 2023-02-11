@@ -61,6 +61,17 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#collected_fees' do
+    it 'can add registration fee to collected_fees' do
+      expect(@facility_1.collected_fees).to be 0
+      
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@bolt)
+
+      expect(@facility_1.collected_fees).to be 300
+    end
+  end
 
 end
 
