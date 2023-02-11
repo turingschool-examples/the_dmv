@@ -165,6 +165,31 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#renew_drivers_license' do
+    it 'can renew license if registrant has written and road test' do
+      expect(@facility_1.services).to eq([])
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to be false
+
+      @facility_1.add_service('Renew License')
+      @facility_1.renew_drivers_license(@registrant_1)
+
+      expect(@facility_1.services).to eq(['Renew License'])
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to be false
+
+      @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.renew_drivers_license(@registrant_1)
+
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to be false
+
+      @facility_1.add_service('Road Test')
+      @facility_1.administer_road_test(@registrant_1)
+      @facility_1.renew_drivers_license(@registrant_1)
+
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to be true
+    end
+  end
+
 end
 
 
