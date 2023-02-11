@@ -53,6 +53,7 @@ class Facility
   end
 
   def administer_written_test(registrant)
+    # get rid of nested if
     if @services.include?('Written Test')
       if eligible_for_written_test?(registrant) == true
         registrant.license_data[:written] = true
@@ -67,5 +68,12 @@ class Facility
   def eligible_for_written_test?(registrant)
     registrant.age >= 16 && registrant.permit?
   end
+
+  def administer_road_test(registrant)
+    return 'Service not available here.' unless @services.include?('Road Test') 
+    registrant.license_data[:written] ? registrant.
+    license_data[:license] = true : 'Need to pass written test first.'
+  end
+
 
 end
