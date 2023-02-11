@@ -115,7 +115,7 @@ RSpec.describe Facility do
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
     end
       
-    it 'allows registrant_1 to administer written test' do
+    it 'allows registrant_1 to be administered a written test' do
       @facility_1.add_service('Written_Test')
 
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
@@ -126,7 +126,20 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq(expected)
     end
 
-    it 'verified info needed for registran_2 to earn their permit' do
+    it 'verified info needed for registrant_2 to earn their permit' do
+      @facility_1.add_service('Written_Test')
+
       expect(@registrant_2.age).to eq(16)
+      expect(@registrant_2.permit?).to eq(false)
+      expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
+    end
+
+    it 'registrant_2 can ear their permit' do
+      @facility_1.add_service('Written_Test')
+
+      @registrant_2.earn_permit
+
+      expect(@facility_1.administer_written_test(registrant_2)).to eq(true)
+
     end
   end

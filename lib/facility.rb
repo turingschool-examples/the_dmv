@@ -37,4 +37,6 @@ class Facility
       false
     end
   end
+
+  def earn_permit
 end
