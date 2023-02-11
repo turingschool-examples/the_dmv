@@ -17,23 +17,40 @@ class Facility
   end
 
   def add_service(service)
-    @services << service
+    services << service
+
   end
 
   def register_vehicle(car)
-    car.registration_date = Date.today
-    if car.antique?
-      car.plate_type = :antique
+    return nil unless @services.include?("Vehicle Registration")
+    
+    if car.antique? 
       @collected_fees += 25
+      car.plate_type = :antique
     elsif car.electric_vehicle?
-      car.plate_type = :ev
       @collected_fees += 200
+      car.plate_type = :ev
     else
-      car.plate_type = :regular
       @collected_fees += 100
+      car.plate_type = :regular
     end
-    @registered_vehicles << car
+    car.registration_date = Date.today
+    @registered_vehicles << car  
   end
-
-
 end
+
+
+
+
+
+
+
+# def set_plate_type
+#   if car.antique?
+#     car.set_plate_type = :antique
+#   elsif car.electric_vehicle?
+#     car.set_plate_type = :ev
+#   else 
+#     car.set_plate_type = :regular
+#   end
+# end
