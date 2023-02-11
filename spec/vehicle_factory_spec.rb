@@ -28,7 +28,7 @@ RSpec.describe VehicleFactory do
     expect(@factory.state_vehicles[0].year).to eq(2013)
     expect(@factory.state_vehicles[0].make).to eq("TOYOTA")
     expect(@factory.state_vehicles[0].model).to eq("Prius Plug-in")
-    expect(@factory.state_vehicles[0].engine).to eq("Plug-in Hybrid Electric Vehicle (PHEV)")
+    expect(@factory.state_vehicles[0].engine).to eq(:ev)
   end
 
   it "builds correct number of vehicles" do
@@ -43,20 +43,3 @@ RSpec.describe VehicleFactory do
     expect(@factory.state_vehicles[637].engine).to eq(:ev)
   end
 end
- 
-  # it "all hashes have the same keys" do  ***ALL HASHES DO NOT HAVE IDENTICAL KEYS ****
-  #   current_hash = @wa_ev_registrations[0]
-  #   for i in 0..@wa_ev_registrations.count - 1
-  #     expect(current_hash.keys).to eq(@wa_ev_registrations[i+1].keys)
-  #     current_hash = @wa_ev_registrations[i+1]
-  #   end
-  # end
-
-  # it "parses data into an array of vehicles" do
-
-  #   for i in 0..wa_vehicles.length - 1
-  #     expect(wa_vehicles[i]).to be_a(Vehicle)
-  #   end
-
-#     p wa_vehicles.length
-  # end
