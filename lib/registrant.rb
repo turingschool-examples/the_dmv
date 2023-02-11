@@ -14,6 +14,10 @@ class Registrant
     ld_hash = {written: false, license: false, renewed: false} 
   end
 
+  def earn_permit
+    return @permit = true if @age >= 15
+  end
+
 
 
 
