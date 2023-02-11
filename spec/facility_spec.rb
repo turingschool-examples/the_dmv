@@ -73,7 +73,7 @@ RSpec.describe Facility do
   end
 
   describe '#administer_written_test' do
-    it 'changes written value on registrant license_data' do
+    it 'changes written value on registrant license_data to true' do
       @facility_1.add_service('Written Test')
 
       expect(@facility_1.administer_written_test(@registrant_1)).to be true
@@ -103,7 +103,7 @@ RSpec.describe Facility do
   end
 
   describe '#administer_road_test' do
-    it 'changes license value on registrant license data' do
+    it 'changes license value on registrant license data to true' do
       @facility_1.add_service('Written Test') 
       @facility_1.add_service('Road Test')
       @facility_1.administer_written_test(@registrant_1)
@@ -120,4 +120,6 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq({:written=>false,:license=>false, :renewed=>false})
     end
   end
+
+
 end
