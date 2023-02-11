@@ -4,14 +4,17 @@ class Registrant
     @name = name 
     @age = age
     @permit = permit
-    # @license_data = license_data
   end
 
   def permit?
     @permit
   end
 
-  
+  def license_data
+    ld_hash = {written: false, license: false, renewed: false} 
+  end
+
+
 
 
 
