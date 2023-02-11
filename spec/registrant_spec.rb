@@ -8,12 +8,17 @@ RSpec.describe Registrant do
   }.freeze
   PERSON_2 = {
     name: 'Penny',
+    age: 16
+  }.freeze
+  PERSON_3 = {
+    name: 'Tucker',
     age: 15
   }.freeze
 
   before(:each) do
     @registrant_1 = Registrant.new(PERSON_1[:name], PERSON_1[:age], PERSON_1[:permit])
     @registrant_2 = Registrant.new(PERSON_2[:name], PERSON_2[:age])
+    @registrant_3 = Registrant.new(PERSON_3[:name], PERSON_3[:age])
   end
 
   describe '#initialize' do
