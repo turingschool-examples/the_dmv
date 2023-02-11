@@ -78,20 +78,28 @@ RSpec.describe Facility do
       registrant_2.earn_permit
       expect(@facility_1.administer_written_test(registrant_2)).to eq(true)
       expect(registrant_3.age).to eq(15)
+      registrant_3.earn_permit
       expect(@facility_1.administer_written_test(registrant_3)).to eq(false)
-
     end
   end
 
   describe '#administer road test' do
-    xit 'can check for written test pass and administer road test' do
+    it 'can check for written test pass and administer road test' do
       registrant_1 = Registrant.new('Bruce', 18, true)
       registrant_2 = Registrant.new('Penny', 16)
       registrant_3 = Registrant.new('Tucker', 15)
+      @facility_1.add_service('Written Test')
       @facility_1.administer_written_test(registrant_1)
-
-
-
+      expect(@facility_1.administer_road_test(registrant_1)).to eq(false)
+      @facility_1.add_service('Road Test')
+      expect(@facility_1.administer_road_test(registrant_1)).to eq(true)
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+      registrant_2.earn_permit
+      expect(@facility_1.administer_written_test(registrant_2)).to eq(true)
+      @facility_1.administer_written_test(registrant_2)
+      expect(@facility_1.administer_road_test(registrant_2)).to eq(true)
+      expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+      expect(@facility_1.administer_road_test(registrant_3)).to eq(false)
     end
   end
 
