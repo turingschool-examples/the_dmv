@@ -23,6 +23,7 @@ class Registrant
   end
 
   def earn_permit
+    return false if @age < 16
     @has_permit = true
   end
 
