@@ -1,29 +1,13 @@
 require 'spec_helper'
 
 RSpec.describe Facility do
-  FACILITY_1 = {
-    name: 'Albany DMV Office',
-    address: '2242 Santiam Hwy SE Albany OR 97321',
-    phone: '541-967-2014'
-  }.freeze
-  FACILITY_2 = {
-    name: 'Ashland DMV Office',
-    address: '600 Tolman Creek Rd Ashland OR 97520',
-    phone: '541-776-6092'
-  }.freeze
-  FACILITY_3 = {
-    name: 'Bend DMV Office',
-    address: '63030 O B Riley Rd Bend OR 97701',
-    phone: '541-388-6322'
-  }.freeze
-
   before(:each) do
     @facility_1 = Facility.new(FACILITY_1)
     @facility_2 = Facility.new(FACILITY_2)
 
-    @cruz = Vehicle.new(CAR_1)
-    @bolt = Vehicle.new(CAR_2)
-    @camaro = Vehicle.new(CAR_3)
+    @cruz = Vehicle.new(CRUZ)
+    @bolt = Vehicle.new(BOLT)
+    @camaro = Vehicle.new(CAMARO)
   end
 
   describe '#initialize' do
@@ -178,6 +162,23 @@ RSpec.describe Facility do
 
     it 'returns nil if the service is not included' do
       expect(@facility_2.register_vehicle(@cruz)).to be(nil)
+    end
+  end
+
+  describe '#administer_written_test' do
+    before(:each) do
+      @registrant_1 = Registrant.new(REGISTRANT_1[:name], REGISTRANT_1[:age], REGISTRANT_1[:permit])
+      @registrant_2 = Registrant.new(REGISTRANT_2[:name], REGISTRANT_2[:age])
+      @registrant_3 = Registrant.new(REGISTRANT_3[:name], REGISTRANT_3[:age])
+    end
+
+    it 'does not do modify anything if there is no written test service' do
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@registrant_1.license_data).to eq(Registrant::DEFAULTS[:license_data])
+    end
+
+    it 'returns false if there is no written test service' do
+      expect(@facility_1.administer_written_test).to be(false)
     end
   end
 end
