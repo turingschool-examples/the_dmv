@@ -21,7 +21,7 @@ class Facility
 
   def register_vehicle(car)
     if @services.include?('Vehicle Registration')
-      car.registration_date = Date.today
+      car.set_registration_date
       determine_vehicle_plate_and_fees(car)
       @registered_vehicles << car
     end
@@ -47,7 +47,7 @@ class Facility
     end
   end
 
-private #helper method
+private 
   def determine_vehicle_plate_and_fees(car)
     if car.antique?
       car.plate_type = :antique
