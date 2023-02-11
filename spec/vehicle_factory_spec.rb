@@ -1,11 +1,19 @@
 require 'spec_helper'
 
 RSpec.describe VehicleFactory do
+  before(:each) do
+    @factory = VehicleFactory.new
+    @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+  end
   describe '#initialize' do
     it 'exists' do
-      factory = VehicleFactory.new
+      expect(@factory).to be_an_instance_of(VehicleFactory)
+    end
+  end
 
-      expect(factory).to be_an_instance_of(VehicleFactory)
+  describe '#create_vehicles' do
+    it 'creates vehicles from given source' do
+      expect(@factory.create_vehicles(@wa_ev_registrations)).to be_an_instance_of(Array)
     end
   end
 
