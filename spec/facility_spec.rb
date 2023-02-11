@@ -42,4 +42,17 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#add vehicle registration for Camaro' do
+    it 'adds vehicle registration for Camaro' do
+
+      @facility_1.add_service('Vehicle Registration')
+
+      expect(@camaro.registration_date).to eq(nil)
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_1.collected_fees).to eq(0)
+      expect(@facility_1.register_vehicle(@camaro)).to eq([@camaro])
+      expect(@camaro.plate_type).to eq(:antique)
+    end
+  end
+
 end
