@@ -33,7 +33,7 @@ class Vehicle
     end
   end
 
-  def set_registration_date(date)
-    @registration_date = date
+  def set_registration_date
+    @registration_date = Date.today
   end
 end
