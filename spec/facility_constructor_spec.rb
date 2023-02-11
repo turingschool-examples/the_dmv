@@ -21,12 +21,20 @@ RSpec.describe 'Facility Constructor' do
       expect(created_facilities.length).to eq(59)
     end
 
-    it '#create additional facilities' do
+    it '#create NY facility' do
       new_york_facilities = DmvDataService.new.ny_dmv_office_locations
       created_facilities = @facility.create_facility(new_york_facilities)
       expect(created_facilities).to be_a(Array)
       expect(created_facilities.first).to be_a(Facility)
       expect(created_facilities.length).to eq(169)
+    end
+    
+    it '#create MO facility' do
+      missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+      created_facilities = @facility.create_facility(missouri_facilities)
+      expect(created_facilities).to be_a(Array)
+      expect(created_facilities.first).to be_a(Facility)
+      expect(created_facilities.length).to eq(178)
     end
   end
 end
