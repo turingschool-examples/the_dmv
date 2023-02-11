@@ -39,18 +39,3 @@ class Facility
   end
 end
 
-
-
-
-
-
-
-# def set_plate_type
-#   if car.antique?
-#     car.set_plate_type = :antique
-#   elsif car.electric_vehicle?
-#     car.set_plate_type = :ev
-#   else 
-#     car.set_plate_type = :regular
-#   end
-# end
