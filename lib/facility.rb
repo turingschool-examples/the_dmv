@@ -39,4 +39,14 @@ class Facility
       @collected_fees += registration_fees
   end
 
+  def administer_written_test(registrant)
+    if registrant.permit? && registrant.age >= 16
+      registrant.license_data[:written] = true   ##if above true, ^registrant license data hash updates :written(key) value from false true
+      true
+    else
+      false
+    end
+  end
+
+
 end
