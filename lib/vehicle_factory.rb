@@ -9,10 +9,17 @@ class VehicleFactory
   def create_vehicles(registrations)
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     wa_ev_registrations.each do |car|
-      @created_vehicles << (vehicle = Vehicle.new(car))
+      vehicle_details = {
+        vin: car[:vin_1_10],
+        year: car[:model_year],
+        make: car[:make],
+        model: car[:model],
+        engine: "ev",
+        registration_date: nil,
+        plate_type: nil
+      }
+      @created_vehicles << (vehicle = Vehicle.new(vehicle_details))
     end
     @created_vehicles
-   
   end
-
 end
