@@ -167,18 +167,50 @@ RSpec.describe Facility do
 
   describe '#administer_written_test' do
     before(:each) do
+      @facility_1.add_service('Written Test')
+
       @registrant_1 = Registrant.new(REGISTRANT_1[:name], REGISTRANT_1[:age], REGISTRANT_1[:permit])
       @registrant_2 = Registrant.new(REGISTRANT_2[:name], REGISTRANT_2[:age])
       @registrant_3 = Registrant.new(REGISTRANT_3[:name], REGISTRANT_3[:age])
     end
 
     it 'does not do modify anything if there is no written test service' do
-      @facility_1.administer_written_test(@registrant_1)
+      @facility_2.administer_written_test(@registrant_1)
       expect(@registrant_1.license_data).to eq(Registrant::DEFAULTS[:license_data])
     end
 
     it 'returns false if there is no written test service' do
-      expect(@facility_1.administer_written_test).to be(false)
+      expect(@facility_2.administer_written_test(@registrant_1)).to be(false)
+    end
+
+    it 'does not do modify anything if the registrant does not have a permit' do
+      @facility_1.administer_written_test(@registrant_2)
+      @facility_1.administer_written_test(@registrant_3)
+      expect(@registrant_2.license_data).to eq(Registrant::DEFAULTS[:license_data])
+      expect(@registrant_3.license_data).to eq(Registrant::DEFAULTS[:license_data])
+    end
+
+    it 'returns false if the registrant does not have a permit' do
+      expect(@facility_1.administer_written_test(@registrant_2)).to be(false)
+      expect(@facility_1.administer_written_test(@registrant_3)).to be(false)
+    end
+
+    it 'does not do modify anything if the registrant is under 16 years old' do
+      @facility_1.administer_written_test(@registrant_3)
+      expect(@registrant_3.license_data.written).to be(false)
+    end
+
+    it 'returns false if the registrant is under 16 years old' do
+      expect(@facility_1.administer_written_test(@registrant_3)).to be(false)
+    end
+
+    it 'correctly modifies the registrant\' license data if it successfully administers the written test' do
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@registrant_1.license_data.written).to be(true)
+    end
+
+    it 'returns true if it successfully administers the written test' do
+      expect(@facility_1.administer_written_test(@registrant_1)).to be(true)
     end
   end
 end
