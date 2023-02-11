@@ -17,7 +17,7 @@ class VehicleFactory
         plate_type: nil
       }
       @vehicles << vehicle = Vehicle.new(vehicle_info)
-      end
-      @vehicles
     end
+      @vehicles
+  end
 end
