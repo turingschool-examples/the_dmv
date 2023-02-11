@@ -13,7 +13,7 @@ class Registrant
     if @age >=16
     @permit = true
     else
-      false
+      false 
     end
   end
 
