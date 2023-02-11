@@ -45,7 +45,7 @@ RSpec.describe Facility do
       expect(facility_1.register_vehicle(bolt)).to eq([cruz, camaro, bolt])
       expect(facility_2.register_vehicle(bolt)).to eq([])
       expect(facility_1.registered_vehicles).to eq([cruz, camaro, bolt])
-      expect(facility_2.reg).to eq([])
+      expect(facility_2.registered_vehicles).to eq([])
     end
 
     it 'assigns plate_type to vehicle' do
@@ -104,6 +104,52 @@ RSpec.describe Facility do
 
       expect(facility_1.collected_fees).to eq(325)
       expect(facility_2.collected_fees).to eq(0)
+    end
+  end
+
+  describe '#administer written test' do
+    it 'can only be at a facility with that service' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+
+      expect(facility_1.administer_written_test(registrant_1)).to eq(false)
+      expect(facility_2.administer_written_test(registrant_1)).to eq(false)
+      expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+
+      facility_1.add_service('Written Test')
+
+      expect(facility_1.administer_written_test(registrant_1)).to be(true)
+      expect(facility_2.administer_written_test(registrant_1)).to be(false)
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
+
+    it 'only administered if at least 16 and has a permit' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+
+
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+    end
+  end
+
+  describe '#administer road test' do
+    it 'can only be at a facility with that service' do
+
+    end
+
+    it 'only administered if passed written test' do
+
+    end
+
+    it 'registrant earns a license after road test' do
+
+    end
+  end
+
+  describe '#renew drivers license' do
+    it 'can be renewed if you have a license' do
+
     end
   end
 end
