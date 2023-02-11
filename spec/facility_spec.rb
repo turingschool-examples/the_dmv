@@ -84,6 +84,17 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#plate_type' do
+    it 'can create a plate type for vehicle when registered' do
+      expect(@cruz.plate_type).to eq(nil)
+
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@cruz.plate_type).to eq(:regular)
+    end
+  end
+
 end
 
 
