@@ -147,5 +147,26 @@ RSpec.describe Facility do
       
       expect(@registrant_2.license_data[:license]).to be true
     end
+
+    it 'cannot issue Road test if registrant is less than 16 years old' do
+      @facility_1.add_service("Written Test")
+      @facility_1.add_service("Road Test")
+      @registrant_3.earn_permit
+      @facility_1.administer_written_test(@registrant_3)
+      @facility_1.administer_road_test(@registrant_3)
+
+      expect(@registrant_3.license_data).to eq({written: false, license: false, renewed: false})
+    end
+  end
+
+  describe '#renew_drivers_license' do
+    before(:each) do
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+    end
+    it 'cannot renew drivers license unless available at facility' do
+     
+
+    end
   end
 end
