@@ -125,5 +125,14 @@ RSpec.describe Facility do
       expect(@facility_1.register_vehicle(@bolt)).to eq([@cruz, @bolt])
       expect(@facility_1.register_vehicle(@camaro)).to eq([@cruz, @bolt, @camaro])
     end
+
+    it 'adds today\'s date to the vehicle\'s registration date' do
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@camaro)
+      expect(@cruz.registration_date).to eq(Date.today)
+      expect(@bolt.registration_date).to eq(Date.today)
+      expect(@camaro.registration_date).to eq(Date.today)
+    end
   end
 end
