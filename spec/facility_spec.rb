@@ -113,6 +113,8 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq(expected)
       expect(@registrant_1.permit?).to eq(true)
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
+      
+      #@facility_1.add_service('Written_Test')
     
     end
   end

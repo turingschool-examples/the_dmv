@@ -31,6 +31,10 @@ class Facility
   end
 
   def administer_written_test(person)
+    if services.include?("Written_Test") && person.permit? == true
     person.license_data[:written] = true
+    else 
+      false
+    end
   end
 end
