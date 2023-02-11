@@ -9,7 +9,8 @@ class FacilityConstructor
   def create_facility(location_data)
     dmv_office_location = DmvDataService.new.or_dmv_office_locations
     new_york_facilities = DmvDataService.new.ny_dmv_office_locations
-   if location_data == dmv_office_location
+   #add missuri facility!
+    if location_data == dmv_office_location
       dmv_office_location.each do |office|
         facility_info = {
           name: office[:title],
