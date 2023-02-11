@@ -18,6 +18,7 @@ class Facility
   def register_vehicle(car)
     if services.include?('Vehicle Registration')
       car.registration_date = Date.today
+      new_plate!(car)
       @registered_vehicles << car
       # car.antique? ? @collected_fees += 25 : car.electric_vehicle? ? @collected_fees += 200 : @collected_fees += 100
       if car.antique?
@@ -28,6 +29,16 @@ class Facility
         @collected_fees +=100
       end
     end
+  end
+
+  def new_plate!(car)
+    if car.antique?
+        car.plate_type = :antique
+      elsif car.electric_vehicle?
+        car.plate_type = :ev
+      else
+        car.plate_type = :regular
+      end
   end
   
 end
