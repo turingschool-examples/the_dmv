@@ -52,15 +52,31 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#register_vehicle' do
-    it 'can register a vehicle' do
+  describe 'Registering Different Vehicle Types' do
+    it 'can register a regular vehicle' do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
-      
+  
       expect(@facility_1.registered_vehicles).to eq([@cruz])
       expect(@cruz.registration_date).to eq(Date.today)
       expect(@cruz.plate_type).to eq(:regular)
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+      expect(@facility_1.collected_fees).to eq(100)
     end
+
+    it 'can register an antique vehicle' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@camaro)
+
+      expect(facility_1.registered_vehicles).to eq([@cruz, @camaro])
+      expect(@camero.registration_date).to eq(Date.today)
+      expect(@camaro.plate_type).to eq(:antique)
+    end
+
+
+
+
   end
+
 
 end
