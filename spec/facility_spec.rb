@@ -57,4 +57,28 @@ RSpec.describe Facility do
       expect(@facility_2.collected_fees).to eq(0)
     end
   end
+
+  describe '#register_vehicle' do
+    it 'adds a vehicle to the registered vehicle list' do
+      expect(@facility_1.registered_vehicles).to eq([])
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+    end
+
+    it 'adds multiple vehicles to the registered vehicle list' do
+      expect(@facility_1.registered_vehicles).to eq([])
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+      @facility_1.register_vehicle(@bolt)
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @bolt])
+      @facility_1.register_vehicle(@camaro)
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @bolt, @camaro])
+    end
+
+    it 'returns the registered vehicle list' do
+      expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
+      expect(@facility_1.register_vehicle(@bolt)).to eq([@cruz, @bolt])
+      expect(@facility_1.register_vehicle(@camaro)).to eq([@cruz, @bolt, @camaro])
+    end
+  end
 end
