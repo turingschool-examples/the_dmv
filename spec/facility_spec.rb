@@ -8,6 +8,10 @@ RSpec.describe Facility do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+
+    @registrant_1 = Registrant.new('Bruce', 18, true )
+    @registrant_2 = Registrant.new('Penny', 16 )
+    @registrant_3 = Registrant.new('Tucker', 15 )
   end
 
   describe '#initialize' do
@@ -100,5 +104,15 @@ RSpec.describe Facility do
       expect(@facility_2.register_vehicle(@bolt)).to eq("service not provided at this location")
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.collected_fees).to eq(0)
+    end
+
+    it 'verifies what info is needed for a license' do
+
+      expected = {:written=>false, :license=>false, :renewed=>false}
+
+      expect(@registrant_1.license_data).to eq(expected)
+      expect(@registrant_1.permit?).to eq(true)
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
+    
     end
   end

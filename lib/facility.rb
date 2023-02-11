@@ -30,8 +30,7 @@ class Facility
     end
   end
 
-  
-  
-
-
+  def administer_written_test(person)
+    person.license_data[:written] = true
+  end
 end
