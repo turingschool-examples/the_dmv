@@ -66,8 +66,23 @@ RSpec.describe Facility do
   end
 
   describe '#add_service' do
-    it 'can add available services' do
+    before(:each) do
       expect(@facility_1.services).to eq([])
+      expect(@facility_2.services).to eq([])
+    end
+
+    it 'can add 1 service' do
+      @facility_1.add_service('New Drivers License')
+      expect(@facility_1.services).to eq(['New Drivers License'])
+    end
+
+    it 'can add 2 services' do
+      @facility_1.add_service('New Drivers License')
+      @facility_1.add_service('Renew Drivers License')
+      expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License'])
+    end
+
+    it 'can add 3 services' do
       @facility_1.add_service('New Drivers License')
       @facility_1.add_service('Renew Drivers License')
       @facility_1.add_service('Vehicle Registration')
@@ -93,6 +108,10 @@ RSpec.describe Facility do
   end
 
   describe '#collected_fees' do
+    before(:each) do
+      @facility_1.add_service('Vehicle Registration')
+    end
+
     it 'returns an integer' do
       expect(@facility_1.collected_fees).to be_a(Integer)
       expect(@facility_2.collected_fees).to be_a(Integer)
@@ -127,6 +146,10 @@ RSpec.describe Facility do
   end
 
   describe '#register_vehicle' do
+    before(:each) do
+      @facility_1.add_service('Vehicle Registration')
+    end
+
     it 'adds a vehicle to the registered vehicle list' do
       expect(@facility_1.registered_vehicles).to eq([])
       @facility_1.register_vehicle(@cruz)
