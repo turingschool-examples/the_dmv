@@ -11,7 +11,6 @@ RSpec.describe VehicleFactory do
     factory = VehicleFactory.new
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     factory.create_vehicles(wa_ev_registrations)
-    require 'pry'; binding.pry
 
     expect(factory.vehicle_storage[0]).to be_instance_of(Vehicle)
     expect(factory.vehicle_storage.length).to eq(1000)
