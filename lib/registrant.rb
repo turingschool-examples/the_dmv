@@ -1,5 +1,4 @@
 class Registrant
-
   attr_reader :name, 
               :age, 
               :permit, 
@@ -16,8 +15,8 @@ class Registrant
   end
 
   def earn_permit
-    if @age >= 16
+    if @age >= 15
     @permit = true
-
+    end
   end
 end
