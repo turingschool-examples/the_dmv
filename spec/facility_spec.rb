@@ -35,8 +35,8 @@ RSpec.describe Facility do
   }.freeze
 
   before(:each) do
-    @facility_1 = Facility.new(LOCATION_1)
-    @facility_2 = Facility.new(LOCATION_2)
+    @facility_1 = Facility.new(FACILITY_1)
+    @facility_2 = Facility.new(FACILITY_2)
 
     @cruz = Vehicle.new(CAR_1)
     @bolt = Vehicle.new(CAR_2)
@@ -46,9 +46,9 @@ RSpec.describe Facility do
   describe '#initialize' do
     it 'can initialize' do
       expect(@facility_1).to be_an_instance_of(Facility)
-      expect(@facility_1.name).to eq(LOCATION_1[:name])
-      expect(@facility_1.address).to eq(LOCATION_1[:address])
-      expect(@facility_1.phone).to eq(LOCATION_1[:phone])
+      expect(@facility_1.name).to eq(FACILITY_1[:name])
+      expect(@facility_1.address).to eq(FACILITY_1[:address])
+      expect(@facility_1.phone).to eq(FACILITY_1[:phone])
       expect(@facility_1.services).to eq([])
       expect(@facility_1.registered_vehicles).to eq([])
       expect(@facility_1.collected_fees).to eq(0)
@@ -56,9 +56,9 @@ RSpec.describe Facility do
 
     it 'can initialize again' do
       expect(@facility_2).to be_an_instance_of(Facility)
-      expect(@facility_2.name).to eq(LOCATION_2[:name])
-      expect(@facility_2.address).to eq(LOCATION_2[:address])
-      expect(@facility_2.phone).to eq(LOCATION_2[:phone])
+      expect(@facility_2.name).to eq(FACILITY_2[:name])
+      expect(@facility_2.address).to eq(FACILITY_2[:address])
+      expect(@facility_2.phone).to eq(FACILITY_2[:phone])
       expect(@facility_2.services).to eq([])
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.collected_fees).to eq(0)
