@@ -62,18 +62,24 @@ RSpec.describe Vehicle do
   end
 
   describe '#antique?' do
-    it 'can determine if a vehicle is an antique' do
+    it 'returns false if a vehicle is not older than 25 years old' do
       expect(@cruz.antique?).to eq(false)
       expect(@bolt.antique?).to eq(false)
+    end
+
+    it 'returns true if a vehicle is older than 25 years old' do
       expect(@camaro.antique?).to eq(true)
     end
   end
 
   describe '#electric_vehicle?' do
-    it 'can determine if a vehicle is an ev' do
+    it 'returns false if a vehicle is not an electric vehicle' do
       expect(@cruz.electric_vehicle?).to eq(false)
-      expect(@bolt.electric_vehicle?).to eq(true)
       expect(@camaro.electric_vehicle?).to eq(false)
+    end
+
+    it 'returns true if a vehicle is an electric vehicle' do
+      expect(@bolt.electric_vehicle?).to eq(true)
     end
   end
 end
