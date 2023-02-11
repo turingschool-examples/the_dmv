@@ -20,7 +20,19 @@ class Facility
   end
 
   def register_vehicle(car)
+    collect_fee(car.plate_type)
     car.registration_date = Date.today
     @registered_vehicles << car
+  end
+
+  private
+
+  def collect_fee(plate)
+    @collected_fees +=
+    case plate
+      when :antique then 25
+      when :ev then 200
+      else 100
+    end
   end
 end
