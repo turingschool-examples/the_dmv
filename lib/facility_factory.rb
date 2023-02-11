@@ -24,7 +24,7 @@ class FacilityFactory
     or_address = facility_hash[:location_1][:human_address]
   end
 
-  def create_or_facilities(data)
+  def create_ny_facilities(data)
     facility_data = []
     data.each do |facility_hash|
       facility_details = {}
@@ -46,5 +46,5 @@ class FacilityFactory
                   facility_hash[:zip_code]].join(' ')
   end
 
-  
+
 end

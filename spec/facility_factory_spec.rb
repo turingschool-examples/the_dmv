@@ -29,7 +29,7 @@ RSpec.describe FacilityFactory do
     it 'can create and store facilities' do
       ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
 
-      @facility_factory.create_or_facilities(ny_dmv_office_locations)
+      @facility_factory.create_ny_facilities(ny_dmv_office_locations)
 
       expect(@facility_factory.facilities).to be_a(Array)
       expect(@facility_factory.facilities[0]).to be_an_instance_of(Facility)
