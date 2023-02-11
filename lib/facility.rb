@@ -13,6 +13,7 @@ class Facility
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
+    
   end
 
   def add_service(service)
@@ -20,7 +21,12 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    @registered_vehicles << vehicle
+    if @services.include?("Vehicle Registration")
+      vehicle.registration_date = Date.today
+      @registered_vehicles << vehicle
+    end
+    
+    
   end
     
     
