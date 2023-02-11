@@ -1,20 +1,19 @@
 require 'spec_helper'
 
 RSpec.describe Registrant do
+  PERSON_1 = {
+    name: 'Bruce',
+    age: 18,
+    permit: true
+  }.freeze
+  PERSON_2 = {
+    name: 'Penny',
+    age: 15
+  }.freeze
+
   before(:each) do
-    @person_1 = {
-      name: 'Bruce',
-      age: 18,
-      permit: true
-    }
-
-    @person_2 = {
-      name: 'Penny',
-      age: 15
-    }
-
-    @registrant_1 = Registrant.new(@person_1[:name], @person_1[:age], @person_1[:permit])
-    @registrant_2 = Registrant.new(@person_2[:name], @person_2[:age])
+    @registrant_1 = Registrant.new(PERSON_1[:name], PERSON_1[:age], PERSON_1[:permit])
+    @registrant_2 = Registrant.new(PERSON_2[:name], PERSON_2[:age])
   end
 
   describe '#initialize' do
@@ -29,11 +28,11 @@ RSpec.describe Registrant do
 
   describe '#name' do
     it 'has a name' do
-      expect(@registrant_1.name).to eq(@person_1[:name])
+      expect(@registrant_1.name).to eq(PERSON_1[:name])
     end
 
     it 'has a different name' do
-      expect(@registrant_2.name).to eq(@person_2[:name])
+      expect(@registrant_2.name).to eq(PERSON_2[:name])
     end
 
     it 'returns a string' do
@@ -44,11 +43,11 @@ RSpec.describe Registrant do
 
   describe '#age' do
     it 'has an age' do
-      expect(@registrant_1.age).to eq(@person_1[:age])
+      expect(@registrant_1.age).to eq(PERSON_1[:age])
     end
 
     it 'has a different age' do
-      expect(@registrant_2.age).to eq(@person_2[:age])
+      expect(@registrant_2.age).to eq(PERSON_2[:age])
     end
 
     it 'returns an integer' do
