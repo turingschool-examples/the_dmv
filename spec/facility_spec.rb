@@ -134,6 +134,31 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#administer_road_test' do
+    it 'can administer a road test if registrant has written test' do
+      expect(@facility_1.services).to eq([])
+      expect(@facility_1.administer_road_test(@registrant_1)).to be false
+
+      @facility_1.add_service('Road Test')
+      @facility_1.administer_road_test(@registrant_1)
+
+      expect(@facility_1.services).to eq(['Road Test'])
+      expect(@facility_1.administer_road_test(@registrant_1)).to be true
+    end
+
+    it 'will not administer road test if registrant does not have written test' do
+      expect(@facility_1.administer_road_test(@registrant_2)).to be false
+      expect(@facility_1.administer_road_test(@registrant_3)).to be false
+
+      @facility_1.add_service('Road Test')
+      @facility_1.administer_road_test(@registrant_2)
+      @facility_1.administer_road_test(@registrant_3)
+
+      expect(@facility_1.administer_road_test(@registrant_2)).to be false
+      expect(@facility_1.administer_road_test(@registrant_3)).to be false
+    end
+  end
+
 end
 
 
