@@ -6,9 +6,6 @@ class Facility
               :registered_vehicles,
               :collected_fees
   
-  
-              
-
   def initialize(facility_info)
     @name = facility_info[:name]
     @address = facility_info[:address]
@@ -37,9 +34,7 @@ class Facility
     end
 
     @registered_vehicles << vehicle
-    
-    
+    @collected_fees += registration_fees
   end
 
-  
 end
