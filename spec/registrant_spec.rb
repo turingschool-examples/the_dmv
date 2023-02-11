@@ -21,4 +21,5 @@ RSpec.describe Registrant do
       :license=>false, :renewed=>false})
     end
   end
+
 end
