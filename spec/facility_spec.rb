@@ -27,9 +27,11 @@ RSpec.describe Facility do
   describe '#add service' do
     it 'can add available services' do
       expect(@facility_1.services).to eq([])
-      @facility_1.add_service('New Drivers License')
-      @facility_1.add_service('Renew Drivers License')
-      @facility_1.add_service('Vehicle Registration')
+
+      expect(@facility_1.add_service('New Drivers License')).to eq(['New Drivers License'])
+      expect(@facility_1.add_service('Renew Drivers License')).to eq(['New Drivers License', 'Renew Drivers License'])
+      expect(@facility_1.add_service('Vehicle Registration')).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
@@ -49,8 +51,8 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([])
 
       @facility_1.add_service('Vehicle Registration')
-      @facility_1.register_vehicle(@cruz)
 
+      expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
       expect(@facility_1.registered_vehicles).to eq([@cruz])
     end
     
@@ -72,7 +74,29 @@ RSpec.describe Facility do
       expect(@camaro.plate_type).to eq(:antique)
     end
     
-    it 'can collect fees when registering vehicles' do
+    it 'can collect 100 for ice vehicles' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@facility_1.collected_fees).to eq(100)
+    end
+    
+    it 'can collect 200 for ev vehicles' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@bolt)
+  
+      expect(@facility_1.collected_fees).to eq(200)
+    end
+    
+    it 'can collect 25 for antique vehicles' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@camaro)
+  
+      expect(@facility_1.collected_fees).to eq(25)
+      
+    end
+
+    it 'can accumulate collect fees when registering vehicles' do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@bolt)
@@ -84,13 +108,12 @@ RSpec.describe Facility do
 
   describe '#administer_written_test' do
     it 'can administer written test if available' do
-      @facility_1.administer_written_test(@registrant_1)
-
+      expect(@facility_1.administer_written_test(@registrant_1)).to be false
       expect(@registrant_1.license_data[:written]).to be false 
 
       @facility_1.add_service("Written Test")
-      @facility_1.administer_written_test(@registrant_1)
 
+      expect(@facility_1.administer_written_test(@registrant_1)).to be true
       expect(@registrant_1.license_data[:written]).to be true
     end
 
@@ -124,13 +147,13 @@ RSpec.describe Facility do
     it 'can issue a Road test if available at facility and registrant has taken the written test' do
       @facility_1.add_service("Written Test")
       @facility_1.administer_written_test(@registrant_1)
-      @facility_1.administer_road_test(@registrant_1)
-      
+
+      expect(@facility_1.administer_road_test(@registrant_1)).to be false
       expect(@registrant_1.license_data[:license]).to be false
 
       @facility_1.add_service("Road Test")
-      @facility_1.administer_road_test(@registrant_1)
 
+      expect(@facility_1.administer_road_test(@registrant_1)).to be true
       expect(@registrant_1.license_data[:license]).to be true
     end
     
@@ -179,8 +202,8 @@ RSpec.describe Facility do
 
     it 'cannot renew drivers license without a permit/written test/road test' do
       @facility_1.add_service("Renew Drivers License")
-      @facility_1.renew_drivers_license(@registrant_2)
       
+      expect(@facility_1.renew_drivers_license(@registrant_2)).to be false
       expect(@registrant_2.license_data).to eq({written: false, license: false, renewed: false})
       
       @registrant_2.earn_permit
@@ -192,7 +215,7 @@ RSpec.describe Facility do
       expect(@registrant_2.license_data).to eq({written: true, license: false, renewed: false})
       
       @facility_1.administer_road_test(@registrant_2)
-      @facility_1.renew_drivers_license(@registrant_2)
+      expect(@facility_1.renew_drivers_license(@registrant_2)).to be true
       expect(@registrant_2.license_data).to eq({written: true, license: true, renewed: true})
     end
   end
