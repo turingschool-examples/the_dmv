@@ -37,7 +37,7 @@ RSpec.describe Vehicle do
   it 'can change the registration date' do
     expect(@cruz.registration_date).to eq(nil)
 
-    @cruz.registration_date = Date.today
+    @cruz.set_registration_date
 
     expect(@cruz.registration_date).to be_an_instance_of(Date)
   end 
