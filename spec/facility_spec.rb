@@ -210,5 +210,6 @@ RSpec.describe Facility do
       expect(@facility_1.renew_drivers_license(@registrant_3)).to eq(false)
       @registrant_2.earn_permit
       expect(@facility_1.renew_drivers_license(@registrant_3)).to eq(false)
+      expect(@registrant_3.age).to eq(15)
     end
   end
