@@ -34,12 +34,17 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#car registration date' do
+  describe 'car registration date' do
     it 'has a registration date' do
       
       expect(@cruz.registration_date).to eq(nil)
     end
   end
 
+  describe 'facilities registered vehicles' do
+    it 'registered vehicles' do
+      expect(@facility_1.registered_vehicles).to eq([])
+    end
+  end
 
 end
