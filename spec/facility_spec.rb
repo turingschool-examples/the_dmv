@@ -101,6 +101,28 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(0)
       expect(@facility_2.collected_fees).to eq(0)
     end
+
+    it 'collects $25 for an antique vehicle being registered' do
+      @facility_1.register_vehicle(@camaro)
+      expect(@facility_1.collected_fees).to eq(25)
+    end
+
+    it 'collects $100 for a regular vehicle being registered' do
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.collected_fees).to eq(100)
+    end
+
+    it 'collects $200 for an electric vehicle being registered' do
+      @facility_1.register_vehicle(@bolt)
+      expect(@facility_1.collected_fees).to eq(200)
+    end
+
+    it 'collects multiple fees' do
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@bolt)
+      expect(@facility_1.collected_fees).to eq(325)
+    end
   end
 
   describe '#register_vehicle' do
