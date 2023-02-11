@@ -24,5 +24,10 @@ RSpec.describe 'Analyize Data' do
       # CODE HERE
     end
   end
-  
+
+  describe 'Vehicles' do
+    it 'creates vehicle objects from NY State Registration data' do
+      #CODE HERE
+    end
+  end
 end
