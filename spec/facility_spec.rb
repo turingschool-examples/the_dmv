@@ -205,7 +205,11 @@ RSpec.describe Facility do
     end
 
     it 'correctly modifies the registrant\' license data if it successfully administers the written test' do
-      @facility_1.administer_written_test(@registrant_1)
+      expect(@facility_2.services).to eq([])
+      @facility_2.administer_written_test(@registrant_1)
+      expect(@registrant_1.license_data).to eq(Registrant::DEFAULTS[:license_data])
+      @facility_2.add_service('Written Test')
+      @facility_2.administer_written_test(@registrant_1)
       expect(@registrant_1.license_data[:written]).to be(true)
     end
 
