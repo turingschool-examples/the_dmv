@@ -16,6 +16,18 @@ RSpec.describe Facility do
       expect(@facility_1.address).to eq('2242 Santiam Hwy SE Albany OR 97321')
       expect(@facility_1.phone).to eq('541-967-2014')
       expect(@facility_1.services).to eq([])
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_1.collected_fees).to eq(0)
+    end
+
+    it 'can initialize again' do
+      expect(@facility_2).to be_an_instance_of(Facility)
+      expect(@facility_2.name).to eq('Ashland DMV Office')
+      expect(@facility_2.address).to eq('600 Tolman Creek Rd Ashland OR 97520')
+      expect(@facility_2.phone).to eq('541-776-6092')
+      expect(@facility_2.services).to eq([])
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
     end
   end
 
