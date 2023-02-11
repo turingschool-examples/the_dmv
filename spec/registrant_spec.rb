@@ -19,7 +19,6 @@ RSpec.describe Registrant do
   it 'has an age' do
     registrant_1 = Registrant.new('Bruce', 18, true)
     
-    require 'pry'; binding.pry
     expect(registrant_1.age).to eq(18)
   end
 
@@ -33,5 +32,13 @@ RSpec.describe Registrant do
     registrant_1 = Registrant.new('Bruce', 18, true)
 
     expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+  end
+
+  it 'can earn a permit' do
+    registrant_2 = Registrant.new('Penny', 15 )
+
+    registrant_2.earn_permit
+
+    expect(registrant_2.permit?).to be true
   end
 end
