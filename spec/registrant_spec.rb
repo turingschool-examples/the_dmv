@@ -24,7 +24,6 @@ RSpec.describe Registrant do
 
       expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       expect(registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-
     end
 
     it 'can earn a permit' do
