@@ -50,6 +50,7 @@ class Facility
 
   def administer_road_test(registrant)
     if registrant.license_data[:written] == true 
+      registrant.license_data[:license] = true
       true
     else
       false
