@@ -19,7 +19,9 @@ RSpec.describe VehicleFactory do
     end
   end
 
-
+  it "can use extracted hash to instantiate new vehicle into array with attributes" do
+    expect(@factory.state_vehicles[0].vin).to eq("JTDKN3DP8D")
+  end
 end
  
   # it "all hashes have the same keys" do  ***ALL HASHES DO NOT HAVE IDENTICAL KEYS ****
