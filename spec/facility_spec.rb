@@ -40,14 +40,15 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(100)
     end
     it 'can register and collect fees on antique vehicle' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
-
       expect(@facility_1.register_vehicle(@camaro)).to eq([@cruz, @camaro])
       expect(@camaro.plate_type).to eq(:antique)
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro])
       expect(@facility_1.collected_fees).to eq(125)
     end
     it 'can register and collect fees on electric vehicle' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
 
@@ -55,14 +56,27 @@ RSpec.describe Facility do
       expect(@bolt.plate_type).to eq(:ev)
       expect(@facility_1.collected_fees).to eq(325)
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
+      expect(@facility_2.collected_fees).to eq(0)
     end
   end
 
   describe '#administer written test' do
     it 'can administer written test to those 16+' do
-
-
-
+      registrant_1 = Registrant.new('Bruce', 18, true)
+      registrant_2 = Registrant.new('Penny', 16)
+      registrant_3 = Registrant.new('Tucker', 15)
+      expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(registrant_1.permit?).to eq(true)
+      expect(@facility_1.administer_written_test(registrant_1)).to eq(false)
+      @facility_1.add_service('Written Test')
+      expect(registrant_1.age).to eq(18)
+      expect(@facility_1.administer_written_test(registrant_1)).to eq(true)
+      expect(registrant_2.age).to eq(16)
+      expect(@facility_1.administer_written_test(registrant_2)).to eq(true)
+      expect(registrant_3.age).to eq(15)
+      expect(@facility_1.administer_written_test(registrant_3)).to eq(false)
 
     end
   end

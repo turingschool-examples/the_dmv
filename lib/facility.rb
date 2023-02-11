@@ -20,18 +20,32 @@ class Facility
   end
 
   def register_vehicle(car)
-    if car.year <= 1998
-      @collected_fees += 25
-      car.plate_type = :antique
-    elsif car.engine == :ev
-      @collected_fees += 200
-      car.plate_type = :ev
-    else
-      @collected_fees += 100
-      car.plate_type = :regular
+    if @services.include?("Vehicle Registration")
+      if car.year <= 1998
+        @collected_fees += 25
+        car.plate_type = :antique
+        elsif car.engine == :ev
+        @collected_fees += 200
+        car.plate_type = :ev
+        else
+        @collected_fees += 100
+        car.plate_type = :regular
+      end
+      car.registration_date = Date.today
+      @registered_vehicles << car
+      @registered_vehicles
+    else nil
     end
-    time = Time.now
-    car.registration_date = time
-    @registered_vehicles << car
+  end
+
+  def administer_written_test(registrant)
+    if @services.include?('Written Test')
+      if registrant.age >= 16
+        registrant.license_data[:written] = true
+        true
+      else false
+      end
+    else false
+    end
   end
 end
