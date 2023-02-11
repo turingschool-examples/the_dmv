@@ -87,13 +87,8 @@ RSpec.describe Registrant do
     end
 
     it 'sets its default values correctly' do
-      expected = {
-        written: false,
-        license: false,
-        renewed: false
-      }
-      expect(@registrant_1.license_data).to eq(expected)
-      expect(@registrant_2.license_data).to eq(expected)
+      expect(@registrant_1.license_data).to eq(Registrant::DEFAULTS[:license_data])
+      expect(@registrant_2.license_data).to eq(Registrant::DEFAULTS[:license_data])
     end
 
     describe '#earn_permit' do
