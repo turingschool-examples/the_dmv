@@ -1,5 +1,4 @@
-require 'rspec'
-require './lib/registrant'
+require 'spec_helper'
 
 RSpec.describe do Registrant
   before(:each) do
