@@ -168,7 +168,7 @@ RSpec.describe Facility do
 
       expect(facility_1.administer_road_test(registrant_1)).to eq(true)
       expect(facility_1.administer_road_test(registrant_2)).to eq(true)
-      expect
+      expect(facility_1.administer_road_test(registrant_3)).to eq(false)
     end
 
     xit 'registrant earns a license after road test' do
