@@ -149,17 +149,21 @@ RSpec.describe Facility do
     end
 
     describe '#administer_road_test' do
+
       it 'can be administered if facility offers service' do
         expect(@facility_1.administer_road_test(@registrant_1)).to be false
         expect(@facility_2.administer_road_test(@registrant_1)).to be false
 
+        @facility_1.add_service('Written Test')
         @facility_1.add_service('Road Test')
+        @facility_1.administer_written_test(@registrant_1)
 
         expect(@facility_1.administer_road_test(@registrant_1)).to be true
         expect(@facility_2.administer_road_test(@registrant_1)).to be false
       end
 
       it 'can be administered if criteria is met' do
+        @facility_1.add_service('Written Test')
         @facility_1.add_service('Road Test')
         @registrant_2.earn_permit
         @facility_1.administer_written_test(@registrant_1)
@@ -174,7 +178,7 @@ RSpec.describe Facility do
       end
 
       it 'can update license data' do
-        @facility_1.add_service('Road Test')
+        @facility_1.add_service('Written Test')
         @facility_1.add_service('Road Test')
         @registrant_2.earn_permit
         @facility_1.administer_written_test(@registrant_1)
