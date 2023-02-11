@@ -37,10 +37,18 @@ class Facility
   end
 
   def administer_road_test(registrant)
-    if !@services.include?('Road Test') || !registrant.license_data[:written]
+    if !@services.include?('Road Test') || !registrant.written?
       return false
     end
     registrant.set_license_data(:license, true)
+    true
+  end
+
+  def renew_drivers_license(registrant)
+    if !@services.include?('Renew License') || !registrant.license?
+      return false
+    end
+    registrant.set_license_data(:renewed, true)
     true
   end
 
