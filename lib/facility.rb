@@ -45,4 +45,14 @@ class Facility
       false
     end
   end
+
+  def renew_drivers_license(person)
+    require 'pry'; binding.pry
+    if person.license_data[:license] = true
+      person.license_data[:renewed] = true
+    else
+      false
+
+    end
+  end
 end
