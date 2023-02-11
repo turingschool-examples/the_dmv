@@ -180,5 +180,21 @@ RSpec.describe Facility do
       expect(@bolt.registration_date).to eq(Date.today)
       expect(@camaro.registration_date).to eq(Date.today)
     end
+
+    it 'does not register the vehicle if the service is not included' do
+      expect(@facility_2.registered_vehicles).to eq([])
+      @facility_2.register_vehicle(@cruz)
+      expect(@facility_2.registered_vehicles).to eq([])
+    end
+
+    it 'does not collect a fee if the service is not included' do
+      expect(@facility_2.collected_fees).to eq(0)
+      @facility_2.register_vehicle(@cruz)
+      expect(@facility_2.collected_fees).to eq(0)
+    end
+
+    it 'returns nil if the service is not included' do
+      expect(@facility_2.register_vehicle(@cruz)).to be(nil)
+    end
   end
 end
