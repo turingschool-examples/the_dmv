@@ -1,39 +1,6 @@
 require 'spec_helper'
 
 RSpec.describe Facility do
-  FACILITY_1 = {
-    name: 'Albany DMV Office',
-    address: '2242 Santiam Hwy SE Albany OR 97321',
-    phone: '541-967-2014'
-  }.freeze
-  FACILITY_2 = {
-    name: 'Ashland DMV Office',
-    address: '600 Tolman Creek Rd Ashland OR 97520',
-    phone: '541-776-6092'
-  }.freeze
-
-  CAR_1 = {
-    vin: '123456789abcdefgh',
-    year: 2012,
-    make: 'Chevrolet',
-    model: 'Cruz',
-    engine: :ice
-  }.freeze
-  CAR_2 = {
-    vin: '987654321abcdefgh',
-    year: 2019,
-    make: 'Chevrolet',
-    model: 'Bolt',
-    engine: :ev
-  }.freeze
-  CAR_3 = {
-    vin: '1a2b3c4d5e6f',
-    year: 1969,
-    make: 'Chevrolet',
-    model: 'Camaro',
-    engine: :ice
-  }.freeze
-
   before(:each) do
     @facility_1 = Facility.new(FACILITY_1)
     @facility_2 = Facility.new(FACILITY_2)
