@@ -31,20 +31,26 @@ class Facility
     if @services.include?('Written Test')
       if person.permit? && person.age > 15
         person.license_data[:written] = true
+        return true
       end
     end
+    false
   end
 
   def administer_road_test(person)
     if @services.include?('Road Test') && person.license_data[:written]
         person.license_data[:license] = true
+        return true
     end
+    false
   end
 
   def renew_drivers_license(person)
     if @services.include?('Renew Drivers License') && person.license_data[:license]
       person.license_data[:renewed] = true
+      return true
     end
+    false
   end
 
 private 
