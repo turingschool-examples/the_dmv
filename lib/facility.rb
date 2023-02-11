@@ -16,22 +16,25 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    if vehicle.antique?
-      @collected_fees += 25
-      vehicle.plate_type = :antique
-      vehicle.registration_date = Date.today
-      @registered_vehicles << vehicle
-    elsif vehicle.engine == :ev
-      @collected_fees += 200
-      vehicle.plate_type = :ev
-      vehicle.registration_date = Date.today
-      @registered_vehicles << vehicle
+    if @services.include? 'Vehicle Registration'
+      if vehicle.antique?
+        @collected_fees += 25
+        vehicle.plate_type = :antique
+        vehicle.registration_date = Date.today
+        @registered_vehicles << vehicle
+      elsif vehicle.engine == :ev
+        @collected_fees += 200
+        vehicle.plate_type = :ev
+        vehicle.registration_date = Date.today
+        @registered_vehicles << vehicle
+      else
+        @collected_fees += 100
+        vehicle.plate_type = :regular
+        vehicle.registration_date = Date.today
+        @registered_vehicles << vehicle
+      end
     else
-      @collected_fees += 100
-      vehicle.plate_type = :regular
-      vehicle.registration_date = Date.today
-      @registered_vehicles << vehicle
+      "This facility does not perform vehicle registration"
     end
   end
-
 end
