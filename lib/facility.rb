@@ -54,21 +54,6 @@ class Facility
     false
   end
 
-  def create_facility(facility_info)
-    dmv_office_location = DmvDataService.new.or_dmv_office_locations
-    dmv_office_location.each do |office|
-      facility_info = {
-        name: office[:title],
-        address: office[:human_address],
-        phone: office[:phone_number],
-        services: [],
-        registered_vehicles: [],
-        collected_fees: 0
-      }
-      facility = Facility.new(facility_info)
-    end
-  end
-
   ## Helper Method
   def determine_plates_and_fees(vehicle)
     if vehicle.antique?
