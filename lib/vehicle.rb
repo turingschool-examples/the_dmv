@@ -19,7 +19,6 @@ class Vehicle
     @plate_type = nil
   end
 
-
   def antique?
     Date.today.year - @year > 25
   end
