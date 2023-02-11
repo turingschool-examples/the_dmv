@@ -1,6 +1,22 @@
 require 'spec_helper'
 
 RSpec.describe Facility do
+  FACILITY_1 = {
+    name: 'Albany DMV Office',
+    address: '2242 Santiam Hwy SE Albany OR 97321',
+    phone: '541-967-2014'
+  }.freeze
+  FACILITY_2 = {
+    name: 'Ashland DMV Office',
+    address: '600 Tolman Creek Rd Ashland OR 97520',
+    phone: '541-776-6092'
+  }.freeze
+  FACILITY_3 = {
+    name: 'Bend DMV Office',
+    address: '63030 O B Riley Rd Bend OR 97701',
+    phone: '541-388-6322'
+  }.freeze
+
   before(:each) do
     @facility_1 = Facility.new(FACILITY_1)
     @facility_2 = Facility.new(FACILITY_2)
