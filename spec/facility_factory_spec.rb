@@ -18,6 +18,7 @@ RSpec.describe FacilityFactory do
       @facility_factory.or_create_facilities(@or_dmv_offices)
       expect(@facility_factory.facilities[0]).to be_an_instance_of(Facility)
       expect(@facility_factory.facilities[0].phone.length).to eq(12)
+      expect(@facility_factory.facilities[0].name.class).to eq(String)
     end
     
     it 'can pull address from NY data' do
@@ -28,6 +29,18 @@ RSpec.describe FacilityFactory do
       @facility_factory.ny_create_facilities(@ny_dmv_offices)
       expect(@facility_factory.facilities[0]).to be_an_instance_of(Facility)
       expect(@facility_factory.facilities[0].phone.length).to eq(10)
+      expect(@facility_factory.facilities[0].name.class).to eq(String)
+    end
+
+    it 'can pull address from MO data' do
+      expect(@facility_factory.mo_find_address(@mo_dmv_offices[0])).to eq()
+    end
+
+    it 'can create Facility class from MO DMV data' do
+      @facility_factory.mo_create_facilities(@mo_dmv_offices)
+      expect(@facility_factory.facilities[0]).to be_an_instance_of(Facility)
+      expect(@facility_factory.facilities[0].phone.length).to eq()
+      expect(@facility_factory.facilities[0].name.class).to eq(String)
     end
   end
 end
