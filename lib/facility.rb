@@ -30,8 +30,29 @@ class Facility
     end
   end
 
-  
-  
+  def administer_written_test(person)
+    if services.include?("Written_Test") && person.permit? == true && person.age >= 16
+    person.license_data[:written] = true
+    else 
+      false
+    end
+  end
 
+  def administer_road_test(person)
+    if administer_written_test(person)
+      person.license_data[:license] = true
+    else
+      false
+    end
+  end
 
+  def renew_drivers_license(person)
+    # require 'pry'; binding.pry
+    if administer_road_test(person)
+      person.license_data[:renewed] = true
+    else
+      false
+
+    end
+  end
 end
