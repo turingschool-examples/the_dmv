@@ -75,5 +75,11 @@ class Facility
     license_data[:license] = true : 'Need to pass written test first.'
   end
 
+  def renew_drivers_license(registrant)
+    return 'Service not available here.' unless @services.
+    include?('Renew License')
+    registrant.license_data[:renewed] = true if registrant.license_data
+    [:written] && registrant.license_data[:license]
+  end
 
 end
