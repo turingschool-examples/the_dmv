@@ -1,5 +1,10 @@
 class Facility
-  attr_reader :address, :phone, :add_service, :registered_vehicles, :collected_fees, :administer_written_test
+  attr_reader :address, 
+              :phone, 
+              :add_service, 
+              :registered_vehicles, 
+              :collected_fees, 
+              :administer_written_test
   attr_accessor :services, :name
   def initialize(facility_info)
     @name = facility_info[:name]
@@ -26,13 +31,9 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    if @services.include?("Written Test")
-      if (registrant.permit == true) && (registrant.age >= 16)
-        registrant.license_data[:written] = true
-        return true
-      else
-        false
-      end
+    if @services.include?("Written Test") && (registrant.permit?)
+      registrant.license_data[:written] = true
+      return true
     end
     false
   end
@@ -61,6 +62,21 @@ class Facility
     false
   end
 
+  def create_facility(facility_info)
+    dmv_office_location = DmvDataService.new.or_dmv_office_locations
+    dmv_office_location.each do |office|
+      facility_info = {
+        name: office[:title],
+        address: office[:human_address],
+        phone: office[:phone_number],
+        services: [],
+        registered_vehicles: [],
+        collected_fees: 0
+      }
+      facility = Facility.new(facility_info)
+    end
+  end
+
   ## Helper Method
   def determine_plates_and_fees(vehicle)
     if vehicle.antique?
@@ -75,3 +91,10 @@ class Facility
     end
   end
 end
+        # title: office[:title],
+        # zip_code: office[:zip_code]
+        # website: office[:website],
+        # type: office[:type],
+        # phone_number: office[:phone_number],
+        # agency: office[:agency],
+        # location_1: office[:location_1]
