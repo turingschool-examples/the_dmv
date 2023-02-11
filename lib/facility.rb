@@ -22,8 +22,7 @@ class Facility
   def register_vehicle(car)
     if @services.include?('Vehicle Registration')
       car.registration_date = Date.today
-      determine_vehicle_plate(car)
-      determine_collected_fees(car)
+      determine_vehicle_plate_and_fees(car)
       @registered_vehicles << car
     end
   end
@@ -44,23 +43,17 @@ class Facility
     end
   end
 
-private #helper methods
-  def determine_vehicle_plate(car)
+private #helper method
+  def determine_vehicle_plate_and_fees(car)
     if car.antique?
       car.plate_type = :antique
-    elsif car.electric_vehicle?
-      car.plate_type = :ev
-    else car.plate_type = :regular
-    end
-  end
-
-  def determine_collected_fees(car)
-    if car.antique?
       @collected_fees += 25
     elsif car.electric_vehicle?
+      car.plate_type = :ev
       @collected_fees += 200
-    else @collected_fees += 100
+    else 
+      car.plate_type = :regular
+      @collected_fees += 100
     end
   end
-
 end
