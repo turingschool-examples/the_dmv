@@ -7,34 +7,39 @@ RSpec.describe Registrant do
   end
 
   describe '#initialize' do
-    it 'can initialize' do
+    it '#initialize' do
       expect(@registrant_1).to be_an_instance_of(Registrant)
       expect(@registrant_2).to be_an_instance_of(Registrant)
     end
 
-    it 'has name' do
+    it '#name' do
       expect(@registrant_1.name).to eq("Bruce")
       expect(@registrant_2.name).to eq("Penny")
     end
 
-    it 'has age' do
+    it '#age' do
       expect(@registrant_1.age).to eq(18)
       expect(@registrant_2.age).to eq(15)
     end
 
-    it 'has permit status' do
+    it '#permit?' do
       expect(@registrant_1.permit?).to be(true)
       expect(@registrant_2.permit?).to be(false)
     end
 
-    it 'has license data' do
+    it '#license data' do
       expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
 
-    it 'can earn permit' do
+    it '#earn permit' do
       @registrant_2.earn_permit
-      expect(@registrant_2.permit?).to be(true)
+      registrant_3 = Registrant.new('bill', 65 )
+
+      expect(@registrant_2.permit?).to be(false)
+      expect(registrant_3.permit?).to be(false)
+      registrant_3.earn_permit
+      expect(registrant_3.permit?).to be(true)
     end
   end
 end
