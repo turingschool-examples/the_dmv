@@ -4,7 +4,8 @@ class Facility
               :phone, 
               :services, 
               :registered_vehicles,
-              :collected_fees
+              :collected_fees,
+              :facility_2
   
   def initialize(facility_info)
     @name = facility_info[:name]
@@ -20,6 +21,11 @@ class Facility
   end
 
   def register_vehicle(vehicle)
+    return nil if self == facility_2
+    @registered_vehicles << vehicle
+    @collected_fees += registration_fees
+    end
+
     vehicle.registration_date = Date.today
     registration_fees = 0
     if vehicle.antique?
@@ -35,6 +41,5 @@ class Facility
 
     @registered_vehicles << vehicle
     @collected_fees += registration_fees
-  end
 
 end
