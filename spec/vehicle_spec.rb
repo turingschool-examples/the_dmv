@@ -82,4 +82,26 @@ RSpec.describe Vehicle do
       expect(@bolt.electric_vehicle?).to eq(true)
     end
   end
+
+  describe '#plate_type' do
+    it 'has a plate type' do
+      expect(@cruz.plate_type).to be(:regular)
+    end
+
+    it 'the plate type is a symbol' do
+      expect(@cruz.plate_type).to be_a(Symbol)
+    end
+
+    it 'can have a :regular plate type' do
+      expect(@cruz.plate_type).to be(:regular)
+    end
+
+    it 'can have an :ev plate type' do
+      expect(@bolt.plate_type).to be(:ev)
+    end
+
+    it 'can have an :antique plate type' do
+      expect(@camaro.plate_type).to be(:antique)
+    end
+  end
 end
