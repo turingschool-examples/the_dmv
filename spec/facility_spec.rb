@@ -197,7 +197,7 @@ RSpec.describe Facility do
 
     it 'does not do modify anything if the registrant is under 16 years old' do
       @facility_1.administer_written_test(@registrant_3)
-      expect(@registrant_3.license_data.written).to be(false)
+      expect(@registrant_3.license_data).to eq(Registrant::DEFAULTS[:license_data])
     end
 
     it 'returns false if the registrant is under 16 years old' do
@@ -206,7 +206,7 @@ RSpec.describe Facility do
 
     it 'correctly modifies the registrant\' license data if it successfully administers the written test' do
       @facility_1.administer_written_test(@registrant_1)
-      expect(@registrant_1.license_data.written).to be(true)
+      expect(@registrant_1.license_data[:written]).to be(true)
     end
 
     it 'returns true if it successfully administers the written test' do
