@@ -39,7 +39,8 @@ class Facility
   end
 
   def administer_road_test(person)
-    if services.include?("Road_Test") && administer_written_test(person)
+    if administer_written_test(person)
+      person.license_data[:license] = true
     else
       false
     end

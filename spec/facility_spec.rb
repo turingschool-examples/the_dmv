@@ -163,7 +163,25 @@ RSpec.describe Facility do
       expect(@registrant_3.license_data).to eq(expected)
     end
 
-    it 'verifies if registrant can be administered a road test' do
+    it 'verifies registrant who does not meet requirements can not be administered a road test' do
+      @facility_1.add_service('Written_Test')
+      @facility_1.add_service('Road Test')
+      
+      expect(@facility_1.services).to match_array(['Written_Test', 'Road Test',])
+
       expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
+
+      @registrant_3.earn_permit
+      expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
+    end
+
+    it 'verifies registrants who meet requirements can be administered a road test' do
+      @facility_1.add_service('Written_Test')
+      @facility_1.add_service('Road Test')
+
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
+
+      expected =  {:written=>true, :license=>true, :renewed=>false}
+      expect(@registrant_1.license_data).to eq(expected)
     end
   end
