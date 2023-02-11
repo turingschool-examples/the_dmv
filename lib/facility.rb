@@ -36,10 +36,14 @@ class Facility
   end
 
   def administer_road_test(person)
-    if @services.include?('Road Test')
-      if person.license_data[:written]
+    if @services.include?('Road Test') && person.license_data[:written]
         person.license_data[:license] = true
-      end
+    end
+  end
+
+  def renew_drivers_license(person)
+    if @services.include?('Renew Drivers License') && person.license_data[:license]
+      person.license_data[:renewed] = true
     end
   end
 
