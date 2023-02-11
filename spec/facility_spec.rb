@@ -45,12 +45,16 @@ RSpec.describe Facility do
 
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
       facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
-
+      facility_1.add_service('Vehicle Registration')
+      
       expect(cruz.registration_date).to eq(nil)
       expect(facility_1.registered_vehicles).to eq([])
       expect(facility_1.collected_fees).to eq(0)
       expect(facility_1.register_vehicle(cruz)).to eq([cruz]) # In order to get the return value of the hash and not just the class, "cruz" had to be placed in []
-      expect(facility_1.registration_date).to eq("Date: 2023-01-12")
+      expect(cruz.registration_date).to eq("Date: 2023-01-12")
+    
+      expect(cruz.plate_type).to eq(:regular)
     end
   end
+ 
 end
