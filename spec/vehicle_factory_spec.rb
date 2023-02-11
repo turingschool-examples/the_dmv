@@ -30,6 +30,18 @@ RSpec.describe VehicleFactory do
     expect(@factory.state_vehicles[0].model).to eq("Prius Plug-in")
     expect(@factory.state_vehicles[0].engine).to eq("Plug-in Hybrid Electric Vehicle (PHEV)")
   end
+
+  it "builds correct number of vehicles" do
+    expect(@factory.state_vehicles.count).to eq(1000)
+  end
+
+  it "registers as electric vehicle" do
+    expect(@factory.state_vehicles[450].engine).to eq(:ev)
+    expect(@factory.state_vehicles[900].engine).to eq(:ev)
+    expect(@factory.state_vehicles[123].engine).to eq(:ev)
+    expect(@factory.state_vehicles[555].engine).to eq(:ev)
+    expect(@factory.state_vehicles[637].engine).to eq(:ev)
+  end
 end
  
   # it "all hashes have the same keys" do  ***ALL HASHES DO NOT HAVE IDENTICAL KEYS ****
