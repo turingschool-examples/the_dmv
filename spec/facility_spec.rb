@@ -139,7 +139,10 @@ RSpec.describe Facility do
 
       @registrant_2.earn_permit
 
-      expect(@facility_1.administer_written_test(registrant_2)).to eq(true)
+      expect(@facility_1.administer_written_test(@registrant_2)).to eq(true)
 
+      expected = {:written=>true, :license=>false, :renewed=>false}
+
+      expect(@registrant_2.license_data).to eq(expected)
     end
   end

@@ -31,12 +31,10 @@ class Facility
   end
 
   def administer_written_test(person)
-    if services.include?("Written_Test") && person.permit? == true
+    if services.include?("Written_Test") && person.permit? == true && person.age >= 16
     person.license_data[:written] = true
     else 
       false
     end
   end
-
-  def earn_permit
 end
