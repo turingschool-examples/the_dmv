@@ -37,4 +37,40 @@ class Facility
       "This facility does not perform vehicle registration"
     end
   end
+
+  def administer_written_test(registrant)
+    if @services.include? 'Written Test'
+      if registrant.age >= 16
+        if registrant.permit
+          registrant.license_data[:written] = true
+          return true
+        end
+        false
+      end
+      false
+    end
+    false
+  end
+
+  def administer_road_test(registrant)
+    if @services.include? 'Road Test'
+      if registrant.license_data[:written] == true
+        registrant.license_data[:license] = true
+        return true
+      end
+      false
+    end
+    false
+  end
+
+  def renew_drivers_license(registrant)
+    if @services.include? 'Renew License'
+      if registrant.license_data[:license] == true
+        registrant.license_data[:renewed] = true
+        return true
+      end
+      false
+    end
+    false
+  end
 end
