@@ -14,4 +14,15 @@ RSpec.describe 'Analyize Data' do
       # CODE HERE
     end
   end
+
+  describe 'Facilities' do 
+    it 'finds daily hours for each facility' do
+      # CODE HERE
+    end
+
+    it 'which holidays are closed for each specific state' do
+      # CODE HERE
+    end
+  end
+  
 end
