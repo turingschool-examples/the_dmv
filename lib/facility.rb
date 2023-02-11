@@ -1,6 +1,10 @@
 class Facility
-  attr_reader :name, :address, :phone, :services
-  attr_accessor :registered_vehicles, :collected_fees
+  attr_reader :name, 
+              :address, 
+              :phone, 
+              :services
+  attr_accessor :registered_vehicles, 
+                :collected_fees
 
   def initialize(name_address_phone)
     @name = name_address_phone[:name]
@@ -39,6 +43,15 @@ class Facility
       else
         car.plate_type = :regular
       end
+  end
+  
+  def administer_written_test(registrant)
+    if services.include?('Written Test') && registrant.permit? == true && registrant.age >= 16
+      registrant.license_data[:written] = true
+      return true
+    else
+      return false
+    end  
   end
   
 end
