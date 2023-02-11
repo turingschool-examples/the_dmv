@@ -7,22 +7,31 @@ class FacilityConstructor
   end
   
   def create_facility(location_data)
+    facility_checker(location_data)
+  end
+
+
+
+
+  # helper methods
+
+  def facility_checker(location_data)
     dmv_office_location = DmvDataService.new.or_dmv_office_locations
     new_york_facilities = DmvDataService.new.ny_dmv_office_locations
-   #add missuri facility!
+    missouri_facilities = DmvDataService.new.mo_dmv_office_locations
     if location_data == dmv_office_location
-      dmv_office_location.each do |office|
-        facility_info = {
-          name: office[:title],
-          address: office[:location_1][:human_address],
-          phone: office[:phone_number],
-          services: [],
-          registered_vehicles: [],
-          collected_fees: 0
-        }
-        @created_facilities << facility = Facility.new(facility_info)
-      end
-      @created_facilities
+    dmv_office_location.each do |office|
+      facility_info = {
+        name: office[:title],
+        address: office[:location_1][:human_address],
+        phone: office[:phone_number],
+        services: [],
+        registered_vehicles: [],
+        collected_fees: 0
+      }
+      @created_facilities << facility = Facility.new(facility_info)
+    end
+    @created_facilities
     elsif location_data == new_york_facilities
       new_york_facilities.each do |office|
         facility_info = {
@@ -35,7 +44,20 @@ class FacilityConstructor
         }
         @created_facilities << facility = Facility.new(facility_info)
       end
+      @created_facilities
+    else location_data == missouri_facilities
+      missouri_facilities.each do |office|
+        facility_info = {
+          name: office[:name],
+          address: [office[:address1], office[:city], office[:state]],
+          phone: office[:phone],
+          services: [],
+          registered_vehicles: [],
+          collected_fees: 0
+        }
+        @created_facilities << facility = Facility.new(facility_info)
+      end
+      @created_facilities
     end
-    @created_facilities
   end
 end
