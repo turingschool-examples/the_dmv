@@ -49,12 +49,19 @@ RSpec.describe Facility do
   end
 
   describe '#collected fees' do
-    it 'total colected fees' do
+    it 'total collected fees' do
 
       expect(@facility_1.collected_fees).to eq(0)
     end
   end
 
+  describe '#register_vehicle' do
+    it 'can register a vehicle' do
 
+      @facility_1.register_vehicle(@cruz)
+      
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+    end
+  end
 
 end
