@@ -17,13 +17,12 @@ class FacilityFactory
     @facilities
   end
 
-  def or_find_address(data)
-    address_h = eval(data[:location_1][:human_address])
+  def or_find_address(facility)
+    address_h = eval(facility[:location_1][:human_address])
     address_s = address_h.values.join(' ')
   end
 
   def ny_create_facilities(data)
-    require 'pry'; binding.pry
     data.each do |facility|
       facility_details = {
         name: facility[:office_namee],
@@ -34,5 +33,14 @@ class FacilityFactory
       self.facilities << facility_sorted
     end
     @facilities
+  end
+
+  def ny_find_address(facility)
+    address_c = []
+    address_c << facility[:street_address_line_1]
+    address_c << facility[:city]
+    address_c << facility[:state]
+    address_c << facility[:zip_code]
+    address_c.join(' ')
   end
 end

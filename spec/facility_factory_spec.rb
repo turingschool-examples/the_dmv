@@ -21,7 +21,7 @@ RSpec.describe FacilityFactory do
     end
     
     it 'can pull address from NY data' do
-      expect(@facility_facotry.ny_find_address(@ny_dmv_offices[0])).to eq('512 WEST 3RD STREET JAMESTOWN NY 14701')
+      expect(@facility_factory.ny_find_address(@ny_dmv_offices[0])).to eq('512 WEST 3RD STREET JAMESTOWN NY 14701')
     end
 
     it 'can create Facility class from NY DMV data' do
