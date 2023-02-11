@@ -46,5 +46,26 @@ class FacilityFactory
                   facility_hash[:zip_code]].join(' ')
   end
 
+  def create_mo_facilities(data)
+    facility_data = []
+    data.each do |facility_hash|
+      facility_details = {}
+      facility_details[:name] = facility_hash[:name]
+      facility_details[:address] = mo_address(facility_hash)
+      facility_details[:phone] = facility_hash[:phone]
+      facility_data << facility_details
+    end
+    facility_data.each do |facility_details|
+      @facilities << Facility.new(facility_details)
+    end
+    @facilities
+  end
+
+  def mo_address(facility_hash)
+    mo_address = [facility_hash[:address1], 
+                  facility_hash[:city], 
+                  facility_hash[:state], 
+                  facility_hash[:zipcode]].join(' ')
+  end
 
 end
