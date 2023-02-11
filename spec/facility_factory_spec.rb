@@ -20,4 +20,18 @@ RSpec.describe FacilityFactory do
     end
   end
 
+  describe '#extract_address' do
+    it 'turns address from external data into string for create_facilities' do
+      expect(@factory.extract_address({:title=>"Albany DMV Office",
+      :zip_code=>"97321",
+      :website=>"http://www.oregon.gov/ODOT/DMV/pages/offices/albany.aspx",
+      :type=>"DMV Location",
+      :phone_number=>"541-967-2014",
+      :agency=>"Transportation, Department of ",
+      :location_1=>{:latitude=>"44.632897", :longitude=>"-123.077928", :human_address=>
+      "{\"address\": \"2242 Santiam Hwy SE\", \"city\": \"Albany\", \"state\": \"OR\", \"zip\": \"97321\"}"}})).
+      to eq("2242 Santiam Hwy SE Albany OR 97321")
+    end
+  end
+
 end
