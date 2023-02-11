@@ -21,11 +21,7 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    return nil if self == facility_2
-    @registered_vehicles << vehicle
-    @collected_fees += registration_fees
-    end
-
+    return nil unless services.include?('Vehicle Registration')
     vehicle.registration_date = Date.today
     registration_fees = 0
     if vehicle.antique?
@@ -39,7 +35,8 @@ class Facility
       vehicle.plate_type = :regular
     end
 
-    @registered_vehicles << vehicle
-    @collected_fees += registration_fees
+      @registered_vehicles << vehicle
+      @collected_fees += registration_fees
+  end
 
 end
