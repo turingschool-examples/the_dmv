@@ -106,15 +106,27 @@ RSpec.describe Facility do
       expect(@facility_2.collected_fees).to eq(0)
     end
 
-    it 'verifies what info is needed for a license' do
+    it 'verifies info needed for a license for registrant_1' do
 
       expected = {:written=>false, :license=>false, :renewed=>false}
 
       expect(@registrant_1.license_data).to eq(expected)
       expect(@registrant_1.permit?).to eq(true)
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
+    end
       
-      #@facility_1.add_service('Written_Test')
-    
+    it 'allows registrant_1 to administer written test' do
+      @facility_1.add_service('Written_Test')
+
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
+
+      expected = {:written=>true, :license=>false, :renewed=>false}
+      expected = 
+
+      expect(@registrant_1.license_data).to eq(expected)
+    end
+
+    it 'verified info needed for registran_2 to earn their permit' do
+      expect(@registrant_2.age).to eq(16)
     end
   end
