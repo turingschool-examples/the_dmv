@@ -185,19 +185,30 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq(expected)
     end
 
-    it 'verifies a facility can renew a drivers license' do
+    it 'verifies a facility can renew a registrant drivers license' do
       @facility_1.add_service('Written_Test')
       @facility_1.add_service('Road Test')
       @facility_1.add_service('Renew Drivers License')
 
       expect(@facility_1.services).to match_array(["Written_Test", "Road Test", "Renew Drivers License"])
 
-      @registrant_1.administer_road_test
       expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(true)
-      # require 'pry'; binding.pry
+
+      expected = {:written=>true, :license=>true, :renewed=>true}
+
+      expect(@registrant_1.license_data).to eq(expected)
+    end
+
+    it 'verifies a facility can not renew a registrant drivers license' do
+      @facility_1.add_service('Written_Test')
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Renew Drivers License')
+
       expect(@facility_1.renew_drivers_license(@registrant_2)).to eq(false)
-      # require 'pry'; binding.pry
-
-
+      @registrant_2.earn_permit
+      expect(@facility_1.renew_drivers_license(@registrant_2)).to eq(true)
+      expect(@facility_1.renew_drivers_license(@registrant_3)).to eq(false)
+      @registrant_2.earn_permit
+      expect(@facility_1.renew_drivers_license(@registrant_3)).to eq(false)
     end
   end
