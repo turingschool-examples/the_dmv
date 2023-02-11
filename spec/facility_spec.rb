@@ -74,6 +74,8 @@ RSpec.describe Facility do
       expect(registrant_1.age).to eq(18)
       expect(@facility_1.administer_written_test(registrant_1)).to eq(true)
       expect(registrant_2.age).to eq(16)
+      expect(@facility_1.administer_written_test(registrant_2)).to eq(false)
+      registrant_2.earn_permit
       expect(@facility_1.administer_written_test(registrant_2)).to eq(true)
       expect(registrant_3.age).to eq(15)
       expect(@facility_1.administer_written_test(registrant_3)).to eq(false)
@@ -82,7 +84,13 @@ RSpec.describe Facility do
   end
 
   describe '#administer road test' do
-    it 'can check for written test pass and administer road test' do
+    xit 'can check for written test pass and administer road test' do
+      registrant_1 = Registrant.new('Bruce', 18, true)
+      registrant_2 = Registrant.new('Penny', 16)
+      registrant_3 = Registrant.new('Tucker', 15)
+      @facility_1.administer_written_test(registrant_1)
+
+
 
     end
   end
