@@ -34,50 +34,17 @@ RSpec.describe Facility do
       @facility_1.add_service('Vehicle Registration')
       
       expect(@cruz.registration_date).to eq(nil)
-      expect(@facility_1.registered_vehicles).to eq([])
-      expect(@facility_1.collected_fees).to eq(0)
-      expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
-      expect(@cruz.plate_type).to eq(:regular)
-      expect(@facility_1.collected_fees).to eq(100)
-    end
-  end
-
-  describe '#add vehicle registration for Camaro' do
-    it 'adds vehicle registration for Camaro' do
-
-      @facility_1.add_service('Vehicle Registration')
-
       expect(@camaro.registration_date).to eq(nil)
-      expect(@facility_1.registered_vehicles).to eq([])
-      expect(@facility_1.collected_fees).to eq(0)
-      expect(@facility_1.register_vehicle(@camaro)).to eq([@camaro])
-      expect(@camaro.plate_type).to eq(:antique)
-      expect(@facility_1.collected_fees).to eq(25)
-    end
-  end
-
-  describe '@add vehicle registration for Bolt' do
-    it 'adds vehicle registration for Bolt' do
-
-      @facility_1.add_service('Vehicle Registration')
-
       expect(@bolt.registration_date).to eq(nil)
       expect(@facility_1.registered_vehicles).to eq([])
       expect(@facility_1.collected_fees).to eq(0)
-      expect(@facility_1.register_vehicle(@bolt)).to eq([@bolt])
+      expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
+      expect(@facility_1.register_vehicle(@camaro)).to eq([@cruz,@camaro])
+      expect(@facility_1.register_vehicle(@bolt)).to eq([@cruz, @camaro,@bolt])
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@camaro.plate_type).to eq(:antique)
       expect(@bolt.plate_type).to eq(:ev)
-      expect(@facility_1.collected_fees).to eq(200)
-    end
-  end
-
-  describe '@total collected fees' do
-    it 'collects total fees' do
-
-      @facility_1.add_service('Vehicle Registration')
-
       expect(@facility_1.collected_fees).to eq(325)
     end
   end
-
-
 end
