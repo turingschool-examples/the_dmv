@@ -7,7 +7,7 @@ RSpec.describe FacilityFactory do
 
   describe '#initialize' do
     it 'can itilialize' do
-      @facility_factory = VehicleFactory.new
+      @facility_factory = FacilityFactory.new
 
       expect(@facility_factory).to be_an_instance_of(FacilityFactory)
       expect(@facility_factory.facilities).to eq([])
@@ -21,7 +21,7 @@ RSpec.describe FacilityFactory do
       @facility_factory.create_facilities(or_dmv_office_locations)
 
       expect(@facility_factory.facilities).to be_a(Array)
-      expect(@facility_factory.facilities).to be_an_instance_of(Facility)
+      expect(@facility_factory.facilities[0]).to be_an_instance_of(Facility)
     end
   end
 end
