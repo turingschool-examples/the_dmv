@@ -20,6 +20,7 @@ class Facility
   end
 
   def register_vehicle(car)
+    return unless @services.include?('Vehicle Registration')
     collect_fee(car.plate_type)
     car.registration_date = Date.today
     @registered_vehicles << car
