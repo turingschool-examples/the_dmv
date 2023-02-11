@@ -217,4 +217,59 @@ RSpec.describe Facility do
       expect(@facility_1.administer_written_test(@registrant_1)).to be(true)
     end
   end
+
+  describe '#administer_road_test' do
+    before(:each) do
+      @facility_1.add_service('Road Test')
+      @facility_2.add_service('Written Test')
+
+      @registrant_1 = Registrant.new(REGISTRANT_1[:name], REGISTRANT_1[:age], REGISTRANT_1[:permit])
+      @registrant_2 = Registrant.new(REGISTRANT_2[:name], REGISTRANT_2[:age])
+      @registrant_3 = Registrant.new(REGISTRANT_3[:name], REGISTRANT_3[:age])
+    end
+
+    it 'does not modify anything if there is no road test service' do
+      expect(@facility_2.services).to eq(['Written Test'])
+      expect(@registrant_1.license_data[:written]).to be(false)
+      expect(@registrant_1.license_data[:license]).to be(false)
+      @facility_2.administer_written_test(@registrant_1)
+      expect(@registrant_1.license_data[:written]).to be(true)
+      @facility_2.administer_road_test(@registrant_1)
+      expect(@registrant_1.license_data[:license]).to be(false)
+    end
+
+    it 'returns false if there is no road test service' do
+      expect(@facility_2.administer_road_test(@registrant_1)).to be(false)
+    end
+
+    it 'does not modify anything if the registrant hasn\'t passed the written test' do
+      expect(@facility_1.services).to eq(['Road Test'])
+      expect(@registrant_1.license_data[:written]).to be(false)
+      expect(@registrant_1.license_data[:license]).to be(false)
+      @facility_1.administer_road_test(@registrant_1)
+      expect(@registrant_1.license_data[:written]).to be(false)
+      expect(@registrant_1.license_data[:license]).to be(false)
+    end
+
+    it 'returns false if the registrant hasn\'t passed the written test' do
+      expect(@facility_1.administer_road_test(@registrant_1)).to be(false)
+    end
+
+    it 'grants a license if the facility has the road test service and the registrant has passed the written test' do
+      @facility_2.add_service('Road Test')
+      expect(@facility_1.services).to eq(['Written Test', 'Road Test'])
+      @facility_2.administer_written_test(@registrant_1)
+      expect(@registrant_1.license_data[:written]).to be(true)
+      expect(@registrant_1.license_data[:license]).to be(false)
+      @facility_2.administer_road_test(@registrant_1)
+      expect(@registrant_1.license_data[:written]).to be(true)
+      expect(@registrant_1.license_data[:license]).to be(true)
+    end
+
+    it 'returns true if the license is successfully granted' do
+      @facility_2.add_service('Road Test')
+      @facility_2.administer_written_test(@registrant_1)
+      expect(@facility_2.administer_road_test(@registrant_1)).to be(true)
+    end
+  end
 end
