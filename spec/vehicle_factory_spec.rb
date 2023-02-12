@@ -4,6 +4,7 @@ RSpec.describe VehicleFactory do
   before(:each) do
     @factory = VehicleFactory.new
   end
+  
   describe '#initialize' do
     it 'exists' do
     
@@ -11,7 +12,13 @@ RSpec.describe VehicleFactory do
     end
   end
 
-  describe '#create_vehicles'
-    it 'can create vehicles'
-    wa_ev_registrations = DnvDataService.new.wa_ev_registrations
+  describe '#create_vehicles' do
+    it 'can create vehicles' do
+      factory = VehicleFactory.new
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      wa = factory.create_vehicles(wa_ev_registrations)
+
+      expect(wa.size).to eq(1000)
+    end
+  end
 end
