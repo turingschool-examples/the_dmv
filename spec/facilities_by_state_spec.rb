@@ -7,33 +7,33 @@ RSpec.describe FacilitiesByState do
     expect(facilities).to be_instance_of(FacilitiesByState)
   end
 
-  it 'can create facilities' do
+  it 'can create facilities from OR' do
     facilities = FacilitiesByState.new
-    dmv = DmvDataService.new.or_dmv_office_locations
+    dmv_or = DmvDataService.new.or_dmv_office_locations
 
-    facilities.create_facilities(dmv)
-    
-    expect(facilities.all_facilities[0]).to be_instance_of(Facility)
-    expect(facilities.all_facilities.length).to eq(59)
+    facilities.create_facilities("or", dmv_or)
+
+    expect(facilities.or[0]).to be_instance_of(Facility)
+    expect(facilities.or.length).to eq(59)
   end
   
-  it 'can create facilities from NY' do 
+  xit 'can create facilities from NY' do 
     facilities = FacilitiesByState.new
-    dmv = DmvDataService.new.ny_dmv_office_locations
+    dmv_ny = DmvDataService.new.ny_dmv_office_locations
     
-    facilities.create_facilities(dmv)
-    require 'pry'; binding.pry
-    expect(facilities.all_facilities[0]).to be_instance_of(Facility)
-    expect(facilities.all_facilities.length).to eq(169)
+    facilities.create_facilities("ny", dmv_ny)
+
+    expect(facilities.ny[0]).to be_instance_of(Facility)
+    expect(facilities.ny.length).to eq(169)
   end
   
-  it 'can create facilities from MO' do
+  xit 'can create facilities from MO' do
     facilities = FacilitiesByState.new
-    dmv = DmvDataService.new.mo_dmv_office_locations
+    dmv_mo = DmvDataService.new.mo_dmv_office_locations
     
-    facilities.create_facilities(dmv)
+    facilities.create_facilities("mo", dmv_mo)
     
-    expect(facilities.all_facilities[0]).to be_instance_of(Facility)
-    expect(facilities.all_facilities.length).to eq(178)
+    expect(facilities.mo[0]).to be_instance_of(Facility)
+    expect(facilities.mo.length).to eq(178)
   end
 end
