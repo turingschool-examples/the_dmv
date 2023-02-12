@@ -17,7 +17,7 @@ RSpec.describe FacilitiesByState do
     expect(facilities.or.length).to eq(59)
   end
   
-  xit 'can create facilities from NY' do 
+  it 'can create facilities from NY' do 
     facilities = FacilitiesByState.new
     dmv_ny = DmvDataService.new.ny_dmv_office_locations
     
@@ -27,7 +27,7 @@ RSpec.describe FacilitiesByState do
     expect(facilities.ny.length).to eq(169)
   end
   
-  xit 'can create facilities from MO' do
+  it 'can create facilities from MO' do
     facilities = FacilitiesByState.new
     dmv_mo = DmvDataService.new.mo_dmv_office_locations
     
