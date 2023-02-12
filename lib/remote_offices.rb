@@ -9,11 +9,11 @@ class RemoteOffices
     or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
       or_dmv_office_locations.each do |office|
         details = {
-          name: office[:title]
-          address: office[:human_address]
-          phone: office[:phone_number]
-          services: []
-          registered_vehicles: []
+          name: office[:title],
+          address: office[:human_address],
+          phone: office[:phone_number],
+          services: [],
+          registered_vehicles: [],
           collected_fees: 0
         }
         other_offices << (offices = Facility.new(details))
