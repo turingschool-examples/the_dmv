@@ -52,7 +52,6 @@ class Facility
       person.license_data[:renewed] = true
     else
       false
-
     end
   end
 end
