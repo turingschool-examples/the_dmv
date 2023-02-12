@@ -20,6 +20,3 @@ attr_reader :state_facility_list
     JSON.parse(ugly_address)["address"]
   end
 end
-
-# "{\"address\": \"2242 Santiam Hwy SE\", \"city\": \"Albany\", \"state\": \"OR\", \"zip\": \"97321\"}"
-# or_address_cleaner(current_hash[:location_1][:human_address]),
