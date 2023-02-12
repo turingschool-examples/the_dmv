@@ -1,6 +1,8 @@
 class FacilitiesByState
 
-  attr_reader :all_facilities, :or, :ny, :mo
+  attr_reader :or, 
+              :ny, 
+              :mo
 
   def initialize
     @or = []
@@ -9,12 +11,16 @@ class FacilitiesByState
     @all_facilities = [@or, @ny, @mo]
   end
 
+  def all_facilities
+    @all_facilities.flatten
+  end
+  
     def create_facilities(state, data)
-      if state.downcase == 'or'
+      if state.downcase == 'or' || state.downcase == 'oregon'
         create_or_facilities(data)
-      elsif state.downcase == 'ny'
+      elsif state.downcase == 'ny' || state.downcase == 'new york'
         create_ny_facilities(data)
-      elsif state.downcase == 'mo'
+      elsif state.downcase == 'mo' || state.downcase == 'missouri'
         create_mo_facilities(data)
       else 'Error, try again' 
       end
@@ -23,10 +29,11 @@ class FacilitiesByState
     private
     def create_or_facilities(data)
       data.each do |facility|
+        parsed_address = JSON.parse(facility[:location_1][:human_address], symbolize_names: true)
         facility_details = {
           name: facility[:title], 
-          address: facility[:location_1][:human_address],
-          phone: facility[:phone_number]
+          address: "#{parsed_address[:address]}, #{parsed_address[:city]}, #{parsed_address[:state]}, #{parsed_address[:zip]}",
+          phone: facility[:phone_number]&.delete("-")
         }
           @or << Facility.new(facility_details)
       end
@@ -48,7 +55,7 @@ class FacilitiesByState
         facility_details = {
           name: facility[:name],
           address: "#{facility[:address1]}, #{facility[:city]}, #{facility[:state]}, #{facility[:zipcode]}",
-          phone: facility[:phone]
+          phone: facility[:phone]&.delete("() -")
         }
         @mo << Facility.new(facility_details)
       end
