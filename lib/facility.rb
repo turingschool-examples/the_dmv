@@ -3,7 +3,8 @@ class Facility
               :address,
               :phone,
               :services,
-              :registered_vehicles
+              :registered_vehicles,
+              :collected_fees
 
   def initialize(info)
     # require'pry';binding.pry
@@ -12,10 +13,15 @@ class Facility
     @phone = info[:phone]
     @services = []
     @registered_vehicles = []
+    @collected_fees = 0
   end
 
   def add_service(service)
     @services << service
   end
+
+  
+
 end
+
  
