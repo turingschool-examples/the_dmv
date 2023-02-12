@@ -15,7 +15,7 @@ class FacilitiesByState
       elsif state.downcase == 'ny'
         create_ny_facilities(data)
       elsif state.downcase == 'mo'
-        create_ny_facilities(data)
+        create_mo_facilities(data)
       else 'Error, try again' 
       end
     end
@@ -29,6 +29,28 @@ class FacilitiesByState
           phone: facility[:phone_number]
         }
           @or << Facility.new(facility_details)
+      end
+    end
+
+    def create_ny_facilities(data)
+      data.each do |facility|
+        facility_details = {
+          name: facility[:office_name],
+          address: "#{facility[:street_address_line_1]}, #{facility[:city]}, #{facility[:state]}, #{facility[:zip_code]}", 
+          phone: facility[:public_phone_number]
+        } 
+        @ny << Facility.new(facility_details)
+      end
+    end
+
+    def create_mo_facilities(data)
+      data.each do |facility|
+        facility_details = {
+          name: facility[:name],
+          address: "#{facility[:address1]}, #{facility[:city]}, #{facility[:state]}, #{facility[:zipcode]}",
+          phone: facility[:phone]
+        }
+        @mo << Facility.new(facility_details)
       end
     end
 end
