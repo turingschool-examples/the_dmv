@@ -22,8 +22,34 @@ class Facility
   def register_vehicle(car)
     return nil unless @services.include?('Vehicle Registration')
     collect_fee(car.plate_type)
-    car.registration_date = Date.today
+    car.set_registration_date
     @registered_vehicles << car
+  end
+
+  def administer_written_test(registrant)
+    if !@services.include?('Written Test') ||
+       registrant.age < 16 ||
+       !registrant.permit?
+      return false
+    end
+    registrant.set_license_data(:written, true)
+    true
+  end
+
+  def administer_road_test(registrant)
+    if !@services.include?('Road Test') || !registrant.written?
+      return false
+    end
+    registrant.set_license_data(:license, true)
+    true
+  end
+
+  def renew_drivers_license(registrant)
+    if !@services.include?('Renew License') || !registrant.license?
+      return false
+    end
+    registrant.set_license_data(:renewed, true)
+    true
   end
 
   private

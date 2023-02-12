@@ -1,29 +1,13 @@
 require 'spec_helper'
 
 RSpec.describe Facility do
-  FACILITY_1 = {
-    name: 'Albany DMV Office',
-    address: '2242 Santiam Hwy SE Albany OR 97321',
-    phone: '541-967-2014'
-  }.freeze
-  FACILITY_2 = {
-    name: 'Ashland DMV Office',
-    address: '600 Tolman Creek Rd Ashland OR 97520',
-    phone: '541-776-6092'
-  }.freeze
-  FACILITY_3 = {
-    name: 'Bend DMV Office',
-    address: '63030 O B Riley Rd Bend OR 97701',
-    phone: '541-388-6322'
-  }.freeze
-
   before(:each) do
     @facility_1 = Facility.new(FACILITY_1)
     @facility_2 = Facility.new(FACILITY_2)
 
-    @cruz = Vehicle.new(CAR_1)
-    @bolt = Vehicle.new(CAR_2)
-    @camaro = Vehicle.new(CAR_3)
+    @cruz = Vehicle.new(CRUZ)
+    @bolt = Vehicle.new(BOLT)
+    @camaro = Vehicle.new(CAMARO)
   end
 
   describe '#initialize' do
@@ -178,6 +162,184 @@ RSpec.describe Facility do
 
     it 'returns nil if the service is not included' do
       expect(@facility_2.register_vehicle(@cruz)).to be(nil)
+    end
+  end
+
+  describe '#administer_written_test' do
+    before(:each) do
+      @facility_1.add_service('Written Test')
+
+      @registrant_1 = Registrant.new(REGISTRANT_1[:name], REGISTRANT_1[:age], REGISTRANT_1[:permit])
+      @registrant_2 = Registrant.new(REGISTRANT_2[:name], REGISTRANT_2[:age])
+      @registrant_3 = Registrant.new(REGISTRANT_3[:name], REGISTRANT_3[:age])
+    end
+
+    it 'does not do modify anything if there is no written test service' do
+      @facility_2.administer_written_test(@registrant_1)
+      expect(@registrant_1.written?).to be(false)
+    end
+
+    it 'returns false if there is no written test service' do
+      expect(@facility_2.administer_written_test(@registrant_1)).to be(false)
+    end
+
+    it 'does not do modify anything if the registrant does not have a permit' do
+      @facility_1.administer_written_test(@registrant_2)
+      @facility_1.administer_written_test(@registrant_3)
+      expect(@registrant_2.written?).to be(false)
+      expect(@registrant_3.written?).to be(false)
+    end
+
+    it 'returns false if the registrant does not have a permit' do
+      expect(@facility_1.administer_written_test(@registrant_2)).to be(false)
+      expect(@facility_1.administer_written_test(@registrant_3)).to be(false)
+    end
+
+    it 'does not do modify anything if the registrant is under 16 years old' do
+      @facility_1.administer_written_test(@registrant_3)
+      expect(@registrant_3.written?).to be(false)
+    end
+
+    it 'returns false if the registrant is under 16 years old' do
+      expect(@facility_1.administer_written_test(@registrant_3)).to be(false)
+    end
+
+    it 'correctly modifies the registrant\' license data if it successfully administers the written test' do
+      expect(@facility_2.services).to eq([])
+      @facility_2.administer_written_test(@registrant_1)
+      expect(@registrant_1.written?).to be(false)
+      @facility_2.add_service('Written Test')
+      @facility_2.administer_written_test(@registrant_1)
+      expect(@registrant_1.written?).to be(true)
+    end
+
+    it 'returns true if it successfully administers the written test' do
+      expect(@facility_1.administer_written_test(@registrant_1)).to be(true)
+    end
+  end
+
+  describe '#administer_road_test' do
+    before(:each) do
+      @facility_1.add_service('Road Test')
+      @facility_2.add_service('Written Test')
+
+      @registrant_1 = Registrant.new(REGISTRANT_1[:name], REGISTRANT_1[:age], REGISTRANT_1[:permit])
+      @registrant_2 = Registrant.new(REGISTRANT_2[:name], REGISTRANT_2[:age])
+      @registrant_3 = Registrant.new(REGISTRANT_3[:name], REGISTRANT_3[:age])
+    end
+
+    it 'does not modify anything if there is no road test service' do
+      expect(@facility_2.services).to eq(['Written Test'])
+      expect(@registrant_1.written?).to be(false)
+      expect(@registrant_1.license?).to be(false)
+      @facility_2.administer_written_test(@registrant_1)
+      expect(@registrant_1.written?).to be(true)
+      @facility_2.administer_road_test(@registrant_1)
+      expect(@registrant_1.license?).to be(false)
+    end
+
+    it 'returns false if there is no road test service' do
+      expect(@facility_2.administer_road_test(@registrant_1)).to be(false)
+    end
+
+    it 'does not modify anything if the registrant hasn\'t passed the written test' do
+      expect(@facility_1.services).to eq(['Road Test'])
+      expect(@registrant_1.written?).to be(false)
+      expect(@registrant_1.license?).to be(false)
+      @facility_1.administer_road_test(@registrant_1)
+      expect(@registrant_1.written?).to be(false)
+      expect(@registrant_1.license?).to be(false)
+    end
+
+    it 'returns false if the registrant hasn\'t passed the written test' do
+      expect(@facility_1.administer_road_test(@registrant_1)).to be(false)
+    end
+
+    it 'grants a license if the facility has the road test service and the registrant has passed the written test' do
+      @facility_2.add_service('Road Test')
+      expect(@facility_2.services).to eq(['Written Test', 'Road Test'])
+      expect(@registrant_1.written?).to be(false)
+      expect(@registrant_1.license?).to be(false)
+      @facility_2.administer_written_test(@registrant_1)
+      expect(@registrant_1.written?).to be(true)
+      expect(@registrant_1.license?).to be(false)
+      @facility_2.administer_road_test(@registrant_1)
+      expect(@registrant_1.written?).to be(true)
+      expect(@registrant_1.license?).to be(true)
+    end
+
+    it 'returns true if the license is successfully granted' do
+      @facility_2.add_service('Road Test')
+      @facility_2.administer_written_test(@registrant_1)
+      expect(@facility_2.administer_road_test(@registrant_1)).to be(true)
+    end
+  end
+
+  describe '#renew_drivers_license' do
+    before(:each) do
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Renew License')
+
+      @registrant_1 = Registrant.new(REGISTRANT_1[:name], REGISTRANT_1[:age], REGISTRANT_1[:permit])
+      @registrant_2 = Registrant.new(REGISTRANT_2[:name], REGISTRANT_2[:age])
+
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+
+      expect(@registrant_1.written?).to be(true)
+      expect(@registrant_1.license?).to be(true)
+      expect(@registrant_1.renewed?).to be(false)
+    end
+
+    it 'does nothing if the facility has no renew license service' do
+      expect(@registrant_1.written?).to be(true)
+      expect(@registrant_1.license?).to be(true)
+      expect(@registrant_1.renewed?).to be(false)
+
+      @facility_2.renew_drivers_license(@registrant_1)
+
+      expect(@registrant_1.written?).to be(true)
+      expect(@registrant_1.license?).to be(true)
+      expect(@registrant_1.renewed?).to be(false)
+    end
+
+    it 'returns false if the facility has no renew license service' do
+      expect(@facility_2.renew_drivers_license(@registrant_1)).to be(false)
+    end
+
+    it 'does nothing if the registrant has no license' do
+      expect(@registrant_2.written?).to be(false)
+      expect(@registrant_2.license?).to be(false)
+      expect(@registrant_2.renewed?).to be(false)
+
+      expect(@facility_1.services.include?('Renew License')).to be(true)
+      @facility_1.renew_drivers_license(@registrant_2)
+
+      expect(@registrant_2.written?).to be(false)
+      expect(@registrant_2.license?).to be(false)
+      expect(@registrant_2.renewed?).to be(false)
+    end
+
+    it 'returns false if the registrant has no license' do
+      expect(@facility_1.renew_drivers_license(@registrant_2)).to be(false)
+    end
+
+    it 'grants a license renewal if the facility has the service and the registrant has a license' do
+      expect(@registrant_1.written?).to be(true)
+      expect(@registrant_1.license?).to be(true)
+      expect(@registrant_1.renewed?).to be(false)
+
+      expect(@facility_1.services.include?('Renew License')).to be(true)
+      @facility_1.renew_drivers_license(@registrant_1)
+
+      expect(@registrant_1.written?).to be(true)
+      expect(@registrant_1.license?).to be(true)
+      expect(@registrant_1.renewed?).to be(true)
+    end
+
+    it 'returns true if the license renewal is successful' do
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to be(true)
     end
   end
 end

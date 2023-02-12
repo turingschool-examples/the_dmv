@@ -1,19 +1,10 @@
 require 'spec_helper'
 
 RSpec.describe Registrant do
-  PERSON_1 = {
-    name: 'Bruce',
-    age: 18,
-    permit: true
-  }.freeze
-  PERSON_2 = {
-    name: 'Penny',
-    age: 15
-  }.freeze
-
   before(:each) do
-    @registrant_1 = Registrant.new(PERSON_1[:name], PERSON_1[:age], PERSON_1[:permit])
-    @registrant_2 = Registrant.new(PERSON_2[:name], PERSON_2[:age])
+    @registrant_1 = Registrant.new(REGISTRANT_1[:name], REGISTRANT_1[:age], REGISTRANT_1[:permit])
+    @registrant_2 = Registrant.new(REGISTRANT_2[:name], REGISTRANT_2[:age])
+    @registrant_3 = Registrant.new(REGISTRANT_3[:name], REGISTRANT_3[:age])
   end
 
   describe '#initialize' do
@@ -28,11 +19,11 @@ RSpec.describe Registrant do
 
   describe '#name' do
     it 'has a name' do
-      expect(@registrant_1.name).to eq(PERSON_1[:name])
+      expect(@registrant_1.name).to eq(REGISTRANT_1[:name])
     end
 
     it 'has a different name' do
-      expect(@registrant_2.name).to eq(PERSON_2[:name])
+      expect(@registrant_2.name).to eq(REGISTRANT_2[:name])
     end
 
     it 'returns a string' do
@@ -43,11 +34,11 @@ RSpec.describe Registrant do
 
   describe '#age' do
     it 'has an age' do
-      expect(@registrant_1.age).to eq(PERSON_1[:age])
+      expect(@registrant_1.age).to eq(REGISTRANT_1[:age])
     end
 
     it 'has a different age' do
-      expect(@registrant_2.age).to eq(PERSON_2[:age])
+      expect(@registrant_2.age).to eq(REGISTRANT_2[:age])
     end
 
     it 'returns an integer' do
@@ -87,8 +78,12 @@ RSpec.describe Registrant do
     end
 
     it 'sets its default values correctly' do
-      expect(@registrant_1.license_data).to eq(Registrant::DEFAULTS[:license_data])
-      expect(@registrant_2.license_data).to eq(Registrant::DEFAULTS[:license_data])
+      expect(@registrant_1.written?).to be(false)
+      expect(@registrant_2.written?).to be(false)
+      expect(@registrant_1.license?).to be(false)
+      expect(@registrant_2.license?).to be(false)
+      expect(@registrant_1.renewed?).to be(false)
+      expect(@registrant_2.renewed?).to be(false)
     end
 
     describe '#earn_permit' do
@@ -102,6 +97,12 @@ RSpec.describe Registrant do
         expect(@registrant_1.permit?).to be(true)
         @registrant_1.earn_permit
         expect(@registrant_1.permit?).to be(true)
+      end
+
+      it 'does nothing if the registrant\'s age is less than 16 years old' do
+        expect(@registrant_3.permit?).to be(false)
+        @registrant_3.earn_permit
+        expect(@registrant_3.permit?).to be(false)
       end
 
       it 'returns true' do
