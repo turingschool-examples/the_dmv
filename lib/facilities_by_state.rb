@@ -14,7 +14,7 @@ class FacilitiesByState
   def all_facilities
     @all_facilities.flatten
   end
-  
+
     def create_facilities(state, data)
       if state.downcase == 'or' || state.downcase == 'oregon'
         create_or_facilities(data)
@@ -27,9 +27,13 @@ class FacilitiesByState
     end
 
     private
+    def parse_address(address)
+      JSON.parse(address, symbolize_names: true)
+    end
+
     def create_or_facilities(data)
       data.each do |facility|
-        parsed_address = JSON.parse(facility[:location_1][:human_address], symbolize_names: true)
+        parsed_address = parse_address(facility[:location_1][:human_address])
         facility_details = {
           name: facility[:title], 
           address: "#{parsed_address[:address]}, #{parsed_address[:city]}, #{parsed_address[:state]}, #{parsed_address[:zip]}",
