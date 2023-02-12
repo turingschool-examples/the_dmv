@@ -11,7 +11,6 @@ class DmvDataService
   def wa_ev_registrations
     @wa_ev_registrations ||= load_data('https://data.wa.gov/resource/rpr4-cgyd.json')
   end
-
   def or_dmv_office_locations
     @or_dmv_office_locations ||= load_data('https://data.oregon.gov/resource/rj4w-f4jc.json')
   end
