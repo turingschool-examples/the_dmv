@@ -10,7 +10,9 @@ class Registrant
     @license_data = {:written=>false, :license=>false, :renewed=>false}
   end
   # require'pry';binding.pry
-  
+  def permit?
+    @permit
+  end
   
   
   
