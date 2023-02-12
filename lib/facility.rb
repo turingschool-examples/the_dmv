@@ -22,7 +22,10 @@ class Facility
 
   def register_vehicle(vehicle)
     if @services.include?("Vehicle Registration")
-      if vehicle.year >= 1998
+      if vehicle.engine == :ev
+        @collected_fees += 200
+        vehicle.plate_type = :ev
+      elsif vehicle.year >= 1998
         @collected_fees += 100
         vehicle.plate_type = :regular
       else vehicle.year <= 1998
