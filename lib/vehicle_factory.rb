@@ -15,7 +15,7 @@ class VehicleFactory
         engine: :ev
         }
         
-      @car_inventory << Vehicle.new(car_hash)
+        @car_inventory << Vehicle.new(car_hash)
     end
   end
 end

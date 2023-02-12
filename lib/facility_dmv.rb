@@ -1,5 +1,6 @@
 class FacilityDmv
   attr_reader :facilities
+
   def initialize
     @facilities = []
   end
@@ -12,6 +13,8 @@ class FacilityDmv
         website: facility[:website],
         phone_number: facility[:phone_number]
         }
+
+        @facilities << Facility.new(facility_hash)
     end
   end
 end

@@ -10,12 +10,20 @@ RSpec.describe FacilityDmv do
     expect(oregon_facilities.size).to eq(59)
   end
 
-  it 'creates new facilityDmv instances' do
+  it 'creates new facility_dmv instances' do
+    facility_dmv = FacilityDmv.new
+    oregon_facilities = DmvDataService.new.or_dmv_office_locations
+
+    expect(facility_dmv.create_facility(oregon_facilities)).to be_an_instance_of(Array)
+    # require 'pry'; binding.pry
+  end
+
+  it 'can add a facility to the array' do
     facility_dmv = FacilityDmv.new
     oregon_facilities = DmvDataService.new.or_dmv_office_locations
 
     expect(facility_dmv.facilities).to eq([])
-    # require 'pry'; binding.pry
-    expect(facility_dmv.create_facility(oregon_facilities)).to be_an_instance_of(Array)
+    facility_dmv.create_facility(oregon_facilities)
+    expect(facility_dmv.facilities.count).to eq(59)
   end
 end
