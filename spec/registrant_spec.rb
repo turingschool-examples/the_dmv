@@ -30,22 +30,14 @@ RSpec.describe Registrant do
   end
 
   describe '#earn_permit' do
-  it 'earn_permit' do
-    registrant_1 = Registrant.new('Bruce', 18, true )
-    registrant_2 = Registrant.new('Penny', 15 )
-    data = {:written=>false, :license=>false, :renewed=>false}
+    it 'earn_permit' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Penny', 15 )
+      data = {:written=>false, :license=>false, :renewed=>false}
 
-    registrant_2.earn_permit
+      registrant_2.earn_permit
 
-    expect(registrant_2.permit?).to eq(true)
+      expect(registrant_2.permit?).to eq(true)
+    end
   end
-end
-
-
-
-
-
-
-
-
 end
