@@ -20,7 +20,9 @@ class Facility
     @services << service
   end
 
- 
+  def register_vehicle(vehicle)
+    @registered_vehicles << vehicle
+  end
   
 
 end
