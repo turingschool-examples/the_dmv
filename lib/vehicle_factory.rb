@@ -9,7 +9,6 @@ class VehicleFactory
     dmv_data.each do |car|
       car_hash = {
         vin: car[:vin_1_10],
-        id: car[:dol_vehicle_id],
         year: car[:model_year].to_i,
         make: car[:make],
         model: car[:model],
