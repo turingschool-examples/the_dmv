@@ -1,4 +1,7 @@
 class Analytics
-  def initialize
+  attr_reader :source
+  
+  def initialize(source)
+    @source = source
   end
 end
