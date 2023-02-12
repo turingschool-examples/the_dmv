@@ -9,5 +9,8 @@ RSpec.describe "OfficeBuilder" do
   end
   it "pulls data from remote source" do
     expect(@or_offices).to be_a(Array)
+    p @or_offices.count
+    p @or_offices[0].keys
+    p @or_offices[0].values
   end
 end
