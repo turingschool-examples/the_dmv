@@ -7,7 +7,6 @@ RSpec.describe VehicleFactory do
 
   describe 'Initialize' do
     it 'exists' do
-
       expect(@factory).to be_a(VehicleFactory)
     end
   end
@@ -15,9 +14,9 @@ RSpec.describe VehicleFactory do
   describe 'Create Vehicles' do
     it 'can create vehicles' do
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-      @factory.create_vehicles(wa_ev_registrations)
+      cars = @factory.create_vehicles(wa_ev_registrations)
+  
+      expect(cars.length).to eq(1000)
     end
   end
-
-
 end
