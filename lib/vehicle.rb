@@ -1,13 +1,14 @@
 require 'date'
 
 class Vehicle
+  attr_accessor :plate_type
   attr_reader :vin,
               :year,
               :make,
               :model,
               :engine,
-              :registration_date,
-              :plate_type
+              :registration_date
+              # :plate_type
 
   def initialize(vehicle_details)
     @vin = vehicle_details[:vin]
@@ -16,11 +17,11 @@ class Vehicle
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
     @plate_type = vehicle_details[:plate_type]
-    # @registration_date = vehicle_details[:registration_date] = nil
+    @registration_date = vehicle_details[:registration_date]
   end
 
-  def registration_date
-    nil
+  def register
+    vehicle.registration_date = DateTime.now.strftime "%d/%m/%Y"
   end
   
 

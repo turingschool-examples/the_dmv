@@ -1,3 +1,4 @@
+require_relative 'vehicle'
 class Facility
   # attr_reader :name, :address, :phone, :services
   attr_reader :name,
@@ -26,17 +27,53 @@ class Facility
 
   def register_vehicle(vehicle)
     @registered_vehicles.push(vehicle)
-    if vehicle.antique?
+    if self.services.include?('Register a vehicle') == false
+      fee = 0
+      return false
+    elsif vehicle.antique?
       fee = 25
-      @plate_type = :antique
+      vehicle.plate_type = :antique
     elsif vehicle.electric_vehicle?
       fee =  200
-      @plate_type = :ev
+      vehicle.plate_type = :ev
     else
       fee = 100
-      @plate_type = :regular
+      vehicle.plate_type = :regular
     end
     @collected_fees += fee
+    # vehicle.register
     vehicle
+  end
+
+  def administer_written_test(registrant)
+    if self.services.include?('Written Test') == false 
+      return false
+    elsif registrant.permit == true && registrant.age >= 16
+      registrant.license_data[:written] = true
+    else
+      return false
+    end
+  end
+
+  def administer_road_test(registrant)
+    if self.services.include?('Road Test') == false
+      return false
+    elsif registrant.license_data[:written] == true 
+      registrant.license_data[:license] = true
+      return true
+    else 
+      return false
+    end
+  end
+
+  def renew_license(registrant)
+    if self.services.include?('Renew License') == false
+      return false
+    elsif registrant.license_data[:license] == true
+      registrant.license_data[:renewed] = true
+      return true
+    else
+      return false
+    end
   end
 end
