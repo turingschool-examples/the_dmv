@@ -1,4 +1,4 @@
-class RemoteOffices
+class RemoteOffice
 
   attr_reader :other_office_locations
   def initialize
@@ -16,7 +16,7 @@ class RemoteOffices
           registered_vehicles: [],
           collected_fees: 0
         }
-        other_offices << (offices = Facility.new(details))
+        @other_offices << (offices = Facility.new(details))
     end
     @other_offices
   end
