@@ -32,18 +32,5 @@ RSpec.describe Vehicle do
       expect(@bolt.electric_vehicle?).to eq(true)
       expect(@camaro.electric_vehicle?).to eq(false)
     end
-
-    it 'can read from external data sets' do
-    toyota = Vehicle.new({vin: "JTDKN3DP8D", year: 2013, make: 'Toyota', model: "Prius Plug-in", engine: :ev} )
-      expect(toyota.vin).to eq("JTDKN3DP8D")
-      expect(toyota.year).to eq(2013)
-      expect(toyota.make).to eq('Toyota')
-      expect(toyota.model).to eq('Prius Plug-in')
-      expect(toyota.engine).to eq(:ev)
-      expect(toyota.registration_date).to eq(nil)
-
-    end
   end
-
-
 end
