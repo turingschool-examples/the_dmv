@@ -29,7 +29,7 @@ RSpec.describe FacilityBuilder do
       end
     end
 
-    xit "has the expected values" do
+    it "has the expected values" do
       p @or_state_facilities.state_facility_list[0][:address]
       expect(@or_state_facilities.state_facility_list[0].values). to eq(["Albany DMV Office", "2242 Santiam Hwy SE", "541-967-2014"])
     end
@@ -70,16 +70,17 @@ RSpec.describe FacilityBuilder do
       end
     end
 
-    xit "has the expected values" do
+    it "has the expected values" do
       p @ny_state_facilities.state_facility_list[0][:address]
       expect(@ny_state_facilities.state_facility_list[0].values). to eq(["JAMESTOWN", "512 WEST 3RD STREET", "7166618220"])
     end
+  end
 
   describe "Missouri" do
     before(:each) do
       @mo_state_facilities = FacilityBuilder.new
       @mo_facilities = DmvDataService.new.mo_dmv_office_locations
-      # @mo_state_facilities.create_facilities(@mo_facilities)
+      @mo_state_facilities.create_facilities(@mo_facilities)
     end
 
     it "pulls data from remote source" do
@@ -90,7 +91,7 @@ RSpec.describe FacilityBuilder do
       p @mo_facilities[0].values
     end
 
-    xit "exists" do
+    it "exists" do
       expect(@mo_state_facilities).to be_a(FacilityBuilder)
       expect(@mo_state_facilities.state_facility_list).to be_a(Array)
       expect(@mo_state_facilities.state_facility_list.count).to eq(178)
