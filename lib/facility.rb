@@ -30,8 +30,7 @@ class Facility
       elsif vehicle.electric_vehicle?
         vehicle.plate_type = :ev
         @collected_fees += 200
-      else
-        vehicle.plate_type = :regular
+      else vehicle.plate_type = :regular
         @collected_fees += 100
       end
       @registered_vehicles
@@ -39,5 +38,5 @@ class Facility
       @registered_vehicles
     end
   end
-
+  
 end
