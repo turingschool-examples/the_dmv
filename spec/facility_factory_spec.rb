@@ -43,15 +43,15 @@ RSpec.describe FacilityFactory do
     end
 
     it 'assigns the correct string value to the @name attribute on every Oregon facility' do
-      expect(oregon_facilities.first.name).to eq('JTDKN3DP8D')
+      expect(oregon_facilities.first.name).to eq(FACILITY_1[:name])
     end
 
     it 'assigns the correct string value to the @address attribute on every Oregon facility' do
-      expect(oregon_facilities.first.address).to eq('2013')
+      expect(oregon_facilities.first.address).to eq(FACILITY_1[:address])
     end
 
     it 'assigns the correct string value to the @phone attribute on every Oregon facility' do
-      expect(oregon_facilities.first.phone).to eq('TOYOTA')
+      expect(oregon_facilities.first.phone).to eq(FACILITY_1[:phone])
     end
   end
 end
