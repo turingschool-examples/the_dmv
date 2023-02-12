@@ -11,4 +11,12 @@ class Facility
   def add_service(service)
     @services << service
   end
+
+  def registered_vehicle(vehicle)
+    registered_vehicle = [(vehicle)]
+  end
+
+  def collected_fees
+    collected_fees = 0
+  end
 end

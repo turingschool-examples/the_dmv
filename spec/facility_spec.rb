@@ -24,14 +24,33 @@ RSpec.describe Facility do
     end
   end
 
-  describe 'add_service method' do
     it 'add service to facility_1' do
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
       expect(facility_1.add_service('Vehicle Registration')).to eq(['Vehicle Registration'])
     end
-  end
 
-  describe 'registration_date method'
+    it 'registration_date is nil by default' do
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      expect(cruz.registration_date).to eq(nil)
+    end
+
+    it 'registed vehicles is empty array' do
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      expect(facility_1.registered_vehicle).to eq([])
+    end
+
+    it 'collected fees starts with zero' do
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      expect(facility_1.collected_fees).to eq(0)
+    end
+
+    it 'register cruz vehicle' do
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      expect(facility_1.register_vehicle(cruz)).to eq([<Vehicle:0x0000000135a48b08...>])
+
+    end
+
 end
 
 
