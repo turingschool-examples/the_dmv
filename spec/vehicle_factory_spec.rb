@@ -4,7 +4,7 @@ RSpec.describe VehicleFactory do
   before(:each) do
     @factory = VehicleFactory.new
   end
-  
+
   describe '#initialize' do
     it 'exists' do
     
@@ -12,7 +12,7 @@ RSpec.describe VehicleFactory do
     end
   end
 
-  describe '#create_vehicles' do
+  describe '#create_vehicles' do    #my before(:each) decided to not work here and I couldn't figure out why
     it 'can create vehicles' do
       factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations

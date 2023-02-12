@@ -1,13 +1,6 @@
 class VehicleFactory
   def initialize
   end
- 
-  
-  def create_vehicle(registration_data)
-    car = Vehicle.new(registration_data)
-    car.vin = registration_data[:vin_1_10]
-    @ew_cars << car
-  end
   
   def create_vehicles(registration_data)
     new_cars = []
