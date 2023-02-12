@@ -18,7 +18,7 @@ RSpec.describe VehicleFactory do
     end
 
     it 'returns an array of Vehicle objects' do
-      expect(@factory.create_vehicles(@wa_ev_registrations).all { |vehicle| vehicle.is_a?(Vehicle) }).to be(true)
+      expect(@factory.create_vehicles(@wa_ev_registrations).all? { |vehicle| vehicle.is_a?(Vehicle) }).to be(true)
     end
   end
 end
