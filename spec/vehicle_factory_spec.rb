@@ -15,6 +15,7 @@ RSpec.describe VehicleFactory do
   describe 'Create Vehicles' do
     it 'can create vehicles' do
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      @factory.create_vehicles(wa_ev_registrations)
     end
   end
 
