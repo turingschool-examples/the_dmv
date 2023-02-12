@@ -35,6 +35,14 @@ module TestData
     engine: :ice
   }.freeze
 
+  WA_EV_VEHICLE = {
+    vin: 'JTDKN3DP8D',
+    year: '2013',
+    make: 'TOYOTA',
+    model: 'Prius Plug-in',
+    engine: :ev
+  }.freeze
+
   FACILITY_1 = {
     name: 'Albany DMV Office',
     address: '2242 Santiam Hwy SE Albany OR 97321',

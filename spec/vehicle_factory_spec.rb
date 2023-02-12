@@ -41,23 +41,23 @@ RSpec.describe VehicleFactory do
     end
 
     it 'assigns the correct string value to the @vin attribute on every WA state electric vehicle' do
-      expect(wa_ev_vehicles.first.vin).to eq('JTDKN3DP8D')
+      expect(wa_ev_vehicles.first.vin).to eq(WA_EV_VEHICLE[:vin])
     end
 
     it 'assigns the correct string value to the @year attribute on every WA state electric vehicle' do
-      expect(wa_ev_vehicles.first.year).to eq('2013')
+      expect(wa_ev_vehicles.first.year).to eq(WA_EV_VEHICLE[:year])
     end
 
     it 'assigns the correct string value to the @make attribute on every WA state electric vehicle' do
-      expect(wa_ev_vehicles.first.make).to eq('TOYOTA')
+      expect(wa_ev_vehicles.first.make).to eq(WA_EV_VEHICLE[:make])
     end
 
     it 'assigns the correct string value to the @model attribute on every WA state electric vehicle' do
-      expect(wa_ev_vehicles.first.model).to eq('Prius Plug-in')
+      expect(wa_ev_vehicles.first.model).to eq(WA_EV_VEHICLE[:model])
     end
 
     it 'assigns the correct symbol value to the @engine attribute on every WA state electric vehicle' do
-      expect(wa_ev_vehicles.first.engine).to eq(:ev)
+      expect(wa_ev_vehicles.first.engine).to eq(WA_EV_VEHICLE[:engine])
     end
   end
 end
