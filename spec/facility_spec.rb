@@ -30,7 +30,6 @@ RSpec.describe Facility do
       @facility_1.add_service('New Drivers License')
       @facility_1.add_service('Renew Drivers License')
       @facility_1.add_service('Vehicle Registration')
-      #@facility_1.add_service('Written Test')
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
       expect(@facility_2.services).to eq([])
     end
