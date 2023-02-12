@@ -24,11 +24,13 @@ class Facility
     if @services.include?("Vehicle Registration")
       if vehicle.year >= 1998
         @collected_fees += 100
-        vehicle.registration_date = Date.today
         vehicle.plate_type = :regular
-        @registered_vehicles << vehicle
-      
+      else vehicle.year <= 1998
+        @collected_fees += 25
+        vehicle.plate_type = :antique
       end
+      vehicle.registration_date = Date.today
+      @registered_vehicles << vehicle
     end
     
     
