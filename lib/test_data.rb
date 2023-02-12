@@ -35,14 +35,6 @@ module TestData
     engine: :ice
   }.freeze
 
-  WA_EV_VEHICLE = {
-    vin: 'JTDKN3DP8D',
-    year: '2013',
-    make: 'TOYOTA',
-    model: 'Prius Plug-in',
-    engine: :ev
-  }.freeze
-
   FACILITY_1 = {
     name: 'Albany DMV Office',
     address: '2242 Santiam Hwy SE Albany OR 97321',
@@ -57,5 +49,31 @@ module TestData
     name: 'Bend DMV Office',
     address: '63030 O B Riley Rd Bend OR 97701',
     phone: '541-388-6322'
+  }.freeze
+
+  WA_EV_VEHICLE = {
+    vin: 'JTDKN3DP8D',
+    year: '2013',
+    make: 'TOYOTA',
+    model: 'Prius Plug-in',
+    engine: :ev
+  }.freeze
+
+  OR_FACILITY = {
+    name: 'Albany DMV Office',
+    address: '2242 Santiam Hwy SE Albany OR 97321',
+    phone: '541-967-2014'
+  }.freeze
+
+  NY_FACILITY = {
+    name: 'JAMESTOWN',
+    address: '512 WEST 3RD STREET JAMESTOWN NY 14701',
+    phone: '7166618220'
+  }.freeze
+
+  MO_FACILITY = {
+    name: 'Albany DMV Office',
+    address: '2242 Santiam Hwy SE Albany OR 97321',
+    phone: '541-967-2014'
   }.freeze
 end
