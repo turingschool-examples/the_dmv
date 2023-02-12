@@ -1,7 +1,7 @@
 class Registrant
   attr_reader :name,
               :age,
-              :permit,
+              :permit
 
   attr_accessor :license_data
 
