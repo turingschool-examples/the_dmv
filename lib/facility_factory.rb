@@ -7,6 +7,8 @@ class FacilityFactory
       create_or_facility(source)
     elsif source.size == 169
       create_ny_facility(source)
+    elsif source.size == 178
+      create_mo_facility(source)
     end
   end
 
@@ -20,9 +22,17 @@ class FacilityFactory
 
   def create_ny_facility(source)
     source.map do |facility|
-      Facility.new({name: facility[:office_name], address: facility.
-      fetch_values(:street_address_line_1, :city, :state, :zip_code).
-      join(' '), phone: facility[:public_phone_number]})
+    Facility.new({name: facility[:office_name], address: facility.
+    fetch_values(:street_address_line_1, :city, :state, :zip_code).
+    join(' '), phone: facility[:public_phone_number]})
+    end
+  end
+
+  def create_mo_facility(source)
+    source.map do |facility|
+      Facility.new({name: facility[:name], address: facility.
+      fetch_values(:address1, :city, :state, :zipcode).
+      join(' '), phone: facility[:phone]})
     end
   end
 end
