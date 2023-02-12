@@ -2,7 +2,6 @@ class Dmv
     attr_reader :facilities, :dmv
   def initialize
     @facilities = []
-    
   end
 
   def add_facility(facility)
@@ -15,7 +14,4 @@ class Dmv
       facility.services.include?(service)
     end
   end
-
-
-
 end

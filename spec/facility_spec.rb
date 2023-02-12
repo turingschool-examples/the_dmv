@@ -35,14 +35,14 @@ RSpec.describe Facility do
     end
   end
 
-  describe 'car registration date' do
-    it 'has a registration date' do   
+  describe 'Registration date start point' do
+    it 'begin registration date' do   
       expect(@cruz.registration_date).to eq(nil)
     end
   end
 
-  describe 'facilities empty register start point' do
-    it 'has no registered vehicles' do    
+  describe 'Facilities empty register start point' do
+    it 'has no registered vehicles yet' do    
       expect(@facility_1.registered_vehicles).to eq([])
       expect(@facility_2.registered_vehicles).to eq([])
     end
@@ -94,5 +94,10 @@ RSpec.describe Facility do
     end
   end
 
+  describe 'Administering a written test' do
+    it 'can administer a written test' do
+      
+    end
+  end
 
 end
