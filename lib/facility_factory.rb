@@ -11,7 +11,7 @@ class FacilityFactory
   end
 
   def create_or_facility(source)
-    array = source.map do |facility|
+    source.map do |facility|
       Facility.new({name: facility[:title], address: JSON.parse(facility.
       dig(:location_1, :human_address)).values.join(' '), 
       phone: facility[:phone_number]})
@@ -19,8 +19,10 @@ class FacilityFactory
   end
 
   def create_ny_facility(source)
-    array = sour.map do |facility|
-      Facility.new({name: facility[:office_name], address: })
+    source.map do |facility|
+      Facility.new({name: facility[:office_name], address: facility.
+      fetch_values(:street_address_line_1, :city, :state, :zip_code).
+      join(' '), phone: facility[:public_phone_number]})
     end
   end
 end
