@@ -12,10 +12,7 @@ class RemoteOffice
           name: office[:title],
           address: office[:human_address],
           phone: office[:phone_number],
-          services: [],
-          registered_vehicles: [],
-          collected_fees: 0
-        }
+          }
         @other_offices << (offices = Facility.new(details))
     end
     @other_offices
