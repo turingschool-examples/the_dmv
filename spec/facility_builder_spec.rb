@@ -2,6 +2,7 @@ require 'rspec'
 require 'spec_helper'
 require './lib/facility'
 require './lib/facility_builder'
+require './lib/dmv_data_service'
 
 RSpec.describe FacilityBuilder do
   describe '#initialize' do
@@ -19,16 +20,20 @@ RSpec.describe FacilityBuilder do
 
       facility.build_facility(or_dmv_office_locations)
 
-      expect(facility.facilities).to be_a(Array)
-      expect(facility.facilities.first).to be_a(Facility)
-      expect(facility.facilities.length).to eq(59)
+      expect(facility.or_facilities).to be_a(Array)
+      expect(facility.or_facilities.first).to be_a(Facility)
+      expect(facility.or_facilities.length).to eq(59)
     end
 
     it 'can create and store facilities from New York' do
       facility = FacilityBuilder.new
       ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
-      require 'pry'; binding.pry
-      facility.build_factory(ny_dmv_office_locations)
+
+      facility.build_facility(ny_dmv_office_locations)
+
+      expect(facility.ny_facilities).to be_a(Array)
+      expect(facility.ny_facilities.first).to be_a(Facility)
+      expect(facility.ny_facilities.length).to eq(169)
     end
   end
 end
