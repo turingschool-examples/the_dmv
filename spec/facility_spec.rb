@@ -63,6 +63,7 @@ describe '#administer written test' do
     # expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
     expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
     expect(@facility_1.administer_written_test(@registrant_2)).to eq(true)
+    expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
   end
 end
 
