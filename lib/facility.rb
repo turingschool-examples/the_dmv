@@ -12,8 +12,7 @@ class Facility
     @phone = facility_details[:phone]
     @services = []
     @registered_vehicles = []
-    @collected_fees = 0
-    
+    @collected_fees = 0 
   end
 
   def add_service(service)
@@ -35,11 +34,15 @@ class Facility
       vehicle.registration_date = Date.today
       @registered_vehicles << vehicle
     end
-    
-    
   end
     
-    
+  def administer_written_test(registrant)
+    if @services.include?('Written Test') && registrant.age >= 16 && registrant.permit?
+        registrant.license_data[:written] = true
+    else
+      false
+    end
+  end
   
 
 
