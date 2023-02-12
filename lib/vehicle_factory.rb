@@ -22,12 +22,10 @@ class VehicleFactory
     end
   end
 
-
   def create_vehicles(list)
     self.render_data(list)
     @rendered_data_array.each do |vehicle_details1|
       @made_vehicles << Vehicle.new(vehicle_details1)
-      
     end
   end
     
