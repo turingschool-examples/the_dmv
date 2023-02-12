@@ -24,8 +24,8 @@ RSpec.describe FacilityFactory do
       expect(@factory.create_facilities(@new_york_facilities)).to be_an_instance_of(Array)
       expect(@factory.create_facilities(@new_york_facilities)[0]).to be_an_instance_of(Facility)
 
-      # expect(@factory.create_facilities(@missouri_facilities)).to be_an_instance_of(Array)
-      # expect(@factory.create_facilities(@missouri_facilities)[0]).to be_an_instance_of(Facility)
+      expect(@factory.create_facilities(@missouri_facilities)).to be_an_instance_of(Array)
+      expect(@factory.create_facilities(@missouri_facilities)[0]).to be_an_instance_of(Facility)
     end
   end
 
@@ -49,5 +49,4 @@ RSpec.describe FacilityFactory do
       expect(@factory.create_mo_facility(@missouri_facilities)[0]).to be_an_instance_of(Facility)
     end
   end
-
 end
