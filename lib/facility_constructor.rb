@@ -9,10 +9,6 @@ class FacilityConstructor
   def create_facility(location_data)
     facility_checker(location_data)
   end
-
-
-
-
   # helper methods
 
   def facility_checker(location_data)
@@ -23,11 +19,8 @@ class FacilityConstructor
     dmv_office_location.each do |office|
       facility_info = {
         name: office[:title],
-        address: office[:location_1][:human_address],
-        phone: office[:phone_number],
-        services: [],
-        registered_vehicles: [],
-        collected_fees: 0
+        address: office[:location_1][:human_address], # Go back and try to refactor this so it returns a string without the /n
+        phone: office[:phone_number]
       }
       @created_facilities << facility = Facility.new(facility_info)
     end
@@ -37,10 +30,7 @@ class FacilityConstructor
         facility_info = {
           name: office[:office_name],
           address: [office[:street_address_line_1], office[:city], office[:state]],
-          phone: office[:public_phone_number],
-          services: [],
-          registered_vehicles: [],
-          collected_fees: 0
+          phone: office[:public_phone_number]
         }
         @created_facilities << facility = Facility.new(facility_info)
       end
@@ -50,10 +40,7 @@ class FacilityConstructor
         facility_info = {
           name: office[:name],
           address: [office[:address1], office[:city], office[:state]],
-          phone: office[:phone],
-          services: [],
-          registered_vehicles: [],
-          collected_fees: 0
+          phone: office[:phone]
         }
         @created_facilities << facility = Facility.new(facility_info)
       end
