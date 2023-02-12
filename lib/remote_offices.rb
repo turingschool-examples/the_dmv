@@ -5,7 +5,7 @@ class RemoteOffice
     @other_offices = []
   end
 
-  def other_office_locations(details)
+  def or_office_locations(details)
     or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
       or_dmv_office_locations.each do |office|
         details = {
@@ -30,11 +30,21 @@ class RemoteOffice
     end
     @other_offices  
   end
-end
-  # name = office_name
-  # address = street_address_line_1, street_address_line_2, city, sate, zip_code
-  # phone = public_phone_number
-  # I am first going to build out this code for only the ny dmv offices, but then 
-  # once it is organized I want to combine it with Oregon offices
-  # Using either and if, elsif, else statement 
 
+  def mo_office_locations(details)
+    mo_office_locations = DmvDataService.new.mo_dmv_office_locations
+      mo_office_locations.each do |office|
+        details = {
+          name: office[:name],
+          address: "#{office[:address1]}, #{office[:city]}, #{office[:state]}, #{office[:zip_code]}",
+          phone: office[:phone]
+        }
+        @other_offices << (offices = Facility.new(details))
+    end
+    @other_offices  
+  end
+end
+
+# Sonow I want all of these data bases to be able to run together
+# how?
+#
