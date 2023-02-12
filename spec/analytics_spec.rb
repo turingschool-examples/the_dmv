@@ -12,7 +12,9 @@ RSpec.describe do
     end
 
     it 'has a source' do
-      expect(@analytics.source).to eq(@dds.wa_ev_registrations)
+      expect(@analytics.source).to eq(@dds)
+      expect(@analytics.source).to be_an_instance_of(Array)
+      expect(@analytics.source[0]).to be_an_instance_of(Hash)
     end
   end
 
