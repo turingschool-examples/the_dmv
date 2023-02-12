@@ -1,15 +1,18 @@
 class FacilityBuilder
-  attr_reader :or_facilities, :ny_facilities
+  attr_reader :or_facilities, :ny_facilities, :mo_facilities
 
   def initialize
     @or_facilities = []
     @ny_facilities = []
+    @mo_facilities = []
   end
 
   def build_facility(dmv_office_locations)
     dmv_office_locations.each do |location|
-      if location[:state] == ('NY')
+      if location[:state] == 'NY'
         ny_facility_builder(location)
+      elsif location[:state] == 'MO'
+        mo_facility_builder(location)
       elsif location[:location_1][:human_address].include?('OR')
         or_facility_builder(location)
       end
@@ -26,6 +29,16 @@ class FacilityBuilder
       }
       @or_facilities << or_facility = Facility.new(location_details)
     @or_facilities
+  end
+
+  def mo_facility_builder(location)
+    location_details = {
+      name: location[:name],
+      address: location[:address1],
+      phone: location[:phone]
+      }
+      @mo_facilities << facility = Facility.new(location_details)
+    @mo_facilities
   end
 
   def ny_facility_builder(location)
