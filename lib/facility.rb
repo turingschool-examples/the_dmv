@@ -13,6 +13,7 @@ class Facility
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
+    @other_office_locations = []
   end
 
   def add_service(service)
@@ -58,5 +59,21 @@ class Facility
       return true
     end
     false
+  end
+
+  def other_office_locations(details)
+    or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
+    or_dmv_office_locations.each do |each|
+      details = {
+        name: info[:title]
+        address: info[:human_address]
+        phone: info[:phone_number]
+        services: []
+        registered_vehicles: []
+        collected_fees: 0
+      }
+      other_office_locations << (offices = Facility.new(details))
+    end
+    @other_office_locations
   end
 end

@@ -13,8 +13,11 @@ RSpec.describe VehicleFactory do
     it 'has data' do
       factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      cars = factory.create_vehicles(wa_ev_registrations) 
 
-      expect(factory.create_vehicles(wa_ev_registrations)).to eq([wa_ev_registrations])
+      expect(cars).to be_a(Array)
+      expect(cars.first).to be_a(Vehicle)
+      expect(cars.length).to eq(1000)
     end
   end
 end
