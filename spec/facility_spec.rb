@@ -31,6 +31,7 @@ RSpec.describe Facility do
       @facility_1.add_service('Renew Drivers License')
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+      expect(@facility_2.services).to eq([])
     end
   end
 
@@ -40,15 +41,17 @@ RSpec.describe Facility do
     end
   end
 
-  describe 'facilities registered vehicles' do
-    it 'registered vehicles' do    
+  describe 'facilities empty register start point' do
+    it 'has no registered vehicles' do    
       expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_2.registered_vehicles).to eq([])
     end
   end
 
-  describe '#collected fees' do
-    it 'total collected fees' do
+  describe 'Collected fees start point' do
+    it 'no collected fees yet' do
       expect(@facility_1.collected_fees).to eq(0)
+      expect(@facility_2.collected_fees).to eq(0)
     end
   end
 
@@ -80,14 +83,15 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
+      @facility_2.register_vehicle(@bolt)
 
       expect(@bolt.registration_date).to eq(Date.today)
       expect(@bolt.plate_type).to eq(:ev)
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
       expect(@facility_1.collected_fees).to eq(325)
+      expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
+      expect(@facility_2.registered_vehicles).to eq([])
     end
-
-
   end
 
 
