@@ -10,7 +10,7 @@ RSpec.describe RemoteOffice do
   end
 
   describe 'oregon_offices' do
-    it 'has office info' do
+    it 'has oregon office info' do
       offices = RemoteOffice.new
       or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
       office = offices.other_office_locations(or_dmv_office_locations)
@@ -18,6 +18,18 @@ RSpec.describe RemoteOffice do
       expect(office).to be_a(Array)
       expect(office.first).to be_a(Facility)
       expect(office.length).to eq(59)
+    end
+  end
+
+  describe 'ny_offices' do
+    it 'has ny office info' do
+      offices = RemoteOffice.new
+      ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
+      office = offices.ny_office_locations(ny_dmv_office_locations)
+
+      expect(office).to be_a(Array)
+      expect(office.first).to be_a(Facility)
+      expect(office.length).to eq(169)
     end
   end
 end
