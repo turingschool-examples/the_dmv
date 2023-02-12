@@ -5,6 +5,10 @@ class Facility
               :registered_vehicles, 
               :collected_fees, 
               :administer_written_test
+              :daily_hours
+              :holidays_closed
+              :daily_open_hours
+              :closed_for_the_holidays
   attr_accessor :services, :name
   def initialize(facility_info)
     @name = facility_info[:name]
@@ -13,6 +17,17 @@ class Facility
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
+    @daily_hours = facility_info[:daily_hours]
+    @holidays_closed = facility_info[:holidays_closed]
+    @zipcode = facility_info[:zipcode]
+  end
+
+  def daily_open_hours
+    @daily_hours
+  end
+
+  def closed_for_the_holidays
+    @holidays_closed
   end
 
   def add_service(service)
