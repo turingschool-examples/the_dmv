@@ -18,11 +18,11 @@ RSpec.describe do
     end
   end
 
-  describe '#most_popular_make_model' do
-    it 'returns most popular make and model' do
-      expect(@analytics.most_popular_make_model).to be_an_instance_of(String)
-    end
-  end
+  # describe '#most_popular_make_model' do
+  #   it 'returns most popular make and model' do
+  #     expect(@analytics.most_popular_make_model).to be_an_instance_of(String)
+  #   end
+  # end
 
   describe '#most_popular_make' do
     it 'returns most popular make' do
@@ -30,5 +30,12 @@ RSpec.describe do
       expect(@analytics.source.map{|car| car[:make]}).to include(@analytics.most_popular_make)
     end
   end
+
+  describe '#most_popular_model' do
+    it 'returns most popular model' do
+      expect(@analytics.most_popular_model).to be_an_instance_of(String)
+      expect(@analytics.source.map{|car| car[:model]}).to include(@analytics.most_popular_model)
+    end
+end
 
 end
