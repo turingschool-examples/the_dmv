@@ -28,13 +28,11 @@ class VehicleFactory
           registration_date: nil,
           plate_type: nil
         }
-        @created_vehicles << (vehicle = Vehicle.new(vehicle_details))
+        @created_vehicles << vehicle = Vehicle.new(vehicle_details)
       end
       @created_vehicles
     elsif registrations == ny_state_registrations
-      cars = ny_state_registrations.find_all do |vehicle_type|
-        vehicle_type[:record_type] == "VEH"
-      end
+      cars = ny_state_registrations.find_all {|vehicle_type| vehicle_type[:record_type] == "VEH"}
       cars.each do |car|
         vehicle_details = {
           vin: car[:vin],
@@ -50,41 +48,4 @@ class VehicleFactory
       @created_vehicles
     end
   end
-
-
-        
-
-  # def ny_state(car)
-  #   ny_state_registrations.each do |car|
-  #     if car[:record_type] == "VEH"
-  #       vehicle_details = {
-  #         vin: car[:vin],
-  #         year: car[:model_year],
-  #         make: car[:make],
-  #         model: car[:model],
-  #         engine: "ev",
-  #         registration_date: nil,
-  #         plate_type: nil
-  #       }
-  #       @created_vehicles << (vehicle = Vehicle.new(vehicle_details))
-  #     end
-  #     @created_vehicles
-  #   end
-  # end
-
-  # def wa_ev(car)
-  #   wa_ev_registrations.each do |car|
-  #     vehicle_details = {
-  #       vin: car[:vin_1_10],
-  #       year: car[:model_year],
-  #       make: car[:make],
-  #       model: car[:model],
-  #       engine: "ev",
-  #       registration_date: nil,
-  #       plate_type: nil
-  #     }
-  #     @created_vehicles << (vehicle = Vehicle.new(vehicle_details))
-  #   end
-  #   @created_vehicles
-  # end
 end
