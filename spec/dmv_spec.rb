@@ -40,4 +40,17 @@ RSpec.describe Dmv do
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
+
+  describe '#render data' do
+    it 'can convert OR data into useable info' do
+      oregon_dmv = Dmv.new
+      oregon_dmv.render_facility_data(DmvDataService.new.or_dmv_office_locations)
+      require 'pry'; binding.pry
+    end
+  end
+  # describe '#create facilities from external data' do
+  #   it 'can create new facilities' do
+
+  #   end
+  # end
 end
