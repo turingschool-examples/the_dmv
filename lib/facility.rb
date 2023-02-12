@@ -27,7 +27,8 @@ class Facility
       elsif vehicle.year >= 1998
         @collected_fees += 100
         vehicle.plate_type = :regular
-      else vehicle.year <= 1998
+      else 
+        vehicle.year <= 1998
         @collected_fees += 25
         vehicle.plate_type = :antique
       end
@@ -59,6 +60,4 @@ class Facility
       false
     end
   end
-
-
 end
