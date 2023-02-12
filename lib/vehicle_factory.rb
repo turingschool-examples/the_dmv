@@ -15,7 +15,7 @@ class VehicleFactory
         model: car[:model],
         engine: :ev
         }
-        # require 'pry'; binding.pry
+        
       @car_inventory << Vehicle.new(car_hash)
     end
   end

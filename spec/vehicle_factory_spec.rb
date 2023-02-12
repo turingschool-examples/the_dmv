@@ -6,6 +6,8 @@ RSpec.describe VehicleFactory do
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     
     expect(factory).to be_an_instance_of(VehicleFactory)
+    expect(wa_ev_registrations).to be_an_instance_of(Array)
+    expect(wa_ev_registrations.size).to eq(1000)
   end
 
   it 'creates a hash of cars' do
@@ -13,7 +15,7 @@ RSpec.describe VehicleFactory do
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
 
     expect(factory.creates_vehicles(wa_ev_registrations)).to be_an_instance_of(Array)
-    #expect(factory.wa_ev_registrations.size).to eq(1000)
+    # require 'pry'; binding.pry
 
   end
 end
