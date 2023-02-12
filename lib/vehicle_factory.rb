@@ -2,7 +2,7 @@ require 'dmv_data_service'
 require 'vehicle'
 
 class VehicleFactory
-  attr_accessor :rendered_data_array, :made_vehicles
+  attr_reader :rendered_data_array, :made_vehicles
 
   def initialize
     @rendered_data_array = []
