@@ -31,7 +31,7 @@ RSpec.describe Registrant do
     describe '#earn permit' do
         it 'can earn a permit' do
             @registrant_2.earn_permit
-            
+
             expect(@registrant_2.permit?).to eq(true)
             expect(@registrant_3.permit?).to eq(false)
         end
