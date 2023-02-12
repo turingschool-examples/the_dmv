@@ -31,7 +31,7 @@ RSpec.describe FacilityBuilder do
 
     it "has the expected values" do
       p @or_state_facilities.state_facility_list[0][:address]
-      # expect(@or_state_facilities.state_facility_list[0].values). to eq(["Albany DMV Office", "2242 Santiam Hwy SE", "541-967-2014"])
+      expect(@or_state_facilities.state_facility_list[0].values). to eq(["Albany DMV Office", "2242 Santiam Hwy SE", "541-967-2014"])
     end
 
     it "has a working or_address_cleaner method" do
