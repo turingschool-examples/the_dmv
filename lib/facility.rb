@@ -27,7 +27,8 @@ class Facility
       elsif vehicle.year >= 1998
         @collected_fees += 100
         vehicle.plate_type = :regular
-      else vehicle.year <= 1998
+      else 
+        vehicle.year <= 1998
         @collected_fees += 25
         vehicle.plate_type = :antique
       end
@@ -52,6 +53,11 @@ class Facility
     end
   end
 
-
-
+  def renew_drivers_license(registrant)
+    if @services.include?('Renew License') && registrant.license_data[:license] == true
+      registrant.license_data[:renewed] = true
+    else
+      false
+    end
+  end
 end
