@@ -1,5 +1,4 @@
-require 'rspec'
-require './lib/registrant'
+require 'spec_helper'
 
 RSpec.describe Registrant do
   describe 'Iteration  1' do
