@@ -33,6 +33,7 @@ RSpec.describe Facility do
     it 'registerd_vehicles' do
 
       expect(@facility.registered_vehicles).to eq([])
+      expect(@facility.registered_vehicles).to eq(@cruz)
 
     end
   end
