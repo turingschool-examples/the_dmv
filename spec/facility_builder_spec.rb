@@ -20,4 +20,10 @@ RSpec.describe "FacilityBuilder" do
     expect(@or_dmv_locations).to be_a(Array)
     expect(@or_dmv_locations.count).to eq(59)
   end
+
+  it "has the expected keys" do
+    for i in 0..@or_dmv_locations - 1
+      expect(@or_dmv_locations[i].keys).to eq([:name, :address, :phone])
+    end
+  end
 end
