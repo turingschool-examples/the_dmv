@@ -3,7 +3,7 @@ class VehicleFactory
   def initialize
   end
 
-  def create_vehicles(dmv_registrations)
-    DmvDataService.new.wa_ev_registrations
+  def create_vehicles(data_type)
+   dmv_data = DmvDataService.new.send(data_type)
   end
 end
