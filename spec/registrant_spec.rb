@@ -1,5 +1,5 @@
 require 'rspec'
-require './lib/registrant'
+
 
 RSpec.describe Registrant do
   describe '#initialize' do
