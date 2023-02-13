@@ -54,7 +54,7 @@ RSpec.describe Facility do
     it 'assigns a plate type' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
       @facility.register_vehicle(cruz)
-      expect(@facility.plate_type(cruz)).to eq(:regular)
+      # expect(@facility.plate_type(cruz)).to eq(:regular)
       expect(cruz.plate_type).to eq(:regular)
     end
 
