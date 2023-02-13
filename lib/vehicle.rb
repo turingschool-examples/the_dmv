@@ -8,18 +8,25 @@ class Vehicle
               :engine,
               :registration_date
 
-  def initialize(vehicle_details)
+  def initialize(vehicle_details, registration_date = nil)
     @vin = vehicle_details[:vin]
     @year = vehicle_details[:year]
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
-    @registration_date = vehicle_details[nil]
+    # @registration_date = registration_date
   end
 
   def antique?
     Date.today.year - @year > 25
+    # require 'pry'; binding.pry
   end
+
+  # def reg_date
+  #   if @registered_vehicles != []
+  #   then @registration_date == Date.today
+  #   end
+  # end
 
   def electric_vehicle?
     @engine == :ev

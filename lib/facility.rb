@@ -1,3 +1,5 @@
+require 'date'
+
 class Facility
   attr_reader :name, 
               :address, 
@@ -17,5 +19,14 @@ class Facility
 
   def add_service(service)
     @services << service
+  end
+
+  # def add_date
+  #   @add_date  = add_date  
+  #   @registration_date == Date.today
+  # end
+
+  def register_vehicle(car)
+    @registered_vehicles.push(car)
   end
 end
