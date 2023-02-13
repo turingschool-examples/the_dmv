@@ -53,10 +53,22 @@ RSpec.describe Dmv do
       expect(oregon_dmv.rendered_facilities.first[:phone]).to eq("541-967-2014")
       expect(oregon_dmv.rendered_facilities.first[:address]).to eq("2242 Santiam Hwy SE Albany OR 97321")
     end
+
+    it 'can convert NY data into useable info' do
+      new_york_dmv = Dmv.new
+      new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+
+      oregon_dmv.render_facility_data(oregon_facilities)
+      
+      expect(new_york_dmv.rendered_facilities.first).to be_a Hash
+      expect(new_york_dmv.rendered_facilities.first[:name]).to eq("JAMESTOWN COUNTY OFFICE")
+      expect(new_york_dmv.rendered_facilities.first[:phone]).to eq("716-661-8220")
+      expect(new_york_dmv.rendered_facilities.first[:address]).to eq("512 WEST 3RD STREET JAMESTOWN NY 14701")
+    end
   end
 
   describe '#create facilities from external data' do
-    it 'can create new facilities' do
+    it 'can create new facilities from oregon' do
       oregon_dmv = Dmv.new
       oregon_facilities = DmvDataService.new.or_dmv_office_locations
 
