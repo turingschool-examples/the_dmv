@@ -13,7 +13,8 @@ RSpec.describe DMVLocation do
 
   describe 'List Locations' do
     it 'can list DMV locations' do
-      oregon_dmv = DmvDataService.new.or_dmv_office_locations
+      or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
+      @dmv.dmv_locations.(or_dmv_office_locations)
     end
   end
 end
