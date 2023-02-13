@@ -14,9 +14,10 @@ RSpec.describe VehicleFactory do
 
     describe '#create vehicles' do
         it 'create vehicles' do
-            @factory.create_vehicles(@wa_ev_registrations)
+        @factory.create_vehicles(@wa_ev_registrations)
 
-            expect(@factory.create_vehicles(@wa_ev_registrations)).to eq([])
+        expect(@wa_ev_registrations)to be_an_instance_of([])
         end
     end
+
 end
