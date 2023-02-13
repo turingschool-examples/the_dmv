@@ -6,6 +6,7 @@ class FacilityFactory
     case state
       when :OR then create_oregon_facilities(facilities_data)
       when :NY then create_new_york_facilities(facilities_data)
+      when :MO then create_missouri_facilities(facilities_data)
     end
   end
 
@@ -31,6 +32,19 @@ class FacilityFactory
            facility[:street_address_line_2] + ' ' : ''}"\
         "#{facility[:city]} #{facility[:state]} #{facility[:zip_code]}",
         phone: facility[:public_phone_number]
+      })
+    end
+  end
+
+  def create_missouri_facilities(facilities_data)
+    facilities_data.map do |facility|
+      Facility.new({
+        name: facility[:name].strip,
+        address: "#{facility[:address1]} "\
+        "#{facility[:address2] ?
+           facility[:address2] + ' ' : ''}"\
+        "#{facility[:city].strip} #{facility[:state]} #{facility[:zipcode]}",
+        phone: facility[:phone]&.delete('() -')
       })
     end
   end
