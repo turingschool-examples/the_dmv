@@ -16,7 +16,8 @@ RSpec.describe VehicleFactory do
         it 'create vehicles' do
         @factory.create_vehicles(@wa_ev_registrations)
 
-        expect(@wa_ev_registrations)to be_an_instance_of([])
+        expect(@wa_ev_registrations).to be_an_instance_of(Array)
+        #require 'pry'; binding.pry
         end
     end
 

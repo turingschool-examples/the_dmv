@@ -7,9 +7,9 @@ class VehicleFactory
 
     def create_vehicles(info)
         info.map do |car|
-            new_car = {
-
-            }
+            new_car = {vin: car[:vin_1_10],
+                year: car[:model_year],
+                engine: :ev}
             @factory_vehicles << Vehicle.new(new_car)
         end
     end
