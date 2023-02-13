@@ -46,5 +46,20 @@ RSpec.describe FacilityBuilder do
       expect(facility.mo_facilities.first).to be_a(Facility)
       expect(facility.mo_facilities.length).to eq(178)
     end
+
+    it 'works with all three states' do
+      facility = FacilityBuilder.new
+      or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
+      ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
+      mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
+
+      facility.build_facility(or_dmv_office_locations)
+      facility.build_facility(ny_dmv_office_locations)
+      facility.build_facility(mo_dmv_office_locations)
+    
+      expect(facility.or_facilities.length).to eq(59)
+      expect(facility.mo_facilities.length).to eq(178)
+      expect(facility.ny_facilities.length).to eq(169)
+    end
   end
 end

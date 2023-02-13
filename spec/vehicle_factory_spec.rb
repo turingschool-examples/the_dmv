@@ -23,4 +23,6 @@ RSpec.describe VehicleFactory do
       expect(factory.vehicles.length).to eq(1000)
     end
   end
+
+  describe '#'
 end
