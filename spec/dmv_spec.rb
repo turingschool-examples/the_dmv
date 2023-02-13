@@ -59,6 +59,15 @@ RSpec.describe Dmv do
       expect(dmv.state).to eq("New York")
     end
 
+    it 'can determine state missouri' do
+      dmv = Dmv.new 
+      missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+
+      dmv.determine_state(missouri_facilities)
+
+      expect(dmv.state).to eq("Missouri")
+    end
+
   end
 
   describe '#render data' do
@@ -86,6 +95,13 @@ RSpec.describe Dmv do
       expect(new_york_dmv.rendered_facilities.first[:phone]).to eq("7166618220")
       expect(new_york_dmv.rendered_facilities.first[:address]).to eq("512 WEST 3RD STREET JAMESTOWN NY 14701")
     end
+
+    # it 'can convert MO data into useable info' do
+    #   dmv = Dmv.new 
+    #   missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+
+    #   dmv.render_facility_data_mo(missouri_facilities)
+    # end
   end
 
   describe '#create facilities from external data' do
