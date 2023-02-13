@@ -44,11 +44,14 @@ RSpec.describe Facility do
       expect(facility_1.collected_fees).to eq(0)
     end
 
-    it 'register cruz vehicle' do
-      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
-      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-      expect(facility_1.register_vehicle(cruz)).to eq([<Vehicle:0x0000000135a48b08...>])
-
+    it 'register vehicles' do
+      facility_2 = Facility.new({name: 'Another Facility', address: '456 Oak Ave', phone: '555-555-5555'})
+      bolt = Vehicle.new({vin: '987654321xyz', year: 2020, make: 'Chevrolet', model: 'Bolt', engine: :electric})      expect(facility_1.register_vehicle(cruz)).to eq([<Vehicle:0x0000000135a48b08...>])
+      expect(facility_2.registered_vehicles).to eq([])
+      expect(facility_2.services).to eq([])
+      expect(facility_2.register_vehicle(bolt)).to be_nil
+      expect(facility_2.registered_vehicles).to eq([])
+      expect(facility_2.collected_fees).to eq(0)
     end
 
 end
