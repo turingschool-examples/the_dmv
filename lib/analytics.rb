@@ -25,4 +25,10 @@ class Analytics
   def vehicles_per_model_year(year)
     @source.select{|car| car[:model_year] == year}.count
   end
+
+  def county_with_most_vehicles
+    cars_by_county = Hash.new(0)
+    @source.each{|car| cars_by_county[car[:county]] += 1}
+    cars_by_county.sort_by{|county, count| count}.last[0]
+  end
 end
