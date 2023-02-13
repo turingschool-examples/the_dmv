@@ -26,5 +26,10 @@ RSpec.describe do VehicleFactory
       expect(@created_vehicles[0].engine).to eq(@vehicle_1.engine)
       expect(@created_vehicles[1].engine).to eq(@vehicle_2.engine)
     end
+    it '#returns nil if vehicle_database is empty' do
+    @factory.create_vehicles(@wa_ev_registrations)
+
+    expect(@factory.create_vehicles([])).to eq nil
+    end 
   end
 end

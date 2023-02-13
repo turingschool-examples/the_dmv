@@ -1,5 +1,3 @@
-require 'date'
-
 class VehicleFactory
 
   # attr_reader :vehicle_data
@@ -8,8 +6,9 @@ class VehicleFactory
   # end
 
   def create_vehicles(vehicle_database)
-    # if vehicle_database == []
-    #   return nil
+    if vehicle_database == []
+      return nil
+    end
     vehicle_instances = []
     vehicle_database.each do |vehicle|
       vehicle_instances.push(Vehicle.new({vin: vehicle[:vin_1_10], year: vehicle[:model_year], make: vehicle[:make], model:  vehicle[:model], engine: :ev}))
