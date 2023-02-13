@@ -43,7 +43,7 @@ RSpec.describe Facility do
       @facility.register_vehicle(cruz)
       expect(@facility.registered_vehicles).to eq([cruz])
     end
-    require 'pry'; binding.pry
+  
 
     it 'changes registration date of vehicle' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
@@ -51,10 +51,10 @@ RSpec.describe Facility do
       expect(cruz.registration_date).to be_a(Date)
     end
 
-    xit 'assigns a plate type' do
+    it 'assigns a plate type' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
       @facility.register_vehicle(cruz)
-      expect(cruz.plate_type).to eq(:regular)
+      expect(@facility.plate_type(cruz)).to eq(:regular)
     end
 
     it 'costs money to register cars' do
@@ -62,6 +62,13 @@ RSpec.describe Facility do
       @facility.register_vehicle(camaro)
       expect(@facility.collected_fees).to eq(25)
     end 
+
+    it 'cannot register a vehicle with two facilities' do
+      @facility_2 = facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+      @facility.register_vehicle(camaro)
+      @facility_2.register_vehicle(camaro)
+      expect(@facility_2.registered_vehicles).to eq([])
+    end
   end
 end
 
