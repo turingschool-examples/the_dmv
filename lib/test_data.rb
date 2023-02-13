@@ -72,8 +72,8 @@ module TestData
   }.freeze
 
   MO_FACILITY = {
-    name: 'Albany DMV Office',
-    address: '2242 Santiam Hwy SE Albany OR 97321',
-    phone: '541-967-2014'
+    name: 'SAINTE GENEVIEVE',
+    address: '753 STE. GENEVIEVE DR STE GENEVIEVE MO 63670',
+    phone: '5738832344'
   }.freeze
 end
