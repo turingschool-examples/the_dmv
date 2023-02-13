@@ -26,4 +26,11 @@ class DmvFacility
       @locations << Facility.new(new_location)
     end
   end
+
+  def create_mo_facilities(office_locations)
+    office_locations.map do |location|
+      new_location = {address: location.fetch_values(:address1, :city, :state, :zipcode).join(' ')}
+      @locations << Facility.new(new_location)
+    end
+  end
 end
