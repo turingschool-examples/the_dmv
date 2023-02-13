@@ -21,7 +21,7 @@ class FacilityFactory
       facility_details_array =
       facility_data.map do |facility|
         facility_details = {
-          name: "#{facility[:office_name].strip.downcase.capitalize} DMV Office",
+          name: ny_format_name(facility),
           phone: ny_format_phone(facility[:public_phone_number]),
           address: ny_format_address(facility)
         }
@@ -33,6 +33,10 @@ class FacilityFactory
 
   def or_format_address(data)
     data[:location_1][:human_address].delete('{}\"').split(', ').map { |address| address.split(': ')[1] }.join(" ")
+  end
+
+  def ny_format_name(data)
+    "#{data[:office_name].strip} DMV Office"
   end
 
   def ny_format_address(data)
