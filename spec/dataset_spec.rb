@@ -18,7 +18,7 @@ RSpec.describe Dataset do
     @wa_ev_dataset = Dataset.new(@wa_ev_vehicles)
     @oregon_dataset = Dataset.new(@oregon_facilities)
     @new_york_dataset = Dataset.new(@new_york_facilities)
-    @missouri_dataset = Dataset.new(@missouri_dataset)
+    @missouri_dataset = Dataset.new(@missouri_facilities)
   end
 
   describe '#initialize' do
@@ -27,6 +27,24 @@ RSpec.describe Dataset do
       expect(@oregon_dataset).to be_a Dataset
       expect(@new_york_dataset).to be_a Dataset
       expect(@missouri_dataset).to be_a Dataset
+    end
+
+    it 'has data' do
+      expect(@wa_ev_dataset.data).to eq(@wa_ev_vehicles)
+      expect(@wa_ev_dataset.data).to be_a Array
+      expect(@wa_ev_dataset.data.first).to be_a Vehicle
+
+      expect(@oregon_dataset.data).to eq(@oregon_facilities)
+      expect(@oregon_dataset.data).to be_a Array
+      expect(@oregon_dataset.data.first).to be_a Facility
+
+      expect(@new_york_dataset.data).to eq(@new_york_facilities)
+      expect(@new_york_dataset.data).to be_a Array
+      expect(@new_york_dataset.data.first).to be_a Facility
+
+      expect(@missouri_dataset.data).to eq(@missouri_facilities)
+      expect(@missouri_dataset.data).to be_a Array
+      expect(@missouri_dataset.data.first).to be_a Facility
     end
   end
 
