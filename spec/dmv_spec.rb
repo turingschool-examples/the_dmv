@@ -58,7 +58,7 @@ RSpec.describe Dmv do
       new_york_dmv = Dmv.new
       new_york_facilities = DmvDataService.new.ny_dmv_office_locations
 
-      oregon_dmv.render_facility_data(oregon_facilities)
+      new_york_dmv.render_facility_data_ny(new_york_facilities)
       
       expect(new_york_dmv.rendered_facilities.first).to be_a Hash
       expect(new_york_dmv.rendered_facilities.first[:name]).to eq("JAMESTOWN COUNTY OFFICE")
