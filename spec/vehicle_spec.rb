@@ -24,10 +24,11 @@ RSpec.describe Vehicle do
       expect(@cruz.plate_type).to eq(:regular)
     end
 
-    # it 'is an :antique' do
+    it 'is an :antique' do
 
+      expect(@camaro.plate_type).to eq(:antique)
 
-    # end
+    end
 
     # it 'is an :ev' do
 
