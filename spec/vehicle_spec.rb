@@ -27,13 +27,11 @@ RSpec.describe Vehicle do
     it 'is an :antique' do
 
       expect(@camaro.plate_type).to eq(:antique)
-
     end
 
     it 'is an :ev' do
 
       expect(@bolt.plate_type).to eq(:ev)
-
     end
   end
 
