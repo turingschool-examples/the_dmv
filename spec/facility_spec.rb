@@ -82,7 +82,7 @@ RSpec.describe Facility do
     it 'can administer a written test' do
       registrant_1 = Registrant.new('Bruce', 18, true )
       @facility.add_service('Written Test')
-      @facility.administer_written_test(registrant_1).to eq(true)
+      expect(@facility.administer_written_test(registrant_1)).to eq(true)
     end
   end
 end
