@@ -2,9 +2,9 @@ require 'spec_helper'
 
 RSpec.describe Vehicle do
   before(:each) do
-    @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-    @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
-    @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    @cruz = Vehicle.new({ vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice } )
+    @bolt = Vehicle.new({ vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev } )
+    @camaro = Vehicle.new({ vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice } )
   end
   describe '#initialize' do
     it 'can initialize' do
@@ -19,7 +19,7 @@ RSpec.describe Vehicle do
   end
 
   describe '#antique?' do
-    it 'can determine if a vehicle is an antique' do
+    it 'determines if vehicle is antique' do
       expect(@cruz.antique?).to eq(false)
       expect(@bolt.antique?).to eq(false)
       expect(@camaro.antique?).to eq(true)
@@ -27,7 +27,7 @@ RSpec.describe Vehicle do
   end
 
   describe '#electric_vehicle?' do
-    it 'can determine if a vehicle is an ev' do
+    it 'determines if vehicle is ev' do
       expect(@cruz.electric_vehicle?).to eq(false)
       expect(@bolt.electric_vehicle?).to eq(true)
       expect(@camaro.electric_vehicle?).to eq(false)

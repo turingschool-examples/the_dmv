@@ -22,17 +22,9 @@ class Facility
 
   def register_vehicle(vehicle)
     if @services.include?("Vehicle Registration")
-       @registered_vehicles << vehicle
-       vehicle.registration_date = ("Date: 2023-01-12")
-          if vehicle.antique?
-            vehicle.plate_type = :antique
-            @collected_fees += (25)
-          elsif vehicle.electric_vehicle?
-            vehicle.plate_type = :ev
-            @collected_fees += (200)
-          else vehicle.plate_type = :regular
-            @collected_fees += (100)
-          end
+      @registered_vehicles << vehicle
+      vehicle.registration_date = ("Date: 2023-01-12")
+      plate_fees(vehicle)
       @registered_vehicles
     end
   end
@@ -59,5 +51,18 @@ class Facility
       return true
     end
     false
+  end
+
+  # Helper Method
+  def plate_fees(vehicle)
+    if vehicle.antique?
+      vehicle.plate_type = :antique
+      @collected_fees += (25)
+    elsif vehicle.electric_vehicle?
+      vehicle.plate_type = :ev
+      @collected_fees += (200)
+    else vehicle.plate_type = :regular
+      @collected_fees += (100)
+    end
   end
 end
