@@ -60,9 +60,9 @@ module TestData
   }.freeze
 
   OR_FACILITY = {
-    name: 'Albany DMV Office',
-    address: '2242 Santiam Hwy SE Albany OR 97321',
-    phone: '541-967-2014'
+    name: 'ALBANY DMV OFFICE',
+    address: '2242 SANTIAM HWY SE ALBANY OR 97321',
+    phone: '5419672014'
   }.freeze
 
   NY_FACILITY = {
