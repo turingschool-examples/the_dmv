@@ -21,5 +21,10 @@ class Facility
     return [service]
   end
 
+  def register_vehicle(model)
+    registered_vehicles << model
+    return registered_vehicles
+  end
+
   
 end
