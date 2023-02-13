@@ -8,11 +8,12 @@ class FacilityFactory
   def create_facilities(facility_data, state)
     return "Sorry, this state is not yet supported." if !@@valid_states.include?(state)
 
-    if state == :MO
+    case state
+    when :MO
       facility_details_array = mo_standardize_data(facility_data)
-    elsif state == :NY
+    when :NY
       facility_details_array = ny_standardize_data(facility_data)
-    elsif state == :OR
+    when :OR
       facility_details_array = or_standardize_data(facility_data)
     end
 
