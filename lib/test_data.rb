@@ -50,4 +50,30 @@ module TestData
     address: '63030 O B Riley Rd Bend OR 97701',
     phone: '541-388-6322'
   }.freeze
+
+  WA_EV_VEHICLE = {
+    vin: 'JTDKN3DP8D',
+    year: '2013',
+    make: 'TOYOTA',
+    model: 'Prius Plug-in',
+    engine: :ev
+  }.freeze
+
+  OR_FACILITY = {
+    name: 'ALBANY DMV OFFICE',
+    address: '2242 SANTIAM HWY SE ALBANY OR 97321',
+    phone: '5419672014'
+  }.freeze
+
+  NY_FACILITY = {
+    name: 'JAMESTOWN',
+    address: '512 WEST 3RD STREET JAMESTOWN NY 14701',
+    phone: '7166618220'
+  }.freeze
+
+  MO_FACILITY = {
+    name: 'SAINTE GENEVIEVE',
+    address: '753 STE. GENEVIEVE DR STE GENEVIEVE MO 63670',
+    phone: '5738832344'
+  }.freeze
 end
