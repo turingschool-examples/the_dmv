@@ -40,7 +40,8 @@ RSpec.describe do
 
   describe '#vehicles_per_model_year' do
     it 'returns number of vehicles with given model year' do
-      expect(@analytics.vehicles_per_model_year).to be_an_instance_of(Integer)
+      expect(@analytics.vehicles_per_model_year('2019')).to be_an_instance_of(Integer)
+      expect(@analytics.vehicles_per_model_year('1600')).to be 0 
     end
   end
 end
