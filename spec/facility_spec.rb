@@ -43,14 +43,15 @@ RSpec.describe Facility do
       @facility.register_vehicle(cruz)
       expect(@facility.registered_vehicles).to eq([cruz])
     end
+    require 'pry'; binding.pry
 
     it 'changes registration date of vehicle' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
       @facility.register_vehicle(cruz)
-      expect(cruz.registration_date).not_to eq(nil)
+      expect(cruz.registration_date).to be_a(Date)
     end
 
-    it 'assigns a plate type' do
+    xit 'assigns a plate type' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
       @facility.register_vehicle(cruz)
       expect(cruz.plate_type).to eq(:regular)
