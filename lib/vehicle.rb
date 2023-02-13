@@ -24,7 +24,6 @@ class Vehicle
     else
       :regular
     end
-
   end
 
   def antique?
@@ -34,4 +33,5 @@ class Vehicle
   def electric_vehicle?
     @engine == :ev
   end
+  
 end

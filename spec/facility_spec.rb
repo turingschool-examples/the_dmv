@@ -35,7 +35,6 @@ RSpec.describe Facility do
       expect(@facility.registered_vehicles).to eq([])
       @facility.register_vehicle(@cruz)
       expect(@facility.registered_vehicles).to eq([@cruz])
-
     end
 
     it 'sets the vehicle registration date' do
@@ -50,6 +49,8 @@ RSpec.describe Facility do
     it '@facility collected fees' do
 
       expect(@facility.collected_fees).to eq(0)
+      @facility.register_vehicle(@cruz)
+      expect(@facility.collected_fees).to eq(100)
     end
   end
 

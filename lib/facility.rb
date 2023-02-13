@@ -23,11 +23,10 @@ class Facility
   def register_vehicle(vehicle)
     @registered_vehicles << vehicle
     vehicle.registration_date = Date.today
+    @collected_fees += vehicle.registration_cost
   end
   
   
-
 end
-
 
 # require'pry';binding.pry
