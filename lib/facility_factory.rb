@@ -1,6 +1,6 @@
 class FacilityFactory
 
-  @@valid_states = [:OR, :NY]
+  @@valid_states = [:OR, :MO, :NY]
 
   def initialize
   end
@@ -26,6 +26,15 @@ class FacilityFactory
           address: ny_format_address(facility)
         }
       end
+    elsif state == :MO
+      facility_details_array =
+      facility_data.map do |facility|
+        facility_details = {
+          name: mo_format_name(facility),
+          phone: mo_format_phone(facility),
+          address: mo_format_address(facility)
+        }
+      end
     end
 
     facility_details_array.map { |facility_details| Facility.new(facility_details) }
@@ -33,6 +42,19 @@ class FacilityFactory
 
   def or_format_address(data)
     data[:location_1][:human_address].delete('{}\"').split(', ').map { |address| address.split(': ')[1] }.join(" ")
+  end
+
+  def mo_format_name(data)
+    "#{data[:name].strip} DMV Office"
+  end
+
+  def mo_format_address(data)
+    "#{data[:address1]} #{data[:city]} #{data[:state]} #{data[:zipcode]}"
+  end
+
+  def mo_format_phone(data)
+    return "No phone." if data[:phone].nil?
+    data[:phone].delete('() ').insert(3, '-')
   end
 
   def ny_format_name(data)
