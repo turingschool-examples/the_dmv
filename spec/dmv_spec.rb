@@ -41,29 +41,74 @@ RSpec.describe Dmv do
     end
   end
 
+  describe '#determine state' do
+    it 'can determine state oregon' do
+      dmv = Dmv.new
+      oregon_facilities = DmvDataService.new.or_dmv_office_locations
+      dmv.determine_state(oregon_facilities)
+
+      expect(dmv.state).to eq("Oregon")
+    end
+
+    it 'can determine state new york' do
+      dmv = Dmv.new
+      new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+
+      dmv.determine_state(new_york_facilities)
+
+      expect(dmv.state).to eq("New York")
+    end
+
+  end
+
   describe '#render data' do
     it 'can convert OR data into useable info' do
       oregon_dmv = Dmv.new
       oregon_facilities = DmvDataService.new.or_dmv_office_locations
 
-      oregon_dmv.render_facility_data(oregon_facilities)
+      oregon_dmv.render_facility_data_or(oregon_facilities)
       
       expect(oregon_dmv.rendered_facilities.first).to be_a Hash
       expect(oregon_dmv.rendered_facilities.first[:name]).to eq("Albany DMV Office")
       expect(oregon_dmv.rendered_facilities.first[:phone]).to eq("541-967-2014")
       expect(oregon_dmv.rendered_facilities.first[:address]).to eq("2242 Santiam Hwy SE Albany OR 97321")
     end
+
+    it 'can convert NY data into useable info' do
+      new_york_dmv = Dmv.new
+      new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+
+      new_york_dmv.render_facility_data_ny(new_york_facilities)
+      
+      
+      expect(new_york_dmv.rendered_facilities.first).to be_a Hash
+      expect(new_york_dmv.rendered_facilities.first[:name]).to eq("JAMESTOWN COUNTY OFFICE")
+      expect(new_york_dmv.rendered_facilities.first[:phone]).to eq("7166618220")
+      expect(new_york_dmv.rendered_facilities.first[:address]).to eq("512 WEST 3RD STREET JAMESTOWN NY 14701")
+    end
   end
 
   describe '#create facilities from external data' do
-    it 'can create new facilities' do
+    it 'can create new facilities from oregon data' do
       oregon_dmv = Dmv.new
       oregon_facilities = DmvDataService.new.or_dmv_office_locations
 
       oregon_dmv.create_facilities(oregon_facilities)
 
       expect(oregon_dmv.facilities.first).to be_an_instance_of Facility
+      expect(oregon_dmv.facilities.count).to eq(59)
     end
+
+    it 'can create new facilities from new york data' do
+      dmv = Dmv.new 
+      new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+
+      dmv.create_facilities(new_york_facilities)
+
+      expect(dmv.facilities.first).to be_an_instance_of Facility
+      expect(dmv.facilities.count).to eq(169)
+    end
+
   end
 
 end
