@@ -45,7 +45,11 @@ RSpec.describe Dmv do
     it 'can convert OR data into useable info' do
       oregon_dmv = Dmv.new
       oregon_dmv.render_facility_data(DmvDataService.new.or_dmv_office_locations)
-      require 'pry'; binding.pry
+      
+      expect(oregon_dmv.rendered_facilities.first).to be_a Hash
+      expect(oregon_dmv.rendered_facilities.first[:name]).to eq("Albany DMV Office")
+      expect(oregon_dmv.rendered_facilities.first[:phone]).to eq("541-967-2014")
+      expect(oregon_dmv.rendered_facilities.first[:address]).to eq("2242 Santiam Hwy SE Albany OR 97321")
     end
   end
   # describe '#create facilities from external data' do
