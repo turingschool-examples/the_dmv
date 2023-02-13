@@ -21,4 +21,8 @@ class Analytics
     each{|car| model_and_count[car[:model]] += 1}
     model_and_count.sort_by{|model, count| count}.last[0]
   end
+
+  def vehicles_per_model_year(year)
+    @source.select{|car| car[:model_year] == year}.count
+  end
 end
