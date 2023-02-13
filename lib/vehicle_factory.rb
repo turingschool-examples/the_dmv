@@ -20,4 +20,8 @@ class VehicleFactory
       @manufactured_vehicles << vehicle_number
     end
   end
+
+  def vehicles_by_zip(number)
+    @manufactured_vehicles.select {|vehicle| vehicle.zip == "#{number}" }
+  end
 end

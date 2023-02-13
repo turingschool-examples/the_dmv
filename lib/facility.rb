@@ -8,7 +8,8 @@ class Facility
               :registered_vehicles, 
               :collected_fees,
               :facility_count,
-              :facility_list
+              :facility_list,
+              :zip
 
   def initialize(information)
     @name = information.fetch(:name)
@@ -19,6 +20,7 @@ class Facility
     @registered_vehicles = []
     @facility_list = []
     @facility_count = 0
+    @zip = zip
   end
 
   def add_service(service)

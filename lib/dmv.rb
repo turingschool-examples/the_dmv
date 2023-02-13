@@ -26,4 +26,8 @@ class Dmv
       @facilities << added_facility
     end
   end
+
+  def facility_by_zip(number)
+    @facilities.select {|facility| facility.zip == "#{number}" }
+  end
 end
