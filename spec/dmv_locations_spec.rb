@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe DMVLocations do
+RSpec.describe DMVLocation do
   before(:each) do
     @dmv = DMVLocation.new
   end
