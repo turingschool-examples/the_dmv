@@ -13,11 +13,11 @@ class FacilityFactory
   def create_oregon_facilities(facilities_data)
     facilities_data.map do |facility|
       address = JSON.parse(facility[:location_1][:human_address], symbolize_names: true)
-      formatted_address = "#{address[:address]} #{address[:city]} #{address[:state]} #{address[:zip]}".upcase
+      formatted_address = "#{address[:address]} #{address[:city]} #{address[:state]} #{address[:zip]}"
 
       Facility.new({
         name: facility[:title].upcase,
-        address: formatted_address,
+        address: formatted_address.upcase,
         phone: facility[:phone_number].delete('-')
       })
     end
