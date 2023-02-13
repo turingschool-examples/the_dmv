@@ -10,4 +10,10 @@ RSpec.describe DMVLocation do
       expect(@dmv).to be_a(DMVLocation)
     end
   end
+
+  describe 'List Locations' do
+    it 'can list DMV locations' do
+      oregon_dmv = DmvDataService.new.or_dmv_office_locations
+    end
+  end
 end
