@@ -1,3 +1,5 @@
+require 'date'
+
 class Facility
   attr_reader :name, :address, :phone, :services
   attr_accessor :add_service, :registered_vehicles, :collected_fees
@@ -16,16 +18,23 @@ class Facility
   end
 
   def register_vehicle(vehicle)
+    vehicle.registration_date = Date.today
+    if vehicle.antique? == true
+      @collected_fees += 25
+    elsif vehicle.electric_vehicle? == true
+       @collected_fees += 200
+    else @collected_fees += 100
+    end
     @registered_vehicles << vehicle
-    # @facility.vehicle.registration_date = Date.new(today)
-
-    #if vehicle.antique? == true, @collected_fees += 25
-    #elsif @plate_type = :ev, @collected_fees += $200
-    #else @collected_fees += 100
   end
 
-  #plate_type
-  #if @antique? == true, @plate_type = :antique
-  #elsif @electric_vehicle == true, @plate_type = :ev
-  #else @plate_type = :regular
+  # def plate_type(vehicle)
+  #   if vehicle.antique? == true 
+  #     @plate_type = :antique
+  #   elsif vehicle.electric_vehicle == true
+  #     @plate_type = :ev
+  #   else  
+  #     @plate_type = :regular
+  #   end
+  # end
 end
