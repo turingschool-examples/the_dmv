@@ -2,11 +2,12 @@ require 'facility'
 
 class Dmv
 
-  attr_reader :facilities, :rendered_facilities
+  attr_reader :facilities, :rendered_facilities, :created_facilities
 
   def initialize
     @facilities = []
     @rendered_facilities = []
+    @created_facilities = []
   end
 
   def add_facility(facility)
@@ -32,15 +33,16 @@ class Dmv
     end
   end
 
+  def create_facilities(list)
+    self.render_facility_data(list)
+      @rendered_facilities.each do |facility_details|
+        @created_facilities << Facility.new(facility_details)
+      end
+  end
+
 end
 
 
 
-# @facility_1 = Facility.new(
-  # {name: 'Albany DMV Office',
-#  address: '2242 Santiam Hwy SE Albany OR 97321',
-#  phone: '541-967-2014' })
 
-
-# DmvDataService.new.or_dmv_office_locations.first[:location_1][:human_address][:address].gsub(/[\"]/,"")
 

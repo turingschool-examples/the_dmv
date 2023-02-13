@@ -63,7 +63,7 @@ RSpec.describe Dmv do
       oregon_dmv.create_facilities(oregon_facilities)
 
       expect(oregon_dmv.created_facilities.first).to be_an_instance_of Facility
-
     end
   end
+  
 end
