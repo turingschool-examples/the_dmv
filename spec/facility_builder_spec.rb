@@ -71,7 +71,7 @@ RSpec.describe FacilityBuilder do
 
     it "has the expected values" do
       p @ny_state_facilities.state_facility_list[0][:address]
-      expect(@ny_state_facilities.state_facility_list[0].values). to eq(["JAMESTOWN", "512 WEST 3RD STREET", "7166618220"])
+      expect(@ny_state_facilities.state_facility_list[0].values). to eq(["JAMESTOWN", "512 WEST 3RD STREET JAMESTOWN, NY 14701", "7166618220"])
     end
   end
 

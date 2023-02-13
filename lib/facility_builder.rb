@@ -19,7 +19,7 @@ attr_reader :state_facility_list
         for i in 0..facility_data.count - 1
           current_hash = facility_data[i]
           facility_hash = {name: current_hash[:office_name],
-                          address: current_hash[:street_address_line_1],
+                          address: ny_address_cleaner(current_hash),
                           phone: current_hash[:public_phone_number]}
           @state_facility_list << facility_hash
         end
@@ -39,6 +39,10 @@ attr_reader :state_facility_list
 
   def or_address_cleaner(ugly_address)
     "#{JSON.parse(ugly_address)["address"]} #{JSON.parse(ugly_address)["city"]}, #{JSON.parse(ugly_address)["state"]} #{JSON.parse(ugly_address)["zip"]}"
+  end
+
+  def ny_address_cleaner(this_hash)
+    "#{this_hash[:street_address_line_1]} #{this_hash[:city]}, #{this_hash[:state]} #{this_hash[:zip_code]}"
   end
 
 end
