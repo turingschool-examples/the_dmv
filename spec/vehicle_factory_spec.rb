@@ -31,6 +31,7 @@ RSpec.describe VehicleFactory do
       expect(factory.ny_vehicles).to be_a(Array)
       expect(factory.ny_vehicles.first).to be_a(Vehicle)
       expect(factory.ny_vehicles.length).to eq(250)
+      expect(factory.ny_vehicles.first.make).to eq('CHRY')
     end
   end
 end

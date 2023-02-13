@@ -7,7 +7,7 @@ class VehicleFactory
   end
   
   def create_vehicles(wa_ev_registrations)
-    wa_ev_registrations.each do |vehicle|
+    wa_ev_registrations.map do |vehicle|
       vehicle_info = {
         vin: vehicle[:vin_1_10],
         year: vehicle[:model_year],
@@ -19,9 +19,15 @@ class VehicleFactory
       }
       @vehicles << vehicle = Vehicle.new(vehicle_info)
     end
-      @vehicles
   end
 
+  
+  #Helper Methods
+  
+  # def create_wa_vehicles(wa_ev_registrations)
+    
+  # end
+  
   def create_ny_vehicles(ny_registrations)
     ny_registrations.select do |vehicle|
       if vehicle[:record_type] == 'VEH'        
@@ -39,5 +45,3 @@ class VehicleFactory
     @ny_vehicles
   end
 end
-
-#Helper Methods
