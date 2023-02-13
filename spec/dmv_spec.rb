@@ -85,20 +85,18 @@ RSpec.describe Dmv do
       expect(new_york_dmv.rendered_facilities.first[:name]).to eq("JAMESTOWN COUNTY OFFICE")
       expect(new_york_dmv.rendered_facilities.first[:phone]).to eq("7166618220")
       expect(new_york_dmv.rendered_facilities.first[:address]).to eq("512 WEST 3RD STREET JAMESTOWN NY 14701")
-      # require 'pry'; binding.pry
-
     end
   end
 
-  # describe '#create facilities from external data' do
-  #   it 'can create new facilities from oregon' do
-  #     oregon_dmv = Dmv.new
-  #     oregon_facilities = DmvDataService.new.or_dmv_office_locations
+  describe '#create facilities from external data' do
+    it 'can create new facilities from oregon' do
+      oregon_dmv = Dmv.new
+      oregon_facilities = DmvDataService.new.or_dmv_office_locations
 
-  #     oregon_dmv.create_facilities(oregon_facilities)
+      oregon_dmv.create_facilities(oregon_facilities)
 
-  #     expect(oregon_dmv.facilities.first).to be_an_instance_of Facility
-  #   end
-  # end
+      expect(oregon_dmv.facilities.first).to be_an_instance_of Facility
+    end
+  end
 
 end
