@@ -1,12 +1,13 @@
 require 'facility'
 
 class Dmv
-
-  attr_reader :facilities, :rendered_facilities, :created_facilities
+  attr_accessor :state
+  attr_reader :facilities, :rendered_facilities
 
   def initialize
     @facilities = []
     @rendered_facilities = []
+    @state = ""
   end
 
   def add_facility(facility)
@@ -17,6 +18,19 @@ class Dmv
     @facilities.find_all do |facility|
       facility.services.include?(service)
     end
+  end
+
+  def determine_state(list)
+    if list.first.key?(:office_name)
+      self.state = "New York"
+    elsif list.first.key?(:title)
+      self.state = "Oregon"
+    elsif list.first.key?(:agent)
+      self.state = "Missouri"
+    else
+      puts "Unable to determine state"
+    end
+
   end
 
   def render_facility_data_ny(list)
