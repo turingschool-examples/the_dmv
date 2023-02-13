@@ -20,14 +20,14 @@ RSpec.describe FacilityFactory do
   describe '#create_facilities' do
     it 'returns an array' do
       expect(oregon_facilities).to be_a(Array)
-      # expect(new_york_facilities).to be_a(Array)
+      expect(new_york_facilities).to be_a(Array)
       # expect(missouri_facilities).to be_a(Array)
     end
 
     it 'returns an array of Facility objects' do
       expect(oregon_facilities.all? { |facility| facility.is_a?(Facility) }).to be(true)
-      # expect(new_york_facilties.all? { |facility| facility.is_a?(Facility) }).to be(true)
-      # expect(missouri_facilties.all? { |facility| facility.is_a?(Facility) }).to be(true)
+      expect(new_york_facilities.all? { |facility| facility.is_a?(Facility) }).to be(true)
+      # expect(missouri_facilities.all? { |facility| facility.is_a?(Facility) }).to be(true)
     end
 
     it 'assigns the @name attribute on every facility to a string value' do
@@ -43,15 +43,27 @@ RSpec.describe FacilityFactory do
     end
 
     it 'assigns the correct string value to the @name attribute on every Oregon facility' do
-      expect(oregon_facilities.first.name).to eq(FACILITY_1[:name])
+      expect(oregon_facilities.first.name).to eq(OR_FACILITY[:name])
     end
 
     it 'assigns the correct string value to the @address attribute on every Oregon facility' do
-      expect(oregon_facilities.first.address).to eq(FACILITY_1[:address])
+      expect(oregon_facilities.first.address).to eq(OR_FACILITY[:address])
     end
 
     it 'assigns the correct string value to the @phone attribute on every Oregon facility' do
-      expect(oregon_facilities.first.phone).to eq(FACILITY_1[:phone])
+      expect(oregon_facilities.first.phone).to eq(OR_FACILITY[:phone])
+    end
+
+    it 'assigns the correct string value to the @name attribute on every New York facility' do
+      expect(new_york_facilities.first.name).to eq(NY_FACILITY[:name])
+    end
+
+    it 'assigns the correct string value to the @address attribute on every New York facility' do
+      expect(new_york_facilities.first.address).to eq(NY_FACILITY[:address])
+    end
+
+    it 'assigns the correct string value to the @phone attribute on every New York facility' do
+      expect(new_york_facilities.first.phone).to eq(NY_FACILITY[:phone])
     end
   end
 end
