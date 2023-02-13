@@ -48,4 +48,23 @@ RSpec.describe Dataset do
     end
   end
 
+  describe '#most_popular_make_model' do
+    it 'returns a string with vehicle make and model' do
+      expect(@wa_ev_dataset.most_popular_make_model).to be_a String
+      expect(@wa_ev_dataset.most_popular_make_model).to_not be ("")
+    end
+
+    it 'includes both make and model attributes' do
+      expected = @wa_ev_dataset.most_popular_make_model
+      expect(expected.split(" ").count).to eq(2)
+    end
+  end
+
+  describe '#count_by_model year' do
+
+  end
+
+  describe '#county_with_most_vehicles' do
+
+  end
 end
