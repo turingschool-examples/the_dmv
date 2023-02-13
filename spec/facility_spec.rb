@@ -49,5 +49,19 @@ RSpec.describe Facility do
       @facility.register_vehicle(cruz)
       expect(cruz.registration_date).not_to eq(nil)
     end
+
+    it 'assigns a plate type' do
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+      @facility.register_vehicle(cruz)
+      expect(cruz.plate_type).to eq(:regular)
+    end
+
+    it 'costs money to register cars' do
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+      @facility.register_vehicle(camaro)
+      expect(@facility.collected_fees).to eq(25)
+    end 
   end
 end
+
+
