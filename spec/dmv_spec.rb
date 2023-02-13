@@ -42,13 +42,23 @@ RSpec.describe Dmv do
   end
 
   describe '#determine state' do
-    it 'can determine state' do
+    it 'can determine state oregon' do
       dmv = Dmv.new
       oregon_facilities = DmvDataService.new.or_dmv_office_locations
       dmv.determine_state(oregon_facilities)
 
-      expect(dmv.state).to eq(oregon)
+      expect(dmv.state).to eq("Oregon")
     end
+
+    it 'can determine state new york' do
+      dmv = Dmv.new
+      new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+
+      dmv.determine_state(new_york_facilities)
+
+      expect(dmv.state).to eq("New York")
+    end
+
   end
 
   describe '#render data' do
