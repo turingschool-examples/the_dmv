@@ -1,25 +1,46 @@
 class FacilityFactory
+
+  @@valid_states = [:OR, :NY]
+
   def initialize
   end
 
-  def create_facilities(facility_data)
-    facility_details_array = [] #creates the Oregon facilities hashes
-    facility_data.each do |facility|
-      facility_details = {
-        name: facility[:title],
-        phone: facility[:phone_number],
-        address: format_address(facility[:location_1][:human_address])
-      }
-      facility_details_array << facility_details
+  def create_facilities(facility_data, state)
+    return "Sorry, this state is not yet supported." if !@@valid_states.include?(state)
+
+    if state == :OR
+      facility_details_array =
+      facility_data.map do |facility|
+          facility_details = {
+            name: facility[:title],
+            phone: facility[:phone_number],
+            address: or_format_address(facility)
+          }
+        end
+    elsif state == :NY
+      facility_details_array =
+      facility_data.map do |facility|
+        facility_details = {
+          name: "#{facility[:office_name].strip.downcase.capitalize} DMV Office",
+          phone: ny_format_phone(facility[:public_phone_number]),
+          address: ny_format_address(facility)
+        }
+      end
     end
 
-    #creates the new facilities with standardized data
-    facilities = facility_details_array.map do |facility_details|
-      Facility.new(facility_details)
-    end
+    facility_details_array.map { |facility_details| Facility.new(facility_details) }
   end
 
-  def format_address(address_data)  #formats the Oregon address data
-    address_data.delete('{}\"').split(', ').map { |address| address.split(': ')[1] }.join(" ")
+  def or_format_address(data)
+    data[:location_1][:human_address].delete('{}\"').split(', ').map { |address| address.split(': ')[1] }.join(" ")
+  end
+
+  def ny_format_address(data)
+    "#{data[:street_address_line_1]} #{data[:city]} #{data[:state]} #{data[:zip_code]}"
+  end
+
+  def ny_format_phone(data)
+    return "No phone." if data.nil?
+    data.insert(3, '-').insert(7, '-')
   end
 end
