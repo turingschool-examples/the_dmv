@@ -54,11 +54,11 @@ RSpec.describe Vehicle do
     end
 
     it 'ev registration_cost' do
-      expect(@camaro.registration_cost).to eq(200)
+      expect(@bolt.registration_cost).to eq(200)
     end
 
     it 'regular registration_cost' do
-      expect(@camaro.registration_cost).to eq(100)
+      expect(@cruz.registration_cost).to eq(100)
     end
   end
 end

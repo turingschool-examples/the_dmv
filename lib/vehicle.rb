@@ -33,5 +33,14 @@ class Vehicle
   def electric_vehicle?
     @engine == :ev
   end
-  
+
+  def registration_cost
+    if antique?
+      25
+    elsif electric_vehicle?
+      200
+    else 
+      100
+    end
+  end
 end
