@@ -89,14 +89,26 @@ RSpec.describe Dmv do
   end
 
   describe '#create facilities from external data' do
-    it 'can create new facilities from oregon' do
+    it 'can create new facilities from oregon data' do
       oregon_dmv = Dmv.new
       oregon_facilities = DmvDataService.new.or_dmv_office_locations
 
       oregon_dmv.create_facilities(oregon_facilities)
 
       expect(oregon_dmv.facilities.first).to be_an_instance_of Facility
+      expect(oregon_dmv.facilities.count).to eq(59)
     end
+
+    it 'can create new facilities from new york data' do
+      dmv = Dmv.new 
+      new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+
+      dmv.create_facilities(new_york_facilities)
+
+      expect(dmv.facilities.first).to be_an_instance_of Facility
+      expect(dmv.facilities.count).to eq(169)
+    end
+
   end
 
 end
