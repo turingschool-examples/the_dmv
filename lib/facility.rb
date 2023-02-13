@@ -28,17 +28,14 @@ class Facility
         @collected_fees += 200
       else @collected_fees += 100
       end
+      if vehicle.antique? == true 
+        vehicle.plate_type = :antique
+      elsif vehicle.electric_vehicle? == true
+        vehicle.plate_type = :ev
+      else  
+        vehicle.plate_type = :regular
+      end
       @registered_vehicles << vehicle
-    end
-  end
-
-  def plate_type(vehicle)
-    if vehicle.antique? == true 
-      vehicle.plate_type = :antique
-    elsif vehicle.electric_vehicle? == true
-      vehicle.plate_type = :ev
-    else  
-      vehicle.plate_type = :regular
     end
   end
 end
