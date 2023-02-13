@@ -41,6 +41,16 @@ RSpec.describe Dmv do
     end
   end
 
+  describe '#determine state' do
+    it 'can determine state' do
+      dmv = Dmv.new
+      oregon_facilities = DmvDataService.new.or_dmv_office_locations
+      dmv.determine_state(oregon_facilities)
+
+      expect(dmv.state).to eq(oregon)
+    end
+  end
+
   describe '#render data' do
     it 'can convert OR data into useable info' do
       oregon_dmv = Dmv.new
@@ -65,6 +75,8 @@ RSpec.describe Dmv do
       expect(new_york_dmv.rendered_facilities.first[:name]).to eq("JAMESTOWN COUNTY OFFICE")
       expect(new_york_dmv.rendered_facilities.first[:phone]).to eq("7166618220")
       expect(new_york_dmv.rendered_facilities.first[:address]).to eq("512 WEST 3RD STREET JAMESTOWN NY 14701")
+      # require 'pry'; binding.pry
+
     end
   end
 
