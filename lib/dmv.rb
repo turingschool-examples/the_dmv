@@ -58,11 +58,15 @@ class Dmv
   end
 
   def create_facilities(list)
-    self.render_facility_data(list)
-    ###will need to add state checker method and update above code
-      @rendered_facilities.each do |facility_details|
-        @facilities << Facility.new(facility_details)
-      end
+    self.determine_state(list)
+    if @state == "New York"
+      self.render_facility_data_ny(list)
+    elsif @state == "Oregon"
+      self.render_facility_data_or(list)
+    end
+    @rendered_facilities.each do |facility_details|
+      @facilities << Facility.new(facility_details)
+    end
   end
 
 end
