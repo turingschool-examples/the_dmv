@@ -13,7 +13,6 @@ class Facility
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
-    
   end
 
   def add_service(service)

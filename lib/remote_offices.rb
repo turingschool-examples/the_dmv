@@ -28,7 +28,11 @@ class RemoteOffice
         ny_office_locations.each do |office|
           location_data = {
             name: office[:office_name],
-            address: "#{office[:street_address_line_1]}, #{office[:street_address_line_2]}, #{office[:city]}, #{office[:state]}, #{office[:zip_code]}",
+            address: "#{office[:street_address_line_1]},  
+                      #{office[:street_address_line_2]},
+                      #{office[:city]},
+                      #{office[:state]}, 
+                      #{office[:zip_code]}",
             phone: office[:public_phone_number]
           }
           @other_offices << (offices = Facility.new(location_data))
@@ -38,7 +42,10 @@ class RemoteOffice
         mo_office_locations.each do |office|
           location_data = {
             name: office[:name],
-            address: "#{office[:address1]}, #{office[:city]}, #{office[:state]}, #{office[:zip_code]}",
+            address: "#{office[:address1]},
+                      #{office[:city]}, 
+                      #{office[:state]}, 
+                      #{office[:zip_code]}",
             phone: office[:phone]
           }
           @other_offices << (offices = Facility.new(location_data))

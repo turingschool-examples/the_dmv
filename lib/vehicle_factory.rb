@@ -21,8 +21,6 @@ class VehicleFactory
         make: car[:make],
         model: car[:model],
         engine: "ev",
-        # registration_date: nil,
-        # plate_type: nil
       }
       created_vehicles << (vehicle = Vehicle.new(vehicle_details))
     end

@@ -11,7 +11,7 @@ class Dmv
 
   def facilities_offering_service(service)
     @facilities.find_all do |facility|
-      facility.services.include?(service)
+    facility.services.include?(service)
     end
   end
 end
