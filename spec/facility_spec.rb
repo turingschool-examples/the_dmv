@@ -37,10 +37,11 @@ RSpec.describe Facility do
   end
 
   describe '#register vehicle' do
-    it 'registers vehicle' do
-      @facility.register_vehicle(@vehicle)
-      expect(@facility.registered_vehicles).to include(@vehicle)
-      expect(@vehicle.registration_date).not_to eq(nil)
+    it 'registers a vehicle' do
+      expect(@facility.registered_vehicles).to eq([])
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+      @facility.register_vehicle(cruz)
+      expect(@facility.registered_vehicles).to eq([cruz])
     end
   end
 end
