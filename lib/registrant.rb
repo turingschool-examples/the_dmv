@@ -23,4 +23,7 @@ class Registrant
     @permit = true
     end
   end
+
+  # def license_data 
+  # end 
 end
