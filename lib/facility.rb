@@ -21,12 +21,13 @@ class Facility
   end
   
   def register_vehicle(vehicle)
-    @registered_vehicles << vehicle
-    vehicle.registration_date = Date.today
-    @collected_fees += vehicle.registration_cost
+    if @services.include?("Vehicle Registration")
+      @registered_vehicles << vehicle
+      vehicle.registration_date = Date.today
+      @collected_fees += vehicle.registration_cost
+  
+    end
   end
-  
-  
 end
 
 # require'pry';binding.pry
