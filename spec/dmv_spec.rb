@@ -96,12 +96,17 @@ RSpec.describe Dmv do
       expect(new_york_dmv.rendered_facilities.first[:address]).to eq("512 WEST 3RD STREET JAMESTOWN NY 14701")
     end
 
-    # it 'can convert MO data into useable info' do
-    #   dmv = Dmv.new 
-    #   missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+    it 'can convert MO data into useable info' do
+      dmv = Dmv.new 
+      missouri_facilities = DmvDataService.new.mo_dmv_office_locations
 
-    #   dmv.render_facility_data_mo(missouri_facilities)
-    # end
+      dmv.render_facility_data_mo(missouri_facilities)
+
+      expect(dmv.rendered_facilities.first).to be_a Hash
+      expect(dmv.rendered_facilities.first[:name]).to eq("SAINTE GENEVIEVE ")
+      expect(dmv.rendered_facilities.first[:phone]).to eq("(573) 883-2344")
+      expect(dmv.rendered_facilities.first[:address]).to eq("753 STE. GENEVIEVE DR STE GENEVIEVE MO 63670")
+    end
   end
 
   describe '#create facilities from external data' do
