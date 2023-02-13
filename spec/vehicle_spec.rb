@@ -18,6 +18,23 @@ RSpec.describe Vehicle do
     end
   end
 
+  describe '#plate type' do
+    it 'is a :regular vehicle' do
+
+      expect(@cruz.plate_type).to eq(:regular)
+    end
+
+    # it 'is an :antique' do
+
+
+    # end
+
+    # it 'is an :ev' do
+
+
+    # end
+  end
+
   describe '#antique?' do
     it 'can determine if a vehicle is an antique' do
       expect(@cruz.antique?).to eq(false)

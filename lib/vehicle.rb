@@ -16,6 +16,17 @@ class Vehicle
     @registration_date = nil
   end
 
+  def plate_type
+    if antique?
+      :antique
+    elsif electric_vehicle?
+      :ev
+    else
+      :regular
+    end
+
+  end
+
   def antique?
     Date.today.year - @year > 25
   end
