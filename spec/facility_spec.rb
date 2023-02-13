@@ -37,6 +37,13 @@ RSpec.describe Facility do
       expect(@facility.registered_vehicles).to eq([@cruz])
 
     end
+
+    it 'sets the vehicle registration date' do
+
+      expect(@cruz.registration_date).to eq(nil)
+      @facility.register_vehicle(@cruz)
+      expect(@cruz.registration_date).to eq(Date.today)
+    end
   end
 
   describe '@facility collected fees' do
