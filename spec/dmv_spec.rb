@@ -45,6 +45,7 @@ RSpec.describe Dmv do
     it 'can convert OR data into useable info' do
       oregon_dmv = Dmv.new
       oregon_facilities = DmvDataService.new.or_dmv_office_locations
+
       oregon_dmv.render_facility_data(oregon_facilities)
       
       expect(oregon_dmv.rendered_facilities.first).to be_a Hash
@@ -54,9 +55,15 @@ RSpec.describe Dmv do
     end
   end
 
-  # describe '#create facilities from external data' do
-  #   it 'can create new facilities' do
+  describe '#create facilities from external data' do
+    it 'can create new facilities' do
+      oregon_dmv = Dmv.new
+      oregon_facilities = DmvDataService.new.or_dmv_office_locations
 
-  #   end
-  # end
+      oregon_dmv.create_facilities(oregon_facilities)
+
+      expect(oregon_dmv.created_facilities.first).to be_an_instance_of Facility
+
+    end
+  end
 end
