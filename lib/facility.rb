@@ -1,6 +1,6 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles
-  attr_accessor :add_service
+  attr_reader :name, :address, :phone, :services
+  attr_accessor :add_service, :registered_vehicles
 
   def initialize(name:, address:, phone:)
     @name = name
