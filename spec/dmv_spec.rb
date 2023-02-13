@@ -40,4 +40,30 @@ RSpec.describe Dmv do
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
+
+  describe '#render data' do
+    it 'can convert OR data into useable info' do
+      oregon_dmv = Dmv.new
+      oregon_facilities = DmvDataService.new.or_dmv_office_locations
+
+      oregon_dmv.render_facility_data(oregon_facilities)
+      
+      expect(oregon_dmv.rendered_facilities.first).to be_a Hash
+      expect(oregon_dmv.rendered_facilities.first[:name]).to eq("Albany DMV Office")
+      expect(oregon_dmv.rendered_facilities.first[:phone]).to eq("541-967-2014")
+      expect(oregon_dmv.rendered_facilities.first[:address]).to eq("2242 Santiam Hwy SE Albany OR 97321")
+    end
+  end
+
+  describe '#create facilities from external data' do
+    it 'can create new facilities' do
+      oregon_dmv = Dmv.new
+      oregon_facilities = DmvDataService.new.or_dmv_office_locations
+
+      oregon_dmv.create_facilities(oregon_facilities)
+
+      expect(oregon_dmv.facilities.first).to be_an_instance_of Facility
+    end
+  end
+
 end
