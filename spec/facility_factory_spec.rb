@@ -22,4 +22,16 @@ RSpec.describe FacilityFactory do
       expect(facility_factory.new_facilities.size).to eq(2)
     end
   end
+
+  describe '#create_facilities' do
+    it 'can create multiple facilities at once' do
+      facility_factory = FacilityFactory.new
+      new_locations = DmvDataService.new.or_dmv_office_locations
+      require 'pry'; binding.pry
+      expect(facility_factory.create_facilities(new_locations).length).to eq(59)
+      expect(facility_factory.create_facilities(new_locations)[0]).to be_a(Facility)
+      expect(facility_factory.create_facilities(new_locations)[1]).to be_a(Facility)
+      expect(facility_factory.create_facilities(new_locations)[2]).to be_a(Facility)
+    end
+  end
 end
