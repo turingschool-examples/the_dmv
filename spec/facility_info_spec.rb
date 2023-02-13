@@ -1,0 +1,20 @@
+require 'spec_helper'
+
+RSpec.describe FacilityInfo do 
+  before(:each) do
+    @dds = DmvDataService.new.or_dmv_office_locations
+    @facility_info = FacilityInfo.new(@dds)
+  end
+
+  describe '#initialize' do
+    it 'exists' do
+      expect(@facility_info).to be_an_instance_of(FacilityInfo)
+    end
+
+    it 'has a source' do
+      expect(@facility_info.source).to eq(@dds)
+    end
+  end
+
+
+end
