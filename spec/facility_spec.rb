@@ -26,8 +26,13 @@ RSpec.describe Facility do
 
   describe '#registered_vehicles' do
     it 'can register vehicles' do 
-      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
-      expect(facility_1.registered_vehicles).to eq([])
+      expect(@facility.registered_vehicles).to eq([])
+    end
+  end
+
+  describe '#collected_fees' do
+    it 'can collect fees' do
+      expect(@facility.collected_fees).to eq(0)
     end
   end
 end
