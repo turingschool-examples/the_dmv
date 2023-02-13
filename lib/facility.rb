@@ -18,9 +18,8 @@ class Facility
 
   def add_service(service)
     @services << service
+    return [service]
   end
 
-  # def registration_date
-  #   @registration_date
-  # end
+  
 end
