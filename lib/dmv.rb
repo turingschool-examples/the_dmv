@@ -7,7 +7,6 @@ class Dmv
   def initialize
     @facilities = []
     @rendered_facilities = []
-    @created_facilities = []
   end
 
   def add_facility(facility)
@@ -36,7 +35,7 @@ class Dmv
   def create_facilities(list)
     self.render_facility_data(list)
       @rendered_facilities.each do |facility_details|
-        @created_facilities << Facility.new(facility_details)
+        @facilities << Facility.new(facility_details)
       end
   end
 
