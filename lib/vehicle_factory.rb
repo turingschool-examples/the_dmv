@@ -1,5 +1,5 @@
 class VehicleFactory
-  attr_accessor :vehicles
+  attr_reader :vehicles
   def initialize
     @vehicles = []
   end
@@ -14,7 +14,7 @@ class VehicleFactory
         engine: :ev
       }
       vehicle_sorted = Vehicle.new(vehicle_details)
-      self.vehicles << vehicle_sorted
+      @vehicles << vehicle_sorted
     end
     @vehicles
   end

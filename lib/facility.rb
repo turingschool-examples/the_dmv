@@ -1,6 +1,5 @@
 class Facility
-  attr_reader :name, :address, :phone, :services
-  attr_accessor :registered_vehicles, :collected_fees
+  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
   def initialize(facility_details)
     @name = facility_details[:name]
@@ -16,21 +15,21 @@ class Facility
   end
 
   def register_vehicle(car)
-    if services.include?('Vehicle Registration')
+    if @services.include?('Vehicle Registration')
       car.registration_date = Date.today
-      self.registered_vehicles << car
+      @registered_vehicles << car
       if car.antique?
-        self.collected_fees += 25
+        @collected_fees += 25
       elsif car.electric_vehicle?
-        self.collected_fees += 200
+        @collected_fees += 200
       else
-        self.collected_fees += 100
+        @collected_fees += 100
       end
     end
   end
 
   def administer_written_test(registrant)
-    if services.include?('Written Test') && registrant.permit? == true && registrant.age >=16
+    if @services.include?('Written Test') && registrant.permit? == true && registrant.age >=16
       registrant.license_data[:written] = true
       return true
     else

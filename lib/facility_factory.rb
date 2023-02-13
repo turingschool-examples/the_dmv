@@ -1,5 +1,5 @@
 class FacilityFactory
-  attr_accessor :facilities
+  attr_reader :facilities
   def initialize
     @facilities = []
   end
@@ -12,7 +12,7 @@ class FacilityFactory
         phone: facility[:phone_number]
       }
       facility_sorted = Facility.new(facility_details)
-      self.facilities << facility_sorted
+      @facilities << facility_sorted
     end
     @facilities
   end
@@ -30,7 +30,7 @@ class FacilityFactory
         phone: facility[:public_phone_number]
       }
       facility_sorted = Facility.new(facility_details)
-      self.facilities << facility_sorted
+      @facilities << facility_sorted
     end
     @facilities
   end
@@ -52,7 +52,7 @@ class FacilityFactory
         phone: facility[:phone]
       }
       facility_sorted = Facility.new(facility_details)
-      self.facilities << facility_sorted
+      @facilities << facility_sorted
     end
     @facilities
   end
