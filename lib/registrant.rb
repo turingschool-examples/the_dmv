@@ -11,7 +11,7 @@ class Registrant
   end
 
   def permit? 
-    p @permit
+    @permit
   end
 
   # def license_data(written, license, renewed)
