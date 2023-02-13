@@ -46,7 +46,7 @@ RSpec.describe Dmv do
       oregon_dmv = Dmv.new
       oregon_facilities = DmvDataService.new.or_dmv_office_locations
 
-      oregon_dmv.render_facility_data(oregon_facilities)
+      oregon_dmv.render_facility_data_or(oregon_facilities)
       
       expect(oregon_dmv.rendered_facilities.first).to be_a Hash
       expect(oregon_dmv.rendered_facilities.first[:name]).to eq("Albany DMV Office")

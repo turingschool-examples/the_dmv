@@ -19,7 +19,7 @@ class Dmv
     end
   end
 
-  def render_facility_data(list)
+  def render_facility_data_or(list)
     list.each do |spec|
      address_to_format = spec.dig(:location_1, :human_address)
      address_hash = JSON.parse address_to_format
