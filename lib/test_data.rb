@@ -59,6 +59,14 @@ module TestData
     engine: :ev
   }.freeze
 
+  NY_VEHICLE = {
+    vin: '999999999999',
+    year: '1975',
+    make: 'STARC',
+    model: nil,
+    engine: :ice
+  }.freeze
+
   OR_FACILITY = {
     name: 'ALBANY DMV OFFICE',
     address: '2242 SANTIAM HWY SE ALBANY OR 97321',
