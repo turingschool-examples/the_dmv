@@ -8,7 +8,8 @@ class Facility
               :registered_vehicles, 
               :collected_fees,
               :facility_count,
-              :facility_list
+              :facility_list,
+              :zip
 
   def initialize(information)
     @name = information.fetch(:name)
@@ -19,6 +20,7 @@ class Facility
     @registered_vehicles = []
     @facility_list = []
     @facility_count = 0
+    @zip = zip
   end
 
   def add_service(service)
@@ -66,17 +68,6 @@ class Facility
       registrant.license_data[:renewed] = true
     else 
       false
-    end
-  end
-
-  def add_facilities(facilities)
-    facilities.each do |facility|
-      facility[:name] = facility[:office_name]
-      facility[:address] = facility[:street_address_line_1]
-      facility[:phone] = facility[:public_phone_number]
-      @facility_count += 1
-      added_facility = Facility.new(facility)
-      @facility_list << added_facility
     end
   end
 

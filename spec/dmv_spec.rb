@@ -40,4 +40,26 @@ RSpec.describe Dmv do
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
+
+  describe 'Can import facilities' do
+    it 'can use external facility data' do
+    super_dmv = Dmv.new
+    new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+    super_dmv.add_facilities(new_york_facilities)
+
+    expect(super_dmv.facility_count).to eq(169)
+    end
+
+    it 'can use multiple external facility datasets' do
+    super_dmv = Dmv.new
+    oregon_facilities = DmvDataService.new.or_dmv_office_locations
+    new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+    missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+    super_dmv.add_facilities(oregon_facilities)
+    super_dmv.add_facilities(new_york_facilities)
+    super_dmv.add_facilities(missouri_facilities)
+      
+    expect(super_dmv.facility_count).to eq(169 + 178 + 59)
+    end
+  end
 end
