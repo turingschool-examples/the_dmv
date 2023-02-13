@@ -31,7 +31,7 @@ RSpec.describe Facility do
   end
 
   describe '#collected_fees' do
-    it 'can collect fees' do
+    it 'has collected fees' do
       expect(@facility.collected_fees).to eq(0)
     end
   end
