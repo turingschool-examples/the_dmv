@@ -64,23 +64,44 @@ RSpec.describe Facility do
   end
   
   describe "#register a vehicle" do
-    it "shows unregistered vehicle details" do
-      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
-      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+  it "shows unregistered vehicle details" do
+    facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+    cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     
-      expect(cruz.registration_date).to eq(nil)
-      expect(facility_1.registered_vehicles).to eq([])
-      expect(facility_1.collected_fees).to eq(0)
-    end
-    
-    it "shows registering a vehicle" do
-      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
-      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-      
-      expect(facility_1.register_vehicle(cruz)).to eq([cruz])
-      expect(facility_1.registered_vehicles).to eq([cruz])
-      # require 'pry'; binding.pry
-      # expect(cruz.registration_date).to eq(Date.today)
-    end
+    expect(facility_1.registered_vehicles).to eq([])
+    # expect(cruz.registration_date).to eq(nil)
+    expect(facility_1.collected_fees).to eq(0)
   end
+  
+  it "shows registering a cruz at facility_1" do
+    facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+    cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+    
+    expect(facility_1.register_vehicle(cruz)).to eq([cruz])
+    expect(facility_1.registered_vehicles).to eq([cruz])
+    # require 'pry'; binding.pry
+    expect(cruz.registration_date).to eq(Date.today)
+    expect(cruz.plate_type).to eq(:regular)
+  end
+  
+  it "shows registering a bolt at facility_1" do
+    facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+    bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+    
+    expect(facility_1.register_vehicle(bolt)).to eq([bolt])
+    expect(facility_1.registered_vehicles).to eq([bolt])
+    expect(bolt.plate_type).to eq(:ev)
+  end
+  
+  it "shows registering a camaro at facility_1" do
+    facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+    camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    
+    expect(facility_1.register_vehicle(camaro)).to eq([camaro])
+    expect(facility_1.registered_vehicles).to eq([camaro])
+    expect(camaro.plate_type).to eq(:antique)
+  end
+  # it 'registers a plate type' do
+  
+end
 end
