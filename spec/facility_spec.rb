@@ -35,4 +35,12 @@ RSpec.describe Facility do
       expect(@facility.collected_fees).to eq(0)
     end
   end
+
+  describe '#register vehicle' do
+    it 'registers vehicle' do
+      @facility.register_vehicle(@vehicle)
+      expect(@facility.registered_vehicles).to include(@vehicle)
+      expect(@vehicle.registration_date).not_to eq(nil)
+    end
+  end
 end
