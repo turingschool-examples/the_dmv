@@ -84,9 +84,27 @@ RSpec.describe VehicleFactory do
     it 'assigns the correct symbol value to the @engine attribute on every WA state electric vehicle' do
       expect(wa_ev_vehicles.first.engine).to eq(WA_EV_VEHICLE[:engine])
     end
+  end
 
-    describe '#create_ny_vehicles' do
+  describe '#create_ny_vehicles' do
+    it 'assigns the correct string value to the @vin attribute on every NY state vehicle' do
+      expect(ny_vehicles.first.vin).to eq(NY_VEHICLE[:vin])
+    end
 
+    it 'assigns the correct string value to the @year attribute on every NY state vehicle' do
+      expect(ny_vehicles.first.year).to eq(NY_VEHICLE[:year])
+    end
+
+    it 'assigns the correct string value to the @make attribute on every NY state vehicle' do
+      expect(ny_vehicles.first.make).to eq(NY_VEHICLE[:make])
+    end
+
+    it 'assigns the @model attribute on every NY state vehicle to nil' do
+      expect(ny_vehicles.first.model).to eq(NY_VEHICLE[:model])
+    end
+
+    it 'assigns the correct symbol value to the @engine attribute on every NY state vehicle' do
+      expect(ny_vehicles.first.engine).to eq(NY_VEHICLE[:engine])
     end
   end
 end
