@@ -33,8 +33,13 @@ RSpec.describe DmvFacility do
       expect(dmv_facility.locations.first.address.include?("NY")).to eq(true)
     end
 
-    xit 'can create mo dmv facility objects' do
-      missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+    it 'can create mo dmv facility objects' do
+      dmv_facility = DmvFacility.new
+      mo_facilities = DmvDataService.new.mo_dmv_office_locations
+      
+      expect(dmv_facility.create_mo_facilities(mo_facilities)).to be_an_instance_of(Array)
+      expect(dmv_facility.locations.first.address.include?("MO")).to eq(true)
+      require 'pry'; binding.pry
     end
   end
 end
