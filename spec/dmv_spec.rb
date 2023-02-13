@@ -44,7 +44,8 @@ RSpec.describe Dmv do
   describe '#render data' do
     it 'can convert OR data into useable info' do
       oregon_dmv = Dmv.new
-      oregon_dmv.render_facility_data(DmvDataService.new.or_dmv_office_locations)
+      oregen_facilities = DmvDataService.new.or_dmv_office_locations
+      oregon_dmv.render_facility_data(oregen_facilities)
       
       expect(oregon_dmv.rendered_facilities.first).to be_a Hash
       expect(oregon_dmv.rendered_facilities.first[:name]).to eq("Albany DMV Office")
