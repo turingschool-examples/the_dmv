@@ -15,8 +15,8 @@ RSpec.describe FacilityFactory do
 
   describe '#create_facilities' do
     before(:each) do
-      @oregon = @factory.create_facilities(@oregon_facilities)
-      @new_york = @factory.create_facilities(@new_york_facilities)
+      @oregon = @factory.create_facilities(@oregon_facilities, :OR)
+      @new_york = @factory.create_facilities(@new_york_facilities, :NY)
     end
 
     it 'can create multiple facility objects' do
