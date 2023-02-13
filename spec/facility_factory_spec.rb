@@ -5,6 +5,7 @@ RSpec.describe FacilityFactory do
     @factory = FacilityFactory.new
     @oregon_facilities = DmvDataService.new.or_dmv_office_locations
     @new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+    @missouri_facilities = DmvDataService.new.mo_dmv_office_locations
   end
 
   describe '#initialize' do
@@ -17,6 +18,7 @@ RSpec.describe FacilityFactory do
     before(:each) do
       @oregon = @factory.create_facilities(@oregon_facilities, :OR)
       @new_york = @factory.create_facilities(@new_york_facilities, :NY)
+      @missouri = @factory.create_facilities(@missouri_facilities, :MO)
     end
 
     it 'can create multiple facility objects' do
@@ -29,11 +31,17 @@ RSpec.describe FacilityFactory do
       expect(@new_york.first).to be_a Facility
       expect(@new_york.last).to be_a Facility
       expect(@new_york.sample).to be_a Facility
+
+      expect(@missouri).to be_a Array
+      expect(@missouri.first).to be_a Facility
+      expect(@missouri.last).to be_a Facility
+      expect(@missouri.sample).to be_a Facility
     end
 
     it 'can create facility objects for all facilities in data set' do
       expect(@oregon.count).to eq(@oregon_facilities.count)
       expect(@new_york.count).to eq(@new_york_facilities.count)
+      expect(@missouri.count).to eq(@missouri_facilities.count)
     end
 
     it 'can add attributes to the facility objects' do
@@ -50,6 +58,13 @@ RSpec.describe FacilityFactory do
       expect(@new_york.sample.services).to eq([])
       expect(@new_york.sample.registered_vehicles).to eq([])
       expect(@new_york.sample.collected_fees).to eq(0)
+
+      expect(@missouri.sample.name).to be_a String
+      expect(@missouri.sample.address).to be_a String
+      expect(@missouri.sample.phone).to be_a String
+      expect(@missouri.sample.services).to eq([])
+      expect(@missouri.sample.registered_vehicles).to eq([])
+      expect(@missouri.sample.collected_fees).to eq(0)
     end
   end
 end
