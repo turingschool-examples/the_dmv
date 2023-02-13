@@ -18,6 +18,20 @@ RSpec.describe Vehicle do
     end
   end
 
+  describe '#plate type' do
+    it 'is a :regular vehicle' do
+      expect(@cruz.plate_type).to eq(:regular)
+    end
+
+    it 'is an :antique' do
+      expect(@camaro.plate_type).to eq(:antique)
+    end
+
+    it 'is an :ev' do
+      expect(@bolt.plate_type).to eq(:ev)
+    end
+  end
+
   describe '#antique?' do
     it 'can determine if a vehicle is an antique' do
       expect(@cruz.antique?).to eq(false)
@@ -31,6 +45,20 @@ RSpec.describe Vehicle do
       expect(@cruz.electric_vehicle?).to eq(false)
       expect(@bolt.electric_vehicle?).to eq(true)
       expect(@camaro.electric_vehicle?).to eq(false)
+    end
+  end
+
+  describe '#registration_cost' do
+    it 'antique registration_cost' do
+      expect(@camaro.registration_cost).to eq(25)
+    end
+
+    it 'ev registration_cost' do
+      expect(@bolt.registration_cost).to eq(200)
+    end
+
+    it 'regular registration_cost' do
+      expect(@cruz.registration_cost).to eq(100)
     end
   end
 end
