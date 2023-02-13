@@ -38,6 +38,7 @@ attr_reader :state_facility_list
   end
 
   def or_address_cleaner(ugly_address)
-    JSON.parse(ugly_address)["address"]
+    "#{JSON.parse(ugly_address)["address"]} #{JSON.parse(ugly_address)["city"]}, #{JSON.parse(ugly_address)["state"]} #{JSON.parse(ugly_address)["zip"]}"
   end
+
 end

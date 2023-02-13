@@ -31,7 +31,7 @@ RSpec.describe FacilityBuilder do
 
     it "has the expected values" do
       p @or_state_facilities.state_facility_list[0][:address]
-      expect(@or_state_facilities.state_facility_list[0].values). to eq(["Albany DMV Office", "2242 Santiam Hwy SE", "541-967-2014"])
+      expect(@or_state_facilities.state_facility_list[0].values). to eq(["Albany DMV Office", "2242 Santiam Hwy SE Albany, OR 97321", "541-967-2014"])
     end
 
     it "is the correct length" do
@@ -39,7 +39,7 @@ RSpec.describe FacilityBuilder do
     end
 
     it "has a working or_address_cleaner method" do
-      expect(@or_state_facilities.or_address_cleaner("{\"address\": \"2242 Santiam Hwy SE\", \"city\": \"Albany\", \"state\": \"OR\", \"zip\": \"97321\"}")).to eq("2242 Santiam Hwy SE")
+      expect(@or_state_facilities.or_address_cleaner("{\"address\": \"2242 Santiam Hwy SE\", \"city\": \"Albany\", \"state\": \"OR\", \"zip\": \"97321\"}")).to eq("2242 Santiam Hwy SE Albany, OR 97321")
     end
   end
 
@@ -54,7 +54,6 @@ RSpec.describe FacilityBuilder do
       expect(@ny_facilities).to be_a(Array)
       p @ny_facilities.count
       p @ny_facilities[0].keys
-      p @ny_facilities[0][:title]
       p @ny_facilities[0].values
     end
 
@@ -87,7 +86,6 @@ RSpec.describe FacilityBuilder do
       expect(@mo_facilities).to be_a(Array)
       p @mo_facilities.count
       p @mo_facilities[0].keys
-      p @mo_facilities[0][:title]
       p @mo_facilities[0].values
     end
 
