@@ -13,7 +13,7 @@ RSpec.describe VehicleFactory do
   end
 
   describe '#create_vehicles' do
-    it 'can create and store vehicles' do
+    it 'can create and store vehicles from Washington' do
       factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
       factory.create_vehicles(wa_ev_registrations)
@@ -22,7 +22,15 @@ RSpec.describe VehicleFactory do
       expect(factory.vehicles.first).to be_a(Vehicle)
       expect(factory.vehicles.length).to eq(1000)
     end
-  end
 
-  describe '#'
+    it 'can create and store vehicles from New York' do
+      factory = VehicleFactory.new
+      ny_registrations = DmvDataService.new.ny_registrations
+      factory.create_ny_vehicles(ny_registrations)
+
+      expect(factory.ny_vehicles).to be_a(Array)
+      expect(factory.ny_vehicles.first).to be_a(Vehicle)
+      expect(factory.ny_vehicles.length).to eq(250)
+    end
+  end
 end

@@ -1,5 +1,7 @@
 class FacilityBuilder
-  attr_reader :or_facilities, :ny_facilities, :mo_facilities
+  attr_reader :or_facilities, 
+              :ny_facilities, 
+              :mo_facilities
 
   def initialize
     @or_facilities = []
