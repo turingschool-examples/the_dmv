@@ -3,11 +3,18 @@ require 'json'
 
 class FacilityFactory
   def create_facilities(facilities_data, state)
-    case state
+    case get_us_state(facilities_data)
       when :OR then create_oregon_facilities(facilities_data)
       when :NY then create_new_york_facilities(facilities_data)
       when :MO then create_missouri_facilities(facilities_data)
     end
+  end
+
+  def get_us_state(facilities_data)
+    if (address = facilities_data.first.dig(:location_1, :human_address))
+      facilities_data = [JSON.parse(address, symbolize_names: true)]
+    end
+    facilities_data.first[:state].to_sym
   end
 
   def create_oregon_facilities(facilities_data)
