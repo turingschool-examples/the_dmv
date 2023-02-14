@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe Registrant do
   before(:each) do
     @registrant_1 = Registrant.new('Bruce', 18, true)
-    @registrant_2 = Registrant.new('Penny', 15)
+    @registrant_2 = Registrant.new('Penny', 16)
   end
 
   describe '#initialize' do
@@ -16,7 +16,7 @@ RSpec.describe Registrant do
 
     it 'can initialize another person' do
       expect(@registrant_2.name).to eq('Penny')
-      expect(@registrant_2.age).to eq(15)
+      expect(@registrant_2.age).to eq(16)
       expect(@registrant_2.permit).to eq(false)
       expect(@registrant_2.license_data).to eq({ written: false, license: false, renewed: false })
     end
