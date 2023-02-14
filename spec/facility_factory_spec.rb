@@ -65,13 +65,13 @@ RSpec.describe do FacilityFactory
       expect(@created_facilities[1].collected_fees).to eq(@facility_2.collected_fees)
     end
     it '#returns nil if vehicle_database is empty' do
-    @factory.create_facilities_oregon(@oregon_facilities)
-    @factory.create_facilities_new_york(@new_york_facilities)
-    @factory.create_facilities_missouri(@missouri_facilities)
+      @factory.create_facilities_oregon(@oregon_facilities)
+      @factory.create_facilities_new_york(@new_york_facilities)
+      @factory.create_facilities_missouri(@missouri_facilities)
 
-    expect(@factory.create_facilities_oregon([])).to eq nil
-    expect(@factory.create_facilities_new_york([])).to eq nil
-    expect(@factory.create_facilities_missouri([])).to eq nil
+      expect(@factory.create_facilities_oregon([])).to eq nil
+      expect(@factory.create_facilities_new_york([])).to eq nil
+      expect(@factory.create_facilities_missouri([])).to eq nil
     end 
   end
 end
