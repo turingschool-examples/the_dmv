@@ -11,7 +11,8 @@ class VehicleFactory
           year: vehicle[:model_year],
           make: vehicle[:make],
           model: vehicle[:model],
-          engine: :ev
+          engine: :ev,
+          county: vehicle[:county]
         }
         Vehicle.new(vehicle_details)
       end
@@ -25,7 +26,8 @@ class VehicleFactory
             year: vehicle[:model_year],
             make: vehicle[:make],
             model: vehicle[:body_type],
-            engine: vehicle[:fuel_type]
+            engine: vehicle[:fuel_type],
+            county: vehicle[:county]
           }
           Vehicle.new(vehicle_details)
       end

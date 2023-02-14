@@ -26,51 +26,25 @@ class EvAnalyzer
   end
 
   def most_registered_county
-    counties = @vehicles.map{|vehicle| vehicle.county}
-    counted_counties = {}
-    most_registrations = 0
-    most_registered_county = nil
-
-    counties.each do |county|
-      if counted_counties.include?(county) == false
-        counted_counties[county] = 1
-      else
-        counted_counties[county] += 1
-      end
+    counted_counties = Hash.new(0)
+  
+    @vehicles.each do |vehicle| 
+      counted_counties[vehicle.county] += 1
     end
-
-    counted_counties.each do |county, number_of_registrations|
-      if number_of_registrations > most_registrations
-        most_registrations = number_of_registrations
-        most_registered_county = county
-      end
-    end
-
+  
+    most_registered_county, most_registrations = counted_counties.max_by { |county, count| count }
+  
     "#{most_registered_county} county: #{most_registrations} registrations"
   end
 
   def most_popular_car
-    cars = @vehicles.map do |vehicle|
-      "#{vehicle.make} #{vehicle.model}"
-    end
-    counted_cars = {}
-    most_registrations = 0
-    most_popular_car = nil
+    counted_cars = Hash.new(0)
 
-    cars.each do |car|
-      if counted_cars.include?(car) == false
-        counted_cars[car] = 1
-      else
-        counted_cars[car] += 1
-      end
+    @vehicles.each do |vehicle| 
+      counted_cars["#{vehicle.make} #{vehicle.model}"] += 1 
     end
 
-    counted_cars.each do |car, number_of_registrations|
-      if number_of_registrations > most_registrations
-        most_registrations = number_of_registrations
-        most_popular_car = car
-      end
-    end
+    most_popular_car, most_registrations = counted_cars.max_by { |car, count| count }
 
     "#{most_popular_car}: #{most_registrations} registrations"
   end

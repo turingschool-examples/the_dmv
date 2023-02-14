@@ -17,10 +17,12 @@ RSpec.describe EvAnalyzer do
   end
 
   it 'finds the most registered county' do
+    expect(@analyzer.most_registered_county).to be_a(String)
     expect(@analyzer.most_registered_county).to eq('King county: 523 registrations') #true as of 2/14/23
   end
 
   it 'finds the most popular make/model' do
+    expect(@analyzer.most_popular_car).to be_a(String)
     expect(@analyzer.most_popular_car).to eq("NISSAN Leaf: 210 registrations") #true as of 2/14/23
   end
 end
