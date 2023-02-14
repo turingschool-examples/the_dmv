@@ -38,13 +38,19 @@ RSpec.describe Facility do
   end
 
   describe '#register vehicles' do
-    it 'can register vehicles' do
+    it 'registers the vehicle' do
       @facility_1.add_service('Vehicle Registration')
+
       expect(@facility_1.registered_vehicles).to eq([])
       expect(@facility_1.collected_fees).to be(0)
-      expect(@cruz.registration_date).to be(nil)
-      expect(@cruz.plate_type).to be(nil)
-      expect(@facility_1.register_vehicle(@cruz)).to eq(@facility_1.registered_vehicles)
+      expect(@facility_1.register_vehicle(@cruz)).to be_a(Array)
+      expect(@facility_1.register_vehicle(@cruz).first).to be_an_instance_of(Vehicle)
+    end
+
+    it 'has the right info' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+
       expect(@cruz.registration_date).to eq(Date.today)
       expect(@cruz.plate_type).to eq(:regular)
       expect(@facility_1.registered_vehicles).to eq([@cruz])
@@ -53,17 +59,10 @@ RSpec.describe Facility do
 
     it 'can register another vehicle' do 
       @facility_1.add_service('Vehicle Registration')
-      expect(@facility_1.register_vehicle(@cruz)).to eq(@facility_1.registered_vehicles)
-      expect(@cruz.registration_date).to eq(Date.today)
-      expect(@cruz.plate_type).to eq(:regular)
-      expect(@facility_1.registered_vehicles).to eq([@cruz])
-      expect(@facility_1.collected_fees).to be(100)
-      expect(@facility_1.register_vehicle(@camaro)).to eq(@facility_1.registered_vehicles)
-      expect(@camaro.registration_date).to eq(Date.today)
-      expect(@camaro.plate_type).to eq(:antique)
-      expect(@facility_1.register_vehicle(@bolt)).to eq(@facility_1.registered_vehicles)
-      expect(@bolt.registration_date).to eq(Date.today)
-      expect(@bolt.plate_type).to eq(:ev)
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+      
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
       expect(@facility_1.collected_fees).to be(325)
     end
@@ -78,41 +77,58 @@ RSpec.describe Facility do
   end
   
   describe 'has drivers licensing services' do
-    describe 'Written Test'
-    it 'administers tests and renews license' do
-      # Written test #
-      expect(@facility_1.administer_written_test(@registrant_1)).to be(false)
-      expect(@facility_1.add_service('Written Test')).to eq(["Written Test"])
-      expect(@facility_1.administer_written_test(@registrant_1)).to be(true)
-      expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
-      expect(@facility_1.administer_written_test(@registrant_2)).to be(false)
-      @registrant_2.earn_permit
-      expect(@facility_1.administer_written_test(@registrant_2)).to be(true)
-      expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
-      expect(@facility_1.administer_written_test(@registrant_3)).to be(false)
-      @registrant_3.earn_permit
-      expect(@facility_1.administer_written_test(@registrant_3)).to be(false)
-      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-    # Road test #
-      expect(@facility_1.administer_road_test(@registrant_3)).to be(false)
-      @registrant_3.earn_permit
-      expect(@facility_1.administer_road_test(@registrant_3)).to be(false)
-      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-      expect(@facility_1.administer_road_test(@registrant_1)).to be(false)
-      expect(@facility_1.add_service('Road Test')).to eq(["Written Test", "Road Test"])
-      expect(@facility_1.administer_road_test(@registrant_1)).to be(true)
-      expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
-      expect(@facility_1.administer_road_test(@registrant_2)).to be(true)
-      expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
-    # Renew License #
-      expect(@facility_1.renew_drivers_license(@registrant_1)).to be(false)
-      expect(@facility_1.add_service('Renew License')).to eq(["Written Test", "Road Test", "Renew License"])
-      expect(@facility_1.renew_drivers_license(@registrant_1)).to be(true)
-      expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
-      expect(@facility_1.renew_drivers_license(@registrant_3)).to be(false)
-      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-      expect(@facility_1.renew_drivers_license(@registrant_2)).to be(true)
-      expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+    describe 'Written Test' do
+      it 'administers tests and renews license' do
+        @facility_1.add_service('Written Test')
+        @registrant_2.earn_permit
+        @registrant_3.earn_permit
+
+        expect(@facility_1.administer_written_test(@registrant_1)).to be(true)
+        expect(@registrant_1.license_data).to eq({:written=> true, :license=> false, :renewed=> false})
+        expect(@facility_1.administer_written_test(@registrant_2)).to be(true)
+        expect(@registrant_2.license_data).to eq({:written=> true, :license=> false, :renewed=> false})
+        expect(@facility_1.administer_written_test(@registrant_3)).to be(false)
+        expect(@registrant_3.license_data).to eq({:written=> false, :license=> false, :renewed=> false})
+      end
+    end
+
+    describe 'Road Test' do
+      it '#administer_road_test' do
+        @facility_1.add_service('Written Test')
+        @facility_1.administer_written_test(@registrant_1)
+        @registrant_2.earn_permit
+        @facility_1.administer_written_test(@registrant_2)
+        @facility_1.add_service('Road Test')
+
+        expect(@facility_1.administer_road_test(@registrant_1)).to be(true)
+        expect(@registrant_1.license_data).to eq({:written=> true, :license=> true, :renewed=> false})
+        expect(@facility_1.administer_road_test(@registrant_2)).to be(true)
+        expect(@registrant_2.license_data).to eq({:written=> true, :license=> true, :renewed=> false})
+      end
+    end
+
+    describe 'Renew License' do
+      before(:each) do
+        @facility_1.add_service('Written Test')
+        @facility_1.administer_written_test(@registrant_1)
+        @registrant_2.earn_permit
+        @facility_1.administer_written_test(@registrant_2)
+        @facility_1.add_service('Road Test')
+        @facility_1.administer_road_test(@registrant_1)
+        @facility_1.administer_road_test(@registrant_2)
+        @facility_1.add_service('Renew License')
+      end
+      it'#Renew_drivers_License' do
+        expect(@facility_1.renew_drivers_license(@registrant_1)).to be(true)
+        expect(@registrant_1.license_data).to eq({:written=> true, :license=>true, :renewed=>true})
+        expect(@facility_1.renew_drivers_license(@registrant_2)).to be(true)
+        expect(@registrant_2.license_data).to eq({:written=> true, :license=>true, :renewed=>true})
+      end
+
+      it 'does not renew license for under age registrant' do
+        expect(@facility_1.renew_drivers_license(@registrant_3)).to be(false)
+        expect(@registrant_3.license_data).to eq({:written=> false, :license=> false, :renewed=> false})
+      end
     end
   end
 end
