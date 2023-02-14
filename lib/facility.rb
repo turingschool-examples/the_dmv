@@ -56,8 +56,9 @@ class Facility
     @collected_fees +=
     case plate
       when :antique then 25
+      when :regular then 100
       when :ev then 200
-      else 100
+      else 0
     end
   end
 end
