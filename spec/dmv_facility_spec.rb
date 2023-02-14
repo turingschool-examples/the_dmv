@@ -79,11 +79,34 @@ RSpec.describe DmvFacility do
       expect(dmv_facility.ny_locations.size).to eq(169)
     end
 
-    it 'creates ny, mo, and or using same method' do
+    it 'creates ny, mo, and or facilities using same method' do
       dmv_facility = DmvFacility.new
       ny_facilities = DmvDataService.new.ny_dmv_office_locations
       mo_facilities = DmvDataService.new.mo_dmv_office_locations
       or_facilities = DmvDataService.new.or_dmv_office_locations
+
+      dmv_facility.create_facilities(ny_facilities)
+      dmv_facility.create_facilities(mo_facilities)
+
+      expect(dmv_facility.mo_locations.empty?).to eq(false) 
+      expect(dmv_facility.or_locations.empty?).to eq(true)
+      expect(dmv_facility.mo_locations.size).to eq(178)
+      expect(dmv_facility.ny_locations.size).to eq(169)
+      expect(dmv_facility.locations.size).to eq(347)
+      
+      dmv_facility.create_facilities(or_facilities)
+
+      expect(dmv_facility.or_locations.size).to eq(59)
+      expect(dmv_facility.mo_locations.size).to eq(178)
+      expect(dmv_facility.ny_locations.size).to eq(169)
+      expect(dmv_facility.locations.size).to eq(406)
+      expect(dmv_facility.or_locations.first.address.include?("OR")).to eq(true)
+      expect(dmv_facility.mo_locations.first.address.include?("MO")).to eq(true)
+      expect(dmv_facility.ny_locations.first.address.include?("NY")).to eq(true)
+      expect(dmv_facility.or_locations.last.address.include?("MO")).to eq(false)
+      expect(dmv_facility.mo_locations.last.address.include?("NY")).to eq(false)
+      expect(dmv_facility.ny_locations.last.address.include?("OR")).to eq(false)
+      expect(dmv_facility.locations.all?{|location|location.is_a? Object}).to eq(true)
     end
   end
 end
