@@ -24,7 +24,6 @@ class FacilityFactory
 
   def create_or_facilities(locations)
     locations.map do |location|
-      require 'pry'; binding.pry
       data = location[:location_1][:human_address]
       address = JSON.parse(data, symbolize_names: true)
       location[:name] = location[:title]

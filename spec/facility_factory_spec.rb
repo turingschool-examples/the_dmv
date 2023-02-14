@@ -15,8 +15,16 @@ RSpec.describe FacilityFactory do
   describe '#create_facility' do
     it 'can create a facility' do
       facility_factory = FacilityFactory.new
-      facility1 = {:name=>'Test', :address=>'123 Spring St', :phone=>'(555)123-0987'}
-      facility2 = {:name=>'Test2', :address=>'456 Spruce Ave', :phone=>'(555)465-2049'}
+      facility1 = {
+        :name=>'Test',
+        :address=>'123 Spring St',
+        :phone=>'(555)123-0987'
+      }
+      facility2 = {
+        :name=>'Test2',
+        :address=>'456 Spruce Ave',
+        :phone=>'(555)465-2049'
+      }
       expect(facility_factory.create_facility(facility1)[0]).to be_a(Facility)
       expect(facility_factory.new_facilities[0].name).to eq('Test')
       expect(facility_factory.new_facilities[0].address).to eq('123 Spring St')
