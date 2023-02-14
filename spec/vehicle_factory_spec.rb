@@ -111,8 +111,8 @@ RSpec.describe VehicleFactory do
       expect(actual).to be_a(Hash)
     end
 
-    it 'it has keys that are hashes' do
-      expect(actual.all? { |key, _| key.is_a?(Hash) }).to be(true)
+    it 'it has keys that symbols of the make and model' do
+      expect(actual.all? { |key, _| key.is_a?(Symbol) }).to be(true)
     end
 
     it 'it has values that are integers representing the counts of each key' do
@@ -120,27 +120,38 @@ RSpec.describe VehicleFactory do
     end
   end
 
-  describe '#most_popular_make_model' do
-    actual = factory.most_popular_make_model(wa_ev_vehicles)
-    expected = {
-      make: 'NISSAN',
-      model: 'Leaf'
-    }
+  describe '#counts_hash' do
+    make_model_keys = wa_ev_vehicles.map do |vehicle|
+      :"#{vehicle.make} #{vehicle.model}"
+    end
+    actual = factory.counts_hash(make_model_keys)
 
-    it 'returns a hash' do
+    it 'returns a hash with keys and their respective counts in the array of keys' do
       expect(actual).to be_a(Hash)
     end
 
-    it 'the returned hash has a make symbol key' do
-      expect(actual.key?(:make)).to be(true)
+    it 'has keys that are the same data type as the elements of the array of keys' do
+      make_model_key = factory.make_model_counts(wa_ev_vehicles).keys.first
+
+      expect(actual.keys.all? { |key| key.class == make_model_key.class })
+        .to be(true)
     end
 
-    it 'the returned hash has a model symbol key' do
-      expect(actual.key?(:model)).to be(true)
+    it 'it has values that are integers representing the counts of each key' do
+      expect(actual.all? { |_, value| value.is_a?(Integer) }).to be(true)
     end
 
-    it 'the values of the returned hash are all strings' do
-      expect(actual.values.all? { |value| value.is_a?(String) }).to be(true)
+    it 'returns the correct count for each key' do
+      expect(actual[:'NISSAN Leaf']).to eq(210)
+    end
+  end
+
+  describe '#most_popular_make_model' do
+    actual = factory.most_popular_make_model(wa_ev_vehicles)
+    expected = :'NISSAN Leaf'
+
+    it 'returns a symbol' do
+      expect(actual).to be_a(Symbol)
     end
 
     it 'returns the most popular make/model registered for WA ev data' do
