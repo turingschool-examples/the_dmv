@@ -9,7 +9,7 @@ RSpec.describe DmvFacility do
     end
   end
 
-  describe '#create dmv facility' do
+  describe '#create dmv facility by state' do
     it 'can create or dmv facility objects' do
       dmv_facility = DmvFacility.new
       or_facilities = DmvDataService.new.or_dmv_office_locations
@@ -43,7 +43,7 @@ RSpec.describe DmvFacility do
       expect(dmv_facility.locations.first.address).to be_an_instance_of(String)
       expect(dmv_facility.locations.first.address.include?("NY")).to eq(true)
       expect(dmv_facility.locations.last.address.include?("NY")).to eq(true)
-      expect(dmv_facility.locations.last.address.include?("OR")).to eq(false)
+      expect(dmv_facility.locations.last.address.include?("PG")).to eq(false)
     end
 
    it 'can create mo dmv facility objects' do
@@ -61,8 +61,29 @@ RSpec.describe DmvFacility do
       expect(dmv_facility.locations.first.address).to be_an_instance_of(String)
       expect(dmv_facility.locations.first.address.include?("MO")).to eq(true)
       expect(dmv_facility.locations.last.address.include?("MO")).to eq(true)
-      expect(dmv_facility.locations.last.address.include?("NY")).to eq(false)
-      expect(dmv_facility.locations.last.address.include?("OR")).to eq(false)
+      expect(dmv_facility.locations.last.address.include?("BQ")).to eq(false)
+    end
+  end
+
+  describe '#create objects from different states in one method' do
+    it 'can create ny_dmv_facilities from multiple source method' do
+      dmv_facility = DmvFacility.new
+      ny_facilities = DmvDataService.new.ny_dmv_office_locations
+
+      expect(dmv_facility.locations).to eq([])
+      expect(dmv_facility.ny_locations).to eq([])
+      expect(dmv_facility.create_facilities(ny_facilities)).to be_an_instance_of(Array)
+      expect(dmv_facility.locations.first).to be_an_instance_of(Facility)
+      expect(dmv_facility.ny_locations.first).to be_an_instance_of(Facility)
+      expect(dmv_facility.locations.length).to eq(169) 
+      expect(dmv_facility.ny_locations.size).to eq(169)
+    end
+
+    it 'creates ny, mo, and or using same method' do
+      dmv_facility = DmvFacility.new
+      ny_facilities = DmvDataService.new.ny_dmv_office_locations
+      mo_facilities = DmvDataService.new.mo_dmv_office_locations
+      or_facilities = DmvDataService.new.or_dmv_office_locations
     end
   end
 end
