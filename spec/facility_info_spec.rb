@@ -48,4 +48,8 @@ RSpec.describe FacilityInfo do
       er King Day (01/16/23), Lincoln’s Birthday (02/13/23), President’s Day (02/20/23), Truman’s Birthday (05/08/23), Memorial Day (05/29/23), Independence Day (07/04/23), Labor Day (09/04/23), Columbus Day (10/09/23)
       , Veterans Day (11/10/23), Thanksgiving (11/23/23), Christmas Day Observed (12/25/23)")
   end
+
+  it 'returns error message for NY data' do
+    expect(@facility_info.holidays_closed).to eq('Information not available.')
+  end
 end
