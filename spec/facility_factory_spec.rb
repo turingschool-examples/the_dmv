@@ -7,28 +7,6 @@ RSpec.describe FacilityFactory do
     @new_york_facilities = DmvDataService.new.ny_dmv_office_locations
     @missouri_facilities = DmvDataService.new.mo_dmv_office_locations
 
-    @new_york_facility_1 = {:office_name=>"JAMESTOWN",
-    :office_type=>"COUNTY OFFICE",
-    :public_phone_number=>"7166618220",
-    :street_address_line_1=>"512 WEST 3RD STREET",
-    :city=>"JAMESTOWN",
-    :state=>"NY",
-    :zip_code=>"14701",
-    :monday_beginning_hours=>"8:30 AM",
-    :monday_ending_hours=>"4:15 PM",
-    :tuesday_beginning_hours=>"8:30 AM",
-    :tuesday_ending_hours=>"4:15 PM",
-    :wednesday_beginning_hours=>"8:30 AM",
-    :wednesday_ending_hours=>"4:15 PM",
-    :thursday_beginning_hours=>"8:30 AM",
-    :thursday_ending_hours=>"5:45 PM",
-    :friday_beginning_hours=>"8:30 AM",
-    :friday_ending_hours=>"4:15 PM",
-    :georeference=>{:type=>"Point", :coordinates=>[-79.24796, 42.09526]},
-    :":@computed_region_yamh_8v7k"=>"209",
-    :":@computed_region_wbg7_3whc"=>"1687",
-    :":@computed_region_kjdx_g34t"=>"2035"}
-
     @missouri_facility_1 = {:number=>"153",
     :dorregionnumber=>"10",
     :type=>"1MV",
@@ -118,7 +96,6 @@ RSpec.describe FacilityFactory do
 
   describe 'Oregon helper methods' do
     before(:each) do
-      @oregon = @factory.create_facilities(@oregon_facilities, :OR)
       @oregon_facility_1 = {:title=>"Albany DMV Office",
                             :zip_code=>"97321",
                             :website=>"http://www.oregon.gov/ODOT/DMV/pages/offices/albany.aspx",
@@ -144,9 +121,69 @@ RSpec.describe FacilityFactory do
     end
 
     describe '#or_format_address' do
-      it 'returns a single string with address data' do
-        expect(@factory.or_format_address(@oregon_facilities[0])).to be_a String
-        expect(@factory.or_format_address(@oregon_facilities[0])).to eq("2242 Santiam Hwy SE Albany OR 97321")
+      it 'returns a single string with formatted address data' do
+        expect(@factory.or_format_address(@oregon_facility_1)).to be_a String
+        expect(@factory.or_format_address(@oregon_facility_1)).to eq("2242 Santiam Hwy SE Albany OR 97321")
+      end
+    end
+  end
+
+  describe 'New York helper methods' do
+    before(:each) do
+      @new_york_facility_1 = {:office_name=>"JAMESTOWN",
+      :office_type=>"COUNTY OFFICE",
+      :public_phone_number=>"7166618220",
+      :street_address_line_1=>"512 WEST 3RD STREET",
+      :city=>"JAMESTOWN",
+      :state=>"NY",
+      :zip_code=>"14701",
+      :monday_beginning_hours=>"8:30 AM",
+      :monday_ending_hours=>"4:15 PM",
+      :tuesday_beginning_hours=>"8:30 AM",
+      :tuesday_ending_hours=>"4:15 PM",
+      :wednesday_beginning_hours=>"8:30 AM",
+      :wednesday_ending_hours=>"4:15 PM",
+      :thursday_beginning_hours=>"8:30 AM",
+      :thursday_ending_hours=>"5:45 PM",
+      :friday_beginning_hours=>"8:30 AM",
+      :friday_ending_hours=>"4:15 PM",
+      :georeference=>{:type=>"Point", :coordinates=>[-79.24796, 42.09526]},
+      :":@computed_region_yamh_8v7k"=>"209",
+      :":@computed_region_wbg7_3whc"=>"1687",
+      :":@computed_region_kjdx_g34t"=>"2035"}
+    end
+
+    describe '#ny_standardize_data' do
+      it 'creates an array of hashes' do
+        expect(@factory.ny_standardize_data(@new_york_facilities)).to be_a Array
+        expect(@factory.ny_standardize_data(@new_york_facilities)[0]).to be_a Hash
+      end
+
+      it 'assigns attributes with the correct data' do
+        expect(@factory.ny_standardize_data(@new_york_facilities)[0][:name]).to eq(@factory.ny_format_name(@new_york_facilities[0]))
+        expect(@factory.ny_standardize_data(@new_york_facilities)[0][:phone]).to eq(@factory.ny_format_phone(@new_york_facilities[0]))
+        expect(@factory.ny_standardize_data(@new_york_facilities)[0][:address]).to eq(@factory.ny_format_address(@new_york_facilities[0]))
+      end
+    end
+
+    describe '#ny_format_name' do
+      it 'returns a single string with formatted name data' do
+        expect(@factory.ny_format_name(@new_york_facility_1)).to be_a String
+        expect(@factory.ny_format_name(@new_york_facility_1)).to eq("JAMESTOWN DMV Office")
+      end
+    end
+
+    describe '#ny_format_address' do
+      it 'returns a single string with formatted address data' do
+        expect(@factory.ny_format_address(@new_york_facility_1)).to be_a String
+        expect(@factory.ny_format_address(@new_york_facility_1)).to eq("512 WEST 3RD STREET JAMESTOWN NY 14701")
+      end
+    end
+
+    describe '#ny_format_phone' do
+      it 'returns a single string with a formatted phone number' do
+        expect(@factory.ny_format_phone(@new_york_facility_1)).to be_a String
+        expect(@factory.ny_format_phone(@new_york_facility_1)).to eq("716-661-8220")
       end
     end
   end
