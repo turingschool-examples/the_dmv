@@ -38,5 +38,13 @@ RSpec.describe VehicleFactory do
       expect(@factory.registrations_per_model_year(2016)).to eq(28)
       expect(@factory.registrations_per_model_year(2020)).to eq(27)
     end
+
+    it 'can give county with most vehicles registered' do
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+
+      @factory.create_vehicles(wa_ev_registrations)
+
+      expect(@factory.most_reg_county).to eq("King")
+    end
   end
 end
