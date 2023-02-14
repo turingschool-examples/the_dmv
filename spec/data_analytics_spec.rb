@@ -2,16 +2,41 @@ require 'spec_helper'
 
 RSpec.describe 'Analyize Data' do
   describe 'EV Registration' do
-    xit 'finds the most popular make and model' do
-      # CODE HERE
+    before(:each) do
+      @factory = VehicleFactory.new
+      @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      @wa_vehicles = @factory.create_vehicles(@wa_ev_registrations)
+      
+    end
+    it 'finds the most popular make' do
+      most_popular_make = @factory.most_popular_make(@wa_ev_registrations)
+
+      expect(most_popular_make).to eq("TESLA")
     end
 
-    xit 'counts number of registered vehicles by model year' do
-      # CODE HERE
+    it 'finds the most popular model' do
+      most_popular_model = @factory.most_popular_model(@wa_ev_registrations)
+
+      expect(most_popular_model).to eq("Model 3")
     end
 
-    xit 'finds county that has most registered vehicles' do
-      # CODE HERE
+    it 'finds the most popular make and model' do
+      most_popular_make_and_model = @factory.most_popular_make_model(@wa_ev_registrations)
+
+      expect(most_popular_make_and_model).to eq("TESLA, Model 3")
+    end
+
+    it 'counts number of registered vehicles by model year' do
+      by_year = @factory.registered_vehicles_by_year(@wa_ev_registrations, "2013")
+
+      expect(by_year).to eq(82)
+    end
+
+    it 'finds county that has most registered vehicles' do
+      county_with_most = @factory.most_by_county(@wa_ev_registrations)
+    
+      expect(county_with_most).to be_a(String)
+      expect(county_with_most).to eq("King")
     end
   end
 
@@ -21,7 +46,7 @@ RSpec.describe 'Analyize Data' do
     @new_york_facilities = DmvDataService.new.ny_dmv_office_locations
     @missouri_facilities = DmvDataService.new.mo_dmv_office_locations
     @facility = FacilityConstructor.new  
-  end
+    end
 
     it 'finds daily hours for NY facilities' do
       new_york =  @facility.create_facility(@new_york_facilities)

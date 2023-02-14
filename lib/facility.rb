@@ -83,10 +83,3 @@ class Facility
     end
   end
 end
-        # title: office[:title],
-        # zip_code: office[:zip_code]
-        # website: office[:website],
-        # type: office[:type],
-        # phone_number: office[:phone_number],
-        # agency: office[:agency],
-        # location_1: office[:location_1]
