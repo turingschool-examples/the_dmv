@@ -75,6 +75,13 @@ RSpec.describe Dataset do
   end
 
   describe '#county_with_most_vehicles' do
+    it 'returns a string' do
+      expect(@wa_ev_dataset.county_with_most_vehicles).to be_a String
+    end
 
+    it 'returns a valid county as a value' do
+      counties = @wa_ev_dataset.data.map { |vehicle| vehicle.county }
+      expect(counties).to include(@wa_ev_dataset.county_with_most_vehicles)
+    end
   end
 end
