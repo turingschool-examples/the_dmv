@@ -7,7 +7,6 @@ class Facility
               
   attr_accessor :collected_fees
                 
-
   def initialize(hash)
     @name = hash[:name]
     @address = hash[:address]

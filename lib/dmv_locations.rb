@@ -1,9 +1,9 @@
 class DmvLocations
   attr_reader :dmv_locations
   def initialize
-    @dmv_locations = []
-    
+    @dmv_locations = []  
   end
+
   def create_dmv_locations(location_info_databases)
     location_info_databases.map do |location|
       new_facility = {
@@ -15,7 +15,15 @@ class DmvLocations
     end
     @dmv_locations
   end
-  
-  
+
+  def add_dmv_locations(location_database)
+    location_database.map do |location|
+      location[:address] = location[:street_address_line_1]
+      location[:name] = location[:office_name]
+      location[:phone] = location[:public_phone_number]
+      facility_1 = Facility.new(location)
+      @dmv_locations << facility_1
+    end
+  end
 end
 
