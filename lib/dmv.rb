@@ -22,15 +22,14 @@ class Dmv
 
   def determine_state(list)
     if list.first.key?(:office_name)
-      self.state = "New York"
-    elsif list.first.key?(:title)
-      self.state = "Oregon"
-    elsif list.first.key?(:agent)
-      self.state = "Missouri"
-    else
+        self.state = "New York"
+      elsif list.first.key?(:title)
+        self.state = "Oregon"
+      elsif list.first.key?(:agent)
+        self.state = "Missouri"
+      else
       puts "Unable to determine state"
     end
-
   end
 
   def render_facility_data_ny(list)
@@ -61,7 +60,7 @@ class Dmv
     list.each do |spec|
       rendered_data = {
           name: (spec[:name]),
-          address: "#{spec[:address1]} #{spec[:city]}#{spec[:state]} #{spec[:zipcode]}" ,
+          address: "#{spec[:address1]} #{spec[:city]} #{spec[:state]} #{spec[:zipcode]}" ,
           phone: (spec[:phone]),
         }
       @rendered_facilities << rendered_data
@@ -70,11 +69,15 @@ class Dmv
 
   def create_facilities(list)
     self.determine_state(list)
-    if @state == "New York"
-      self.render_facility_data_ny(list)
-    elsif @state == "Oregon"
-      self.render_facility_data_or(list)
-    end
+      if @state == "New York"
+          self.render_facility_data_ny(list)
+        elsif @state == "Oregon"
+          self.render_facility_data_or(list)
+        elsif @state == "Missouri"
+          self.render_facility_data_mo(list)
+        else
+        puts "Unable to determine state"
+      end
     @rendered_facilities.each do |facility_details|
       @facilities << Facility.new(facility_details)
     end
