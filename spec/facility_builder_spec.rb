@@ -2,7 +2,6 @@ require 'rspec'
 require './lib/facility_builder'
 
 RSpec.describe FacilityBuilder do
-  
   it 'exists' do
     facility = FacilityBuilder.new
 
@@ -13,7 +12,6 @@ RSpec.describe FacilityBuilder do
     facility = FacilityBuilder.new()
     or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
     facility.load_locations(or_dmv_office_locations)
-    # require 'pry'; binding.pry
 
     expect(facility.locations.length).to eq(59)
     expect(facility.locations[0][:name]).to eq("Albany DMV Office")
@@ -25,7 +23,6 @@ RSpec.describe FacilityBuilder do
     facility = FacilityBuilder.new()
     new_york_facilities = DmvDataService.new.ny_dmv_office_locations
     facility.load_locations(new_york_facilities)
-
 
     expect(facility.locations.length).to eq(169)
     expect(facility.locations[0][:name]).to eq("JAMESTOWN")
