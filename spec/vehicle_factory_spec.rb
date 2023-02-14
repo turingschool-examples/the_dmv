@@ -11,7 +11,7 @@ RSpec.describe VehicleFactory do
 
     it 'begins with an empty array' do
       factory = VehicleFactory.new
-      expect(factory.vehicle_registrations).to eq[]
+      expect(factory.vehicle_registrations).to eq([])
     end
 
   end
