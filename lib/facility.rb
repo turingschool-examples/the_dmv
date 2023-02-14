@@ -20,11 +20,6 @@ class Facility
   def add_service(service)
     @services << service
   end
-
-  # def add_date
-  #   @add_date  = add_date
-  #   @registration_date == Date.today
-  # end
   
   def collect_fees(car)
     if car.plate_type == :regular
@@ -46,12 +41,12 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    unless @services.include?('Written Test')
-    # end
-    registrant.permit = true && registrant.age >= 16
-    # @license_data.update(@license_data){ |:written, false| true }
-    registrant.license_data[:written] = false
+    if @services.include?('Written Test') == false
+      false
+    elsif registrant.age < 16 || registrant.permit? != true
+      false
+    else
+      registrant.license_data[:written] = true
     end
   end
-
 end

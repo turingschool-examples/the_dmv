@@ -8,8 +8,6 @@ class Vehicle
                 :model,
                 :engine
 
-              # :plate_type
-
   def initialize(vehicle_details, registration_date = nil, plate_type = nil)
     @vin = vehicle_details[:vin]
     @year = vehicle_details[:year]
@@ -36,5 +34,4 @@ class Vehicle
       @plate_type = :ev
     end
   end
-
 end
