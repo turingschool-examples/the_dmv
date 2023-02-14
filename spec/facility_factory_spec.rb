@@ -68,6 +68,25 @@ RSpec.describe FacilityFactory do
       expect(facility.create_facilities_ny(new_york_facilities)[0].registered_vehicles).to eq(facility_2.registered_vehicles)
       expect(facility.create_facilities_ny(new_york_facilities)[0].collected_fees).to eq(facility_2.collected_fees)
     end
+
+    it 'matches the first facility in the MO data base array' do
+      missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+      facility_3 = Facility.new({
+        :name => "SAINTE GENEVIEVE ",
+        :address => "753 STE. GENEVIEVE DR", 
+        :phone => "(573) 883-2344",
+        :services => [], 
+        :registered_vehicles => [],
+        :collected_fees => 0
+      })
+
+      expect(facility.create_facilities_mo(missouri_facilities)[0].name).to eq(facility_3.name)
+      expect(facility.create_facilities_mo(missouri_facilities)[0].address).to eq(facility_3.address)
+      expect(facility.create_facilities_mo(missouri_facilities)[0].phone).to eq(facility_3.phone)
+      expect(facility.create_facilities_mo(missouri_facilities)[0].services).to eq(facility_3.services)
+      expect(facility.create_facilities_mo(missouri_facilities)[0].registered_vehicles).to eq(facility_3.registered_vehicles)
+      expect(facility.create_facilities_mo(missouri_facilities)[0].collected_fees).to eq(facility_3.collected_fees)
+    end
   end
 end
 
