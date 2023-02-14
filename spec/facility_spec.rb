@@ -35,7 +35,7 @@ RSpec.describe Facility do
       @facility_1.add_service('Vehicle Registration')
     end
 
-    it 'can register vehicle if facility offers the service' do
+    it 'can register vehicle, only if the facility offers the service' do
       expect(@facility_1.registered_vehicles).to eq([])
       expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
       expect(@facility_2.register_vehicle(@cruz)).to eq(nil)
@@ -98,7 +98,7 @@ RSpec.describe Facility do
     end
 
     describe '#administer_written_test' do
-      it 'can be administered if facility offers service' do
+      it 'can be administered, only if facility offers service' do
         expect(@facility_1.administer_written_test(@registrant_1)).to be false
         expect(@facility_2.administer_written_test(@registrant_1)).to be false
 
@@ -150,7 +150,7 @@ RSpec.describe Facility do
 
     describe '#administer_road_test' do
 
-      it 'can be administered if facility offers service' do
+      it 'can be administered, only if facility offers service' do
         expect(@facility_1.administer_road_test(@registrant_1)).to be false
         expect(@facility_2.administer_road_test(@registrant_1)).to be false
 
@@ -199,7 +199,7 @@ RSpec.describe Facility do
     end
 
     describe '#renew_drivers_license' do
-      it 'can be administered if facility offers service' do
+      it 'can be administered, only if facility offers service' do
         @facility_1.add_service('Written Test')
         @facility_1.add_service('Road Test')
         @facility_1.administer_written_test(@registrant_1)
