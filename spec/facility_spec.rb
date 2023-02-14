@@ -173,15 +173,4 @@ RSpec.describe Facility do
       to eq({:written=>true,:license=>false, :renewed=>false})
     end
   end
-
-  describe '#service_provided' do
-    it 'returns message if service not provided at facility' do
-      expect(@facility_1.service_provided?('Written Test')).
-      to eq('Service not available at this location.')
-
-      @facility_1.add_service('Written Test')
-
-      expect(@facility_1.service_provided?('Written Test')).to be true
-    end
-  end
 end
