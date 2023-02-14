@@ -38,8 +38,10 @@ RSpec.describe Registrant do
       registrant_2 = Registrant.new('Penny', 15 )
       registrant_3 = Registrant.new('Lizzy', 16)
       
+      expect(registrant_1.earn_permit).to eq(true)
       expect(registrant_2.earn_permit).to eq(false)
       expect(registrant_3.earn_permit).to eq(true)
+      expect(registrant_1.permit?).to eq(true)
       expect(registrant_2.permit?).to eq(false)
       expect(registrant_3.permit?).to eq(true)
     end
