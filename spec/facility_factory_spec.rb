@@ -1,0 +1,38 @@
+require'spec_helper'
+
+RSpec.describe FacilityFactory do
+  it 'exists' do
+    factory = FacilityFactory.new
+    
+    expect(factory).to be_an_instance_of(FacilityFactory)
+  end
+
+  describe '#creating facility factory' do
+    it 'creates facility instances from or_dmv_office_locations' do
+      factory = FacilityFactory.new
+      or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+      or_facilities = factory.create_facilities(or_dmv_office_locations)
+
+      expect(or_facilities[0].name).to eq(facility_1.name)
+      expect(or_facilities[1].name).to eq(facility_2.name)
+      expect(or_facilities[0].address).to eq(facility_1.address)
+      expect(or_facilities[1].address).to eq(facility_2.address)
+      expect(or_facilities[0].phone).to eq(facility_1.phone)
+      expect(or_facilities[1].phone).to eq(facility_2.phone)
+    end
+  end
+
+  describe 'concatenate facility human_address' do
+    it 'will concatenate the human address of the facility' do
+      factory = FacilityFactory.new
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      human_address = "{\"address\": \"2242 Santiam Hwy SE\", \"city\": \"Albany\", \"state\": \"OR\", \"zip\": \"97321\"}"
+
+      expect(factory.concatenate(human_address)).to eq(facility_1.address)
+    end
+
+
+  end
+end
