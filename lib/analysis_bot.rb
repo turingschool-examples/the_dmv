@@ -35,7 +35,8 @@ class AnalysisBot
     data_set.each do |car_hash|
       counties_hash[car_hash[:county]] += 1
     end
-    require 'pry'; binding.pry
-  
+    counties_hash.sort_by{|k_v_pair| k_v_pair.last}.last[0] 
+    
+    return counties_hash[county]
   end
 end
