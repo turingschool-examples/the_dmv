@@ -4,9 +4,10 @@ class Facility
   attr_reader :name, 
               :address, 
               :phone, 
-              :services,
-              :registered_vehicles,
-              :collected_fees
+              :services
+              
+  attr_accessor :registered_vehicles,
+                :collected_fees
 
   def initialize(facility)
     @name = facility[:name]
@@ -23,7 +24,7 @@ class Facility
 
   def register_vehicle(vehicle)
     return nil unless @services.include?('Vehicle Registration')
-    
+
     if vehicle.antique?
       @collected_fees += 25
       vehicle.plate_type = :antique
@@ -40,23 +41,20 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    if @services.include?('Written Test') && registrant.age >= 16 && registrant.permit
-      registrant.license_data[:written] = true
-    end
-    registrant.license_data[:written]
+    return false unless @services.include?('Written Test') && registrant.age >= 16 && registrant.permit
+    registrant.license_data[:written] = true
+    true
   end
 
   def administer_road_test(registrant)
-    if @services.include?('Road Test') && registrant.license_data[:written]
-      registrant.license_data[:license] = true
-    end
-    registrant.license_data[:license]
+    return false unless @services.include?('Road Test') && registrant.license_data[:written]
+    registrant.license_data[:license] = true
+    true
   end
 
   def renew_drivers_license(registrant)
-    if @services.include?('Renew License') && registrant.license_data[:written] && registrant.license_data[:license]
-      registrant.license_data[:renewed] = true
-    end
-    registrant.license_data[:renewed]
+    return false unless @services.include?('Renew License') && registrant.license_data[:written] && registrant.license_data[:license]
+    registrant.license_data[:renewed] = true
+    true
   end
 end
