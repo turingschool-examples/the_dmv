@@ -27,6 +27,11 @@ RSpec.describe FacilityFactory do
       expect(@factory.create_facilities(@missouri_facilities)).to be_an_instance_of(Array)
       expect(@factory.create_facilities(@missouri_facilities)[0]).to be_an_instance_of(Facility)
     end
+
+    it 'returns error message if method wont work with source' do
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      expect(@factory.create_facilities(wa_ev_registrations)).to eq('Invalid data.')
+    end
   end
 
   describe 'create_or_facility' do
