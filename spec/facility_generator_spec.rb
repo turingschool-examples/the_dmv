@@ -8,14 +8,14 @@ RSpec.describe FacilityGenerator do
   
   describe '#create_facility' do
     it 'returns an array of facilities' do
-      or_facilities = factory.create_facility(or_dmv_office_locations)
-      
+      or_facilities = factory.create_facility_or(or_dmv_office_locations)
+    
       expect(or_facilities).to all(be_a(Facility))
     end
     
     it 'returns an array of facilities but with a different dataset' do
-      ny_facilities = factory.create_facility(ny_dmv_office_locations)
-      
+      ny_facilities = factory.create_facility_ny(ny_dmv_office_locations)
+
       expect(ny_facilities).to all(be_a(Facility))
     end
   end
