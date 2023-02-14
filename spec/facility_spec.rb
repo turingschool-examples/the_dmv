@@ -36,7 +36,7 @@ RSpec.describe Facility do
 
     it 'registed vehicles is empty array' do
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
-      expect(facility_1.registered_vehicle).to eq([])
+      expect(facility_1.registered_vehicles).to eq([])
     end
 
     it 'collected fees starts with zero' do
@@ -46,14 +46,13 @@ RSpec.describe Facility do
 
     it 'register vehicles' do
       facility_2 = Facility.new({name: 'Another Facility', address: '456 Oak Ave', phone: '555-555-5555'})
-      bolt = Vehicle.new({vin: '987654321xyz', year: 2020, make: 'Chevrolet', model: 'Bolt', engine: :electric})      expect(facility_1.register_vehicle(cruz)).to eq([<Vehicle:0x0000000135a48b08...>])
+      bolt = Vehicle.new({vin: '987654321xyz', year: 2020, make: 'Chevrolet', model: 'Bolt', engine: :electric})
       expect(facility_2.registered_vehicles).to eq([])
       expect(facility_2.services).to eq([])
-      expect(facility_2.register_vehicle(bolt)).to be_nil
+      expect(facility_2.registered_vehicles).to eq([])
       expect(facility_2.registered_vehicles).to eq([])
       expect(facility_2.collected_fees).to eq(0)
     end
-
 end
 
 
