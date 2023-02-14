@@ -5,7 +5,6 @@ class VehicleFactory
   end
 
   def create_vehicles(data)
-    vehicles_with_dup = []
     data.each do |car|
       vehicle_details = {
         make: car[:make],
