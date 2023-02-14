@@ -90,6 +90,8 @@ RSpec.describe FacilityFactory do
       
       expect(facility_factory.create_facilities('ca')).to eq('State unavailable!')
       expect(facility_factory.create_facilities('or', new_locations_or)).to be_a(Facility)
+      expect(facility_factory.create_facilities('ny', new_locations_ny)).to be_a(Facility)
+      expect(facility_factory.create_facilities('mo', new_locations_mo)).to be_a(Facility)
     end
   end
 end
