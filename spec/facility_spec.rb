@@ -64,4 +64,22 @@ RSpec.describe Facility do
     end
   end
 
+  it 'can administer written test' do 
+    registrant_1 = Registrant.new('Bruce', 18, true)
+    registrant_2 = Registrant.new('Penny', 15 )
+    @facility.add_service('Written Test')
+
+    expect(@facility.administer_written_test(registrant_1)).to eq true
+    expect(@facility.administer_written_test(registrant_2)).to eq false
+  end
+
+  it 'can administer road test' do 
+    registrant_1 = Registrant.new('Bruce', 18, true)
+    registrant_2 = Registrant.new('Penny', 15 )
+    @facility.add_service('Road Test')
+
+    expect(@facility.administer_road_test(registrant_1)).to eq true
+    expect(@facility.administer_road_test(registrant_2)).to eq false
+  end
+
 end
