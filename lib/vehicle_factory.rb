@@ -1,12 +1,13 @@
 class VehicleFactory
-  attr_reader :vehicles, :create_vehicles, :ny_vehicles
+  attr_reader :vehicles, :create_vehicles, :ny_vehicles, :wa_vehicles
 
   def initialize
     @vehicles = []
     @ny_vehicles = []
+    @wa_vehicles = []
   end
   
-  def create_vehicles(wa_ev_registrations)
+  def create_wa_vehicles(wa_ev_registrations)
     wa_ev_registrations.map do |vehicle|
       vehicle_info = {
         vin: vehicle[:vin_1_10],
@@ -17,7 +18,7 @@ class VehicleFactory
         registration_date: nil,
         plate_type: nil
       }
-      @vehicles << vehicle = Vehicle.new(vehicle_info)
+      @wa_vehicles << vehicle = Vehicle.new(vehicle_info)
     end
   end
 
@@ -42,6 +43,6 @@ class VehicleFactory
         @ny_vehicles << vehicle = Vehicle.new(vehicle_info)
       end
     end
-    @ny_vehicles
+    
   end
 end
