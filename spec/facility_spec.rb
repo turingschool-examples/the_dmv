@@ -32,33 +32,45 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#add_service' do
-    before(:each) do
-      expect(@facility_1.services).to eq([])
-      expect(@facility_2.services).to eq([])
+  describe '#name' do
+    it 'has a name' do
+      expect(@facility_1.name).to eq(FACILITY_1[:name])
+      expect(@facility_2.name).to eq(FACILITY_2[:name])
+    end
+  end
+
+  describe '#address' do
+    it 'has an address' do
+      expect(@facility_1.address).to eq(FACILITY_1[:address])
+      expect(@facility_2.address).to eq(FACILITY_2[:address])
+    end
+  end
+
+  describe '#phone' do
+    it 'has a phone number' do
+      expect(@facility_1.phone).to eq(FACILITY_1[:phone])
+      expect(@facility_2.phone).to eq(FACILITY_2[:phone])
+    end
+  end
+
+  describe '#services' do
+    it 'returns an array' do
+      expect(@facility_1.services).to be_a(Array)
+      expect(@facility_2.services).to be_(Array)
     end
 
-    it 'can add 1 service' do
+    it 'has an array of services that starts empty' do
+      expect(@facility_1.services.empty?).to be(true)
+      expect(@facility_2.services.empty).to be(true)
+    end
+
+    it 'saves services that are added' do
       @facility_1.add_service('New Drivers License')
       expect(@facility_1.services).to eq(['New Drivers License'])
-    end
-
-    it 'can add 2 services' do
-      @facility_1.add_service('New Drivers License')
       @facility_1.add_service('Renew Drivers License')
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License'])
-    end
-
-    it 'can add 3 services' do
-      @facility_1.add_service('New Drivers License')
-      @facility_1.add_service('Renew Drivers License')
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
-    end
-
-    it 'returns an array of strings' do
-      expect(@facility_1.services).to be_a(Array)
-      expect(@facility_1.services.all? { |service| service.is_a?(String) }).to be(true)
     end
   end
 
@@ -120,6 +132,37 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(325)
     end
   end
+
+  describe '#add_service' do
+    before(:each) do
+      expect(@facility_1.services).to eq([])
+      expect(@facility_2.services).to eq([])
+    end
+
+    it 'can add 1 service' do
+      @facility_1.add_service('New Drivers License')
+      expect(@facility_1.services).to eq(['New Drivers License'])
+    end
+
+    it 'can add 2 services' do
+      @facility_1.add_service('New Drivers License')
+      @facility_1.add_service('Renew Drivers License')
+      expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License'])
+    end
+
+    it 'can add 3 services' do
+      @facility_1.add_service('New Drivers License')
+      @facility_1.add_service('Renew Drivers License')
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+    end
+
+    it 'returns an array of strings' do
+      expect(@facility_1.services).to be_a(Array)
+      expect(@facility_1.services.all? { |service| service.is_a?(String) }).to be(true)
+    end
+  end
+
 
   describe '#register_vehicle' do
     before(:each) do
