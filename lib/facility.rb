@@ -27,20 +27,26 @@ class Facility
   # end
 
   def register_vehicle(car)
-    @registered_vehicles.push(car) 
-    # if @services.include?(['Vehicle Registration'])
-    # end
+    if @services.include?('Vehicle Registration')
+      car.registration_date = Date.today
+      car.plate_type
+      collect_fees(car)
+      @registered_vehicles.push(car)
+    end
+    # @registration_date = registration_date
   end
 
-  def collect_fees
-    if @plate_type == :regular
+  # def registration_date
+  # end
+
+  def collect_fees(car)
+    if car.plate_type == :regular
       @collected_fees += 100
-    elsif @plate_type == :ev
+    elsif car.plate_type == :ev
       @collected_fees += 200
-    elsif @plate_type == :antique
+    elsif car.plate_type == :antique
       @collected_fees += 25
     end
-    # collect_fees
   end
 
 end

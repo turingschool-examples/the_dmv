@@ -6,7 +6,8 @@ class Vehicle
               :make,
               :model,
               :engine
-              # :registration_date,
+              
+  attr_accessor :registration_date
               # :plate_type
 
   def initialize(vehicle_details, registration_date = nil, plate_type = nil)
@@ -15,7 +16,7 @@ class Vehicle
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
-    @registration_date = registration_date
+    # @registration_date = registration_date
   end
 
   def antique?
@@ -23,13 +24,13 @@ class Vehicle
     # require 'pry'; binding.pry
   end
 
-  def registration_date
-    if @registered_vehicles != []
-    @registration_date = Date.today
-    elsif @registered_vehicles = []
-    @registration_date = registration_date
-    end
-  end
+  # def registration_date
+  #   if @registered_vehicles != []
+  #   @registration_date = Date.today
+  #   elsif @registered_vehicles = []
+  #   @registration_date = registration_date
+  #   end
+  # end
 
   def electric_vehicle?
     @engine == :ev
