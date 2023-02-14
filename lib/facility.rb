@@ -27,7 +27,7 @@ class Facility
 
   def register_vehicle(vehicle)
     @registered_vehicles.push(vehicle)
-    if self.services.include?('Register a vehicle') == false
+    if services.include?('Register a vehicle') == false
       fee = 0
       return false
     elsif vehicle.antique?
@@ -46,7 +46,7 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    if self.services.include?('Written Test') == false 
+    if services.include?('Written Test') == false 
       return false
     elsif registrant.permit == true && registrant.age >= 16
       registrant.license_data[:written] = true
@@ -56,7 +56,7 @@ class Facility
   end
 
   def administer_road_test(registrant)
-    if self.services.include?('Road Test') == false
+    if services.include?('Road Test') == false
       return false
     elsif registrant.license_data[:written] == true 
       registrant.license_data[:license] = true
@@ -67,7 +67,7 @@ class Facility
   end
 
   def renew_license(registrant)
-    if self.services.include?('Renew License') == false
+    if services.include?('Renew License') == false
       return false
     elsif registrant.license_data[:license] == true
       registrant.license_data[:renewed] = true
