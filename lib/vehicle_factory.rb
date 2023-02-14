@@ -9,6 +9,14 @@ class VehicleFactory
     end
   end
 
+  def get_us_state(vehicle_data)
+    case
+      when vehicle_data&.first&.dig(:state_of_residence) == 'WA' then :WA
+      when vehicle_data&.first&.dig(:state) == 'NY' then :NY
+      else nil
+    end
+  end
+
   def make_model_counts(vehicles)
     make_models = vehicles.map do |vehicle|
       {
@@ -27,13 +35,6 @@ class VehicleFactory
     model_counts.key(max_count)
   end
 
-  def get_us_state(vehicle_data)
-    case
-      when vehicle_data&.first&.dig(:state_of_residence) == 'WA' then :WA
-      when vehicle_data&.first&.dig(:state) == 'NY' then :NY
-      else nil
-    end
-  end
 
   def create_wa_ev_vehicles(vehicle_data)
     vehicle_data.map do |vehicle|
