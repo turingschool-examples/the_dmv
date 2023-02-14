@@ -18,11 +18,24 @@ class AnalysisBot
     years_hash = Hash.new(0)
     years.each do |year| 
       data_set.each do |car|
-        # require 'pry'; binding.pry
         years_hash[year.to_sym] += 1 if car[:model_year] == year
       end
     end
 
     return years_hash[year.to_s.to_sym]
+  end
+
+  def county_highest_registrations(data_set, county)
+    # counties = data_set.map{|car_registrations| car_registrations[:county]}.uniq
+    # counties_hash = Hash.new(0)
+    # counties.each do |county|
+    #   data_set
+
+    counties_hash = Hash.new(0)
+    data_set.each do |car_hash|
+      counties_hash[car_hash[:county]] += 1
+    end
+    require 'pry'; binding.pry
+  
   end
 end
