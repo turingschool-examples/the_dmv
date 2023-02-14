@@ -14,9 +14,14 @@ class VehicleFactory
       @manufactured_vehicle_count += 1
       number = @manufactured_vehicle_count
       vehicle_number = Vehicle.new(vehicle)
-      vehicle_number.vin!(vehicle.fetch(:vin_1_10))
-      vehicle_number.engine!(:ev)
-      vehicle_number.year!(vehicle.fetch(:model_year))
+      if vehicle.has_key?(:vin_1_10) 
+        vehicle_number.vin!(vehicle.fetch(:vin_1_10))
+        vehicle_number.engine!(:ev)
+        vehicle_number.year!(vehicle.fetch(:model_year))
+      else
+        vehicle_number.vin!(vehicle.fetch(:vin))
+        vehicle_number.year!(vehicle.fetch(:model_year))
+      end
       @manufactured_vehicles << vehicle_number
     end
   end
