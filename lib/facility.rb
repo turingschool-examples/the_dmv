@@ -18,7 +18,6 @@ class Facility
 
   def add_service(service)
     @services << service
-    return [service]
   end
   
   def register_vehicle(model)
@@ -34,7 +33,6 @@ class Facility
       @collected_fees += 100
     end
     registered_vehicles << model
-    registered_vehicles
   end
 
   
