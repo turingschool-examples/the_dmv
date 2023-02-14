@@ -10,7 +10,7 @@ RSpec.describe FacilityDmv do
     expect(oregon_facilities.size).to eq(59)
   end
 
-  it 'creates new facility_dmv instances' do
+  it 'creates new OR facility_dmv instances' do
     facility_dmv = FacilityDmv.new
     oregon_facilities = DmvDataService.new.or_dmv_office_locations
 
@@ -26,6 +26,14 @@ RSpec.describe FacilityDmv do
     expect(facility_dmv.or_facilities.count).to eq(59)
   end
 
+  xit 'can convert addressed from API info' do
+    facility_dmv = FacilityDmv.new
+    oregon_facilities = DmvDataService.new.
+
+    facility_dmv.create_or_facility(oregon_facilities)
+    expect(facility_dmv.address_converter)
+  end
+
   it 'exits and pulls NY data from API' do
     facility_dmv = FacilityDmv.new
     new_york_facilities = DmvDataService.new.ny_dmv_office_locations
@@ -35,5 +43,10 @@ RSpec.describe FacilityDmv do
     expect(new_york_facilities.size).to eq(169)
   end
 
+  it 'creates new NY facility_dmv instances' do
+    facility_dmv = FacilityDmv.new
+    new_york_facilities = DmvDataService.new.ny_dmv_office_locations
 
+    expect(facility_dmv.create_ny_facility(new_york_facilities)).to be_an_instance_of(Array)
+  end
 end

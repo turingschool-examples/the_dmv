@@ -118,6 +118,7 @@ RSpec.describe Facility do
     it 'allows registrant_1 to be administered a written test' do
       @facility_1.add_service('Written_Test')
 
+      @facility_1.administer_written_test(@registrant_1)
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
 
       expected = {:written=>true, :license=>false, :renewed=>false}
