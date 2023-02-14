@@ -11,8 +11,6 @@ class FacilityFactory
     end
   end
 
-  private
-
   def get_us_state(facilities_data)
     if (address = facilities_data.first&.dig(:location_1, :human_address))
       facilities_data = [JSON.parse(address, symbolize_names: true)]
