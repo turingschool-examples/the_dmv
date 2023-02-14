@@ -110,6 +110,15 @@ RSpec.describe Facility do
       @facility.administer_road_test(registrant_1)
       expect(registrant_1.license_data).to eq({:written => true, :license => true, :renewed => false})
     end
+
+    it 'renews driver licenses' do
+      @facility.add_service('Renew License')
+      registrant_1 = Registrant.new('Bruce', 18, true)
+      @facility.administer_written_test(registrant_1)
+      @facility.administer_road_test(registrant_1)
+      @facility.renew_drivers_license(registrant_1)
+      expect(registrant_1.license_data).to eq({:written => true, :license => true, :renewed => true})
+    end
   end
 end
 
