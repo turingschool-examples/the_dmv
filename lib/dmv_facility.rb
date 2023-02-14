@@ -10,16 +10,14 @@ class DmvFacility
     @mo_locations = []
     @or_locations = []
   end
-
-  def create_facilities(all_office_locations)
-    office_locations.map do |location| 
-      if location.has_key?(:state) && location[:state] == "NY"
-        create_ny_facilities(office_locations)
-      elsif location.has_key?(:state) && location[:state] == "MO"
-        create_mo_facilities(office_locations)
-      else
-        create_or_facilities(office_locations)
-      end
+  
+  def create_facilities(office_locations)
+    if office_locations.first[:state] == "NY"
+      create_ny_facilities(office_locations)
+    elsif office_locations.first[:state] == "MO"
+      create_mo_facilities(office_locations)
+    else
+      create_or_facilities(office_locations)
     end
   end
 
@@ -30,10 +28,8 @@ class DmvFacility
         address: location[:location_1][:human_address],
         phone: location[:phone_number]
       }
-        @or_locations << Facility.new(new_location)
-      end
-    @or_locations.map do |location|
-      @locations << location 
+      @or_locations << Facility.new(new_location)
+      @locations << Facility.new(new_location)
     end
   end
 
@@ -45,9 +41,7 @@ class DmvFacility
         phone: location[:public_phone_number]
       }
       @ny_locations << Facility.new(new_location)
-      end
-    @ny_locations.map do |location|
-      @locations << location 
+      @locations << Facility.new(new_location)
     end
   end
 
@@ -55,9 +49,7 @@ class DmvFacility
     office_locations.map do |location|
       new_location = {address: location.fetch_values(:address1, :city, :state, :zipcode).join(' ')}
       @mo_locations << Facility.new(new_location)
-    end
-    @mo_locations.map do |location|
-      @locations << location 
+      @locations << Facility.new(new_location)
     end
   end
 end
