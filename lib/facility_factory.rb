@@ -8,6 +8,8 @@ class FacilityFactory
       create_ny_facility(source)
     elsif source.size == 178
       create_mo_facility(source)
+    else
+      'Invalid data.'
     end
   end
 
