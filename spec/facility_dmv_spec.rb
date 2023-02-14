@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe FacilityDmv do
-  it 'exists from API' do
+  it 'exists and pulls OR data from API' do
     facility_dmv = FacilityDmv.new
     oregon_facilities = DmvDataService.new.or_dmv_office_locations
 
@@ -15,7 +15,6 @@ RSpec.describe FacilityDmv do
     oregon_facilities = DmvDataService.new.or_dmv_office_locations
 
     expect(facility_dmv.create_or_facility(oregon_facilities)).to be_an_instance_of(Array)
-    # require 'pry'; binding.pry
   end
 
   it 'can add a facility to the array' do
@@ -26,4 +25,15 @@ RSpec.describe FacilityDmv do
     facility_dmv.create_or_facility(oregon_facilities)
     expect(facility_dmv.or_facilities.count).to eq(59)
   end
+
+  it 'exits and pulls NY data from API' do
+    facility_dmv = FacilityDmv.new
+    new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+
+    expect(facility_dmv).to be_an_instance_of(FacilityDmv)
+    expect(new_york_facilities).to be_an_instance_of(Array)
+    expect(new_york_facilities.size).to eq(169)
+  end
+
+
 end

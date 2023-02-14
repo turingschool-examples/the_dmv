@@ -8,13 +8,9 @@ class FacilityDmv
   def create_or_facility(facility_data)
     facility_data.each do |facility|
       facility_hash = {
-        name: facility[:title],
-        zip_code: facility[:zip_code],
-        website: facility[:website],
-        type: facility[:type],
-        phone: facility[:phone_number],
-        agency: facility[:agency],
-        address: address_converter(facility[:location_1][:human_address])
+        name: facility[:title], 
+        address: address_converter(facility[:location_1][:human_address]),
+        phone: facility[:phone_number]
       
       }
        
@@ -26,4 +22,6 @@ class FacilityDmv
         add_hash = JSON.parse(hash_in_string)
         add_hash.values.join(' ')
   end
+
+  
 end
