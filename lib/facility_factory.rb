@@ -30,6 +30,20 @@ class FacilityFactory
     end
   end
 
+  def create_facilities_mo(data)
+    data.map do |facility|
+      formatted_data = {
+        name: facility[:name],
+        address: facility[:address1],
+        phone: facility[:phone],
+        services: [],
+        registered_vehicles: [],
+        collected_fees: 0
+      }
+      Facility.new(formatted_data)
+    end
+  end
+
 
 
   
