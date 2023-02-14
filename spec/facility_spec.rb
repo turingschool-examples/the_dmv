@@ -84,6 +84,24 @@ RSpec.describe Facility do
       @facility.add_service('Written Test')
       expect(@facility.administer_written_test(registrant_1)).to eq(true)
     end
+
+    it 'does not administer a written test to the ineligible' do
+      registrant_2 = Registrant.new('Penny', 16)
+
+      @facility.add_service('Written Test')
+      expect(@facility.administer_written_test(registrant_2)).to eq(false)
+    end
+
+    it 'can administer a road test, except if ineligible' do
+      @facility.add_service('Written Test')
+      @facility.add_service('Road Test')
+      registrant_1 = Registrant.new('Bruce', 18, true)
+      @facility.administer_written_test(registrant_1)
+      registrant_2 = Registrant.new('Penny', 16)
+
+      expect(@facility.administer_road_test(registrant_1)).to eq(true)
+      expect(@facility.administer_road_test(registrant_2)).to eq(false)
+    end
   end
 end
 
