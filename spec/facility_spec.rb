@@ -67,10 +67,17 @@ RSpec.describe Facility do
     it 'saves services that are added' do
       @facility_1.add_service('New Drivers License')
       expect(@facility_1.services).to eq(['New Drivers License'])
+
       @facility_1.add_service('Renew Drivers License')
-      expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License'])
+      expect(@facility_1.services)
+        .to eq(['New Drivers License', 'Renew Drivers License'])
+        
       @facility_1.add_service('Vehicle Registration')
-      expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+      expect(@facility_1.services).to eq(
+        ['New Drivers License',
+         'Renew Drivers License',
+         'Vehicle Registration'
+      ])
     end
   end
 
