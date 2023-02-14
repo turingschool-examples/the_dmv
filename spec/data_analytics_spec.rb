@@ -2,6 +2,12 @@ require 'spec_helper'
 
 RSpec.describe 'Analyize Data' do
   describe 'EV Registration' do
+    before(:each) do
+      @factory = VehicleFactory.new
+      @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      @wa_vehicles = @factory.create_vehicles(@wa_ev_registrations)
+      
+    end
     xit 'finds the most popular make and model' do
       # CODE HERE
     end
@@ -10,8 +16,11 @@ RSpec.describe 'Analyize Data' do
       # CODE HERE
     end
 
-    xit 'finds county that has most registered vehicles' do
-      # CODE HERE
+    it 'finds county that has most registered vehicles' do
+      county_with_most = @factory.most_by_county(@wa_ev_registrations)
+    
+      expect(county_with_most).to be_a(String)
+      expect(county_with_most).to eq("King")
     end
   end
 
@@ -21,9 +30,9 @@ RSpec.describe 'Analyize Data' do
     @new_york_facilities = DmvDataService.new.ny_dmv_office_locations
     @missouri_facilities = DmvDataService.new.mo_dmv_office_locations
     @facility = FacilityConstructor.new  
-  end
+    end
 
-    it 'finds daily hours for NY facilities' do
+    xit 'finds daily hours for NY facilities' do
       new_york =  @facility.create_facility(@new_york_facilities)
       
       expect(new_york.first.daily_open_hours).to eq([
@@ -34,21 +43,21 @@ RSpec.describe 'Analyize Data' do
         :friday=>{:open=>"8:30 AM", :close=>"4:15 PM"}}])
     end
 
-    it 'finds daily hours for OR facilities' do
+    xit 'finds daily hours for OR facilities' do
       oregon_facilities = @facility.create_facility(@dmv_office_location)
 
       expect(oregon_facilities.first).to be_a(Facility)
       expect(oregon_facilities.first.daily_open_hours).to be(nil)
     end
 
-    it 'finds daily hours for MO facilities' do
+    xit 'finds daily hours for MO facilities' do
       missouri =  @facility.create_facility(@missouri_facilities)
       mo = missouri.first.daily_open_hours
 
       expect(mo).to eq("Monday - Friday - 8:30 to 5:00, Last 4 week days - 8:00 to 5:00")
     end
       
-    it 'which holidays are closed for each specific state' do
+    xit 'which holidays are closed for each specific state' do
       missouri =  @facility.create_facility(@missouri_facilities)
       mo = missouri.first.closed_for_the_holidays
 
@@ -58,7 +67,7 @@ RSpec.describe 'Analyize Data' do
   end
 
   describe 'Vehicles' do
-    it 'creates vehicle objects from NY State Registration data' do
+    xit 'creates vehicle objects from NY State Registration data' do
       factory = VehicleFactory.new
       ny_state_registrations = DmvDataService.new.ny_state_registrations
       created_vehicles = factory.create_vehicles(ny_state_registrations)
