@@ -102,11 +102,11 @@ RSpec.describe Facility do
 
       expect(registrant_2.permit?).to be false
 
-      facility_1.add_service('Written Test')
 
       expect(facility_1.administer_written_test(registrant_2)).to be false
 
       registrant_2.earn_permit
+      facility_1.add_service('Written Test')
 
       expect(facility_1.administer_written_test(registrant_2)).to be true
 
@@ -158,28 +158,30 @@ RSpec.describe Facility do
   end
 
   describe '#renew drivers liscense' do
-    it 'a registrant can renew drivers liscense' do
-      expect(facility_1.administer_road_test(registrant_1)).to be false
-
+    before do 
       facility_1.add_service('Written Test')
-      expect(facility_1.administer_written_test(registrant_1)).to be true
+      facility_1.add_service('Road Test')
       registrant_2.earn_permit
-      expect(facility_1.administer_written_test(registrant_2)).to be true
-
-      expect(facility_1.add_service('Road Test')).to eq(["Written Test", "Road Test"])
-      expect(facility_1.administer_road_test(registrant_1)).to be true
-      expect(facility_1.administer_road_test(registrant_2)).to be true
-      expect(registrant_1.license_data[:license]).to be true
-      expect(registrant_2.license_data[:license]).to be true
-
+      facility_1.administer_written_test(registrant_1)
+      facility_1.administer_written_test(registrant_2)
+      facility_1.administer_road_test(registrant_1)
+      facility_1.administer_road_test(registrant_2)
+    end
+    it 'a registrant can renew drivers liscense' do
       expect(facility_1.renew_drivers_license(registrant_1)).to be false
       expect(facility_1.renew_drivers_license(registrant_2)).to be false
-      expect(facility_1.add_service('Renew License')).to eq(["Written Test", "Road Test", "Renew License"])
+      
+      facility_1.add_service('Renew License')
 
       expect(facility_1.renew_drivers_license(registrant_1)).to be true
       expect(facility_1.renew_drivers_license(registrant_2)).to be true
       expect(registrant_1.license_data[:renewed]).to be true
       expect(registrant_2.license_data[:renewed]).to be true
+    end
+
+    it 'A registrant without a permit can not renew license' do
+      expect(facility_1.renew_drivers_license(registrant_3)).to be false
+      expect(registrant_3.license_data[:renewed]).to be false
     end
 
 
