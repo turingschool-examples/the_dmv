@@ -1,7 +1,6 @@
 class VehicleFactory
 
-  def initialize
-  end
+  def initialize; end
 
   def create_vehicles(source)
     source.map do |car|

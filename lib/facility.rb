@@ -20,16 +20,13 @@ class Facility
   end
 
   def register_vehicle(car)
-    if @services.include?('Vehicle Registration')
-      @registered_vehicles << car
-      car.registration_date = '2/9/2023'
-      # fill in today's date?
-      car.plate_type = check_plate_type(car)
-      @collected_fees += check_registration_fees(car)
-      car
-    else
-      'Service not available at this location.'
-    end
+    return 'Service not available at this location.' unless 
+    @services.include?('Vehicle Registration')
+    @registered_vehicles << car
+    car.registration_date = Date.today.to_s
+    car.plate_type = check_plate_type(car)
+    @collected_fees += check_registration_fees(car)
+    car
   end
 
   def check_plate_type(car)
@@ -53,15 +50,12 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    # get rid of nested if
-    if @services.include?('Written Test')
-      if eligible_for_written_test?(registrant) == true
-        registrant.license_data[:written] = true
-      else 
-        'You are not eligible for a written test.'
-      end
-    else
-      'Service not available at this location.'
+    return 'Service not available at this location.' unless 
+    @services.include?('Written Test')
+    if eligible_for_written_test?(registrant) == true
+      registrant.license_data[:written] = true
+    else 
+      'You are not eligible for a written test.'
     end
   end
 
@@ -70,17 +64,17 @@ class Facility
   end
 
   def administer_road_test(registrant)
-    return 'Service not available here.' unless @services.include?('Road Test') 
+    return 'Service not available at this location.' unless 
+    @services.include?('Road Test') 
     registrant.license_data[:written] ? registrant.
     license_data[:license] = true : 'Need to pass written test first.'
   end
 
   def renew_drivers_license(registrant)
-    return 'Service not available at this location.' unless @services.
-    include?('Renew License')
+    return 'Service not available at this location.' unless 
+    @services.include?('Renew License')
 
     (registrant.license_data[:written] && registrant.license_data[:license]) ? registrant.
     license_data[:renewed] = true : 'Must have license.'
   end
-
 end
