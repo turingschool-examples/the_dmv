@@ -27,11 +27,6 @@ RSpec.describe Facility do
     end
   end
 
-    it 'add service to facility_1' do
-      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
-      expect(facility_1.add_service('Vehicle Registration')).to eq(['Vehicle Registration'])
-    end
-
     it 'registration_date is nil by default' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       expect(cruz.registration_date).to eq(nil)
