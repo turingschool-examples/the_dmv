@@ -10,8 +10,9 @@ class Dmv
   end
 
   def facilities_offering_service(service)
-    @facilities.find_all do |facility|
+    results = @facilities.find_all do |facility|
       facility.services.include?(service)
     end
+    results.empty? ? 'No facility found.' : results
   end
 end

@@ -1,6 +1,5 @@
 class FacilityFactory
-  def initialize
-  end
+  def initialize; end
 
   def create_facilities(source)
     if source.size == 59
@@ -9,6 +8,8 @@ class FacilityFactory
       create_ny_facility(source)
     elsif source.size == 178
       create_mo_facility(source)
+    else
+      'Invalid data.'
     end
   end
 

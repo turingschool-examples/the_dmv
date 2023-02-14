@@ -24,7 +24,7 @@ RSpec.describe Dmv do
   end
 
   describe '#facilities_offering_service' do
-    it 'can return list of facilities offering a specified Service' do
+    it 'can return list of facilities offering given service' do
       @facility_1.add_service('New Drivers License')
       @facility_1.add_service('Renew Drivers License')
       @facility_2.add_service('New Drivers License')
@@ -38,6 +38,10 @@ RSpec.describe Dmv do
       @dmv.add_facility(@facility_3)
 
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
+    end
+
+    it 'returns message if no facility offers given service' do
+      expect(@dmv.facilities_offering_service('Road Test')).to eq('No facility found.')
     end
   end
 end
