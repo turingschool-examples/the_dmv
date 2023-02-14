@@ -14,9 +14,21 @@ class FacilityFactory
       }
       Facility.new(formatted_data)
     end
-
   end
 
+  def create_facilities_ny(data)
+    data.map do |facility|
+      formatted_data = {
+        name: facility[:office_name],
+        address: facility[:street_address_line_1],
+        phone: facility[:public_phone_number],
+        services: [],
+        registered_vehicles: [],
+        collected_fees: 0
+      }
+      Facility.new(formatted_data)
+    end
+  end
 
 
 
