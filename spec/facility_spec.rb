@@ -98,9 +98,17 @@ RSpec.describe Facility do
       registrant_1 = Registrant.new('Bruce', 18, true)
       @facility.administer_written_test(registrant_1)
       registrant_2 = Registrant.new('Penny', 16)
-
       expect(@facility.administer_road_test(registrant_1)).to eq(true)
       expect(@facility.administer_road_test(registrant_2)).to eq(false)
+    end
+
+    it 'changes values in license_data hash' do
+      @facility.add_service('Written Test')
+      @facility.add_service('Road Test')
+      registrant_1 = Registrant.new('Bruce', 18, true)
+      @facility.administer_written_test(registrant_1)
+      @facility.administer_road_test(registrant_1)
+      expect(registrant_1.license_data).to eq({:written => true, :license => true, :renewed => false})
     end
   end
 end
