@@ -1,7 +1,6 @@
 class FacilityFactory
 
   def create_facilities_oregon(facility_database)
-
     facility_instances = []
     facility_database.each do |facility|
      address_data = facility[:location_1][:human_address]
@@ -14,7 +13,6 @@ class FacilityFactory
   end
 
   def create_facilities_new_york(facility_database)
-
     facility_instances = []
     facility_database.each do |facility|
       address = facility[:street_address_line_1],
@@ -25,6 +23,20 @@ class FacilityFactory
       facility_instances.push(Facility.new({name: facility[:office_name], 
                                             address: address.compact.join(' ') , 
                                             phone: facility[:public_phone_number]}))
+    end
+    facility_instances
+  end
+
+  def create_facilities_missouri(facility_database)
+    facility_instances = []
+    facility_database.each do |facility|
+      address = facility[:address1],
+                facility[:city],
+                facility[:state],
+                facility[:zipcode]
+      facility_instances.push(Facility.new({name: facility[:name],
+                                            address: address.compact.join(' '),
+                                            phone: facility[:phone]}))
     end
     facility_instances
   end
