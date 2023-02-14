@@ -61,5 +61,29 @@ RSpec.describe Dmv do
       
     expect(super_dmv.facility_count).to eq(169 + 178 + 59)
     end
+
+    it 'can import facility hours' do
+    super_dmv = Dmv.new
+    oregon_facilities = DmvDataService.new.or_dmv_office_locations
+    new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+    missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+    super_dmv.add_facilities(oregon_facilities)
+    super_dmv.add_facilities(new_york_facilities)
+    super_dmv.add_facilities(missouri_facilities)
+        
+    expect(super_dmv.facilities[352].hours).to eq("Monday - Friday - 8:30 to 5:00, Last 4 week days - 8:00 to 5:00")
+    end
+
+    it 'can import facility holidays' do
+    super_dmv = Dmv.new
+    oregon_facilities = DmvDataService.new.or_dmv_office_locations
+    new_york_facilities = DmvDataService.new.ny_dmv_office_locations      
+    missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+    super_dmv.add_facilities(oregon_facilities)
+    super_dmv.add_facilities(new_york_facilities)
+    super_dmv.add_facilities(missouri_facilities)
+        
+    expect(super_dmv.facilities[352].holidaysclosed).to eq("Independence Day (07/04/22), Labor Day (09/05/22), Columbus Day (10/10/22), Veterans Day (11/11/22), Thanksgiving (11/24/22), Christmas Day Observed (12/26/22), New Year's Day Observed (01/02/23), Martin Luther King Day (01/16/23), Lincoln’s Birthday (02/13/23), President’s Day (02/20/23), Truman’s Birthday (05/08/23), Memorial Day (05/29/23), Independence Day (07/04/23), Labor Day (09/04/23), Columbus Day (10/09/23), Veterans Day (11/10/23), Thanksgiving (11/23/23), Christmas Day Observed (12/25/23)")
+    end
   end
 end

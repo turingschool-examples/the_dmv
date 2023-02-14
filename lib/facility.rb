@@ -9,7 +9,9 @@ class Facility
               :collected_fees,
               :facility_count,
               :facility_list,
-              :zip
+              :zip,
+              :hours,
+              :holidaysclosed
 
   def initialize(information)
     @name = information.fetch(:name)
@@ -20,7 +22,9 @@ class Facility
     @registered_vehicles = []
     @facility_list = []
     @facility_count = 0
-    @zip = zip
+    @zip = information[:zip]
+    @hours = information[:daysopen]
+    @holidaysclosed = information[:holidaysclosed]
   end
 
   def add_service(service)
