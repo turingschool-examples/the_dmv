@@ -97,9 +97,14 @@ RSpec.describe FacilityFactory do
       new_locations_mo = DmvDataService.new.mo_dmv_office_locations
       
       expect(facility_factory.create_facilities('ca')).to eq('State unavailable!')
-      expect(facility_factory.create_facilities('or', new_locations_or)).to be_a(Facility)
-      expect(facility_factory.create_facilities('ny', new_locations_ny)).to be_a(Facility)
-      expect(facility_factory.create_facilities('mo', new_locations_mo)).to be_a(Facility)
+      facility_factory.create_facilities('or', new_locations_or)
+      expect(facility_factory.new_facilities.count).to eq(59)
+      facility_factory.create_facilities('ny', new_locations_ny)
+      expect(facility_factory.new_facilities.count).to eq(228)
+      facility_factory.create_facilities('mo', new_locations_mo)
+      expect(facility_factory.new_facilities.count).to eq(406)
+      expect(facility_factory.new_facilities).to all(be_a Facility)
+    
     end
   end
 end
