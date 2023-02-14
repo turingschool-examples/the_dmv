@@ -26,7 +26,7 @@ class Facility
       vehicle.set_plate_type
       @collected_fees += vehicle.set_fees
     else
-      "service not provided at this location"
+      false
     end
   end
 
@@ -47,7 +47,6 @@ class Facility
   end
 
   def renew_drivers_license(person)
-    # require 'pry'; binding.pry
     if administer_road_test(person)
       person.license_data[:renewed] = true
     else

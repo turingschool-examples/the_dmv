@@ -101,7 +101,7 @@ RSpec.describe Facility do
     it 'facility_2 starts with no services, vehicles, or fees' do
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.services).to eq([])
-      expect(@facility_2.register_vehicle(@bolt)).to eq("service not provided at this location")
+      expect(@facility_2.register_vehicle(@bolt)).to eq(false)
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.collected_fees).to eq(0)
     end
@@ -118,7 +118,7 @@ RSpec.describe Facility do
     it 'allows registrant_1 to be administered a written test' do
       @facility_1.add_service('Written_Test')
 
-      # @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_written_test(@registrant_1)
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
 
       expected = {:written=>true, :license=>false, :renewed=>false}
@@ -134,13 +134,14 @@ RSpec.describe Facility do
       expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
     end
 
-    it 'registrant_2 can ear their permit and take written test' do
+    it 'registrant_2 can earn their permit and take written test' do
       @facility_1.add_service('Written_Test')
       @registrant_2.earn_permit
 
       expect(@facility_1.administer_written_test(@registrant_2)).to eq(true)
 
       expected = {:written=>true, :license=>false, :renewed=>false}
+
       expect(@registrant_2.license_data).to eq(expected)
     end
 
@@ -169,7 +170,6 @@ RSpec.describe Facility do
       @facility_1.add_service('Road Test')
       
       expect(@facility_1.services).to match_array(['Written_Test', 'Road Test',])
-
       expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
 
       @registrant_3.earn_permit
@@ -192,7 +192,6 @@ RSpec.describe Facility do
       @facility_1.add_service('Renew Drivers License')
 
       expect(@facility_1.services).to match_array(["Written_Test", "Road Test", "Renew Drivers License"])
-
       expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(true)
 
       expected = {:written=>true, :license=>true, :renewed=>true}
