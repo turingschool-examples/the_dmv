@@ -4,9 +4,6 @@ class FacilityFactory
 
   @@valid_states = %i[MO NY OR]
 
-  def initialize
-  end
-
   def create_facilities(facility_data, state)
     return "Sorry, this state is not yet supported." if !@@valid_states.include?(state)
 
