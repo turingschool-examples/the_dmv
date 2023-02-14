@@ -9,11 +9,6 @@ RSpec.describe VehicleFactory do
       expect(factory).to be_a(VehicleFactory)
     end
 
-    # it 'begins with an empty array' do
-    #   factory = VehicleFactory.new
-    #   expect(factory.vehicle_registrations).to eq([])
-    # end
-
   end
     
   describe '#factory is operative' do
@@ -27,8 +22,9 @@ RSpec.describe VehicleFactory do
     it 'vehicles have vin numbers' do
       factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-      vehicle = factory.create_vehicles(wa_ev_registrations)
-      expect(vehicle.vin).to eq([:vin_1_10])
+      factory.create_vehicles(wa_ev_registrations)
+      expect(@vin).to eq([:vin_1_10])
+      require 'pry'; binding.pry
     end
   end
 end
