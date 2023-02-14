@@ -4,8 +4,10 @@ class VehicleFactory
               :make,
               :model,
               :engine,
+              :locations
               
   def initialize
+    @locations = []
   end
 
   def create_vehicles(dmv_data)
@@ -23,38 +25,35 @@ class VehicleFactory
   end   
 
   def create_facilities(dmv_locations)
-    locations = []
     dmv_locations.map do |location|
-      locations << Facility.new(
+      @locations << Facility.new(
         address: location[:title],
         phone: location[:zip_code],
         name: location[:agency],
       )
     end
-    locations
+    @locations
   end
 
   def create_mo_facility(dmv_locations)
-    mo_locations = []
     dmv_locations.map do |location|
-      mo_locations << Facility.new(
+      @locations << Facility.new(
         address: location[:address1],
         phone: location[:phone],
         name: location[:name],
       )
     end
-    mo_locations
+    @locations
   end
 
   def create_ny_facility(dmv_locations)
-    ny_locations = []
     dmv_locations.map do |location|
-      ny_locations << Facility.new(
+      @locations << Facility.new(
         address: location[:street_address_line_1],
         phone: location[:public_phone_number],
         name: location[:office_name],
       )
     end
-    ny_locations
+    @locations
   end
 end
