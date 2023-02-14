@@ -2,12 +2,20 @@ require './lib/vehicle'
 
 class VehicleFactory
   def create_vehicles(vehicles_data)
-    # I am only doing it this way to maintain the interaction pattern
-    # from the end of iteration 2 where this method has no 2nd argument
-    if vehicles_data.first[:state_of_residence] == 'WA'
-      return create_wa_ev_vehicles(vehicles_data)
-    else
-      return create_ny_vehicles(vehicles_data)
+    case get_us_state(vehicles_data)
+      when :WA then create_wa_ev_vehicles(vehicles_data)
+      when :NY then create_ny_vehicles(vehicles_data)
+      else nil
+    end
+  end
+
+  private
+
+  def get_us_state(vehicles_data)
+    case
+      when vehicles_data&.first&.dig(:state_of_residence) == 'WA' then :WA
+      when vehicles_data&.first&.dig(:state) == 'NY' then :NY
+      else nil
     end
   end
 
