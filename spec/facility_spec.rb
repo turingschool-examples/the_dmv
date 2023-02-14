@@ -112,6 +112,8 @@ RSpec.describe Facility do
     end
 
     it 'renews driver licenses' do
+      @facility.add_service('Written Test')
+      @facility.add_service('Road Test')
       @facility.add_service('Renew License')
       registrant_1 = Registrant.new('Bruce', 18, true)
       @facility.administer_written_test(registrant_1)
