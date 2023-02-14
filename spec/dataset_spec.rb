@@ -50,13 +50,15 @@ RSpec.describe Dataset do
 
   describe '#most_popular_make_model' do
     it 'returns a string with vehicle make and model' do
-      expect(@wa_ev_dataset.most_popular_make_model).to be_a String
-      expect(@wa_ev_dataset.most_popular_make_model).to_not be ("")
+      expect(@wa_ev_dataset.most_popular_make_model).to be_a Array
+      expect(@wa_ev_dataset.most_popular_make_model).to_not be ([])
     end
 
     it 'includes both make and model attributes' do
-      expected = @wa_ev_dataset.most_popular_make_model
-      expect(expected.split(" ").count).to eq(2)
+      makes = @wa_ev_dataset.data.map { |vehicle| vehicle.make }
+      models = @wa_ev_dataset.data.map { |vehicle| vehicle.model }
+      expect(makes).to include(@wa_ev_dataset.most_popular_make_model[0])
+      expect(models).to include(@wa_ev_dataset.most_popular_make_model[1])
     end
   end
 
