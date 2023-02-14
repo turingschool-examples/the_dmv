@@ -30,9 +30,9 @@ RSpec.describe Facility do
     it 'can register a vehicle' do
       facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
 
-      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
-      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
-      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+      camaro = Vehicle.new({vin_1_10: '1a2b3c4d5e6f', model_year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+      bolt = Vehicle.new({vin_1_10: '987654321abcdefgh', model_year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
+      cruz = Vehicle.new({vin_1_10: '123456789abcdefgh', model_year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
       
       expect(@facility.register_vehicle(cruz)).to eq('This facility does not perform vehicle registration')
       expect(@facility.register_vehicle(bolt)).to eq('This facility does not perform vehicle registration')
