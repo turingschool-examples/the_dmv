@@ -2,10 +2,12 @@ class FacilityFactory
 
   def create_facilities_oregon(facility_database)
 
-    vehicle_instances = []
-    vehicle_database.each do |vehicle|
-      vehicle_instances.push(Vehicle.new({vin: vehicle[:vin_1_10], year: vehicle[:model_year], make: vehicle[:make], model:  vehicle[:model], engine: :ev}))
+    facility_instances = []
+    facility_database.each do |facility|
+     address_data = facility[:location_1][:human_address]
+     address = JSON.parse(address_data)
+      facility_instances.push(Facility.new({name: facility[:title], address: address.values.join(' ') , phone: facility[:phone_number]}))
     end
-    vehicle_instances
+    facility_instances
   end
 end
