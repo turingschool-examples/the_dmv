@@ -52,6 +52,7 @@ RSpec.describe FacilityDmv do
     expect(facility_dmv.create_ny_facility(new_york_facilities)).to be_an_instance_of(Array)
     expect(facility_dmv.create_ny_facility(new_york_facilities)[0][:office_name]).to eq("JAMESTOWN")
     expect(facility_dmv.create_ny_facility(new_york_facilities)[1][:office_name]).to eq("SARATOGA SPRINGS - WILTON")
+    expect(facility_dmv.ny_facilities[0].name).to eq("JAMESTOWN")
   end
 
   it 'exits and pulls MO data from API' do
@@ -61,5 +62,14 @@ RSpec.describe FacilityDmv do
     expect(facility_dmv).to be_an_instance_of(FacilityDmv)
     expect(missouri_facilities).to be_an_instance_of(Array)
     expect(missouri_facilities.size).to eq(178)
+  end
+
+  it 'creates new MO facility_dmv instances' do
+    facility_dmv = FacilityDmv.new
+    missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+
+    expect(facility_dmv.create_mo_facility(missouri_facilities)).to be_an_instance_of(Array)
+    expect(facility_dmv.create_mo_facility(missouri_facilities)[0][:name]).to eq("SAINTE GENEVIEVE ")
+    expect(facility_dmv.create_mo_facility(missouri_facilities)[0][:state]).to eq("MO")
   end
 end

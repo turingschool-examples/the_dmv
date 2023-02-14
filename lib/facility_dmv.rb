@@ -1,11 +1,13 @@
 class FacilityDmv
   attr_reader :or_facilities,
-              :ny_facilities
+              :ny_facilities,
+              :mo_facilities
 
 
   def initialize
     @or_facilities = []
     @ny_facilities = []
+    @mo_facilities = []
   end
 
   def create_or_facility(facility_data)
@@ -33,16 +35,37 @@ class FacilityDmv
       facility_hash = {
 
         name: facility[:office_name],
-        phone: (facility[:public_phone_number]),
+        phone: facility[:public_phone_number.to_s.insert(3, '-').insert(-5, '-')],
         address: "#{facility[:street_address_line_1]} #{facility[:city]} #{facility[:state]}, #{facility[:zip_code]}" 
 
       }
       @ny_facilities << Facility.new(facility_hash)
+      # require 'pry'; binding.pry
     end
   end
-    def phone_converter(api_info)
+
+  def phone_converter(api_info)
       # require 'pry'; binding.pry
-      api_info.insert(3, '-').insert(-5, '-')
+    api_info.to_s.insert(3, '-').insert(-5, '-')
+  end
+
+  def create_mo_facility(facility_data)
+    facility_data.each do |facility|
+      facility_hash = {
+        name: facility[:name].rstrip,
+        phone: facility[:phone],
+        address: "#{facility[:address1]}, #{facility[:city].rstrip}, #{facility[:state]} #{facility[:zipcode]}"
+      }
+
+      @mo_facilities << Facility.new(facility_hash)
+
     end
 
+    # def mo_phone_converter(api_info)
+      
+    #   require 'pry'; binding.pry
+
+    # end
+
+  end
 end
