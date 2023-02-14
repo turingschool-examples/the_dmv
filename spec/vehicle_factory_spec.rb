@@ -46,8 +46,8 @@ RSpec.describe VehicleFactory do
       factory = VehicleFactory.new
       ny_registrations = DmvDataService.new.ny_registrations
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-      factory.create_vehicles(ny_registrations)
       factory.create_vehicles(wa_ev_registrations)
+      factory.create_vehicles(ny_registrations)
 
       expect(factory.wa_vehicles).to be_a(Array)
       expect(factory.wa_vehicles.first).to be_a(Vehicle)
@@ -57,14 +57,14 @@ RSpec.describe VehicleFactory do
       expect(factory.wa_vehicles.first.vin).to eq('JTDKN3DP8D')
       expect(factory.wa_vehicles.first.year).to eq('2013')
 
-      # expect(factory.ny_vehicles).to be_a(Array)
-      # expect(factory.ny_vehicles.first).to be_a(Vehicle)
-      # expect(factory.ny_vehicles.length).to eq(250)
-      # expect(factory.ny_vehicles.first.make).to eq('CHRY')
-      # expect(factory.ny_vehicles.first.engine).to eq('GAS')
-      # expect(factory.ny_vehicles.first.model).to eq('4DSD')
-      # expect(factory.ny_vehicles.first.vin).to eq('9999236')
-      # expect(factory.ny_vehicles.first.year).to eq('1937')
+      expect(factory.ny_vehicles).to be_a(Array)
+      expect(factory.ny_vehicles.first).to be_a(Vehicle)
+      expect(factory.ny_vehicles.length).to eq(250)
+      expect(factory.ny_vehicles.first.make).to eq('CHRY')
+      expect(factory.ny_vehicles.first.engine).to eq('GAS')
+      expect(factory.ny_vehicles.first.model).to eq('4DSD')
+      expect(factory.ny_vehicles.first.vin).to eq('9999236')
+      expect(factory.ny_vehicles.first.year).to eq('1937')
     end
   end
 end

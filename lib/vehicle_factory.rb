@@ -7,6 +7,17 @@ class VehicleFactory
     @wa_vehicles = []
   end
   
+  def create_vehicles(vehicles)
+# require 'pry'; binding.pry
+    if vehicles.first[:state] == 'NY'
+      create_ny_vehicles(vehicles)
+    elsif vehicles[0][:state_of_residence] == 'WA'
+      create_wa_vehicles(vehicles)
+    end
+  end
+  
+  #Helper Methods
+  
   def create_wa_vehicles(wa_ev_registrations)
     wa_ev_registrations.map do |vehicle|
       vehicle_info = {
@@ -21,16 +32,11 @@ class VehicleFactory
       @wa_vehicles << vehicle = Vehicle.new(vehicle_info)
     end
   end
-
-  
-  #Helper Methods
-  
-  # def create_wa_vehicles(wa_ev_registrations)
-    
-  # end
   
   def create_ny_vehicles(ny_registrations)
+    # require 'pry'; binding.pry
     ny_registrations.select do |vehicle|
+      # require 'pry'; binding.pry
       if vehicle[:record_type] == 'VEH'        
         vehicle_info = {
           :vin => vehicle[:vin],
@@ -41,6 +47,7 @@ class VehicleFactory
           :record_type => vehicle[:record_type]
           }
         @ny_vehicles << vehicle = Vehicle.new(vehicle_info)
+        @ny_vehicles
       end
     end
     
