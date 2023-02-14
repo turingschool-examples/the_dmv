@@ -31,7 +31,7 @@ RSpec.describe Dmv do
     describe '@create facilities ny' do
         it 'can create facilities for ny' do
             @facility_1 = Facility.new({name: 'JAMESTOWN', address: '512 WEST 3RD STREET JAMESTOWN NY 14701', phone: '7166618220' })
-            @facility_2 = Facility.new({name: 'ARATOGA SPRINGS - WILTON', address: '3065 ROUTE 50 WILTON MALL SARATOGA SPRINGS NY 12866', phone: '5185847403' })
+            @facility_2 = Facility.new({name: 'SARATOGA SPRINGS - WILTON', address: '3065 ROUTE 50 SARATOGA SPRINGS NY 12866', phone: '5185847403' })
             @created_facilities_ny = @location.create_facilities_ny(@ny_facility)
             expect(@created_facilities_ny[0].name).to eq(@facility_1.name)
             expect(@created_facilities_ny[1].name).to eq(@facility_2.name)
