@@ -84,7 +84,6 @@ RSpec.describe Facility do
       expect(facility_1.collected_fees).to eq(0)
     end
   end
-
   describe "#register a vehicle at facillity 1" do
     it "shows registering a cruz at facility_1" do
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
@@ -93,11 +92,9 @@ RSpec.describe Facility do
 
       expect(facility_1.register_vehicle(cruz)).to eq([cruz])
       expect(facility_1.registered_vehicles).to eq([cruz])
-      # require 'pry'; binding.pry
       expect(cruz.registration_date).to eq(Date.today)
       expect(cruz.plate_type).to eq(:regular)
       expect(facility_1.collected_fees).to eq(100)
-      
     end
   
     it "shows registering a bolt at facility_1" do

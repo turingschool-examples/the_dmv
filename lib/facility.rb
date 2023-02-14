@@ -20,7 +20,7 @@ class Facility
   def add_service(service)
     @services << service
   end
-  
+
   def collect_fees(car)
     if car.plate_type == :regular
       @collected_fees += 100
