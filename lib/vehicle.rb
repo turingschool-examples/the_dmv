@@ -32,6 +32,7 @@ class Vehicle
 
   def electric_vehicle?
     @engine = :ev if @engine.to_s.downcase.include?("electric") || @engine == :ev
+    @engine == :ev
   end
 
 

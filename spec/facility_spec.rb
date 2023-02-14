@@ -134,5 +134,4 @@ end
       expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
-
 end
