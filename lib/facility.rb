@@ -43,4 +43,9 @@ class Facility
     # collect_fees
   end
 
+  def administer_written_test(registrant)
+    
+    
+  end
+
 end

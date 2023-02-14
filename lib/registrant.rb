@@ -16,7 +16,7 @@ class Registrant
   # @written = @license_data[:written] 
   # @license = @license_data[:license]
   # @renewed = @license_data[:renewed] maybe try this!
-  # require 'pry'; binding.pry
+  require 'pry'; binding.pry
   end
 
   def permit?
