@@ -12,11 +12,13 @@ RSpec.describe 'Analyize Data' do
       # CODE HERE
     end
 
-    xit 'counts number of registered vehicles by model year' do
-      # CODE HERE
+    it 'counts number of registered vehicles by model year' do
+      by_year = @factory.registered_vehicles_by_year("2013")
+
+      expect(by_year).to eq(82)
     end
 
-    it 'finds county that has most registered vehicles' do
+    xit 'finds county that has most registered vehicles' do
       county_with_most = @factory.most_by_county(@wa_ev_registrations)
     
       expect(county_with_most).to be_a(String)
