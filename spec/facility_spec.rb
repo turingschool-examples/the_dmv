@@ -78,20 +78,43 @@ RSpec.describe Facility do
       expect(@registrant_1.permit?).to eq(true)
     end
   
-    it 'administer_written_test' do
-      expect(@facility.administer_written_test(@registrant_1)).to eq(false)
-      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-      @facility.add_service('Written Test')
-      expect(@facility.administer_written_test(@registrant_1)).to eq(true)
-      expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
-      expect(@facility.administer_written_test(@registrant_2)).to eq(false)
-      @registrant_2.earn_permit
-      expect(@facility.administer_written_test(@registrant_2)).to eq(true)
-      expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
-      expect(@facility.administer_written_test(@registrant_3)).to eq(false)
+    describe '#administerad_written_test' do
+      it 'requires a facility that administerad_written_test' do
+        expect(@facility.administer_written_test(@registrant_1)).to eq(false)
+        expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+        @facility.add_service('Written Test')
+        expect(@facility.administer_written_test(@registrant_1)).to eq(true)
+        expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+      end  
+
+      it 'testing to see if registrant has a peermit' do
+        @facility.add_service('Written Test')
+        expect(@facility.administer_written_test(@registrant_2)).to eq(false)
+        @registrant_2.earn_permit
+        expect(@facility.administer_written_test(@registrant_2)).to eq(true)
+        expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+      end  
+
+      it 'testing for correct age requirement' do
+        @facility.add_service('Written Test')
+        expect(@registrant_3.age).to eq(15)
+        expect(@facility.administer_written_test(@registrant_3)).to eq(false)
+        @registrant_3.earn_permit
+        expect(@facility.administer_written_test(@registrant_3)).to eq(false)
+      end
+    end    
+  end
+
+  describe '#Road Test' do
+    it 'road_test' do
+      expect(@facility.administer_road_test(@registrant_3)).to eq(false)
       @registrant_3.earn_permit
-      expect(@facility.administer_written_test(@registrant_3)).to eq(false)
+      expect(@facility.administer_road_test(@registrant_3)).to eq(false)
+      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      
     end
   end
+
+
 end
 # require'pry';binding.pry

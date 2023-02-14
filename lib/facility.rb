@@ -38,7 +38,13 @@ class Facility
     end
   end
 
-
+  def administer_road_test(registrant)
+    if @services.include?('Road Test') && registrant.passed_written_test
+      true
+    else
+      false
+    end
+  end
 end
 
 # require'pry';binding.pry
