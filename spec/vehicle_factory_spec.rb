@@ -108,6 +108,20 @@ RSpec.describe VehicleFactory do
     end
   end
 
+  describe '#get_us_state' do
+    it 'returns the :WA symbol for Washington state vehicle data' do
+      expect(factory.get_us_state(wa_ev_registrations)).to be(:WA)
+    end
+
+    it 'returns the :NY symbol for New York state vehicle data' do
+      expect(factory.get_us_state(ny_registrations)).to be(:NY)
+    end
+
+    it 'returns nil for any other invalid vehicle data' do
+      expect(factory.get_us_state([])).to be(nil)
+    end
+  end
+
   describe '#most_popular_make_model' do
     actual = factory.most_popular_make_model(wa_ev_vehicles)
     expected = {
