@@ -13,7 +13,7 @@ RSpec.describe VehicleAnalyzer do
     expect(@analyzer.count_model_year(2020)).to eq(88) #true as of 2/14/23
     expect(@analyzer.count_model_year(2015)).to eq(84) #true as of 2/14/23
     expect(@analyzer.count_model_year(2012)).to eq(38) #true as of 2/14/23
-    expect(@analyzer.count_model_year("2012")).to eq(0)
+    expect(@analyzer.count_model_year("2012")).to eq(38)
   end
 
   it 'finds the most registered county' do
