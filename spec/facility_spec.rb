@@ -63,14 +63,23 @@ RSpec.describe Facility do
   end
 
   describe '#registered_vehicles' do
+    it 'starts empty' do
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_2.registered_vehicles).to eq([])
+    end
+
     it 'returns an array' do
       expect(@facility_1.registered_vehicles).to be_a(Array)
       expect(@facility_2.registered_vehicles).to be_a(Array)
     end
 
-    it 'starts empty' do
-      expect(@facility_1.registered_vehicles).to eq([])
-      expect(@facility_2.registered_vehicles).to eq([])
+    it 'contains an array of Vehicle objects' do
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@camaro)
+      expect(@facility_1.registered_vehicles.all? do |vehicle|
+        vehicle.is_a?(Vehicle)
+      end).to be(true)
     end
   end
 
@@ -340,6 +349,40 @@ RSpec.describe Facility do
 
     it 'returns true if the license renewal is successful' do
       expect(@facility_1.renew_drivers_license(@registrant_1)).to be(true)
+    end
+  end
+
+  describe '#collect_fee' do
+    it 'adds 25 to @collected_fees for an antique plate' do
+      expect(@facility_1.collected_fees).to be(0)
+      @facility_1.collect_fee(:antique)
+      expect(@facility_1.collected_fees).to be(25)
+      @facility_1.collect_fee(:antique)
+      expect(@facility_1.collected_fees).to be(50)
+    end
+
+    it 'adds 100 to @collected_fees for a regular plate' do
+      expect(@facility_1.collected_fees).to be(0)
+      @facility_1.collect_fee(:regular)
+      expect(@facility_1.collected_fees).to be(100)
+      @facility_1.collect_fee(:regular)
+      expect(@facility_1.collected_fees).to be(200)
+    end
+
+    it 'adds 200 to @collected_fees for an ev plate' do
+      expect(@facility_1.collected_fees).to be(0)
+      @facility_1.collect_fee(:ev)
+      expect(@facility_1.collected_fees).to be(200)
+      @facility_1.collect_fee(:ev)
+      expect(@facility_1.collected_fees).to be(400)
+    end
+
+    it 'adds 0 for any invalid plate type' do
+      expect(@facility_1.collected_fees).to be(0)
+      @facility_1.collect_fee('ev')
+      expect(@facility_1.collected_fees).to be(0)
+      @facility_1.collect_fee(25)
+      expect(@facility_1.collected_fees).to be(0)
     end
   end
 end
