@@ -24,11 +24,11 @@ RSpec.describe VehicleFactory do
 
     expect(factory).to be_an_instance_of(VehicleFactory)
         
-    locations = factory.create_facilities(or_dmv_office_locations)
-   
-    expect(locations[0].address).to eq("Albany DMV Office")
-    expect(locations[0].phone).to eq("97321")
-    expect(locations[0].name).to eq("Transportation, Department of ")
+    @locations = factory.create_facilities(or_dmv_office_locations)
+
+    expect(@locations[0].address).to eq("Albany DMV Office")
+    expect(@locations[0].phone).to eq("97321")
+    expect(@locations[0].name).to eq("Transportation, Department of ")
   end
 
   it 'access data from another dmv #new york' do
@@ -37,11 +37,10 @@ RSpec.describe VehicleFactory do
 
     expect(factory).to be_an_instance_of(VehicleFactory)
     
-    ny_locations = factory.create_ny_facility(new_york_facilities)
-
-    expect(ny_locations[0].address).to eq("512 WEST 3RD STREET")
-    expect(ny_locations[0].phone).to eq("7166618220")
-    expect(ny_locations[0].name).to eq("JAMESTOWN")
+    @locations = factory.create_ny_facility(new_york_facilities)
+    expect(@locations[0].address).to eq("512 WEST 3RD STREET")
+    expect(@locations[0].phone).to eq("7166618220")
+    expect(@locations[0].name).to eq("JAMESTOWN")
   end
 
   it 'access data from another dmv #missouri' do
@@ -50,10 +49,10 @@ RSpec.describe VehicleFactory do
 
     expect(factory).to be_an_instance_of(VehicleFactory)
     
-    mo_locations = factory.create_mo_facility(missouri_facilities)
+    @locations = factory.create_mo_facility(missouri_facilities)
     
-    expect(mo_locations[0].phone).to eq("(573) 883-2344")
-    expect(mo_locations[0].name).to eq("SAINTE GENEVIEVE ")
-    expect(mo_locations[0].address).to eq("753 STE. GENEVIEVE DR")
+    expect(@locations[0].phone).to eq("(573) 883-2344")
+    expect(@locations[0].name).to eq("SAINTE GENEVIEVE ")
+    expect(@locations[0].address).to eq("753 STE. GENEVIEVE DR")
   end
 end
