@@ -7,9 +7,9 @@ RSpec.describe FacilityFactory do
 
   factory = FacilityFactory.new
 
-  oregon_facilities = factory.create_facilities(oregon_facility_data, :OR)
-  new_york_facilities = factory.create_facilities(new_york_facility_data, :NY)
-  missouri_facilities = factory.create_facilities(missouri_facility_data, :MO)
+  oregon_facilities = factory.create_facilities(oregon_facility_data)
+  new_york_facilities = factory.create_facilities(new_york_facility_data)
+  missouri_facilities = factory.create_facilities(missouri_facility_data)
 
   describe '#initialize' do
     it 'can initialize' do
@@ -76,6 +76,10 @@ RSpec.describe FacilityFactory do
 
     it 'assigns the correct string value to the @phone attribute on every Missouri facility' do
       expect(missouri_facilities.first.phone).to eq(MO_FACILITY[:phone])
+    end
+
+    it 'returns nil for invalid state data' do
+      expect(factory.create_facilities([])).to be(nil)
     end
   end
 end
