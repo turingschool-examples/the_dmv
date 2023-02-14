@@ -20,7 +20,6 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    # require 'pry'; binding.pry
     if services.include?('Vehicle Registration')
       @registered_vehicles << vehicle
       vehicle.set_registration_date
