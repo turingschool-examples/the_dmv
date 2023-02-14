@@ -14,14 +14,10 @@ class FacilityFactory
   private
 
   def get_us_state(facilities_data)
-    begin
-      if (address = facilities_data.first.dig(:location_1, :human_address))
-        facilities_data = [JSON.parse(address, symbolize_names: true)]
-      end
-      facilities_data.first[:state].to_sym
-    rescue => exception
-      nil
+    if (address = facilities_data.first&.dig(:location_1, :human_address))
+      facilities_data = [JSON.parse(address, symbolize_names: true)]
     end
+    facilities_data&.first&.dig(:state)&.to_sym
   end
 
   def create_oregon_facilities(facilities_data)
