@@ -77,9 +77,26 @@ RSpec.describe Facility do
     registrant_1 = Registrant.new('Bruce', 18, true)
     registrant_2 = Registrant.new('Penny', 15 )
     @facility.add_service('Road Test')
+    @facility.add_service('Written Test')
+    @facility.administer_written_test(registrant_1)
+    @facility.administer_written_test(registrant_2)
 
     expect(@facility.administer_road_test(registrant_1)).to eq true
     expect(@facility.administer_road_test(registrant_2)).to eq false
   end
 
+  it 'can renew lisence' do 
+    registrant_1 = Registrant.new('Bruce', 18, true)
+    registrant_2 = Registrant.new('Penny', 15 )
+    @facility.add_service('Renew License')
+    @facility.add_service('Road Test')
+    @facility.add_service('Written Test')
+    @facility.administer_written_test(registrant_1)
+    @facility.administer_written_test(registrant_2)
+    @facility.administer_road_test(registrant_1)
+    @facility.administer_road_test(registrant_2)
+  
+    expect(@facility.renew_drivers_license(registrant_1)).to eq true
+    expect(@facility.renew_drivers_license(registrant_2)).to eq false
+  end
 end
