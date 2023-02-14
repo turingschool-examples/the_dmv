@@ -52,8 +52,6 @@ class Facility
     true
   end
 
-  private
-
   def collect_fee(plate)
     @collected_fees +=
     case plate
