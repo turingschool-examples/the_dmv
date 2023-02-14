@@ -25,27 +25,33 @@ class Facility
   #   @add_date  = add_date
   #   @registration_date == Date.today
   # end
-
-  def register_vehicle(car)
-    @registered_vehicles.push(car) 
-    # if @services.include?(['Vehicle Registration'])
-    # end
-  end
-
-  def collect_fees
-    if @plate_type == :regular
+  
+  def collect_fees(car)
+    if car.plate_type == :regular
       @collected_fees += 100
-    elsif @plate_type == :ev
+    elsif car.plate_type == :ev
       @collected_fees += 200
-    elsif @plate_type == :antique
+    elsif car.plate_type == :antique
       @collected_fees += 25
     end
-    # collect_fees
+  end
+
+  def register_vehicle(car)
+    if @services.include?('Vehicle Registration')
+      car.registration_date = Date.today
+      car.plate_type
+      collect_fees(car)
+      @registered_vehicles.push(car)
+    end
   end
 
   def administer_written_test(registrant)
-    
-    
+    unless @services.include?('Written Test')
+    # end
+    registrant.permit = true && registrant.age >= 16
+    # @license_data.update(@license_data){ |:written, false| true }
+    registrant.license_data[:written] = false
+    end
   end
 
 end
