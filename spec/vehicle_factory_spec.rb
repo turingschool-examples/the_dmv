@@ -5,25 +5,25 @@ RSpec.describe VehicleFactory do
     @factory = VehicleFactory.new
     @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     @test_vehicle_1 = {:electric_vehicle_type=>"Plug-in Hybrid Electric Vehicle (PHEV)",
-    :vin_1_10=>"JTDKN3DP8D",
-    :model_year=>"2013",
-    :make=>"TOYOTA",
-    :model=>"Prius Plug-in",
-    :transaction_year=>"2019",
-    :county=>"King",
-    :city=>"RENTON",
-    :state_of_residence=>"WA",
-    :zip=>"98056"}
+                        :vin_1_10=>"JTDKN3DP8D",
+                        :model_year=>"2013",
+                        :make=>"TOYOTA",
+                        :model=>"Prius Plug-in",
+                        :transaction_year=>"2019",
+                        :county=>"King",
+                        :city=>"RENTON",
+                        :state_of_residence=>"WA",
+                        :zip=>"98056"}
     @test_vehicle_2 = {:electric_vehicle_type=>"Plug-in Hybrid Electric Vehicle (PHEV)",
-    :vin_1_10=>"JTDKARFP9J",
-    :model_year=>"2018",
-    :make=>"TOYOTA",
-    :model=>"Prius Prime",
-    :transaction_year=>"2022",
-    :county=>"Pierce",
-    :city=>"DUPONT",
-    :state_of_residence=>"WA",
-    :zip=>"98327"}
+                        :vin_1_10=>"JTDKARFP9J",
+                        :model_year=>"2018",
+                        :make=>"TOYOTA",
+                        :model=>"Prius Prime",
+                        :transaction_year=>"2022",
+                        :county=>"Pierce",
+                        :city=>"DUPONT",
+                        :state_of_residence=>"WA",
+                        :zip=>"98327"}
   end
 
   describe '#initialize' do
