@@ -2,11 +2,12 @@ require './lib/facility'
 require 'json'
 
 class FacilityFactory
-  def create_facilities(facilities_data, state)
+  def create_facilities(facilities_data)
     case get_us_state(facilities_data)
       when :OR then create_oregon_facilities(facilities_data)
       when :NY then create_new_york_facilities(facilities_data)
       when :MO then create_missouri_facilities(facilities_data)
+      else nil
     end
   end
 
@@ -14,7 +15,11 @@ class FacilityFactory
     if (address = facilities_data.first.dig(:location_1, :human_address))
       facilities_data = [JSON.parse(address, symbolize_names: true)]
     end
-    facilities_data.first[:state].to_sym
+    begin
+      return facilities_data.first[:state].to_sym
+    rescue => exception
+      return nil
+    end
   end
 
   def create_oregon_facilities(facilities_data)
