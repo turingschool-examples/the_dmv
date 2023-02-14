@@ -1,4 +1,4 @@
-require './lib/factory'
+require './lib/vehicle_factory'
 require 'rspec'
 
 RSpec.describe VehicleFactory do
@@ -10,8 +10,9 @@ RSpec.describe VehicleFactory do
   
   it 'loads vehicles' do
     factory=VehicleFactory.new
+    wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     factory.create_vehicles(wa_ev_registrations)
 
-    expect(factory.vehicles.empty?).to eq(false)
+    expect(factory.vehicles.length).to eq(1000)
   end
 end
