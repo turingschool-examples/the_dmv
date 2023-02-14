@@ -52,7 +52,7 @@ class Facility
   end
 
   def administer_road_test(registrant)
-    if services.include?('Road Test') && registrant.permit? == true
+    if services.include?('Road Test') && registrant.written_test? == true
       registrant.license_data[:license] = true
       return registrant.license_data[:license]
     else
@@ -60,5 +60,13 @@ class Facility
     end
   end
   
+  def renew_drivers_license(registrant)
+    if services.include?('Renew License') && registrant.license? == true
+      registrant.license_data[:renewed] = true
+      return registrant.license_data[:renewed]
+    else
+      return false
+    end
+  end 
   # require 'pry'; binding.pry
 end

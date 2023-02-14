@@ -11,12 +11,16 @@ class Registrant
     @license_data = {written: false, license: false, renewed: false}
   end
 
-  # def license_data
-  #   license_data = {written: false, license: false, renewed: false}
-  # end
-
   def permit?
     @permit
+  end
+
+  def license?
+    @license_data[:license]
+  end
+
+  def written_test?
+    @license_data[:written]
   end
 
   def earn_permit
