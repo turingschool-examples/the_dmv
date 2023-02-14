@@ -29,9 +29,22 @@ class VehicleFactory
         address: location[:title],
         phone: location[:zip_code],
         name: location[:agency],
-        
       )
     end
     locations
   end
+
+  def create_mo_facility(dmv_locations)
+    mo_locations = []
+    dmv_locations.map do |location|
+      mo_locations << Facility.new(
+        address: location[:address1],
+        phone: location[:phone],
+        name: location[:name],
+      )
+    end
+    mo_locations
+  end
+
+  
 end
