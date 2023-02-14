@@ -97,13 +97,18 @@ RSpec.describe FacilityBuilder do
 
     it "has the expected keys" do
       for i in 0..@mo_state_facilities.state_facility_list.count - 1
-        expect(@mo_state_facilities.state_facility_list[i].keys).to eq([:name, :address, :phone, :daily_hours])
+        expect(@mo_state_facilities.state_facility_list[i].keys).to eq([:name, :address, :phone, :daily_hours, :holidays])
       end
     end
 
     it "has the expected values" do
       p @mo_state_facilities.state_facility_list[0][:address]
-      expect(@mo_state_facilities.state_facility_list[0].values). to eq(["SAINTE GENEVIEVE ", "753 STE. GENEVIEVE DR STE GENEVIEVE, MO 63670", "(573) 883-2344", "Monday - Friday - 8:30 to 5:00, Last 4 week days - 8:00 to 5:00"])
+      expect(@mo_state_facilities.state_facility_list[0].values). to eq(
+        ["SAINTE GENEVIEVE ", 
+         "753 STE. GENEVIEVE DR STE GENEVIEVE, MO 63670", 
+         "(573) 883-2344", 
+         "Monday - Friday - 8:30 to 5:00, Last 4 week days - 8:00 to 5:00",
+         "Independence Day (07/04/22), Labor Day (09/05/22), Columbus Day (10/10/22), Veterans Day (11/11/22), Thanksgiving (11/24/22), Christmas Day Observed (12/26/22), New Year's Day Observed (01/02/23), Martin Luther King Day (01/16/23), Lincoln’s Birthday (02/13/23), President’s Day (02/20/23), Truman’s Birthday (05/08/23), Memorial Day (05/29/23), Independence Day (07/04/23), Labor Day (09/04/23), Columbus Day (10/09/23), Veterans Day (11/10/23), Thanksgiving (11/23/23), Christmas Day Observed (12/25/23)"])
     end
   end
 
@@ -126,6 +131,11 @@ RSpec.describe FacilityBuilder do
       expect(@ny_state_facilities).to be_a(FacilityBuilder)
       p @ny_state_facilities.state_facility_list[0][:daily_hours]
       expect(expect(@ny_state_facilities.state_facility_list[0][:daily_hours]).to eq("Monday: 8:30 AM - 4:15 PM Tuesday: 8:30 AM - 4:15 PM Wednesday: 8:30 AM - 4:15 PM Thursday: 8:30 AM - 5:45 PM Friday: 8:30 AM - 4:15 PM"))
+    end
+
+    it "Missouri hash includes holidays" do
+      expect(@mo_state_facilities.state_facility_list[0][:holidays]).not_to be_nil
+      expect(@mo_state_facilities.state_facility_list[0][:holidays]).to eq("Independence Day (07/04/22), Labor Day (09/05/22), Columbus Day (10/10/22), Veterans Day (11/11/22), Thanksgiving (11/24/22), Christmas Day Observed (12/26/22), New Year's Day Observed (01/02/23), Martin Luther King Day (01/16/23), Lincoln’s Birthday (02/13/23), President’s Day (02/20/23), Truman’s Birthday (05/08/23), Memorial Day (05/29/23), Independence Day (07/04/23), Labor Day (09/04/23), Columbus Day (10/09/23), Veterans Day (11/10/23), Thanksgiving (11/23/23), Christmas Day Observed (12/25/23)")
     end
   end
 end

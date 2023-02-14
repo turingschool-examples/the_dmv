@@ -31,7 +31,9 @@ attr_reader :state_facility_list
                         facility_hash = {name: current_hash[:name],
                         address: mo_address_cleaner(current_hash),
                         phone: current_hash[:phone],
-                        daily_hours: current_hash[:daysopen]}
+                        daily_hours: current_hash[:daysopen],
+                        holidays: current_hash[:holidaysclosed]
+                        }
                         @state_facility_list << facility_hash
                       end
                       
