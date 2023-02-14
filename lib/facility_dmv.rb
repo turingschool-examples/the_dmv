@@ -32,13 +32,12 @@ class FacilityDmv
       facility_hash = {
 
         name: facility[:office_name],
-        phone: facility[:public_phone_number],
+        phone: facility[:public_phone_number].insert(3, '-').insert(-5, '-'),
         address: "#{facility[:street_address_line_1]} #{facility[:city]} #{facility[:state]}, #{facility[:zip_code]}" 
-        # +  facility[:state] +  facility[:zip_code]
 
       }
       @ny_facilities << Facility.new(facility_hash)
-      # require 'pry'; binding.pry
+      
     end
   end
 end
