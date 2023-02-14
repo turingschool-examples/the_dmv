@@ -15,6 +15,8 @@ RSpec.describe FacilityDmv do
     oregon_facilities = DmvDataService.new.or_dmv_office_locations
 
     expect(facility_dmv.create_or_facility(oregon_facilities)).to be_an_instance_of(Array)
+    expect(facility_dmv.create_or_facility(oregon_facilities)[0][:title]).to eq("Albany DMV Office")
+    expect(facility_dmv.create_or_facility(oregon_facilities)[1][:title]).to eq("Ashland DMV Office")
   end
 
   it 'can add a facility to the array' do
@@ -48,5 +50,7 @@ RSpec.describe FacilityDmv do
     new_york_facilities = DmvDataService.new.ny_dmv_office_locations
 
     expect(facility_dmv.create_ny_facility(new_york_facilities)).to be_an_instance_of(Array)
+    expect(facility_dmv.create_ny_facility(new_york_facilities)[0][:office_name]).to eq("JAMESTOWN")
+    expect(facility_dmv.create_ny_facility(new_york_facilities)[1][:office_name]).to eq("SARATOGA SPRINGS - WILTON")
   end
 end

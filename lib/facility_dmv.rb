@@ -18,6 +18,7 @@ class FacilityDmv
       
       }
         @or_facilities << Facility.new(facility_hash)
+        # require 'pry'; binding.pry
     end
   end
 
@@ -32,12 +33,16 @@ class FacilityDmv
       facility_hash = {
 
         name: facility[:office_name],
-        phone: facility[:public_phone_number].insert(3, '-').insert(-5, '-'),
+        phone: (facility[:public_phone_number]),
         address: "#{facility[:street_address_line_1]} #{facility[:city]} #{facility[:state]}, #{facility[:zip_code]}" 
 
       }
       @ny_facilities << Facility.new(facility_hash)
-      
     end
   end
+    def phone_converter(api_info)
+      # require 'pry'; binding.pry
+      api_info.insert(3, '-').insert(-5, '-')
+    end
+
 end
