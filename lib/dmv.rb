@@ -1,8 +1,7 @@
 class Dmv
   attr_reader :facilities
   def initialize()
-    @facilities = []
-    
+    @facilities = [] 
   end
 
   def add_facility(facility)

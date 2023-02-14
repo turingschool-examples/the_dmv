@@ -14,5 +14,4 @@ attr_reader :name, :age, :license_data
   def earn_permit
     @permit = true
   end
-
 end

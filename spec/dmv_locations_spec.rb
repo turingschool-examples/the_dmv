@@ -36,7 +36,7 @@ RSpec.describe do
     dmv_facility = DmvLocations.new
     new_york_facilities = DmvDataService.new.ny_dmv_office_locations
     
-    expect(dmv_facility.create_dmv_locations_2(new_york_facilities)).to be_an_instance_of(Array)
+    expect(dmv_facility.add_dmv_locations(new_york_facilities)).to be_an_instance_of(Array)
     expect(dmv_facility.dmv_locations.length).to be(169)
     expect(dmv_facility.dmv_locations[0]).to be_an_instance_of(Facility)
     expect(dmv_facility.dmv_locations[1]).to be_an_instance_of(Facility)
@@ -47,13 +47,12 @@ RSpec.describe do
   it 'creates locations from Missouri' do
     dmv_facility = DmvLocations.new
     missouri_facilities = DmvDataService.new.mo_dmv_office_locations
-    # require 'pry'; binding.pry
-    expect(dmv_facility.create_dmv_locations_2(missouri_facilities)).to be_an_instance_of(Array)
+
+    expect(dmv_facility.add_dmv_locations(missouri_facilities)).to be_an_instance_of(Array)
     expect(dmv_facility.dmv_locations.length).to be(178)
     expect(dmv_facility.dmv_locations[0]).to be_an_instance_of(Facility)
     expect(dmv_facility.dmv_locations[1]).to be_an_instance_of(Facility)
     expect(dmv_facility.dmv_locations[2]).to be_an_instance_of(Facility)
     expect(dmv_facility.dmv_locations[177]).to be_an_instance_of(Facility)
   end
-  
 end
