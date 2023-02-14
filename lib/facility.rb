@@ -22,13 +22,34 @@ class Facility
   end
 
   def register_vehicle(model)
-    time = Time.now.to_s
-    date = []
-    date << time.split.first
-    registration_date = date
-    registered_vehicles << model
-    return registered_vehicles
+    if services.include?('Vehicle Registration')
+      time = Time.now.to_s
+      date = []
+      date << time.split.first
+      model.registration_date = date
+      registered_vehicles << model
+
+      if model.plate_type == :regular
+        @collected_fees += 100
+      elsif model.plate_type == :antique
+        @collected_fees += 25
+      else
+        @collected_fees += 200
+      end
+      return registered_vehicles
+    else
+      return nil
+    end
   end
 
+  def administer_written_test(registrant)
+    if services.include?('Vehicle Registration')
+      registrant.written
+      require 'pry'; binding.pry
+    else
+      return nil
+    end
+  end
   
+  # require 'pry'; binding.pry
 end
