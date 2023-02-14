@@ -4,24 +4,37 @@ RSpec.describe Facility do
   before(:each) do
     @facility_1 = Facility.new({name: 'Albany DMV Office',
       address: '2242 Santiam Hwy SE Albany OR 97321',
-      phone: '541-967-2014' })
+      phone: '541-967-2014',
+       monday: "8:30AM - 5:00PM",
+       tuesday: "8:30AM - 5:00PM",
+       wednesday: "8:30AM - 5:00PM",
+       thursday: "8:30AM - 5:00PM",
+       friday: "8:30AM - 5:00PM"})
 
     @facility_2 = Facility.new({name: 'Ashland DMV Office',
       address: '600 Tolman Creek Rd Ashland OR 97520',
-      phone: '541-776-6092' })
+      phone: '541-776-6092',
+      monday: "8:30AM - 5:00PM",
+      tuesday: "8:30AM - 5:00PM",
+      wednesday: "8:30AM - 5:00PM",
+      thursday: "8:30AM - 5:00PM",
+      friday: "8:30AM - 5:00PM"})
 
     @cruz = Vehicle.new({vin: '123456789abcdefgh',
-      year: 2012, make: 'Chevrolet',
+      year: 2012,
+      make: 'Chevrolet',
       model: 'Cruz',
       engine: :ice} )
 
     @bolt = Vehicle.new({vin: '987654321abcdefgh',
-       yea: 2019, make: 'Chevrolet',
+      year: 2019, 
+      make: 'Chevrolet',
       model: 'Bolt',
       engine: :ev} )
-      
+
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f',
-      year: 1969, make: 'Chevrolet',
+      year: 1969,
+      make: 'Chevrolet',
       model: 'Camaro',
       engine: :ice} )
 

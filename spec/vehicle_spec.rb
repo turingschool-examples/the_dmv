@@ -3,23 +3,20 @@ require 'spec_helper'
 RSpec.describe Vehicle do
   before(:each) do
     @cruz = Vehicle.new({vin: '123456789abcdefgh',
-       yea: 2012,
+       year: 2012,
       make: 'Chevrolet',
       model: 'Cruz',
-       engin: :ice,
-      county: 'Douglas'} )
+       engine: :ice } )
 
     @bolt = Vehicle.new({vin: '987654321abcdefgh',
       year: 2019, make: 'Chevrolet',
       model: 'Bolt',
-      engine: :ev,
-      county: 'Frank'} )
+      engine: :ev } )
       
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f',
       year: 1969, make: 'Chevrolet',
       model: 'Camaro',
-      engine: :ice,
-      county: 'Waterloo'} )
+      engine: :ice } )
   end
   describe '#initialize' do
     it 'can initialize' do
@@ -29,7 +26,6 @@ RSpec.describe Vehicle do
       expect(@cruz.make).to eq('Chevrolet')
       expect(@cruz.model).to eq('Cruz')
       expect(@cruz.engine).to eq(:ice)
-      expect(@cruz.county).to eq('Douglas')
       expect(@cruz.registration_date).to eq(nil)
     end
   end

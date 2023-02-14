@@ -25,7 +25,6 @@ RSpec.describe VehicleFactory do
     expect(factory.vehicle_storage[0].year).to eq("2013")
     expect(factory.vehicle_storage[0].make).to eq("TOYOTA")
     expect(factory.vehicle_storage[0].model).to eq("Prius Plug-in")
-    expect(factory.vehicle_storage[0].county).to eq("King")
   end
 
   it 'can find the most popular make of vehicle' do
@@ -50,8 +49,7 @@ RSpec.describe VehicleFactory do
   it 'can display the county with the most registered vehicles' do
     factory = VehicleFactory.new
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-    factory.create_vehicles(wa_ev_registrations)
 
-    expect(factory.county_with_most_vehicles).to eq('King')
+    expect(factory.county_with_most_vehicles(wa_ev_registrations)).to eq('King')
   end
 end

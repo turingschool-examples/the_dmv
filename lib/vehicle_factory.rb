@@ -41,8 +41,8 @@ class VehicleFactory
     end.length
   end
   
-  def county_with_most_vehicles
-    grouped_by_county = @vehicle_storage.group_by { |vehicle| vehicle.county }
+  def county_with_most_vehicles(data)
+    grouped_by_county = data.group_by { |vehicle| vehicle[:county] }
     grouped_by_county.max_by {|county, vehicles| vehicles.length}.first
   end
 end
