@@ -6,7 +6,7 @@ class FacilityConstructor
     @@dmv_office_location = DmvDataService.new.or_dmv_office_locations
     @@new_york_facilities = DmvDataService.new.ny_dmv_office_locations
     @@missouri_facilities = DmvDataService.new.mo_dmv_office_locations
-    
+
   def initialize
     @created_facilities = []
   end
@@ -21,7 +21,7 @@ class FacilityConstructor
   # helper methods
 
   def facility_checker(location_data)
-    if location_data == dmv_office_location
+    if location_data == @@dmv_office_location
       @@dmv_office_location.each do |office|
         facility_info = {
           name: office[:title],
@@ -32,7 +32,7 @@ class FacilityConstructor
         @created_facilities << facility = Facility.new(facility_info)
       end
       @created_facilities
-    elsif location_data == new_york_facilities
+    elsif location_data == @@new_york_facilities
       @@new_york_facilities.each do |office|
         facility_info = {
           name: office[:office_name],
@@ -65,7 +65,7 @@ class FacilityConstructor
         @created_facilities << facility = Facility.new(facility_info)
       end
       @created_facilities
-    else location_data == missouri_facilities
+    else location_data == @@missouri_facilities
       @@missouri_facilities.each do |office|
         facility_info = {
           name: office[:name],
