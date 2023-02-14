@@ -1,6 +1,9 @@
 class FacilityFactory
 
   def create_facilities_oregon(facility_database)
+    if facility_database == []
+      return nil
+    end
     facility_instances = []
     facility_database.each do |facility|
      address_data = facility[:location_1][:human_address]
@@ -13,6 +16,9 @@ class FacilityFactory
   end
 
   def create_facilities_new_york(facility_database)
+    if facility_database == []
+      return nil
+    end
     facility_instances = []
     facility_database.each do |facility|
       address = facility[:street_address_line_1],
@@ -28,13 +34,17 @@ class FacilityFactory
   end
 
   def create_facilities_missouri(facility_database)
+    if facility_database == []
+      return nil
+    end
     facility_instances = []
     facility_database.each do |facility|
       address = facility[:address1],
-                facility[:city],
+                facility[:city].rstrip,
                 facility[:state],
                 facility[:zipcode]
-      facility_instances.push(Facility.new({name: facility[:name],
+      name = facility[:name]
+      facility_instances.push(Facility.new({name: name.rstrip,
                                             address: address.compact.join(' '),
                                             phone: facility[:phone]}))
     end

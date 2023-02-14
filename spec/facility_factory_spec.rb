@@ -69,9 +69,9 @@ RSpec.describe do FacilityFactory
     @factory.create_facilities_new_york(@new_york_facilities)
     @factory.create_facilities_missouri(@missouri_facilities)
 
-    expect(create_facilities_oregon([])).to eq nil
-    expect(create_facilities_new_york([])).to eq nil
-    expect(create_facilities_missouri([])).to eq nil
+    expect(@factory.create_facilities_oregon([])).to eq nil
+    expect(@factory.create_facilities_new_york([])).to eq nil
+    expect(@factory.create_facilities_missouri([])).to eq nil
     end 
   end
 end
