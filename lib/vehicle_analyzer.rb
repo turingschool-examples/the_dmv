@@ -12,26 +12,26 @@ class VehicleAnalyzer
   end
 
   def most_registered_county
-    counted_counties = Hash.new(0)
+    counties = Hash.new(0)
   
     @vehicles.each do |vehicle| 
-      counted_counties[vehicle.county] += 1
+      counties[vehicle.county] += 1
     end
   
-    most_registered_county, most_registrations = counted_counties.max_by { |county, count| count }
+    county, count = counties.max_by { |county, count| count }
   
-    "#{most_registered_county} county: #{most_registrations} registrations"
+    "#{county} county: #{count} registrations"
   end
 
   def most_popular_car
-    counted_cars = Hash.new(0)
+    cars = Hash.new(0)
 
     @vehicles.each do |vehicle| 
-      counted_cars["#{vehicle.make} #{vehicle.model}"] += 1 
+      cars["#{vehicle.make} #{vehicle.model}"] += 1 
     end
 
-    most_popular_car, most_registrations = counted_cars.max_by { |car, count| count }
+    car, count = cars.max_by { |car, count| count }
 
-    "#{most_popular_car}: #{most_registrations} registrations"
+    "#{car}: #{count} registrations"
   end
 end
