@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 class VehicleFactory
-  attr_reader :created_vehicles, :create_vehicles
+  attr_reader :created_vehicles, :create_vehicles, :most_by_county
   def initialize
     @created_vehicles = []
   end
@@ -10,6 +10,14 @@ class VehicleFactory
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     ny_state_registrations = DmvDataService.new.ny_state_registrations
     create_vehicle_based_on_state(registrations)
+  end
+
+
+
+  def most_by_county(registrations)
+    grouped = registrations.group_by { |car| car[:county] }
+    sorted = grouped.sort_by{|k,v| -v.count}
+    top_county = sorted[0][0]
   end
 
   # Helper methods
@@ -24,9 +32,8 @@ class VehicleFactory
           year: car[:model_year],
           make: car[:make],
           model: car[:model],
-          engine: "ev",
-          registration_date: nil,
-          plate_type: nil
+          county: car[:county],
+          engine: "ev" 
         }
         @created_vehicles << vehicle = Vehicle.new(vehicle_details)
       end
@@ -39,9 +46,7 @@ class VehicleFactory
           year: car[:model_year],
           make: car[:make],
           model: car[:model],
-          engine: "ev",
-          registration_date: nil,
-          plate_type: nil
+          engine: "ev"
         }
         @created_vehicles << vehicle = Vehicle.new(vehicle_details)
       end
