@@ -63,44 +63,22 @@ RSpec.describe VehicleFactory do
         .to be(true)
     end
 
-    it 'assigns the correct string value to the @vin attribute on every WA state electric vehicle' do
+    it 'assigns the correct attributes and values to WA vehicles' do
       expect(wa_ev_vehicles.first.vin).to eq(WA_EV_VEHICLE[:vin])
-    end
-
-    it 'assigns the correct string value to the @year attribute on every WA state electric vehicle' do
       expect(wa_ev_vehicles.first.year).to eq(WA_EV_VEHICLE[:year])
-    end
-
-    it 'assigns the correct string value to the @make attribute on every WA state electric vehicle' do
       expect(wa_ev_vehicles.first.make).to eq(WA_EV_VEHICLE[:make])
-    end
-
-    it 'assigns the correct string value to the @model attribute on every WA state electric vehicle' do
       expect(wa_ev_vehicles.first.model).to eq(WA_EV_VEHICLE[:model])
-    end
-
-    it 'assigns the correct symbol value to the @engine attribute on every WA state electric vehicle' do
       expect(wa_ev_vehicles.first.engine).to eq(WA_EV_VEHICLE[:engine])
+      expect(wa_ev_vehicles.first.registration_date).to be(nil)
     end
 
-    it 'assigns the correct string value to the @vin attribute on every NY state vehicle' do
+    it 'assigns the correct attributes and values to NY vehicles' do
       expect(ny_vehicles.first.vin).to eq(NY_VEHICLE[:vin])
-    end
-
-    it 'assigns the correct string value to the @year attribute on every NY state vehicle' do
       expect(ny_vehicles.first.year).to eq(NY_VEHICLE[:year])
-    end
-
-    it 'assigns the correct string value to the @make attribute on every NY state vehicle' do
       expect(ny_vehicles.first.make).to eq(NY_VEHICLE[:make])
-    end
-
-    it 'assigns the @model attribute on every NY state vehicle to nil' do
       expect(ny_vehicles.first.model).to eq(NY_VEHICLE[:model])
-    end
-
-    it 'assigns the correct symbol value to the @engine attribute on every NY state vehicle' do
       expect(ny_vehicles.first.engine).to eq(NY_VEHICLE[:engine])
+      expect(ny_vehicles.first.registration_date).to be(nil)
     end
 
     it 'returns nil for invalid state data' do
@@ -119,6 +97,22 @@ RSpec.describe VehicleFactory do
 
     it 'returns nil for any other invalid vehicle data' do
       expect(factory.get_us_state([])).to be(nil)
+    end
+  end
+
+  describe '#make_model_counts' do
+    actual = factory.make_model_counts(wa_ev_vehicles)
+
+    it 'returns a hash' do
+      expect(actual).to be_a(Hash)
+    end
+
+    it 'it has keys that are hashes' do
+      expect(actual.all? { |key, _| key.is_a?(Hash) }).to be(true)
+    end
+
+    it 'it has values that are integers representing the counts of each key' do
+      expect(actual.all? { |_, value| value.is_a?(Integer) }).to be(true)
     end
   end
 
@@ -150,19 +144,11 @@ RSpec.describe VehicleFactory do
     end
   end
 
-  describe '#make_model_counts' do
-    actual = factory.make_model_counts(wa_ev_vehicles)
+  describe '#create_wa_ev_vehicles' do
 
-    it 'returns a hash' do
-      expect(actual).to be_a(Hash)
-    end
+  end
 
-    it 'it has keys that are hashes' do
-      expect(actual.all? { |key, _| key.is_a?(Hash) }).to be(true)
-    end
+  describe '#create_ny_vehicles' do
 
-    it 'it has values that are integers representing the counts of each key' do
-      expect(actual.all? { |_, value| value.is_a?(Integer) }).to be(true)
-    end
   end
 end
