@@ -21,6 +21,7 @@ RSpec.describe VehicleFactory do
       expect(new_vehicles[0]).to be_a(Vehicle)
       expect(new_vehicles[1]).to be_a(Vehicle)
       expect(new_vehicles[2]).to be_a(Vehicle)
+      require 'pry'; binding.pry
     end
   end
 end
