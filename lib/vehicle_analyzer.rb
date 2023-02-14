@@ -7,7 +7,7 @@ class VehicleAnalyzer
 
   def count_model_year(model_year)
     @vehicles.find_all {
-      |vehicle| vehicle.year == model_year
+      |vehicle| vehicle.year == model_year.to_i
     }.count
   end
 
