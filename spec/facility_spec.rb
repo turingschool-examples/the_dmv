@@ -40,8 +40,6 @@ RSpec.describe Facility do
       facility = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
       facility.register_vehicle(cruz)
       
-
-      # require 'pry'; binding.pry
       expect(cruz.registration_date).to eq(cruz.registration_date)
     end
 
