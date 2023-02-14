@@ -25,7 +25,7 @@ class FacilityDmv
   end
 
   def address_converter(api_info)
-        hash_in_string = (api_info)
+        hash_in_string = api_info
         add_hash = JSON.parse(hash_in_string)
         add_hash.values.join(' ')
   end
@@ -35,7 +35,7 @@ class FacilityDmv
       facility_hash = {
 
         name: facility[:office_name],
-        phone: facility[:public_phone_number.to_s.insert(3, '-').insert(-5, '-')],
+        phone: facility[:public_phone_number],
         address: "#{facility[:street_address_line_1]} #{facility[:city]} #{facility[:state]}, #{facility[:zip_code]}" 
 
       }
@@ -44,10 +44,10 @@ class FacilityDmv
     end
   end
 
-  def phone_converter(api_info)
-      # require 'pry'; binding.pry
-    api_info.to_s.insert(3, '-').insert(-5, '-')
-  end
+  # def ny_phone_converter(number_string)
+      
+  #     number_string.insert(3, '-').insert(-5, '-')
+  # end
 
   def create_mo_facility(facility_data)
     facility_data.each do |facility|
@@ -56,16 +56,16 @@ class FacilityDmv
         phone: facility[:phone],
         address: "#{facility[:address1]}, #{facility[:city].rstrip}, #{facility[:state]} #{facility[:zipcode]}"
       }
-
+# require 'pry'; binding.pry
       @mo_facilities << Facility.new(facility_hash)
 
     end
 
-    # def mo_phone_converter(api_info)
-      
-    #   require 'pry'; binding.pry
+    # def mo_phone_converter(number_string)
+    #   number_string.gsub(' ', '-')
+    #   # require 'pry'; binding.pry
 
-    # end
+    #end
 
   end
 end
