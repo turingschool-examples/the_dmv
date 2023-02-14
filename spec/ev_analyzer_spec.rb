@@ -13,16 +13,14 @@ RSpec.describe EvAnalyzer do
 
   it 'counts model years' do
     expect(@analyzer.count_model_year('2012')).to be_an(Integer)
-    expect(@analyzer.count_model_year('2012')).to eq(38)
+    expect(@analyzer.count_model_year('2012')).to eq(38) #true as of 2/14/23
   end
 
   it 'finds the most registered county' do
-    expect(@analyzer.most_registered_county).to eq('King county: 523 registrations')
+    expect(@analyzer.most_registered_county).to eq('King county: 523 registrations') #true as of 2/14/23
   end
 
-  xit 'finds the most popular make/model' do
-    expect(@analyzer.find_most_popular(@vehicles)).to eq()
-    expect(wa_ev_vehicles[0]).to be_a(Vehicle)
-    expect(wa_ev_vehicles[0].engine).to eq(:ev)
+  it 'finds the most popular make/model' do
+    expect(@analyzer.most_popular_car).to eq("NISSAN Leaf: 210 registrations") #true as of 2/14/23
   end
 end
