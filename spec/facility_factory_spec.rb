@@ -33,20 +33,24 @@ RSpec.describe FacilityFactory do
   describe '#create_facilities' do
     it 'can create multiple facilities at once (from OR)' do
       facility_factory = FacilityFactory.new
-      new_locations = DmvDataService.new.or_dmv_office_locations
-      facility_factory.create_facilities(new_locations)
-
+      new_locations_or = DmvDataService.new.or_dmv_office_locations
+      facility_factory.create_or_facilities(new_locations_or)
       expect(facility_factory.new_facilities.length).to eq(59)
       expect(facility_factory.new_facilities[0]).to be_a(Facility)
+      expect(facility_factory.new_facilities[0].name).to eq('Albany DMV Office')
+      expect(facility_factory.new_facilities[0].phone).to eq('541-967-2014')
       expect(facility_factory.new_facilities[1]).to be_a(Facility)
+      expect(facility_factory.new_facilities[1].name).to eq('Ashland DMV Office')
+      expect(facility_factory.new_facilities[1].phone).to eq('541-776-6092')
       expect(facility_factory.new_facilities[2]).to be_a(Facility)
+      expect(facility_factory.new_facilities[2].name).to eq('Astoria DMV Office')
+      expect(facility_factory.new_facilities[2].phone).to eq('503-325-3951')
     end
 
     it 'can create multiple facilities at once (from NY)' do
     facility_factory = FacilityFactory.new
-    new_locations = DmvDataService.new.ny_dmv_office_locations
-    facility_factory.create_facilities(new_locations)
-require 'pry'; binding.pry
+    new_locations_ny = DmvDataService.new.ny_dmv_office_locations
+    facility_factory.create_ny_facilities(new_locations_ny)
     expect(facility_factory.new_facilities.length).to eq(169)
     expect(facility_factory.new_facilities[0]).to be_a(Facility)
     expect(facility_factory.new_facilities[0].name).to eq('JAMESTOWN')
@@ -57,6 +61,6 @@ require 'pry'; binding.pry
     expect(facility_factory.new_facilities[2]).to be_a(Facility)
     expect(facility_factory.new_facilities[2].name).to eq('MONROE COUNTY EASTSIDE MOBILE OFFICE')
     expect(facility_factory.new_facilities[2].phone).to eq('5857531604')
-  end
+    end
   end
 end
