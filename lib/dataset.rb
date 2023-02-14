@@ -17,6 +17,9 @@ class Dataset
     model = model_count.sort_by{|model, number| number}.last[0]
 
     result = [make, model]
-    require 'pry'; binding.pry
+  end
+
+  def count_by_model_year(year)
+    @data.find_all{ |vehicle| vehicle.year == year }.count
   end
 end
