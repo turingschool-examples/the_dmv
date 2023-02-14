@@ -9,7 +9,8 @@ class VehicleFactory
         year: vehicle[:model_year],
         make: vehicle[:make],
         model: vehicle[:model],
-        engine: :ev
+        engine: :ev,
+        county: vehicle[:county]
         })
     end
   end
