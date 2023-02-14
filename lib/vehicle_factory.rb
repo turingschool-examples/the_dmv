@@ -6,10 +6,10 @@ class VehicleFactory
   end
   
   def create_vehicles(info_registrations)
-    info_registrations.map do |hash| 
+    info_registrations.map do |car| 
       new_car = {
-        vin: hash[:vin_1_10],
-        year: hash[:model_year],
+        vin: car[:vin_1_10],
+        year: car[:model_year],
         engine: :ev
       }
       @factory_vehicles << Vehicle.new(new_car)

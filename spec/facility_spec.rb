@@ -46,6 +46,7 @@ RSpec.describe Facility do
       expect(facility_2.register_vehicle(bolt)).to eq([])
       expect(facility_1.registered_vehicles).to eq([cruz, camaro, bolt])
       expect(facility_2.registered_vehicles).to eq([])
+      expect(facility_1.registered_vehicles.include?("sled")).to eq(false)
     end
 
     it 'assigns plate_type to vehicle' do
