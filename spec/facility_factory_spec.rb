@@ -46,11 +46,17 @@ RSpec.describe FacilityFactory do
     facility_factory = FacilityFactory.new
     new_locations = DmvDataService.new.ny_dmv_office_locations
     facility_factory.create_facilities(new_locations)
-
+require 'pry'; binding.pry
     expect(facility_factory.new_facilities.length).to eq(169)
     expect(facility_factory.new_facilities[0]).to be_a(Facility)
+    expect(facility_factory.new_facilities[0].name).to eq('JAMESTOWN')
+    expect(facility_factory.new_facilities[0].phone).to eq('7166618220')
     expect(facility_factory.new_facilities[1]).to be_a(Facility)
+    expect(facility_factory.new_facilities[1].name).to eq('SARATOGA SPRINGS - WILTON')
+    expect(facility_factory.new_facilities[1].phone).to eq('5185847403')
     expect(facility_factory.new_facilities[2]).to be_a(Facility)
-    end
+    expect(facility_factory.new_facilities[2].name).to eq('MONROE COUNTY EASTSIDE MOBILE OFFICE')
+    expect(facility_factory.new_facilities[2].phone).to eq('5857531604')
+  end
   end
 end
