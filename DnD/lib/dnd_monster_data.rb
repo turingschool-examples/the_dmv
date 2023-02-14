@@ -1,7 +1,7 @@
 require 'faraday'
 require 'json'
 
-class MonsterService
+class MonsterData
 
   def load_data(source)
     response = Faraday.get(source)
