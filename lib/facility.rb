@@ -1,11 +1,12 @@
 class Facility
-  attr_reader :name,
+  attr_reader :services,
+              :registered_vehicles,
+              :name,
               :address,
-              :phone,
-              :services,
-              :registered_vehicles
+              :phone
               
   attr_accessor :collected_fees
+                
 
   def initialize(hash)
     @name = hash[:name]
