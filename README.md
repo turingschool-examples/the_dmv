@@ -17,3 +17,4 @@ This is the starter repo for the BE Mod1 DMV project.
  4. What made it easy? If nothing felt easy, what would’ve helped you feel more comfortable more quickly?
 
   - Theres not much to do, after going through the bugs, you have to make slight changes to the code, and thats it really.
+  
