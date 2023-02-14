@@ -69,8 +69,14 @@ RSpec.describe Dataset do
 
     it 'returns the count of vehicles for a given year only' do
       model_years = @wa_ev_dataset.data.map { |vehicle| vehicle.year }
-      expected = model_years.find_all { |year| year == 2019 }.count
+      expected = model_years.find_all { |year| year == "2019" }.count
       expect(@wa_ev_dataset.count_by_model_year(2019)).to eq(expected)
+    end
+
+    it 'allows for year argument to be an integer or a string' do
+      with_string = @wa_ev_dataset.count_by_model_year("2019")
+      with_integer = @wa_ev_dataset.count_by_model_year(2019)
+      expect(with_string).to eq(with_integer)
     end
   end
 
@@ -82,6 +88,20 @@ RSpec.describe Dataset do
     it 'returns a valid county as a value' do
       counties = @wa_ev_dataset.data.map { |vehicle| vehicle.county }
       expect(counties).to include(@wa_ev_dataset.county_with_most_vehicles)
+    end
+  end
+
+  describe '#get_make' do
+    it 'returns the most popular make as a string' do
+      expect(@wa_ev_dataset.get_make(@wa_ev_dataset.data)).to be_a String
+    end
+  end
+
+  describe '#get_model' do
+    it 'returns the most popular model as a string' do
+      make = @wa_ev_dataset.get_make(@wa_ev_dataset.data)
+
+      expect(@wa_ev_dataset.get_model(@wa_ev_dataset.data, make)).to be_a String
     end
   end
 end
