@@ -28,8 +28,6 @@ RSpec.describe Facility do
 
   describe '#register_vehicle' do
     it 'can register a vehicle' do
-      facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
-
       camaro = Vehicle.new({vin_1_10: '1a2b3c4d5e6f', model_year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
       bolt = Vehicle.new({vin_1_10: '987654321abcdefgh', model_year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
       cruz = Vehicle.new({vin_1_10: '123456789abcdefgh', model_year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
@@ -52,7 +50,7 @@ RSpec.describe Facility do
       @facility.register_vehicle(bolt)
       expect(bolt.registration_date).to eq(Date.today)
       expect(bolt.plate_type).to eq(:ev)
-      expect(@facility.collected_fees).to eq(300) # 100(:regular) + 200(:ev)
+      expect(@facility.collected_fees).to eq(300)
 
       expect(camaro.plate_type).to eq(nil)
       expect(camaro.registration_date).to eq(nil)
@@ -60,7 +58,7 @@ RSpec.describe Facility do
       @facility.register_vehicle(camaro)
       expect(camaro.plate_type).to eq(:antique)
       expect(camaro.registration_date).to eq(Date.today)
-      expect(@facility.collected_fees).to eq(325) # 25(:antique)
+      expect(@facility.collected_fees).to eq(325)
     end
   end
 
