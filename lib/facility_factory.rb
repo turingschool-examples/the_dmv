@@ -48,9 +48,9 @@ class FacilityFactory
     facilities_data.map do |facility|
       Facility.new({
         name: facility[:name].strip,
-        address: "#{facility[:address1]} "\
+        address: "#{facility[:address1]} " +
         "#{facility[:address2] ?
-           facility[:address2] + ' ' : ''}"\
+           facility[:address2] + ' ' : ''}" +
         "#{facility[:city].strip} #{facility[:state]} #{facility[:zipcode]}",
         phone: facility[:phone]&.delete('() -')
       })
