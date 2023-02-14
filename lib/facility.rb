@@ -37,4 +37,9 @@ class Facility
   def administer_written_test(registrant)
     registrant.license_data[:written] = true if @services.include?("Written Test") && registrant.age >= 16 && registrant.permit? == true
   end
+
+  def daily_hours
+    facility_info
+    require 'pry'; binding.pry
+  end
 end
