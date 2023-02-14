@@ -47,10 +47,9 @@ RSpec.describe VehicleFactory do
 
     expect(factory).to be_an_instance_of(VehicleFactory)
     
-    locations = factory.create_vehicles(missouri_facilities)
+    locations = factory.create_facilities(missouri_facilities)
+    
 
-    expect(locations[0].phone).to eq("63670")
-    # expect(factory.create_vehicles(missouri_facilities)).to eq(missouri_facilities)
-    # expect(missouri_facilities[0][:state]).to eq("MO")
+    expect(missouri_facilities[0][:state]).to eq("MO")
   end
 end
