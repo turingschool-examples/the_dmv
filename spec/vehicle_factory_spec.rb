@@ -64,21 +64,25 @@ RSpec.describe VehicleFactory do
     end
 
     it 'assigns the correct attributes and values to WA vehicles' do
-      expect(wa_ev_vehicles.first.vin).to eq(WA_EV_VEHICLE[:vin])
-      expect(wa_ev_vehicles.first.year).to eq(WA_EV_VEHICLE[:year])
-      expect(wa_ev_vehicles.first.make).to eq(WA_EV_VEHICLE[:make])
-      expect(wa_ev_vehicles.first.model).to eq(WA_EV_VEHICLE[:model])
-      expect(wa_ev_vehicles.first.engine).to eq(WA_EV_VEHICLE[:engine])
-      expect(wa_ev_vehicles.first.registration_date).to be(nil)
+      wa_ev_vehicle_1 = factory.create_vehicles(wa_ev_registrations).first
+
+      expect(wa_ev_vehicle_1.vin).to eq(WA_EV_VEHICLE[:vin])
+      expect(wa_ev_vehicle_1.year).to eq(WA_EV_VEHICLE[:year])
+      expect(wa_ev_vehicle_1.make).to eq(WA_EV_VEHICLE[:make])
+      expect(wa_ev_vehicle_1.model).to eq(WA_EV_VEHICLE[:model])
+      expect(wa_ev_vehicle_1.engine).to eq(WA_EV_VEHICLE[:engine])
+      expect(wa_ev_vehicle_1.registration_date).to be(nil)
     end
 
     it 'assigns the correct attributes and values to NY vehicles' do
-      expect(ny_vehicles.first.vin).to eq(NY_VEHICLE[:vin])
-      expect(ny_vehicles.first.year).to eq(NY_VEHICLE[:year])
-      expect(ny_vehicles.first.make).to eq(NY_VEHICLE[:make])
-      expect(ny_vehicles.first.model).to eq(NY_VEHICLE[:model])
-      expect(ny_vehicles.first.engine).to eq(NY_VEHICLE[:engine])
-      expect(ny_vehicles.first.registration_date).to be(nil)
+      ny_vehicle_1 = factory.create_vehicles(ny_registrations).first
+
+      expect(ny_vehicle_1.vin).to eq(NY_VEHICLE[:vin])
+      expect(ny_vehicle_1.year).to eq(NY_VEHICLE[:year])
+      expect(ny_vehicle_1.make).to eq(NY_VEHICLE[:make])
+      expect(ny_vehicle_1.model).to eq(NY_VEHICLE[:model])
+      expect(ny_vehicle_1.engine).to eq(NY_VEHICLE[:engine])
+      expect(ny_vehicle_1.registration_date).to be(nil)
     end
 
     it 'returns nil for invalid state data' do
@@ -145,10 +149,28 @@ RSpec.describe VehicleFactory do
   end
 
   describe '#create_wa_ev_vehicles' do
+    it 'assigns the correct attributes and values to WA vehicles' do
+      wa_ev_vehicle_1 = factory.create_wa_ev_vehicles(wa_ev_registrations).first
 
+      expect(wa_ev_vehicle_1.vin).to eq(WA_EV_VEHICLE[:vin])
+      expect(wa_ev_vehicle_1.year).to eq(WA_EV_VEHICLE[:year])
+      expect(wa_ev_vehicle_1.make).to eq(WA_EV_VEHICLE[:make])
+      expect(wa_ev_vehicle_1.model).to eq(WA_EV_VEHICLE[:model])
+      expect(wa_ev_vehicle_1.engine).to eq(WA_EV_VEHICLE[:engine])
+      expect(wa_ev_vehicle_1.registration_date).to be(nil)
+    end
   end
 
   describe '#create_ny_vehicles' do
+    it 'assigns the correct attributes and values to NY vehicles' do
+      ny_vehicle_1 = factory.create_ny_vehicles(ny_registrations).first
 
+      expect(ny_vehicle_1.vin).to eq(NY_VEHICLE[:vin])
+      expect(ny_vehicle_1.year).to eq(NY_VEHICLE[:year])
+      expect(ny_vehicle_1.make).to eq(NY_VEHICLE[:make])
+      expect(ny_vehicle_1.model).to eq(NY_VEHICLE[:model])
+      expect(ny_vehicle_1.engine).to eq(NY_VEHICLE[:engine])
+      expect(ny_vehicle_1.registration_date).to be(nil)
+    end
   end
 end
