@@ -25,10 +25,13 @@ class Facility
     model.registration_date = Date.today
     if model.antique? && !model.electric_vehicle?
       model.plate_type = :antique
+      @collected_fees += 25
     elsif model.electric_vehicle?
       model.plate_type = :ev
+      @collected_fees += 200
     else
       model.plate_type = :regular
+      @collected_fees += 100
     end
     registered_vehicles << model
     registered_vehicles
