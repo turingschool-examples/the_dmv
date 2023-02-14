@@ -21,16 +21,3 @@ class VehicleFactory
     cars
   end   
 
-  def create_facilities(dmv_data)
-    locations = []
-    dmv_data.each do |location|
-      locations << Facility.new(
-        title: location[:title],
-        zip_code: location[:zip_code],
-        website: location[:website],
-        type: location[:type]
-      )
-    end
-    locations
-  end
-end
