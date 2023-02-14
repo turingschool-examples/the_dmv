@@ -37,6 +37,19 @@ RSpec.describe Facility do
       expect(@facility_1.address).to eq('2242 Santiam Hwy SE Albany OR 97321')
       expect(@facility_1.phone).to eq('541-967-2014')
       expect(@facility_1.services).to eq([])
+      
+    end
+
+    it 'has hours for each day of the week they are open' do
+      expect(@facility_1.monday_hrs).to eq("8:30AM - 5:00PM")
+      expect(@facility_1.tuesday_hrs).to eq("8:30AM - 5:00PM")
+      expect(@facility_1.wednesday_hrs).to eq("8:30AM - 5:00PM")
+      expect(@facility_1.thursday_hrs).to eq("8:30AM - 5:00PM")
+      expect(@facility_1.friday_hrs).to eq("8:30AM - 5:00PM")
+    end
+
+    it 'never has hours on the weekend' do
+      expect(@facility_1.weekend_hrs).to eq('Hahahaha')
     end
   end
 

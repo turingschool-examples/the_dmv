@@ -2,7 +2,13 @@ class Facility
   attr_reader :name, 
               :address, 
               :phone, 
-              :services, 
+              :services,
+              :monday_hrs,
+              :tuesday_hrs,
+              :wednesday_hrs,
+              :thursday_hrs,
+              :friday_hrs,
+              :weekend_hrs,
               :registered_vehicles, 
               :collected_fees
 
@@ -10,6 +16,12 @@ class Facility
     @name = facility_details[:name]
     @address = facility_details[:address]
     @phone = facility_details[:phone]
+    @monday_hrs = facility_details[:monday]
+    @tuesday_hrs = facility_details[:tuesday]
+    @wednesday_hrs = facility_details[:wednesday]
+    @thursday_hrs = facility_details[:thursday]
+    @friday_hrs = facility_details[:friday]
+    @weekend_hrs = "Hahahaha"
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
