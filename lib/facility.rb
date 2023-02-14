@@ -20,21 +20,21 @@ class Facility
     @services << service
     return [service]
   end
-
-  def registration_date
-    date = Time.now.to_s 
-    @registration_date << date.split.first
-  end
   
   def register_vehicle(model)
-    time = Time.now.to_s
-    date = []
-    date << time.split.first
-    @registration_date = date
-    # require 'pry'; binding.pry
+    model.registration_date = Date.today
+    if model.antique? && !model.electric_vehicle?
+      model.plate_type = :antique
+    elsif model.electric_vehicle?
+      model.plate_type = :ev
+    else
+      model.plate_type = :regular
+    end
     registered_vehicles << model
-    return registered_vehicles
+    registered_vehicles
   end
+
+  
   
 
   
