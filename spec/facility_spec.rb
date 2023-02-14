@@ -55,6 +55,21 @@ RSpec.describe Facility do
       expect(facility_1.register_vehicle(cruz)).to eq([cruz])
     end
 
+    it 'Registered vehicles have a registration date' do
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      facility_1.register_vehicle(cruz)
+
+      # require 'pry'; binding.pry
+      expect(cruz.registration_date).to eq(@registration_date)
+    end
+
+    it 'has plate type' do
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+
+      expect(cruz.plate_type).to eq(:regular)
+    end
+
       
   end
 end
