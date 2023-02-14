@@ -10,12 +10,11 @@ RSpec.describe VehicleFactory do
     
     cars = factory.create_vehicles(wa_ev_registrations)
     
-    
-# repeat for other elements in the array
-
-    # expect(factory.create_vehicles(wa_ev_registrations)).to eq(cars)
-  
-
+    expect(cars[0].engine).to eq(:ev)
+    expect(cars[0].make).to eq("TOYOTA")
+    expect(cars[0].model).to eq("Prius Plug-in")
+    expect(cars[0].vin).to eq("JTDKN3DP8D")
+    expect(cars[0].year).to eq("2013")
   end
 
   xit 'access data from another dmv #oregon' do
