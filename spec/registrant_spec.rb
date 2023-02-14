@@ -85,29 +85,29 @@ RSpec.describe Registrant do
       expect(@registrant_1.renewed?).to be(false)
       expect(@registrant_2.renewed?).to be(false)
     end
+  end
+  
+  describe '#earn_permit' do
+    it 'changes #permit? from false to true' do
+      expect(@registrant_2.permit?).to be(false)
+      @registrant_2.earn_permit
+      expect(@registrant_2.permit?).to be(true)
+    end
 
-    describe '#earn_permit' do
-      it 'changes #permit? from false to true' do
-        expect(@registrant_2.permit?).to be(false)
-        @registrant_2.earn_permit
-        expect(@registrant_2.permit?).to be(true)
-      end
+    it 'does nothing if #permit? is already true' do
+      expect(@registrant_1.permit?).to be(true)
+      @registrant_1.earn_permit
+      expect(@registrant_1.permit?).to be(true)
+    end
 
-      it 'does nothing if #permit? is already true' do
-        expect(@registrant_1.permit?).to be(true)
-        @registrant_1.earn_permit
-        expect(@registrant_1.permit?).to be(true)
-      end
+    it 'does nothing if the registrant\'s age is less than 16 years old' do
+      expect(@registrant_3.permit?).to be(false)
+      @registrant_3.earn_permit
+      expect(@registrant_3.permit?).to be(false)
+    end
 
-      it 'does nothing if the registrant\'s age is less than 16 years old' do
-        expect(@registrant_3.permit?).to be(false)
-        @registrant_3.earn_permit
-        expect(@registrant_3.permit?).to be(false)
-      end
-
-      it 'returns true' do
-        expect(@registrant_1.earn_permit).to be(true)
-      end
+    it 'returns true' do
+      expect(@registrant_1.earn_permit).to be(true)
     end
   end
 end
