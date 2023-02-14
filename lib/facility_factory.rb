@@ -10,4 +10,6 @@ class FacilityFactory
     end
     facility_instances
   end
+
+  
 end

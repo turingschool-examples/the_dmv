@@ -4,6 +4,7 @@ RSpec.describe do FacilityFactory
   before(:each) do
     @factory = FacilityFactory.new
     @oregon_facilities = DmvDataService.new.or_dmv_office_locations
+    @new_york_facilities = DmvDataService.new.ny_dmv_office_locations
   end
   describe '#initialize' do
     it 'can initialize' do
@@ -28,10 +29,10 @@ RSpec.describe do FacilityFactory
       expect(@created_facilities[0].collected_fees).to eq(@facility_1.collected_fees)
       expect(@created_facilities[1].collected_fees).to eq(@facility_2.collected_fees)
     end
-    it 'create_facility passes Oregon data to facility class' do
-      @facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
-      @facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
-      @created_facilities = @factory.create_facilities_oregon(@oregon_facilities)
+    it 'create_facility passes New York data to facility class' do
+      @facility_1 = Facility.new({name: 'JAMESTOWN', address: '512 WEST 3RD STREET JAMESTOWN NY 14701', phone: '7166618220' })
+      @facility_2 = Facility.new({name: 'SARATOGA SPRINGS - WILTON', address: '3065 ROUTE 50 WILTON MALL SARATOGA SPRINGS NY 12866', phone: '5185847403' })
+      @created_facilities = @factory.create_facilities_new_york(@new_york_facilities)
       expect(@created_facilities[0].name).to eq(@facility_1.name)
       expect(@created_facilities[1].name).to eq(@facility_2.name)
       expect(@created_facilities[0].address).to eq(@facility_1.address)
