@@ -1,19 +1,19 @@
 require 'spec_helper'
 
-RSpec.describe EvAnalyzer do
+RSpec.describe VehicleAnalyzer do
   before(:each) do
-    @analyzer = EvAnalyzer.new
-    wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-    @analyzer.get_vehicles(wa_ev_registrations)
+    @analyzer = VehicleAnalyzer.new
   end
 
   it 'exists' do
-    expect(@analyzer).to be_an(EvAnalyzer)
+    expect(@analyzer).to be_a(VehicleAnalyzer)
   end
 
   it 'counts model years' do
-    expect(@analyzer.count_model_year('2012')).to be_an(Integer)
-    expect(@analyzer.count_model_year('2012')).to eq(38) #true as of 2/14/23
+    expect(@analyzer.count_model_year(2020)).to eq(88) #true as of 2/14/23
+    expect(@analyzer.count_model_year(2015)).to eq(84) #true as of 2/14/23
+    expect(@analyzer.count_model_year(2012)).to eq(38) #true as of 2/14/23
+    expect(@analyzer.count_model_year("2012")).to eq(38)
   end
 
   it 'finds the most registered county' do
