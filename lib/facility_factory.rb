@@ -62,7 +62,7 @@ class FacilityFactory
 
   def ny_format_phone(data)
     return "No phone." if data[:public_phone_number].nil?
-    data[:public_phone_number].insert(3, '-').insert(7, '-')
+    return "#{$1}-#{$2}-#{$3}" if data[:public_phone_number] =~ /^(\d{3})(\d{3})(\d{4})$/
   end
 
   def or_standardize_data(data)
