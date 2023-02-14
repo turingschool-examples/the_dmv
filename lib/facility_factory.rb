@@ -36,7 +36,7 @@ class FacilityFactory
   end
 
   def mo_format_address(data)
-    "#{data[:address1]} #{data[:city]} #{data[:state]} #{data[:zipcode]}"
+    "#{data[:address1]} #{data[:city].strip} #{data[:state]} #{data[:zipcode]}"
   end
 
   def mo_format_phone(data)
