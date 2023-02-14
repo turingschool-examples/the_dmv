@@ -1,11 +1,11 @@
 class FacilityDmv
-  attr_reader :facilities
+  attr_reader :or_facilities
 
   def initialize
-    @facilities = []
+    @or_facilities = []
   end
 
-  def create_facility(facility_data)
+  def create_or_facility(facility_data)
     facility_data.each do |facility|
       facility_hash = {
         name: facility[:title],
@@ -15,19 +15,15 @@ class FacilityDmv
         phone: facility[:phone_number],
         agency: facility[:agency],
         address: address_converter(facility[:location_1][:human_address])
-        
-        # add_hash = facility[:location_1][:human_address]
-        # string_hash = JSON.parse(add_hash)
-        # string_hash.values.join(' ')
+      
       }
        
-        @facilities << Facility.new(facility_hash)
-        # require 'pry'; binding.pry
+        @or_facilities << Facility.new(facility_hash)
     end
   end
   def address_converter(api_info)
-        add_hash = (api_info)
-        string_hash = JSON.parse(add_hash)
-        string_hash.values.join(' ')
+        hash_in_string = (api_info)
+        add_hash = JSON.parse(hash_in_string)
+        add_hash.values.join(' ')
   end
 end
