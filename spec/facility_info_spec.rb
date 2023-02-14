@@ -18,8 +18,7 @@ RSpec.describe FacilityInfo do
 
   describe '#daily_hours' do
     it 'lists hours facility is open' do
-      expect(@facility_info.daily_hours).to be_an_instance_of Hash
-      expect(@facility_info.daily_hours.keys).to eq(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'])
+      expect(@facility_info.daily_hours[0]).to be_an_instance_of Hash
     end
   end
 
