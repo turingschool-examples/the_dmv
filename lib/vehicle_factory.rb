@@ -33,4 +33,9 @@ class VehicleFactory
     ans = grouped.max_by { |key, value| value }
     ans[0]
   end
+
+  def registrations_per_model_year(year)
+    grouped = @vehicles.group_by { |vehicle| vehicle.year }
+    grouped[year].length
+  end
 end
