@@ -1,3 +1,5 @@
+require 'json'
+
 class FacilityFactory
   attr_reader :facilities
 
@@ -17,6 +19,8 @@ class FacilityFactory
         end
         if key == :location_1
           new_hash[:address] = facility[:location_1][:human_address]
+          new_hash[:address] = JSON.parse(new_hash[:address])
+          new_hash[:address] = "#{new_hash[:address]["address"]} #{new_hash[:address]["city"]} #{new_hash[:address]["state"]} #{new_hash[:address]["zip"]}"
         end
         if key == :office_name
           new_hash[:name] = "#{value} #{facility[:office_type]}"
@@ -42,17 +46,3 @@ class FacilityFactory
     @facilities
   end
 end
-#   new_facility_hash = Hash.new
-#   if key == :title
-#     require 'pry'; binding.pry
-#     new_facility_hash[:name] = value
-#   elsif key == :location_1
-#     new_facility_hash[:address] = value[:human_address]
-#   elsif key == :phone_number
-#     new_facility_hash[:phone] = value
-#   end
-#   facilities << new_facility_hash
-# end
-# facilities
-# require 'pry'; binding.pry
-# end
