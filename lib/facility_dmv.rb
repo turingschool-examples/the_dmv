@@ -36,7 +36,7 @@ class FacilityDmv
 
         name: facility[:office_name],
         phone: facility[:public_phone_number],
-        address: "#{facility[:street_address_line_1]} #{facility[:city]} #{facility[:state]}, #{facility[:zip_code]}" 
+        address: "#{facility[:street_address_line_1]}, #{facility[:city]} #{facility[:state]}, #{facility[:zip_code]}" 
 
       }
       @ny_facilities << Facility.new(facility_hash)
@@ -56,8 +56,8 @@ class FacilityDmv
         phone: facility[:phone],
         address: "#{facility[:address1]}, #{facility[:city].rstrip}, #{facility[:state]} #{facility[:zipcode]}"
       }
-# require 'pry'; binding.pry
       @mo_facilities << Facility.new(facility_hash)
+      # require 'pry'; binding.pry
 
     end
 

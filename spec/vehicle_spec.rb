@@ -33,4 +33,28 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe '#set_plate_type'do
+    it 'can determine plate type of a vehicle' do
+
+      expect(@cruz.set_plate_type).to eq(:regular)
+      expect(@camaro.set_plate_type).to eq(:antique)
+    end
+  end
+
+  describe "#set registration_date" do
+    it 'can set the registration date for a vehicle' do
+
+      expect(@cruz.set_registration_date).to eq(Date.today)
+      expect(@bolt.set_registration_date).to eq(Date.today)
+    end
+  end
+
+  describe'#set_fees' do
+    it 'can set collection fees for vehicles' do
+
+      expect(@cruz.set_fees).to eq(100)
+      expect(@bolt.set_fees).to eq(200)
+    end
+  end
 end
