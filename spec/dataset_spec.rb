@@ -64,12 +64,12 @@ RSpec.describe Dataset do
 
   describe '#count_by_model_year' do
     it 'returns an integer count' do
-      expect(@wa_ev_dataset.count_by_model_year).to be_a Integer
+      expect(@wa_ev_dataset.count_by_model_year(2019)).to be_a Integer
     end
 
     it 'returns the count of vehicles for a given year only' do
-      model_years = @wa_ev_dataset.data.map { |vehicle| vehicle.model_year }
-      expected = model_years.find_all { |years| model_year == 2019 }.count
+      model_years = @wa_ev_dataset.data.map { |vehicle| vehicle.year }
+      expected = model_years.find_all { |year| year == 2019 }.count
       expect(@wa_ev_dataset.count_by_model_year(2019)).to eq(expected)
     end
   end
