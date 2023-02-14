@@ -15,7 +15,16 @@ class DmvLocations
     end
     @dmv_locations
   end
-  
+
+  def create_dmv_locations_2(location_database)
+    location_database.map do |location|
+      location[:address] = location[:street_address_line_1]
+      location[:name] = location[:office_name]
+      location[:phone] = location[:public_phone_number]
+      facility1 = Facility.new(location)
+      @dmv_locations << facility1
+    end
+  end
   
 end
 
