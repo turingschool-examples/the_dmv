@@ -58,6 +58,7 @@ RSpec.describe Facility do
     end
   
     it 'registrant_1 has a permit?' do
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
       registrant_1 = Registrant.new('Bruce', 18, true )
       expect(registrant_1.permit?).to eq(true)
     end
