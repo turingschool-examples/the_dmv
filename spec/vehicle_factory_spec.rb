@@ -107,4 +107,32 @@ RSpec.describe VehicleFactory do
       expect(factory.create_vehicles([])).to be(nil)
     end
   end
+
+  describe '#most_popular_make_model' do
+    actual = factory.most_popular_make_model(wa_ev_vehicles)
+    expected = {
+      make: 'NISSAN',
+      model: 'Leaf'
+    }
+
+    it 'returns a hash' do
+      expect(actual).to be_a(Hash)
+    end
+
+    it 'the returned hash has a make symbol key' do
+      expect(actual.key?(:make)).to be(true)
+    end
+
+    it 'the returned hash has a model symbol key' do
+      expect(actual.key?(:model)).to be(true)
+    end
+
+    it 'the values of the returned hash are all strings' do
+      expect(actual.values.all? { |value| value.is_a?(String) }).to be(true)
+    end
+
+    it 'returns the most popular make/model registered for WA ev data' do
+      expect(actual).to eq(expected)
+    end
+  end
 end
