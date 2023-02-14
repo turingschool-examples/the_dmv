@@ -14,15 +14,11 @@ class AnalysisBot
   end
 
   def cars_this_year(data_set, year)
-    years = data_set.map{|car_hash| car_hash[:model_year]}.uniq.sort
     years_hash = Hash.new(0)
-    years.each do |year| 
-      data_set.each do |car|
-        years_hash[year.to_sym] += 1 if car[:model_year] == year
-      end
+    data_set.each do |car_hash|
+      years_hash[car_hash[:model_year]] += 1
     end
-
-    return years_hash[year.to_s.to_sym]
+    return years_hash[year.to_s]
   end
 
   def county_highest_registrations(data_set)
