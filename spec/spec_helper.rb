@@ -4,4 +4,5 @@ require './lib/facility'
 require './lib/vehicle'
 require './lib/registrant'
 require './lib/dmv_data_service'
+require './lib/vehicle_factory'
 
