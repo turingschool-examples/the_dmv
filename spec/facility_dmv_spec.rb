@@ -28,12 +28,13 @@ RSpec.describe FacilityDmv do
     expect(facility_dmv.or_facilities.count).to eq(59)
   end
 
-  xit 'can convert addressed from API info' do
+  it 'can convert addressed from API info' do
     facility_dmv = FacilityDmv.new
-    oregon_facilities = DmvDataService.new.
+    oregon_facilities = DmvDataService.new
 
-    facility_dmv.create_or_facility(oregon_facilities)
-    expect(facility_dmv.address_converter)
+      hash_in_string = "{\"address\": \"2242 Santiam Hwy SE\", \"city\": \"Albany\", \"state\": \"OR\", \"zip\": \"97321\"}"
+
+    expect(facility_dmv.address_converter(hash_in_string)).to eq("2242 Santiam Hwy SE Albany OR 97321")
   end
 
   it 'exits and pulls NY data from API' do

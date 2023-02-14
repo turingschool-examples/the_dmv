@@ -20,6 +20,7 @@ class Facility
   end
 
   def register_vehicle(vehicle)
+    # require 'pry'; binding.pry
     if services.include?('Vehicle Registration')
       @registered_vehicles << vehicle
       vehicle.set_registration_date
@@ -32,7 +33,7 @@ class Facility
 
   def administer_written_test(person)
     if services.include?("Written_Test") && person.permit? == true && person.age >= 16
-    person.license_data[:written] = true
+      person.license_data[:written] = true
     else 
       false
     end
