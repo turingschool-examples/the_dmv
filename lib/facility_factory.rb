@@ -2,13 +2,7 @@ require 'json'
 
 class FacilityFactory
   attr_reader :new_facilities
-              :or
-              :ny
-              :mo
   def initialize
-    @or = []
-    @ny = []
-    @mo = []
     @new_facilities = []
   end
 
@@ -17,16 +11,20 @@ class FacilityFactory
     @new_facilities << facility
   end
 
-  def create_facilities(state, data)
+  def create_facilities(state, locations = nil)
     if state == 'or'
-      create_or_facilities
+      create_or_facilities(locations)
     elsif state == 'ny'
-      create_ny_facilities
+      create_ny_facilities(locations)
+    elsif state == 'mo'
+      create_mo_facilities(locations)
+    else "State unavailable!"
     end
   end
 
   def create_or_facilities(locations)
-    locations.each do |location|
+    locations.map do |location|
+      require 'pry'; binding.pry
       data = location[:location_1][:human_address]
       address = JSON.parse(data, symbolize_names: true)
       location[:name] = location[:title]
@@ -48,6 +46,11 @@ class FacilityFactory
   end
 
   def create_mo_facilities(locations)
-    
+    locations.each do |location|
+      location[:address] = location[:address1]
+      location[:name]
+      facility = Facility.new(location)
+      @new_facilities << facility
+    end
   end
 end
