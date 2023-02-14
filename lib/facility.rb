@@ -40,11 +40,19 @@ class Facility
   end
     
   def administer_written_test(registrant)
-    if @services.include?('Written Test') == true
-    registrant.permit? == true
-    registrant.age >= 16
+    if @services.include?('Written Test') == true && registrant.permit? == true && registrant.age >= 16
+      registrant.written_test = true
       true
     else 
+      false
+    end
+  end
+
+  def administer_road_test(registrant)
+    if @services.include?('Road Test') == true && registrant.written_test == true
+      registrant.road_test = true 
+      true
+    else
       false
     end
   end
