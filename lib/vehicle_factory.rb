@@ -6,7 +6,7 @@ class VehicleFactory
   end
 
   def create_vehicles(data)
-    car_data = []
+    vehicle_data = []
     data.each do |data_hash|
       vehicle_details = {}
       vehicle_details[:vin] = data_hash[:vin_1_10]
@@ -14,9 +14,9 @@ class VehicleFactory
       vehicle_details[:make] = data_hash[:make]
       vehicle_details[:model] = data_hash[:model]
       vehicle_details[:engine] = :ev
-      car_data << vehicle_details
+      vehicle_data << vehicle_details
     end
-    car_data.each do |vehicle_details|
+    vehicle_data.each do |vehicle_details|
       @vehicles << Vehicle.new(vehicle_details)
     end
     @vehicles
