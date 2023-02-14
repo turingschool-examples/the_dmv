@@ -7,8 +7,6 @@ RSpec.describe VehicleFactory do
 
   describe '#initialize' do
     it 'can initialize a factory' do
-      @factory = VehicleFactory.new
-
       expect(@factory).to be_a(VehicleFactory)
       expect(@factory.vehicles).to eq([])
     end
@@ -20,7 +18,7 @@ RSpec.describe VehicleFactory do
       @factory.create_vehicles(wa_ev_registrations)
 
       expect(@factory.vehicles).to be_a(Array)
-      expect(@factory.vehicles[0]).to be_a(Vehicle)
+      expect(@factory.vehicles).to all(be_a Vehicle)
       expect(@factory.vehicles.length).to eq(1000)
     end
   end
