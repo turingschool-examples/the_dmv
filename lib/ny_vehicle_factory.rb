@@ -1,12 +1,14 @@
 class NyVehicleFactory
+  attr_reader :source
 
-  def initialize; end
+  def initialize(source)
+    @source = source
+  end
 
   def create_vehicles(source)
     cars = filter_cars(source)
     cars.map do |car|
       Vehicle.new({vin: car[:vin], year: car[:model_year], make: car[:make], model: 'unspecified', engine: car[:fuel_type]})
-      # fuel types won't match engine
     end
   end
 
