@@ -11,6 +11,7 @@ class VehicleFactory
       year: car[:model_year],
       make: car[:make],
       model: car[:model],
+      county: car[:county],
       engine: :ev
       }
       @vehicle_storage << Vehicle.new(car_hash)
@@ -22,9 +23,7 @@ class VehicleFactory
   end
   
   def find_most_popular_make
-    most_popular_make = @vehicle_storage.group_by do |vehicle|
-      vehicle.make
-    end
+    most_popular_make = @vehicle_storage.group_by { |vehicle| vehicle.make }
     most_popular_make.max_by {|make, vehicles| vehicles.length}.first
   end
 
@@ -32,15 +31,18 @@ class VehicleFactory
     popular_make = @vehicle_storage.select do |vehicle|
       vehicle.make == find_most_popular_make
     end
-    most_popular_model = popular_make.group_by do |vehicle|
-      vehicle.model
-    end
+    most_popular_model = popular_make.group_by { |vehicle| vehicle.model }
     most_popular_model.max_by {|model, vehicles| vehicles.length}.first
   end
 
-  def number_by_model_year(year, model)
+  def number_by_model_year(model, year)
     @vehicle_storage.select do |vehicle|
       vehicle.year == year && vehicle.model == model
     end.length
+  end
+  
+  def county_with_most_vehicles
+    grouped_by_county = @vehicle_storage.group_by { |vehicle| vehicle.county }
+    grouped_by_county.max_by {|county, vehicles| vehicles.length}.first
   end
 end
