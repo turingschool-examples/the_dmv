@@ -48,4 +48,30 @@ class EvAnalyzer
 
     "#{most_registered_county} county: #{most_registrations} registrations"
   end
+
+  def most_popular_car
+    cars = @vehicles.map do |vehicle|
+      "#{vehicle.make} #{vehicle.model}"
+    end
+    counted_cars = {}
+    most_registrations = 0
+    most_popular_car = nil
+
+    cars.each do |car|
+      if counted_cars.include?(car) == false
+        counted_cars[car] = 1
+      else
+        counted_cars[car] += 1
+      end
+    end
+
+    counted_cars.each do |car, number_of_registrations|
+      if number_of_registrations > most_registrations
+        most_registrations = number_of_registrations
+        most_popular_car = car
+      end
+    end
+
+    "#{most_popular_car}: #{most_registrations} registrations"
+  end
 end
