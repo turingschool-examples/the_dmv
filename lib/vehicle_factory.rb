@@ -26,10 +26,10 @@ class VehicleFactory
     locations = []
     dmv_locations.map do |location|
       locations << Facility.new(
-        title: location[:title],
-        zip_code: location[:zip_code],
-        website: location[:website],
-        type: location[:type]
+        address: location[:title],
+        phone: location[:zip_code],
+        name: location[:agency],
+        
       )
     end
     locations
