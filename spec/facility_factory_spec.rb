@@ -14,6 +14,7 @@ RSpec.describe FacilityFactory do
       or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
       test1 = factory.create_facilities(or_dmv_office_locations)
       expect(test1).to be_an_instance_of(Array)
+      require 'pry'; binding.pry
     end
 
     it "creates an array of facility objects with ny_dmv_office_locations" do
