@@ -57,6 +57,17 @@ class Dmv
     end
   end
 
+  def render_facility_data_mo(list)
+    list.each do |spec|
+      rendered_data = {
+          name: (spec[:name]),
+          address: "#{spec[:address1]} #{spec[:city]}#{spec[:state]} #{spec[:zipcode]}" ,
+          phone: (spec[:phone]),
+        }
+      @rendered_facilities << rendered_data
+    end
+  end
+
   def create_facilities(list)
     self.determine_state(list)
     if @state == "New York"
