@@ -11,21 +11,23 @@ RSpec.describe FacilityFactory do
     factory = FacilityFactory.new
 
     or_dmv_facilities = DmvDataService.new.or_dmv_office_locations
-    facilities = factory.create_facilities(or_dmv_facilities)
+    or_facilities = factory.create_facilities(or_dmv_facilities)
 
-    expect(facilities).to be_an(Array)
-    expect(facilities[0]).to be_a(Facility)
+    expect(or_facilities).to be_an(Array)
+    expect(or_facilities[0]).to be_a(Facility)
+    expect(or_facilities[0].name).
 
     new_york_facilities = DmvDataService.new.ny_dmv_office_locations
-    facilities = factory.create_facilities(new_york_facilities)
+    ny_facilities = factory.create_facilities(new_york_facilities)
 
-    expect(facilities).to be_an(Array)
-    expect(facilities[0]).to be_a(Facility)
+    expect(ny_facilities).to be_an(Array)
+    expect(ny_facilities[0]).to be_a(Facility)
+
 
     missouri_facilities = DmvDataService.new.mo_dmv_office_locations
-    facilities = factory.create_facilities(missouri_facilities)
-    
-    expect(facilities).to be_an(Array)
-    expect(facilities[0]).to be_a(Facility)
+    mo_facilities = factory.create_facilities(missouri_facilities)
+
+    expect(mo_facilities).to be_an(Array)
+    expect(mo_facilities[0]).to be_a(Facility)
   end
 end
