@@ -8,17 +8,31 @@ RSpec.describe 'Analyize Data' do
       @wa_vehicles = @factory.create_vehicles(@wa_ev_registrations)
       
     end
-    xit 'finds the most popular make and model' do
-      # CODE HERE
+    it 'finds the most popular make' do
+      most_popular_make = @factory.most_popular_make(@wa_ev_registrations)
+
+      expect(most_popular_make).to eq("TESLA")
+    end
+
+    it 'finds the most popular model' do
+      most_popular_model = @factory.most_popular_model(@wa_ev_registrations)
+
+      expect(most_popular_model).to eq("Model 3")
+    end
+
+    it 'finds the most popular make and model' do
+      most_popular_make_and_model = @factory.most_popular_make_model(@wa_ev_registrations)
+
+      expect(most_popular_make_and_model).to eq("TESLA, Model 3")
     end
 
     it 'counts number of registered vehicles by model year' do
-      by_year = @factory.registered_vehicles_by_year("2013")
+      by_year = @factory.registered_vehicles_by_year(@wa_ev_registrations, "2013")
 
       expect(by_year).to eq(82)
     end
 
-    xit 'finds county that has most registered vehicles' do
+    it 'finds county that has most registered vehicles' do
       county_with_most = @factory.most_by_county(@wa_ev_registrations)
     
       expect(county_with_most).to be_a(String)
@@ -34,7 +48,7 @@ RSpec.describe 'Analyize Data' do
     @facility = FacilityConstructor.new  
     end
 
-    xit 'finds daily hours for NY facilities' do
+    it 'finds daily hours for NY facilities' do
       new_york =  @facility.create_facility(@new_york_facilities)
       
       expect(new_york.first.daily_open_hours).to eq([
@@ -45,21 +59,21 @@ RSpec.describe 'Analyize Data' do
         :friday=>{:open=>"8:30 AM", :close=>"4:15 PM"}}])
     end
 
-    xit 'finds daily hours for OR facilities' do
+    it 'finds daily hours for OR facilities' do
       oregon_facilities = @facility.create_facility(@dmv_office_location)
 
       expect(oregon_facilities.first).to be_a(Facility)
       expect(oregon_facilities.first.daily_open_hours).to be(nil)
     end
 
-    xit 'finds daily hours for MO facilities' do
+    it 'finds daily hours for MO facilities' do
       missouri =  @facility.create_facility(@missouri_facilities)
       mo = missouri.first.daily_open_hours
 
       expect(mo).to eq("Monday - Friday - 8:30 to 5:00, Last 4 week days - 8:00 to 5:00")
     end
       
-    xit 'which holidays are closed for each specific state' do
+    it 'which holidays are closed for each specific state' do
       missouri =  @facility.create_facility(@missouri_facilities)
       mo = missouri.first.closed_for_the_holidays
 
@@ -69,7 +83,7 @@ RSpec.describe 'Analyize Data' do
   end
 
   describe 'Vehicles' do
-    xit 'creates vehicle objects from NY State Registration data' do
+    it 'creates vehicle objects from NY State Registration data' do
       factory = VehicleFactory.new
       ny_state_registrations = DmvDataService.new.ny_state_registrations
       created_vehicles = factory.create_vehicles(ny_state_registrations)
