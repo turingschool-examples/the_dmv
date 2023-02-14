@@ -32,7 +32,7 @@ RSpec.describe FacilityBuilder do
       facility.build_facility(ny_dmv_office_locations)
 
       expect(facility.ny_facilities).to be_a(Array)
-      expect(facility.ny_facilities.first).to be_a(Facility)
+      expect(facility.ny_facilities).to all(be_a Facility)
       expect(facility.ny_facilities.length).to eq(169)
     end
 
@@ -43,7 +43,7 @@ RSpec.describe FacilityBuilder do
       facility.build_facility(mo_dmv_office_locations)
 
       expect(facility.mo_facilities).to be_a(Array)
-      expect(facility.mo_facilities.first).to be_a(Facility)
+      expect(facility.mo_facilities).to all(be_a Facility)
       expect(facility.mo_facilities.length).to eq(178)
     end
 

@@ -8,11 +8,16 @@ class VehicleFactory
   end
   
   def create_vehicles(vehicles)
-# require 'pry'; binding.pry
     if vehicles.first[:state] == 'NY'
       create_ny_vehicles(vehicles)
     elsif vehicles[0][:state_of_residence] == 'WA'
       create_wa_vehicles(vehicles)
+    end
+  end
+
+  def registered_vehicles_by_year(vehicles)
+    vehicles.tally do |vehicle|
+      
     end
   end
   
@@ -34,9 +39,7 @@ class VehicleFactory
   end
   
   def create_ny_vehicles(ny_registrations)
-    # require 'pry'; binding.pry
     ny_registrations.select do |vehicle|
-      # require 'pry'; binding.pry
       if vehicle[:record_type] == 'VEH'        
         vehicle_info = {
           :vin => vehicle[:vin],
