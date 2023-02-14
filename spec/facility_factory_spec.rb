@@ -15,7 +15,6 @@ RSpec.describe FacilityFactory do
 
     expect(or_facilities).to be_an(Array)
     expect(or_facilities[0]).to be_a(Facility)
-    expect(or_facilities[0].name).
 
     new_york_facilities = DmvDataService.new.ny_dmv_office_locations
     ny_facilities = factory.create_facilities(new_york_facilities)
