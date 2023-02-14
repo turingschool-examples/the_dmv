@@ -12,8 +12,8 @@ RSpec.describe EvAnalyzer do
   end
 
   it 'counts model years' do
-    expect(@analyzer.count_model_year('2012')).to be_an(Integer)
-    expect(@analyzer.count_model_year('2012')).to eq(38) #true as of 2/14/23
+    expect(@analyzer.count_model_year(2012)).to be_an(Integer)
+    expect(@analyzer.count_model_year(2012)).to eq(38) #true as of 2/14/23
   end
 
   it 'finds the most registered county' do
