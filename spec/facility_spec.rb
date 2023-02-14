@@ -30,7 +30,8 @@ RSpec.describe Facility do
       @facility_1.add_service('New Drivers License')
       @facility_1.add_service('Renew Drivers License')
       @facility_1.add_service('Vehicle Registration')
-      expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+      expect(@facility_1.services).
+      to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
 
@@ -60,7 +61,8 @@ RSpec.describe Facility do
     end
 
     it 'only registers vehicle if service provided at facility' do
-      expect(@facility_1.register_vehicle(@cruz)).to eq('Service not available at this location.')
+      expect(@facility_1.register_vehicle(@cruz)).
+      to eq('Service not available at this location.')
 
       expect(@facility_1.registered_vehicles).to eq([])
       expect(@bolt.registration_date).to eq(nil)
@@ -74,26 +76,33 @@ RSpec.describe Facility do
       @facility_1.add_service('Written Test')
 
       expect(@facility_1.administer_written_test(@registrant_1)).to be true
-      expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+      expect(@registrant_1.license_data).
+      to eq({:written=>true, :license=>false, :renewed=>false})
     end
 
     it 'only administers written test if service provided at facility' do
-      expect(@facility_1.administer_written_test(@registrant_1)).to eq('Service not available at this location.')
-      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@facility_1.administer_written_test(@registrant_1)).
+      to eq('Service not available at this location.')
+      expect(@registrant_1.license_data).
+      to eq({:written=>false, :license=>false, :renewed=>false})
     end
 
     it 'only administers written test if registrant has a permit' do
       @facility_1.add_service('Written Test')
 
-      expect(@facility_1.administer_written_test(@registrant_2)).to eq('You are not eligible for a written test.')
-      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@facility_1.administer_written_test(@registrant_2)).
+      to eq('You are not eligible for a written test.')
+      expect(@registrant_2.license_data).
+      to eq({:written=>false, :license=>false, :renewed=>false})
     end
 
     it 'only administers written test if registrant at least 16' do
       @facility_1.add_service('Written Test')
 
-      expect(@facility_1.administer_written_test(@registrant_3)).to eq('You are not eligible for a written test.')
-      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@facility_1.administer_written_test(@registrant_3)).
+      to eq('You are not eligible for a written test.')
+      expect(@registrant_2.license_data).
+      to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
 
@@ -104,20 +113,25 @@ RSpec.describe Facility do
       @facility_1.administer_written_test(@registrant_1)
       
       expect(@facility_1.administer_road_test(@registrant_1)).to be true
-      expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+      expect(@registrant_1.license_data).
+      to eq({:written=>true, :license=>true, :renewed=>false})
     end
 
     it 'can only administer road test if registrant passed written test' do
       @facility_1.add_service('Written Test') 
       @facility_1.add_service('Road Test')
       
-      expect(@facility_1.administer_road_test(@registrant_1)).to eq('Need to pass written test first.')
-      expect(@registrant_1.license_data).to eq({:written=>false,:license=>false, :renewed=>false})
+      expect(@facility_1.administer_road_test(@registrant_1)).
+      to eq('Need to pass written test first.')
+      expect(@registrant_1.license_data).
+      to eq({:written=>false,:license=>false, :renewed=>false})
     end
     
     it 'only administers road test if service provided at facility' do
-      expect(@facility_1.administer_road_test(@registrant_1)).to eq('Service not available at this location.')
-      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@facility_1.administer_road_test(@registrant_1)).
+      to eq('Service not available at this location.')
+      expect(@registrant_1.license_data).
+      to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
 
@@ -130,12 +144,15 @@ RSpec.describe Facility do
         @facility_1.administer_road_test(@registrant_1)
         
         expect(@facility_1.renew_drivers_license(@registrant_1)).to be true
-        expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+        expect(@registrant_1.license_data).
+        to eq({:written=>true, :license=>true, :renewed=>true})
     end
 
     it 'only renews license if service provided at facility' do
-      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq('Service not available at this location.')
-      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@facility_1.renew_drivers_license(@registrant_1)).
+      to eq('Service not available at this location.')
+      expect(@registrant_1.license_data).
+      to eq({:written=>false, :license=>false, :renewed=>false})
     end
 
     it 'can only renew license if registrant has license' do
@@ -143,13 +160,28 @@ RSpec.describe Facility do
       @facility_1.add_service('Road Test')
       @facility_1.add_service('Renew License')
       
-      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq('Must have license.')
-      expect(@registrant_1.license_data).to eq({:written=>false,:license=>false, :renewed=>false})
+      expect(@facility_1.renew_drivers_license(@registrant_1)).
+      to eq('Must have license.')
+      expect(@registrant_1.license_data).
+      to eq({:written=>false,:license=>false, :renewed=>false})
 
       @facility_1.administer_written_test(@registrant_1)
 
-      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq('Must have license.')
-      expect(@registrant_1.license_data).to eq({:written=>true,:license=>false, :renewed=>false})
+      expect(@facility_1.renew_drivers_license(@registrant_1)).
+      to eq('Must have license.')
+      expect(@registrant_1.license_data).
+      to eq({:written=>true,:license=>false, :renewed=>false})
+    end
+  end
+
+  describe '#service_provided' do
+    it 'returns message if service not provided at facility' do
+      expect(@facility_1.service_provided?('Written Test')).
+      to eq('Service not available at this location.')
+
+      @facility_1.add_service('Written Test')
+
+      expect(@facility_1.service_provided?('Written Test')).to be true
     end
   end
 end
