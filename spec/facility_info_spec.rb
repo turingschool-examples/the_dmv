@@ -40,4 +40,12 @@ RSpec.describe FacilityInfo do
       expect(@facility_info_2.daily_hours[0]).to eq('Monday - Friday - 8:30 to 5:00, Last 4 week days - 8:00 to 5:00')
     end
   end
+
+  describe '#holidays_closed' do
+    it 'returns holidays facility is closed' do
+      expect(@facility_info_2.holidays_closed[0]).
+      to eq("Independence Day (07/04/22), Labor Day (09/05/22), Columbus Day (10/10/22), Veterans Day (11/11/22), Thanksgiving (11/24/22), Christmas Day Observed (12/26/22), New Year's Day Observed (01/02/23), Martin Luth
+      er King Day (01/16/23), Lincoln’s Birthday (02/13/23), President’s Day (02/20/23), Truman’s Birthday (05/08/23), Memorial Day (05/29/23), Independence Day (07/04/23), Labor Day (09/04/23), Columbus Day (10/09/23)
+      , Veterans Day (11/10/23), Thanksgiving (11/23/23), Christmas Day Observed (12/25/23)")
+  end
 end
