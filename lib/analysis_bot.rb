@@ -12,4 +12,17 @@ class AnalysisBot
     most_pop_model = models_number_hash.sort_by{|k_v_pair| k_v_pair.last}.last[0]
     return "#{most_pop_make} #{most_pop_model}"
   end
+
+  def cars_this_year(data_set, year)
+    years = data_set.map{|car_hash| car_hash[:model_year]}.uniq.sort
+    years_hash = Hash.new(0)
+    years.each do |year| 
+      data_set.each do |car|
+        # require 'pry'; binding.pry
+        years_hash[year.to_sym] += 1 if car[:model_year] == year
+      end
+    end
+
+    return years_hash[year.to_s.to_sym]
+  end
 end
