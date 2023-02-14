@@ -31,22 +31,6 @@ class FacilityFactory
     end
   end
 
-  def ny_standardize_data(data)
-    data.map do |facility|
-      {name: ny_format_name(facility),
-       phone: ny_format_phone(facility),
-       address: ny_format_address(facility)}
-    end
-  end
-
-  def or_standardize_data(data)
-    data.map do |facility|
-      {name: facility[:title],
-       phone: facility[:phone_number],
-       address: or_format_address(facility)}
-    end
-  end
-
   def mo_format_name(data)
     "#{data[:name].strip} DMV Office"
   end
@@ -60,6 +44,14 @@ class FacilityFactory
     data[:phone].delete('() ').insert(3, '-')
   end
 
+  def ny_standardize_data(data)
+    data.map do |facility|
+      {name: ny_format_name(facility),
+       phone: ny_format_phone(facility),
+       address: ny_format_address(facility)}
+    end
+  end
+
   def ny_format_name(data)
     "#{data[:office_name].strip} DMV Office"
   end
@@ -71,6 +63,14 @@ class FacilityFactory
   def ny_format_phone(data)
     return "No phone." if data[:public_phone_number].nil?
     data[:public_phone_number].insert(3, '-').insert(7, '-')
+  end
+
+  def or_standardize_data(data)
+    data.map do |facility|
+      {name: facility[:title],
+       phone: facility[:phone_number],
+       address: or_format_address(facility)}
+    end
   end
 
   def or_format_address(data)
