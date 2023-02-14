@@ -15,9 +15,6 @@ class FacilityConstructor
     facility_checker(location_data)
   end
 
-  
-
-
   # helper methods
 
   def facility_checker(location_data)
