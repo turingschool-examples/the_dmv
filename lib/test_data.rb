@@ -58,7 +58,6 @@ module TestData
     model: 'Prius Plug-in',
     engine: :ev
   }.freeze
-
   NY_VEHICLE = {
     vin: '999999999999',
     year: '1975',
@@ -72,13 +71,11 @@ module TestData
     address: '2242 SANTIAM HWY SE ALBANY OR 97321',
     phone: '5419672014'
   }.freeze
-
   NY_FACILITY = {
     name: 'JAMESTOWN',
     address: '512 WEST 3RD STREET JAMESTOWN NY 14701',
     phone: '7166618220'
   }.freeze
-
   MO_FACILITY = {
     name: 'SAINTE GENEVIEVE',
     address: '753 STE. GENEVIEVE DR STE GENEVIEVE MO 63670',
