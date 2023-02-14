@@ -47,7 +47,7 @@ RSpec.describe FacilityBuilder do
       expect(facility.mo_facilities.length).to eq(178)
     end
 
-    it 'works with all three states' do
+    it 'works with all three state facilities' do
       facility = FacilityBuilder.new
       or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
       ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
