@@ -135,4 +135,20 @@ RSpec.describe VehicleFactory do
       expect(actual).to eq(expected)
     end
   end
+
+  describe '#make_model_counts' do
+    actual = factory.make_model_counts(wa_ev_vehicles)
+
+    it 'returns a hash' do
+      expect(actual).to be_a(Hash)
+    end
+
+    it 'it has keys that are hashes' do
+      expect(actual.all? { |key, _| key.is_a?(Hash) }).to be(true)
+    end
+
+    it 'it has values that are integers representing the counts of each key' do
+      expect(actual.all? { |_, value| value.is_a?(Integer) }).to be(true)
+    end
+  end
 end
