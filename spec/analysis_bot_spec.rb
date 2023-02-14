@@ -22,7 +22,7 @@ RSpec.describe AnalysisBot do
     end
 
     it "can return county with highest number of registered cars" do
-      expect(jeremy.county_highest_registrations(washington_vehicles, "Pierce")).to eq(71)
+      expect(jeremy.county_highest_registrations(washington_vehicles)).to eq("King")
     end
   end
 

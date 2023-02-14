@@ -25,18 +25,12 @@ class AnalysisBot
     return years_hash[year.to_s.to_sym]
   end
 
-  def county_highest_registrations(data_set, county)
-    # counties = data_set.map{|car_registrations| car_registrations[:county]}.uniq
-    # counties_hash = Hash.new(0)
-    # counties.each do |county|
-    #   data_set
-
+  def county_highest_registrations(data_set)
     counties_hash = Hash.new(0)
     data_set.each do |car_hash|
       counties_hash[car_hash[:county]] += 1
     end
-    counties_hash.sort_by{|k_v_pair| k_v_pair.last}.last[0] 
     
-    return counties_hash[county]
+    return counties_hash.sort_by{|k_v_pair| k_v_pair.last}.last[0] 
   end
 end
