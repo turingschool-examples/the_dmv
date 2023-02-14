@@ -42,4 +42,10 @@ RSpec.describe DmvDataService do
       expect(@dds.mo_dmv_office_locations.size).to eq(178)
     end
   end
+
+  describe '#ny_registrations' do
+    it 'can load ney york registration data' do
+      expect(@dds.ny_registrations.size).to eq(1000)
+    end
+  end
 end

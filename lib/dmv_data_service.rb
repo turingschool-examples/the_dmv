@@ -2,6 +2,7 @@ require 'faraday'
 require 'json'
 
 class DmvDataService
+  attr_reader :wa_ev_registrations
 
   def load_data(source)
     response = Faraday.get(source)
@@ -10,6 +11,10 @@ class DmvDataService
 
   def wa_ev_registrations
     @wa_ev_registrations ||= load_data('https://data.wa.gov/resource/rpr4-cgyd.json')
+  end
+
+  def ny_registrations
+    @ny_registrations ||= load_data('https://data.ny.gov/resource/w4pv-hbkt.json')
   end
 
   def or_dmv_office_locations
