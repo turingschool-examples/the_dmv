@@ -12,4 +12,28 @@ RSpec.describe VehicleFactory do
       expect(@factory.create_vehicles(wa_ev_registrations)[0]).to be_an_instance_of(Vehicle)
     end
   end
+
+  describe '#Iteration 4 Part 2' do
+    it 'can find most popular make of imported vehicles' do
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+
+      @factory.create_vehicles(wa_ev_registrations)
+
+      expect(@factory.most_pop_make).to eq("TESLA")
+    end
+
+    it 'can find most popular model of imported vehicles' do
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+
+      @factory.create_vehicles(wa_ev_registrations)
+
+      expect(@factory.most_pop_model).to eq("Leaf")
+    end
+
+    it 'can give count of registered vehicles per model year' do
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+
+      @factory.create_vehicles(wa_ev_registrations)
+    end
+  end
 end
