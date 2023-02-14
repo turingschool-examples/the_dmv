@@ -40,7 +40,7 @@ class Facility
 
   def administer_written_test(registrant)
     if registrant.permit?
-      registrant.take_written_test
+      registrant
       true
     else
       false

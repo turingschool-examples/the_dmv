@@ -56,6 +56,7 @@ RSpec.describe Facility do
       expect(facility_2.registered_vehicles).to eq([])
       expect(facility_2.collected_fees).to eq(0)
     end
+
     it 'written, license, and renewed all false for reg_1' do
       registrant_1 = Registrant.new('Bruce', 18, true )
       expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
@@ -74,7 +75,7 @@ RSpec.describe Facility do
     
     it 'administers a road test' do
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
-      registrant_1 = Registrant.new('Bruce', 18, true, true, true)
+      registrant_1 = Registrant.new('Bruce', 18, true)
       facility_1.add_service('Road Test')
       expect(facility_1.administer_road_test(registrant_1)).to eq(true)
       expect(registrant_1.road_test_passed).to eq(true)
@@ -83,7 +84,7 @@ RSpec.describe Facility do
     
     it 'renews a driver\'s license' do
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
-      registrant_1 = Registrant.new('Bruce', 18, true, true, true, true)
+      registrant_1 = Registrant.new('Bruce', 18, true)
       facility_1.add_service('Renew license')
       expect(facility_1.renew_drivers_license(registrant_1)).to eq(true)
       expect(registrant_1.licensed).to eq(true)
