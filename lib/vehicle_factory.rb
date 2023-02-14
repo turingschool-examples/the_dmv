@@ -1,6 +1,6 @@
 class VehicleFactory
   attr_reader :vehicles
-
+  
   def create_vehicles(dmv_hash)
     @vehicles = []
     dmv_hash.each do |vehicle|

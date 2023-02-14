@@ -13,7 +13,7 @@ RSpec.describe VehicleFactory do
       factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
       factory.create_vehicles(wa_ev_registrations)
-      factory.vehicles
+      expect(factory.vehicles).to include(Vehicle)
     end
   end
 end
