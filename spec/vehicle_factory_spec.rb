@@ -11,11 +11,11 @@ RSpec.describe VehicleFactory do
   describe '#obtaining wa data to make vehicles' do
     it 'creates vehicle instances from wa_ev_registrations' do
       factory = VehicleFactory.new
-      wa_ev_registrations = DmvDataService.new.wa_ev_registrationswa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
       vehicle_1 = Vehicle.new({vin: "JTDKN3DP8D", year: "2013", make: "TOYOTA", model: "Prius Plug-in", engine: :ev} )
-      vehicle_2 = Vehicle.new({vin: "1G1RD6E47D", year: "2013", make: "CHEVROLET", model: "Volt", engine: :ev} )
+      vehicle_2 = Vehicle.new({vin: "JTDKARFP9J", year: "2018", make:"TOYOTA", model: "Prius Prime", engine: :ev} )
       wa_vehicles = factory.create_vehicles(wa_ev_registrations)
-
+      
       expect(wa_vehicles[0].vin).to eq(vehicle_1.vin)
       expect(wa_vehicles[1].vin).to eq(vehicle_2.vin)
       expect(wa_vehicles[0].year).to eq(vehicle_1.year)
@@ -27,7 +27,5 @@ RSpec.describe VehicleFactory do
       expect(wa_vehicles[0].engine).to eq(vehicle_1.engine)
       expect(wa_vehicles[1].engine).to eq(vehicle_2.engine)
     end
-
-
   end
 end                         
