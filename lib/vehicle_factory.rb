@@ -16,6 +16,7 @@ class VehicleFactory
         }
         
         @car_inventory << Vehicle.new(car_hash)
+        require 'pry'; binding.pry
     end
   end
 end

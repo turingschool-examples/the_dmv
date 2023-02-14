@@ -21,7 +21,7 @@ RSpec.describe FacilityDmv do
   it 'can add a facility to the array' do
     facility_dmv = FacilityDmv.new
     oregon_facilities = DmvDataService.new.or_dmv_office_locations
-
+# require 'pry'; binding.pry
     expect(facility_dmv.facilities).to eq([])
     facility_dmv.create_facility(oregon_facilities)
     expect(facility_dmv.facilities.count).to eq(59)
