@@ -57,6 +57,4 @@ class VehicleFactory
     end
     ny_locations
   end
-
-  
 end
