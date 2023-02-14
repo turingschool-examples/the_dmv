@@ -31,7 +31,6 @@ class Facility
       vehicle.plate_type = :regular_vehicle_fee
       @collected_fees += regular_vehicle_fee
     end
-
     registered_vehicles << vehicle
   end
 
@@ -40,6 +39,30 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    
+    if registrant.permit?
+      registrant.take_written_test
+      true
+    else
+      false
+    end
+  end
+
+  def administer_road_test(registrant)
+    if services.include?('Road Test') && registrant.written_test_passed?
+      registrant.take_road_test
+      registrant.earn_license if registrant.road_test_passed?
+      true
+    else
+      false
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    if services.include?('Renew license') && registrant.licensed?
+      registrant.renew_license 
+      true
+    else
+      false
+    end
   end
 end
