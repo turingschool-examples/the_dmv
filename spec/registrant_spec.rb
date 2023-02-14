@@ -1,5 +1,6 @@
 require 'rspec'
 require './lib/registrant'
+require './lib/facility'
 
 RSpec.describe Registrant do
   describe '#it exists' do
@@ -38,6 +39,14 @@ RSpec.describe Registrant do
       registrant_2.earn_permit
 
       expect(registrant_2.permit?).to eq(true)
+    end
+  end
+
+  describe '#passed_written_test' do
+    it 'passed_written_test' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      registrant_1.passed_written_test
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
   end
 end
