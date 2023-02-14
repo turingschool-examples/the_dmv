@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'; binding.pry
 
 RSpec.describe DmvDataService do
   before(:each) do
@@ -23,6 +22,12 @@ RSpec.describe DmvDataService do
   describe '#wa_ev_registrations' do
     it 'can load washington ev registration data' do
       expect(@dds.wa_ev_registrations.size).to eq(1000)
+    end
+  end
+
+  describe '#ny_vehicle_registrations' do
+    it 'can load new york vehicle registration data' do
+      expect(@dds.ny_vehicle_registrations.size).to eq(1000)
     end
   end
 
