@@ -48,16 +48,3 @@ RSpec.describe DMVLocation do
     end
   end
 end
-# [{:number=>"153",
-#   :dorregionnumber=>"10",
-#   :type=>"1MV",
-#   :name=>"SAINTE GENEVIEVE ",
-#   :address1=>"753 STE. GENEVIEVE DR",
-#   :city=>"STE GENEVIEVE ",
-#   :state=>"MO",
-#   :zipcode=>"63670",
-#   :county=>"Ste. Genevieve",
-#   :phone=>"(573) 883-2344",
-#   :fax=>"(573) 880-5062",
-#   :size=>"1",
-#   :email=>"SAINTEGENEVIEVEAGENTOFFICE@DOR.MO.GOV",
