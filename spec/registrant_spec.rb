@@ -8,6 +8,9 @@ RSpec.describe Registrant do
     @registrant_2 = Registrant.new('Penny', 15)
   end
 
+  it "exists" do
+    expect(@reg)
+  end
   it 'has attributes' do
     expect(@registrant_1.name).to eq("Bruce")
     expect(@registrant_1.age).to eq(18)
