@@ -39,7 +39,6 @@ RSpec.describe Facility do
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
       
       expect(@facility.registered_vehicles).to eq([])
-      # require 'pry'; binding.pry
     end
 
     it 'DMVs can collect fees on registered cars' do
@@ -59,15 +58,19 @@ RSpec.describe Facility do
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       facility_1.register_vehicle(cruz)
-
-      # require 'pry'; binding.pry
-      expect(cruz.registration_date).to eq(@registration_date)
+      expect(cruz.registration_date).to eq(Date.today)
     end
 
-    it 'has plate type' do
+    it 'cars have different plate types' do
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+      facility_1.register_vehicle(cruz)
+      facility_1.register_vehicle(camaro)
+      
 
       expect(cruz.plate_type).to eq(:regular)
+      expect(camaro.plate_type).to eq(:antique)
     end
 
       
