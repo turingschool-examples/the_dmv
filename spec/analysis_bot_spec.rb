@@ -6,6 +6,6 @@ RSpec.describe AnalysisBot do
   jeremy = AnalysisBot.new
 
   it "can produce the most common make and model" do
-    p jeremy.most_common_vehicle(washington_vehicles)
+    
   end
 end
