@@ -34,21 +34,21 @@ RSpec.describe FacilityFactory do
     end
   end
 
-  describe 'create_or_facility' do
+  describe '#create_or_facility' do
     it 'creates facilities from oregon database' do
       expect(@factory.create_or_facility(@or_dmv_office_locations)).to be_an_instance_of(Array)
       expect(@factory.create_or_facility(@or_dmv_office_locations)[0]).to be_an_instance_of(Facility)
     end
   end
 
-  describe 'create_ny_facility' do
+  describe '#create_ny_facility' do
     it 'creates facilities from new york database' do
       expect(@factory.create_ny_facility(@new_york_facilities)).to be_an_instance_of(Array)
       expect(@factory.create_ny_facility(@new_york_facilities)[0]).to be_an_instance_of(Facility)
     end
   end
 
-  describe 'create_mo_facility' do
+  describe '#create_mo_facility' do
     it 'creates facilities from missouri database' do
       expect(@factory.create_mo_facility(@missouri_facilities)).to be_an_instance_of(Array)
       expect(@factory.create_mo_facility(@missouri_facilities)[0]).to be_an_instance_of(Facility)
