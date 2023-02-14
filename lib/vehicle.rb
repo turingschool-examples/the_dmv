@@ -6,6 +6,7 @@ class Vehicle
               :make,
               :model,
               :engine,
+              :county,
               :plate_type
   attr_accessor :registration_date
 
@@ -14,6 +15,7 @@ class Vehicle
     @year = vehicle_details[:year]
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
+    @county = vehicle_details[:county]
     @engine = vehicle_details[:engine]
     @registration_date = nil
     @plate_type = self.plate_gen
