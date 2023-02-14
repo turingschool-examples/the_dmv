@@ -37,5 +37,12 @@ RSpec.describe VehicleFactory do
     expect(factory.most_popular_make_model).to eq('TESLA, Model 3')
   end
 
-  it 'can count the number of vehicles for a model year'
+  it 'can count the number of vehicles for a model year' do
+    factory = VehicleFactory.new
+    wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+    factory.create_vehicles(wa_ev_registrations)
+
+    expect(factory.number_by_model_year('2018', 'Model 3')).to eq(66)
+    expect(factory.number_by_model_year('2017', 'Prius Prime')).to eq(25)
+  end
 end

@@ -37,4 +37,10 @@ class VehicleFactory
     end
     most_popular_model.max_by {|model, vehicles| vehicles.length}.first
   end
+
+  def number_by_model_year(year, model)
+    @vehicle_storage.select do |vehicle|
+      vehicle.year == year && vehicle.model == model
+    end.length
+  end
 end
