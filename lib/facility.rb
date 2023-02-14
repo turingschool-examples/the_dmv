@@ -73,7 +73,6 @@ class Facility
   def renew_drivers_license(registrant)
     return 'Service not available at this location.' unless 
     @services.include?('Renew License')
-
     (registrant.license_data[:written] && registrant.license_data[:license]) ? registrant.
     license_data[:renewed] = true : 'Must have license.'
   end
