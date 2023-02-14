@@ -12,10 +12,10 @@ RSpec.describe VehicleFactory do
 
     expect(cars[0].engine).to eq(:ev)
     expect(cars[0].make).to eq("TOYOTA")
-    expect(cars[0].model).to eq("Prius Plug-in")
-    expect(cars[0].vin).to eq("JTDKN3DP8D")
-    expect(cars[0].year).to eq("2013")
-    expect(cars[6].year).to eq("2017")
+    expect(cars[0].model).to eq("RAV4 Prime")
+    expect(cars[0].vin).to eq("JTMEB3FV7M")
+    expect(cars[0].year).to eq("2021")
+    expect(cars[6].year).to eq("2016")
   end
 
   it 'access data from another dmv #oregon' do
