@@ -3,6 +3,10 @@ require 'spec_helper'
 RSpec.describe FacilityBuilder do
   before(:each) do
     @builder = FacilityBuilder.new
+    @or_facilities = DmvDataService.new.or_dmv_office_locations
+    @ny_facilities = DmvDataService.new.ny_dmv_office_locations
+    @mo_facilities = DmvDataService.new.mo_dmv_office_locations
+    @facility_data_array = []
   end
 
   describe '#initialize' do
@@ -14,8 +18,7 @@ RSpec.describe FacilityBuilder do
 
   describe '#build_facilities' do
     it 'can create an array of facility objects for Oregon' do
-      or_facilities = DmvDataService.new.or_dmv_office_locations
-      @builder.build_facilities(or_facilities)
+      @builder.build_facilities(@or_facilities)
 
       expect(@builder.facilities).to be_a(Array)
       expect(@builder.facilities.first).to be_a(Facility)
@@ -23,9 +26,7 @@ RSpec.describe FacilityBuilder do
     end
 
     it 'can create an array of facility objects for New York' do
-      ny_facilities = DmvDataService.new.ny_dmv_office_locations
-      
-      @builder.build_facilities(ny_facilities)
+      @builder.build_facilities(@ny_facilities)
 
       expect(@builder.facilities).to be_a(Array)
       expect(@builder.facilities.first).to be_a(Facility)
@@ -33,12 +34,28 @@ RSpec.describe FacilityBuilder do
     end
 
     it 'can create an array of facility objects for Missouri' do
-      mo_facilities = DmvDataService.new.mo_dmv_office_locations
-      @builder.build_facilities(mo_facilities)
+      @builder.build_facilities(@mo_facilities)
 
       expect(@builder.facilities).to be_a(Array)
       expect(@builder.facilities.first).to be_a(Facility)
       expect(@builder.facilities.size).to eq(178)
+    end
+  end
+
+  describe '#build_hash' do
+    it 'can build array of hashes for Oregon' do
+      expect(@builder.build_hash(@or_facilities, @facility_data_array)).to be_a Array
+      expect(@builder.build_hash(@or_facilities, @facility_data_array)).to all(be_a Hash)
+    end
+
+    it 'can build array of hashes for New York' do
+      expect(@builder.build_hash(@ny_facilities, @facility_data_array)).to be_a Array
+      expect(@builder.build_hash(@ny_facilities, @facility_data_array)).to all(be_a Hash)
+    end
+
+    it 'can build array of hashes for Missouri' do
+      expect(@builder.build_hash(@mo_facilities, @facility_data_array)).to be_a Array
+      expect(@builder.build_hash(@mo_facilities, @facility_data_array)).to all(be_a Hash)
     end
   end
 end

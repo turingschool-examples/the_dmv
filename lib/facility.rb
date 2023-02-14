@@ -45,7 +45,7 @@ class Facility
   end
 
   def collect_fee(vehicle)
-    return 0 if vehicle.registration_date.nil?
+    return nil if vehicle.registration_date.nil?
 
     if vehicle.electric_vehicle?
       fee = 200
@@ -70,7 +70,7 @@ class Facility
   end
 
   def renew_drivers_license(registrant)
-    return false unless @services.include?('Renew License') && registrant.license_data[:road] == true
+    return false unless @services.include?('Renew License') && registrant.license_data[:license] == true
 
     registrant.license_data[:renewed] = true
   end
