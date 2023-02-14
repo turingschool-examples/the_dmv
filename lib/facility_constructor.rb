@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 class FacilityConstructor
-  attr_reader :created_facilities, :daily_hours, :facility_checker
+  attr_reader :created_facilities, :daily_hours, :facility_checker, :create_facility
 
     @@dmv_office_location = DmvDataService.new.or_dmv_office_locations
     @@new_york_facilities = DmvDataService.new.ny_dmv_office_locations
@@ -14,9 +14,6 @@ class FacilityConstructor
   def create_facility(location_data)
     facility_checker(location_data)
   end
-
-  
-
 
   # helper methods
 
