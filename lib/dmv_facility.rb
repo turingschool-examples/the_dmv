@@ -38,5 +38,18 @@ class DmvFacility
         end
         facility_instances
     end
+
+    def create_facilities_mo(facility_database)
+        facility_database.map do |facility|
+
+        new_facility = {
+            name: facility[:name],
+            address: facility.fetch_values(:address1, :city, :state, :zipcode).join(" "),
+            phone: facility[:phone]
+        }
+        facility_instances << Facility.new(new_facility)
+        end
+        facility_instances
+    end
 end
 
