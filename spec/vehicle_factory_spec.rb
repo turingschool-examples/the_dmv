@@ -37,9 +37,11 @@ RSpec.describe VehicleFactory do
 
     expect(factory).to be_an_instance_of(VehicleFactory)
     
-    locations = factory.create_facilities(new_york_facilities)
-   
-    expect(locations[0].phone).to eq("14701")
+    ny_locations = factory.create_ny_facility(new_york_facilities)
+
+    expect(ny_locations[0].address).to eq("512 WEST 3RD STREET")
+    expect(ny_locations[0].phone).to eq("7166618220")
+    expect(ny_locations[0].name).to eq("JAMESTOWN")
   end
 
   it 'access data from another dmv #missouri' do
