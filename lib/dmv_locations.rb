@@ -26,7 +26,16 @@ class DMVLocation
       location[:address] = location[:street_address_line_1]
       facility = Facility.new(location)
       @locations << facility
+    end  
+  end
+
+  def mo_locations(office_locations)
+    office_locations.each do |location|
+      location[:name] = location[:name]
+      location[:phone] = location[:phone]
+      location[:address] = location[:address1]
+      facility = Facility.new(location)
+      @locations << facility
     end
-    
   end
 end
