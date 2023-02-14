@@ -3,7 +3,8 @@ class VehicleFactory
               :year,
               :make,
               :model,
-              :engine
+              :engine,
+              
   def initialize
   end
 
@@ -21,3 +22,16 @@ class VehicleFactory
     cars
   end   
 
+  def create_facilities(dmv_locations)
+    locations = []
+    dmv_locations.map do |location|
+      locations << Facility.new(
+        title: location[:title],
+        zip_code: location[:zip_code],
+        website: location[:website],
+        type: location[:type]
+      )
+    end
+    locations
+  end
+end
