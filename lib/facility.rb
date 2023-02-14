@@ -43,11 +43,20 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    if services.include?('Vehicle Registration')
-      registrant.written
-      require 'pry'; binding.pry
+    if services.include?('Written Test') && registrant.permit? == true
+      registrant.license_data[:written] = true
+      return registrant.license_data[:written]
     else
-      return nil
+      return false
+    end
+  end
+
+  def administer_road_test(registrant)
+    if services.include?('Road Test') && registrant.permit? == true
+      registrant.license_data[:license] = true
+      return registrant.license_data[:license]
+    else
+      return false
     end
   end
   
