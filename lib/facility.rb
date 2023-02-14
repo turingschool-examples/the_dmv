@@ -38,8 +38,13 @@ class Facility
     registrant.license_data[:written] = true if @services.include?("Written Test") && registrant.age >= 16 && registrant.permit? == true
   end
 
-  def daily_hours
-    facility_info
-    require 'pry'; binding.pry
-  end
+  # def daily_hours(facility_data)
+  #   if facility_data[0].keys.include?(:zip_code)
+  #     if facility_data[0][:zip_code].start_with?("1")
+  #       for i in 0..facility_data.count - 1
+          
+  #       end
+  #     end
+  #   end
+  # end
 end
