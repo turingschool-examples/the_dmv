@@ -14,9 +14,9 @@ class FacilityFactory
         }
         Facility.new(facility_details)
       end
+
     elsif facilities[0].keys.include?(:office_name)
       facilities.map do |facility|
-        # require 'pry'; binding.pry
         facility_details = {
           name: facility[:office_name],
           address: "#{facility[:street_address_line_1]} #{facility[:city]} #{facility[:state]} #{facility[:zip_code]}",
@@ -24,6 +24,7 @@ class FacilityFactory
         }
         Facility.new(facility_details)
       end
+
     else
       facilities.map do |facility|
         facility_details = {
