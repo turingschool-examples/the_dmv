@@ -14,10 +14,10 @@ class FacilityFactory
   private
 
   def get_us_state(facilities_data)
-    if (address = facilities_data.first.dig(:location_1, :human_address))
-      facilities_data = [JSON.parse(address, symbolize_names: true)]
-    end
     begin
+      if (address = facilities_data.first.dig(:location_1, :human_address))
+        facilities_data = [JSON.parse(address, symbolize_names: true)]
+      end
       return facilities_data.first[:state].to_sym
     rescue => exception
       return nil
