@@ -78,7 +78,7 @@ RSpec.describe Facility do
       expect(registrant_1.licensed).to eq(true)
     end
     
-    it 'renews a driver\'s license' do
+    it 'renews a driver license' do
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
       registrant_1 = Registrant.new('Bruce', 18, true)
       facility_1.add_service('Renew license')

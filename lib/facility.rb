@@ -58,7 +58,7 @@ class Facility
   end
 
   def renew_drivers_license(registrant)
-    if services.include?('Renew license') && registrant.licensed?
+    if services.include?('Renew license') && registrant.license?
       registrant.renew_license 
       true
     else
