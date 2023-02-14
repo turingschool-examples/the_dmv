@@ -18,7 +18,7 @@ class FacilityFactory
   end
 
   def or_find_address(facility)
-    address_h = eval(facility[:location_1][:human_address])
+    address_h = JSON.parse(facility[:location_1][:human_address])
     address_s = address_h.values.join(' ')
   end
 
