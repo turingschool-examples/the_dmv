@@ -66,6 +66,10 @@ RSpec.describe FacilityFactory do
       expect(@missouri.sample.registered_vehicles).to eq([])
       expect(@missouri.sample.collected_fees).to eq(0)
     end
+
+    it "returns an error when a state is not valid" do
+      expect(@factory.create_facilities(@oregon_facilities, :TX)).to eq("Sorry, this state is not yet supported.")
+    end
   end
 
   describe 'Missouri helper methods' do
