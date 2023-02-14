@@ -21,10 +21,21 @@ class Facility
     return [service]
   end
 
+  def registration_date
+    date = Time.now.to_s 
+    @registration_date << date.split.first
+  end
+  
   def register_vehicle(model)
+    time = Time.now.to_s
+    date = []
+    date << time.split.first
+    @registration_date = date
+    # require 'pry'; binding.pry
     registered_vehicles << model
     return registered_vehicles
   end
+  
 
   
 end
