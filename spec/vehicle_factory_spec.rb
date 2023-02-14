@@ -62,9 +62,7 @@ RSpec.describe VehicleFactory do
       expect(ny_vehicles.all? { |vehicle| vehicle.engine.is_a?(Symbol) })
         .to be(true)
     end
-  end
 
-  describe '#create_wa_ev_vehicles' do
     it 'assigns the correct string value to the @vin attribute on every WA state electric vehicle' do
       expect(wa_ev_vehicles.first.vin).to eq(WA_EV_VEHICLE[:vin])
     end
@@ -84,9 +82,7 @@ RSpec.describe VehicleFactory do
     it 'assigns the correct symbol value to the @engine attribute on every WA state electric vehicle' do
       expect(wa_ev_vehicles.first.engine).to eq(WA_EV_VEHICLE[:engine])
     end
-  end
 
-  describe '#create_ny_vehicles' do
     it 'assigns the correct string value to the @vin attribute on every NY state vehicle' do
       expect(ny_vehicles.first.vin).to eq(NY_VEHICLE[:vin])
     end
@@ -105,6 +101,10 @@ RSpec.describe VehicleFactory do
 
     it 'assigns the correct symbol value to the @engine attribute on every NY state vehicle' do
       expect(ny_vehicles.first.engine).to eq(NY_VEHICLE[:engine])
+    end
+
+    it 'returns nil for invalid state data' do
+      expect(factory.create_vehicles([])).to be(nil)
     end
   end
 end
