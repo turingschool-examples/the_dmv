@@ -3,8 +3,14 @@ require './lib/registrant'
 
 RSpec.describe Facility do
   before(:each) do
-    @facility = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+    @facility = Facility.new(
+      {   name: 'Albany DMV Office',
+          address: '2242 Santiam Hwy SE Albany OR 97321',
+          phone: '541-967-2014'
+        }
+    )
   end
+
   describe '#initialize' do
     it 'can initialize' do
       expect(@facility).to be_an_instance_of(Facility)
@@ -28,7 +34,6 @@ RSpec.describe Facility do
   @facility.add_service('Register a vehicle') 
   cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
   @facility.register_vehicle(cruz)
-  # require 'pry'; binding.pry
 
   expect(@facility.registered_vehicles.empty?).to eq(false)
   expect(cruz.registration_date).to eq(Date.today)
@@ -41,7 +46,6 @@ RSpec.describe Facility do
  
   
   expect(@facility.collected_fees).to eq(100)
-
   end
   
   it 'has plate type' do
@@ -151,8 +155,8 @@ RSpec.describe Facility do
     facility_1.add_service('Renew License')
     facility_1.administer_written_test(registrant_1) 
     facility_1.administer_road_test(registrant_1)
-    facility_2.renew_license(registrant_1) #facility can't renew
-    facility_1.administer_road_test(registrant_2) #registrant doesn't have license
+    facility_2.renew_license(registrant_1)
+    facility_1.administer_road_test(registrant_2)
 
     expect(registrant_1.license_data).to eq({:license=>true, :renewed=>false, :written=>true})
     expect(registrant_2.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
