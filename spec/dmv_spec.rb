@@ -40,4 +40,12 @@ RSpec.describe Dmv do
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
+
+  describe '#facilities created from external data' do
+    it 'creates facilities' do
+      facility = Facility.new
+      or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
+      expect(facility.add_facility(or_dmv_office_locations)).to be_an_instance_of(Array)
+    end
+  end
 end
