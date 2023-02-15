@@ -39,7 +39,6 @@ RSpec.describe FacilityFactory do
     end 
 
     it 'creates facility instances from mo_dmv_office_locations' do
-    
       factory = FacilityFactory.new
       mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
       facility_1 = Facility.new({name: 'SAINTE GENEVIEVE', address: '753 STE. GENEVIEVE DR STE GENEVIEVE MO 63670', phone: '(573) 883-2344' })

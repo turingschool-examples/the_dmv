@@ -3,9 +3,9 @@ class FacilityFactory
     facility_specs = []
     database.each do |facility|
       facility_specs << Facility.new({
-        name: facility[:title] || facility[:office_name], 
+        name: facility[:title] || facility[:office_name] || facility[:name].strip,
         address: parse_address(facility), 
-        phone: facility[:phone_number] || facility[:public_phone_number]
+        phone: facility[:phone_number] || facility[:public_phone_number] || facility[:phone]
       })
     end
     facility_specs
@@ -24,11 +24,17 @@ class FacilityFactory
     end
   end
 
+  def mo_concatenate(address)
+    address[:address1] + " " + address[:city].strip + " " + address[:state] + " " + address[:zipcode]
+  end
+
   def parse_address(facility)
     if facility.key? :location_1
       or_concatenate(facility[:location_1][:human_address])
     elsif facility.key? :street_address_line_1
       ny_concatenate(facility)
+    else
+      mo_concatenate(facility)
     end
   end
 end
