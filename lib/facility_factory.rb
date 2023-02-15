@@ -50,7 +50,7 @@ class FacilityFactory
         Facility.new(facility_details)
       end
     else
-      "Unrecognized facilities"
+      facilities.map{ |facility| Facility.new(facility)}
     end
   end
 end
