@@ -26,27 +26,40 @@ RSpec.describe FacilityFactory do
     it 'creates facility instances from ny_dmv_office_locations' do
       factory = FacilityFactory.new
       ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
-      facility_1 = Facility.new({name: 'JAMESTOWN', address: '512 WEST 3RD STREET JAMESTOWN NY 14701', phone: '716-661-8220' })
-      facility_2 = Facility.new({name: 'SARATOGA SPRINGS - WILTON', address: '3065 ROUTE 50 WILTON MALL SARATOGA SPRINGS NY 12866', phone: '518-584-7403' })
+      facility_1 = Facility.new({name: 'JAMESTOWN', address: '512 WEST 3RD STREET JAMESTOWN NY 14701', phone: '7166618220' })
+      facility_2 = Facility.new({name: 'SARATOGA SPRINGS - WILTON', address: '3065 ROUTE 50 WILTON MALL SARATOGA SPRINGS NY 12866', phone: '5185847403' })
       ny_facilities = factory.create_facilities(ny_dmv_office_locations)
 
-      expect(or_facilities[0].name).to eq(facility_1.name)
-      expect(or_facilities[1].name).to eq(facility_2.name)
-      expect(or_facilities[0].address).to eq(facility_1.address)
-      expect(or_facilities[1].address).to eq(facility_2.address)
-      expect(or_facilities[0].phone).to eq(facility_1.phone)
-      expect(or_facilities[1].phone).to eq(facility_2.phone)
+      expect(ny_facilities[0].name).to eq(facility_1.name)
+      expect(ny_facilities[1].name).to eq(facility_2.name)
+      expect(ny_facilities[0].address).to eq(facility_1.address)
+      expect(ny_facilities[1].address).to eq(facility_2.address)
+      expect(ny_facilities[0].phone).to eq(facility_1.phone)
+      expect(ny_facilities[1].phone).to eq(facility_2.phone)
     end 
   end
 
-  describe 'concatenate facility human_address' do
-    it 'will concatenate the human address of the facility' do
-      factory = FacilityFactory.new
-      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
-      human_address = "{\"address\": \"2242 Santiam Hwy SE\", \"city\": \"Albany\", \"state\": \"OR\", \"zip\": \"97321\"}"
+  describe '#concatenate facilities' do
+    describe 'or_concatenate facility human_address' do
+      it 'will concatenate the human address of the facility' do
+        factory = FacilityFactory.new
+        facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+        human_address = "{\"address\": \"2242 Santiam Hwy SE\", \"city\": \"Albany\", \"state\": \"OR\", \"zip\": \"97321\"}"
 
-      expect(factory.concatenate(human_address)).to eq(facility_1.address)
+        expect(factory.or_concatenate(human_address)).to eq(facility_1.address)
+      end
+
     end
 
-  end
+    describe 'ny_concatenate(address)' do
+      it 'will concatenate ny facility for address' do
+        factory = FacilityFactory.new
+        address = {"office_name":"JAMESTOWN","office_type":"COUNTY OFFICE","public_phone_number":"7166618220","street_address_line_1":"512 WEST 3RD STREET","city":"JAMESTOWN","state":"NY","zip_code":"14701"}
+        facility_1 = Facility.new({name: 'JAMESTOWN', address: '512 WEST 3RD STREET JAMESTOWN NY 14701', phone: '7166618220' })
+        facility_2 = Facility.new({name: 'SARATOGA SPRINGS - WILTON', address: '3065 ROUTE 50 WILTON MALL SARATOGA SPRINGS NY 12866', phone: '5185847403' })
+
+        expect(factory.ny_concatenate(address)).to eq(facility_1.address)
+      end
+    end
+  end  
 end
