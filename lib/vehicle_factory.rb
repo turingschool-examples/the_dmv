@@ -19,13 +19,21 @@ class VehicleFactory
 
   def make_model_counts(vehicles)
     make_models = vehicles.map do |vehicle|
-      {
-        make: vehicle.make,
-        model: vehicle.model
-      }
+      :"#{vehicle.make} #{vehicle.model}"
     end
-    make_models.to_h do |make_model|
-      [make_model, make_models.count(make_model)]
+    counts_hash(make_models)
+  end
+
+  def model_year_counts(vehicles)
+    model_years = vehicles.map do |vehicle|
+      vehicle.year.to_sym
+    end
+    counts_hash(model_years)
+  end
+
+  def counts_hash(array_of_keys)
+    array_of_keys.uniq.to_h do |key|
+      [key, array_of_keys.count(key)]
     end
   end
 
@@ -35,6 +43,9 @@ class VehicleFactory
     model_counts.key(max_count)
   end
 
+  def registered_vehicle_count_for_model_year(vehicles, year)
+    model_year_counts(vehicles)[year.to_s.to_sym]
+  end
 
   def create_wa_ev_vehicles(vehicle_data)
     vehicle_data.map do |vehicle|
