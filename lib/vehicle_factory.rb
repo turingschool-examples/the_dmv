@@ -7,10 +7,11 @@ class VehicleFactory
 
   def create_vehicles(registrations)
     registrations.each do |registration|
-    vehicle = Vehicle.new(registration)
-      # require 'pry'; binding.pry
-      @vin = registration[:vin_1_10]
-    @vehicles << [vehicle]
+      vehicle = Vehicle.new(registration)
+      vehicle.vin = registration[:vin_1_10]
+      vehicle.year = registration[:model_year]
+      vehicle.engine = :ev
+     @vehicles << vehicle
     end
-  end
+  end 
 end

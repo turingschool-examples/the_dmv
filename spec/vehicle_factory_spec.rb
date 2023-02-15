@@ -23,23 +23,21 @@ RSpec.describe VehicleFactory do
       factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
       factory.create_vehicles(wa_ev_registrations)
-      # require 'pry'; binding.pry
-      expect(factory.vehicles[0][:vin]).to eq(wa_ev_registrations[0][:vin_1_10])
+      expect(factory.vehicles[0].vin).to eq(wa_ev_registrations[0][:vin_1_10])
     end
 
-    xit 'vehicles have engines' do
+    it 'vehicles have engines' do
       factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
       factory.create_vehicles(wa_ev_registrations)
-      require 'pry'; binding.pry
-      expect(factory.vehicles[0][:engine]).to eq([:ev])
+      expect(factory.vehicles[0].engine).to eq(:ev)
     end
 
-    xit 'vehicles have years' do 
+    it 'vehicles have years' do 
       factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
       factory.create_vehicles(wa_ev_registrations)
-      (factory.vehicles[@year]).to eq(wa_ev_registrations[0][:model_year])
+      expect(factory.vehicles[0].year).to eq(wa_ev_registrations[0][:model_year])
     end
   end
 end

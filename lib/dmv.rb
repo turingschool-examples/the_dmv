@@ -15,4 +15,8 @@ class Dmv
       facility.services.include?(service)
     end
   end
+
+  def discover_facilities(facilities)
+    
+  end
 end
