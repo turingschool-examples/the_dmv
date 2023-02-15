@@ -35,6 +35,9 @@ RSpec.describe Facility do
   describe '#name' do
     it 'has a name' do
       expect(@facility_1.name).to eq(FACILITY_1[:name])
+    end
+
+    it 'has a different name' do
       expect(@facility_2.name).to eq(FACILITY_2[:name])
     end
   end
@@ -42,6 +45,9 @@ RSpec.describe Facility do
   describe '#address' do
     it 'has an address' do
       expect(@facility_1.address).to eq(FACILITY_1[:address])
+    end
+
+    it 'has a different address' do
       expect(@facility_2.address).to eq(FACILITY_2[:address])
     end
   end
@@ -49,6 +55,9 @@ RSpec.describe Facility do
   describe '#phone' do
     it 'has a phone number' do
       expect(@facility_1.phone).to eq(FACILITY_1[:phone])
+    end
+
+    it 'has a different phone number' do
       expect(@facility_2.phone).to eq(FACILITY_2[:phone])
     end
   end
