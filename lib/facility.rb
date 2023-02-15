@@ -21,7 +21,7 @@ class Facility
 
   def register_vehicle(car)
     return nil unless @services.include?('Vehicle Registration')
-    collect_fee(car.plate_type)
+    collect_fee(car.register_plate)
     car.set_registration_date
     @registered_vehicles << car
   end
@@ -52,9 +52,9 @@ class Facility
     true
   end
 
-  def collect_fee(plate)
+  def collect_fee(plate_type)
     @collected_fees +=
-    case plate
+    case plate_type
       when :antique then 25
       when :regular then 100
       when :ev then 200

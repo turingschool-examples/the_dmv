@@ -207,6 +207,18 @@ RSpec.describe Facility do
       expect(@facility_1.register_vehicle(@camaro)).to eq([@cruz, @bolt, @camaro])
     end
 
+    it 'add a plate type to a vehicle' do
+      expect(@cruz.plate_type).to be(nil)
+      expect(@bolt.plate_type).to be(nil)
+      expect(@camaro.plate_type).to be(nil)
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@camaro)
+      expect(@cruz.plate_type).to be(:regular)
+      expect(@bolt.plate_type).to be(:ev)
+      expect(@camaro.plate_type).to be(:antique)
+    end
+
     it 'adds today\'s date to the vehicle\'s registration date' do
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@bolt)
