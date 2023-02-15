@@ -60,7 +60,8 @@ RSpec.describe VehicleFactory do
     end
 
     it 'adds the correct data for each vehicle attribute' do
-      vehicles = @factory.create_vehicles(@wa_ev_registrations)
+      test_ev_registrations = [@test_vehicle_1, @test_vehicle_2]
+      vehicles = @factory.create_vehicles(test_ev_registrations)
       new_vehicle_1 = vehicles[0]
       new_vehicle_2 = vehicles[1]
 
