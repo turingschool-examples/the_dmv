@@ -52,10 +52,10 @@ module TestData
   }.freeze
 
   WA_EV_VEHICLE = {
-    vin: 'JTDKN3DP8D',
-    year: '2013',
+    vin: 'JTMEB3FV7M',
+    year: '2021',
     make: 'TOYOTA',
-    model: 'Prius Plug-in',
+    model: 'RAV4 Prime',
     engine: :ev
   }.freeze
   NY_VEHICLE = {
