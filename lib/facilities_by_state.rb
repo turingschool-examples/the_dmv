@@ -15,29 +15,32 @@ class FacilitiesByState
     @all_facilities.flatten
   end
 
-    def create_facilities(state, data)
-      if state.downcase == 'or' || state.downcase == 'oregon'
-        create_or_facilities(data)
-      elsif state.downcase == 'ny' || state.downcase == 'new york'
+    def create_facilities(data)
+      if data[0][:state] == 'NY'
         create_ny_facilities(data)
-      elsif state.downcase == 'mo' || state.downcase == 'missouri'
+      elsif data[0][:state] == 'MO'
         create_mo_facilities(data)
-      else 'Error, try again' 
+      else
+        create_or_facilities(data)
       end
     end
 
-    private
-    def parse_address(address)
-      JSON.parse(address, symbolize_names: true)
+    def parse_string(json_string)
+      JSON.parse(json_string, symbolize_names: true)
     end
 
     def create_or_facilities(data)
       data.each do |facility|
-        parsed_address = parse_address(facility[:location_1][:human_address])
+        parsed_address = parse_string(facility[:location_1][:human_address])
         facility_details = {
           name: facility[:title], 
           address: "#{parsed_address[:address]}, #{parsed_address[:city]}, #{parsed_address[:state]}, #{parsed_address[:zip]}",
-          phone: facility[:phone_number]&.delete("-")
+          phone: facility[:phone_number]&.delete("-"),
+          monday: 'Hours not given',
+          tuesday: 'Hours not given', 
+          wednesday: 'Hours not given', 
+          thursday: 'Hours not given', 
+          friday: 'Hours not given'
         }
           @or << Facility.new(facility_details)
       end
@@ -48,7 +51,13 @@ class FacilitiesByState
         facility_details = {
           name: facility[:office_name],
           address: "#{facility[:street_address_line_1]}, #{facility[:city]}, #{facility[:state]}, #{facility[:zip_code]}", 
-          phone: facility[:public_phone_number]
+          phone: facility[:public_phone_number],
+          monday: "#{facility[:monday_beginning_hours]} to #{facility[:monday_ending_hours]}",
+          tuesday: "#{facility[:tuesday_beginning_hours]} to #{facility[:tuesday_ending_hours]}",
+          wednesday: "#{facility[:wednesday_beginning_hours]} to #{facility[:wednesday_ending_hours]}",
+          thursday: "#{facility[:thursday_beginning_hours]} to #{facility[:thursday_ending_hours]}",
+          friday: "#{facility[:friday_beginning_hours]} to #{facility[:friday_ending_hours]}",
+          
         } 
         @ny << Facility.new(facility_details)
       end
