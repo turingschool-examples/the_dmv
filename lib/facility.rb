@@ -29,6 +29,7 @@ class Facility
     make_plate!(vehicle)
     @registered_vehicles << vehicle
     collect_fee(vehicle)
+    vehicle.registration_date = Date.today
     @registered_vehicles
   end
 
