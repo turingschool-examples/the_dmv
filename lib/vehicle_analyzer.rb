@@ -1,8 +1,8 @@
 class VehicleAnalyzer
   attr_reader :vehicles
 
-  def initialize
-    @vehicles = VehicleFactory.new.create_vehicles(DmvDataService.new.wa_ev_registrations)
+  def initialize(vehicles)
+    @vehicles = VehicleFactory.new.create_vehicles(vehicles)
   end
 
   def count_model_year(model_year)
