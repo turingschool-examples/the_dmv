@@ -1,6 +1,6 @@
 class VehicleFactory
-
-  attr_reader :vehicle_factory
+ attr_reader :vehicle_factory
+ 
   def initialize
     @vehicle_factory = []
   end
