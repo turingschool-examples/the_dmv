@@ -12,10 +12,15 @@ class Vehicle
 
   def initialize(vehicle_details)
     @vin = vehicle_details[:vin]
-    @year = vehicle_details[:year]
+    @year = vehicle_details[:year].to_s
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
-    @engine = vehicle_details[:engine]
+    if vehicle_details[:engine].downcase.include?("electric")
+      @engine = :ev
+    else
+      @engine = :ice
+    end
+
     @registration_date = nil
     if antique?
       @plate_type = :antique
