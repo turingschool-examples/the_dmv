@@ -51,34 +51,63 @@ module TestData
     phone: '541-388-6322'
   }.freeze
 
-  WA_EV_VEHICLE = {
+  WA_EV_VEHICLE_1 = {
     vin: 'JTMEB3FV7M',
     year: '2021',
     make: 'TOYOTA',
     model: 'RAV4 Prime',
     engine: :ev
   }.freeze
-  NY_VEHICLE = {
+  WA_EV_VEHICLE_2 = {
+    vin: 'KNDCC3LD6K',
+    year: '2019',
+    make: 'KIA',
+    model: 'Niro',
+    engine: :ev
+  }.freeze
+  NY_VEHICLE_1 = {
     vin: '999999999999',
     year: '1975',
     make: 'STARC',
     model: nil,
     engine: :ice
   }.freeze
+  NY_VEHICLE_2 = {
+    vin: '9811240',
+    year: '1998',
+    make: 'AR/CA',
+    model: nil,
+    engine: :ice
+  }.freeze
 
-  OR_FACILITY = {
+  OR_FACILITY_1 = {
     name: 'ALBANY DMV OFFICE',
     address: '2242 SANTIAM HWY SE ALBANY OR 97321',
     phone: '5419672014'
   }.freeze
-  NY_FACILITY = {
+  OR_FACILITY_2 = {
+    name: 'LA PINE DMV OFFICE',
+    address: '51515 HUNTINGTON RD LA PINE OR 97739',
+    phone: '5413886322'
+  }.freeze
+  NY_FACILITY_1 = {
     name: 'JAMESTOWN',
     address: '512 WEST 3RD STREET JAMESTOWN NY 14701',
     phone: '7166618220'
   }.freeze
-  MO_FACILITY = {
+  NY_FACILITY_2 = {
+    name: 'MOHAWK WELCOME CENTER KIOSK',
+    address: 'I90 WESTBOUND MILEPOST187 MOHAWK VALLEY WELCOME CTR FULTONVILLE NY 12072',
+    phone: nil
+  }.freeze
+  MO_FACILITY_1 = {
     name: 'SAINTE GENEVIEVE',
     address: '753 STE. GENEVIEVE DR STE GENEVIEVE MO 63670',
     phone: '5738832344'
+  }.freeze
+  MO_FACILITY_2 = {
+    name: 'SAINT CLAIR',
+    address: '960 PLAZA DR, SUITE H ST CLAIR MO 63077',
+    phone: '6366296000'
   }.freeze
 end
