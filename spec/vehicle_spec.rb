@@ -10,92 +10,82 @@ RSpec.describe Vehicle do
   describe '#initialize' do
     it 'can initialize' do
       expect(@cruz).to be_an_instance_of(Vehicle)
-      expect(@cruz.vin).to eq(CRUZ[:vin])
-      expect(@cruz.year).to eq(CRUZ[:year])
-      expect(@cruz.make).to eq(CRUZ[:make])
-      expect(@cruz.model).to eq(CRUZ[:model])
-      expect(@cruz.engine).to eq(CRUZ[:engine])
-      expect(@cruz.registration_date).to eq(nil)
     end
 
     it 'can initialize a different car' do
       expect(@bolt).to be_an_instance_of(Vehicle)
-      expect(@bolt.vin).to eq(BOLT[:vin])
-      expect(@bolt.year).to eq(BOLT[:year])
-      expect(@bolt.make).to eq(BOLT[:make])
-      expect(@bolt.model).to eq(BOLT[:model])
-      expect(@bolt.engine).to eq(BOLT[:engine])
-      expect(@bolt.registration_date).to eq(nil)
     end
 
     it 'can initialize a different car again' do
       expect(@camaro).to be_an_instance_of(Vehicle)
+    end
+  end
+
+  describe '#vin' do
+    it 'has a vin' do
+      expect(@cruz.vin).to eq(CRUZ[:vin])
+    end
+
+    it 'has a different vin' do
+      expect(@bolt.vin).to eq(BOLT[:vin])
       expect(@camaro.vin).to eq(CAMARO[:vin])
-      expect(@camaro.year).to eq(CAMARO[:year])
-      expect(@camaro.make).to eq(CAMARO[:make])
-      expect(@camaro.model).to eq(CAMARO[:model])
-      expect(@camaro.engine).to eq(CAMARO[:engine])
-      expect(@camaro.registration_date).to eq(nil)
-    end
-  end
-
-  describe '#vin' do
-    it 'has a vin' do
-
-    end
-
-    it 'has a different vin' do
-
-    end
-  end
-
-  describe '#vin' do
-    it 'has a vin' do
-
-    end
-
-    it 'has a different vin' do
-
     end
   end
 
   describe '#year' do
     it 'has a vin' do
-
+      expect(@cruz.year).to eq(CRUZ[:year])
     end
 
     it 'has a different year' do
-
+      expect(@bolt.year).to eq(BOLT[:year])
+      expect(@camaro.year).to eq(CAMARO[:year])
     end
   end
 
   describe '#make' do
     it 'has a make' do
-
+      expect(@cruz.make).to eq(CRUZ[:make])
     end
 
     it 'has a different make' do
-
+      expect(@bolt.make).to eq(BOLT[:make])
+      expect(@camaro.make).to eq(CAMARO[:make])
     end
   end
 
   describe '#model' do
     it 'has a model' do
-
+      expect(@cruz.model).to eq(CRUZ[:model])
     end
 
     it 'has a different model' do
-
+      expect(@bolt.model).to eq(BOLT[:model])
+      expect(@camaro.model).to eq(CAMARO[:model])
     end
   end
 
   describe '#engine' do
     it 'has an engine' do
-
+      expect(@cruz.engine).to eq(CRUZ[:engine])
     end
 
     it 'has a different engine' do
+      expect(@bolt.engine).to eq(BOLT[:engine])
+      expect(@camaro.engine).to eq(CAMARO[:engine])
+    end
+  end
 
+  describe '#registration_date' do
+    it 'starts as nil' do
+      expect(@cruz.registration_date).to eq(nil)
+      expect(@bolt.registration_date).to eq(nil)
+      expect(@camaro.registration_date).to eq(nil)
+    end
+
+    it 'can be assigned to a date object' do
+      @cruz.set_registration_date
+      expect(@cruz.registration_date).to be_a(Date)
     end
   end
 
