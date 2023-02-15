@@ -39,6 +39,84 @@ RSpec.describe Vehicle do
     end
   end
 
+  describe '#vin' do
+    it 'has a vin' do
+
+    end
+
+    it 'has a different vin' do
+
+    end
+  end
+
+  describe '#vin' do
+    it 'has a vin' do
+
+    end
+
+    it 'has a different vin' do
+
+    end
+  end
+
+  describe '#year' do
+    it 'has a vin' do
+
+    end
+
+    it 'has a different year' do
+
+    end
+  end
+
+  describe '#make' do
+    it 'has a make' do
+
+    end
+
+    it 'has a different make' do
+
+    end
+  end
+
+  describe '#model' do
+    it 'has a model' do
+
+    end
+
+    it 'has a different model' do
+
+    end
+  end
+
+  describe '#engine' do
+    it 'has an engine' do
+
+    end
+
+    it 'has a different engine' do
+
+    end
+  end
+
+  describe '#plate_type' do
+    it 'starts as nil' do
+      expect(@cruz.plate_type).to be(nil)
+      expect(@bolt.plate_type).to be(nil)
+      expect(@camaro.plate_type).to be(nil)
+    end
+
+    it 'is set to a symbol after being registered' do
+      @cruz.register_plate
+      expect(@cruz.plate_type).to be(:regular)
+    end
+
+    it 'is can be set to a different symbol after being registered' do
+      @bolt.register_plate
+      expect(@bolt.plate_type).to be(:ev)
+    end
+  end
+
   describe '#antique?' do
     it 'returns false if a vehicle is not older than 25 years old' do
       expect(@cruz.antique?).to eq(false)
@@ -61,24 +139,22 @@ RSpec.describe Vehicle do
     end
   end
 
-  describe '#plate_type' do
-    it 'has a plate type' do
+  describe '#register_plate' do
+    it 'sets a :regular plate' do
+      expect(@cruz.plate_type).to be(nil)
+      @cruz.register_plate
       expect(@cruz.plate_type).to be(:regular)
     end
 
-    it 'the plate type is a symbol' do
-      expect(@cruz.plate_type).to be_a(Symbol)
-    end
-
-    it 'can have a :regular plate type' do
-      expect(@cruz.plate_type).to be(:regular)
-    end
-
-    it 'can have an :ev plate type' do
+    it 'sets an :ev plate' do
+      expect(@bolt.plate_type).to be(nil)
+      @bolt.register_plate
       expect(@bolt.plate_type).to be(:ev)
     end
 
-    it 'can have an :antique plate type' do
+    it 'sets an :antique plate' do
+      expect(@camaro.plate_type).to be(nil)
+      @camaro.register_plate
       expect(@camaro.plate_type).to be(:antique)
     end
   end
