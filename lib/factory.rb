@@ -17,6 +17,5 @@ class VehicleFactory
       @vehicle_factory << vehicle = Vehicle.new(vehicle_information)
     end
     @vehicle_factory
-    # require 'pry'; binding.pry
   end
 end

@@ -68,5 +68,4 @@ class Facility
       return false
     end
   end 
-  # require 'pry'; binding.pry
 end
