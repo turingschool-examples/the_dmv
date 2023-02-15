@@ -41,6 +41,5 @@ RSpec.describe FacilityCompiler do
     expect(created_facilities).to be_a(Array)
     expect(created_facilities[0]).to be_a(Facility)
     expect(created_facilities.size).to eq(178)
-    require 'pry'; binding.pry
   end
 end
