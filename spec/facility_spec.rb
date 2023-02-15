@@ -31,7 +31,6 @@ RSpec.describe Facility do
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       facility_1.add_service('Vehicle Registration')
-
       expect(facility_1.register_vehicle(cruz)).to eq([cruz]) 
     end
 
@@ -39,14 +38,12 @@ RSpec.describe Facility do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       facility = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
       facility.register_vehicle(cruz)
-      
       expect(cruz.registration_date).to eq(cruz.registration_date)
     end
 
     it 'has plate type' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
-
       expect(camaro.plate_type).to eq(:antique)
       expect(cruz.plate_type).to eq(:regular)
     end
@@ -57,7 +54,6 @@ RSpec.describe Facility do
       @facility.add_service('Vehicle Registration')
       @facility.register_vehicle(cruz)
       @facility.register_vehicle(camaro)
-      
       expect(@facility.collected_fees).to eq(125)
     end
   end
@@ -66,7 +62,6 @@ RSpec.describe Facility do
     registrant_1 = Registrant.new('Bruce', 18, true)
     registrant_2 = Registrant.new('Penny', 15 )
     @facility.add_service('Written Test')
-
     expect(@facility.administer_written_test(registrant_1)).to eq true
     expect(@facility.administer_written_test(registrant_2)).to eq false
   end
@@ -78,7 +73,6 @@ RSpec.describe Facility do
     @facility.add_service('Written Test')
     @facility.administer_written_test(registrant_1)
     @facility.administer_written_test(registrant_2)
-
     expect(@facility.administer_road_test(registrant_1)).to eq true
     expect(@facility.administer_road_test(registrant_2)).to eq false
   end
@@ -93,7 +87,6 @@ RSpec.describe Facility do
     @facility.administer_written_test(registrant_2)
     @facility.administer_road_test(registrant_1)
     @facility.administer_road_test(registrant_2)
-  
     expect(@facility.renew_drivers_license(registrant_1)).to eq true
     expect(@facility.renew_drivers_license(registrant_2)).to eq false
   end
