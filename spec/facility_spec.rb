@@ -56,12 +56,12 @@ RSpec.describe Facility do
   describe '#services' do
     it 'returns an array' do
       expect(@facility_1.services).to be_a(Array)
-      expect(@facility_2.services).to be_(Array)
+      expect(@facility_2.services).to be_a(Array)
     end
 
     it 'has an array of services that starts empty' do
-      expect(@facility_1.services.empty?).to be(true)
-      expect(@facility_2.services.empty).to be(true)
+      expect(@facility_1.services).to eq([])
+      expect(@facility_2.services).to eq([])
     end
 
     it 'saves services that are added' do
@@ -71,7 +71,7 @@ RSpec.describe Facility do
       @facility_1.add_service('Renew Drivers License')
       expect(@facility_1.services)
         .to eq(['New Drivers License', 'Renew Drivers License'])
-        
+
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.services).to eq(
         ['New Drivers License',
