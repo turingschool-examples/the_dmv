@@ -2,12 +2,41 @@ require 'spec_helper'
 
 RSpec.describe Facility do
   before(:each) do
-    @facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
-    @facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+    @facility_1 = Facility.new({name: 'Albany DMV Office',
+      address: '2242 Santiam Hwy SE Albany OR 97321',
+      phone: '541-967-2014',
+       monday: "8:30AM - 5:00PM",
+       tuesday: "8:30AM - 5:00PM",
+       wednesday: "8:30AM - 5:00PM",
+       thursday: "8:30AM - 5:00PM",
+       friday: "8:30AM - 5:00PM"})
 
-    @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-    @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
-    @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    @facility_2 = Facility.new({name: 'Ashland DMV Office',
+      address: '600 Tolman Creek Rd Ashland OR 97520',
+      phone: '541-776-6092',
+      monday: "8:30AM - 5:00PM",
+      tuesday: "8:30AM - 5:00PM",
+      wednesday: "8:30AM - 5:00PM",
+      thursday: "8:30AM - 5:00PM",
+      friday: "8:30AM - 5:00PM"})
+
+    @cruz = Vehicle.new({vin: '123456789abcdefgh',
+      year: 2012,
+      make: 'Chevrolet',
+      model: 'Cruz',
+      engine: :ice} )
+
+    @bolt = Vehicle.new({vin: '987654321abcdefgh',
+      year: 2019, 
+      make: 'Chevrolet',
+      model: 'Bolt',
+      engine: :ev} )
+
+    @camaro = Vehicle.new({vin: '1a2b3c4d5e6f',
+      year: 1969,
+      make: 'Chevrolet',
+      model: 'Camaro',
+      engine: :ice} )
 
     @registrant_1 = Registrant.new('Bruce', 18, true )
     @registrant_2 = Registrant.new('Penny', 16 )
@@ -21,6 +50,19 @@ RSpec.describe Facility do
       expect(@facility_1.address).to eq('2242 Santiam Hwy SE Albany OR 97321')
       expect(@facility_1.phone).to eq('541-967-2014')
       expect(@facility_1.services).to eq([])
+      
+    end
+
+    it 'has hours for each day of the week they are open' do
+      expect(@facility_1.monday_hrs).to eq("8:30AM - 5:00PM")
+      expect(@facility_1.tuesday_hrs).to eq("8:30AM - 5:00PM")
+      expect(@facility_1.wednesday_hrs).to eq("8:30AM - 5:00PM")
+      expect(@facility_1.thursday_hrs).to eq("8:30AM - 5:00PM")
+      expect(@facility_1.friday_hrs).to eq("8:30AM - 5:00PM")
+    end
+
+    it 'never has hours on the weekend' do
+      expect(@facility_1.weekend_hrs).to eq('Hahahaha')
     end
   end
 
