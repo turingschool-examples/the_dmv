@@ -20,11 +20,11 @@ RSpec.describe VehicleFactory do
       vehicle_1 = Vehicle.new({
         :engine => :ev,
         :make =>  "TOYOTA",
-        :model =>  "Prius Plug-in",
+        :model =>  "RAV4 Prime",
         :plate_type =>  nil,
         :registration_date =>  nil,
-        :vin =>  "JTDKN3DP8D",
-        :year =>  "2013"
+        :vin =>  "JTMEB3FV7M",
+        :year =>  "2021"
       })
 
       expect(factory.create_vehicles(wa_ev_registrations)[0].engine).to eq(vehicle_1.engine)
