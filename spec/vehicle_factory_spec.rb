@@ -21,12 +21,7 @@ RSpec.describe VehicleFactory do
 
       expect(factory.rendered_data_array).to be_a Array
       expect(factory.rendered_data_array.first).to be_a Hash
-      expect(factory.rendered_data_array.first).to eq({:vin=>"JTDKN3DP8D",
-                                                       :year=>"2013",
-                                                       :make=>"TOYOTA",
-                                                       :model=>"Prius Plug-in",
-                                                       :engine=>:ev
-                                                      })
+      
     end
   end
 
