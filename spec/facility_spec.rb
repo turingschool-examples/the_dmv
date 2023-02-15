@@ -58,7 +58,7 @@ RSpec.describe Facility do
       @facility_1.add_service('Vehicle Registration')
 
       expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
-      expect(@cruz.registration_date).to be_a Date
+      expect(@cruz.registration_date).to eq(Date.today)
       expect(@cruz.plate_type).to eq(:regular)
       expect(@facility_1.registered_vehicles).to eq([@cruz])
       expect(@facility_1.collected_fees).to eq(100)
