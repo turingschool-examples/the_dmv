@@ -31,6 +31,9 @@ class VehicleFactory
           }
           Vehicle.new(vehicle_details)
       end
+
+    else
+      vehicles.map{ |vehicle| Vehicle.new(vehicle)}
     end
   end
 end
