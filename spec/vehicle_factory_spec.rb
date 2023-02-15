@@ -10,29 +10,29 @@ RSpec.describe VehicleFactory do
       @factory.create_vehicles(@wa_ev_registrations)
     end
     
-    xit "is an array" do
+    it "is an array" do
       expect(@wa_ev_registrations).to be_a(Array)
     end
 
-    xit "is an array of hashes" do
+    it "is an array of hashes" do
       for i in 0..@wa_ev_registrations.count - 1
         expect(@wa_ev_registrations[i]).to be_a(Hash)
       end
     end
 
-    xit "can use extracted hash to instantiate new vehicle into array with attributes" do
-      expect(@factory.state_vehicles[0].vin).to eq("JTDKN3DP8D")
+    it "can use extracted hash to instantiate new vehicle into array with attributes" do
+      expect(@factory.state_vehicles[0].vin).to eq("JTMEB3FV7M")
     end
 
-    xit "pulls in all specified information from remote data" do
-      expect(@factory.state_vehicles[0].vin).to eq("JTDKN3DP8D")
-      expect(@factory.state_vehicles[0].year).to eq(2013)
+    it "pulls in all specified information from remote data" do
+      expect(@factory.state_vehicles[0].vin).to eq("JTMEB3FV7M")
+      expect(@factory.state_vehicles[0].year).to eq("2021")
       expect(@factory.state_vehicles[0].make).to eq("TOYOTA")
-      expect(@factory.state_vehicles[0].model).to eq("Prius Plug-in")
+      expect(@factory.state_vehicles[0].model).to eq("RAV4 Prime")
       expect(@factory.state_vehicles[0].engine).to eq(:ev)
     end
 
-    xit "builds correct number of vehicles" do
+    it "builds correct number of vehicles" do
       expect(@factory.state_vehicles.count).to eq(1000)
     end
 

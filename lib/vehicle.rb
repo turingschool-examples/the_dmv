@@ -15,7 +15,7 @@ class Vehicle
     @year = vehicle_details[:year].to_s
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
-    if vehicle_details[:engine].downcase.include?("electric")
+    if vehicle_details[:engine].to_s.downcase.include?("electric") || vehicle_details[:engine].to_s.downcase.include?("ev")
       @engine = :ev
     else
       @engine = :ice

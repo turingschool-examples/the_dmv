@@ -10,7 +10,7 @@ RSpec.describe Vehicle do
     it 'can initialize' do
       expect(@cruz).to be_an_instance_of(Vehicle)
       expect(@cruz.vin).to eq('123456789abcdefgh')
-      expect(@cruz.year).to eq(2012)
+      expect(@cruz.year).to eq("2012")
       expect(@cruz.make).to eq('Chevrolet')
       expect(@cruz.model).to eq('Cruz')
       expect(@cruz.engine).to eq(:ice)

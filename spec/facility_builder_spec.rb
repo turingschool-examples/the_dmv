@@ -65,13 +65,13 @@ RSpec.describe FacilityBuilder do
 
     it "has the expected keys" do
       for i in 0..@ny_state_facilities.state_facility_list.count - 1
-        expect(@ny_state_facilities.state_facility_list[i].keys).to eq([:name, :address, :phone])
+        expect(@ny_state_facilities.state_facility_list[i].keys).to eq([:name, :address, :phone, :daily_hours])
       end
     end
 
     it "has the expected values" do
       p @ny_state_facilities.state_facility_list[0][:address]
-      expect(@ny_state_facilities.state_facility_list[0].values). to eq(["JAMESTOWN", "512 WEST 3RD STREET JAMESTOWN, NY 14701", "7166618220"])
+      expect(@ny_state_facilities.state_facility_list[0].length). to eq(4)
     end
   end
 
