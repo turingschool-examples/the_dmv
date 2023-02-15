@@ -21,10 +21,10 @@ RSpec.describe VehicleFactory do
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     factory.create_vehicles(wa_ev_registrations)
 
-    expect(factory.vehicle_storage[0].vin).to eq("JTDKN3DP8D")
-    expect(factory.vehicle_storage[0].year).to eq("2013")
+    expect(factory.vehicle_storage[0].vin).to eq("JTMEB3FV7M")
+    expect(factory.vehicle_storage[0].year).to eq("2021")
     expect(factory.vehicle_storage[0].make).to eq("TOYOTA")
-    expect(factory.vehicle_storage[0].model).to eq("Prius Plug-in")
+    expect(factory.vehicle_storage[0].model).to eq("RAV4 Prime")
   end
 
   it 'can find the most popular make of vehicle' do
@@ -42,8 +42,8 @@ RSpec.describe VehicleFactory do
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     factory.create_vehicles(wa_ev_registrations)
 
-    expect(factory.number_by_model_year('Model 3', '2018')).to eq(66)
-    expect(factory.number_by_model_year('Prius Prime', '2017')).to eq(25)
+    expect(factory.number_by_model_year('Model S', '2020')).to eq(4)
+    expect(factory.number_by_model_year('Prius Prime', '2017')).to eq(3)
   end
 
   it 'can display the county with the most registered vehicles' do
