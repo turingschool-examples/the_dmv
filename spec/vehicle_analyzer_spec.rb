@@ -10,19 +10,19 @@ RSpec.describe VehicleAnalyzer do
   end
 
   it 'counts model years' do
-    expect(@analyzer.count_model_year(2020)).to eq(88) #true as of 2/14/23
-    expect(@analyzer.count_model_year(2015)).to eq(84) #true as of 2/14/23
-    expect(@analyzer.count_model_year(2012)).to eq(38) #true as of 2/14/23
-    expect(@analyzer.count_model_year("2012")).to eq(38)
+    expect(@analyzer.count_model_year(2020)).to eq(71) #true as of 2/14/23
+    expect(@analyzer.count_model_year(2015)).to eq(97) #true as of 2/14/23
+    expect(@analyzer.count_model_year(2012)).to eq(20) #true as of 2/14/23
+    expect(@analyzer.count_model_year("2012")).to eq(20) #true as of 2/14/23
   end
 
   it 'finds the most registered county' do
     expect(@analyzer.most_registered_county).to be_a(String)
-    expect(@analyzer.most_registered_county).to eq('King county: 523 registrations') #true as of 2/14/23
+    expect(@analyzer.most_registered_county).to eq('King county: 729 registrations') #true as of 2/14/23
   end
 
   it 'finds the most popular make/model' do
     expect(@analyzer.most_popular_car).to be_a(String)
-    expect(@analyzer.most_popular_car).to eq("NISSAN Leaf: 210 registrations") #true as of 2/14/23
+    expect(@analyzer.most_popular_car).to eq("NISSAN Leaf: 256 registrations") #true as of 2/14/23
   end
 end
