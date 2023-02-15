@@ -22,9 +22,9 @@ RSpec.describe VehicleFactory do
       expect(factory.wa_vehicles.first).to be_a(Vehicle)
       expect(factory.wa_vehicles.length).to eq(1000)
       expect(factory.wa_vehicles.first.make).to eq('TOYOTA')
-      expect(factory.wa_vehicles.first.model).to eq('Prius Plug-in')
-      expect(factory.wa_vehicles.first.vin).to eq('JTDKN3DP8D')
-      expect(factory.wa_vehicles.first.year).to eq('2013')
+      expect(factory.wa_vehicles.first.model).to eq('RAV4 Prime')
+      expect(factory.wa_vehicles.first.vin).to eq('JTMEB3FV7M')
+      expect(factory.wa_vehicles.first.year).to eq('2021')
     end
 
     it 'can create and store vehicles from New York' do
@@ -53,9 +53,9 @@ RSpec.describe VehicleFactory do
       expect(factory.wa_vehicles.first).to be_a(Vehicle)
       expect(factory.wa_vehicles.length).to eq(1000)
       expect(factory.wa_vehicles.first.make).to eq('TOYOTA')
-      expect(factory.wa_vehicles.first.model).to eq('Prius Plug-in')
-      expect(factory.wa_vehicles.first.vin).to eq('JTDKN3DP8D')
-      expect(factory.wa_vehicles.first.year).to eq('2013')
+      expect(factory.wa_vehicles.first.model).to eq('RAV4 Prime')
+      expect(factory.wa_vehicles.first.vin).to eq('JTMEB3FV7M')
+      expect(factory.wa_vehicles.first.year).to eq('2021')
 
       expect(factory.ny_vehicles).to be_a(Array)
       expect(factory.ny_vehicles.first).to be_a(Vehicle)
