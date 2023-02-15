@@ -3,10 +3,10 @@ class Registrant
               :age,
               :license_data
 
-  def initialize(name, age, has_permit = false)
+  def initialize(name, age, permit = false)
     @name = name
     @age = age
-    @has_permit = has_permit
+    @permit = permit
     @license_data = {
       written: false,
       license: false,
@@ -15,7 +15,7 @@ class Registrant
   end
 
   def permit?
-    @has_permit
+    @permit
   end
 
   def written?
@@ -32,7 +32,7 @@ class Registrant
 
   def earn_permit
     return false if @age < 16
-    @has_permit = true
+    @permit = true
   end
 
   def set_license_data(key, value)
