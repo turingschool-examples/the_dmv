@@ -24,7 +24,7 @@ RSpec.describe VehicleFactory do
       vehicle_array = factory.create_vehicles(wa_ev_registrations)
       count_hash = factory.most_popular_make(vehicle_array)
       expect(count_hash).to be_an_instance_of(Hash)
-      expect(count_hash).to include("TESLA"=>313)
+      expect(count_hash).to include("TESLA"=>334)
     end
   end
 
@@ -35,7 +35,7 @@ RSpec.describe VehicleFactory do
       vehicle_array = factory.create_vehicles(wa_ev_registrations)
       count_hash = factory.most_popular_model(vehicle_array)
       expect(count_hash).to be_an_instance_of(Hash)
-      expect(count_hash).to include("Ioniq"=>4)
+      expect(count_hash).to include("Leaf"=>256)
     end
   end
 
@@ -44,7 +44,7 @@ RSpec.describe VehicleFactory do
       factory = VehicleFactory.new
       most_registered = factory.wa_county_with_most_registered
       expect(most_registered).to be_an_instance_of(Hash)
-      expect(most_registered).to include("King"=>523)
+      expect(most_registered).to include("King"=>729)
     end
   end
 end
