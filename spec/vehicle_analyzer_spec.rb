@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe VehicleAnalyzer do
   before(:each) do
-    @analyzer = VehicleAnalyzer.new
+    @analyzer = VehicleAnalyzer.new(DmvDataService.new.wa_ev_registrations)
   end
 
   it 'exists' do
