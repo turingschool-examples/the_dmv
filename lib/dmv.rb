@@ -21,9 +21,10 @@ class Dmv
       facility[:name] = facility[:office_name]
       facility[:address] = facility[:street_address_line_1]
       facility[:phone] = facility[:public_phone_number]
-      if facility.has_key?(:daysopen)
-        facility[:daysopen] = "Monday - Friday - 8:30 to 5:00, Last 4 week days - 8:00 to 5:00"
-      end
+      facility[:hours] = facility[:daysopen]
+      # if facility.has_key?(:daysopen)
+      #   facility[:daysopen] = "Monday - Friday - 8:30 to 5:00, Last 4 week days - 8:00 to 5:00"
+      # end
       @facility_count += 1
       added_facility = Facility.new(facility)
       @facilities << added_facility

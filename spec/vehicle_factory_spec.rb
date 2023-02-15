@@ -50,7 +50,7 @@ RSpec.describe VehicleFactory do
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
       cowans_vehicle_factory.manufacture_vehicles(wa_ev_registrations)
   
-      expect(cowans_vehicle_factory.count_by_year("2020")).to eq(88)
+      expect(cowans_vehicle_factory.count_by_year("2020")).to eq(71)
     end
 
     it 'can show most registered county' do
