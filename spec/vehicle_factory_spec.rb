@@ -111,12 +111,35 @@ RSpec.describe VehicleFactory do
       expect(actual).to be_a(Hash)
     end
 
-    it 'it has keys that symbols of the make and model' do
+    it 'it has keys that are symbols of the make and model' do
       expect(actual.all? { |key, _| key.is_a?(Symbol) }).to be(true)
     end
 
     it 'it has values that are integers representing the counts of each key' do
       expect(actual.all? { |_, value| value.is_a?(Integer) }).to be(true)
+    end
+  end
+
+  describe '#model_year_counts' do
+    actual = factory.model_year_counts(wa_ev_vehicles)
+
+    it 'returns a hash' do
+      expect(actual).to be_a(Hash)
+    end
+
+    it 'it has keys that are symbols of model years' do
+      expect(actual.all? { |key, _| key.is_a?(Symbol) }).to be(true)
+    end
+
+    it 'it has values that are integers representing the counts of each key' do
+      expect(actual.all? { |_, value| value.is_a?(Integer) }).to be(true)
+    end
+
+    it 'returns the correct count for each key' do
+      expect(actual[:'2013']).to eq(115)
+      expect(actual[:'2018']).to eq(106)
+      expect(actual[:'2022']).to eq(76)
+      expect(actual[:'2012']).to eq(20)
     end
   end
 
@@ -142,7 +165,20 @@ RSpec.describe VehicleFactory do
     end
 
     it 'returns the correct count for each key' do
-      expect(actual[:'NISSAN Leaf']).to eq(210)
+      expect(actual[:'NISSAN Leaf']).to eq(256)
+    end
+  end
+
+  describe '#registered_vehicle_count_for_model_year' do
+    it 'returns an integer' do
+      expect(factory.registered_vehicle_count_for_model_year(wa_ev_vehicles, 2013)).to be_a(Integer)
+    end
+
+    it 'returns the correct counts for the given year' do
+      expect(factory.registered_vehicle_count_for_model_year(wa_ev_vehicles, 2013)).to eq(115)
+      expect(factory.registered_vehicle_count_for_model_year(wa_ev_vehicles, 2018)).to eq(106)
+      expect(factory.registered_vehicle_count_for_model_year(wa_ev_vehicles, 2022)).to eq(76)
+      expect(factory.registered_vehicle_count_for_model_year(wa_ev_vehicles, 2012)).to eq(20)
     end
   end
 
