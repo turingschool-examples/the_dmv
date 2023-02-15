@@ -1,7 +1,9 @@
 require 'date'
 
 class Vehicle
-  attr_accessor :plate_type, :registration_date
+  attr_accessor :plate_type,
+                :registration_date
+                
   attr_reader :vin,
               :year,
               :make,
