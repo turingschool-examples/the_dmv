@@ -6,6 +6,7 @@ class VehicleFactory
   def initialize
     @vehicles = []
   end
+  
   def create_vehicles(source)
     source.each do |vehicle_hash|
     saved_vehicles = {}
@@ -15,7 +16,6 @@ class VehicleFactory
     saved_vehicles[:model] = vehicle_hash[:model]
     saved_vehicles[:engine] = :ev
     saved_vehicles[:plate_type] = :ev
-    # saved_vehicles[:vin] = vehicle_hash[:vin_1_10]
     @vehicles << Vehicle.new(saved_vehicles)
     end
   end
