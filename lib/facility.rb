@@ -1,6 +1,5 @@
 require_relative 'vehicle'
 class Facility
-  # attr_reader :name, :address, :phone, :services
   attr_reader :name,
               :address,
               :phone,
