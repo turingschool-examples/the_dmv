@@ -37,6 +37,23 @@ RSpec.describe FacilityFactory do
       expect(ny_facilities[0].phone).to eq(facility_1.phone)
       expect(ny_facilities[1].phone).to eq(facility_2.phone)
     end 
+
+    it 'creates facility instances from mo_dmv_office_locations' do
+    
+      factory = FacilityFactory.new
+      mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
+      facility_1 = Facility.new({name: 'SAINTE GENEVIEVE', address: '753 STE. GENEVIEVE DR STE GENEVIEVE MO 63670', phone: '(573) 883-2344' })
+      facility_2 = Facility.new({name: 'OAKVILLE', address: '3164 TELEGRAPH ROAD ST LOUIS MO 63125', phone: '(314) 887-1050' })
+      mo_facilities = factory.create_facilities(mo_dmv_office_locations)
+
+      expect(mo_facilities[0].name).to eq(facility_1.name)
+      expect(mo_facilities[1].name).to eq(facility_2.name)
+      expect(mo_facilities[0].address).to eq(facility_1.address)
+      expect(mo_facilities[1].address).to eq(facility_2.address)
+      expect(mo_facilities[0].phone).to eq(facility_1.phone)
+      expect(mo_facilities[1].phone).to eq(facility_2.phone)
+
+    end
   end
 
   describe '#concatenate facilities' do
