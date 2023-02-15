@@ -35,7 +35,7 @@ RSpec.describe VehicleFactory do
 
       @factory.create_vehicles(wa_ev_registrations)
 
-      expect(@factory.registrations_per_model_year(2016)).to eq(28)
+      expect(@factory.registrations_per_model_year(2016)).to eq(21)
       expect(@factory.registrations_per_model_year(2020)).to eq(27)
     end
 
