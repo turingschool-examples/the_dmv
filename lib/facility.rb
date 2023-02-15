@@ -26,13 +26,13 @@ class Facility
       vehicle.set_plate_type
       @collected_fees += vehicle.set_fees
     else
-      "service not provided at this location"
+      false
     end
   end
 
   def administer_written_test(person)
     if services.include?("Written_Test") && person.permit? == true && person.age >= 16
-    person.license_data[:written] = true
+      person.license_data[:written] = true
     else 
       false
     end
@@ -47,7 +47,6 @@ class Facility
   end
 
   def renew_drivers_license(person)
-    # require 'pry'; binding.pry
     if administer_road_test(person)
       person.license_data[:renewed] = true
     else
