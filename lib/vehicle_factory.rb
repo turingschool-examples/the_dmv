@@ -47,6 +47,13 @@ class VehicleFactory
     model_year_counts(vehicles)[year.to_s.to_sym]
   end
 
+  def county_with_most_registered_vehicles(ev_registrations)
+    counties = ev_registrations.map{ |registration| registration[:county] }
+    county_counts = counts_hash(counties)
+    max_count = county_counts.values.max
+    county_counts.key(max_count)
+  end
+
   def create_wa_ev_vehicles(vehicle_data)
     vehicle_data.map do |vehicle|
       Vehicle.new({
