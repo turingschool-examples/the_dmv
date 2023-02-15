@@ -182,6 +182,18 @@ RSpec.describe VehicleFactory do
     end
   end
 
+  describe '#county_with_most_registered_vehicles' do
+    it 'returns a string' do
+      expect(factory.county_with_most_registered_vehicles(wa_ev_registrations))
+        .to be_a(String)
+    end
+
+    it 'returns the correct county with the most registrations' do
+      expect(factory.county_with_most_registered_vehicles(wa_ev_registrations))
+        .to eq('King')
+    end
+  end
+
   describe '#most_popular_make_model' do
     actual = factory.most_popular_make_model(wa_ev_vehicles)
     expected = :'NISSAN Leaf'
