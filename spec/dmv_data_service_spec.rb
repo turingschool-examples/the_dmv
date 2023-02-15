@@ -4,6 +4,7 @@ RSpec.describe DmvDataService do
   before(:each) do
     @dds = DmvDataService.new
   end
+
   describe '#initialize' do
     it 'can initialize' do
       expect(@dds).to be_an_instance_of(DmvDataService)
@@ -22,6 +23,12 @@ RSpec.describe DmvDataService do
   describe '#wa_ev_registrations' do
     it 'can load washington ev registration data' do
       expect(@dds.wa_ev_registrations.size).to eq(1000)
+    end
+  end
+
+  describe '#ny_registrations' do
+    it 'can load new york  registration data' do
+      expect(@dds.ny_registrations.size).to eq(1000)
     end
   end
 

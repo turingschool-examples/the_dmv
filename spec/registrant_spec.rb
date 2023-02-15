@@ -47,16 +47,6 @@ RSpec.describe Registrant do
     end
   end
 
-  describe '#permit?' do
-    it 'has a permit' do
-      expect(@registrant_1.permit?).to be(true)
-    end
-
-    it 'does not have a permit' do
-      expect(@registrant_2.permit?).to be(false)
-    end
-  end
-
   describe '#license_data' do
     it 'is a hash' do
       expect(@registrant_1.license_data).to be_a(Hash)
@@ -85,29 +75,89 @@ RSpec.describe Registrant do
       expect(@registrant_1.renewed?).to be(false)
       expect(@registrant_2.renewed?).to be(false)
     end
+  end
 
-    describe '#earn_permit' do
-      it 'changes #permit? from false to true' do
-        expect(@registrant_2.permit?).to be(false)
-        @registrant_2.earn_permit
-        expect(@registrant_2.permit?).to be(true)
-      end
+  describe '#permit?' do
+    it 'has a permit' do
+      expect(@registrant_1.permit?).to be(true)
+    end
 
-      it 'does nothing if #permit? is already true' do
-        expect(@registrant_1.permit?).to be(true)
-        @registrant_1.earn_permit
-        expect(@registrant_1.permit?).to be(true)
-      end
+    it 'does not have a permit' do
+      expect(@registrant_2.permit?).to be(false)
+    end
+  end
 
-      it 'does nothing if the registrant\'s age is less than 16 years old' do
-        expect(@registrant_3.permit?).to be(false)
-        @registrant_3.earn_permit
-        expect(@registrant_3.permit?).to be(false)
-      end
+  describe '#written?' do
+    it 'returns the written key in license data' do
+      expect(@registrant_1.written?).to be(@registrant_1.license_data[:written])
+      @registrant_1.license_data[:written] = true
+      expect(@registrant_1.written?).to be(@registrant_1.license_data[:written])
+    end
+  end
 
-      it 'returns true' do
-        expect(@registrant_1.earn_permit).to be(true)
-      end
+  describe '#license?' do
+    it 'returns the license key in license data' do
+      expect(@registrant_1.license?).to be(@registrant_1.license_data[:license])
+      @registrant_1.license_data[:license] = true
+      expect(@registrant_1.license?).to be(@registrant_1.license_data[:license])
+    end
+  end
+
+  describe '#renewed?' do
+    it 'returns the renewed key in license data' do
+      expect(@registrant_1.renewed?).to be(@registrant_1.license_data[:renewed])
+      @registrant_1.license_data[:renewed] = true
+      expect(@registrant_1.renewed?).to be(@registrant_1.license_data[:renewed])
+    end
+  end
+
+  describe '#earn_permit' do
+    it 'changes #permit? from false to true' do
+      expect(@registrant_2.permit?).to be(false)
+      @registrant_2.earn_permit
+      expect(@registrant_2.permit?).to be(true)
+    end
+
+    it 'does nothing if #permit? is already true' do
+      expect(@registrant_1.permit?).to be(true)
+      @registrant_1.earn_permit
+      expect(@registrant_1.permit?).to be(true)
+    end
+
+    it 'does nothing if the registrant\'s age is less than 16 years old' do
+      expect(@registrant_3.permit?).to be(false)
+      @registrant_3.earn_permit
+      expect(@registrant_3.permit?).to be(false)
+    end
+
+    it 'returns true' do
+      expect(@registrant_1.earn_permit).to be(true)
+    end
+  end
+
+  describe '#set_license_data' do
+    it 'can set the written key in the license data to true' do
+      expect(@registrant_1.written?).to be(false)
+      expect(@registrant_1.set_license_data(:written, true))
+      expect(@registrant_1.written?).to be(true)
+    end
+
+    it 'can set the license key in the license data to true' do
+      expect(@registrant_1.license?).to be(false)
+      expect(@registrant_1.set_license_data(:license, true))
+      expect(@registrant_1.license?).to be(true)
+    end
+
+    it 'can set the renewed key in the license data to true' do
+      expect(@registrant_1.renewed?).to be(false)
+      expect(@registrant_1.set_license_data(:renewed, true))
+      expect(@registrant_1.renewed?).to be(true)
+    end
+
+    it 'returns the value that it assigned' do
+      expect(@registrant_1.set_license_data(:written, true)).to be(true)
+      expect(@registrant_1.set_license_data(:license, false)).to be(false)
+      expect(@registrant_1.set_license_data(:renewed, true)).to be(true)
     end
   end
 end

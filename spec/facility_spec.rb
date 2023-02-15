@@ -32,45 +32,82 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#add_service' do
-    before(:each) do
+  describe '#name' do
+    it 'has a name' do
+      expect(@facility_1.name).to eq(FACILITY_1[:name])
+    end
+
+    it 'has a different name' do
+      expect(@facility_2.name).to eq(FACILITY_2[:name])
+    end
+  end
+
+  describe '#address' do
+    it 'has an address' do
+      expect(@facility_1.address).to eq(FACILITY_1[:address])
+    end
+
+    it 'has a different address' do
+      expect(@facility_2.address).to eq(FACILITY_2[:address])
+    end
+  end
+
+  describe '#phone' do
+    it 'has a phone number' do
+      expect(@facility_1.phone).to eq(FACILITY_1[:phone])
+    end
+
+    it 'has a different phone number' do
+      expect(@facility_2.phone).to eq(FACILITY_2[:phone])
+    end
+  end
+
+  describe '#services' do
+    it 'returns an array' do
+      expect(@facility_1.services).to be_a(Array)
+      expect(@facility_2.services).to be_a(Array)
+    end
+
+    it 'has an array of services that starts empty' do
       expect(@facility_1.services).to eq([])
       expect(@facility_2.services).to eq([])
     end
 
-    it 'can add 1 service' do
+    it 'saves services that are added' do
       @facility_1.add_service('New Drivers License')
       expect(@facility_1.services).to eq(['New Drivers License'])
-    end
 
-    it 'can add 2 services' do
-      @facility_1.add_service('New Drivers License')
       @facility_1.add_service('Renew Drivers License')
-      expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License'])
-    end
+      expect(@facility_1.services)
+        .to eq(['New Drivers License', 'Renew Drivers License'])
 
-    it 'can add 3 services' do
-      @facility_1.add_service('New Drivers License')
-      @facility_1.add_service('Renew Drivers License')
       @facility_1.add_service('Vehicle Registration')
-      expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
-    end
-
-    it 'returns an array of strings' do
-      expect(@facility_1.services).to be_a(Array)
-      expect(@facility_1.services.all? { |service| service.is_a?(String) }).to be(true)
+      expect(@facility_1.services).to eq(
+        ['New Drivers License',
+         'Renew Drivers License',
+         'Vehicle Registration'
+      ])
     end
   end
 
   describe '#registered_vehicles' do
+    it 'starts empty' do
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_2.registered_vehicles).to eq([])
+    end
+
     it 'returns an array' do
       expect(@facility_1.registered_vehicles).to be_a(Array)
       expect(@facility_2.registered_vehicles).to be_a(Array)
     end
 
-    it 'starts empty' do
-      expect(@facility_1.registered_vehicles).to eq([])
-      expect(@facility_2.registered_vehicles).to eq([])
+    it 'contains an array of Vehicle objects' do
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@camaro)
+      expect(@facility_1.registered_vehicles.all? do |vehicle|
+        vehicle.is_a?(Vehicle)
+      end).to be(true)
     end
   end
 
@@ -112,6 +149,37 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#add_service' do
+    before(:each) do
+      expect(@facility_1.services).to eq([])
+      expect(@facility_2.services).to eq([])
+    end
+
+    it 'can add 1 service' do
+      @facility_1.add_service('New Drivers License')
+      expect(@facility_1.services).to eq(['New Drivers License'])
+    end
+
+    it 'can add 2 services' do
+      @facility_1.add_service('New Drivers License')
+      @facility_1.add_service('Renew Drivers License')
+      expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License'])
+    end
+
+    it 'can add 3 services' do
+      @facility_1.add_service('New Drivers License')
+      @facility_1.add_service('Renew Drivers License')
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+    end
+
+    it 'returns an array of strings' do
+      expect(@facility_1.services).to be_a(Array)
+      expect(@facility_1.services.all? { |service| service.is_a?(String) }).to be(true)
+    end
+  end
+
+
   describe '#register_vehicle' do
     before(:each) do
       @facility_1.add_service('Vehicle Registration')
@@ -137,6 +205,18 @@ RSpec.describe Facility do
       expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
       expect(@facility_1.register_vehicle(@bolt)).to eq([@cruz, @bolt])
       expect(@facility_1.register_vehicle(@camaro)).to eq([@cruz, @bolt, @camaro])
+    end
+
+    it 'add a plate type to a vehicle' do
+      expect(@cruz.plate_type).to be(nil)
+      expect(@bolt.plate_type).to be(nil)
+      expect(@camaro.plate_type).to be(nil)
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@camaro)
+      expect(@cruz.plate_type).to be(:regular)
+      expect(@bolt.plate_type).to be(:ev)
+      expect(@camaro.plate_type).to be(:antique)
     end
 
     it 'adds today\'s date to the vehicle\'s registration date' do
@@ -340,6 +420,40 @@ RSpec.describe Facility do
 
     it 'returns true if the license renewal is successful' do
       expect(@facility_1.renew_drivers_license(@registrant_1)).to be(true)
+    end
+  end
+
+  describe '#collect_fee' do
+    it 'adds 25 to @collected_fees for an antique plate' do
+      expect(@facility_1.collected_fees).to be(0)
+      @facility_1.collect_fee(:antique)
+      expect(@facility_1.collected_fees).to be(25)
+      @facility_1.collect_fee(:antique)
+      expect(@facility_1.collected_fees).to be(50)
+    end
+
+    it 'adds 100 to @collected_fees for a regular plate' do
+      expect(@facility_1.collected_fees).to be(0)
+      @facility_1.collect_fee(:regular)
+      expect(@facility_1.collected_fees).to be(100)
+      @facility_1.collect_fee(:regular)
+      expect(@facility_1.collected_fees).to be(200)
+    end
+
+    it 'adds 200 to @collected_fees for an ev plate' do
+      expect(@facility_1.collected_fees).to be(0)
+      @facility_1.collect_fee(:ev)
+      expect(@facility_1.collected_fees).to be(200)
+      @facility_1.collect_fee(:ev)
+      expect(@facility_1.collected_fees).to be(400)
+    end
+
+    it 'adds 0 for any invalid plate type' do
+      expect(@facility_1.collected_fees).to be(0)
+      @facility_1.collect_fee('ev')
+      expect(@facility_1.collected_fees).to be(0)
+      @facility_1.collect_fee(25)
+      expect(@facility_1.collected_fees).to be(0)
     end
   end
 end
