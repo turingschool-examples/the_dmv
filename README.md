@@ -3,7 +3,7 @@
 This is the starter repo for the BE Mod1 DMV project.
 
 1. Describe the steps you took to dig in to this code base. What was your process? If you don’t feel you had a process, define one that you might like to try next time.
-  - I begin by rvieiwing the project reading through all iterations so I can have a direction of where I am going. This helps clear up any confusion of what the objective is. I then always begin with test and review them to see if and when I shoud split them up in different describe blocks. I go line for line and pass every test although sometimes I will look ahead to try and set myself up to create a more effecient method for my tests.
+  - I begin by revieiwing the project reading through all iterations so I can have a direction of where I am going. This helps clear up any confusion of what the objective is. I then always begin with test and review them to see if and when I shoud split them up in different describe blocks. I go line for line and pass every test although sometimes I will look ahead to try and set myself up to create a more effecient method for my tests.
   
 2. What was hard about working with code you did not write?
     - The hardest part was trouble shooting but I find this helpuful to experience. This allows me to be familiar with failures and errors and how I can correct them. 
