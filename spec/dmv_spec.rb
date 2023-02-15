@@ -45,7 +45,7 @@ RSpec.describe Dmv do
     it 'creates facilities' do
       facility = Facility.new
       or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
-      expect(facility.add_facility(or_dmv_office_locations)).to be_an_instance_of(Array)
+      expect(facility.discover_facilities(or_dmv_office_locations)).to be_an_instance_of(Array)
     end
   end
 end
