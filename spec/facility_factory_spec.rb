@@ -77,5 +77,16 @@ RSpec.describe FacilityFactory do
         expect(factory.ny_concatenate(address)).to eq(facility_1.address)
       end
     end
+
+    describe 'mo_concatenate(address)' do
+      it 'will concatenate mo facility for address' do
+        factory = FacilityFactory.new
+        address = {"number":"153","dorregionnumber":"10","type":"1MV","name":"SAINTE GENEVIEVE ","address1":"753 STE. GENEVIEVE DR","city":"STE GENEVIEVE ","state":"MO","zipcode":"63670","county":"Ste. Genevieve","phone":"(573) 883-2344"}
+        facility_1 = Facility.new({name: 'SAINTE GENEVIEVE', address: '753 STE. GENEVIEVE DR STE GENEVIEVE MO 63670', phone: '(573) 883-2344' })
+        facility_2 = Facility.new({name: 'OAKVILLE', address: '3164 TELEGRAPH ROAD ST LOUIS MO 63125', phone: '(314) 887-1050' })
+        
+        expect(factory.mo_concatenate(address)).to eq(facility_1.address)
+      end
+    end
   end  
 end
