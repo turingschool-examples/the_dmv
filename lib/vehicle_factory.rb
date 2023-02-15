@@ -13,8 +13,7 @@ class VehicleFactory
         make: car[:make],
         model: car[:model],
         engine: :ev
-        }
-        
+      }   
       @car_inventory << Vehicle.new(car_hash)
     end
   end
