@@ -41,7 +41,7 @@ class Facility
       vehicle.plate_type = :regular
     end
     @collected_fees += fee
-    # vehicle.register
+    vehicle.registration_date = Date.today
     vehicle
   end
 

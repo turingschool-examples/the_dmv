@@ -25,16 +25,20 @@ RSpec.describe Facility do
     end
   end
   it 'registers vehicle' do
+  @facility.add_service('Register a vehicle') 
   cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
   @facility.register_vehicle(cruz)
+  # require 'pry'; binding.pry
 
   expect(@facility.registered_vehicles.empty?).to eq(false)
+  expect(cruz.registration_date).to eq(Date.today)
   end
 
   it 'collects fee' do
  cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
  @facility.add_service('Register a vehicle') 
  @facility.register_vehicle(cruz)
+ 
   
   expect(@facility.collected_fees).to eq(100)
 
