@@ -17,5 +17,15 @@ RSpec.describe Registrant do
 
     expect(registrant_1.age).to eq(18)
   end
-  
+
+  it "has a permit attribute/method that defaults to false" do 
+    registrant_1 = Registrant.new('Bruce', 18, true )
+    registrant_2 = Registrant.new('Penny', 15 )
+
+    expect(registrant_1.permit).to be true
+    expect(registrant_2.permit).to be false
+  end
+
+  it "has "
+
 end
