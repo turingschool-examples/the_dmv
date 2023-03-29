@@ -1,10 +1,10 @@
 class Facility
   attr_reader :name, :address, :phone, :services
 
-  def initialize(name, address, phone)
-    @name = name
-    @address = address
-    @phone = phone
+  def initialize(facility_attributes)
+    @name = facility_attributes{:name}
+    @address = facility_attributes{:address}
+    @phone = facility_attributes{:phone}
     @services = []
   end
 
