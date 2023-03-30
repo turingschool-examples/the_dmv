@@ -1,5 +1,9 @@
 class Facility
-  attr_reader :name, :address, :phone, :services
+  attr_reader :name, 
+              :address, 
+              :phone, 
+              :services,
+              :registered_vehicles
 
   def initialize(facility_attributes)
     @name = facility_attributes[:name]
