@@ -64,7 +64,8 @@ RSpec.describe Facility do
 
       facility_1.add_service('Vehicle Registration')
       facility_1.register_vehicle(cruz)
-      
+
+      expect(cruz.plate_type).to eq(:regular)
     end
   end
 end
