@@ -20,24 +20,18 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    # return nil unless services.include?("Vehicle Registration")
     vehicle.registration_date = Date.today
     if vehicle.antique?
       @collected_fees += 25
+      vehicle.plate_type = :antique
+    elsif vehicle.electric_vehicle?
+      @collected_fees += 200
+      vehicle.plate_type = :electric
+    else
+      @collected_fees += 100
+      vehicle.plate_type = :regular
     end
-
     @registered_vehicles << vehicle
-    
-    
-    
-    
-   
-    
-    
-    
-    # Electric Vehicles (EV) cost $200 to register
-    # All other vehicles cost $100 to register
-    # A vehicle’s plate_type should be set to :regular, :antique, or :ev upon successful registration.
   end
 end
 
