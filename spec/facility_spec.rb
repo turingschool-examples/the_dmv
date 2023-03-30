@@ -54,7 +54,7 @@ RSpec.describe Facility do
       expect(cruz.registration_date).to eq(Date.today)
     end
 
-    it 'checks a vehicle plate_type, checkes registered_vehicles list, checks collected fees' do
+    it 'checks a vehicle plate_type, facility 1 registers another car, re-checkes registered_vehicles list, checks collected fees' do
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
       facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
 
@@ -66,6 +66,20 @@ RSpec.describe Facility do
       facility_1.register_vehicle(cruz)
 
       expect(cruz.plate_type).to eq(:regular)
+      expect(facility_1.registered_vehicles).to eq([cruz])
+      expect(facility_1.collected_fees).to eq(100)
+
+      facility_1.register_vehicle(camaro)
+
+      expect(camaro.registration_date).to eq(Date.today)
+      expect(camaro.plate_type).to eq(:antique)
+
+      facility_1.register_vehicle(bolt)
+
+      expect(bolt.registration_date).to eq(Date.today)
+      expect(bolt.plate_type).to eq(:ev)
+      expect(facility_1.registered_vehicles).to eq([cruz, camaro, bolt])
+      expect(facility_1.collected_fees).to eq(325)
     end
   end
 end
@@ -77,38 +91,9 @@ end
 
 
 
-# pry(main)> cruz.plate_type
-# #=> :regular
 
-# pry(main)> facility_1.registered_vehicles
-# #=> [#<Vehicle:0x0000000135a48b08...>]
 
-# pry(main)> facility_1.collected_fees
-# #=> 100
 
-# pry(main)> facility_1.register_vehicle(camaro)
-# #=> [#<Vehicle:0x0000000135a48b08...>, #<Vehicle:0x0000000135adb610...>]
-
-# pry(main)> camaro.registration_date
-# #=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
-
-# pry(main)> camaro.plate_type
-# #=> :antique
-
-# pry(main)> facility_1.register_vehicle(bolt)
-# #=> [#<Vehicle:0x0000000135a48b08...>, #<Vehicle:0x0000000135adb610...>, #<Vehicle:0x0000000125832180...>]
-
-# pry(main)> bolt.registration_date
-# #=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
-
-# pry(main)> bolt.plate_type
-# #=> :ev
-
-# pry(main)> facility_1.registered_vehicles
-# #=> [#<Vehicle:0x0000000135a48b08...>, #<Vehicle:0x0000000135adb610...>, #<Vehicle:0x0000000125832180...>]
-
-# pry(main)> facility_1.collected_fees
-# #=> 325
 
 # pry(main)> facility_2.registered_vehicles
 # #=> []
