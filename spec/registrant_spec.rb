@@ -29,11 +29,11 @@ RSpec.describe Registrant do
 
   describe '#earn_permit' do
     it 'updates permit status to true' do 
-      expect(registrant_2.permit?).to be false
+      expect(@registrant_2.permit?).to be false
 
-      registrant_2.earn_permit
+      @registrant_2.earn_permit
 
-      expect(registrant_2.permit?).to be true
+      expect(@registrant_2.permit?).to be true
     end
   end
   
