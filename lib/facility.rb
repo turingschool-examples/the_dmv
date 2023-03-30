@@ -26,7 +26,7 @@ class Facility
       vehicle.plate_type = :antique
     elsif vehicle.electric_vehicle?
       @collected_fees += 200
-      vehicle.plate_type = :electric
+      vehicle.plate_type = :ev
     else
       @collected_fees += 100
       vehicle.plate_type = :regular
