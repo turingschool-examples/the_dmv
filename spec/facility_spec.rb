@@ -1,8 +1,11 @@
-require 'spec_helper'
+require './lib/facility'
+require './lib/facility'
 
 RSpec.describe Facility do
   before(:each) do
-    @facility = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+     @facility = Facility.new({name: 'Albany DMV Office', 
+     address: '2242 Santiam Hwy SE Albany OR 97321', 
+     phone: '541-967-2014'})
   end
   describe '#initialize' do
     it 'can initialize' do
@@ -17,9 +20,9 @@ RSpec.describe Facility do
   describe '#add service' do
     it 'can add available services' do
       expect(@facility.services).to eq([])
-      @facility.add_service('New Drivers License')
-      @facility.add_service('Renew Drivers License')
-      @facility.add_service('Vehicle Registration')
+      @facility.add_services('New Drivers License')
+      @facility.add_services('Renew Drivers License')
+      @facility.add_services('Vehicle Registration')
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
