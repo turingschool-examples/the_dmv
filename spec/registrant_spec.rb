@@ -14,16 +14,26 @@ RSpec.describe Registrant do
       expect(@registrant_2.permit).to be false
     end
   end
-  describe 'permit?' do
+  describe '#permit?' do
     it 'can determine if a registrant has a permit' do 
       expect(@registrant_1.permit?).to be true
       expect(@registrant_2.permit?).to be false
     end
   end
-  describe 'license data' do
+  describe '#license_data' do
     it 'has default false has key attributes written, license, renewed' do 
       expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+  end
+
+  describe '#earn_permit' do
+    it 'updates permit status to true' do 
+      expect(registrant_2.permit?).to be false
+
+      registrant_2.earn_permit
+
+      expect(registrant_2.permit?).to be true
     end
   end
   
