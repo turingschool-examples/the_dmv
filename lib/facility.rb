@@ -20,6 +20,7 @@ class Facility
   end
 
   def register_vehicle(vehicle)
+    return nil unless services.include?("Vehicle Registration")
     vehicle.registration_date = Date.today
     if vehicle.antique?
       @collected_fees += 25
