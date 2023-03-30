@@ -47,9 +47,24 @@ RSpec.describe Facility do
       bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
       camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
 
+      facility_1.add_service('Vehicle Registration')
       facility_1.register_vehicle(cruz)
 
       expect(facility_1.registered_vehicles).to eq([cruz])
+      expect(cruz.registration_date).to eq(Date.today)
+    end
+
+    it 'checks a vehicle plate_type, checkes registered_vehicles list, checks collected fees' do
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+
+      facility_1.add_service('Vehicle Registration')
+      facility_1.register_vehicle(cruz)
+      
     end
   end
 end
@@ -59,11 +74,7 @@ end
 
 
 
-# pry(main)> facility_1.register_vehicle(cruz)
-# #=> [#<Vehicle:0x0000000135a48b08...>]
 
-# pry(main)> cruz.registration_date
-# #=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
 
 # pry(main)> cruz.plate_type
 # #=> :regular
