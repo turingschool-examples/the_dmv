@@ -8,4 +8,4 @@ class Registrant
     @license_data = license_data
   end
 
-end
+end #final
