@@ -53,11 +53,18 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(100)
     end
 
-    xit 'changes vehicle plate type and updates reg date' do 
+    xit 'assigns a reg date' do 
       @facility_1.register_vehicle(@cruz)
 
       expect(@cruz.registration_date).to eq(Date.today)
+    end
+
+    xit 'has a #plate_type helper method' do 
       expect(@cruz.plate_type).to eq(:regular)
+    end
+
+    xit 'has a #collect_fees helper method' do 
+
     end
 
     xit 'cannot register vehicle once registered elsewhere' do 
@@ -83,6 +90,12 @@ RSpec.describe Facility do
     end
 
     xit 'works with multiple vehices' do
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+
+      expect(@facility_1.collected_fees).to eq(325)
+      expect(@facility_2.registered_vehicles).to eq([@cruz, @camaro, @bolt])
       
     end
   end
