@@ -24,7 +24,7 @@ class Facility
       vehicle.set_registration_date
       @registered_vehicles << vehicle
     else
-      "Service not provided at this facility"
+      false
     end
   end
 
@@ -43,10 +43,26 @@ class Facility
       if registrant.permit? && registrant.age >= 16
         registrant.license_data[:written] = true
       else
-        "Not qualified for written test"
+        false
       end
     else
-      "Service not provided at this facility"
+      false
+    end
+  end
+
+  def administer_road_test(registrant)
+    if services.include?("Road Test") && registrant.license_data[:written] == true
+        registrant.license_data[:license] = true
+    else
+      false
+    end
+  end
+
+  def renew_license(registrant)
+    if registrant.license_data[:license] == true
+      registrant.license_data[:renewed] = true
+    else
+      false
     end
   end
 
