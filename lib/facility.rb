@@ -21,9 +21,8 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    if vehicle.registration_date == nil ||
-      vehicle.registration_date.month >= Date.today.month-1 &&
-      vehicle.registration_date.year < Date.today.year
+    if @services.include?('Vehicle Registration') &&
+      vehicle.registration_date == nil
       
       @registered_vehicles << vehicle
       vehicle.set_registration_date

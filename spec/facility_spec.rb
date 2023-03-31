@@ -79,24 +79,24 @@ RSpec.describe Facility do
       
     end
 
-    xit 'cannot register a vehicle until the service is added' do
+    it 'cannot register a vehicle until the service is added' do
       expect(@facility_2.services).to eq([])
 
       expect(@facility_2.register_vehicle(@bolt)).to be nil
 
       @facility_2.add_service('Vehicle Registration')
 
-      expect(@facility_2.register_vehicle(@bolt)).to eq(@bolt)
-      expect(@facility_2.registered_vehicles). to eq(@bolt)
+      expect(@facility_2.register_vehicle(@bolt)).to eq([@bolt])
+      expect(@facility_2.registered_vehicles). to eq([@bolt])
     end
 
-    xit 'works with multiple vehices' do
+    it 'works with multiple vehices' do
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
 
       expect(@facility_1.collected_fees).to eq(325)
-      expect(@facility_2.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
     end
   end
 end
