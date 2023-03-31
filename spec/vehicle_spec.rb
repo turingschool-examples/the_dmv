@@ -33,4 +33,23 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe '#plate_type' do
+    it 'returns the vehicle plate type based on engine and year' do 
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@camaro.plate_type).to eq(:antique)
+    end
+  end
+
+  describe '#registration_date' do 
+    it 'defaults to nil' do 
+      expect(@cruz.registration_date).to be nil
+    end
+    it 'has a #set_registration_date method' do
+      @cruz.set_registration_date
+
+      expect(@cruz.registration_date).to eq(Date.today)
+    end
+  end
 end
