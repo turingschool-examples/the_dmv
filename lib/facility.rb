@@ -24,4 +24,8 @@ class Facility
     @registered_vehicles << vehicle
     @registered_vehicles
   end
+
+  # def collect_fees(vehicle)
+  #   if 
+  # end
 end

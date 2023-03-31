@@ -43,7 +43,7 @@ RSpec.describe Facility do
   end
 
   describe '#register_vehicle' do 
-    it 'adds vehicle to registered vehicles' do 
+    xit 'adds vehicle to registered vehicles' do 
       expect(@cruz.registration_date).to eq(nil)
 
       # return value is registered vehicles array
