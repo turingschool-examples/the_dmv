@@ -5,11 +5,26 @@ class Facility
     @name = facility_info[:name]
     @address = facility_info[:address]
     @phone = facility_info[:phone]
-    @services = []
+    @services = facility_info[:services] = []
+    @vehicles_registered = facility_info[:registered_vehicles] = []
+    @fees_collected = facility_info[:collected_fees] = 0
   end
 
   def add_service(service)
     @services << service
+  end
+
+  def registered_vehicles
+    return @vehicles_registered
+  end
+
+  def collected_fees
+    return @fees_collected
+  end
+
+  def register_vehicle(car)
+    @vehicles_registered << car
+    # @registration_date
   end
 
 end
