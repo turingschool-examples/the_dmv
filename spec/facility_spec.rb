@@ -36,12 +36,14 @@ RSpec.describe Facility do
     
     it '#collect_fees(vehicle) when registering' do
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       facility_1.add_service('Vehicle Registration')
       expect(facility_1.collected_fees).to eq(0)
       
       facility_1.register_vehicle(cruz)
       expect(facility_1.collected_fees).to eq(100)
+      expect(facility_2.collected_fees).to eq(0)
     end
 
     it '#changes_registration_date of vehicle' do
