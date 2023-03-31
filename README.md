@@ -2,7 +2,7 @@
 
 This is the starter repo for the BE Mod1 DMV project.
 
-1. The steps I took to dif in to the debuging process were to look at each spec file and start with test 1 and move my way down the list.
+1. The steps I took to dig in to the debuging process were to look at each spec file and start with test 1 and move my way down the list, fixing any bugs along the way.
 
 2. I don't think there was something that was hard with code I didn't write. Working with data types that I am unfamiliar with is difficult.
 
