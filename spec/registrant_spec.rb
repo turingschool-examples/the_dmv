@@ -27,4 +27,15 @@ require 'spec_helper'
 
       expect(@registrant_1.permit?).to eq(true)
     end
+
+    it "can check license data" do
+      @registrant_1 = Registrant.new('Bruce', 18, true )
+
+      expected = {
+        :written => false,
+        :licensed => false,
+        :renewed => false
+      }
+      expect(@registrant_1.license_data).to eq(expected)
+    end
   end
