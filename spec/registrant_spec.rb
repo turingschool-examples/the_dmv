@@ -35,4 +35,27 @@ RSpec.describe Registrant do
     end
   end
 
+  describe '#written?' do
+    it 'can check written test status on the license_data hash' do
+      expect(@registrant_1.written?).to be false
+      expect(@registrant_2.written?).to be false
+    end
+  end
+
+  describe '#license?' do
+    it 'can check license status on the license_data hash' do
+      expect(@registrant_1.license?).to be false
+      expect(@registrant_2.license?).to be false
+    end
+  end
+
+  describe '#renewed?' do
+    it 'can check renewal status on the license_data hash' do
+      expect(@registrant_1.renewed?).to be false
+      expect(@registrant_2.renewed?).to be false
+    end
+  end
+
+
+
 end
