@@ -121,7 +121,7 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data[:written]).to eq true
     end
 
-    it 'cannot be administered if someone already has a license' do 
+    it 'cannot be administered if someone already did it' do 
       @facility_1.administer_written_test(@registrant_1)
 
       expect(@facility_1.administer_written_test(@registrant_1)).to be false
@@ -143,19 +143,44 @@ RSpec.describe Facility do
   
   describe '#administer_road_test' do 
     it 'returns true after service is added to facility' do 
+      expect(@facility_2.services).to eq([])
+
+      expect(@facility_2.administer_written_test(@registrant_1)).to be false
+
+      @facility_2.add_service('Road Test')
+
+      expect(@facility_2.administer_written_test(@registrant_1)).to be true
+    end
+
+    xit 'may only be administered if :written => true' do 
+      expect(@facility_1.administer_road_test(@registrant_1)).to be false
       
-    end
+      @facility_1.administer_written_test(@registrant_1)
 
-    it 'may only be administered if :written => true' do 
-
-    end
-
-    it 'may only be administered if registrant is 16 or older' do
-
+      expect(@facility_1.administer_road_test(@registrant_1)).to be true
     end
       
-    it 'updates registrant license data to :license => true' do 
+    xit 'updates registrant license data to :license => true' do 
+      @facility_1.administer_written_test(@registrant_1)
 
+      expect(@registrant_1.license_data[:license]).to be false
+
+      @facility_1.administer_road_test(@registrant_1)
+      expect(@registrant_1.license_data[:license]).to be true
+    end
+
+    xit 'may only be administered if registrant is 16 or older' do
+      @registrant_4.license_data[:written] = true
+
+      expect(@facility_1.administer_road_test(@registrant_4)).to be false
+      expect(@registrant_4.license_data[:license]).to be false
+    end
+
+    xit 'cannot be administered if someone has already done it' do 
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+
+      expect(@facility_1.administer_road_test(@registrant_1)).to be false
     end
   end
 
