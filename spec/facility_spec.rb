@@ -9,18 +9,19 @@ RSpec.describe Facility do
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
 
   end
+  
   describe '#initialize' do
     it 'can initialize' do
-      expect(@facility).to be_an_instance_of(Facility)
-      expect(@facility.name).to eq('Albany DMV Office')
-      expect(@facility.address).to eq('2242 Santiam Hwy SE Albany OR 97321')
-      expect(@facility.phone).to eq('541-967-2014')
-      expect(@facility.services).to eq([])
+      expect(@facility_1).to be_an_instance_of(Facility)
+      expect(@facility_1.name).to eq('Albany DMV Office')
+      expect(@facility_1.address).to eq('2242 Santiam Hwy SE Albany OR 97321')
+      expect(@facility_1.phone).to eq('541-967-2014')
+      expect(@facility_1.services).to eq([])
     end
   end
 
   describe '#add service' do
-    xit 'can add available services' do
+    it 'can add available services' do
       expect(@facility.services).to eq([])
       @facility.add_service('New Drivers License')
       @facility.add_service('Renew Drivers License')
