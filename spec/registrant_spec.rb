@@ -8,13 +8,12 @@ RSpec.describe Registrant do
 
       expect(registrant_1).to be_a(Registrant)
       expect(registrant_2).to be_a(Registrant)
-      require 'pry'; binding.pry
     end
 
     it 'can call name, age, and permit' do
       registrant_1 = Registrant.new('Bruce', 18, true)
       registrant_2 = Registrant.new('Penny', 15)
-
+      # require 'pry'; binding.pry
       expect(registrant_1.name).to eq('Bruce')
       expect(registrant_1.age).to eq(18)
       expect(registrant_1.permit?).to eq(true)
@@ -27,7 +26,7 @@ RSpec.describe Registrant do
 
       registrant_2.earn_permit
 
-      expect(registrant_2.permit?).to eq(tru)
+      expect(registrant_2.permit?).to eq(true)
     end
   end
 
