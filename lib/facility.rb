@@ -34,43 +34,38 @@ class Facility
     end
   end
 
-
   def administer_written_test(registrant)
-  #   if facility offers 'Written Test' service line 83
-  #     &&
-    if registrant.permit? && registrant.age >= 16
-      registrant.license_data[:written] = true
-    else 
+    if services.include?('Written Test')
+      if registrant.permit? && registrant.age >= 16
+        registrant.license_data[:written] = true
+      else 
+        false
+      end
+    else
       false
     end
   end
+
+
 
   def administer_road_test(registrant)
-    if registrant.license_data[:written] == false
+    if services.include?('Road Test') && registrant.license_data[:written] == true
+      registrant.license_data[:license] = true
+    else
       false
-
     end
-
   end
 
 
 
-  # Administer a road test:
 
-#   A road test can only be administered to registrants who have passed the written test
-
-#   For simplicity’s sake, Registrants who qualify for the road test automatically earn a license
-
-
-end #final
-
-
-
-
-
-
-
-
+  def renew_drivers_license(registrant)
+    if services.include?('Renew License') && registrant.license_data[:license] == true
+      registrant.license_data[:renewed] = true
+    else
+      false
+    end
+  end
 
 
 # Renew a driver’s license:
@@ -79,3 +74,7 @@ end #final
 
 
 # NOTE: A facility must offer a service in order to perform it. Just because the DMV allows facilities to perform certain services, does not mean that every facility provides every service.
+
+
+
+end #final
