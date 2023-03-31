@@ -20,10 +20,10 @@ RSpec.describe Registrant do
       expect(@registrant_2.permit?).to be false
     end
   end
-  describe '#license_data' do
+  describe '#read_license_data' do
     it 'has default false has key attributes written, license, renewed' do 
-      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@registrant_1.read_license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@registrant_2.read_license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
 
@@ -34,6 +34,16 @@ RSpec.describe Registrant do
       @registrant_2.earn_permit
 
       expect(@registrant_2.permit?).to be true
+    end
+  end
+
+  describe '#written_pass' do 
+    it 'updates license data after written test' do 
+      expect(@registrant_1.read_license_data[:written]).to be false
+      
+      @registrant_1.written_pass
+
+      expect(@registrant_1.read_license_data[:written]).to be true
     end
   end
 end
