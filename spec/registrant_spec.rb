@@ -1,5 +1,4 @@
-require "rspec"
-require "./lib/registrant"
+require 'spec_helper'
 
 describe Registrant do
   it "can add a registrant" do
