@@ -115,13 +115,13 @@ RSpec.describe Facility do
       expect(@facility_2.administer_written_test(@registrant_1)).to be true
     end
 
-    xit 'updates license data to :written => true' do
+    it 'updates license data to :written => true' do
       @facility_1.administer_written_test(@registrant_1)
 
       expect(@registrant_1.license_data[:written]).to eq true
     end
 
-    xit 'cannot be administered if someone already has a license' do 
+    it 'cannot be administered if someone already has a license' do 
       @facility_1.administer_written_test(@registrant_1)
 
       expect(@facility_1.administer_written_test(@registrant_1)).to be false
