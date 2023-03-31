@@ -6,18 +6,15 @@ class Registrant
     @name = name
     @age = age
     @permit = permit
-  end
-
-  def permit?   
-    @permit
-  end
-
-  def license_data
-    {
+    @license_data = {
       :written => false,
       :license => false,
       :renewed => false,
     }
+  end
+
+  def permit?   
+    @permit
   end
 
   def earn_permit
