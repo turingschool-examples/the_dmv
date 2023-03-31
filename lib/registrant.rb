@@ -16,6 +16,7 @@ class Registrant
   end
 
   def earn_permit
-    return true if @permit = true
+    # permit? ? true : nil
+    @permit = true
   end
 end
