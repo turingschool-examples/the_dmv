@@ -31,4 +31,8 @@ class Registrant
     @license_data[:written] = true
   end
 
+  def road_pass
+    @license_data[:license] = true
+  end
+
 end

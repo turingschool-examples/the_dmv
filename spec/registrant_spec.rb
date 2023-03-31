@@ -46,4 +46,14 @@ RSpec.describe Registrant do
       expect(@registrant_1.read_license_data[:written]).to be true
     end
   end
+
+  describe '#road_pass' do 
+    it 'updates license data after written test' do 
+      expect(@registrant_1.read_license_data[:license]).to be false
+      
+      @registrant_1.road_pass
+
+      expect(@registrant_1.read_license_data[:license]).to be true
+    end
+  end
 end
