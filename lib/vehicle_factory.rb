@@ -1,13 +1,13 @@
 require './lib/vehicle'
 
 class VehicleFactory
-  def create_vehicles(vehicle_data)
-    vehicle_data.map do |data|
+  def create_vehicles(data)
+    data.map do |car|
       Vehicle.new({
-        vin: data[:vin_1_10],
-        year: data[:model_year],
-        make: data[:make],
-        model: data[:model],
+        vin: car[:vin_1_10],
+        year: car[:model_year],
+        make: car[:make],
+        model: car[:model],
         engine: :ev
       })
     end
