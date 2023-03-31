@@ -21,4 +21,10 @@ require 'spec_helper'
 
       expect(@registrant_1.age).to eq(18)
     end
+
+    it "can check permit status" do
+      @registrant_1 = Registrant.new('Bruce', 18, true )
+
+      expect(@registrant_1.permit?).to eq(true)
+    end
   end
