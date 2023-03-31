@@ -21,10 +21,17 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    @registered_vehicles << vehicle
-    vehicle.registration_date = Date.today
-    collect_fees(vehicle)
-    @registered_vehicles
+    if vehicle.registration_date == nil ||
+      vehicle.registration_date.month >= Date.today.month-1 &&
+      vehicle.registration_date.year < Date.today.year
+      
+      @registered_vehicles << vehicle
+      vehicle.set_registration_date
+      collect_fees(vehicle)
+      @registered_vehicles
+    else
+      nil
+    end
   end
 
   def collect_fees(vehicle)

@@ -68,12 +68,12 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(325)
     end
 
-    xit 'cannot register vehicle once registered elsewhere' do 
+    it 'cannot register vehicle once registered elsewhere' do 
       @facility_1.register_vehicle(@cruz)
 
-      expect(@facility_2.register_vehicle).to be nil
+      expect(@facility_2.register_vehicle(@cruz)).to be nil
       
-      @facility_2.register_vehicle
+      @facility_2.register_vehicle(@cruz)
 
       expect(@facility_2.registered_vehicles).to eq([])
       
