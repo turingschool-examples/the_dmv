@@ -2917,7 +2917,7 @@ Naming/VariableNumber:
   Enabled: true
   VersionAdded: '0.50'
   VersionChanged: '1.4'
-  EnforcedStyle: normalcase
+  EnforcedStyle: snake_case
   SupportedStyles:
     - snake_case
     - normalcase
@@ -4650,7 +4650,7 @@ Style/OptionalArguments:
 Style/OptionalBooleanParameter:
   Description: 'Use keyword arguments when defining method with boolean argument.'
   StyleGuide: '#boolean-keyword-arguments'
-  Enabled: true
+  Enabled: false
   Safe: false
   VersionAdded: '0.89'
   AllowedMethods:

@@ -23,8 +23,8 @@ RSpec.describe Registrant do
     end
 
     it "has license data" do
-      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@registrant_1.license_data).to eq({ written: false, license: false, renewed: false })
+      expect(@registrant_2.license_data).to eq({ written: false, license: false, renewed: false })
     end
   end
 
