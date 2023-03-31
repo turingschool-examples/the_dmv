@@ -20,14 +20,15 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    if @services.exclude?(service)
-      nil
-    end
+    if self.services.include?("Vehicle Registration")
     @registered_vehicles << vehicle
     change_registration_date(vehicle)
     make_plate_type(vehicle)
     collect_fees(vehicle)
     @registered_vehicles
+    else
+      return nil
+    end
   end
 
   def change_registration_date(vehicle)
