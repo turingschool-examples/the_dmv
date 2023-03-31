@@ -19,24 +19,24 @@ require 'spec_helper'
     end
 
     it "can have an age" do
-      @registrant_1 = Registrant.new('Bruce', 18, true )
-      @registrant_2 = Registrant.new('Penny', 15 )
+      @registrant_1
+      @registrant_2
 
       expect(@registrant_1.age).to eq(18)
       expect(@registrant_2.age).to eq(15)
     end
 
     it "can check permit status" do
-      @registrant_1 = Registrant.new('Bruce', 18, true )
-      @registrant_2 = Registrant.new('Penny', 15 )
+      @registrant_1
+      @registrant_2
 
       expect(@registrant_1.permit?).to eq(true)
       expect(@registrant_2.permit?).to eq(false)
     end
 
     it "can check license data" do
-      @registrant_1 = Registrant.new('Bruce', 18, true )
-      @registrant_2 = Registrant.new('Penny', 15 )
+      @registrant_1
+      @registrant_2
 
       expected = {
         :written => false,
@@ -48,7 +48,7 @@ require 'spec_helper'
     end
 
     it "can earn a permit" do
-      @registrant_2 = Registrant.new('Penny', 15 )
+      @registrant_2
 
       @registrant_2.earn_permit
 
