@@ -11,7 +11,7 @@ RSpec.describe Facility do
     @facility_1.add_service('Vehicle Registration')
   end
   describe '#initialize' do
-    it 'can initialize' do
+    it 'it exists and has attributes' do
       expect(@facility).to be_an_instance_of(Facility)
       expect(@facility.name).to eq('Albany DMV Office')
       expect(@facility.address).to eq('2242 Santiam Hwy SE Albany OR 97321')

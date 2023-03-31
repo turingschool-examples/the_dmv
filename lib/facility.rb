@@ -35,6 +35,7 @@ class Facility
 
   def collect_fees(vehicle)
     total_fee = 0
+    vehicle.set_plate_type
     if vehicle.plate_type == :antique
       total_fee += 25
     elsif vehicle.plate_type == :ev 
