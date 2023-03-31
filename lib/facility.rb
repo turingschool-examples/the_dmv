@@ -19,10 +19,20 @@ class Facility
     @services << service
   end
 
+  def determine_plate_type(vehicle)
+    if vehicle.electric_vehicle?
+      :ev
+    elsif vehicle.antique?
+      :antique
+    else
+      :regular
+    end
+  end
+
   def determine_fees(vehicle)
-    if vehicle.plate_type == :regular
+    if determine_plate_type(vehicle) == :regular
       100
-    elsif vehicle.plate_type == :ev
+    elsif determine_plate_type(vehicle) == :ev
       200
     else
       25
@@ -33,6 +43,7 @@ class Facility
     return unless @services.include?("Vehicle Registration")
 
     vehicle.registration_date = Date.new
+    vehicle.plate_type = determine_plate_type(vehicle)
     @collected_fees += determine_fees(vehicle)
     @registered_vehicles << vehicle
   end
