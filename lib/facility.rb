@@ -52,8 +52,6 @@ class Facility
     else
       false
     end
-    #A road test can only be administered to registrants who have passed the written test
-  # For simplicity’s sake, Registrants who qualify for the road test automatically earn a license
   end
 end
 
