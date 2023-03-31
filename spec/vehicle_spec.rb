@@ -46,5 +46,10 @@ RSpec.describe Vehicle do
     it 'defaults to nil' do 
       expect(@cruz.registration_date).to be nil
     end
+    it 'has a #set_registration_date method' do
+      @cruz.set_registration_date
+
+      expect(@cruz.registration_date).to eq(Date.today)
+    end
   end
 end

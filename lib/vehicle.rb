@@ -35,4 +35,8 @@ class Vehicle
       plate_type = :regular
     end
   end
+
+  def set_registration_date
+    @registration_date = Date.today
+  end
 end

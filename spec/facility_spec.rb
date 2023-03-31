@@ -53,7 +53,7 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(100)
     end
 
-    xit 'assigns a reg date' do 
+    it 'assigns a reg date' do 
       @facility_1.register_vehicle(@cruz)
 
       expect(@cruz.registration_date).to eq(Date.today)
