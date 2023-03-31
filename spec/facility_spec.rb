@@ -7,6 +7,9 @@ RSpec.describe Facility do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    @registrant_1 = Registrant.new('Bruce', 18, true )
+    @registrant_2 = Registrant.new('Penny', 16 )
+    @registrant_3 = Registrant.new('Tucker', 15 )
   end
   describe '#initialize' do
     it 'can initialize' do
@@ -71,6 +74,32 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(300)
       @facility_1.collect_registration_fee(@camaro)
       expect(@facility_1.collected_fees).to eq(325)
+    end
+  end
+
+  describe '#administer_written_test' do
+    it 'can administer written test' do
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@registrant_1.permit?).to be true
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq("Service not provided at this facility")
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      @facility_1.add_service("Written Test")
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+      
+      expect(@registrant_2.permit?).to be false
+      expect(@registrant_2.age).to eq(16)
+      expect(@facility_1.administer_written_test(@registrant_2)).to eq("Not qualified for written test")
+      @registrant_2.earn_permit
+      @facility_1.administer_written_test(@registrant_2)
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+
+      expect(@registrant_3.permit?).to be false
+      expect(@registrant_3.age).to eq(15)
+      expect(@facility_1.administer_written_test(@registrant_3)).to eq("Not qualified for written test")
+      @registrant_3.earn_permit
+      expect(@facility_1.administer_written_test(@registrant_3)).to eq("Not qualified for written test")
+      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
 
