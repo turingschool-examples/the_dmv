@@ -46,8 +46,3 @@ end
 
 
 
-
-# pry(main)> registrant_2.earn_permit
-
-# pry(main)> registrant_2.permit?
-# #=> true
