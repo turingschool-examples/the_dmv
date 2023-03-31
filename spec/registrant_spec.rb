@@ -1,4 +1,4 @@
-require './lib/registrant'
+require 'spec_helper'
 
 RSpec.describe Registrant do
   it 'creates a registrant with the given name, age, and permit status' do
