@@ -12,15 +12,55 @@ RSpec.describe Facility do
   end
 
   describe "#registered vehicles" do
-    it "can register/store registered vehicles" do
-      expect(cruz.registration_date).to eq(nil)
-      expect(facility_1.registered_vehicles).to eq([])
-      expect(facility_1.collected_fees).to eq(0)
-
-      expect(facility_1.register_vehicle(cruz)).to eq([cruz])
-      expect(cruz.registration_date).to be_an_instance_of(Date)
+    it "initializes with empty registration info" do
+      expect(@cruz.registration_date).to eq(nil)
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_1.collected_fees).to eq(0)
     end
 
-    it 
+    it "can register and store registration information" do
+      expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
+      expect(@cruz.registration_date).to be_an_instance_of(Date)
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+      expect(@facility_1.collected_fees).to eq(100)
+    end
+
+    it "can register antique vehicles" do
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.register_vehicle(@camaro)).to eq([@cruz, @camaro])
+      expect(@camaro.registration_date).to be_an_instance_of(Date)
+      expect(@camaro.plate_type).to eq(:antique)
+    end
+
+    it "can register EV vehicles" do
+      expect(@facility_1.register_vehicle(@bolt))
+      expect(@bolt.registration_date).to be_an_instance_of(Date)
+      expect(@bolt.plate_type).to eq(:ev)
+    end
+
+    it "stores all registered vehicles" do
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+    end
+
+    it "collects all fees" do
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+
+      expect(@facility_1.collected_fees).to eq(325)
+    end
+
+    it "knows facility 2 can't register vehicles" do
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.services).to eq([])
+      expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
+    end
   end
 end
