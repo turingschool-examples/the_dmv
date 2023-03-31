@@ -18,22 +18,23 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    collect_registration_fee(vehicle)
-    vehicle.set_plate_type
-    @registered_vehicles << vehicle
+    if services.include?("Vehicle Registration")
+      collect_registration_fee(vehicle)
+      vehicle.set_plate_type
+      vehicle.set_registration_date
+      @registered_vehicles << vehicle
+    else
+      "Service not provided at this facility"
+    end
   end
 
   def collect_registration_fee(vehicle)
-    if services.include?("Vehicle Registration")
-      if vehicle.antique?
-        @collected_fees += 25
-      elsif vehicle.electric_vehicle?
-        @collected_fees += 200
-      else
-        @collected_fees += 100
-      end
+    if vehicle.antique?
+      @collected_fees += 25
+    elsif vehicle.electric_vehicle?
+      @collected_fees += 200
     else
-      "Service not provided at this facility"
+      @collected_fees += 100
     end
   end
 
