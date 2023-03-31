@@ -38,7 +38,13 @@ RSpec.describe Facility do
       expect(facility_1.register_vehicle(cruz)).to eq([cruz])
       expect(cruz.registration_date).to eq(Date.today)
     end
+    
+    it 'can collect fees' do 
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      facility_1.add_service('Vehicle Registration')
 
-  
+      expect(cruz.collected_fees).to eq(100)
+    end
   end
 end
