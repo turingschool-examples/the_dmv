@@ -1,5 +1,5 @@
 class Facility
-  attr_reader :name, :address, :phone, :services
+  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
   def initialize(facility_info)
     @name = facility_info[:name]
@@ -7,7 +7,6 @@ class Facility
     @phone = facility_info[:phone]
     @services = []
     @registered_vehicles = []
-    @registration_date = "#<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>"
     @collected_fees = 0
   end
 
@@ -15,13 +14,9 @@ class Facility
     @services << service
   end
 
-  def registered_vehicles
-    @registered_vehicles
-  end
-
   def register_vehicle(vehicle)
     @registered_vehicles << vehicle
-    @registration_date = "#<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>"
+    vehicle.registration_date = Date.today
     if 
       vehicle.year <= 1998
       @collected_fees += 25
@@ -36,38 +31,27 @@ class Facility
 
 
 
-  # def registration_date
-  #   "#<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>"
-  #   # if 
-  #     # nil
-  #   # else
-  #     # "#<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>"
-  #   # end
 
-  # end
-
-  def collected_fees
-    @collected_fees
+  def plate_type
+    if vehicle.antique? == true
+      plate_type = :antique
+    elsif vehicle_details[:engine] == :ev
+      plate_type = :ev
+    else
+      plate_type = :regular
+    end
   end
+  
 
-  # def plate_type
-  #   plate_type = @registered_vehicles.each do |vehicle|
-  #   if vehicle.antique?
-  #     :antique
-  #   elsif vehicle.electric_vehicle?
-  #     :ev
-  #   else
-  #     :regular
-  #   end
-  # end
-  # plate_type
-  # end
 
-  # def administer_written_test
+  # def administer_written_test(registrant)
   #   if facility offers 'Written Test' service
-  #     and
-  #   if registrant.permit? == true and @age >= 16
+  #     &&
+  #   if registrant.permit? == true && @age >= 16
   #   end
+  # change registrant.license_data[:written]=>true
+  # end
+  # registrant.license_data
   # end
 
 # Administer a written test:

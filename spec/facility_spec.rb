@@ -39,7 +39,7 @@ RSpec.describe Facility do
       expect(facility_1.collected_fees).to eq(0)
       
       expect(facility_1.register_vehicle(cruz)).to eq([cruz])
-      # expect(cruz.registration_date).to eq("#<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>")
+      expect(cruz.registration_date).to eq(Date.today)
       
       # expect(cruz.plate_type).to eq(:regular)
       
@@ -47,14 +47,14 @@ RSpec.describe Facility do
       expect(facility_1.registered_vehicles).to eq([cruz])
       expect(facility_1.collected_fees).to eq(100)
       expect(facility_1.register_vehicle(camaro)).to eq([cruz, camaro])
-      # expect(camaro.registration_date).to eq(#<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>)
+      expect(camaro.registration_date).to eq(Date.today)
       
       # expect(camaro.plate_type).to eq(:antique)
       expect(facility_1.register_vehicle(bolt)).to eq([cruz, camaro, bolt])
-      # expect(bolt.registration_date).to eq(#<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>)
+      expect(bolt.registration_date).to eq(Date.today)
       # expect(bolt.plate_type).to eq(:ev)
       expect(facility_1.registered_vehicles).to eq([cruz, camaro, bolt])      
-      # expect(facility_1.collected_fees).to eq(325)  
+      expect(facility_1.collected_fees).to eq(325)  
       expect(facility_2.registered_vehicles).to eq([])
       expect(facility_2.services).to eq([])  
       # expect(facility_2.register_vehicle(bolt)).to eq(nil)
@@ -121,17 +121,6 @@ describe 'get a drivers license' do
 
   end #keep
 end #keep
-
-
-
-
-
-
- 
-
-
-
-
 
 
 
