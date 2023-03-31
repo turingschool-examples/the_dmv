@@ -33,4 +33,16 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe '#plate_type' do
+    it 'returns the vehicle plate type' do 
+
+    end
+  end
+
+  describe '#registration_date' do 
+    it 'defaults to nil' do 
+      
+    end
+  end
 end
