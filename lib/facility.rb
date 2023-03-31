@@ -20,7 +20,7 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    if @facility.services.exclude?(service)
+    if @services.exclude?(service)
       nil
     end
     @registered_vehicles << vehicle
