@@ -6,6 +6,7 @@ class Vehicle
               :make,
               :model,
               :engine
+              # :registration_date
 
   def initialize(vehicle_details)
     @vin = vehicle_details[:vin]
@@ -13,7 +14,7 @@ class Vehicle
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
-    
+    # @registration_date = nil 
   end
 
   def antique?
@@ -25,6 +26,7 @@ class Vehicle
   end
 
   def registration_date
-    nil
+    @registration_date
   end
+
 end
