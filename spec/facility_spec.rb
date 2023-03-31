@@ -9,6 +9,13 @@ RSpec.describe Facility do
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
     @facility_1.add_service('Vehicle Registration')
+    @facility_1.add_service('Written Test')
+    @facility_1.add_service('Road Test')
+    @facility_1.add_service('Renew License')
+    @registrant_1 = Registrant.new('Bruce', 18, true )
+    @registrant_2 = Registrant.new('Penny', 16 )
+    @registrant_3 = Registrant.new('Tucker', 15 )
+    @registrant_4 = Registrant.new('Fakeid', 14, true)
   end
   describe '#initialize' do
     it 'it exists and has attributes' do
@@ -48,12 +55,10 @@ RSpec.describe Facility do
 
       # return value is registered vehicles array
       expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
-
       expect(@facility_1.registered_vehicles).to eq([@cruz])
-      expect(@facility_1.collected_fees).to eq(100)
     end
 
-    it 'assigns a reg date' do 
+    it 'assigns a registration date' do 
       @facility_1.register_vehicle(@cruz)
 
       expect(@cruz.registration_date).to eq(Date.today)
@@ -63,12 +68,12 @@ RSpec.describe Facility do
       expect(@facility_1.collect_fees(@cruz)).to eq(100)
       expect(@facility_1.collect_fees(@bolt)).to eq(200)
       expect(@facility_1.collect_fees(@camaro)).to eq(25)
+     
       # This method will add to total collected fees.
-
       expect(@facility_1.collected_fees).to eq(325)
     end
 
-    it 'cannot register vehicle once registered elsewhere' do 
+    it 'cannot register a vehicle once registered elsewhere' do 
       @facility_1.register_vehicle(@cruz)
 
       expect(@facility_2.register_vehicle(@cruz)).to be nil
@@ -81,7 +86,6 @@ RSpec.describe Facility do
 
     it 'cannot register a vehicle until the service is added' do
       expect(@facility_2.services).to eq([])
-
       expect(@facility_2.register_vehicle(@bolt)).to be nil
 
       @facility_2.add_service('Vehicle Registration')
@@ -97,6 +101,71 @@ RSpec.describe Facility do
 
       expect(@facility_1.collected_fees).to eq(325)
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+    end
+  end
+
+  describe '#administer_written_test' do
+    it 'returns true after service is added to facility' do
+      expect(@facility_2.services).to eq([])
+
+      expect(@facility_2.administer_written_test(@registrant_1)).to be false
+
+      @facility_2.add_service('Written Test')
+
+      expect(@facility_2.administer_written_test(@registrant_1)).to be true
+    end
+
+    xit 'updates license data to :written => true' do
+      @facility_1.administer_written_test(@registrant_1)
+
+      expect(@registrant_1.license_data[:written]).to eq true
+    end
+
+    xit 'cannot be administered if someone already has a license' do 
+      @facility_1.administer_written_test(@registrant_1)
+
+      expect(@facility_1.administer_written_test(@registrant_1)).to be false
+    end
+
+    xit 'cannot be administered if registrant does not have a permit' do
+      expect(@registrant_2.permit?).to be false
+
+      expect(@facility_1.administer_written_test(@registrant_2)).to be false
+      expect(@registrant_2.license_data[:written]).to eq false
+    end
+
+    xit 'cannot be administered if registrant is under 16' do
+      expect(@facility_1.administer_written_test(@registrant_4)).to be false
+
+      expect(@registrant.license_data[:written]).to be false
+    end
+  end
+  
+  describe '#administer_road_test' do 
+    it 'returns true after service is added to facility' do 
+      
+    end
+
+    it 'may only be administered if :written => true' do 
+
+    end
+
+    it 'may only be administered if registrant is 16 or older' do
+
+    end
+      
+    it 'updates registrant license data to :license => true' do 
+
+    end
+  end
+
+  describe '#renew_drivers_license' do 
+    it 'returns true after service is added to facility' do 
+
+    end
+     
+    it 'may be executed if :written and :license => true' do 
+
     end
   end
 end
