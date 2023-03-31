@@ -127,17 +127,17 @@ RSpec.describe Facility do
       expect(@facility_1.administer_written_test(@registrant_1)).to be false
     end
 
-    xit 'cannot be administered if registrant does not have a permit' do
+    it 'cannot be administered if registrant does not have a permit' do
       expect(@registrant_2.permit?).to be false
 
       expect(@facility_1.administer_written_test(@registrant_2)).to be false
       expect(@registrant_2.license_data[:written]).to eq false
     end
 
-    xit 'cannot be administered if registrant is under 16' do
+    it 'cannot be administered if registrant is under 16' do
+      expect(@registrant_4.age).to eq(14)
       expect(@facility_1.administer_written_test(@registrant_4)).to be false
-
-      expect(@registrant.license_data[:written]).to be false
+      expect(@registrant_4.license_data[:written]).to be false
     end
   end
   
