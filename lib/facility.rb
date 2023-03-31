@@ -43,6 +43,17 @@ class Facility
       false
     end
   end
+
+  def administer_road_test(registrant)
+    if administer_written_test(registrant) == true
+      registrant.license_data[:license] = true
+      true
+    else
+      false
+    end
+    #A road test can only be administered to registrants who have passed the written test
+  # For simplicity’s sake, Registrants who qualify for the road test automatically earn a license
+  end
 end
 
 
