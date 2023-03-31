@@ -53,6 +53,8 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    # if registrant
+    if registrant.permit == true && registrant.age >= 16
+      registrant.license_data[:written] = true
+    end
   end
 end
