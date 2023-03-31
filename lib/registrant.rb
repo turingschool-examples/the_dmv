@@ -9,9 +9,9 @@ class Registrant
     @age          = age
     @permit       = permit
     @license_data = {
-                    :written=>false,
-                    :licensed=>false,
-                    :renewed=>false
+                    written: false,
+                    licensed: false,
+                    renewed: false
                     }
   end
 
