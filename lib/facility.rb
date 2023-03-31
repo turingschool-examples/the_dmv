@@ -25,7 +25,16 @@ class Facility
     @registered_vehicles
   end
 
-  # def collect_fees(vehicle)
-  #   if 
-  # end
+  def collect_fees(vehicle)
+    total_fee = 0
+    if vehicle.plate_type == :antique
+      total_fee += 25
+    elsif vehicle.plate_type == :ev 
+      total_fee += 200
+    else
+      total_fee += 100
+    end
+    @collected_fees += total_fee
+    total_fee
+  end
 end

@@ -43,7 +43,7 @@ RSpec.describe Facility do
   end
 
   describe '#register_vehicle' do 
-    xit 'adds vehicle to registered vehicles' do 
+    it 'adds vehicle to registered vehicles' do 
       expect(@cruz.registration_date).to eq(nil)
 
       # return value is registered vehicles array
@@ -59,11 +59,12 @@ RSpec.describe Facility do
       expect(@cruz.registration_date).to eq(Date.today)
     end
 
-    xit 'has a #collect_fees helper method' do 
+    it 'has a #collect_fees helper method' do 
       expect(@facility_1.collect_fees(@cruz)).to eq(100)
       expect(@facility_1.collect_fees(@bolt)).to eq(200)
       expect(@facility_1.collect_fees(@camaro)).to eq(25)
       # This method will add to total collected fees.
+
       expect(@facility_1.collected_fees).to eq(325)
     end
 
