@@ -46,4 +46,12 @@ require 'spec_helper'
       expect(@registrant_1.license_data).to eq(expected)
       expect(@registrant_2.license_data).to eq(expected)
     end
+
+    it "can earn a permit" do
+      @registrant_2 = Registrant.new('Penny', 15 )
+
+      @registrant_2.earn_permit
+
+      expect(@registrant_2.permit?).to eq(true)
+    end
   end
