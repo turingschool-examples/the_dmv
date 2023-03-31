@@ -142,17 +142,17 @@ RSpec.describe Facility do
   end
   
   describe '#administer_road_test' do 
-    xit 'returns true after service is added to facility' do 
+    it 'returns true after service is added to facility' do 
+      @facility_1.administer_written_test(@registrant_1)
       expect(@facility_2.services).to eq([])
-
-      expect(@facility_2.administer_written_test(@registrant_1)).to be false
-
+      expect(@facility_2.administer_road_test(@registrant_1)).to be false
+      
       @facility_2.add_service('Road Test')
 
-      expect(@facility_2.administer_written_test(@registrant_1)).to be true
+      expect(@facility_2.administer_road_test(@registrant_1)).to be true
     end
 
-    xit 'may only be administered if :written => true' do 
+    it 'may only be administered if :written => true' do 
       expect(@facility_1.administer_road_test(@registrant_1)).to be false
       
       @facility_1.administer_written_test(@registrant_1)
@@ -160,23 +160,23 @@ RSpec.describe Facility do
       expect(@facility_1.administer_road_test(@registrant_1)).to be true
     end
       
-    xit 'updates registrant license data to :license => true' do 
+    it 'updates registrant license data to :license => true' do 
       @facility_1.administer_written_test(@registrant_1)
 
-      expect(@registrant_1.license_data[:license]).to be false
+      expect(@registrant_1.read_license_data[:license]).to be false
 
       @facility_1.administer_road_test(@registrant_1)
-      expect(@registrant_1.license_data[:license]).to be true
+      expect(@registrant_1.read_license_data[:license]).to be true
     end
 
-    xit 'may only be administered if registrant is 16 or older' do
-      @registrant_4.license_data[:written] = true
+    it 'may only be administered if registrant is 16 or older' do
+      @registrant_4.written_pass
 
       expect(@facility_1.administer_road_test(@registrant_4)).to be false
-      expect(@registrant_4.license_data[:license]).to be false
+      expect(@registrant_4.read_license_data[:license]).to be false
     end
 
-    xit 'cannot be administered if someone has already done it' do 
+    it 'cannot be administered if someone has already done it' do 
       @facility_1.administer_written_test(@registrant_1)
       @facility_1.administer_road_test(@registrant_1)
 
