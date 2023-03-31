@@ -21,33 +21,35 @@ class Facility
 
   def register_vehicle(vehicle)
     @registered_vehicles << vehicle
-    # change_registration_date(vehicle)
+    change_registration_date(vehicle)
+    establish_plate_type(vehicle)
     # collect_fees(vehicle)
-    # establish_plate_type(vehicle)
+    registered_vehicles
   end
 
   def change_registration_date(vehicle)
     vehicle.registration_date = Date.today
   end
 
+  def establish_plate_type(vehicle)
+    if vehicle.antique?
+      vehicle.plate_type = :antique
+    elsif vehicle.electric_vehicle?
+      vehicle.plate_type = :ev
+    else
+      vehicle.plate_type = :regular
+    end
+  end
+
   # def collect_fees(vehicle)
   #   if vehicle.antique?
   #     @collected_fees += 25
-  #   elsif vehicle.ev?
+  #   elsif vehicle.electric_vehicle?
   #     @collected_fees += 200
   #   else
   #     @collect_fees += 100
   #   end
   # end
 
-  # def establish_plate_type(vehicle)
-  #   if vehicle.antique?
-  #     vehicle.plate_type = :antique
-  #   elsif vehicle.ev?
-  #     vehicle.plate_type = :ev
-  #   else
-  #     vehicle.plate_type = :regular
-  #   end
-  # end
 
 end
