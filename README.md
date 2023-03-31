@@ -5,7 +5,8 @@
 - Describe the steps you took to dig in to this code base. What was your process? If you don’t feel you had a process, define one that you might like to try next time
 
   - I took several steps to get this far in fixing the dmv, vehicle and facility files. The first thing I did was identify which problems there were by using `rspec` in the main folder - that showed me all of the failures that existed in each of the files. From there, I tried to identify which files were dependent on which files before it and decided to start with the `facility`. I was  first confounded by trying to set up a new class with hash attributes, which was something I had never done before, so my instinct was to set them up using individual attributes. From there, my process was to try to debug and let the error/failure messages guide me. My first clue was that initializing a new facility was only expecting 1 argument, but I was giving it multiple arguments. After quickly googling I found that I wanted to setup the initialize method with a hash, and then use a special syntax to access those details in the attributes (I've quickly attempted to recreate a similar Vehicle class below to see if the different syntax stuck in memory):
-  ```
+
+  ```ruby
   class Vehicle
     attr_reader :year,
                 :make,
