@@ -23,7 +23,9 @@ class FacilityCreator
       end
     elsif json == DmvDataService.new.mo_dmv_office_locations
       json.each do |facility|
-        
+        address = "#{facility[:"address1"]} #{facility[:"city"]} #{facility[:"state"]} #{facility[:"zipcode"]}"
+        new_facility = Facility.new({name: facility[:"name"], address: address, phone: facility[:"phone"]})
+        @facilities << new_facility
       end
     end
   end

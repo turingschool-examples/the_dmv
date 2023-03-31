@@ -25,7 +25,6 @@ RSpec.describe FacilityCreator do
       mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
 
       creator.create_facilities(mo_dmv_office_locations)
-      require 'pry'; binding.pry
       expect(creator.facilities).to be_an_instance_of(Array)
       expect(creator.facilities.first).to be_an_instance_of(Facility)
     end
