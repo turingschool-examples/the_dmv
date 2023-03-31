@@ -6,9 +6,10 @@ RSpec.describe VehicleFactory do
       factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
 
-      vehicle_array = factory.create_vehicles(wa_ev_registrations)
-      expect(vehicle_array).to be_an_instance_of(Array)
-      expect(vehicle_array.first).to be_an_instance_of(Vehicle)
+      factory.create_vehicles(wa_ev_registrations)
+      
+      expect(factory.vehicles).to be_an_instance_of(Array)
+      expect(factory.vehicles.first).to be_an_instance_of(Vehicle)
     end
   end
 end
