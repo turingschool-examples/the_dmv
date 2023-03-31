@@ -31,10 +31,10 @@ class Vehicle
   end
 
   def plate_type!
-    if regular?
-      @plate_type = :regular
-    elsif antique?
+    if antique?
       @plate_type = :antique
+    elsif regular?
+      @plate_type = :regular
     else
       @plate_type = :ev
     end
