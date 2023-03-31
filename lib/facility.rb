@@ -16,8 +16,8 @@ class Facility
     @services << service
   end
 
-  def register_vehicle(vehicle)
-    if @services.include?("Vehicle Registration")
+  def register_vehicle(vehicle, service="Vehicle Registration")
+    if self.performs_service?(service)
       vehicle.registration_date = Date.today
       @registered_vehicles << vehicle
       if vehicle.antique?
@@ -34,5 +34,46 @@ class Facility
       return nil
     end
     @registered_vehicles
+  end
+
+  def administer_written_test(registrant, service="Written Test")
+    if self.performs_service?(service)
+      if registrant.age >= 16 && registrant.permit?
+        registrant.license_data[:written] = true
+        return true
+      else
+        return false
+      end
+    else
+      return false
+    end
+  end
+
+  def administer_road_test(registrant, service="Road Test")
+    if self.performs_service?(service)
+      if registrant.license_data[:written] == true
+        registrant.license_data[:license] = true
+      else
+        return false
+      end
+    else
+      return false
+    end
+  end
+
+  def renew_drivers_license(registrant, service="Renew License")
+    if self.performs_service?(service)
+      if registrant.license_data[:license] == true
+        registrant.license_data[:renewed] = true
+      else
+        return false
+      end
+    else
+      return false
+    end
+  end
+
+  def performs_service?(service)
+    true if @services.include?(service)
   end
 end
