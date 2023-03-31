@@ -48,7 +48,14 @@ class Facility
     return false unless services.include?("Road Test")
     if administer_written_test(registrant) == true
       registrant.license_data[:license] = true
-      true
+    else
+      false
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    if administer_road_test(registrant) == true
+      registrant.license_data[:renewed] = true
     else
       false
     end
