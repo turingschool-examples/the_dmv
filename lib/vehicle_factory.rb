@@ -2,6 +2,7 @@ require "spec_helper"
 
 class VehicleFactory
   attr_reader :vehicles
+
   def initialize
     @vehicles = []
   end
