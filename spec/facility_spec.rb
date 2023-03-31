@@ -24,7 +24,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe 'offer more services' do
+  describe '#register_vehicle(vehicle)' do
     it 'has default empty array of registered vehicles' do
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
       facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
@@ -95,5 +95,26 @@ RSpec.describe Facility do
       expect(facility_1.registered_vehicles).to eq([cruz])
       expect(facility_1.collected_fees).to eq(100)
     end
+
+    it 'facility_1 registers more vehicles' do
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+      facility_1.add_service('Vehicle Registration')
+      facility_1.register_vehicle(cruz)
+
+      expect(facility_1.register_vehicle(camaro)).to eq([cruz, camaro])
+      expect(camaro.registration_date).to eq(Date.today)
+      expect(camaro.plate_type).to eq(:antique)
+      expect(facility_1.register_vehicle(bolt)).to eq([cruz, camaro, bolt])
+      expect(bolt.registration_date).to eq(Date.today)
+      expect(bolt.plate_type).to eq(:ev)
+      expect(facility_1.registered_vehicles).to eq([cruz, camaro, bolt])
+      expect(facility_1.collected_fees).to eq(325)
+    end
+
+    
   end
 end
