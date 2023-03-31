@@ -1,4 +1,5 @@
 require 'spec_helper'
+require './lib/vehicle'
 
 RSpec.describe Vehicle do
   before(:each) do
@@ -33,4 +34,10 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  it "can register vehicles" do
+   @cruz.register
+   expect(@cruz.registration_date).to eq(Date.today)
+   end
+
 end
