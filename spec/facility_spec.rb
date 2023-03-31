@@ -100,11 +100,13 @@ RSpec.describe Facility do
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
       facility_1.add_service('Written Test')
       registrant_1 = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Penny', 16 )
       
       expect(registrant_1.permit?).to eq(true)
       expect(registrant_1.age).to eq(18)
       expect(facility_1.administer_written_test(registrant_1)).to eq(true)
       expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+      expect(facility_1.administer_written_test(registrant_2)).to eq(false)
     end
   end
 end
