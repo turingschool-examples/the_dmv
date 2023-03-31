@@ -129,16 +129,39 @@ RSpec.describe Facility do
 
     it 'administers road test for qualified registrants and updates license data' do
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
-      facility_1.add_service('Road Test')
-      facility_1.add_service('Written Test')
       registrant_1 = Registrant.new('Bruce', 18, true )
       registrant_3 = Registrant.new('Tucker', 15 )
-
+      facility_1.add_service('Road Test')
+      facility_1.add_service('Written Test')
       facility_1.administer_written_test(registrant_1)
     
       expect(facility_1.administer_road_test(registrant_1)).to eq(true)
       expect(facility_1.administer_road_test(registrant_3)).to eq(false)
       expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+    end
+  end
+
+  describe '#renew license' do
+    it 'checks facility services for renew license' do
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      facility_1.add_service('Renew License')
+
+      expect(facility_1.services).to eq(['Renew License'])
+    end
+
+    it 'renews license for qualified registrants' do
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      facility_1.add_service('Road Test')
+      facility_1.add_service('Written Test')
+      facility_1.add_service('Renew License')
+      facility_1.administer_written_test(registrant_1)
+      facility_1.administer_road_test(registrant_1)
+
+      expect(facility_1.renew_drivers_license(registrant_1)).to eq(true)
+      expect(facility_2.renew_drivers_license(registrant_1)).to eq(false)
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
     end
   end
 end
