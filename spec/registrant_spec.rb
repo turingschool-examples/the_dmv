@@ -10,7 +10,7 @@ require 'spec_helper'
       expect(@registrant_1).to be_an_instance_of(Registrant)
     end
 
-    it "can hae a name" do
+    it "can have a name" do
       @registrant_1 = Registrant.new('Bruce', 18, true )
       
       expect(@registrant_1.name).to eq('Bruce')

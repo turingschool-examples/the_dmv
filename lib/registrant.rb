@@ -5,7 +5,7 @@ class Registrant
               :license_data
 
   def initialize(name, age, permit = false)
-    name          = name
+    @name          = name
     @age          = age
     @permit       = false
     @license_data = {}
