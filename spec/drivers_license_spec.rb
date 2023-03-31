@@ -1,6 +1,8 @@
+require "spec_helper"
+
 RSpec.describe Facility do
   before(:each) do
-    @registrant_1 = Registration.new("Bruce", 18, true)
+    @registrant_1 = Registrant.new("Bruce", 18, true)
     @registrant_2 = Registrant.new('Penny', 16)
     @registrant_3 = Registrant.new("Tucker", 15)
 
