@@ -123,6 +123,9 @@ RSpec.describe Facility do
       expect(facility_1.administer_road_test(registrant_1)).to eq(false)
       expect(facility_1.add_service('Road Test')).to eq(["Written Test", "Road Test"])
       expect(facility_1.administer_road_test(registrant_1)).to eq(true)
+
+      registrant_2.earn_permit
+      expect(facility_1.administer_road_test(registrant_2)).to eq(true)
     end
   end
 end
@@ -142,11 +145,7 @@ end
 
 
 
-# pry(main)> registrant_1.license_data
-# #=> {:written=>true, :license=>true, :renewed=>false}
 
-# pry(main)> facility_1.administer_road_test(registrant_2)
-# #=> true
 
 # pry(main)> registrant_2.license_data
 # #=> {:written=>true, :license=>true, :renewed=>false}

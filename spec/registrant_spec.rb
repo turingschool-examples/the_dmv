@@ -88,6 +88,11 @@ RSpec.describe Registrant do
       facility_1.administer_road_test(registrant_1)
       
       expect(registrant_1.license_data).to eq({:written => true, :license => true, :renewed => false})
+
+      registrant_2.earn_permit
+      facility_1.administer_road_test(registrant_2)
+
+      expect(registrant_2.license_data).to eq({:written => true, :license => true, :renewed => false})
     end
   end
 end
