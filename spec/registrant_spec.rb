@@ -6,7 +6,13 @@ require 'spec_helper'
       @registrant_2 = Registrant.new('Penny', 15 )
     end
 
-    it "exists" do
+    it "initialize" do
+      expect(@registrant_1).to be_an_instance_of(Registrant)
+    end
 
+    it "can hae a name" do
+      @registrant_1 = Registrant.new('Bruce', 18, true )
+      
+      expect(@registrant_1.name).to eq('Bruce')
     end
   end
