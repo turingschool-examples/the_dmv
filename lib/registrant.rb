@@ -8,4 +8,8 @@ class Registrant
     @age = age
     @permit = permit
   end
+
+  def permit?
+    @permit
+  end
 end
