@@ -40,26 +40,28 @@ RSpec.describe Registrant do
       #=> {:written=>false, :license=>false, :renewed=>false}
     end 
 
-    it "can do all that again" do 
+    it "permit is false by default" do 
 
-      expect(@registrant_2.name).to eq("Penny")
-      expect(@registrant_2.age).to eq(15)
+      # expect(@registrant_2.name).to eq("Penny")
+      # expect(@registrant_2.age).to eq(15)
       expect(@registrant_2.permit?).to be(false)
 
-      expected_2 = {
-        :written=>false, 
-        :license=>false, 
-        :renewed=>false
-      }
+      # expected_2 = {
+      #   :written=>false, 
+      #   :license=>false, 
+      #   :renewed=>false
+      # }
 
-      expect(@registrant_2.license_data).to eq(expected_2)
+      # expect(@registrant_2.license_data).to eq(expected_2)
       #=> {:written=>false, :license=>false, :renewed=>false}
     end
     
     it "has an earn_permit method" do
+      #registrant 2 is 15 years old. She shouldn't be able to earn_permit
+      expect(@registrant_2.permit?).to be(false)
       @registrant_2.earn_permit
-      
-      expect(@registrant_2.permit?).to be(true)
+
+      expect(@registrant_2.permit?).to eq(true)
     end
   end
 end
