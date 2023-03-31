@@ -20,11 +20,12 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    @registered_vehicles << vehicle
-    change_registration_date(vehicle)
-    establish_plate_type(vehicle)
-    collect_fees(vehicle)
-    registered_vehicles
+    if @services.include?('Vehicle Registration')
+      change_registration_date(vehicle)
+      establish_plate_type(vehicle)
+      collect_fees(vehicle)
+      @registered_vehicles << vehicle
+    end
   end
 
   def change_registration_date(vehicle)
