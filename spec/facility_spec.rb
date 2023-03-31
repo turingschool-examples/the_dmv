@@ -61,4 +61,17 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#collect_registration_fee' do
+    it 'can collect registration fee' do
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.collected_fees).to eq(0)
+      @facility_1.collect_registration_fee(@cruz)
+      expect(@facility_1.collected_fees).to eq(100)
+      @facility_1.collect_registration_fee(@bolt)
+      expect(@facility_1.collected_fees).to eq(300)
+      @facility_1.collect_registration_fee(@camaro)
+      expect(@facility_1.collected_fees).to eq(325)
+    end
+  end
+
 end
