@@ -43,13 +43,13 @@ RSpec.describe Facility do
   end
 
   describe '#register_vehicle' do 
-    xit 'adds vehicle to registered vehicles' do 
+    it 'adds vehicle to registered vehicles' do 
       expect(@cruz.registration_date).to eq(nil)
 
       # return value is registered vehicles array
-      expect(@facility_1.register_vehicle(@cruz)).to eq(@registered_vehicles)
+      expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
 
-      expect(@facility_1.registered_vehicles).to eq(@cruz)
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
       expect(@facility_1.collected_fees).to eq(100)
     end
 
@@ -96,7 +96,6 @@ RSpec.describe Facility do
 
       expect(@facility_1.collected_fees).to eq(325)
       expect(@facility_2.registered_vehicles).to eq([@cruz, @camaro, @bolt])
-
     end
   end
 end
