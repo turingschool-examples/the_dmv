@@ -52,5 +52,7 @@ class Facility
     end
   end
 
-
+  def administer_written_test(registrant)
+    # if registrant
+  end
 end

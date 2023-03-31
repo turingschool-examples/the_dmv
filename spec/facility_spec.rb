@@ -85,4 +85,24 @@ RSpec.describe Facility do
       expect(facility_1.register_vehicle(camaro)).to eq([cruz, camaro])
     end
   end
+
+  describe '#administer written test' do
+    it 'checks facility services in order to administer tests' do
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+      facility_1.add_service('Written Test')
+      
+      expect(facility_1.services).to eq(['Written Test'])
+      expect(facility_2.services).to eq([])
+    end
+
+    it 'can administer written tests' do
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      facility_1.add_service('Written Test')
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      require 'pry'; binding.pry
+      expect(facility_1.administer_written_test(registrant_1)).to eq(true)
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
+  end
 end
