@@ -1,5 +1,5 @@
-require 'faraday'
-require 'json'
+require 'Faraday'
+require 'JSON'
 
 class DmvDataService
 
