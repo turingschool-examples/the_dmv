@@ -16,6 +16,7 @@ class Facility
   end
 
   def register_vehicle(vehicle)
+    return nil unless services.include?("Vehicle Registration")
     vehicle.register
     @collected_fees += fee_amount(vehicle)
      @registered_vehicles << vehicle
