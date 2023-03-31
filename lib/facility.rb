@@ -15,44 +15,32 @@ class Facility
   end
 
   def register_vehicle(vehicle)
+    # if facility.services does not inclue 'Vehicle Registration' then return nil spec line 64
     @registered_vehicles << vehicle
     vehicle.registration_date = Date.today
-    if 
-      vehicle.year <= 1998
+    if vehicle.antique?
       @collected_fees += 25
-    elsif
-      :engine == :ev
+      vehicle.plate_type = :antique
+    elsif vehicle.electric_vehicle?
       @collected_fees += 200
+      vehicle.plate_type = :ev
     else
       @collected_fees += 100
+      vehicle.plate_type = :regular
     end
     @registered_vehicles
   end
 
 
-
-
-  def plate_type
-    if vehicle.antique? == true
-      plate_type = :antique
-    elsif vehicle_details[:engine] == :ev
-      plate_type = :ev
-    else
-      plate_type = :regular
+  def administer_written_test(registrant)
+  #   if facility offers 'Written Test' service line 83
+  #     &&
+    if registrant.permit? && registrant.age >= 16
+      registrant.license_data[:written] = true
+    else 
+      false
     end
   end
-  
-
-
-  # def administer_written_test(registrant)
-  #   if facility offers 'Written Test' service
-  #     &&
-  #   if registrant.permit? == true && @age >= 16
-  #   end
-  # change registrant.license_data[:written]=>true
-  # end
-  # registrant.license_data
-  # end
 
 # Administer a written test:
 
