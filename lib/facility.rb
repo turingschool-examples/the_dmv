@@ -14,6 +14,15 @@ class Facility
     @services << service
   end
 
+  def administer_written_test(person)
+    if @services.include?("Written Test") && person.permit?
+      person.license_data[:written] = true
+      true
+    else
+      false
+    end
+  end
+
   def register_vehicle(car)
     if @services.include?("Vehicle Registration")
       @registered_vehicles << car
