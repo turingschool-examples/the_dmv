@@ -20,23 +20,3 @@ class WaVehicleFactory
       end
     end
   end
-
-      # @vehicles.map do |vehicle|
-      #   vehicle.keep_if { |key, value|
-      #   key == :vin ||
-      #   key == :year ||
-      #   key == :make ||
-      #   key == :model ||
-      #   key == :engine }
-      # end
-
-
-    # @vehicles.map do |vehicle|
-      #   Vehicle.new(vehicle.each_pair {
-      #     |key, value| puts "#{key}=>#{value},"
-      #   }
-      #   )
-      # end
-
-        # @registration_date = nil
-        # @plate_type = nil
