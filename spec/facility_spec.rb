@@ -336,15 +336,14 @@ RSpec.describe Facility do
 
       end
 
-        xit "CAN administer road_test with written test" do
+        it "CAN administer road_test with written test" do
           
           @facility_1.add_service("Written Test")
+          @facility_1.add_service("Road Test")
           @registrant_2.earn_permit
-          @registrant_2.administer_written_test
-  
+          @facility_1.administer_written_test(@registrant_2)
   
            expect(@facility_1.administer_road_test(@registrant_2)).to be(true)
-           # #=> true
   
           expected_2 = {
             :written=>true, 
@@ -353,7 +352,6 @@ RSpec.describe Facility do
           }
         
           expect(@registrant_2.license_data).to eq(expected_2)
-          # #=> {:written=>true, :license=>true, :renewed=>false}
 
         end
             
