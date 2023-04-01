@@ -22,10 +22,6 @@ class Facility
     @services << service
   end
 
-  def collected_fees
-    @collected_fees
-  end
-
   def register_vehicle(vehicle)
     @registered_vehicles << vehicle
     @registration_date = vehicle.registration_date = Date.today
