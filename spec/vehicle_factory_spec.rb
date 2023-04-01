@@ -49,5 +49,26 @@ RSpec.describe VehicleFactory do
       expect(factory.count_model_year(wa_ev_registrations)).to eq(count)
       expect(factory.count_model_year(wa_ev_registrations)).to eq({"2014"=>38, "2019"=>118, "2016"=>103, "2012"=>31, "2017"=>123, "2018"=>137, "2023"=>16, "2013"=>118, "2020"=>70, "2015"=>54, "2021"=>73, "2022"=>87, "2011"=>32})
     end
+
+    it "finds county with most registered vehicles" do
+      factory = VehicleFactory.new
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+
+      county = factory.most_registered_county(wa_ev_registrations)
+      
+     
+
+      expect(factory.most_registered_county(wa_ev_registrations)).to eq("King")
+    end
+
+    it "has a least popular make" do
+      factory = VehicleFactory.new
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+
+      
+      least_popular_make = factory.least_popular(wa_ev_registrations)
+      
+      expect(factory.least_popular(wa_ev_registrations)).to eq("MITSUBISHI")
+    end
   end
 end
