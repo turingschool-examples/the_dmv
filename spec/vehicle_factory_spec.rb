@@ -11,6 +11,7 @@ RSpec.describe VehicleFactory do
     it "create vehicles using wa dmv data set" do
       factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+
       
       new_cars = factory.create_vehicles(wa_ev_registrations)
 
