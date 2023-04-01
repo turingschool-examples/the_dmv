@@ -1,31 +1,31 @@
 require 'spec_helper'
 
 RSpec.describe Facility do
-  # before(:each) do
-  #   @facility = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
-  # end
-  # describe "Established information" do
+  before(:each) do
+    @facility = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+  end
+  describe "Established information" do
 
-  #   describe '#initialize' do
-  #     it 'can initialize' do
-  #       expect(@facility).to be_an_instance_of(Facility)
-  #       expect(@facility.name).to eq('Albany DMV Office')
-  #       expect(@facility.address).to eq('2242 Santiam Hwy SE Albany OR 97321')
-  #       expect(@facility.phone).to eq('541-967-2014')
-  #       expect(@facility.services).to eq([])
-  #     end
-  #   end
+    describe '#initialize' do
+      it 'can initialize' do
+        expect(@facility).to be_an_instance_of(Facility)
+        expect(@facility.name).to eq('Albany DMV Office')
+        expect(@facility.address).to eq('2242 Santiam Hwy SE Albany OR 97321')
+        expect(@facility.phone).to eq('541-967-2014')
+        expect(@facility.services).to eq([])
+      end
+    end
   
-  #   describe '#add service' do
-  #     it 'can add available services' do
-  #       expect(@facility.services).to eq([])
-  #       @facility.add_service('New Drivers License')
-  #       @facility.add_service('Renew Drivers License')
-  #       @facility.add_service('Vehicle Registration')
-  #       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
-  #     end
-  #   end
-  # end
+    describe '#add service' do
+      it 'can add available services' do
+        expect(@facility.services).to eq([])
+        @facility.add_service('New Drivers License')
+        @facility.add_service('Renew Drivers License')
+        @facility.add_service('Vehicle Registration')
+        expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+      end
+    end
+  end
 
   describe "Vehicle Registration" do
     before(:each) do
@@ -67,6 +67,8 @@ RSpec.describe Facility do
     end
     
     it "returns the register_vehicle method" do
+      
+      @facility_1.add_service('Vehicle Registration')
 
       expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
 
@@ -110,6 +112,9 @@ RSpec.describe Facility do
     xit "adds plate_type to vehicle when registered" do
 
       #this isn't asserting anything or at least my shit isn't returnig the right way
+      # when the vehicles get registered, there isn't anything to assert that the 
+      # plate_type gets associate with the car, but it still passes. 
+      expect(@facility_1.registered_vehicles[0].plate_type).to eq(nil)
 
       @facility_1.register_vehicle(@cruz)
 
@@ -117,7 +122,9 @@ RSpec.describe Facility do
 
     end
 
-    xit "adds vehicles to @registered_vehicles attribute" do
+    it "adds vehicles to @registered_vehicles attribute" do
+
+      @facility_1.add_service('Vehicle Registration')
 
       @facility_1.register_vehicle(@cruz)
       
@@ -127,65 +134,43 @@ RSpec.describe Facility do
       
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro])
 
-      # @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@bolt)
 
-      # expect(@facility_1.registered_vehicles).to eq([@cruz, @camara, @bolt])
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
 
 
     end
       
-    xit "can collect fees for type of car" do
+    it "can collect fees for any type of car" do
 
+      @facility_1.add_service('Vehicle Registration')
+      
       @facility_1.register_vehicle(@cruz)
-
+      # require 'pry'; binding.pry
+      
       expect(@facility_1.collected_fees).to eq(100)
       
-    end
+      @facility_1.register_vehicle(@camaro)
+      
+      expect(@facility_1.collected_fees).to eq(125)
+      
+      @facility_1.register_vehicle(@bolt)
 
-
-
-    xit "can register a antique type" do
-
-      #=> [#<Vehicle:0x0000000135a48b08...>, #<Vehicle:0x0000000135adb610...>]
-      
-      # expect(@camaro.registration_date).to eq(Date.today)
-      #=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
-      
-      # expect(@camaro.plate_type).to eq(:antique)
-      # #=> :antique
-      # expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro])
-      expect(@facility_1.collected_fees).to eq(25)
-    end
-      
-    xit "can register a third vehicle" do 
-
-
-      # expect(@facility_1.register_vehicle(@bolt)).to eq([@cruz, @camaro, @bolt])
-      #=> [#<Vehicle:0x0000000135a48b08...>, #<Vehicle:0x0000000135adb610...>, #<Vehicle:0x0000000125832180...>]
-      
-      # expect(@bolt.registration_date).to eq(Date.today)
-      #=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
-      
-      # expect(@bolt.plate_type).to eq(:ev)
-      # #=> :ev
-      
-      expect(@facility_1.registered_vehicles).to eq([@cruz, @camara, @bolt])
-      #=> [#<Vehicle:0x0000000135a48b08...>, #<Vehicle:0x0000000135adb610...>, #<Vehicle:0x0000000125832180...>]
-      
       expect(@facility_1.collected_fees).to eq(325)
-      #=> 325
+      
     end
+
     
-    xit "facility_2 is to empty" do
+    it "facility_2 is empty" do
 
       expect(@facility_2.registered_vehicles).to eq([])
       #=> []
-      
       expect(@facility_2.services).to eq([])
       #=> []
       
-      expect(@facility_2.register_vehicle(bolt)).to eq(nil)
+      expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
       #=> nil
+      #^^ add a test for it can't do a service if it's not offered ^^ ?
       
       expect(@facility_2.registered_vehicles).to eq([])
       #=> []
@@ -194,5 +179,200 @@ RSpec.describe Facility do
       #=> 0
       
     end
+  end
+
+  describe "Getting a Driver's License" do
+    before(:each) do
+
+      @registrant_1 = Registrant.new('Bruce', 18, true )
+      @registrant_2 = Registrant.new('Penny', 16 )
+      @registrant_3 = Registrant.new('Tucker', 15 )
+      
+      @facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      @facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+      
+    end
+
+    #Written Test
+    
+    it "a registrant has accessible data" do 
+      #does this need to be tested? Have I already asserted this above?
+
+      expected = {
+            :written=>false, 
+            :license=>false, 
+            :renewed=>false
+          }
+
+      expect(@registrant_1.license_data).to eq(expected)
+      #=> {:written=>false, :license=>false, :renewed=>false}
+      expect(@registrant_1.permit?).to be(true)
+
+      expect(@registrant_2.age).to eq(16)
+
+    end
+    
+    # it "a registrant has accessible permit data" do
+
+    #   # expect(@registrant_1.permit?).to be(true)
+    #   #=> true
+    # end
+    
+    it "CAN'T administer written_test w/o service" do
+
+      expect(@facility_1.administer_written_test(@registrant_1).to be(false))
+      #=> false
+      expected = {
+            :written=>false, 
+            :license=>false, 
+            :renewed=>false
+      }
+      
+      expect(@registrant_1.license_data).to eq(expected)
+      #=> {:written=>false, :license=>false, :renewed=>false}
+      
+    end
+
+    xit "CAN administer written test w/ service" do
+
+      expect(@facility_1.add_service('Written Test')).to eq(["Written Test"])
+      #=> ["Written Test"]
+      
+      expect(@facility_1.administer_written_test(@registrant_1)).to be(true)
+      #=> true
+
+      expected = {
+            :written=>true, 
+            :license=>false, 
+            :renewed=>false
+        }
+      
+      expect(@registrant_1.license_data).to eq(expected)
+      #=> {:written=>true, :license=>false, :renewed=>false}
+      
+    end
+
+    # xit "a registrant has accessible age data" do 
+
+    #   # expect(@registrant_2.age).to eq(16)
+    #   #=> 16
+    # end
+      
+    xit "a registrant can't take a written_test w/o a permit" do
+
+      expect(@registrant_2.permit?).to be(false)
+      #=> false
+      
+      expect(@facility_1.administer_written_test(@registrant_2)).to be(false)
+      #=> false
+      
+      @registrant_2.earn_permit
+      
+      expect(@facility_1.administer_written_test(@registrant_2).to be(true))
+      #=> true
+      
+    end
+
+    xit "a registrant w/ permit can't obtain written_test if age is under 16" do
+
+      expected = {
+            :written=>true, 
+            :license=>false, 
+            :renewed=>false
+        }
+
+      expect(@registrant_2.license_data).to eq(expected)
+      #=> {:written=>true, :license=>false, :renewed=>false}
+      
+      expect(@registrant_3.age).to eq(15)
+      #=> 15
+      
+      expect(@registrant_3.permit?).to be(false)
+      #=> false
+      
+      expect(@facility_1.administer_written_test(@registrant_3)).to be(false)
+      #=> false
+      
+      @registrant_3.earn_permit
+      
+      expect(@facility_1.administer_written_test(@registrant_3)).to be(false)
+      #=> false
+      
+      expected_2 = {
+            :written=>false, 
+            :license=>false, 
+            :renewed=>false
+        }
+
+      expect(@registrant_3.license_data).to eq(expected_2)
+      #=> {:written=>false, :license=>false, :renewed=>false}
+      
+    end
+
+    # Road Test
+    
+    # @facility_1.administer_road_test(@registrant_3)
+    # #=> false
+    
+    # @registrant_3.earn_permit
+    
+    # @facility_1.administer_road_test(@registrant_3)
+    # #=> false
+    
+    # @registrant_3.license_data
+    # #=> {:written=>false, :license=>false, :renewed=>false}
+    
+    # @facility_1.administer_road_test(@registrant_1)
+    # #=> false
+    
+    # @facility_1.add_service('Road Test')
+    # #=> ["Written Test", "Road Test"]
+    
+    # @facility_1.administer_road_test(@registrant_1)
+    # #=> true
+    
+    # @registrant_1.license_data
+    # #=> {:written=>true, :license=>true, :renewed=>false}
+    
+    # @facility_1.administer_road_test(@registrant_2)
+    # #=> true
+    
+    # @registrant_2.license_data
+    # #=> {:written=>true, :license=>true, :renewed=>false}
+    
+    # # Renew License
+    
+    # @facility_1.renew_drivers_license(@registrant_1)
+    # #=> false
+    
+    # @facility_1.add_service('Renew License')
+    # #=> ["Written Test", "Road Test", "Renew License"]
+    
+    # @facility_1.renew_drivers_license(@registrant_1)
+    # #=> true
+    
+    # @registrant_1.license_data
+    # #=> {:written=>true, :license=>true, :renewed=>true}
+    
+    # @facility_1.renew_drivers_license(@registrant_3)
+    # #=> false
+    
+    # @registrant_3.license_data
+    # #=> {:written=>false, :license=>false, :renewed=>false}
+    
+    # @facility_1.renew_drivers_license(@registrant_2)
+    # #=> true
+    
+    # @registrant_2.license_data
+    # #=> {:written=>true, :license=>true, :renewed=>true}
+  
+  
+  
+  
+  
+  
+  
+  
+  
   end
 end
