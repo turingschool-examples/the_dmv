@@ -24,10 +24,6 @@ class Registrant
     @permit = true
   end
 
-  def read_license_data
-    @license_data
-  end
-
   def written_pass
     @license_data[:written] = true
   end

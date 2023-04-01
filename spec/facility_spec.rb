@@ -118,7 +118,7 @@ RSpec.describe Facility do
     it 'updates license data to :written => true' do
       @facility_1.administer_written_test(@registrant_1)
 
-      expect(@registrant_1.read_license_data[:written]).to eq true
+      expect(@registrant_1.license_data[:written]).to eq true
     end
 
     it 'cannot be administered if someone already did it' do 
@@ -131,13 +131,13 @@ RSpec.describe Facility do
       expect(@registrant_2.permit?).to be false
 
       expect(@facility_1.administer_written_test(@registrant_2)).to be false
-      expect(@registrant_2.read_license_data[:written]).to eq false
+      expect(@registrant_2.license_data[:written]).to eq false
     end
 
     it 'cannot be administered if registrant is under 16' do
       expect(@registrant_4.age).to eq(14)
       expect(@facility_1.administer_written_test(@registrant_4)).to be false
-      expect(@registrant_4.read_license_data[:written]).to be false
+      expect(@registrant_4.license_data[:written]).to be false
     end
   end
   
@@ -163,17 +163,17 @@ RSpec.describe Facility do
     it 'updates registrant license data to :license => true' do 
       @facility_1.administer_written_test(@registrant_1)
 
-      expect(@registrant_1.read_license_data[:license]).to be false
+      expect(@registrant_1.license_data[:license]).to be false
 
       @facility_1.administer_road_test(@registrant_1)
-      expect(@registrant_1.read_license_data[:license]).to be true
+      expect(@registrant_1.license_data[:license]).to be true
     end
 
     it 'may only be administered if registrant is 16 or older' do
       @registrant_4.written_pass
 
       expect(@facility_1.administer_road_test(@registrant_4)).to be false
-      expect(@registrant_4.read_license_data[:license]).to be false
+      expect(@registrant_4.license_data[:license]).to be false
     end
 
     it 'cannot be administered if someone has already done it' do 
@@ -198,7 +198,7 @@ RSpec.describe Facility do
     end
      
     it 'may be executed only if :written and :license => true' do 
-      expect(@registrant_1.read_license_data).to eq({written: false, license: false, renewed: false})
+      expect(@registrant_1.license_data).to eq({written: false, license: false, renewed: false})
       expect(@facility_1.renew_drivers_license(@registrant_1)).to be false
 
       @facility_1.administer_written_test(@registrant_1)
@@ -210,11 +210,11 @@ RSpec.describe Facility do
       @facility_1.administer_written_test(@registrant_1)
       @facility_1.administer_road_test(@registrant_1)
 
-      expect(@registrant_1.read_license_data[:renewed]).to be false
+      expect(@registrant_1.license_data[:renewed]).to be false
 
       @facility_1.renew_drivers_license(@registrant_1)
 
-      expect(@registrant_1.read_license_data[:renewed]).to be true
+      expect(@registrant_1.license_data[:renewed]).to be true
     end
   end
 end

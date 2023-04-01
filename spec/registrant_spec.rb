@@ -20,10 +20,10 @@ RSpec.describe Registrant do
       expect(@registrant_2.permit?).to be false
     end
   end
-  describe '#read_license_data' do
+  describe '#license_data' do
     it 'has default false has key attributes written, license, renewed' do 
-      expect(@registrant_1.read_license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-      expect(@registrant_2.read_license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
 
@@ -39,31 +39,31 @@ RSpec.describe Registrant do
 
   describe '#written_pass' do 
     it 'updates license data after written test' do 
-      expect(@registrant_1.read_license_data[:written]).to be false
+      expect(@registrant_1.license_data[:written]).to be false
       
       @registrant_1.written_pass
 
-      expect(@registrant_1.read_license_data[:written]).to be true
+      expect(@registrant_1.license_data[:written]).to be true
     end
   end
 
   describe '#road_pass' do 
     it 'updates license data after road test' do 
-      expect(@registrant_1.read_license_data[:license]).to be false
+      expect(@registrant_1.license_data[:license]).to be false
       
       @registrant_1.road_pass
 
-      expect(@registrant_1.read_license_data[:license]).to be true
+      expect(@registrant_1.license_data[:license]).to be true
     end
   end
 
   describe '#license_renewal' do 
     it 'updates license data after renewal' do 
-      expect(@registrant_1.read_license_data[:renewed]).to be false
+      expect(@registrant_1.license_data[:renewed]).to be false
       
       @registrant_1.license_renewal
 
-      expect(@registrant_1.read_license_data[:renewed]).to be true
+      expect(@registrant_1.license_data[:renewed]).to be true
     end
   end
 end
