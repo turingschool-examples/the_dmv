@@ -18,5 +18,17 @@ RSpec.describe FacilityFactory do
       expect(@fac_factory.create_facilities(@or_dmv_office_locations)).to be_a(Array)
       expect(@fac_factory.facilities.length).not_to eq(0)
     end
+
+    it 'can create facility objects with attributes' do
+      @fac_factory.create_facilities(@or_dmv_office_locations)
+
+      expect(@fac_factory.facilities[0]).to be_a(Facility)
+      expect(@fac_factory.facilities[0].name).not_to be nil
+      expect(@fac_factory.facilities[0].address).not_to be nil
+      expect(@fac_factory.facilities[0].phone).not_to be nil
+      expect(@fac_factory.facilities[0].services).to eq([])
+      expect(@fac_factory.facilities[0].registered_vehicles).to eq([])
+      expect(@fac_factory.facilities[0].collected_fees).to eq(0)
+    end
   end
 end
