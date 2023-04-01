@@ -34,15 +34,17 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    return false unless @services.include?('Written Test') 
+    return false unless @services.include?("Written Test") 
     return false unless registrant.age >= 16
     return false unless registrant.permit?
     registrant.license_data[:written] = true
   end
 
   def administer_road_test(registrant)
-    # require 'pry'; binding.pry
+    return false unless @services.include?("Road Test") 
     return false unless registrant.license_data[:written] == true
+    registrant.license_data[:license] = true
+    true
   end
 
 
