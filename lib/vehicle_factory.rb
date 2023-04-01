@@ -10,7 +10,7 @@ class WaVehicleFactory
       @vehicles << source
       @vehicles.flatten!
       
-      @vehicles.each do |vehicle|
+      @vehicles.map do |vehicle|
         vehicle[:vin] = vehicle.delete :vin_1_10
         vehicle[:year] = vehicle.delete :model_year
         vehicle[:engine] = :ev   
