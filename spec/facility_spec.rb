@@ -193,186 +193,166 @@ RSpec.describe Facility do
       
     end
 
-    #Written Test
+    describe "#Written Test" do
     
-    it "a registrant has accessible data" do 
-      #does this need to be tested? Have I already asserted this above?
-
-      expected = {
-            :written=>false, 
-            :license=>false, 
-            :renewed=>false
-          }
-
-      expect(@registrant_1.license_data).to eq(expected)
-      #=> {:written=>false, :license=>false, :renewed=>false}
-      expect(@registrant_1.permit?).to be(true)
-
-      expect(@registrant_2.age).to eq(16)
-
-    end
-    
-    # it "a registrant has accessible permit data" do
-
-    #   # expect(@registrant_1.permit?).to be(true)
-    #   #=> true
-    # end
-    
-    it "CAN'T administer written_test w/o service" do
-
-      expect(@facility_1.administer_written_test(@registrant_1).to be(false))
-      #=> false
-      expected = {
-            :written=>false, 
-            :license=>false, 
-            :renewed=>false
-      }
-      
-      expect(@registrant_1.license_data).to eq(expected)
-      #=> {:written=>false, :license=>false, :renewed=>false}
-      
-    end
-
-    xit "CAN administer written test w/ service" do
-
-      expect(@facility_1.add_service('Written Test')).to eq(["Written Test"])
-      #=> ["Written Test"]
-      
-      expect(@facility_1.administer_written_test(@registrant_1)).to be(true)
-      #=> true
-
-      expected = {
-            :written=>true, 
-            :license=>false, 
-            :renewed=>false
+      it "a registrant has accessible data" do 
+        #does this need to be tested? Have I already asserted this above?
+        
+        expected = {
+          :written=>false, 
+          :license=>false, 
+          :renewed=>false
         }
+        
+        expect(@registrant_1.license_data).to eq(expected)
+        
+        expect(@registrant_1.permit?).to be(true)
+        
+        expect(@registrant_2.age).to eq(16)
+        
+      end
       
-      expect(@registrant_1.license_data).to eq(expected)
-      #=> {:written=>true, :license=>false, :renewed=>false}
-      
-    end
-
-    # xit "a registrant has accessible age data" do 
-
-    #   # expect(@registrant_2.age).to eq(16)
-    #   #=> 16
-    # end
-      
-    xit "a registrant can't take a written_test w/o a permit" do
-
-      expect(@registrant_2.permit?).to be(false)
-      #=> false
-      
-      expect(@facility_1.administer_written_test(@registrant_2)).to be(false)
-      #=> false
-      
-      @registrant_2.earn_permit
-      
-      expect(@facility_1.administer_written_test(@registrant_2).to be(true))
-      #=> true
-      
-    end
-
-    xit "a registrant w/ permit can't obtain written_test if age is under 16" do
-
-      expected = {
-            :written=>true, 
-            :license=>false, 
-            :renewed=>false
+      it "CAN'T administer written_test w/o service" do
+        
+        expect(@facility_1.administer_written_test(@registrant_1)).to be(false)
+        
+        expected = {
+          :written=>false, 
+          :license=>false, 
+          :renewed=>false
         }
-
-      expect(@registrant_2.license_data).to eq(expected)
-      #=> {:written=>true, :license=>false, :renewed=>false}
+        
+        expect(@registrant_1.license_data).to eq(expected)
+        
+      end
       
-      expect(@registrant_3.age).to eq(15)
-      #=> 15
-      
-      expect(@registrant_3.permit?).to be(false)
-      #=> false
-      
-      expect(@facility_1.administer_written_test(@registrant_3)).to be(false)
-      #=> false
-      
-      @registrant_3.earn_permit
-      
-      expect(@facility_1.administer_written_test(@registrant_3)).to be(false)
-      #=> false
-      
-      expected_2 = {
-            :written=>false, 
-            :license=>false, 
-            :renewed=>false
+      it "CAN administer written test w/ service" do
+        
+        expect(@facility_1.add_service('Written Test')).to eq(["Written Test"])
+        
+        expect(@facility_1.administer_written_test(@registrant_1)).to be(true)
+        
+        expected = {
+          :written=>true, 
+          :license=>false, 
+          :renewed=>false
         }
-
-      expect(@registrant_3.license_data).to eq(expected_2)
-      #=> {:written=>false, :license=>false, :renewed=>false}
+        
+        expect(@registrant_1.license_data).to eq(expected)
+        
+      end
+      
+      it "a registrant can't take a written_test w/o a permit" do
+        
+        @facility_1.add_service('Written Test')
+        
+        expect(@registrant_2.permit?).to be(false)
+        
+        expect(@facility_1.administer_written_test(@registrant_2)).to be(false)
+        
+        @registrant_2.earn_permit
+        
+        expect(@facility_1.administer_written_test(@registrant_2)).to be(true)
+        
+        expected = {
+          :written=>true, 
+          :license=>false, 
+          :renewed=>false
+        }
+        
+        expect(@registrant_2.license_data).to eq(expected)
+        
+      end
+      
+      it "a registrant w/ permit can't obtain written_test if age is under 16" do
+        
+        
+        expect(@registrant_3.age).to eq(15)
+        
+        expect(@registrant_3.permit?).to be(false)
+        
+        expect(@facility_1.administer_written_test(@registrant_3)).to be(false)
+        
+        @registrant_3.earn_permit
+        
+        expect(@facility_1.administer_written_test(@registrant_3)).to be(false)
+        
+        expected_2 = {
+          :written=>false, 
+          :license=>false, 
+          :renewed=>false
+        }
+        
+        expect(@registrant_3.license_data).to eq(expected_2)
+        
+      end
+    end
+    
+    describe "Road Test" do
+      
+      # @facility_1.administer_road_test(@registrant_3)
+      # #=> false
+      
+      # @registrant_3.earn_permit
+      
+      # @facility_1.administer_road_test(@registrant_3)
+      # #=> false
+      
+      # @registrant_3.license_data
+      # #=> {:written=>false, :license=>false, :renewed=>false}
+      
+      # @facility_1.administer_road_test(@registrant_1)
+      # #=> false
+      
+      # @facility_1.add_service('Road Test')
+      # #=> ["Written Test", "Road Test"]
+      
+      # @facility_1.administer_road_test(@registrant_1)
+      # #=> true
+      
+      # @registrant_1.license_data
+      # #=> {:written=>true, :license=>true, :renewed=>false}
+      
+      # @facility_1.administer_road_test(@registrant_2)
+      # #=> true
+      
+      # @registrant_2.license_data
+      # #=> {:written=>true, :license=>true, :renewed=>false}
+      
+      # # Renew License
+      
+      # @facility_1.renew_drivers_license(@registrant_1)
+      # #=> false
+      
+      # @facility_1.add_service('Renew License')
+      # #=> ["Written Test", "Road Test", "Renew License"]
+      
+      # @facility_1.renew_drivers_license(@registrant_1)
+      # #=> true
+      
+      # @registrant_1.license_data
+      # #=> {:written=>true, :license=>true, :renewed=>true}
+      
+      # @facility_1.renew_drivers_license(@registrant_3)
+      # #=> false
+      
+      # @registrant_3.license_data
+      # #=> {:written=>false, :license=>false, :renewed=>false}
+      
+      # @facility_1.renew_drivers_license(@registrant_2)
+      # #=> true
+      
+      # @registrant_2.license_data
+      # #=> {:written=>true, :license=>true, :renewed=>true}
+      
+      
+      
+      
+      
+      
+      
+      
       
     end
-
-    # Road Test
-    
-    # @facility_1.administer_road_test(@registrant_3)
-    # #=> false
-    
-    # @registrant_3.earn_permit
-    
-    # @facility_1.administer_road_test(@registrant_3)
-    # #=> false
-    
-    # @registrant_3.license_data
-    # #=> {:written=>false, :license=>false, :renewed=>false}
-    
-    # @facility_1.administer_road_test(@registrant_1)
-    # #=> false
-    
-    # @facility_1.add_service('Road Test')
-    # #=> ["Written Test", "Road Test"]
-    
-    # @facility_1.administer_road_test(@registrant_1)
-    # #=> true
-    
-    # @registrant_1.license_data
-    # #=> {:written=>true, :license=>true, :renewed=>false}
-    
-    # @facility_1.administer_road_test(@registrant_2)
-    # #=> true
-    
-    # @registrant_2.license_data
-    # #=> {:written=>true, :license=>true, :renewed=>false}
-    
-    # # Renew License
-    
-    # @facility_1.renew_drivers_license(@registrant_1)
-    # #=> false
-    
-    # @facility_1.add_service('Renew License')
-    # #=> ["Written Test", "Road Test", "Renew License"]
-    
-    # @facility_1.renew_drivers_license(@registrant_1)
-    # #=> true
-    
-    # @registrant_1.license_data
-    # #=> {:written=>true, :license=>true, :renewed=>true}
-    
-    # @facility_1.renew_drivers_license(@registrant_3)
-    # #=> false
-    
-    # @registrant_3.license_data
-    # #=> {:written=>false, :license=>false, :renewed=>false}
-    
-    # @facility_1.renew_drivers_license(@registrant_2)
-    # #=> true
-    
-    # @registrant_2.license_data
-    # #=> {:written=>true, :license=>true, :renewed=>true}
-  
-  
-  
-  
-  
-  
-  
-  
-  
   end
 end
