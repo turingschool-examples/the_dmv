@@ -13,4 +13,9 @@ class Registrant
     renewed: false
   }
   end
+
+  def permit?
+    @permit
+  end
+  
 end
