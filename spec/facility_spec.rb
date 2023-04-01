@@ -46,12 +46,15 @@ RSpec.describe Facility do
     end
   end
   describe '#facilities_registered_vehicles' do
-    it 'can return list of vehicles' do
+    it 'can return list of vehicles and collect fees' do
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.registered_vehicles).to eq([])
       expect(@facility_1.collected_fees).to eq(0)
       expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
+      expect(@facility_1.collected_fees).to eq(100)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
     end
   end
-    
 end
