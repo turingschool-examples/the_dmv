@@ -52,6 +52,7 @@ class Facility
       registrant.read_license_data[:written] == false &&
       registrant.permit? == true &&
       registrant.age >= 16
+
       registrant.written_pass
     else
       false
