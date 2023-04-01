@@ -4,7 +4,8 @@ class Facility
               :phone, 
               :services,
               :registered_vehicles,
-              :collected_fees
+              :collected_fees,
+              :zipcode
 
   def initialize(data)
     @name = data[:name]
@@ -13,6 +14,7 @@ class Facility
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
+    @zipcode = data[:zipcode]
   end
 
   def add_service(service)
