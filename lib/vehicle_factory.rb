@@ -7,7 +7,6 @@ class VehicleFactory
   def create_vehicles(vehicles)
     until vehicles.empty?
       vehicles.map do |vehicle|
-      require 'pry'; binding.pry 
         new_vehicle = Vehicle.new(vehicle)
         new_vehicle.vin = vehicle[:vin_1_10]
         new_vehicle.engine = :ev
