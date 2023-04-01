@@ -23,6 +23,7 @@ class Facility
   end
 
   def register_vehicle(car)
-    
+    registered_vehicles << car
+    car.register
   end
 end
