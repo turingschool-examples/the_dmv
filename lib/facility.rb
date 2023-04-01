@@ -24,7 +24,10 @@ class Facility
     if vehicle.antique?
       vehicle.plate_type = :antique
       @collected_fees += 25
-    else
+    elsif vehicle.electric_vehicle?
+      vehicle.plate_type = :ev
+      @collected_fees += 200
+    else 
       vehicle.plate_type = :regular
       @collected_fees += 100
     end
