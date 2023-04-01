@@ -8,7 +8,7 @@ class FacilityFactory
     dmv.each do |facility|
       new_facilities << Facility.new(
         name: facility[:title],
-        address: facility[:human_address],
+        address: facility[:address1],
         phone: facility[:phone_number],
         zipcode: facility[:zip_code]
       )
