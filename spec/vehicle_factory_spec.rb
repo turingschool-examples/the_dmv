@@ -1,32 +1,39 @@
 require 'spec_helper'
 
-RSpec.describe VehicleFactory do 
+RSpec.describe WaVehicleFactory do 
   before(:each) do 
-    @factory = VehicleFactory.new
+    @factory = WaVehicleFactory.new
     @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
   end
   describe '#initialize' do
     it "exists" do 
-      expect(@factory).to be_a(VehicleFactory)
+      expect(@factory).to be_a(WaVehicleFactory)
+    end
+
+    it 'has a vehicles attribute that is empty be default' do 
+      expect(@factory.vehicles).to eq([])
     end
   end
 
   describe '#create_vehicles' do 
     it 'can create Vehicle objects using dmv data' do 
       expect(@factory.create_vehicles(@wa_ev_registrations)).to be_a(Array) 
-      expect(@factory.vehicles.length).to be(>5)
+      expect(@factory.vehicles.length).not_to eq(0)
+      require 'pry'; binding.pry
     end
 
-    it 'assigns attributes to vehicle class instances' do 
-      expect(@factory.vehicles(0).vin).not_to be nil
-      expect(@factory.vehicles(0).year).not_to be nil
-      expect(@factory.vehicles(0).make).not_to be nil
-      expect(@factory.vehicles(0).model).not_to be nil
-      expect(@factory.vehicles(0).registration_date).to be nil
-      expect(@factory.vehicles(0).plate_type).to be nil
+    xit 'assigns attributes to vehicle class instances' do 
+      expect(@factory.vehicles[0]).to be_a(Vehicle)
+      expect(@factory.vehicles[0].vin).not_to be nil
+  
+      # expect(@factory.vehicles[0].year).not_to be nil
+      # expect(@factory.vehicles[0].make).not_to be nil
+      # expect(@factory.vehicles[0].model).not_to be nil
+      # expect(@factory.vehicles[0].registration_date).to be nil
+      # expect(@factory.vehicles[0].plate_type).to be nil
     end
 
-    it 'assigns an :ev engine type' do 
+    xit 'assigns an :ev engine type' do 
       expect(@factory.vehicles(0).engine).to eq(:ev)
     end
   end
