@@ -37,10 +37,6 @@ RSpec.describe Facility do
       @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
       @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
     end
-    
-    # if I want to break these tests below down into individual tests, type = one kind, date = one test, registered_vehicles = one test etc and then have all 
-    # 3 dates or all 3 types or whatever. Tis is blocked out and registrant_spec tests is one test specifically per test. One test would be like
-    # one action per test. This is more convention issues than anything. Come back and adjust them if I have time. Decide on one way or the other.
 
     it "returns the services added" do
 
@@ -146,7 +142,6 @@ RSpec.describe Facility do
       @facility_1.add_service('Vehicle Registration')
       
       @facility_1.register_vehicle(@cruz)
-      # require 'pry'; binding.pry
       
       expect(@facility_1.collected_fees).to eq(100)
       
@@ -164,19 +159,14 @@ RSpec.describe Facility do
     it "facility_2 is empty" do
 
       expect(@facility_2.registered_vehicles).to eq([])
-      #=> []
+
       expect(@facility_2.services).to eq([])
-      #=> []
       
       expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
-      #=> nil
-      #^^ add a test for it can't do a service if it's not offered ^^ ?
       
       expect(@facility_2.registered_vehicles).to eq([])
-      #=> []
       
       expect(@facility_2.collected_fees).to eq(0)
-      #=> 0
       
     end
   end
@@ -309,7 +299,6 @@ RSpec.describe Facility do
       end
       
       it "CAN'T administer road test w/o adding service" do
-        #already has permit so needs written test
         @facility_1.add_service("Written Test")
         @facility_1.administer_written_test(@registrant_1)
         expected_1 = {
@@ -361,15 +350,23 @@ RSpec.describe Facility do
       it "CAN'T renew license without adding service" do
 
         expect(@facility_1.renew_drivers_license(@registrant_1)).to be(false)
-        #=> false
         
+        @facility_1.add_service("Written Test")
+        @facility_1.add_service("Road Test")
         services_offered = ["Written Test", "Road Test", "Renew License"]
 
         expect(@facility_1.add_service('Renew License')).to eq(services_offered)
-        #=> ["Written Test", "Road Test", "Renew License"]
-        
+      end
+
+      it "can renew license with written and road tests" do
+
+        @facility_1.add_service("Written Test")
+        @facility_1.add_service("Road Test")
+        @facility_1.add_service('Renew License')
+        @facility_1.administer_written_test(@registrant_1)
+        @facility_1.administer_road_test(@registrant_1)
+
         expect(@facility_1.renew_drivers_license(@registrant_1)).to be(true)
-        #=> true
 
         expected = {
           :written=>true, 
@@ -377,15 +374,21 @@ RSpec.describe Facility do
           :renewed=>true
         }
         
-        expect(@registrant_1.license_data).to be(expected)
-        #=> {:written=>true, :license=>true, :renewed=>true}
+        expect(@registrant_1.license_data).to eq(expected)
         
       end
 
-      xit "CAN'T renew license without written or license data" do
+      it "CAN'T renew license without written or license data" do
+
+        @facility_1.add_service("Written Test")
+        @facility_1.add_service("Road Test")
+        @facility_1.add_service('Renew License')
+        @registrant_2.earn_permit
+        @registrant_3.earn_permit
+        @facility_1.administer_written_test(@registrant_2)
+        @facility_1.administer_road_test(@registrant_2)
 
         expect(@facility_1.renew_drivers_license(@registrant_3)).to be(false)
-        #=> false
 
         expected = {
           :written=>false, 
@@ -393,11 +396,9 @@ RSpec.describe Facility do
           :renewed=>false
         }
 
-        expect(@registrant_3.license_data).to be(expected)
-        #=> {:written=>false, :license=>false, :renewed=>false}
+        expect(@registrant_3.license_data).to eq(expected)
         
         expect(@facility_1.renew_drivers_license(@registrant_2)).to be(true)
-        #=> true
         
         expected_2 = {
           :written=>true, 
@@ -406,17 +407,8 @@ RSpec.describe Facility do
         }
 
         expect(@registrant_2.license_data).to eq(expected_2)
-        #=> {:written=>true, :license=>true, :renewed=>true}
-        
         
       end
-      
-      
-      
-      
-      
-      
-      
     end
   end
 end
