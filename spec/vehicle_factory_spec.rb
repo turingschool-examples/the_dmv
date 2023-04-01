@@ -19,7 +19,6 @@ RSpec.describe WaVehicleFactory do
     it 'can create Vehicle objects using dmv data' do 
       expect(@factory.create_vehicles(@wa_ev_registrations)).to be_a(Array) 
       expect(@factory.vehicles.length).not_to eq(0)
-
     end
 
     it 'assigns attributes to vehicle class instances' do 
