@@ -23,9 +23,10 @@ class Facility
     vehicle.registration_date = Date.today
     if vehicle.antique?
       vehicle.plate_type = :antique
-      collected_fees += 100
+      @collected_fees += 25
     else
       vehicle.plate_type = :regular
+      @collected_fees += 100
     end
     @registered_vehicles << vehicle
   end
