@@ -181,6 +181,23 @@ RSpec.describe Facility do
         expect(facility_1).to be_an_instance_of(Facility)
         expect(facility_2).to be_an_instance_of(Facility)
       end
+      
+      it "verifies registrant 1 data" do
+        registrant_1 = Registrant.new('Bruce', 18, true )
+        registrant_2 = Registrant.new('Penny', 16 )
+        registrant_3 = Registrant.new('Tucker', 15 )
+        facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+        facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+
+        r1_data = {
+          :written  =>  false,
+          :license  =>  false,
+          :renewed  =>  false
+        }
+
+        expect(registrant_1.license_data).to eq(r1_data)
+        expect(registrant_1.permit?).to be true
+      end
     end
   end
 end
