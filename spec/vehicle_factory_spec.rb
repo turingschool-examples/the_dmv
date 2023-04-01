@@ -5,6 +5,7 @@ RSpec.describe VehicleFactory do
     it 'exists' do
       factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      require 'pry'; binding.pry
     
       expect(factory).to be_a(VehicleFactory)
     end
@@ -19,7 +20,4 @@ RSpec.describe VehicleFactory do
       expect(factory.create_vehicles(wa_ev_registrations).first).to be_a(Vehicle)
     end
   end
-
-
-  
 end
