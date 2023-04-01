@@ -19,4 +19,7 @@ RSpec.describe VehicleFactory do
       expect(factory.create_vehicles(wa_ev_registrations).first).to be_a(Vehicle)
     end
   end
+
+
+  
 end

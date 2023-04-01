@@ -15,5 +15,7 @@ class VehicleFactory
       end
    end
    @all_created_vehicles
+
+   
   end
 end
