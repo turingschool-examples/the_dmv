@@ -34,6 +34,12 @@ RSpec.describe Vehicle do
     end
   end
 
+  describe '#registration date' do
+    it 'can determine registration date' do
+      expect(@cruz.registration_date).to eq(Date.today.year)
+    end
+  end
+
   describe '#plate type' do
     it 'can determine plate type' do
       expect(@cruz.plate_type).to eq(:regular)
