@@ -1,5 +1,5 @@
 class Facility
-  attr_reader :name, :address, :phone, :services
+  attr_reader :name, :address, :phone, :services, :date_of_registration, :vehicle_details
 
   def initialize(facility_info)
     @name = facility_info[:name]
@@ -22,9 +22,11 @@ class Facility
     return @fees_collected
   end
 
-  def register_vehicle(car)
-    @vehicles_registered << car
-    # @registration_date
+  def register_vehicle(vehicle)
+    @vehicles_registered << vehicle
+    @record_date
+    return [vehicle]
   end
+
 
 end
