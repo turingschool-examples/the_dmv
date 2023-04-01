@@ -7,6 +7,7 @@ class Facility
               :services,
               :registered_vehicles,
               :collected_fees
+              
 
   def initialize(facility)
     @name = facility[:name]
@@ -27,11 +28,8 @@ class Facility
 
   def register_vehicle(vehicle)
     @registered_vehicles << vehicle
-    @registration_date = self.registered_vehicles[0].registration_date = Date.today
+    @registration_date = vehicle.registration_date = Date.today
+    @plate_type = if vehicle.engine == :ice then :regular else :ev end
+      # put plate_type method into vehicle class
   end
-
-  def registration_date
-    @registration_date
-  end
-
 end
