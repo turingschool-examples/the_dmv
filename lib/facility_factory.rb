@@ -3,13 +3,14 @@ class FacilityFactory
     
   end
 
-  def create_facility(or_dmv)
+  def create_facility(dmv)
     new_facilities = []
-    or_dmv.each do |facility|
+    dmv.each do |facility|
       new_facilities << Facility.new(
         name: facility[:title],
         address: facility[:human_address],
         phone: facility[:phone_number],
+        zipcode: facility[:zip_code]
       )
     end
     new_facilities 
