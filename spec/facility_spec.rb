@@ -296,16 +296,19 @@ RSpec.describe Facility do
         facility_1.administer_written_test(registrant_1)
         registrant_2.earn_permit
         facility_1.administer_written_test(registrant_2)
-
-        r2_data = {
-          :written  =>  true,
+        
+        expect(registrant_3.age).to eq(15)
+        expect(registrant_3.permit?).to be false
+        
+        r3_data = {
+          :written  =>  false,
           :license  =>  false,
           :renewed  =>  false
         }
-        expect(registrant_2.license_data).to eq(r2_data)
-
-        expect(registrant_3.age).to eq(15)
+        registrant_3.earn_permit
+        expect(facility_1.administer_written_test(registrant_3)).to be false
         expect(registrant_3.permit?).to be false
+        expect(registrant_3.license_data).to eq(r3_data)
       end
     end
   end
