@@ -1,6 +1,7 @@
 require 'spec_helper'
 require "./lib/facility"
 require "./lib/vehicle"
+require "./lib/registrant"
 
 RSpec.describe Facility do
   before(:each) do
@@ -153,6 +154,18 @@ RSpec.describe Facility do
         expect(facility_2.register_vehicle(bolt)).to be nil
         expect(facility_2.registered_vehicles).to eq([])
         expect(facility_2.collected_fees).to eq(0)
+      end
+    end
+
+    context "registrant" do
+      it "exists" do
+        registrant_1 = Registrant.new('Bruce', 18, true )
+        registrant_2 = Registrant.new('Penny', 16 )
+        registrant_3 = Registrant.new('Tucker', 15 )
+
+        expect(registrant_1).to be_an_instance_of(Registrant)
+        expect(registrant_2).to be_an_instance_of(Registrant)
+        expect(registrant_3).to be_an_instance_of(Registrant)
       end
     end
   end
