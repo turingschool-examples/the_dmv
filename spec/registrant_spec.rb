@@ -72,5 +72,58 @@ RSpec.describe Registrant do
     expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
   end
 
-  
+
+  it 'can administer road test' do 
+    registrant_1 = Registrant.new('Bruce', 18, true )
+    registrant_2 = Registrant.new('Penny', 16 )
+    registrant_3 = Registrant.new('Tucker', 15 )
+    facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+    facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+    facility_1.add_service('Written Test')
+    facility_1.administer_written_test(registrant_1)
+    registrant_2.earn_permit
+    facility_1.administer_written_test(registrant_2)
+    
+    #registrant 3
+
+    expect(facility_1.administer_road_test(registrant_3)).to eq(false)
+
+    registrant_3.earn_permit 
+    expect(facility_1.administer_road_test(registrant_3)).to eq(false)
+    expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+
+
+    #registrant 1
+
+    expect(facility_1.administer_road_test(registrant_1)).to eq(false)
+
+    facility_1.add_service('Road Test')
+    expect(facility_1.services).to eq(["Written Test", "Road Test"])
+    
+    facility_1.administer_road_test(registrant_1)
+    expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+
+
+    #registrant 2
+    facility_1.administer_road_test(registrant_2)
+    
+    expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false}) 
+  end
+
+  it 'can renew licenses' do 
+    registrant_1 = Registrant.new('Bruce', 18, true )
+    registrant_2 = Registrant.new('Penny', 16 )
+    registrant_3 = Registrant.new('Tucker', 15 )
+    facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+    facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+    facility_1.add_service('Written Test')
+    facility_1.add_service('Road Test')
+    facility_1.administer_written_test(registrant_1)
+    facility_1.administer_road_test(registrant_1)
+    registrant_2.earn_permit
+    facility_1.administer_written_test(registrant_2)
+    facility_1.administer_road_test(registrant_2)
+
+
+  end
 end 
