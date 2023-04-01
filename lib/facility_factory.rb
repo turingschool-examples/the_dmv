@@ -1,7 +1,7 @@
 require './lib/facility'
 
 class FacilityFactory
-  def create_facilities(data)
+  def create_facility_oregon(data)
     data.map do |facility|
       Facility.new({
         name: facility[:title],
