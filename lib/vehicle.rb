@@ -1,4 +1,5 @@
 require 'date'
+require './lib/dmv_data_service'
 
 class Vehicle
   attr_reader :vin, :year, :make, :model, :engine, :vehicles_registered, :vehicle_details, :registration_date
@@ -31,4 +32,7 @@ class Vehicle
     end
   end
   
+  DmvDataService.new.wa_ev_registrations
+
+
 end
