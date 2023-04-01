@@ -11,4 +11,14 @@ class FacilityFactory
     end
   end
 
+    def create_facility_new_york(data)
+      data.map do |facility|
+        Facility.new({
+          name: facility[:office_name]
+          address: facility[:street_address_line_1]
+          phone: facility[:public_phone_numer]
+        })
+      end
+    end
+
 end
