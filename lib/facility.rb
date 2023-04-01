@@ -58,4 +58,16 @@ class Facility
     end
   end
 
+  def administer_road_test(registrant)
+    if services.include?('Road Test')
+      if registrant.license_data[:written] == true
+        registrant.license_data[:license] = true
+      elsif registrant.license_data[:written] == false
+        false
+      end
+    else
+      false
+    end
+  end
+
 end
