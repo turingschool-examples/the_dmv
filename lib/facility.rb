@@ -1,5 +1,5 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :registration_date, :vehicle_details
+  attr_reader :name, :address, :phone, :services, :registration_date, :vehicle_details, :license_data
   attr_accessor :registration_date
   def initialize(facility_info)
     @name = facility_info[:name]
@@ -42,5 +42,12 @@ class Facility
     end
   end
 
+  def administer_written_test(registrant)
+    if services.include?('Written Test')
+      registrant.license_data[:written] = true
+    else
+      false
+    end
+  end
 
 end
