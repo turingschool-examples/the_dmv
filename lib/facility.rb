@@ -29,7 +29,5 @@ class Facility
   def register_vehicle(vehicle)
     @registered_vehicles << vehicle
     @registration_date = vehicle.registration_date = Date.today
-    @plate_type = if vehicle.engine == :ice then :regular else :ev end
-      # put plate_type method into vehicle class
   end
 end
