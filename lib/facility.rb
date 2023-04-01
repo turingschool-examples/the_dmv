@@ -1,5 +1,10 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :collected_fees, :registered_vehicles
+  attr_reader :name,
+              :address, 
+              :phone, 
+              :services, 
+              :collected_fees, 
+              :registered_vehicles
 
   def initialize(name:, address:, phone:)
     @name = name
@@ -15,10 +20,21 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    return @registered_vehicles << vehicle
-    require 'pry'; binding.pry
-    #adjust registration date in vehicle class    
-
+    date = Time.new.strftime("%d/%m/%Y")
+    vehicle.registration_date = Time.new.strftime("%d/%m/%Y")
+    
+  #  new_array = @registered_vehicles.each do |vehicle|
+  #     @registered_vehicles << vehicle
+  #   end
+  # @plate_type = vehicle.plate_type
+  @registered_vehicles << vehicle
+  
+  # @registered_vehicles << vehicle
+  @registered_vehicles
+  # require 'pry'; binding.pry
   end
+
+
+
 
 end
