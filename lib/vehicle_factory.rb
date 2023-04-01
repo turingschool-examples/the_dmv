@@ -16,4 +16,10 @@ class VehicleFactory
     end
     new_cars
   end
+
+  def most_popular(dmv)
+   dmv.group_by { |car| car[:make] }.max_by { |make, brand| brand.count }.first
+  end
+
+  
 end
