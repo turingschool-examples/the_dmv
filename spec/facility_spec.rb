@@ -185,12 +185,36 @@ RSpec.describe Facility do
   end
 
   describe '#renew_drivers_license' do 
-    it 'returns true after service is added to facility' do 
+    it 'works after service is added to facility and it returns true' do 
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
 
+      expect(@facility_2.services).to eq([])
+      expect(@facility_2.renew_drivers_license(@registrant_1)).to be false
+      
+      @facility_2.add_service('Renew License')
+
+      expect(@facility_2.renew_drivers_license(@registrant_1)).to be true
     end
      
-    it 'may be executed if :written and :license => true' do 
+    it 'may be executed only if :written and :license => true' do 
+      expect(@registrant_1.read_license_data).to eq({written: false, license: false, renewed: false})
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to be false
 
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to be true
+    end
+
+    it 'updates license data :renewed' do 
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+
+      expect(@registrant_1.read_license_data[:renewed]).to be false
+
+      @facility_1.renew_drivers_license(@registrant_1)
+
+      expect(@registrant_1.read_license_data[:renewed]).to be true
     end
   end
 end
