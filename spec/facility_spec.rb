@@ -50,11 +50,18 @@ RSpec.describe Facility do
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.registered_vehicles).to eq([])
       expect(@facility_1.collected_fees).to eq(0)
-      expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
+      @facility_1.register_vehicle(@cruz)
       expect(@facility_1.collected_fees).to eq(100)
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+      expect(@facility_1.collected_fees).to eq(325)
+    
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.services).to eq([])
+      @facility_2.register_vehicle(@bolt)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
     end
   end
 end
