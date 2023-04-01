@@ -1,5 +1,5 @@
 class Dmv
-  attr_reader :facilities
+  attr_reader :facilities, :facilities_offering_service
   def initialize
     @facilities = []
   

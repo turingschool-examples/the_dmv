@@ -40,6 +40,8 @@ class Facility
   def administer_written_test(registrant)
     if registrant.permit? && registrant.age >= 16 && @services.include?("Written Test")
       true 
+      
+      registrant.license_data[:written] = true 
     else  
       false 
     end

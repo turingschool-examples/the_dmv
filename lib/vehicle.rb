@@ -27,11 +27,12 @@ class Vehicle
   end
 
   def plate_type 
+   
     if 
-      @engine == :antique 
+      antique?  
       :antique 
     elsif 
-     @engine == :ev 
+      electric_vehicle?
       :ev 
     else
         
