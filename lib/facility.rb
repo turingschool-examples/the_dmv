@@ -40,6 +40,10 @@ class Facility
     registrant.license_data[:written] = true
   end
 
+  def administer_road_test(registrant)
+    # require 'pry'; binding.pry
+    return false unless registrant.license_data[:written] == true
+  end
 
 
 end
