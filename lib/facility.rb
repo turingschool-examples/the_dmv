@@ -23,15 +23,19 @@ class Facility
   end
 
   def register_vehicle(car)
-    age = 2023 - car.year
-    registered_vehicles << car
-    car.register
-    if age >= 25
-      @collected_fees += 25
-    elsif (age < 25) && (car.engine != :ev)
-      @collected_fees += 100
+    if car.plate_type == nil
+      age = 2023 - car.year
+      registered_vehicles << car
+      car.register
+      if age >= 25
+        @collected_fees += 25
+      elsif (age < 25) && (car.engine != :ev)
+        @collected_fees += 100
+      else
+        @collected_fees += 200
+      end
     else
-      @collected_fees += 200
+      nil
     end
   end
 end
