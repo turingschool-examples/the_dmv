@@ -13,7 +13,7 @@ class WaVehicleFactory
       @vehicles.each do |vehicle|
         vehicle[:vin] = vehicle.delete :vin_1_10
         vehicle[:year] = vehicle.delete :model_year
-        vehicle[:engine] = :ev        
+        vehicle[:engine] = :ev   
       end
       @vehicles.map! do |vehicle|
         Vehicle.new(vehicle)

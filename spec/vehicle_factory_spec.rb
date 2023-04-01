@@ -36,7 +36,7 @@ RSpec.describe WaVehicleFactory do
 
     it 'assigns an :ev engine type' do 
       @factory.create_vehicles(@wa_ev_registrations)
-
+require 'pry'; binding.pry
       expect(@factory.vehicles[0].engine).to eq(:ev)
     end
   end
