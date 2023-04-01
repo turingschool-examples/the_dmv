@@ -26,9 +26,10 @@ RSpec.describe VehicleFactory do
       expect(new_cars[3].model).to eq("e-Golf")
       expect(new_cars[4].vin).to eq("WVWKR7AU7K")
       expect(new_cars[6].year).to eq("2019")
+      expect(factory.create_vehicles(wa_ev_registrations)[16].year).to eq("2013")
     end
   end
-  describe "Iteration 4, option 2"
+  describe "Iteration 4, option 2" do
     it "finds the most popular make registered" do
       factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
@@ -38,4 +39,15 @@ RSpec.describe VehicleFactory do
       
       expect(factory.most_popular(wa_ev_registrations)).to eq("TESLA")
     end
+
+    it "Counts registered vehicle for a model year" do
+      factory = VehicleFactory.new
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+
+      count = factory.count_model_year(wa_ev_registrations)
+
+      expect(factory.count_model_year(wa_ev_registrations)).to eq(count)
+      expect(factory.count_model_year(wa_ev_registrations)).to eq({"2014"=>38, "2019"=>118, "2016"=>103, "2012"=>31, "2017"=>123, "2018"=>137, "2023"=>16, "2013"=>118, "2020"=>70, "2015"=>54, "2021"=>73, "2022"=>87, "2011"=>32})
+    end
+  end
 end
