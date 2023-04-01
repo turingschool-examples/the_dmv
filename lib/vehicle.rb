@@ -41,7 +41,7 @@ class Vehicle
     if (engine == :ice) && (age < 25)
       @plate_type = :regular
     elsif (engine == :ice) && (age >= 25)
-      @plate_type = :classic
+      @plate_type = :antique
     else
       @plate_type = :ev
     end
