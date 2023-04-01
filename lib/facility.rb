@@ -44,7 +44,11 @@ class Facility
 
   def administer_written_test(registrant)
     if services.include?('Written Test')
-      registrant.license_data[:written] = true
+      if registrant.permit? == true
+        registrant.license_data[:written] = true
+      elsif registrant.permit? == false
+        registrant.license_data[:written] = false
+      end
     else
       false
     end
