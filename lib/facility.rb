@@ -23,15 +23,14 @@ class Facility
     date = Time.new.strftime("%d/%m/%Y")
     vehicle.registration_date = Time.new.strftime("%d/%m/%Y")
     
-  #  new_array = @registered_vehicles.each do |vehicle|
-  #     @registered_vehicles << vehicle
-  #   end
-  # @plate_type = vehicle.plate_type
-  @registered_vehicles << vehicle
-  
-  # @registered_vehicles << vehicle
-  @registered_vehicles
-  # require 'pry'; binding.pry
+    return unless @services.include?('Vehicle Registration')
+    @registered_vehicles << vehicle
+    @plate_type = vehicle.plate_type
+    @collected_fees += 100 if vehicle.plate_type == :regular
+    @collected_fees += 25 if vehicle.plate_type == :antique
+    @collected_fees += 200 if vehicle.plate_type == :ev
+    @registered_vehicles
+    
   end
 
 
