@@ -36,4 +36,13 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe "#regular_vehicle?" do
+    it "can determine if a vehicle is a regular vehichle" do
+
+      expect(@cruz.regular_vehichle?).to eq(true)
+      expect(@bolt.regular_vehichle?).to eq(false)
+      expect(@camaro.regular_vehichle?).to eq(false)
+    end
+  end
 end
