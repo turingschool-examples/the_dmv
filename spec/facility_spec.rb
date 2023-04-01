@@ -291,16 +291,12 @@ RSpec.describe Facility do
     describe "Road Test" do
       
       it "CAN'T administer road test w/o a written test" do
-          #registrant_3 isn't old enough for written test
-          #registrant_4 is old enough for written test 
 
         expect(@facility_1.administer_road_test(@registrant_3)).to be(false)
-        #=> false
         
         @registrant_3.earn_permit
         
         expect(@facility_1.administer_road_test(@registrant_3)).to be(false)
-        #=> false
         
         expected = {
           :written=>false, 
@@ -309,44 +305,40 @@ RSpec.describe Facility do
         }
 
         expect(@registrant_3.license_data).to eq(expected)
-        #=> {:written=>false, :license=>false, :renewed=>false}
-
-        
         
       end
       
-      xit "CAN'T administer road test w/o adding service" do
+      it "CAN'T administer road test w/o adding service" do
         #already has permit so needs written test
-        @registrant_1.administer_written_test
-        
+        @facility_1.add_service("Written Test")
+        @facility_1.administer_written_test(@registrant_1)
         expected_1 = {
           :written=>true, 
           :license=>false, 
           :renewed=>false
         }
-
-        expect(@registrant_1.license_data).to be(expected_1)
+        
+        expect(@registrant_1.license_data).to eq(expected_1)
         
         expect(@facility_1.administer_road_test(@registrant_1)).to be(false)
-        #=> false
 
         expect(@facility_1.add_service('Road Test')).to eq(["Written Test", "Road Test"])
-        #=> ["Written Test", "Road Test"]
         
         expect(@facility_1.administer_road_test(@registrant_1)).to be(true)
-        #=> true
         
         expected_2 = {
           :written=>true, 
           :license=>true, 
           :renewed=>false
         }
-        expect(@registrant_1.license_data).to be(expected_2)
-        #=> {:written=>true, :license=>true, :renewed=>false}
+
+        expect(@registrant_1.license_data).to eq(expected_2)
+
       end
 
         xit "CAN administer road_test with written test" do
-
+          
+          @facility_1.add_service("Written Test")
           @registrant_2.earn_permit
           @registrant_2.administer_written_test
   
