@@ -46,4 +46,39 @@ class Facility
     @collected_fees += total_fee
     total_fee
   end
+
+  def administer_written_test(registrant)
+    if @services.include?('Written Test') &&
+      registrant.read_license_data[:written] == false &&
+      registrant.permit? == true &&
+      registrant.age >= 16
+
+      registrant.written_pass
+    else
+      false
+    end
+  end
+
+  def administer_road_test(registrant)
+    if @services.include?('Road Test') &&
+      registrant.read_license_data[:written] == true &&
+      registrant.read_license_data[:license] == false &&
+      registrant.age >= 16
+
+      registrant.road_pass
+    else
+      false
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    if @services.include?('Renew License') &&
+      registrant.read_license_data[:written] == true &&
+      registrant.read_license_data[:license] == true
+
+      registrant.license_renewal
+    else
+      false
+    end
+  end
 end
