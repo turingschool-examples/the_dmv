@@ -1,5 +1,6 @@
 require 'spec_helper'
 require './lib/facility'
+require './lib/registrant'
 
 RSpec.describe Facility do
   before(:each) do
@@ -81,7 +82,10 @@ RSpec.describe Facility do
       
       facility_1.add_service('Written Test')
       expect(facility_1.services).to eq(["Written Test"])
+      expect(facility_1.administer_written_test(registrant_1)).to eq(true)
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
 
+       expect(registrant_2.age).to be(16)
     end
   end
 end

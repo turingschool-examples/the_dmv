@@ -41,4 +41,4 @@ RSpec.describe Vehicle do
       expect(@cruz.plate_type).to eq(:regular)
     end
 
-end
+  end

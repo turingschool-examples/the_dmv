@@ -1,7 +1,7 @@
 class Facility
   attr_reader :name, :address, :phone,
               :services, :registered_vehicles, :collected_fees
-
+              :administer_written_test
   def initialize(name:, address:, phone:)
     @name = name
     @address = address
@@ -9,6 +9,7 @@ class Facility
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
+    @administer_written_test
   end
 
   def add_service(service)
@@ -36,7 +37,7 @@ class Facility
     return false unless services.include?("Written Test")
 
     if registrant.age >= 16 && registrant.permit? == true
-      true
+      registrant.license_data[:written] = true
     else 
       false
     end
