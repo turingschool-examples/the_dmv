@@ -35,8 +35,14 @@ class Facility
     else  
       @registered_vehicles = []
     end 
+  end
 
-   
+  def administer_written_test(registrant)
+    if registrant.permit? && registrant.age >= 16 && @services.include?("Written Test")
+      true 
+    else  
+      false 
+    end
   end
 
 
