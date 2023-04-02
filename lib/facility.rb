@@ -23,7 +23,16 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    @registered_vehicles << vehicle
-    @registration_date = vehicle.registration_date = Date.today
+    if vehicle.registration_date == nil 
+      @registered_vehicles << vehicle
+      @registration_date = vehicle.registration_date = Date.today
+      if vehicle.model == "Cruz" 
+        @collected_fees += 100
+      elsif vehicle.model == "Bolt"
+        @collected_fees += 225
+      end
+    else 
+      nil
+    end
   end
 end
