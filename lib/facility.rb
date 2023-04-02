@@ -30,9 +30,7 @@ class Facility
           elsif vehicle.plate_type == :regular
             @collected_fees += 100
         end
-        
     end
   end
-
 
 end

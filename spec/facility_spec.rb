@@ -52,11 +52,39 @@ RSpec.describe Facility do
   end
   
   describe '#collected_fees' do
-  it 'can collect fees' do
-    @facility_1.add_service('Vehicle Registration')
-    @facility_1.register_vehicle(@cruz)
-    binding.pry
-    expect(@facility_1.collected_fees).to eq(100)
+    it 'can collect fees' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.collected_fees).to eq(100)
+    end
+  end
+
+
+  describe 'multiple vehicles test' do
+    it 'can register and collect fees fot multiple vehicles' do
+      
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro])
+      
+      @facility_1.register_vehicle(@bolt)
+      expect(@facility_1.collected_fees).to eq(325)
+    end
+  end
+  
+  describe "can't register vehicle" do
+    it 'will not register vehicle if not offered at facility' do
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.services).to eq([])
+      
+      @facility_2.register_vehicle(@bolt)
+      
+      
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
+
     end
   end
 end
