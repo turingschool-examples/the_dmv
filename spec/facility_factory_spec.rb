@@ -1,3 +1,7 @@
+require './lib/facility_factory'
+require './lib/dmv_data_service'
+require './lib/facility'
+
 RSpec.describe FacilityFactory do
 
   it 'exists' do
