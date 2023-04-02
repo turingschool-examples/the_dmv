@@ -32,13 +32,17 @@ RSpec.describe FacilityFactory do
       expect(@fac_factory.facilities[0].collected_fees).to eq(0)
     end
 
+    it 'returns an array of created facilities' do 
+      expect(@fac_factory.create_facilities(@or_dmv_office_locations)).to eq(@fac_factory.facilities)
+    end
+
     describe 'it can work with a NY data source' do 
       it 'can create hashes of facility data' do 
         expect(@fac_factory.create_facilities(@ny_dmv_office_locations)).to be_a(Array)
         expect(@fac_factory.facilities.length).not_to eq(0)
       end
   
-      xit 'can create facility objects with attributes' do
+      it 'can create facility objects with attributes' do
         @fac_factory.create_facilities(@ny_dmv_office_locations)
   
         expect(@fac_factory.facilities[0]).to be_a(Facility)
@@ -50,6 +54,9 @@ RSpec.describe FacilityFactory do
         expect(@fac_factory.facilities[0].collected_fees).to eq(0)
       end
 
+      xit 'returns an array of created facilities' do 
+        expect(@fac_factory.create_facilities(@ny_dmv_office_locations)).to eq(@fac_factory.facilities)
+      end
     end
   end
 end
