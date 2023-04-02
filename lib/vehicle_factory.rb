@@ -5,11 +5,12 @@ class VehicleFactory
 
   def initialize
     # @city = city
-    @database = DmvDataService.new.wa_ev_registrations
+    # @database = DmvDataService.new.wa_ev_registrations
     @new_vehicles = []
   end
   
-  def create_vehicles
+  def create_vehicles(database = nil)
+    # require 'pry'; binding.pry
     vehicle_details = {
       vin: nil, 
       year: nil , 
@@ -17,13 +18,14 @@ class VehicleFactory
       model: nil, 
       engine: :ev
     }
-    new_car = Vehicle.new(vehicle_details)
-    vehicle_details[:make] = @database[0][:make]
-    vehicle_details[:vin] = @database[0][:vin_1_10]
-    require 'pry'; binding.pry
-    @new_vehicles << new_car
-    # require 'pry'; binding.pry
-    # new_car.engine
+    empty_new_car = Vehicle.new(vehicle_details)
+    return @new_vehicles << empty_new_car unless database.class == Array
+    vehicle_details[:make] = database[0][:make]
+    vehicle_details[:model] = database[0][:model]
+    vehicle_details[:vin] = database[0][:vin_1_10]
+    vehicle_details[:year] = database[0][:model_year]
+    full_new_car = Vehicle.new(vehicle_details)
+    @new_vehicles << full_new_car
     # require 'pry'; binding.pry
   end
   
