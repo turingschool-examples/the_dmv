@@ -8,7 +8,12 @@ RSpec.describe Facility do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )  
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+
+    @registrant_1 = Registrant.new('Bruce', 18, true )
+    @registrant_2 = Registrant.new('Penny', 16 )
+    @registrant_3 = Registrant.new('Tucker', 15 )
   end
+  
   describe '#initialize' do
     it 'can initialize' do
       expect(@facility_1).to be_an_instance_of(Facility)
@@ -29,7 +34,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe 'register vehicles' do
+  describe '#register vehicles' do
     it 'can register a vehicle' do
       @facility_1.add_service('Vehicle Registration')
       expect(@cruz.registration_date).to eq(nil)
@@ -65,6 +70,12 @@ RSpec.describe Facility do
       expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.collected_fees).to eq(0)
+    end
+  end
+
+  describe '#administer tests' do
+    it 'can administer a written test' do
+    
     end
   end
 end
