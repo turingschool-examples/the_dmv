@@ -20,16 +20,8 @@ class Facility
     return nil unless self.performs_service?(service)
     vehicle.registration_date = Date.today
     @registered_vehicles << vehicle
-    if vehicle.antique?
-      @collected_fees += 25
-      vehicle.plate_type = :antique
-    elsif vehicle.electric_vehicle?
-      @collected_fees += 200
-      vehicle.plate_type = :ev
-    else
-      @collected_fees += 100
-      vehicle.plate_type = :regular
-    end
+    fee_type = vehicle.set_plate
+    self.collect_fees(fee_type)
     @registered_vehicles
   end
 
@@ -50,5 +42,15 @@ class Facility
 
   def performs_service?(service)
     true if @services.include?(service)
+  end
+
+  def collect_fees(plate_type)
+    if plate_type == :ev
+      @collected_fees += 200
+    elsif plate_type == :antique
+      @collected_fees += 25
+    elsif plate_type == :regular
+      @collected_fees += 100
+    end
   end
 end
