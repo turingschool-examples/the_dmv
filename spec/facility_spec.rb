@@ -442,5 +442,11 @@ RSpec.describe Facility do
         expect(registrant_2.license_data).to eq(r2_data)
       end
     end
+
+    context "reads from external data sets" do
+      it "can read" do 
+        
+      end
+    end
   end
 end

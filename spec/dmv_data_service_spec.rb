@@ -9,7 +9,7 @@ RSpec.describe DmvDataService do
       expect(@dds).to be_an_instance_of(DmvDataService)
     end
   end
-
+require 'pry'; binding.pry
   describe '#load_data' do
     it 'can load data from a given source' do
       source = 'https://data.oregon.gov/resource/rj4w-f4jc.json'
