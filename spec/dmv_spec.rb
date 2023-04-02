@@ -1,5 +1,7 @@
 require 'spec_helper'
 require './lib/dmv'
+require './lib/facility'
+require './lib/vehicle'
 
 RSpec.describe Dmv do
   before(:each) do
@@ -41,4 +43,6 @@ RSpec.describe Dmv do
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
+
+  
 end
