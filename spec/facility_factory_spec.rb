@@ -54,7 +54,7 @@ RSpec.describe FacilityFactory do
         expect(@fac_factory.facilities[0].collected_fees).to eq(0)
       end
 
-      xit 'returns an array of created facilities' do 
+      it 'returns an array of created facilities' do 
         expect(@fac_factory.create_facilities(@ny_dmv_office_locations)).to eq(@fac_factory.facilities)
       end
     end

@@ -16,11 +16,7 @@ attr_reader :facilities
       else
       # NY facilities:
       facility[:name] = facility.delete :office_name
-      facility[:address] = "#{facility[:street_address_line_1]}, 
-                           #{facility[:street_address_line_2]},
-                           #{facility[:city]},
-                           #{facility[:state]},
-                           #{facility[:zip_code]}"
+      facility[:address] = "#{facility[:street_address_line_1]}, #{facility[:street_address_line_2]}, #{facility[:city]}, #{facility[:state]}, #{facility[:zip_code]}"
       facility[:phone] = facility.delete :public_phone_number
       end
     end
