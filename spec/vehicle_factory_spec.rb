@@ -15,12 +15,12 @@ RSpec.describe VehicleFactory do
       expect(@factory).to be_an_instance_of(VehicleFactory)
     end
     
-    it "has a database to access" do
+    # it "has a database to access" do
       
-      expect(@factory.database).to eq(@wa_ev_registrations)
-      expect(@factory.database).to be_an(Array)
+    #   expect(@factory.database).to eq(@wa_ev_registrations)
+    #   expect(@factory.database).to be_an(Array)
       
-    end
+    # end
   end
   
   describe "create_vehicles method" do 
@@ -36,6 +36,7 @@ RSpec.describe VehicleFactory do
     
     it "make a new vehicle with a default make of nil" do
       @factory.create_vehicles
+      # require 'pry'; binding.pry
       expect(@factory.new_vehicles[0].make).to eq(nil)
 
     end
@@ -70,37 +71,37 @@ RSpec.describe VehicleFactory do
 
     end
 
-    it "does" do
-      @factory.create_vehicles
+    it "can create a new vehicle with make information from database" do
+      @factory.create_vehicles(@wa_ev_registrations)
 
-      # require 'pry'; binding.pry
+      expect(@factory.new_vehicles[0].make).to eq("SMART")
+    end
+
+    it "can create a new vehicle with model information from database" do
+      @factory.create_vehicles(@wa_ev_registrations)
+
+      expect(@factory.new_vehicles[0].make).to eq("SMART")
+      expect(@factory.new_vehicles[0].model).to eq("Fortwo Electric Drive")
+    end
+
+    it "can create a new vehicle with vin information from database" do
+      @factory.create_vehicles(@wa_ev_registrations)
+
+      expect(@factory.new_vehicles[0].vin).to eq("WMEEJ9AA7E")
+    end
+
+    it "can create a new vehicle with model_year information from database" do
+      @factory.create_vehicles(@wa_ev_registrations)
+
+      expect(@factory.new_vehicles[0].year).to eq("2014")
+    end
+
+    it "next steps" do
+      @factory.create_vehicles(@wa_ev_registrations)
+
+      require 'pry'; binding.pry
     end
     
-    # xit "" do
-    #   expect(@factory.create_vehicles(wa_ev_registrations)).to eq("SMART")
-    #   expect(@factory.model).to eq(nil)
-    # end
-    
-    # xit "plate_type" do
-    #   expect(@factory.plate_type).to eq(nil)
-    # end
-    
-    # xit "registration date" do
-    #   expect(@factory.registration_date).to eq(nil)
-    # end
-    
-    # xit "vin number defaults to nil" do
-    #   expect(@factory.vin).to eq(nil)
-    # end
-    
-    # xit "year defaults to nil" do
-    #   expect(@factory.year).to eq(nil)
-    # end
-    
-    # xit "can make a vehicle with a make from the database " do 
-      
-      
-    #   expect(@factory.make).to eq("SMART")
       
     # end
     
