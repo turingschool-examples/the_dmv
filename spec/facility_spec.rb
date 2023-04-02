@@ -62,10 +62,30 @@ RSpec.describe Facility do
       expect(@cruz.plate_type).to eq(:regular)
     end
 
-    it 'creates a list of registered vehicles' do
+    it 'adds to the list of registered vehicles' do
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.registered_vehicles).to eq([@cruz])
     end
+
+    it 'adds to the total collected fees' do 
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.collected_fees).to eq(100)
+      expect(@facility_1.register_vehicle(@camaro)).to eq([@cruz, @camaro])
+      expect(@camaro.registration_date).to eq(Date.today)
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@facility_1.register_vehicle(@bolt)).to eq([@cruz, @camaro,@bolt])
+      expect(@bolt.registration_date).to eq(Date.today)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro,@bolt])
+      expect(@facility_1.collected_fees).to eq(325)
+    end
+
+    # it 'registers vehicles for facility 2 as well' do
+  
+
+
+    # end
+
 
   end
 
