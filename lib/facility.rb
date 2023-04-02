@@ -108,6 +108,7 @@ class Facility
 
   def renew_drivers_license(registrant)
     if renew_drivers_license_qualification_check(registrant) && check_service_renew_drivers_license('Renew License')
+      registrant.license_data[:renewed] = true
       true
     else
       false
