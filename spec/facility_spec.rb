@@ -106,7 +106,6 @@ RSpec.describe Facility do
   describe '#administer_written_test' do
     it 'can give a written test' do
       
-      
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
 
       @facility_1.add_service('Written Test')
@@ -115,10 +114,7 @@ RSpec.describe Facility do
       expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
 
       @registrant_2.earn_permit
-      
-      
       expect(@facility_1.administer_written_test(@registrant_2)).to eq(true)
-     
     end
   end
 
@@ -134,7 +130,6 @@ RSpec.describe Facility do
       expect(@facility_1.administer_raod_test(@registrant_1)).to eq(false)
 
       @facility_1.administer_written_test(@registrant_1)
-      
       expect(@facility_1.administer_raod_test(@registrant_1)).to eq(true)
     end
   end
@@ -144,17 +139,40 @@ RSpec.describe Facility do
     it 'can renew a drivers license' do
 
       expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
+
       @facility_1.add_service('Written Test')
       @facility_1.add_service('Road Test')
-      binding.pry
       expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
+
       @facility_1.add_service('Renew License')
-      binding.pry
       @facility_1.administer_written_test(@registrant_1)
       @facility_1.administer_raod_test(@registrant_1)
       expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(true)
-      binding.pry
     end
   end
+
+  describe 'mulitple registrants test' do
+    it 'can run with multiple registrants' do
+
+      expect(@facility_1.services).to eq([])
+
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Renew License')
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
+
+      @registrant_2.earn_permit
+      @facility_1.administer_written_test(@registrant_2)
+      @facility_1.administer_raod_test(@registrant_1)
+      @facility_1.renew_drivers_license(@registrant_1)
+      expect(@facility_1.renew_drivers_license(@registrant_2)).to eq(false)
+
+      @facility_1.administer_raod_test(@registrant_2)
+      expect(@facility_1.renew_drivers_license(@registrant_2)).to eq(true)
+    end
+  end
+
+
 
 end
