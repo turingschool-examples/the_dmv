@@ -38,13 +38,20 @@ class Facility
       vehicle.plate_type = :regular
     end
   end
-# aministering a written test is being called on a Facility object.
+  # aministering a written test is being called on a Facility object.
   def administer_written_test(registrant)
-    if @services.include?("Written Test") && (registrant.permit? && registrant.age >= 16)
-    registrant.license_data[:written] = true
-    end
-    registrant.license_data[:written]
-# last line of code needs to call for a return.
-end
+    registrant.license_data[:written] = true if eligible?(registrant)
+    eligible?(registrant)
+  # last line of code needs to call for a return.
+  end
+                              # registrant, in this instance, is a local parameter.
+  def administer_road_test(registrant)
+    # if by default looks for a boolean value of "true"
+   registrant.license_data[:license] = true if eligible?(registrant) && registrant.license_data[:written]
+   registrant.license_data[:written] && eligible?(registrant)
+  end
 
+  def eligible?(registrant)
+    registrant.permit? && registrant.age >= 16 && (@services.include?("Written Test") || @services.include?("Road Test"))
+  end
 end
