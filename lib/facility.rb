@@ -77,5 +77,13 @@ class Facility
     @services.include? 'Road Test'
   end
 
+  def road_test_qualification_check(registrant)
+    if registrant.license_data[:written] == true
+      true
+    else
+      false
+    end
+  end
   
+ 
 end
