@@ -15,3 +15,5 @@ end
 # I need to call on the database key/value pairs 
 # to build vehicles from that information. 
 # I need to instantiate an empty array? 
+
+can i see any of this
