@@ -182,12 +182,12 @@ RSpec.describe Facility do
 
       expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
       
-      expected = {
+      expected_3 = {
                 :written=>false, 
                 :license=>false, 
                 :renewed=>false
               }
-      expect(@registrant_3.license_data).to eq(expected)
+      expect(@registrant_3.license_data).to eq(expected_3)
 
       expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
       
@@ -200,26 +200,32 @@ RSpec.describe Facility do
       
       expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
 
-      expected = {
+      expected_1 = {
                 written: true, 
                 license: true, 
                 renewed: false
       }
-      expect(@registrant_1.license_data).to eq(expected)
+      expect(@registrant_1.license_data).to eq(expected_1)
      
       @registrant_2.earn_permit
       @facility_1.administer_written_test(@registrant_2)
 
       expect(@facility_1.administer_road_test(@registrant_2)).to eq(true)
 
-      expected = {
+      expected_2 = {
          written: true, 
          license: true,
          renewed: false
       }
 
+      expect(@registrant_2.license_data).to eq(expected_2)
+
     end
   end
 
               # renew_license
+# Make sure to "add" all the services that are returned in the assertion (expect statement)
+# Make sure to call all instances with @ first (@registrant_1, @registrant_2, @registrant_3)
+
+
 end
