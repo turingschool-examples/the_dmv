@@ -16,7 +16,7 @@ RSpec.describe WaVehicleFactory do
   end
 
   describe '#create_vehicles' do 
-    it 'can create Vehicle objects using dmv data' do 
+    it 'can create hashes of vehicle data using dmv data' do 
       expect(@factory.create_vehicles(@wa_ev_registrations)).to be_a(Array) 
       expect(@factory.vehicles.length).not_to eq(0)
     end
