@@ -105,7 +105,21 @@ RSpec.describe Facility do
     
     end
 
+    it 'Facility 2 does not have any services' do
+    
+      facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
 
 
-end
+      expect(facility_2.registered_vehicles).to eq([])
+      expect(facility_2.services).to eq([])
+
+      facility_2.register_vehicle(bolt)
+      
+      expect(facility_2.registered_vehicles).to eq([])
+      expect(facility_2.collected_fees).to eq(0)
+    end
+
+  end
 end
