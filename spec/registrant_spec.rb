@@ -43,7 +43,7 @@ require 'spec_helper'
 
       expected = {
                   written:   false,
-                  licensed:  false,
+                  license:  false,
                   renewed:   false
                   }       
       expect(@registrant_1.license_data).to eq(expected)
