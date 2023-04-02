@@ -232,8 +232,11 @@ RSpec.describe Facility do
   describe "renew_license" do
     it "can renew drivers license" do
 
-      @facility_1.add_service("Written Test", "Road Test")
+      @facility_1.add_service("Written Test")
+      @facility_1.add_service("Road Test")
 
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
       expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
 
       @facility_1.add_service("Renew License")

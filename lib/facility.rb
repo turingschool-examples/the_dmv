@@ -51,9 +51,17 @@ class Facility
    registrant.license_data[:written] && eligible?(registrant)
   end
 
-  
+  def renew_drivers_license(registrant)
+    registrant.license_data[:license] = true if eligible?(registrant)
+    end
+
+  end
 
   def eligible?(registrant)
     registrant.permit? && registrant.age >= 16 && (@services.include?("Written Test") || @services.include?("Road Test"))
+  end
+
+  def eligible_for_renewal?(registrant)
+    if registrant.license_data[:license] == true && @services.include?("Renew License")
   end
 end
