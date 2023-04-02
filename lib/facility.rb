@@ -85,5 +85,12 @@ class Facility
     end
   end
   
- 
+  def administer_road_test(registrant)
+    if road_test_qualification_check(registrant) && check_service_road_test('Road Test')
+      registrant.license_data[:license] = true
+      true
+    else
+      false
+    end
+  end
 end
