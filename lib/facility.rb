@@ -20,12 +20,16 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    if @services.include? 'Vehicle Registration'
+    if check_service_vehicle_registration('Vehicle Registration')
       registered_vehicles << vehicle
       vehicle.registration_date = Date.today
       categorize_plate(vehicle)
       calculate_fees(vehicle)
     end
+  end
+
+  def check_service_vehicle_registration(services)
+    @services.include? 'Vehicle Registration'
   end
 
   def calculate_fees(vehicle)
