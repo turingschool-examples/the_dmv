@@ -1,4 +1,4 @@
-require 'faraday'
+require 'faraday' #http 
 require 'json'
 
 class DmvDataService

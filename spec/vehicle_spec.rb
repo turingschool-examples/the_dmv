@@ -33,4 +33,33 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
-end
+
+    it "determines if car is registered" do
+      expect(@cruz.registered?).to eq(false)
+      expect(@bolt.registered?).to eq(false)
+      expect(@camaro.registered?).to eq(false)
+      @cruz.get_registered
+
+      expect(@cruz.registered?).to eq(true)
+    end
+
+
+    
+ 
+
+      
+    
+
+
+
+
+
+  end
+
+    
+    
+    
+    
+    
+  
+

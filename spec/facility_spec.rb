@@ -1,4 +1,7 @@
 require 'spec_helper'
+require './lib/facility'
+require './lib/vehicle'
+
 
 RSpec.describe Facility do
   before(:each) do
@@ -23,4 +26,7 @@ RSpec.describe Facility do
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
+
+
+
 end
