@@ -7,6 +7,7 @@ RSpec.describe FacilityFactory do
     @mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
     @oregon_facilities = FacilityFactory.new.create_facility_oregon(@or_dmv_office_locations)
     @new_york_facilities = FacilityFactory.new.create_facility_new_york(@ny_dmv_office_locations)
+    @missouri_facilities = FacilityFactory.new.create_facility_missouri(@mo_dmv_office_locations)
   end
 
   describe '#initialize' do
@@ -57,6 +58,13 @@ RSpec.describe FacilityFactory do
     it 'can find the address of DMV offices in New York' do
       expect(@new_york_facilities[0].address).to eq("407 SELDEN RD  SELDEN NY 11784")
       expect(@new_york_facilities[@new_york_facilities.count - 1].address).to eq("15 MERRITT AVENUE  MILLBROOK NY 12545")
+    end
+  end
+
+  describe '#create_facility_missouri' do
+    it 'can create facilities from Missouri DMV office data' do
+      expect(@missouri_facilities).to be_a(Array)
+      expect(@missouri_facilities.count).to eq(177)
     end
   end
   
