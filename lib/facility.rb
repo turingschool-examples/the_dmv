@@ -48,7 +48,7 @@ class Facility
     end
   end
 
-  def check_service_written_test
+  def check_service_written_test(services)
     @services.include? 'Written Test'
   end
 
@@ -61,7 +61,7 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    if written_test_qualification_check(registrant) && check_service_written_test
+    if written_test_qualification_check(registrant) && check_service_written_test('Written Test')
       registrant.license_data[:written] = true
       true
     else
