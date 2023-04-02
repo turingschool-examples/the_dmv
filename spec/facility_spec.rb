@@ -372,37 +372,21 @@ RSpec.describe Facility do
         facility_1.administer_written_test(registrant_2)
         registrant_3.earn_permit
         facility_1.administer_written_test(registrant_3)
-        
-        expect(facility_1.administer_road_test(registrant_3)).to be false
-        registrant_3.earn_permit
-        expect(facility_1.administer_road_test(registrant_3)).to be false
-        
-        r3_data = {
-          :written  =>  false,
-          :license  =>  false,
-          :renewed  =>  false
-        }
-        expect(registrant_3.license_data).to eq(r3_data)
-        expect(facility_1.administer_road_test(registrant_1)).to be false
-        
         facility_1.add_service("Road Test")
-        expect(facility_1.services).to eq(["Written Test", "Road Test"])
-        expect(facility_1.administer_road_test(registrant_1)).to be true
+        facility_1.administer_road_test(registrant_1)
+        facility_1.administer_road_test(registrant_2)
         
+        facility_1.renew_drivers_license(registrant_1)
+        expect(registrant_1.license_data[:renewed]).to be false
+        facility_1.add_service("Renew License")
+        expect(facility_1.services).to eq(["Written Test", "Road Test", "Renew License"])
+        expect(facility_1.renew_drivers_license(registrant_1)).to be true
         r1_data = {
           :written  =>  true,
           :license  =>  true,
-          :renewed  =>  false
+          :renewed  =>  true
         }
         expect(registrant_1.license_data).to eq(r1_data)
-        expect(facility_1.administer_road_test(registrant_2)).to be true
-        
-        r2_data = {
-          :written  =>  true,
-          :license  =>  true,
-          :renewed  =>  false
-        }
-        expect(registrant_2.license_data).to eq(r2_data)
       end
     end
   end
