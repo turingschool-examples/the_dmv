@@ -2,6 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Facility do
   before(:each) do
+    @facility_new = Facility.new({name: nil, address: nil, phone: nil})
     @facility   = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014'})
     @facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014'})
     @facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
@@ -214,6 +215,20 @@ RSpec.describe Facility do
       expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
     end
   end
-require 'pry'; binding.pry
+
+  describe "creating new facilities from existing data sources" do
+    it "creates Oregon facility" do
+      require 'pry'; binding.pry
+      @facility_new.create_facility_oregon(@or_dmv_office_locations)
+    end
+
+    # it "creates New York facility" do
+      
+    # end
+
+    # it "creates Missouri faciilty" do
+
+    # end
+  end
 
 end

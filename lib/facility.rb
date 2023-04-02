@@ -91,32 +91,40 @@ class Facility
     end
   end 
 
-  # def create_vehicles(location)
-  #   new_car_list = []
-  #   location.each do |vehicle|
-  #     car_hash = {vin: nil, year: nil, make: nil, model: nil, engine: :ev}
-  #     car_hash[:vin] = vehicle[:vin_1_10]
-  #     car_hash[:year] = vehicle[:model_year]
-  #     car_hash[:make] = vehicle[:make]
-  #     car_hash[:model] = vehicle[:model]
-  #     new_vehicle = Vehicle.new(car_hash)
-  #     new_car_list << new_vehicle
-  #   end
-  #   new_car_list
+
+  def create_facility_oregon(location)
+    new_facility_list1 = []
+    location.each do |station|
+      facility_or_hash = {name: nil, address: nil, phone: nil}
+      facility_or_hash[:name] = station[:title]
+      facility_or_hash[:address] = station[:location_1][:human_address]
+      facility_or_hash[:phone] = station[:phone_number]
+      new_facility_1 = Facility.new(facility_or_hash)
+      new_facility_list1 << new_facility_1
+    end
+    new_facility_list1
+  end
+
+  def create_facility_ny(location)
+    new_facility_list2 = []
+    location.each do |station|
+      facility_ny_hash = {name: nil, address: nil, phone: nil}
+      facility_ny_hash[:name] = station[:office_name]
+      facility_ny_hash[:address] = station[:street_address_line_1][:city][:state][:zip_code]
+      facility_ny_hash[:phone] = station[:public_phone_number]
+      new_facility_2 = Facility.new(facility_ny_hash)
+      new_facility_list2 << new_facility_2
+    end
+    new_facility_list2
+  end
+
+  # def ny_address
+
   # end
 
-  def create_facility(oregon)
-    new_facility_1 = []
-    oregon.each do |station|
-      or_facility_hash = {name: nil, address: nil, phone: nil}
-      
-  end
-
-  def create_facility(new_york)
-  end
-
-  def create_facility(missouri)
-  end
+  # def create_facility_missouri(location)
+  #   new_facility_list3 = []
+  # end
 
 
 
