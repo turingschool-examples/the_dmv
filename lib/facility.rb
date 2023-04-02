@@ -91,4 +91,33 @@ class Facility
     end
   end 
 
+  # def create_vehicles(location)
+  #   new_car_list = []
+  #   location.each do |vehicle|
+  #     car_hash = {vin: nil, year: nil, make: nil, model: nil, engine: :ev}
+  #     car_hash[:vin] = vehicle[:vin_1_10]
+  #     car_hash[:year] = vehicle[:model_year]
+  #     car_hash[:make] = vehicle[:make]
+  #     car_hash[:model] = vehicle[:model]
+  #     new_vehicle = Vehicle.new(car_hash)
+  #     new_car_list << new_vehicle
+  #   end
+  #   new_car_list
+  # end
+
+  def create_facility(oregon)
+    new_facility_1 = []
+    oregon.each do |station|
+      or_facility_hash = {name: nil, address: nil, phone: nil}
+      
+  end
+
+  def create_facility(new_york)
+  end
+
+  def create_facility(missouri)
+  end
+
+
+
 end
