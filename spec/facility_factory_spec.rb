@@ -66,6 +66,21 @@ RSpec.describe FacilityFactory do
       expect(@missouri_facilities).to be_a(Array)
       expect(@missouri_facilities.count).to eq(177)
     end
+
+    it 'can find the name of DMV offices in Missouri' do
+      expect(@missouri_facilities[0].name).to eq("OAKVILLE")
+      expect(@missouri_facilities[@missouri_facilities.count - 1].name).to eq("BELTON")
+    end
+
+    it 'can find the phone number of DMV offices in Missouri' do
+      expect(@missouri_facilities[0].phone).to eq("(314) 887-1050")
+      expect(@missouri_facilities[@missouri_facilities.count - 1].phone).to eq("(816) 331-9400")
+    end
+
+    it 'can find the address of DMV offices in Missouri' do
+      expect(@missouri_facilities[0].address).to eq("3164 TELEGRAPH ROAD ST LOUIS MO 63125")
+      expect(@missouri_facilities[@missouri_facilities.count - 1].address).to eq("325 MAIN STREET BELTON MO 64012")
+    end
   end
   
 end
