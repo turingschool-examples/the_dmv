@@ -7,7 +7,7 @@ RSpec.describe Registrant do
   end
 
   describe "#initialize" do
-    it "can initialize" do
+    it "can initialize with attributes" do
       expect(@registrant_1).to be_an_instance_of(Registrant)
       expect(@registrant_1.name).to eq("Bruce")
       expect(@registrant_1.age).to eq(18)
@@ -29,6 +29,16 @@ RSpec.describe Registrant do
     it "can check registrants license data" do
       expect(@registrant_1.license_data).to be_a(Hash)
       expect(@registrant_2.license_data).to be_a(Hash)
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+  end
+
+  describe "#earn_permit" do
+    it "can have registrants earn a permit" do
+      expect(@registrant_2.permit?).to eq(false)
+      @registrant_2.earn_permit
+      expect(@registrant_2.permit?).to eq(true)
     end
   end
 end
