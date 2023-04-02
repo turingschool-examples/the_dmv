@@ -12,7 +12,7 @@ attr_reader :facilities
       # OR facilities
       if facility.has_key?(:location_1)
         facility[:name] = facility.delete :title
-        facility[:address] = facility.delete :location_1
+        facility[:address] = facility[:location_1][:human_address]
         facility[:phone] = facility.delete :phone_number   
       # MO facilities
       elsif facility.has_key?(:dorregionnumber)
@@ -22,12 +22,6 @@ attr_reader :facilities
       facility[:name] = facility.delete :office_name
       facility[:address] = "#{facility[:street_address_line_1]}, #{facility[:street_address_line_2]}, #{facility[:city]}, #{facility[:state]}, #{facility[:zip_code]}"
       facility[:phone] = facility.delete :public_phone_number
-      end
-    end
-
-    @facilities.each do |facility|
-      if facility[:address].has_key?(:human_address)
-      facility[:address] = facility[:address][:human_address]
       end
     end
 
