@@ -139,10 +139,13 @@ RSpec.describe Facility do
       @facility_1.add_service("Written Test")
 
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
+      
       expected = {
               :written=>true,
               :license=>false, 
-              :renewed=>false}
+              :renewed=>false
+            }
+
       expect(@registrant_1.license_data).to eq(expected)
       expect(@registrant_2.age).to eq(16)
       expect(@registrant_2.permit?).to eq(false)
@@ -260,14 +263,21 @@ RSpec.describe Facility do
                   renewed: false
                 }
       expect(@registrant_3.license_data).to eq(expected_3)
-      expect@facility_1.renew_drivers_license(@registrant_2).to eq(true)
+
+      @registrant_2.earn_permit
+
+      @facility_1.administer_written_test(@registrant_2)
+      @facility_1.administer_road_test(@registrant_2)
+      @facility_1.renew_drivers_license(@registrant_2)
+
+      expect(@facility_1.renew_drivers_license(@registrant_2)).to eq(true)
 
       expected_2 = {
                   written: true, 
                   license: true, 
                   renewed: true
                 }
-
+      expect(@registrant_2.license_data).to eq(expected_2)
 
     end
   end
