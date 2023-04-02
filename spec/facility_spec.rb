@@ -49,6 +49,10 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(0)
     end
 
+    it '#register_vehicle(vehicle)' do 
+      expect(@facility_1.register_vehicle(cruz)).to eq([@cruz])
+    end
+
   end
 
 end
