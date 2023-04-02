@@ -51,7 +51,11 @@ RSpec.describe Facility do
 
     it '#register_vehicle(vehicle)' do 
       expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
-      require 'pry'; binding.pry
+    end
+
+    it 'documents the date of registration' do
+      @facility_1.register_vehicle(@cruz)
+      expect(@cruz.registration_date).to eq(Date.today)
     end
 
   end
