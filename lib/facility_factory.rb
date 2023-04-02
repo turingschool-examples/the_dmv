@@ -6,6 +6,17 @@ attr_reader :facilities
 
   def create_facilities(source)
     @facilities << source
-    @facilities.flatten!
+    @facilities.flatten!(2)
+
+    @facilities.each do |facility|
+      facility[:name] = facility.delete :title
+      # facility[:address] = facility.delete [:location_1]
+      facility[:phone] = facility.delete :phone_number
+      facility[:address] = facility.delete [:human_address]
+    end
+
+    @facilities.map! do |facility|
+      Facility.new(facility)
+    end
   end
 end
