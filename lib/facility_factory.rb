@@ -4,14 +4,15 @@ require 'json'
 class FacilityFactory
   def create_facility_oregon(data)
     data.map do |facility|
-      address = JSON.parse(facility[:location_1][:human_address], symbolize_names: true)
-      address_formatted = address.values.join(" ")
+      address_unformatted = JSON.parse(facility[:location_1][:human_address], symbolize_names: true)
+      address = address_unformatted.values.join(" ")
 
       Facility.new({
         name: facility[:title],
-        address: address_formatted,
+        address: address,
         phone: facility[:phone_number]
       })
+
     end
   end
 
