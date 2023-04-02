@@ -195,6 +195,9 @@ RSpec.describe Facility do
       @facility_1.add_service("Road Test")
 
       expect(@facility_1.services).to eq(["Written Test", "Road Test"])
+
+      @facility_1.administer_written_test(@registrant_1)
+      
       expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
 
       expected = {
@@ -203,6 +206,9 @@ RSpec.describe Facility do
                 renewed: false
       }
       expect(@registrant_1.license_data).to eq(expected)
+     
+      @registrant_2.earn_permit
+      @facility_1.administer_written_test(@registrant_2)
 
       expect(@facility_1.administer_road_test(@registrant_2)).to eq(true)
 
@@ -211,7 +217,7 @@ RSpec.describe Facility do
          license: true,
          renewed: false
       }
-      
+
     end
   end
 end
