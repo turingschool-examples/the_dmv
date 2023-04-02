@@ -17,6 +17,7 @@ RSpec.describe VehicleFactory do
   describe "Adding vehicles to the factory" do
     
     it "creates a list of vehicles" do
+      require 'pry'; binding.pry
       @factory.create_vehicles(@wa_ev_registrations)
     end
 
