@@ -40,10 +40,16 @@ class Facility
   end
 
   def administer_written_test(tester)
-    if services.include? "Written Test"
-      tester.license_data[:written] = true
+    if (services.include? "Written Test") 
+      if (tester.permit?) && (tester.age >= 16)
+        tester.license_data[:written] = true
+        true
+      else
+        false
+      end
+    else
+      false
     end
-    false
   end
 
 end
