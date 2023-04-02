@@ -42,6 +42,16 @@ class Facility
     vehicle.registration_date = Date.today
   end
 
+  def administer_written_test(registrant)
+    if @services.include?('Written Test') && registrant.qualifies_for_written_test == true
+      registrant.license_data[:written] = true
+    else
+      false
+    end
+  end
+
+
+
 end
 
 
