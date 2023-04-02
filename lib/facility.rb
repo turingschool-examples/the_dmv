@@ -22,25 +22,29 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    if vehicle.year >= 25 && vehicle.engine == :ice
-      # require 'pry'; binding.pry
-      @collected_fees += 25
-      @plate_type = :antique 
-      @registered_vehicles << vehicle
-      @registration_date = DateTime.now
-      return vehicle
-    elsif vehicle[:year] < 25 && vehicle[:engine] == :ev
-      @collected_fees += 200
-      @plate_type = :ev
-      @registered_vehicles << vehicle
-      @registration_date = DateTime.now
-      return vehicle
-    elsif vehicle[:year] < 25 && vehicle[:engine] == :ice
-      @collected_fees += 100
-      @plate_type = :regular
-      @registered_vehicles << vehicle
-      @registration_date = DateTime.now
-      return vehicle
+    if @services.include?('Vehicle Registration')
+      if vehicle.year <= 1998 and vehicle.engine == :ice
+        # require 'pry'; binding.pry
+        @collected_fees += 25
+        vehicle.plate_type = :antique 
+        @registered_vehicles << vehicle
+        vehicle.registration_date = Date.today
+        return @registered_vehicles
+      elsif vehicle.year > 1998 and vehicle.engine == :ev
+        @collected_fees += 200
+        vehicle.plate_type = :ev
+        @registered_vehicles << vehicle
+        vehicle.registration_date = Date.today
+        return @registered_vehicles
+      elsif vehicle.year > 1998 and vehicle.engine == :ice
+        @collected_fees += 100
+        vehicle.plate_type = :regular
+        @registered_vehicles << vehicle
+        vehicle.registration_date = Date.today
+        return @registered_vehicles
+      end
+    else 
+      nil
     end
   end
 
