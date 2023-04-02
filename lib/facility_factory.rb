@@ -15,7 +15,9 @@ attr_reader :facilities
     end
 
     @facilities.each do |facility|
+      if facility.has_key?(:human_address)
       facility[:address] = facility[:address][:human_address]
+      end
     end
 
     @facilities.map! do |facility|
