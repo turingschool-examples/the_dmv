@@ -38,5 +38,13 @@ class Facility
       vehicle.plate_type = :regular
     end
   end
+# aministering a written test is being called on a Facility object.
+  def administer_written_test(registrant)
+    if @services.include?("Written Test") && (registrant.permit? && registrant.age >= 16)
+    registrant.license_data[:written] = true
+    end
+    registrant.license_data[:written]
+# last line of code needs to call for a return.
+end
 
 end
