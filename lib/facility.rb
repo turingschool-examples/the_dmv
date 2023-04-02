@@ -25,7 +25,7 @@ class Facility
     
     return unless @services.include?('Vehicle Registration')
     @registered_vehicles << vehicle
-    @plate_type = vehicle.plate_type
+    @plate_type = vehicle.set_plate_type_dawggy
     @collected_fees += 100 if vehicle.plate_type == :regular
     @collected_fees += 25 if vehicle.plate_type == :antique
     @collected_fees += 200 if vehicle.plate_type == :ev
@@ -49,10 +49,9 @@ class Facility
 
   def renew_drivers_license(registrant)
     return false unless @services.include?("Renew License") 
-    return false unless registrant.license_data[:written] == true && registrant.license_data[:license] == true
+    return false unless registrant.license_data[:license] == true && registrant.license_data[:license] == true
     registrant.license_data[:renewed] = true
     true
   end
-
 
 end
