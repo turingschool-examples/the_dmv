@@ -66,7 +66,7 @@ RSpec.describe Facility do
     end
   end
 
-  it "can register vehicles at facilities with services" do
+  it "can register vehicles at facilities with correct services" do
     facility_1 = Facility.new({
       name: 'Albany DMV Office', 
     address: '2242 Santiam Hwy SE Albany OR 97321', 
