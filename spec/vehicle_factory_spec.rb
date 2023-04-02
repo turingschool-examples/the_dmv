@@ -40,7 +40,7 @@ RSpec.describe VehicleFactory do
       expect(factory.most_popular(wa_ev_registrations)).to eq("TESLA")
     end
 
-    it "Counts registered vehicle for a model year" do
+    it "Counts registered vehicle for a model year, returns as hash key = year, value equals count of registered vehicles for that year" do
       factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
 
@@ -69,6 +69,33 @@ RSpec.describe VehicleFactory do
       least_popular_make = factory.least_popular(wa_ev_registrations)
       
       expect(factory.least_popular(wa_ev_registrations)).to eq("MITSUBISHI")
+    end
+
+    it "it finds the amount of cars registered by make, creates hash with key/value pairs" do
+      factory = VehicleFactory.new
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+
+      reg_by_make_hash = factory.registered_by_make(wa_ev_registrations)
+
+      expect(reg_by_make_hash).to eq({"SMART"=>7,
+                                      "VOLKSWAGEN"=>32,
+                                      "PORSCHE"=>3,
+                                      "CHEVROLET"=>151,
+                                      "TESLA"=>335,
+                                      "MITSUBISHI"=>2,
+                                      "NISSAN"=>228,
+                                      "FORD"=>47,
+                                      "AUDI"=>21,
+                                      "CHRYSLER"=>14,
+                                      "VOLVO"=>28,
+                                      "TOYOTA"=>43,
+                                      "BMW"=>41,
+                                      "FIAT"=>7,
+                                      "RIVIAN"=>2,
+                                      "KIA"=>26,
+                                      "JEEP"=>7,
+                                      "CADILLAC"=>3,
+                                      "HONDA"=>3})
     end
   end
 end
