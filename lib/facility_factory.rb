@@ -10,9 +10,12 @@ attr_reader :facilities
 
     @facilities.each do |facility|
       facility[:name] = facility.delete :title
-      # facility[:address] = facility.delete [:location_1]
-      facility[:phone] = facility.delete :phone_number
-      facility[:address] = facility.delete [:human_address]
+      facility[:address] = facility.delete :location_1
+      facility[:phone] = facility.delete :phone_number      
+    end
+
+    @facilities.each do |facility|
+      facility[:address] = facility[:address][:human_address]
     end
 
     @facilities.map! do |facility|
