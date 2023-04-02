@@ -19,4 +19,8 @@ class Registrant
     @permit
   end
 
+  def earn_permit
+    self.license_data[:written] = true
+  end
+
 end
