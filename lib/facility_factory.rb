@@ -26,9 +26,12 @@ attr_reader :facilities
     end
 
     @facilities.each do |facility|
-      if facility.has_key?(:human_address)
+      if facility[:address].has_key?(:human_address)
       facility[:address] = facility[:address][:human_address]
       end
+    end
+
+    @facilities.each do |facility|
       if facility[:phone] == nil
         facility[:phone] = "no phone listed"
       end
