@@ -31,4 +31,19 @@ class FacilityFactory
     end
   end
 
+  def create_facility_missouri(data)
+    data.map do |facility|
+      address = [facility[:address1],
+                facility[:city],
+                facility[:state],
+                facility[:zipcode]].join(" ")
+
+      Facility.new({
+        name: facility[:name],
+        address: address,
+        phone: facility[:phone]
+      })
+    end
+  end
+
 end
