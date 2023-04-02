@@ -1,35 +1,39 @@
 require 'spec_helper'
 
-RSpec.describe Facility do
-  factory = VehicleFactory.new
+RSpec.describe VehicleFactory do
+  it "creates a vehicle from a list of one vehicle" do
+    factory = VehicleFactory.new
+    @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+    created_vehicles = factory.create_vehicles([{vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice}])
+    
+    expect(created_vehicles[0].vin).to eq(@cruz.vin)
+    expect(created_vehicles[0].year).to eq(@cruz.year)
+    expect(created_vehicles[0].make).to eq(@cruz.make)
+    expect(created_vehicles[0].model).to eq(@cruz.model)
+  end
 
+  it "creates vehicles from a list of vehicles" do
+    factory = VehicleFactory.new
+    @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+    @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+    created_vehicles = factory.create_vehicles([{vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice}, {vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev}])
+    expect(created_vehicles[0].vin).to eq(@cruz.vin)
+    expect(created_vehicles[0].year).to eq(@cruz.year)
+    expect(created_vehicles[0].make).to eq(@cruz.make)
+    expect(created_vehicles[0].model).to eq(@cruz.model)
+    expect(created_vehicles[1].vin).to eq(@bolt.vin)
+    expect(created_vehicles[1].year).to eq(@bolt.year)
+    expect(created_vehicles[1].make).to eq(@bolt.make)
+    expect(created_vehicles[1].model).to eq(@bolt.model)
+  end
+
+  it "creates vehicles from a list of vehicles" do
+    factory = VehicleFactory.new
+    wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+    created_vehicles = factory.create_vehicles(wa_ev_registrations)
+    
+    expect(created_vehicles[0]).to be_an_instance_of(Vehicle)
+    expect(created_vehicles).to be_an(Array)
+    expect(created_vehicles.count).to eq(1000) 
+  end
 end
-
-
-
-
-wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-#  [{:electric_vehicle_type=>"Plug-in Hybrid Electric Vehicle (PHEV)",
-#    :vin_1_10=>"JTDKN3DP8D",
-#    :dol_vehicle_id=>"229686908",
-#    :model_year=>"2013",
-#    :make=>"TOYOTA",
-#    :model=>"Prius Plug-in",
-#    ...},
-#    ...,
-#    {:electric_vehicle_type=>"Plug-in Hybrid Electric Vehicle (PHEV)",
-#     :vin_1_10=>"1G1RD6E47D",
-#     :dol_vehicle_id=>"289314742",
-#     :model_year=>"2013",
-#     :make=>"CHEVROLET",
-#     :model=>"Volt",
-#     ...}]
-
-
-factory.create_vehicles(wa_ev_registrations)
-  #=> [#<Vehicle:0x000000012d3812f0 @engine=:ev, @make="TOYOTA", @model="Prius Plug-in", @plate_type=nil, @registration_date=nil, @vin="JTDKN3DP8D", @year="2013">,
-  #<Vehicle:0x000000012d3812a0 @engine=:ev, @make="TOYOTA", @model="Prius Prime", @plate_type=nil, @registration_date=nil, @vin="JTDKARFP9J", @year="2018">,
-  #<Vehicle:0x000000012d381200 @engine=:ev, @make="NISSAN", @model="Leaf", @plate_type=nil, @registration_date=nil, @vin="1N4AZ1CP0J", @year="2018">,
-  #<Vehicle:0x000000012d381188 @engine=:ev, @make="NISSAN", @model="Leaf", @plate_type=nil, @registration_date=nil, @vin="1N4AZ1CP0J", @year="2018">,
-  #<Vehicle:0x000000012d381138 @engine=:ev, @make="NISSAN", @model="Leaf", @plate_type=nil, @registration_date=nil, @vin="1N4AZ1CP0J", @year="2018">,
-  # ...]
