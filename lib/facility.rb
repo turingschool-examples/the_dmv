@@ -106,5 +106,11 @@ class Facility
     end
   end
 
-  
+  def renew_drivers_license(registrant)
+    if renew_drivers_license_qualification_check(registrant) && check_service_renew_drivers_license('Renew License')
+      true
+    else
+      false
+    end
+  end
 end
