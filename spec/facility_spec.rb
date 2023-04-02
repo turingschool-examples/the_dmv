@@ -62,10 +62,10 @@ RSpec.describe Facility do
       expect(@cruz.plate_type).to eq(:regular)
     end
 
-    # it 'creates a list of registered vehicles' do
-    #   @facility_1.register_vehicle(@cruz)
-    #   expect(@facility_1.registered_vehicles).to eq([@cruz])
-    # end
+    it 'creates a list of registered vehicles' do
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+    end
 
   end
 
