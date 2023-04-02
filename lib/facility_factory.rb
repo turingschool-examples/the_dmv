@@ -12,7 +12,6 @@ class FacilityFactory
         address: address,
         phone: facility[:phone_number]
       })
-
     end
   end
 
