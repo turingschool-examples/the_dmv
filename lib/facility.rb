@@ -72,4 +72,10 @@ class Facility
       false
     end
   end
+
+  def check_service_road_test(services)
+    @services.include? 'Road Test'
+  end
+
+  
 end
