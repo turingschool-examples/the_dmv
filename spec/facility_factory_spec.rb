@@ -6,6 +6,7 @@ RSpec.describe FacilityFactory do
     @ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
     @mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
     @oregon_facilities = FacilityFactory.new.create_facility_oregon(@or_dmv_office_locations)
+    @new_york_facilities = FacilityFactory.new.create_facility_new_york(@ny_dmv_office_locations)
   end
 
   describe '#initialize' do
@@ -16,7 +17,7 @@ RSpec.describe FacilityFactory do
   end
 
   describe '#create_facility_oregon' do
-    it 'can create facilities from the Oregon DMV office data' do
+    it 'can create facilities from Oregon DMV office data' do
       expect(@oregon_facilities).to be_a(Array)
       expect(@oregon_facilities.count).to eq(59)
     end
@@ -34,6 +35,28 @@ RSpec.describe FacilityFactory do
     it 'can find the address of DMV offices in Oregon' do
       expect(@oregon_facilities[0].address).to eq("2242 Santiam Hwy SE Albany OR 97321")
       expect(@oregon_facilities[@oregon_facilities.count - 1].address).to eq("51515 Huntington Rd La Pine OR 97739")
+    end
+  end
+
+  describe '#create_facility_new_york' do
+    it 'can create facilities from New York DMV office data' do
+      expect(@new_york_facilities).to be_a(Array)
+      expect(@new_york_facilities.count).to eq(170)
+    end
+
+    it 'can find the name of DMV offices in New York' do
+      expect(@new_york_facilities[0].name).to eq("SELDEN")
+      expect(@new_york_facilities[@new_york_facilities.count - 1].name).to eq("MILLBROOK")
+    end
+
+    it 'can find the phone number of DMV offices in New York' do
+      expect(@new_york_facilities[0].phone).to eq(nil)
+      expect(@new_york_facilities[@new_york_facilities.count - 1].phone).to eq("8456774080")
+    end
+
+    it 'can find the address of DMV offices in New York' do
+      expect(@new_york_facilities[0].address).to eq("407 SELDEN RD  SELDEN NY 11784")
+      expect(@new_york_facilities[@new_york_facilities.count - 1].address).to eq("15 MERRITT AVENUE  MILLBROOK NY 12545")
     end
   end
   
