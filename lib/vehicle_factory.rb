@@ -8,4 +8,6 @@ class VehicleFactory < Vehicle
 
   def create_vehicles(state_database)
 
+
+  end
 end
