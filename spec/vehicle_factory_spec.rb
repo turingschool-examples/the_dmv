@@ -19,4 +19,11 @@ RSpec.describe VehicleFactory do
     vehicle = vehicle_factory.create_wa_vehicle(washington)
     expect(vehicle.vin).to eq("WMEEJ9AA7E")
   end
+
+  it "can make all the vehicles" do 
+    vehicle_factory = VehicleFactory.new
+    wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+    vehicles = vehicle_factory.create_vehicles(wa_ev_registrations)
+    expect(vehicles.first).to be_an_instance_of(Vehicle)
+  end
 end

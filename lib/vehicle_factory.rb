@@ -8,4 +8,9 @@ class VehicleFactory
     Vehicle.new(vehicle)
   end
 
+  def create_vehicles(registrations)
+    registrations.map do |registration|
+      self.create_wa_vehicle(registration)
+    end
+  end
 end
