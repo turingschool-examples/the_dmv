@@ -66,9 +66,9 @@ RSpec.describe FacilityFactory do
         expect(@fac_factory.facilities.length).not_to eq(0)
       end
   
-      xit 'can create facility objects with attributes' do
+      it 'can create facility objects with attributes' do
         @fac_factory.create_facilities(@mo_dmv_office_locations)
-  
+  require 'pry'; binding.pry
         expect(@fac_factory.facilities[0]).to be_a(Facility)
         expect(@fac_factory.facilities[0].name).not_to be nil
         expect(@fac_factory.facilities[0].address).not_to be nil
@@ -78,7 +78,7 @@ RSpec.describe FacilityFactory do
         expect(@fac_factory.facilities[0].collected_fees).to eq(0)
       end
 
-      xit 'returns an array of created facilities' do 
+      it 'returns an array of created facilities' do 
         expect(@fac_factory.create_facilities(@mo_dmv_office_locations)).to eq(@fac_factory.facilities)
       end
     end

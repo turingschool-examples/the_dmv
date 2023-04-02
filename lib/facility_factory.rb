@@ -9,10 +9,14 @@ attr_reader :facilities
     @facilities.flatten!(2)
 
     @facilities.each do |facility|
+      # OR facilities
       if facility.has_key?(:location_1)
         facility[:name] = facility.delete :title
         facility[:address] = facility.delete :location_1
-        facility[:phone] = facility.delete :phone_number      
+        facility[:phone] = facility.delete :phone_number   
+      # MO facilities
+      elsif facility.has_key?(:dorregionnumber)
+        facility[:address] = "#{facility[:address1]}, #{facility[:city]}, #{facility[:state]}, #{facility[:zipcode]}"
       else
       # NY facilities:
       facility[:name] = facility.delete :office_name
