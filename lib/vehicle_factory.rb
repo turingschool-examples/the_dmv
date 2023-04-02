@@ -32,4 +32,8 @@ class VehicleFactory
   def most_registered_county(dmv)
     dmv.group_by { |car| car[:county] }.max_by { |name, car| car.count }.first
   end
+
+  def registered_by_make(dmv)
+    dmv.group_by { |car| car[:make] }.transform_values { |car| car.count }
+  end
 end
