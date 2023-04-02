@@ -4,13 +4,15 @@ class Registrant
               :permit, 
               :license_data
 
+  attr_accessor :license_data
+
   def initialize(name, age, permit = false)
     @name          = name
     @age          = age
     @permit       = permit
     @license_data = {
                     written: false,
-                    licensed: false,
+                    license: false,
                     renewed: false
                     }
   end
