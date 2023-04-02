@@ -25,4 +25,16 @@ class Registrant
     end
   end
 
+  def qualifies_for_road_test?
+    if @license_data[:written] = true 
+      return true
+    else
+      false
+    end
+
+  end
+
+
+
+    # A road test can only be administered to registrants who have passed the written test
 end

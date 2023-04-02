@@ -50,7 +50,18 @@ class Facility
     end
   end
 
+  def administer_road_test(registrant)
+    if @services.include?('Road Test')  && registrant.qualifies_for_road_test? == true
+      registrant.license_data[:license] = true
+    else
+      false
+    end
+  
+  
+  # For simplicity’s sake, Registrants who qualify for the road test automatically earn a license
 
+  
+  end
 
 end
 
