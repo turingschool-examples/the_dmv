@@ -388,6 +388,32 @@ RSpec.describe Facility do
         }
         expect(registrant_1.license_data).to eq(r1_data)
       end
+
+      it "cannot renew licenses for if the written and road test have not been administered" do
+        registrant_1 = Registrant.new('Bruce', 18, true )
+        registrant_2 = Registrant.new('Penny', 16 )
+        registrant_3 = Registrant.new('Tucker', 15 )
+        facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+        facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+        facility_1.add_service("Written Test")
+        facility_1.administer_written_test(registrant_1)
+        registrant_2.earn_permit
+        facility_1.administer_written_test(registrant_2)
+        registrant_3.earn_permit
+        facility_1.administer_written_test(registrant_3)
+        facility_1.add_service("Road Test")
+        facility_1.administer_road_test(registrant_1)
+        facility_1.administer_road_test(registrant_2)
+        facility_1.add_service("Renew License")
+        facility_1.renew_drivers_license(registrant_1)
+        facility_1.renew_drivers_license(registrant_3)
+        r3_data = {
+          :written  =>  false,
+          :license  =>  false,
+          :renewed  =>  false
+        }
+        expect(registrant_3.license_data).to eq(r3_data)
+      end
     end
   end
 end
