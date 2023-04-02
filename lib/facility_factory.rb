@@ -5,7 +5,7 @@ class FacilityFactory
 
   def create_facility(facility_list)
     facility_list.map do |facility_data|
-      FacilityFactory.new(facility_data)
+      Facility.new(facility_data)
     end
   end
 end
