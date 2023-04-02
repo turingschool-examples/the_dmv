@@ -17,9 +17,9 @@ class FacilityFactory
 
   def create_facility_new_york(data)
     data.map do |facility|
-      address = [facility[:street_address_line_1].split.map(&:capitalize).join(' '), 
+      address = [facility[:street_address_line_1], 
                 facility[:street_address_line_2], 
-                facility[:city].capitalize, 
+                facility[:city], 
                 facility[:state], 
                 facility[:zip_code]].join(" ")
       
