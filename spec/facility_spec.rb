@@ -50,7 +50,8 @@ RSpec.describe Facility do
     end
 
     it '#register_vehicle(vehicle)' do 
-      expect(@facility_1.register_vehicle(cruz)).to eq([@cruz])
+      expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
+      require 'pry'; binding.pry
     end
 
   end
