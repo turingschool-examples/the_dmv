@@ -46,10 +46,12 @@ class Facility
   end
                               # registrant, in this instance, is a local parameter.
   def administer_road_test(registrant)
-    # if by default looks for a boolean value of "true"
+    # "if" by default looks for a boolean value of "true"
    registrant.license_data[:license] = true if eligible?(registrant) && registrant.license_data[:written]
    registrant.license_data[:written] && eligible?(registrant)
   end
+
+  
 
   def eligible?(registrant)
     registrant.permit? && registrant.age >= 16 && (@services.include?("Written Test") || @services.include?("Road Test"))
