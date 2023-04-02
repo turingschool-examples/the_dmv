@@ -93,4 +93,10 @@ class Facility
       false
     end
   end
+
+  def check_service_renew_drivers_license(services)
+    @services.include? 'Renew License'
+  end
+
+ 
 end

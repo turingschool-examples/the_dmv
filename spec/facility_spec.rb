@@ -1,5 +1,6 @@
 require 'spec_helper'
 require './lib/registrant'
+require './lib/facility'
 
 RSpec.describe Facility do
   before(:each) do
@@ -226,6 +227,7 @@ RSpec.describe Facility do
       expect(facility_1.administer_road_test(registrant_2)).to eq(true)
       expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
       #renew license test below
-      # facility_1.renew_drivers_license(registrant_1)
+      expect(facility_1.renew_drivers_license(registrant_1)).to eq(false)
+      
   end
 end
