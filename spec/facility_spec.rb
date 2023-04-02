@@ -220,4 +220,6 @@ RSpec.describe Facility do
 
     end
   end
+
+              # renew_license
 end
