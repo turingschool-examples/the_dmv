@@ -1,11 +1,11 @@
 class VehicleFactory
-  # attr_reader :
               
-  def initialize()
-    @
+  def initialize
   end
 
-  def create_vehicles(wa_ev_registrations)
-
+  def create_vehicles(vehicle_list)
+    vehicle_list.map do |vehicle_data|
+      Vehicle.new(vehicle_data)
+    end
   end
 end
