@@ -20,7 +20,9 @@ class Registrant
   end
 
   def qualifies_for_written_test?
-    @license_data[:written] = true
+    if @permit == true && age >= 16
+      return true
+    end
   end
 
 end
