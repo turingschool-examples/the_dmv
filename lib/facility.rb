@@ -20,19 +20,33 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    vehicle.registration_date = Date.today
-    registered_vehicles << vehicle
+    if @services.include? 'Vehicle Registration'
+      registered_vehicles << vehicle
+      vehicle.registration_date = Date.today
+      categorize_plate(vehicle)
+      calculate_fees(vehicle)
+    end
+  end
 
-    if vehicle.year <= (Date.today.year - 25)
-      vehicle.plate_type = :antique
+  def calculate_fees(vehicle)
+    if vehicle.year <= (Date.today.year - 25) 
       @collected_fees += 25
     elsif  
       vehicle.engine == :ev
-      vehicle.plate_type = :ev
       @collected_fees += 200
     else
-      vehicle.plate_type = :regular
       @collected_fees += 100
+    end
+  end
+
+  def categorize_plate(vehicle)
+    if vehicle.year <= (Date.today.year - 25)
+      vehicle.plate_type = :antique
+    elsif  
+      vehicle.engine == :ev
+      vehicle.plate_type = :ev
+    else
+      vehicle.plate_type = :regular
     end
   end
 
