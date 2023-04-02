@@ -19,4 +19,6 @@ class Registrant
     @permit
   end
 
+  
+
 end
