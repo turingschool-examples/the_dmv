@@ -40,28 +40,23 @@ class Facility
   end
   # aministering a written test is being called on a Facility object.
   def administer_written_test(registrant)
-    registrant.license_data[:written] = true if eligible?(registrant)
-    eligible?(registrant)
+    registrant.license_data[:written] = true if eligible?(registrant) && (@services.include?("Written Test"))
+    eligible?(registrant) && @services.include?("Written Test")
   # last line of code needs to call for a return.
   end
                               # registrant, in this instance, is a local parameter.
   def administer_road_test(registrant)
     # "if" by default looks for a boolean value of "true"
-   registrant.license_data[:license] = true if eligible?(registrant) && registrant.license_data[:written]
-   registrant.license_data[:written] && eligible?(registrant)
+   registrant.license_data[:license] = true if registrant.license_data[:written] && (@services.include?("Road Test"))
+   registrant.license_data[:written] && (@services.include?("Road Test"))
   end
 
   def renew_drivers_license(registrant)
-    registrant.license_data[:license] = true if eligible?(registrant)
-    end
-
+    registrant.license_data[:renewed] = true if registrant.license_data[:license] && (@services.include?("Renew License"))
+    registrant.license_data[:license] && (@services.include?("Renew License"))
   end
 
   def eligible?(registrant)
-    registrant.permit? && registrant.age >= 16 && (@services.include?("Written Test") || @services.include?("Road Test"))
-  end
-
-  def eligible_for_renewal?(registrant)
-    if registrant.license_data[:license] == true && @services.include?("Renew License")
+    registrant.permit? && registrant.age >= 16
   end
 end
