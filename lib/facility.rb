@@ -6,7 +6,7 @@ class Facility
                 :registered_vehicles,
                 :collected_fees
 
-  def initialize(name, address, phone)
+  def initialize(name:, address:, phone:)
     @name = name
     @address = address
     @phone = phone
@@ -45,10 +45,10 @@ class Facility
     nil
   end
 
-  def administer_written_test(registrant)
-    if registrant.age >= 16 && @permit == true
+  # def administer_written_test(registrant)
+  #   if registrant.age >= 16 && @permit == true
       
-    end
-  end
+  #   end
+  # end
 
 end
