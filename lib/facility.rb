@@ -47,6 +47,21 @@ class Facility
     end
   end
 
+  def administer_road_test(registrant)
+    if !self.services.include?("Road Test") || registrant.license_data[:written] = false
+      false
+    elsif self.services.include?("Road Test")
+      registrant.license_data[:license] = true
+    end
+  end
+
+
+# A road test can only be administered to registrants 
+# who have passed the written test.
+
+# For simplicity's sake, registrants who qualify for the road test 
+# automatically earn a license.
+
   def renew_drivers_license(registrant)
     if !self.services.include?("Renew License")
       false
