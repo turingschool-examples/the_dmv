@@ -86,8 +86,16 @@ RSpec.describe Facility do
       @registrant_2 = Registrant.new('Penny', 16 )
       @registrant_3 = Registrant.new('Tucker', 15 )
     end
-
     
+  describe '#administer written test' do
+    it 'will administer the written test if service is provided' do
+      expect(@facility_1.administer_written_test(@registrant_1)).to be(false)
+
+
+    end
+
+  end
+
 
 
   end

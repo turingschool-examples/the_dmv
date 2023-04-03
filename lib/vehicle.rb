@@ -48,4 +48,5 @@ attr_accessor :registration_date,
       100
     end
   end
+
 end
