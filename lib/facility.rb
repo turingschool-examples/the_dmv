@@ -41,9 +41,17 @@ class Facility
   def administer_written_test(registrant)
     if !self.services.include?("Written Test") || registrant.age < 16
       false
-    elsif self.services.include?("Written Test") == true
+    elsif self.services.include?("Written Test")
       registrant.license_data[:written] = true
       true
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    if !self.services.include?("Renew License")
+      false
+    elsif self.services.include?("Renew License")
+      registrant.license_data[:renewed] = true
     end
   end
 end
