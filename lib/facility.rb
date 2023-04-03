@@ -1,5 +1,10 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
+  attr_reader :name, 
+              :address, 
+              :phone, 
+              :services, 
+              :registered_vehicles, 
+              :collected_fees
 
   @@fees = {
     antique: 25, ev: 200,regular: 100
