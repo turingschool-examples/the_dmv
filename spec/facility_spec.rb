@@ -61,14 +61,17 @@ RSpec.describe Facility do
     end
 
     it 'can check for registration date' do
-      expect(@cruz.registration_date).to eq(nil)
       @facility_1.add_service('Vehicle Registration')
+
       expect(@cruz.registration_date).to eq(nil)
-
-
       expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
-
       expect(@cruz.registration_date).to eq(Date.today)
+    end
+
+    it 'can collect fees' do
+      expect(@facility_1.collected_fees).to eq(0)
+
+      
     end
 
   end
