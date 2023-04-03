@@ -107,7 +107,8 @@ RSpec.describe Facility do
     end
 
     it 'has no registered vehicles or collected fees' do
-      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro,@bolt])
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
     end
 
 end
