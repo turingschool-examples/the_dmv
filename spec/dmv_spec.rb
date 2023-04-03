@@ -42,5 +42,14 @@ RSpec.describe Dmv do
     end
   end
 
+  describe '#add facility from data' do
+    it 'can add facility from data' do
+      @dmv = Dmv.new
+      or_dmv = DmvDataService.new.or_dmv_office_locations
+      @dmv.new_facility(or_dmv)
+      expect(@dmv.facilities).to eq(@dmv.facilities)
+    end
+  end
+  
   
 end
