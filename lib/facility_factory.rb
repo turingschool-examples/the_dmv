@@ -33,7 +33,7 @@ class FacilityFactory
         name: facility[:name],
         address: [facility[:address1], facility[:city], facility[:state]],
         phone: facility[:phone],
-        facility[:zipcode]
+        facility: [:zipcode]
       })
     end
   end
