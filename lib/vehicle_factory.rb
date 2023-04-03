@@ -41,7 +41,7 @@ class WaVehicleFactory
     def count_mod_yr(model_, year_)
       @vehicles.select do |vehicle|
         vehicle.model.downcase == model_.downcase &&
-        vehicle.year == year_
+        vehicle.year == year_.to_s
       end.count
     end
   end

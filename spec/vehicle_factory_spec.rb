@@ -60,7 +60,8 @@ RSpec.describe WaVehicleFactory do
 
     it 'can count registered vehicles by model and year' do 
       @factory.create_vehicles(@wa_ev_registrations)
-      count_mod_yr = @factory.count_mod_yr("Model 3", "2018")
+      count_mod_yr = @factory.count_mod_yr("Model 3", 2018)
+      
       expect(count_mod_yr).to be_an Integer
     end
   end
