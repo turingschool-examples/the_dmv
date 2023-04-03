@@ -4,7 +4,7 @@ class Registrant
               :permit
 
   attr_accessor :license_data
-# ^^uncommitted 
+
   def initialize(name, age, permit = false)
     @name = name
     @age= age
