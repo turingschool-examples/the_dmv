@@ -96,7 +96,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#taking Written Test' do
+  describe '#getting a Drivers License: WRITTEN TEST' do
     it "tests for administering a written test for registrant_1 @ facility_1" do
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
       facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
@@ -115,7 +115,7 @@ RSpec.describe Facility do
       expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
 
-    it "tests for administering a written test for registrant_2 @ facility_1" do
+    it "tests for administering a Written Test for registrant_2 @ facility_1" do
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
       facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
       registrant_1 = Registrant.new('Bruce', 18, true )
@@ -144,7 +144,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#taking Road Test' do
+  describe '#getting a Drivers License: ROAD TEST' do
 # A road test can only be administered to registrants who have passed the written test
 # For simplicity’s sake, Registrants who qualify for the road test automatically earn a license
     it "tests for administering a road test for @ facility_1" do
@@ -169,5 +169,33 @@ RSpec.describe Facility do
       ### go back and make these tests per individual
     end
   end
+
+  describe '#getting a Drivers License: RENEWAL' do
+  #registrant has already passed the road test and earned a license
+    it "tests to renew license  " do
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Penny', 16 )
+      registrant_3 = Registrant.new('Tucker', 15 )
+      facility_1.add_services('Written Test')
+      facility_1.add_services('Road Test')
+      facility_1.administer_written_test(registrant_1)
+      facility_1.administer_written_test(registrant_2)
+      facility_1.administer_road_test(registrant_1)
+      facility_1.administer_road_test(registrant_2)
+
+      expect(facility_1.add_services('Renew License')).to eq(["Written Test", "Road Test", "Renew License"])
+      expect(facility_1.renew_drivers_license(registrant_1)).to eq(true)
+      
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+      expect(facility_1.renew_drivers_license(registrant_3)).to eq(false)
+      expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      
+      expect(facility_1.renew_drivers_license(registrant_2)).to eq(true)
+      expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+    end
+  end
+
  
 end
