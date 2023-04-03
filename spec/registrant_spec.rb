@@ -51,6 +51,8 @@ RSpec.describe Registrant do
 
     it 'adds administering written test as a service' do 
       expect(@facility_1.add_service('Written Test')).to eq(['Written Test'])
+      expect(@facility_1.administer_written_test(@registrant_1)).to be(true)
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
 
   end
