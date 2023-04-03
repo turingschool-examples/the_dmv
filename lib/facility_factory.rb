@@ -6,6 +6,8 @@ class FacilityFactory
      oregon_processing(data)
     elsif state == :NY
      new_york_processing(data)
+    else
+      "that state's data is not valid for processing"
     end
   end
 
