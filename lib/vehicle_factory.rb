@@ -1,7 +1,6 @@
 class VehicleFactory
 
   def create_vehicles(vehicle_data)
-    require 'pry'; binding.pry
     vehicle_data.map do |vehicle|
       Vehicle.new({
       vin: vehicle[:vin_1_10],
