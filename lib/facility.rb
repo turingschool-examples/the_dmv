@@ -2,9 +2,7 @@ class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
   @@fees = {
-    antique: 25,
-    ev: 200,
-    regular: 100
+    antique: 25, ev: 200,regular: 100
   }
 
   def initialize(data)
@@ -26,7 +24,16 @@ class Facility
 
     @registered_vehicles << vehicle
     vehicle.registration_date = Date.today
-    @collected_fees += @@fees[:regular]
+    if vehicle.antique?
+      @collected_fees += @@fees[:antique]
+      vehicle.plate_type = :antique
+    elsif vehicle.electric_vehicle?
+      @collected_fees += @@fees[:ev]
+      vehicle.plate_type = :ev
+    else
+      @collected_fees += @@fees[:regular]
+      vehicle.plate_type = :regular
+    end
     @registered_vehicles
   end
 end
