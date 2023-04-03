@@ -1,5 +1,7 @@
-require './lib/registrant'
 require 'spec_helper'
+require './lib/registrant'
+require './lib/vehicle'
+require './lib/facility'
 
 RSpec.describe Registrant do
   describe "Iteration 1" do
@@ -25,7 +27,7 @@ RSpec.describe Registrant do
       expect(registrant_2.permit?).to eq(false)  
     end
     
-    it "tests for license_data" do
+    it "tests for registrant's license_data" do
       registrant_1 = Registrant.new("Bruce", 18, true )
       registrant_2 = Registrant.new("Penny", 15 )
       
@@ -33,7 +35,7 @@ RSpec.describe Registrant do
       expect(registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})  
     end
 
-    it "tests for earn_permit" do
+    it "tests for registrant's ability to earn a permit" do
       registrant_1 = Registrant.new("Bruce", 18, true )
       registrant_2 = Registrant.new("Penny", 15 )
       registrant_1.earn_permit
@@ -42,6 +44,8 @@ RSpec.describe Registrant do
       expect(registrant_1.permit?).to eq(true)
       expect(registrant_2.permit?).to eq(true)
     end
+
+    
   end
 
 
