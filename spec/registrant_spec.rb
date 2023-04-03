@@ -106,5 +106,23 @@ RSpec.describe Registrant do
     end
   end
 
+  describe 'road test' do
+    describe 'road test for registrant 3' do
+      it 'does not offer road tests as a service' do 
+          expect(@facility_1.administer_road_test(@registrant_3)).to be(false)
+          # expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      end
+
+      # it '' do 
+
+      # end
+
+      # it '' do 
+
+      # end
+
+    end
+  end
+
 
 end
