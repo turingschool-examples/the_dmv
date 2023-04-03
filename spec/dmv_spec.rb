@@ -48,6 +48,9 @@ RSpec.describe Dmv do
       or_dmv = DmvDataService.new.or_dmv_office_locations
       @dmv.new_facility(or_dmv)
       expect(@dmv.facilities).to eq(@dmv.facilities)
+      ny_dmv = DmvDataService.new.ny_dmv_office_locations
+      @dmv.new_facility(ny_dmv)
+      # expect(@dmv.facilities).to eq(@dmv.facilities)
     end
   end
   

@@ -18,11 +18,8 @@ class Dmv
 
   def new_facility(state_facilities)
     state_facilities.map do |facility|
-      @gen_facility = Facility.new(facility)
-      @gen_facility.name = facility[:title]
-      @gen_facility.address = JSON.parse(facility[:location_1][:human_address])
-      @gen_facility.phone = facility[:phone_number]
-      add_facility(@gen_facility)
+      gen_facility = Facility.new(name: facility[:title], address: JSON.parse(facility[:location_1][:human_address], phone: facility[:phone_number]))
+      add_facility(gen_facility)
     end
   end
   
