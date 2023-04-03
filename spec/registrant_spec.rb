@@ -107,24 +107,58 @@ RSpec.describe Registrant do
   end
 
   describe 'road test' do
-    describe 'road test for registrant 3' do
-      it 'does not offer road tests as a service' do 
+    before(:each) do
+      @facility_1.add_service('Written Test')
+      @registrant_2 = Registrant.new('Penny', 16 )
+      @facility_1.administer_written_test(@registrant_1)
+      @registrant_2.earn_permit
+      @facility_1.administer_written_test(@registrant_2)
+    end
+
+    describe 'does not offer road tests as a service for anyone' do
+      it 'does not offer road tests as a service for permit-holders' do 
           expect(@facility_1.administer_road_test(@registrant_3)).to be(false)
           @registrant_3.earn_permit
           expect(@facility_1.administer_road_test(@registrant_3)).to be(false)
-          # expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+          expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       end
 
-      # it '' do 
+      it 'does not offer road tests as a service to people with a passing written test' do
+        expect(@facility_1.administer_road_test(@registrant_1)).to be(false)
+      end
 
-      # end
+      it 'adds road test as a provided service' do 
+        expect(@facility_1.add_service('Road Test')).to eq(["Written Test", "Road Test"])
+      end
+    end
 
-      # it '' do 
+    describe 'road test for registrant 1 and registrant 2' do
+      before(:each) do
+        @facility_1.add_service('Road Test')
+      end
 
-      # end
+      it '#administer_road_test' do 
+      expect(@facility_1.administer_road_test(@registrant_1)).to be(true)
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+      end
+
+      it 'adminsters road test for registrant 2 and updates license data' do
+        expect(@facility_1.administer_road_test(@registrant_2)).to be(true)
+        expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+      end
 
     end
   end
+
+  # describe 'renew license' do
+  #   describe 'does not offer license renewal as a provided service' do
+  #     it 'does not offer license renewal as a provided service' do
+  #       expect(@facility_1.renew_drivers_license(@registrant_1)).to be(false)
+  #     end
+
+
+  #   end
+  # end
 
 
 end
