@@ -22,12 +22,16 @@ RSpec.describe DmvDataService do
   describe '#wa_ev_registrations' do
     it 'can load washington ev registration data' do
       expect(@dds.wa_ev_registrations.size).to eq(1000)
+      # wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+    
     end
   end
 
   describe '#or_dmv_office_locations' do
     it 'can load oregon dmv office locations' do
       expect(@dds.or_dmv_office_locations.size).to eq(59)
+  # or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations 
+    
     end
   end
 

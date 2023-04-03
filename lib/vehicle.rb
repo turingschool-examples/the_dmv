@@ -27,5 +27,4 @@ class Vehicle
     @engine == :ev
   end
 
-
 end
