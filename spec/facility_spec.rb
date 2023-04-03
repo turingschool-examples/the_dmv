@@ -26,7 +26,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe 'facility_1' do
+  describe 'add vehicle registration to facility 1' do
     before(:each) do
       @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
@@ -36,9 +36,14 @@ RSpec.describe Facility do
     it 'adds vehicle registration as a service to the facility' do
       expect(@facility_1.add_service('Vehicle Registration')).to eq(['Vehicle Registration'])
     end
-
+  end
+  
+  describe 'facility 1' do
     before(:each) do
       @facility_1.add_service('Vehicle Registration')
+      @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+      @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
     end
 
     it 'checks the registration date on the vehicle' do 
@@ -92,7 +97,7 @@ RSpec.describe Facility do
       @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
       @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
     end
-  end
+  
 
     it 'checks for registered vehicles' do
       expect(@facility_2.registered_vehicles).to eq([])
@@ -110,5 +115,5 @@ RSpec.describe Facility do
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.collected_fees).to eq(0)
     end
-
+  end
 end
