@@ -22,7 +22,7 @@ RSpec.describe Registrant do
 
     it 'has an earn permit method' do
       @registrant_2.earn_permit
-      expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+      expect(@registrant_2.permit).to eq(true)
     end
   end
 
