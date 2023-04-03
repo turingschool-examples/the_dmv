@@ -16,4 +16,14 @@ class VehicleFactory
       vehicle_data[:engine] = :ev
     end
   end
+
+  def models(vehicle_list)
+    require 'pry'; binding.pry
+    new_array = []
+    vehicle_list.select do |vehicle|
+      new_array << vehicle.model
+    end
+    new_array.tally
+  end
+
 end
