@@ -10,6 +10,7 @@ class Vehicle
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
+    @vehicle_type = vehicle_details[:vehicle_type]
     @registration_date = nil
     @plate_type = nil
   end
