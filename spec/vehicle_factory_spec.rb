@@ -41,7 +41,11 @@ RSpec.describe VehicleFactory do
     expect(created_vehicles).to be_an(Array)
     expect(created_vehicles.count).to eq(1000) 
   end
-  # factory.renamed_vehicles.models
+
+  it "can determine the most common make/model in a list" do
+    # factory.renamed_vehicles.models in a new test block
+    
+  end
 
 
 end
