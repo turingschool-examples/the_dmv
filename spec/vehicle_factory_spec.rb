@@ -28,7 +28,8 @@ RSpec.describe VehicleFactory do
   describe "#registrations_for_model_year" do
     it "can return count of vehicles in a specific model year" do
       @factory.create_vehicles(@wa_ev_registrations)
-      expect(@factory.registrations_for_model_year(2020)).to eq(100)
+      expect(@factory.registrations_for_model_year(2020)).to eq(70)
+      expect(@factory.registrations_for_model_year(2018)).to eq(137)
     end
   end
 end

@@ -25,4 +25,9 @@ class VehicleFactory
     most_popular = raw_most_popular[0][0]
     return "#{most_popular[:make]} #{most_popular[:model]}"
   end
+
+  def registrations_for_model_year(model_year)
+    selected_vehicles = @vehicles.select { |vehicle| vehicle.year == model_year }
+    count = selected_vehicles.count
+  end
 end
