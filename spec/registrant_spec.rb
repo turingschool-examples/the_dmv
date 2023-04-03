@@ -40,9 +40,13 @@ RSpec.describe Registrant do
       expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
 
-    # it 'checks permit status' do 
-    #   expect(@registrant_1.permit?).to be(false)
-    # end
+    it 'checks permit status' do 
+      expect(@registrant_1.permit?).to be(true)
+    end
+
+    it "does not offer administered written test as a service" do 
+      expect(@facility_1.administer_written_test(@registrant_1)).to be(false)
+    end
 
   end
 
