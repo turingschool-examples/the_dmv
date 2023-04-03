@@ -10,6 +10,7 @@ class DmvDataService
 
   def wa_ev_registrations
     @wa_ev_registrations ||= load_data('https://data.wa.gov/resource/rpr4-cgyd.json')
+  require 'pry'; binding.pry
   end
 
   def or_dmv_office_locations
