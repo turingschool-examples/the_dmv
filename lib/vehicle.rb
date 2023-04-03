@@ -4,10 +4,10 @@ class Vehicle
   attr_reader :vin,
               :year,
               :make,
-              :model,
-              :engine
+              :model
   attr_accessor :registration_date,
-                :plate_type
+                :plate_type,
+                :engine
 
   def initialize(vehicle_details)
     @vin               = vehicle_details[:vin]

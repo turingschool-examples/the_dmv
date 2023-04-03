@@ -1,22 +1,55 @@
 class VehicleFactory
-  attr_reader :vehicles
   def initialize
-    @vehicles = []
+    
   end
 
-  def create_vehicles(vehicles)
-  #  vehicles.map do |vehicle|
-  #   vehicle.keys.uniq
-  #  end
-  #  vehicles << veh
-  ## Lightbulb
-  # each do
-  #   first, change certain keys to correct keys matching vehicle class
-  #   v1 = Vehicle.new(wa_ev_registrations[0]), pass in default value of engine :ev
-  #   add engine type to be ev, bonus if you can make it so that it does so based on whether the data passed in includes ev
+  # def create_vehicles(vehicles)
+  #   arr = vehicles.each do |vehicle|
+  #     vehicle[:year] = vehicle.delete(:model_year)  
+  #     vehicle[:vin] = vehicle.delete(:vin_1_10)  
+  #   end
+  #   vehicles.replace(arr)
+  #   arr1 = []
+  #   manufactured = vehicles.each do |created|
+  #     created = Vehicle.new(vehicles)
+  #     created.engine = :ev
+  #     arr1 << created
+  #   end
+  #   return arr1
   # end
 
-      # Vehicle.new
-      # vehicle[:make] = vehicle_details[:make]
+  def create_vehicles(registrations)
+    created_vehicles = registrations.map do |car|
+      Vehicle.new(
+        { 
+          vin:    car[:vin_1_10],
+          year:   car[:model_year],
+          make:   car[:make],
+          model:  car[:model],
+          engine: :ev
+        }
+      )
+    end
+    created_vehicles
+    ## Second Iteration, but was modifying the original arrray with delete
+    # created_vehicles = registrations.map do |registration|
+    #   registration[:year] = registration.delete(:model_year)  
+    #   registration[:vin] = registration.delete(:vin_1_10)
+    #   registration[:engine] = :ev
+    #   Vehicle.new(registration)
+    # end
+    # created_vehicles
+    ## Earlier Iteration
+    # registrations.map do |registration|
+    #   registration[:year] = registration.delete(:model_year)  
+    #   registration[:vin] = registration.delete(:vin_1_10)
+    #   registration[:engine] = :ev
+    # end
+    # vehicles = []
+    # registrations.each do |registration|
+    #   car = Vehicle.new(registration)
+    #   vehicles << car
+    # end
+    # return vehicles
   end
 end
