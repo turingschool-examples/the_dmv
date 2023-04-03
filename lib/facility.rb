@@ -22,17 +22,14 @@ class Facility
 
 
   def register_vehicle(vehicle)
-    @registered_vehicles << vehicle
-    vehicle.update_registration_date
-    # if vehicle.plate_type == :ev
-    #   @collected_fees += 200
-    # elsif vehicle.plate_type == :antique
-    #   @collected_fees += 25
-    # else
-    #   @collected_fees += 100
-    # end
-    @collected_fees += collection_fee_assignment[vehicle.plate_type]
-    @registered_vehicles
+    if @services.include?('Vehicle Registration')
+      @registered_vehicles << vehicle
+      vehicle.update_registration_date
+      @collected_fees += collection_fee_assignment[vehicle.plate_type]
+      @registered_vehicles
+    else 
+      nil
+    end
   end
 
   def collection_fee_assignment
@@ -42,9 +39,5 @@ class Facility
     :regular => 100
     }
   end
-  
-  
-
-
 
 end
