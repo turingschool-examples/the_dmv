@@ -38,6 +38,20 @@ RSpec.describe Facility do
     it "registers vehicle @ facility_1" do
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
       
+      facility_1.register_vehicle(@cruz)
+      expect(@cruz.registered?).to eq(true)
+      expect(@cruz.registration_date).to eq(Date.today)
+      expect(@cruz.plate_type).to eq(:regular)
+
+      facility_1.register_vehicle(@camaro)
+      expect(@camaro.registered?).to eq(true)
+      expect(@camaro.registration_date).to eq(Date.today)
+      expect(@camaro.plate_type).to eq(:antique)
+
+      facility_1.register_vehicle(@cruz)
+      expect(@bolt.registered?).to eq(true)
+      expect(@bolt.registration_date).to eq(Date.today)
+      expect(@bolt.plate_type).to eq(:ev)
     end
    
 
