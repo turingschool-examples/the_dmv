@@ -94,9 +94,9 @@ RSpec.describe Facility do
     end
   end
 
-    # it 'checks for registered vehicles' do
-    #   expect(@facility_2.registered_vehicles).to eq([])
-    # end
+    it 'checks for registered vehicles' do
+      expect(@facility_2.registered_vehicles).to eq([])
+    end
 
     # it 'checks for services' do
     #   expect(@facility_2.services).to eq([])
