@@ -15,9 +15,25 @@ class FacilityFactory
       original_datum[:address] = original_datum.delete :location_1
       original_datum[:phone] = original_datum.delete :phone_number
     end
-    original_datum[:address]
   end
-      
+
+  def ny_transform(original_dataset)
+    original_dataset.find_all do |original_datum|
+      original_datum[:name] = original_datum.delete :office_name
+      original_datum[:address] = original_datum.delete :street_address_line_1
+      original_datum[:phone] = original_datum.delete :public_phone_number
+    end
+  end
+
+  def mo_transform(original_dataset)
+    original_dataset.find_all do |original_datum|
+      original_datum[:name] = original_datum.delete :name
+      original_datum[:address] = original_datum.delete :address1
+      original_datum[:phone] = original_datum.delete :phone
+    end
+  end
+  
+
 
     # human_address = or_dmv_office_locations[1][:location_1][:human_address]
     # human_address.delete("{").delete("}")
@@ -60,6 +76,8 @@ class FacilityFactory
 #   {:latitude=>"42.184549",
 #    :longitude=>"-122.671018",
 #    :human_address=>"{\"address\": \"600 Tolman Creek Rd\", \"city\": \"Ashland\", \"state\": \"OR\", \"zip\": \"97520\"}"}}
+
+
 
 
 # ny_facility_data = {:office_name=>"SELDEN",
