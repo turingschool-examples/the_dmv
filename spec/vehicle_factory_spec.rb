@@ -27,11 +27,12 @@ RSpec.describe VehicleFactory do
     expect(created_vehicles[1].model).to eq(@bolt.model)
   end
 
-  it "creates vehicles from a list of vehicles" do
+  it "creates vehicles from an external list of vehicles" do
     factory = VehicleFactory.new
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-    created_vehicles = factory.create_vehicles(wa_ev_registrations)
-    
+    renamed_vehicles = factory.rename_vehicles(wa_ev_registrations)
+    created_vehicles = factory.create_vehicles(renamed_vehicles)
+
     expect(created_vehicles[0]).to be_an_instance_of(Vehicle)
     expect(created_vehicles).to be_an(Array)
     expect(created_vehicles.count).to eq(1000) 
