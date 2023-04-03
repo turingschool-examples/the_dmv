@@ -152,12 +152,14 @@ RSpec.describe Registrant do
 
   describe 'renew license' do
     before (:each) do
+      @registrant_2 = Registrant.new('Penny', 16 )
       @facility_1.add_service('Written Test')
       @facility_1.add_service('Road Test')
       @facility_1.administer_written_test(@registrant_1)
       @facility_1.administer_road_test(@registrant_1)
       @registrant_2.earn_permit
       @facility_1.administer_written_test(@registrant_2)
+      @facility_1.administer_road_test(@registrant_2)
     end
 
 
@@ -174,7 +176,7 @@ RSpec.describe Registrant do
       end
     end
 
-    describe 'allows license holders who meet requirements to renew ' do
+    describe 'only allows license holders who meet requirements to renew ' do
       before(:each) do
         @facility_1.add_service('Renew License')
       end
@@ -186,10 +188,20 @@ RSpec.describe Registrant do
       end
 
       it 'does not renew the license of registrant 3' do
-        expect(@facility_1.services).to eq(["Written Test", "Road Test", "Renew License"])
+        # expect(@facility_1.services).to eq(["Written Test", "Road Test", "Renew License"])
         expect(@facility_1.renew_drivers_license(@registrant_3)).to be(false)
         expect(@registrant_3.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
         # expect(@registrant_1.license_data).to eq({:license=>true, :renewed=>true, :written=>true})
+      end
+
+      it 'renews the license of registrant 2' do
+        # expect(@facility_1.services).to eq(['Written Test', 'Road Test', 'Renew License'])
+        # expect(@registrant_2.permit?).to be (true)
+        # expect(@registrant_2.age).to eq(16)
+        # expect(@facility_1.administer_written_test(@registrant_2)).to be(true)
+        # expect(@facility_1.administer_road_test(@registrant_2)).to be(true)
+        expect(@facility_1.renew_drivers_license(@registrant_2)).to be(true)
+        expect(@registrant_2.license_data).to eq({:license=>true, :renewed=>true, :written=>true})
       end
 
     
