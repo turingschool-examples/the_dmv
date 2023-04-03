@@ -30,4 +30,8 @@ class Registrant
     @license_data[:license] = true
   end
 
+  def update_renew_status
+    @license_data[:renewed] = true
+  end
+
 end
