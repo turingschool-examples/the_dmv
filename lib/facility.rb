@@ -18,8 +18,9 @@ class Facility
     @collected_fees = (0)
   end
 
-  def add_services(service)
+  def add_service(service)
     @services << service
+    @services
   end
 
   def register_vehicle(car)
@@ -43,6 +44,19 @@ class Facility
     if (services.include? "Written Test") 
       if (tester.permit?) && (tester.age >= 16)
         tester.license_data[:written] = true
+        true
+      else
+        false
+      end
+    else
+      false
+    end
+  end
+
+  def administer_road_test(tester)
+    if (services.include? "Road Test") 
+      if tester.license_data[:written] == true
+        tester.license_data[:license] = true
         true
       else
         false
