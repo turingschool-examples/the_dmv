@@ -17,7 +17,7 @@ class Facility
 
   def add_service(service)
     @services << service
-    [service]
+    @services
   end
 
 
@@ -46,6 +46,16 @@ class Facility
       registrant.update_written_test_status
       true
     else
+      false
+    end
+  end
+
+  def administer_road_test(registrant)
+    return false if !@services.include?('Road Test')
+    if registrant.license_data[:written] == true
+      registrant.update_license_status
+      true
+    elsif registrant.license_data[:written] == false
       false
     end
   end
