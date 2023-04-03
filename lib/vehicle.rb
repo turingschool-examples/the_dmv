@@ -1,7 +1,7 @@
 require 'date'
 
 class Vehicle
-  attr_accessor :year,
+  attr_reader   :year,
                 :make,
                 :model,
                 :engine,
