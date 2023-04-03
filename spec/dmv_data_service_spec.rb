@@ -33,7 +33,7 @@ RSpec.describe DmvDataService do
 
   describe '#ny_dmv_office_locations' do
     it 'can load new york dmv office locations' do
-      expect(@dds.ny_dmv_office_locations.size).to eq(169)
+      expect(@dds.ny_dmv_office_locations.size).to eq(170)
     end
   end
 
@@ -42,4 +42,5 @@ RSpec.describe DmvDataService do
       expect(@dds.mo_dmv_office_locations.size).to eq(177)
     end
   end
+  
 end
