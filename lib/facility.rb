@@ -18,6 +18,8 @@ class Facility
     return nil if !@services.include?('Vehicle Registration')
 
     @registered_vehicles << vehicle
-    require 'pry'; binding.pry
+    vehicle.registration_date = Date.today
+
+    @registered_vehicles
   end
 end
