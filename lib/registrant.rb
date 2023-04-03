@@ -1,5 +1,5 @@
 class Registrant
-  attr_reader :name,
+  attr_accessor :name,
               :age,
               :permit,
               :license_data
@@ -19,22 +19,20 @@ class Registrant
     @permit = true
   end
 
-  def qualifies_for_written_test?
-    if @permit == true && age >= 16
-      return true
-    end
-  end
-
-  def qualifies_for_road_test?
-    if @license_data[:written] = true 
-      return true
-    else
-      false
-    end
+  def takes_written
+    @license_data[:written] = true
 
   end
 
+  def takes_road
+    @license_data[:license] = true
 
+  end
 
-    # A road test can only be administered to registrants who have passed the written test
+  def is_renewed
+    @license_data[:renewed] = true
+  end
+
 end
+
+

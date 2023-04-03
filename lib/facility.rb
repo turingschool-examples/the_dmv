@@ -43,24 +43,39 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    if @services.include?('Written Test') && registrant.qualifies_for_written_test? == true
-      registrant.license_data[:written] = true
+    if @services.include?('Written Test') && 
+      registrant.license_data[:written] == false &&
+      registrant.permit? == true &&
+      registrant.age >= 16
+      
+      registrant.takes_written
     else
       false
     end
   end
 
   def administer_road_test(registrant)
-    if @services.include?('Road Test')  && registrant.qualifies_for_road_test? == true
-      registrant.license_data[:license] = true
+    if @services.include?('Road Test') &&
+      registrant.license_data[:written] == true &&
+      registrant.license_data[:license] == false &&
+      registrant.age >= 16
+      
+     registrant.takes_road
     else
       false
     end
-  
-  
-  # For simplicity’s sake, Registrants who qualify for the road test automatically earn a license
+  end
 
-  
+  def renew_drivers_license(registrant)
+    if @services.include?('Renew License') &&
+      registrant.license_data[:written] == true &&
+      registrant.license_data[:license] == true
+
+     registrant.is_renewed
+    
+    else
+      false
+    end
   end
 
 end
