@@ -40,14 +40,21 @@ class WaVehicleFactory
     end
 
     def count_mod_yr(model_, year_)
-      count = 0
-      @vehicles.each do |vehicle|
-        if vehicle.model.downcase == model_.downcase &&
-          vehicle.year == year_ 
-          count =+ 1
-        end
-      end
-      count
+      # count = 0
+      # @vehicles.each do |vehicle|
+      #   if vehicle.model.downcase == model_.downcase &&
+      #     vehicle.year == year_ 
+
+      #     count += 1
+
+      #   end
+      # end
+      # count
+
+      @vehicles.select do |vehicle|
+        vehicle.model.downcase == model_.downcase &&
+        vehicle.year == year_
+      end.count
     end
   end
 
