@@ -46,13 +46,16 @@ RSpec.describe WaVehicleFactory do
   end
 
   describe 'EV Analytics' do
-    it '#most_popular_car' do
+    it '#most_popular_cars' do
       dmv_cars = @factory.create_vehicles(@wa_ev_registrations)
-      most_popular_car = @factory.most_popular_car
+      most_popular_cars = @factory.most_popular_cars
 
       # method will return most popular make and model attributes.
-      expect(most_popular_car).to have_key(:make)
-      expect(most_popular_car).to have_key(:model)
+      expect(most_popular_cars).to be_a Hash
+      expect(most_popular_cars).to have_key(:make)
+      expect(most_popular_cars).to have_key(:model)
     end
+
+    it '#'
   end
 end
