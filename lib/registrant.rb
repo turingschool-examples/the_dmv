@@ -4,9 +4,9 @@ class Registrant
               :license_data
 
   def initialize(name, age, permit = false)
-  @name   = name
-  @age    = age
-  @permit = permit
+  @name         = name
+  @age          = age
+  @permit       = permit
   @license_data = {
     written: false,
     license: false,
@@ -20,6 +20,10 @@ class Registrant
 
   def earn_permit
     @permit = true
+  end
+
+  def update_written_test_status
+    @license_data[:written] = true
   end
 
 end
