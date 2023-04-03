@@ -110,7 +110,7 @@ class Facility
     location.each do |station|
       facility_ny_hash = {name: nil, address: nil, phone: nil}
       facility_ny_hash[:name] = station[:office_name]
-      facility_ny_hash[:address] = station[:street_address_line_1][:city][:state][:zip_code]
+      facility_ny_hash[:address] = station.values_at(:street_address_line_1, :city, :state, :zip_code)
       facility_ny_hash[:phone] = station[:public_phone_number]
       new_facility_2 = Facility.new(facility_ny_hash)
       new_facility_list2 << new_facility_2
@@ -118,13 +118,18 @@ class Facility
     new_facility_list2
   end
 
-  # def ny_address
-
-  # end
-
-  # def create_facility_missouri(location)
-  #   new_facility_list3 = []
-  # end
+  def create_facility_missouri(location)
+    new_facility_list3 = []
+    location.each do |station|
+      facility_mo_hash = {name: nil, address: nil, phone: nil}
+      facility_mo_hash[:name] = station[:name]
+      facility_mo_hash[:address] = station.values_at(:address1, :city, :state, :zipcode)
+      facility_mo_hash[:phone] = station[:phone]
+      new_facility_3 = Facility.new(facility_mo_hash)
+      new_facility_list3 << new_facility_3
+    end
+    new_facility_list3
+  end
 
 
 

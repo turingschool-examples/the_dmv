@@ -220,15 +220,18 @@ RSpec.describe Facility do
     it "creates Oregon facility" do
       require 'pry'; binding.pry
       @facility_new.create_facility_oregon(@or_dmv_office_locations)
+      expect(@facility_new.create_facility_oregon(@or_dmv_office_locations)).to be_an(Array)
     end
 
-    # it "creates New York facility" do
-      
-    # end
+    it "creates New York facility" do
+      @facility_new.create_facility_ny(@new_york_facilities)
+      expect(@facility_new.create_facility_ny(@new_york_facilities)).to be_an(Array)
+    end
 
-    # it "creates Missouri faciilty" do
-
-    # end
+    it "creates Missouri faciilty" do
+        @facility_new.create_facility_missouri(@missouri_facilities)
+        expect(@facility_new.create_facility_missouri(@missouri_facilities)).to be_an(Array)
+    end
   end
 
 end
