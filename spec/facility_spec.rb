@@ -102,4 +102,8 @@ RSpec.describe Facility do
       expect(@facility_2.services).to eq([])
     end
 
+    it 'does not offer Vehicle Registration as a service' do 
+      expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
+    end
+
 end
