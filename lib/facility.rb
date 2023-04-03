@@ -1,8 +1,8 @@
 class Facility
-  attr_reader :name, 
+attr_accessor :name, 
               :address, 
-              :phone, 
-              :services, 
+              :phone
+attr_reader   :services, 
               :registered_vehicles, 
               :collected_fees
 
