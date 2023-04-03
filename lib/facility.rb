@@ -53,6 +53,12 @@ class Facility
     end
   end
 
+  def make_ev(cars)
+    cars.each do |car|
+      car.engine[:engine] = :ev
+    end
+  end
+
   def administer_road_test(tester)
     if (services.include? "Road Test") 
       if tester.license_data[:written] == true
