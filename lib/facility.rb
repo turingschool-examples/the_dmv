@@ -1,12 +1,15 @@
 require 'date'
 
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
+  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees, :operating_hours, :observed_holidays, :non_holiday_closures
 
   def initialize(facility_details)
     @name = facility_details[:name]
     @address = facility_details[:address]
     @phone = facility_details[:phone]
+    @operating_hours = facility_details[:operating_hours]
+    @observed_holidays = facility_details[:holidays]
+    @non_holiday_closures = facility_details[:non_holiday_closures]
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
@@ -19,10 +22,9 @@ class Facility
   def register_vehicle(vehicle, service="Vehicle Registration")
     return nil unless self.performs_service?(service)
     vehicle.registration_date = Date.today
-    @registered_vehicles << vehicle
     fee_type = vehicle.set_plate
     self.collect_fees(fee_type)
-    @registered_vehicles
+    @registered_vehicles << vehicle
   end
 
   def administer_written_test(registrant, service="Written Test")
