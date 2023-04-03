@@ -23,7 +23,7 @@ RSpec.describe FacilityFactory do
 
     it 'can create facility objects with attributes' do
       @fac_factory.create_facilities(@or_dmv_office_locations)
-require 'pry'; binding.pry
+
       expect(@fac_factory.facilities[0]).to be_a(Facility)
       expect(@fac_factory.facilities[0].name).not_to be nil
       expect(@fac_factory.facilities[0].address).not_to be nil

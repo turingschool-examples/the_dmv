@@ -11,12 +11,14 @@ class WaVehicleFactory
       @vehicles.flatten!
       
       @vehicles.each do |vehicle|
-        vehicle[:vin] = vehicle.delete :vin_1_10
-        vehicle[:year] = vehicle.delete :model_year
+        vehicle[:vin] = vehicle[:vin_1_10]
+        vehicle[:year] = vehicle[:model_year]
         vehicle[:engine] = :ev   
       end
       @vehicles.map! do |vehicle|
         Vehicle.new(vehicle)
       end
     end
+
+
   end

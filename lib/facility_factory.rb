@@ -11,17 +11,17 @@ attr_reader :facilities
     @facilities.each do |facility|
       # OR facilities
       if facility.has_key?(:location_1)
-        facility[:name] = facility.delete :title
+        facility[:name] = facility[:title]
         facility[:address] = facility[:location_1][:human_address]
-        facility[:phone] = facility.delete :phone_number   
+        facility[:phone] = facility[:phone_number]   
       # MO facilities
       elsif facility.has_key?(:dorregionnumber)
         facility[:address] = "#{facility[:address1]}, #{facility[:city]}, #{facility[:state]}, #{facility[:zipcode]}"
       else
       # NY facilities:
-      facility[:name] = facility.delete :office_name
+      facility[:name] = facility[:office_name]
       facility[:address] = "#{facility[:street_address_line_1]}, #{facility[:street_address_line_2]}, #{facility[:city]}, #{facility[:state]}, #{facility[:zip_code]}"
-      facility[:phone] = facility.delete :public_phone_number
+      facility[:phone] = facility[:public_phone_number]
       end
     end
 
