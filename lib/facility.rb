@@ -23,7 +23,6 @@ class Facility
   def register_vehicle(vehicle)
     if @services.include?('Vehicle Registration') &&
       vehicle.registration_date == nil
-      
       @registered_vehicles << vehicle
       vehicle.set_registration_date
       collect_fees(vehicle)
@@ -52,7 +51,6 @@ class Facility
       registrant.license_data[:written] == false &&
       registrant.permit? == true &&
       registrant.age >= 16
-
       registrant.written_pass
     else
       false
@@ -64,7 +62,6 @@ class Facility
       registrant.license_data[:written] == true &&
       registrant.license_data[:license] == false &&
       registrant.age >= 16
-
       registrant.road_pass
     else
       false
@@ -75,7 +72,6 @@ class Facility
     if @services.include?('Renew License') &&
       registrant.license_data[:written] == true &&
       registrant.license_data[:license] == true
-
       registrant.license_renewal
     else
       false

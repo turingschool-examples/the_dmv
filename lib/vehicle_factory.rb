@@ -9,7 +9,6 @@ class WaVehicleFactory
     def create_vehicles(source)
       @vehicles << source
       @vehicles.flatten!
-      
       @vehicles.each do |vehicle|
         vehicle[:vin] = vehicle[:vin_1_10]
         vehicle[:year] = vehicle[:model_year]
