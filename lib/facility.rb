@@ -5,6 +5,7 @@ class Facility
                 :services,
                 :registered_vehicles,
                 :collected_fees
+               
 
   def initialize(name:, address:, phone:)
     @name = name
