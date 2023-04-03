@@ -23,14 +23,15 @@ RSpec.describe FacilityFactory do
 
     it 'can create facility objects with attributes' do
       @fac_factory.create_facilities(@or_dmv_office_locations)
+      first_fac = @fac_factory.facilities[0]
 
-      expect(@fac_factory.facilities[0]).to be_a(Facility)
-      expect(@fac_factory.facilities[0].name).not_to be nil
-      expect(@fac_factory.facilities[0].address).not_to be nil
-      expect(@fac_factory.facilities[0].phone).not_to be nil
-      expect(@fac_factory.facilities[0].services).to eq([])
-      expect(@fac_factory.facilities[0].registered_vehicles).to eq([])
-      expect(@fac_factory.facilities[0].collected_fees).to eq(0)
+      expect(first_fac).to be_a(Facility)
+      expect(first_fac.name).not_to be nil
+      expect(first_fac.address).not_to be nil
+      expect(first_fac.phone).not_to be nil
+      expect(first_fac.services).to eq([])
+      expect(first_fac.registered_vehicles).to eq([])
+      expect(first_fac.collected_fees).to eq(0)
     end
 
     it 'returns an array of created facilities' do 
@@ -45,14 +46,15 @@ RSpec.describe FacilityFactory do
   
       it 'can create facility objects with attributes' do
         @fac_factory.create_facilities(@ny_dmv_office_locations)
-  
-        expect(@fac_factory.facilities[0]).to be_a(Facility)
-        expect(@fac_factory.facilities[0].name).not_to be nil
-        expect(@fac_factory.facilities[0].address).not_to be nil
-        expect(@fac_factory.facilities[0].phone).not_to be nil
-        expect(@fac_factory.facilities[0].services).to eq([])
-        expect(@fac_factory.facilities[0].registered_vehicles).to eq([])
-        expect(@fac_factory.facilities[0].collected_fees).to eq(0)
+        first_fac = @fac_factory.facilities[0]
+
+        expect(first_fac).to be_a(Facility)
+        expect(first_fac.name).not_to be nil
+        expect(first_fac.address).not_to be nil
+        expect(first_fac.phone).not_to be nil
+        expect(first_fac.services).to eq([])
+        expect(first_fac.registered_vehicles).to eq([])
+        expect(first_fac.collected_fees).to eq(0)
       end
 
       it 'returns an array of created facilities' do 
@@ -68,14 +70,15 @@ RSpec.describe FacilityFactory do
   
       it 'can create facility objects with attributes' do
         @fac_factory.create_facilities(@mo_dmv_office_locations)
- 
-        expect(@fac_factory.facilities[0]).to be_a(Facility)
-        expect(@fac_factory.facilities[0].name).not_to be nil
-        expect(@fac_factory.facilities[0].address).not_to be nil
-        expect(@fac_factory.facilities[0].phone).not_to be nil
-        expect(@fac_factory.facilities[0].services).to eq([])
-        expect(@fac_factory.facilities[0].registered_vehicles).to eq([])
-        expect(@fac_factory.facilities[0].collected_fees).to eq(0)
+        first_fac = @fac_factory.facilities[0]
+
+        expect(first_fac).to be_a(Facility)
+        expect(first_fac.name).not_to be nil
+        expect(first_fac.address).not_to be nil
+        expect(first_fac.phone).not_to be nil
+        expect(first_fac.services).to eq([])
+        expect(first_fac.registered_vehicles).to eq([])
+        expect(first_fac.collected_fees).to eq(0)
       end
 
       it 'returns an array of created facilities' do 
