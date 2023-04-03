@@ -47,21 +47,4 @@ class WaVehicleFactory
   end
 
   
-  # def most_popular_cars
-  #   make_count = Hash.new(0)
-  #   model_count = Hash.new(0)
-  #   @vehicles.each do |vehicle|
-  #     model_count[vehicle.model] += 1
-  #     make_count[vehicle.make] += 1
-  #   end
-  #  pop_model =  model_count.sort_by do |model, num|
-  #     num 
-  #   end.reverse[0].first
-  #  pop_make = make_count.sort_by do |model, num|
-  #     num 
-  #   end.reverse[0].first
-  #   most_pop = Hash.new(0)
-  #   most_pop[:make] = pop_make
-  #   most_pop[:model] = pop_model
-  #   most_pop
-  # end
+  

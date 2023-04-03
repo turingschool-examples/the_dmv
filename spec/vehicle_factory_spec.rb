@@ -51,10 +51,10 @@ RSpec.describe WaVehicleFactory do
     it '#most_popular_cars' do
       @factory.create_vehicles(@wa_ev_registrations)
       most_popular_car = @factory.most_popular_car
-
+      
       # method will return most popular make and model attributes.
       expect(most_popular_car).to be_a Hash
-      expect(most_popular_cas).to have_key(:make)
+      expect(most_popular_car).to have_key(:make)
       expect(most_popular_car).to have_key(:model)
     end
 
