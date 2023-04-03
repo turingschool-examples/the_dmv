@@ -26,8 +26,7 @@ class Vehicle
     @engine == :ev
   end
 
-  def plate_type 
-   
+  def plate_type   
     if 
       antique?  
       :antique 
@@ -37,8 +36,6 @@ class Vehicle
     else
         
       :regular 
-    end
-    
+    end 
   end
-
 end

@@ -8,8 +8,7 @@ class Facility
     @phone = phone
     @services = []
     @registered_vehicles = []
-    @collected_fees = 0
-    
+    @collected_fees = 0 
   end
 
   def add_service(service)
@@ -19,7 +18,6 @@ class Facility
   def register_vehicle(vehicle)
     if @services.include?("Vehicle Registration")
       @registered_vehicles << vehicle 
-    
       vehicle.registration_date = Date.today
     
       if 
@@ -39,8 +37,7 @@ class Facility
 
   def administer_written_test(registrant)
     if registrant.permit? && registrant.age >= 16 && @services.include?("Written Test")
-      true 
-      
+      true  
       registrant.license_data[:written] = true 
     else  
       false 
@@ -55,20 +52,13 @@ class Facility
       false 
     end
   end
-  
-  
+   
   def renew_drivers_license(registrant)
     if registrant.license_data[:license] == true && @services.include?("Renew License")
       true 
       registrant.license_data[:renewed] = true 
     else  
       false 
-    end
-    
+    end 
   end
-
-  
-
-  
-
 end

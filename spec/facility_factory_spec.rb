@@ -95,8 +95,5 @@ RSpec.describe FacilityFactory do
     expect(@factory.facilities[2].address).to eq("117A NORTH MAIN")
     expect(@factory.facilities[2].phone).to eq(nil)
   end
-
-
-
 end
 

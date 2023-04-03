@@ -72,7 +72,6 @@ RSpec.describe Registrant do
     expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
   end
 
-
   it 'can administer road test' do 
     registrant_1 = Registrant.new('Bruce', 18, true )
     registrant_2 = Registrant.new('Penny', 16 )
@@ -92,7 +91,6 @@ RSpec.describe Registrant do
     expect(facility_1.administer_road_test(registrant_3)).to eq(false)
     expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
 
-
     #registrant 1
 
     expect(facility_1.administer_road_test(registrant_1)).to eq(false)
@@ -102,7 +100,6 @@ RSpec.describe Registrant do
     
     facility_1.administer_road_test(registrant_1)
     expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
-
 
     #registrant 2
     facility_1.administer_road_test(registrant_2)
@@ -124,7 +121,6 @@ RSpec.describe Registrant do
     facility_1.administer_written_test(registrant_2)
     facility_1.administer_road_test(registrant_2)
 
-
     #registrant 1
 
     expect(facility_1.renew_drivers_license(registrant_1)).to eq(false)
@@ -135,11 +131,9 @@ RSpec.describe Registrant do
     facility_1.renew_drivers_license(registrant_1)
     expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
     
-
     #registrant 3
     facility_1.renew_drivers_license(registrant_3)
     expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-
 
     #registrant 2
     facility_1.renew_drivers_license(registrant_2)
