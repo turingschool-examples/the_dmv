@@ -16,5 +16,4 @@ class VehicleFactory
       vehicle_data[:engine] = :ev
     end
   end
-
 end
