@@ -86,37 +86,41 @@ RSpec.describe Facility do
       expect(@bolt.registration_date).to eq(date)
 
     end
+    
+    it "adds plate_type to vehicle when registered" do
+      
+      @facility_1.add_service("Vehicle Registration")
+      expect(@cruz.plate_type).to eq(nil)
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@facility_1.registered_vehicles[0].plate_type).to eq(:regular)
+      expect(@cruz.plate_type).to eq(:regular)
+
+    end
 
     it "can have a :regular plate type" do
+      @facility_1.add_service("Vehicle Registration")
+      expect(@cruz.plate_type).to eq(nil)
+      @facility_1.register_vehicle(@cruz)
 
       expect(@cruz.plate_type).to eq(:regular)
 
     end
 
     it "can have an :ev plate type" do
-
+      @facility_1.add_service("Vehicle Registration")
+      @facility_1.register_vehicle(@bolt)
       expect(@bolt.plate_type).to eq(:ev)
 
     end
 
     it "can have an :antique plate type" do
-
+      @facility_1.add_service("Vehicle Registration")
+      @facility_1.register_vehicle(@camaro)
       expect(@camaro.plate_type).to eq(:antique)
       
     end
 
-    xit "adds plate_type to vehicle when registered" do
-
-      #this isn't asserting anything or at least my shit isn't returnig the right way
-      # when the vehicles get registered, there isn't anything to assert that the 
-      # plate_type gets associate with the car, but it still passes. 
-      expect(@facility_1.registered_vehicles[0].plate_type).to eq(nil)
-
-      @facility_1.register_vehicle(@cruz)
-
-      expect(@facility_1.registered_vehicles[0].plate_type).to eq(:regular)
-
-    end
 
     it "adds vehicles to @registered_vehicles attribute" do
 
