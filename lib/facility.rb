@@ -36,4 +36,8 @@ class Facility
       @registered_vehicles
     end
   end
+
+  def administer_written_test(registrant)
+    
+  end
 end
