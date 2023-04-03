@@ -1,6 +1,6 @@
 class VehicleFactory
 
-  attr_reader :vehicles
+  attr_reader :vehicles_list
     def initialize
       @vehicles_list = []
     end
@@ -10,5 +10,6 @@ class VehicleFactory
         @vehicles_list << Vehicle.new(vehicle)
       end
     end
+
 
 end
