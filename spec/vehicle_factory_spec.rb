@@ -14,6 +14,7 @@ RSpec.describe VehicleFactory do
 
       
       new_cars = factory.create_vehicles(wa_ev_registrations)
+     
 
       expect(new_cars[0].engine).to eq(:ev)
       expect(new_cars[0].make).to eq("SMART")
@@ -77,25 +78,25 @@ RSpec.describe VehicleFactory do
 
       reg_by_make_hash = factory.registered_by_make(wa_ev_registrations)
 
-      expect(reg_by_make_hash).to eq({"SMART"=>7,
-                                      "VOLKSWAGEN"=>32,
-                                      "PORSCHE"=>3,
-                                      "CHEVROLET"=>151,
-                                      "TESLA"=>335,
-                                      "MITSUBISHI"=>2,
-                                      "NISSAN"=>228,
-                                      "FORD"=>47,
-                                      "AUDI"=>21,
-                                      "CHRYSLER"=>14,
-                                      "VOLVO"=>28,
-                                      "TOYOTA"=>43,
-                                      "BMW"=>41,
-                                      "FIAT"=>7,
-                                      "RIVIAN"=>2,
-                                      "KIA"=>26,
-                                      "JEEP"=>7,
-                                      "CADILLAC"=>3,
-                                      "HONDA"=>3})
+      expect(factory.registered_by_make(wa_ev_registrations)).to eq({"SMART"=>7,
+                                                                      "VOLKSWAGEN"=>32,
+                                                                      "PORSCHE"=>3,
+                                                                      "CHEVROLET"=>151,
+                                                                      "TESLA"=>335,
+                                                                      "MITSUBISHI"=>2,
+                                                                      "NISSAN"=>228,
+                                                                      "FORD"=>47,
+                                                                      "AUDI"=>21,
+                                                                      "CHRYSLER"=>14,
+                                                                      "VOLVO"=>28,
+                                                                      "TOYOTA"=>43,
+                                                                      "BMW"=>41,
+                                                                      "FIAT"=>7,
+                                                                      "RIVIAN"=>2,
+                                                                      "KIA"=>26,
+                                                                      "JEEP"=>7,
+                                                                      "CADILLAC"=>3,
+                                                                      "HONDA"=>3})
     end
   end
 end
