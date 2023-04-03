@@ -10,14 +10,33 @@ class FacilityFactory
   end
 
   def oregon_transform(original_dataset)
-    human_address = or_dmv_office_locations[1][:location_1][:human_address]
-    human_address.delete("{").delete("}")
-    human_address.join("")
+    original_dataset.find_all do |original_datum|
+      original_datum[:name] = original_datum.delete :title
+      original_datum[:address] = original_datum.delete :location_1
+      original_datum[:phone] = original_datum.delete :phone_number
+    end
+    original_datum[:address]
+  end
+      
+
+    # human_address = or_dmv_office_locations[1][:location_1][:human_address]
+    # human_address.delete("{").delete("}")
+    # human_address.join("")
     # human_address.delete("address").delete("city").delete("state").delete("zip")
     # human_address 
-  end
+  
 
+  # def rename_vehicles(vehicle_list)
+  #   vehicle_list.find_all do |vehicle_data|
+  #     vehicle_data[:vin] = vehicle_data.delete :dol_vehicle_id
+  #     vehicle_data[:year] = vehicle_data.delete :model_year
+  #     vehicle_data[:engine] = :ev
+  #   end
+  # end
 
+  # @name = facility_info[:name]
+  # @address = facility_info[:address]
+  # @phone = facility_info[:phone]
 
 
   # def new_york_tranform

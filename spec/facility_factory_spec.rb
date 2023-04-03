@@ -30,8 +30,9 @@ RSpec.describe FacilityFactory do
     or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations 
     ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
     mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
+    or_data = facility_factory.oregon_transform(or_dmv_office_locations)
     require 'pry'; binding.pry
-    or_data = oregon_transform(or_dmv_office_locations)
+   
     # or_created_facilities = facility_factory.create_facility(or_data)
     
     # expect(or_created_facilities[0]).to be_an_instance_of(Facility)
