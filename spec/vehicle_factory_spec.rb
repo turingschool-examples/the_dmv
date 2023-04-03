@@ -24,4 +24,11 @@ RSpec.describe VehicleFactory do
       expect(@factory.most_popular_makes_model).to eq("NISSAN Leaf")
     end
   end
+
+  describe "#registrations_for_model_year" do
+    it "can return count of vehicles in a specific model year" do
+      @factory.create_vehicles(@wa_ev_registrations)
+      expect(@factory.registrations_for_model_year(2020)).to eq(100)
+    end
+  end
 end
