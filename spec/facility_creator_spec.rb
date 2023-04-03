@@ -47,5 +47,14 @@ RSpec.describe FacilityCreator do
       expect(ny_creator.facilities[0].operating_hours).to be_an_instance_of(Hash)
       expect(mo_creator.facilities[0].operating_hours).to be_a(String)
     end
+
+    it "stores holidays and closure dates for Missouri" do 
+      mo_creator = FacilityCreator.new
+      mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
+      mo_creator.create_facilities(mo_dmv_office_locations)
+
+      expect(mo_creator.facilities[0].observed_holidays).to be_a(String)
+      expect(mo_creator.facilities[0].non_holiday_closures).to be_a(String)
+    end
   end
 end
