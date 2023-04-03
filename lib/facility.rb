@@ -47,13 +47,26 @@ class Facility
     end
   end
 
-  # def administer_written_test(registrant)
-  #   if !self.services.include?('Written Test') || registrant.age < 16
-  #    false
-  #   elsif self.services.include?('Written Test') == true
-  #     registrant.license_data[:written] = true
-  #   end
-  # end
+  def administer_written_test(registrant)
+    if !self.services.include?('Written Test') || registrant.age < 16
+      false
+    elsif self.services.include?('Written Test') && registrant.permit? == true
+      registrant.license_data[:written] = true
+    else
+      registrant.license_data[:written] = false
+    end
+  end
+
+  def administer_road_test(registrant)
+    if !self.services.include?('Road Test')
+      false
+    elsif self.services.include?('Written Test') && registrant.license_data[:written] = true
+      registrant.license_data[:license] = true
+    else
+      false
+    end
+    
+  end
     
     
     
