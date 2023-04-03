@@ -14,7 +14,7 @@ RSpec.describe VehicleFactory do
     end
   end
 
-  describe "create vehicles" do
+  describe "create_vehicles" do
     it "can create vehicles" do
 
     expect(@factory.create_vehicles(@wa_ev_registrations)).to be_a(Array)
