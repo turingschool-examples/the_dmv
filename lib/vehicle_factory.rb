@@ -20,5 +20,15 @@ class WaVehicleFactory
       end
     end
 
-
+    def most_popular_car
+      model_count = Hash.new(0)
+      @vehicles.each do |vehicle|
+        model_count[vehicle.model] += 1
+      end
+      model_count.sort_by do |model, num|
+        num 
+      end.reverse[0]
+    end
   end
+
+  

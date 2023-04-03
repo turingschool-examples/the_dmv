@@ -19,9 +19,9 @@ attr_reader :facilities
         facility[:address] = "#{facility[:address1]}, #{facility[:city]}, #{facility[:state]}, #{facility[:zipcode]}"
       else
       # NY facilities:
-      facility[:name] = facility[:office_name]
-      facility[:address] = "#{facility[:street_address_line_1]}, #{facility[:street_address_line_2]}, #{facility[:city]}, #{facility[:state]}, #{facility[:zip_code]}"
-      facility[:phone] = facility[:public_phone_number]
+        facility[:name] = facility[:office_name]
+        facility[:address] = "#{facility[:street_address_line_1]}, #{facility[:street_address_line_2]}, #{facility[:city]}, #{facility[:state]}, #{facility[:zip_code]}"
+        facility[:phone] = facility[:public_phone_number]
       end
     end
 
