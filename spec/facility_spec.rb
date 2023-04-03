@@ -72,5 +72,24 @@ RSpec.describe Facility do
       expect(@facility_2.collected_fees).to eq(0)
     end
 
+    it 'can set vehicle plate type' do
+
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@camaro.plate_type).to eq(:antique)
+    end
   end
+
+  describe 'Drivers License' do
+    before(:each) do
+      @registrant_1 = Registrant.new('Bruce', 18, true )
+      @registrant_2 = Registrant.new('Penny', 16 )
+      @registrant_3 = Registrant.new('Tucker', 15 )
+    end
+
+    
+
+
+  end
+
 end
