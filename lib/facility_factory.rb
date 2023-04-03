@@ -27,5 +27,14 @@ class FacilityFactory
       end
     end
 
+    def determine_phone_num(facility)
+      if facility.keys.include?(:phone_number)
+        facility[:phone_number]
+      elsif facility.keys.include?(:office_type)
+        facility[:public_phone_number] ? facility[:public_phone_number].insert(6, "-").insert(3, "-") : "None"
+      elsif facility.keys.include?(:phone)
+        facility[:phone].delete("( )").insert(3, "-")
+      end
+    end
     
 end

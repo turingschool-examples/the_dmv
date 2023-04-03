@@ -29,6 +29,13 @@ RSpec.describe FacilityFactory do
     expect(@factory.determine_address(@oregon_facilities.first)).to eq("2242 Santiam Hwy SE")
   end
 
+  it 'can determine phone number' do 
+    @factory = FacilityFactory.new
+    @oregon_facilities = DmvDataService.new.or_dmv_office_locations
+
+    expect(@factory.determine_phone_num(@oregon_facilities.first)).to eq("541-967-2014")
+  end
+
 
 
 
