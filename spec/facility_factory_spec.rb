@@ -8,7 +8,7 @@ RSpec.describe FacilityFactory do
       expect(facility).to be_a(FacilityFactory)
     end
 
-    xit "creates new facilities from oregon data set" do
+    it "creates new facilities from oregon data set" do
       facility = FacilityFactory.new
       oregon = DmvDataService.new.or_dmv_office_locations
       
@@ -24,7 +24,7 @@ RSpec.describe FacilityFactory do
       expect(facilities[0].zipcode).to eq("97321")
     end
     
-    xit "creates new facilities from new york data set" do
+    it "creates new facilities from new york data set" do
       facility = FacilityFactory.new
       new_york_facilities = DmvDataService.new.ny_dmv_office_locations
 
