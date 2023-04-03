@@ -29,24 +29,25 @@ class Facility
 
     @registered_vehicles << vehicle
     vehicle.registration_date = Date.today
-    if vehicle.antique?
-      @collected_fees += @@fees[:antique]
-      vehicle.plate_type = :antique
-    elsif vehicle.electric_vehicle?
-      @collected_fees += @@fees[:ev]
-      vehicle.plate_type = :ev
-    else
-      @collected_fees += @@fees[:regular]
-      vehicle.plate_type = :regular
-    end
+      if vehicle.antique?
+        @collected_fees += @@fees[:antique]
+        vehicle.plate_type = :antique
+      elsif vehicle.electric_vehicle?
+        @collected_fees += @@fees[:ev]
+        vehicle.plate_type = :ev
+      else
+        @collected_fees += @@fees[:regular]
+        vehicle.plate_type = :regular
+      end
     @registered_vehicles
   end
   
-  def administer_written_test(person)
-    if services.include?("Written_Test") && person.permit? == true && person.age >= 16
-      person.license_data[:written] = true
-    else 
-      false
+  def administer_written_test(registrant)
+    if @services.include?("Written Test") && registrant.permit? && registrant.age >= 16
+      registrant.license_data[:written] = true
+      return true
+    else
+      return false
     end
   end
   

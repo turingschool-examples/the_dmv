@@ -89,9 +89,14 @@ RSpec.describe Facility do
     
   describe '#administer written test' do
     it 'will administer the written test if service is provided' do
+      
       expect(@facility_1.administer_written_test(@registrant_1)).to be(false)
+      expect(@facility_2.administer_written_test(@registrant_1)).to be(false)
 
+      @facility_1.add_service('Written Test')
 
+      expect(@facility_1.administer_written_test(@registrant_1)).to be(true)
+      expect(@facility_2.administer_written_test(@registrant_1)).to be(false)
     end
 
   end
