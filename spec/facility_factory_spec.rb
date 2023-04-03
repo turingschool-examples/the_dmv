@@ -13,4 +13,14 @@ RSpec.describe FacilityFactory do
       expect(@facility).to be_an_instance_of(FacilityFactory)
     end
   end
+
+  describe "create_facility" do
+    it "creates facility" do
+
+      expect(@facility.create_facility(@or_facilities)).to all(be_an_instance_of Facility)
+      expect(@facility.create_facility(@ny_facilities)).to all(be_an_instance_of Facility)
+      expect(@facility.create_facility(@mo_facilities)).to all(be_an_instance_of Facility)
+
+    end
+  end
 end
