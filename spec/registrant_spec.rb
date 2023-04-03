@@ -54,6 +54,32 @@ RSpec.describe Registrant do
       expect(@facility_1.administer_written_test(@registrant_1)).to be(true)
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
+  end
+  describe 'administers a written test for registrant 2' do 
+    before(:each) do
+      @facility_1.add_service('Written Test')
+      @registrant_2 = Registrant.new('Penny', 16 )
+    end
+
+    it '#age' do 
+    expect(@registrant_2.age).to eq(16)
+    end
+
+    it '#permit?' do 
+    expect(@registrant_2.permit?).to be(false)
+    end
+
+    it '#administer_written_test(registrant)' do 
+    expect(@facility_1.administer_written_test(@registrant_2)).to be(false)
+    end
+
+    it 'only permit holders can be administered a written test' do 
+      expect(@registrant_2.permit?).to be(false)
+      @registrant_2.earn_permit
+      expect(@facility_1.administer_written_test(@registrant_2)).to be(true)
+    end
+
+
 
   end
 
