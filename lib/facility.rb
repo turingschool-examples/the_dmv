@@ -26,13 +26,24 @@ class Facility
     if vehicle.registration_date == nil 
       @registered_vehicles << vehicle
       @registration_date = vehicle.registration_date = Date.today
-      if vehicle.model == "Cruz" 
+      if vehicle.antique?  
+        @collected_fees += 25
+      elsif vehicle.electric_vehicle?
+        @collected_fees += 200
+      else
         @collected_fees += 100
-      elsif vehicle.model == "Bolt"
-        @collected_fees += 225
       end
     else 
       nil
+    end
+  end
+
+  def administer_written_test(registrant)
+    if !self.services.include?("Written Test") || registrant.age < 16
+      false
+    elsif self.services.include?("Written Test") == true
+      registrant.license_data[:written] = true
+      true
     end
   end
 end
