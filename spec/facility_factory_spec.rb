@@ -4,15 +4,31 @@ require './lib/dmv_data_service'
 
 RSpec.describe FacilityFactory do
   it 'Exists' do
-    factory = FacilityFactory.new
-    expect(factory).to be_an_instance_of(FacilityFactory)
+    locations = FacilityFactory.new
+    expect(locations).to be_an_instance_of(FacilityFactory)
   end
 
   it 'Can add Locations' do
-    factory = FacilityFactory.new
+    locations = FacilityFactory.new
     or_locations = DmvDataService.new.or_dmv_office_locations
-    factory.create_facilities(or_locations)
-  require 'pry'; binding.pry
+    locations.create_facilities(or_locations)
   end
+
+  it 'Can make other faciliteis' do
+    oregon = FacilityFactory.new
+    or_locations = DmvDataService.new.or_dmv_office_locations
+    oregon.create_facilities(or_locations)
+
+    new_york = FacilityFactory.new
+    ny_locations = DmvDataService.new.ny_dmv_office_locations
+    new_york.create_facilities(or_locations)
+
+    missouri = FacilityFactory.new
+    mo_locations = DmvDataService.new.mo_dmv_office_locations
+    missouri.create_facilities(or_locations)
+    require 'pry'; binding.pry
+  end
+
+
 
 end
