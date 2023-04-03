@@ -17,6 +17,7 @@ RSpec.describe Facility do
     @registrant_3 = Registrant.new('Tucker', 15 )
     @registrant_4 = Registrant.new('Fakeid', 14, true)
   end
+  
   describe '#initialize' do
     it 'it exists and has attributes' do
       expect(@facility).to be_an_instance_of(Facility)
@@ -81,7 +82,6 @@ RSpec.describe Facility do
       @facility_2.register_vehicle(@cruz)
 
       expect(@facility_2.registered_vehicles).to eq([])
-      
     end
 
     it 'cannot register a vehicle until the service is added' do

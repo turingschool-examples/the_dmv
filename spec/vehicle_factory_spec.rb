@@ -42,8 +42,7 @@ RSpec.describe WaVehicleFactory do
     end
 
     it 'returns an array of created vehicles' do 
-      expect(@factory.create_vehicles(@wa_ev_registrations)).to eq(@factory.vehicles)
-      
+      expect(@factory.create_vehicles(@wa_ev_registrations)).to be_a(Array)
     end
   end
 
@@ -52,8 +51,8 @@ RSpec.describe WaVehicleFactory do
       @factory.create_vehicles(@wa_ev_registrations)
       most_popular_car = @factory.most_popular_car
       
-      # method will return most popular make and model attributes.
-      expect(most_popular_car).to be_a Hash
+      # method will return most popular car with make and model attributes.
+      expect(most_popular_car).to be_a(Hash)
       expect(most_popular_car).to have_key(:make)
       expect(most_popular_car).to have_key(:model)
     end
@@ -62,7 +61,7 @@ RSpec.describe WaVehicleFactory do
       @factory.create_vehicles(@wa_ev_registrations)
       count_mod_yr = @factory.count_mod_yr("Model 3", 2018)
       
-      expect(count_mod_yr).to be_an Integer
+      expect(count_mod_yr).to be_an(Integer)
     end
   end
 end

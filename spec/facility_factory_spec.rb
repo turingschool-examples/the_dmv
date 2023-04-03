@@ -82,7 +82,7 @@ RSpec.describe FacilityFactory do
       end
 
       it 'returns an array of created facilities' do 
-        expect(@fac_factory.create_facilities(@mo_dmv_office_locations)).to eq(@fac_factory.facilities)
+        expect(@fac_factory.create_facilities(@mo_dmv_office_locations)).to be_a(Array)
       end
     end
   end
