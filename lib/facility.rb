@@ -61,5 +61,4 @@ class Facility
       false
     end
   end
-
-end #final
+end 

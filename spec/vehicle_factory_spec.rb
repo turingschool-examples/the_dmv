@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 RSpec.describe VehicleFactory do
+  it "exists" do
+    factory = VehicleFactory.new
+    expect(factory).to be_an_instance_of(VehicleFactory)
+  end
+
   it "creates a vehicle from a list of one vehicle" do
     factory = VehicleFactory.new
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
@@ -32,9 +37,11 @@ RSpec.describe VehicleFactory do
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     renamed_vehicles = factory.rename_vehicles(wa_ev_registrations)
     created_vehicles = factory.create_vehicles(renamed_vehicles)
-
     expect(created_vehicles[0]).to be_an_instance_of(Vehicle)
     expect(created_vehicles).to be_an(Array)
     expect(created_vehicles.count).to eq(1000) 
   end
+  # factory.renamed_vehicles.models
+
+
 end
