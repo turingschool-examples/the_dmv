@@ -46,10 +46,10 @@ class Facility
     nil
   end
 
-  # def administer_written_test(registrant)
-  #   if registrant.age >= 16 && @permit == true
+  def administer_written_test(registrant)
+    if registrant.age >= 16 && @permit == true
       
-  #   end
-  # end
+    end
+  end
 
 end
