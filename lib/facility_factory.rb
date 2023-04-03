@@ -36,5 +36,16 @@ class FacilityFactory
         facility[:phone].delete("( )").insert(3, "-")
       end
     end
-    
+
+    def create_facilities(database)
+      database.each do |facility|
+        @facilities << Facility.new(
+          {
+          name: determine_name(facility),
+          address: determine_address(facility),
+          phone: determine_phone_num(facility),
+        }
+      )
+      end
+    end
 end
