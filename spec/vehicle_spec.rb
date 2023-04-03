@@ -60,16 +60,4 @@ RSpec.describe Vehicle do
     expect(facility_2.registered_vehicles).to eq([])
     expect(facility_2.collected_fees).to eq(0)
   end
-
-  # it 'can determine if a vehicle is an antique' do
-  #   expect(@cruz.antique?).to eq(false)
-  #   expect(@bolt.antique?).to eq(false)
-  #   expect(@camaro.antique?).to eq(true)
-  # end
-
-  # it 'can determine if a vehicle is an ev' do
-  #   expect(@cruz.electric_vehicle?).to eq(false)
-  #   expect(@bolt.electric_vehicle?).to eq(true)
-  #   expect(@camaro.electric_vehicle?).to eq(false)
-  # end
 end
