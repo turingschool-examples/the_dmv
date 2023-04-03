@@ -150,15 +150,15 @@ RSpec.describe Registrant do
     end
   end
 
-  # describe 'renew license' do
-  #   describe 'does not offer license renewal as a provided service' do
-  #     it 'does not offer license renewal as a provided service' do
-  #       expect(@facility_1.renew_drivers_license(@registrant_1)).to be(false)
-  #     end
+  describe 'renew license' do
+    describe 'does not offer license renewal as a provided service' do
+      it 'does not offer license renewal as a provided service' do
+        expect(@facility_1.renew_drivers_license(@registrant_1)).to be(false)
+      end
 
 
-  #   end
-  # end
+    end
+  end
 
 
 end
