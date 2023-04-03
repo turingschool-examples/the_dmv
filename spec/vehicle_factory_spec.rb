@@ -10,7 +10,9 @@ RSpec.describe VehicleFactory do
   it 'can create vehicles' do
     factory = VehicleFactory.new
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-    expect(factory.create_vehicles_by_state(wa_ev_registrations)).to eq(1000)
-    expect(factory.create_vehicles_by_state(wa_ev_registrations)).to be_a(Vehicle)
+    expect(factory.create_vehicles_by_state(wa_ev_registrations)).to be_a(Array)
+    (factory.create_vehicles_by_state(wa_ev_registrations)).each do |vehicle|
+    expect(vehicle).to be_a(Vehicle)
+    end
   end
 end
