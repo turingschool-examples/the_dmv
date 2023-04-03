@@ -49,7 +49,7 @@ RSpec.describe WaVehicleFactory do
 
   describe 'EV Analytics' do
     it '#most_popular_cars' do
-      dmv_cars = @factory.create_vehicles(@wa_ev_registrations)
+      @factory.create_vehicles(@wa_ev_registrations)
       most_popular_cars = @factory.most_popular_cars
 
       # method will return most popular make and model attributes.
@@ -59,10 +59,10 @@ RSpec.describe WaVehicleFactory do
     end
 
     it 'can count registered vehicles by model and year' do 
-      dmv_cars = @factory.create_vehicles(@wa_ev_registrations)
-      count_mod_yr = @factory.count_mod_yr
+      @factory.create_vehicles(@wa_ev_registrations)
+      count_mod_yr = @factory.count_mod_yr("Model 3", 2018)
 
-      expect(count_mod_yr)
+      expect(count_mod_yr).to be_an Integer
     end
   end
 end

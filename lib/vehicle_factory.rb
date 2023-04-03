@@ -38,6 +38,17 @@ class WaVehicleFactory
       most_pop[:model] = pop_model
       most_pop
     end
+
+    def count_mod_yr(model_, year_)
+      count = 0
+      @vehicles.each do |vehicle|
+        if vehicle.model.downcase == model_.downcase &&
+          vehicle.year == year_ 
+          count =+ 1
+        end
+      end
+      count
+    end
   end
 
   
