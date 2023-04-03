@@ -29,7 +29,7 @@ RSpec.describe FacilityFactory do
       new_york_facilities = DmvDataService.new.ny_dmv_office_locations
       
       ny_facilities = facility.create_facility(new_york_facilities)
-      
+      expect(ny_facilities[0].name).to eq("SELDEN")
       expect(ny_facilities[0].zipcode).to eq("11784")
     end
     
@@ -38,8 +38,7 @@ RSpec.describe FacilityFactory do
       missouri_facilities = DmvDataService.new.mo_dmv_office_locations
 
       mizzou_facilities = facility.create_facility(missouri_facilities)
-      
-      expect(mizzou_facilities[3].address).to eq("309 W WATER STREET")
+      expect(mizzou_facilities[3].address).to eq("105 Armory ST")
     end
   end
 end
