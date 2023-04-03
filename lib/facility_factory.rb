@@ -5,16 +5,13 @@ class FacilityFactory
     @created_facilities = []
   end
 
-  oregon_facilites = DmvDataService.new.or_dmv_office_locations
-  new_york_facilities = DmvDataService.new.ny_dmv_office_locations
-  missouri_facilities = DmvDataService.new.mo_dmv_office_locations
-
   def create_oregon_facility(database)
     database.map do |facility|
       @created_facilities << Facility.new({
         name: facility[:title],
-        address: JSON.parse(facility.dig(:location_1, :human_)).values.join(' '),
-        phone: facility[:phone_number]
+        address: facility[:location_1][:human_address], 
+        phone: facility[:phone_number],
+        zipcode: facility[:zip_code]
       })
     end
   end
@@ -23,8 +20,9 @@ class FacilityFactory
     database.map do |facility|
       @created_facilities << Facility.new({
         name: facility[:office_name],
-        address: facility.fetch_values(:street_address_line_1, :city, :state, :zip_code).join(' '),
-        phone: facility[:public_phone_number]
+        address: [facility[:street_address_line_1], facility[:city], facility[:state]],
+        phone: facility[:public_phone_number],
+        zipcode: facility[:zip_code]
       })
     end
   end
@@ -33,8 +31,9 @@ class FacilityFactory
     database.map do |facility|
       @created_facilities << Facility.new({
         name: facility[:name],
-        address: facility.fetch_values(:address1, :city, :state, :zipcode).join(' '),
-        phone: facility[:phone]
+        address: [facility[:address1], facility[:city], facility[:state]],
+        phone: facility[:phone],
+        facility[:zipcode]
       })
     end
   end
