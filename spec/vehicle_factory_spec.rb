@@ -50,18 +50,17 @@ RSpec.describe WaVehicleFactory do
   describe 'EV Analytics' do
     it '#most_popular_cars' do
       @factory.create_vehicles(@wa_ev_registrations)
-      most_popular_cars = @factory.most_popular_cars
+      most_popular_car = @factory.most_popular_car
 
       # method will return most popular make and model attributes.
-      expect(most_popular_cars).to be_a Hash
-      expect(most_popular_cars).to have_key(:make)
-      expect(most_popular_cars).to have_key(:model)
+      expect(most_popular_car).to be_a Hash
+      expect(most_popular_cas).to have_key(:make)
+      expect(most_popular_car).to have_key(:model)
     end
 
     it 'can count registered vehicles by model and year' do 
       @factory.create_vehicles(@wa_ev_registrations)
       count_mod_yr = @factory.count_mod_yr("Model 3", "2018")
-      require 'pry'; binding.pry
       expect(count_mod_yr).to be_an Integer
     end
   end
