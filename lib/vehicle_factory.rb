@@ -30,4 +30,11 @@ class VehicleFactory
     selected_vehicles = @vehicles.select { |vehicle| vehicle.year == model_year }
     count = selected_vehicles.count
   end
+
+  def most_registered_by_county
+    json = DmvDataService.new.wa_ev_registrations
+    counties = json.map { |vehicle| vehicle[:"county"] }
+    top_county = counties.tally.first
+    top_county[0]
+  end
 end
