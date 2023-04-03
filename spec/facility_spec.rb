@@ -106,4 +106,8 @@ RSpec.describe Facility do
       expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
     end
 
+    it 'has no registered vehicles or collected fees' do
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro,@bolt])
+    end
+
 end
