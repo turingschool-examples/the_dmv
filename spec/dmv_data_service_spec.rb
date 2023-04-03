@@ -9,7 +9,7 @@ RSpec.describe DmvDataService do
       expect(@dds).to be_an_instance_of(DmvDataService)
     end
   end
-
+  
   describe '#load_data' do
     it 'can load data from a given source' do
       source = 'https://data.oregon.gov/resource/rj4w-f4jc.json'
@@ -33,7 +33,7 @@ RSpec.describe DmvDataService do
 
   describe '#ny_dmv_office_locations' do
     it 'can load new york dmv office locations' do
-      expect(@dds.ny_dmv_office_locations.size).to eq(169)
+      expect(@dds.ny_dmv_office_locations.size).to eq(170)
     end
   end
 

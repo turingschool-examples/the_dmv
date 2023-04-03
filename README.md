@@ -33,3 +33,53 @@
 
 - Wtf is `require 'date'` in line 1 of the vehicle class? Is date a standard gem file that's being accessed in `Date.antique?`
 - Utilizing the `attr_accessor` instead of `attr_reader` in vehicle class for the registration date since, presumably, it will need to be accessed/edited later on when that car is registered
+
+## Iteration 2
+
+- Why is the facility class utlizing `@facility` instead of `facility`?
+- With starting the reading from external data sets...
+  - I think that the facility class may need a `new_drivers_license` method based on line 23 from the facility spec?
+- In a `pry` in `dmv_data_service_spec` I could access specific information in the array using the following:
+
+```ruby
+[7] pry(RSpec::ExampleGroups::DmvDataService)> DmvDataService.new.wa_ev_registrations[5]
+=> {:electric_vehicle_type=>"Battery Electric Vehicle (BEV)",
+ :vin_1_10=>"WVWKR7AU7K",
+ :dol_vehicle_id=>"296928922",
+ :model_year=>"2019",
+ :make=>"VOLKSWAGEN",
+ :model=>"e-Golf",
+ :vehicle_primary_use=>"Passenger",
+ :electric_range=>"125",
+ :odometer_reading=>"0",
+ :odometer_code=>"Odometer reading is not collected at time of renewal",
+ :new_or_used_vehicle=>"Used",
+ :sale_price=>"0",
+ :base_msrp=>"0",
+ :transaction_type=>"Registration Renewal",
+ :transaction_date=>"2021-09-13T00:00:00.000",
+ :transaction_year=>"2021",
+ :county=>"King",
+ :city=>"REDMOND",
+ :state_of_residence=>"WA",
+ :zip=>"98052",
+ :non_clean_alternative_fuel=>"HB 2778 Eligiblity Requirements not met",
+ :hb_2042_clean_alternative_fuel_vehicle_cafv_eligibility=>"HB 2042 Eligibility Requirements not met",
+ :meets_2019_hb_2042_electric_range_requirement=>true,
+ :meets_2019_hb_2042_sale_date_requirement=>false,
+ :meets_2019_hb_2042_sale_price_value_requirement=>false,
+ :_2019_hb_2042_battery_range_requirement=>"Meets battery range requirement",
+ :_2019_hb_2042_purchase_date_requirement=>"Non-sale, registration transaction",
+ :_2019_hb_2042_sale_price_value_requirement=>"Non-sale, registration transaction",
+ :electric_vehicle_fee_paid=>"Yes",
+ :transportation_electrification_fee_paid=>"Yes",
+ :hybrid_vehicle_electrification_fee_paid=>"No",
+ :census_tract_2020=>"53033032330",
+ :legislative_district=>"45",
+ :electric_utility=>"PUGET SOUND ENERGY INC||CITY OF TACOMA - (WA)"}
+ ```
+ ...
+ ```ruby
+[14] pry(RSpec::ExampleGroups::DmvDataService)> DmvDataService.new.wa_ev_registrations[5][:make]
+=> "VOLKSWAGEN"
+```
