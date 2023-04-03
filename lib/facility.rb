@@ -66,4 +66,17 @@ class Facility
     end
   end
 
+  def renew_drivers_license(tester)
+    if (services.include? "Renew License") 
+      if (tester.license_data[:written] == true) && (tester.license_data[:license] == true)
+        tester.license_data[:renewed] = true
+        true
+      else
+        false
+      end
+    else
+      false
+    end
+  end
+
 end
