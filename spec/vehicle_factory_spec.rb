@@ -16,13 +16,24 @@ RSpec.describe Vehicle do
   end
 
   describe "creates vehicles" do
-    it "gets model from database and creates vehicle" do
-      expect(factory.create_vehicles(wa_ev_registrations)
+    it "will get model data from database" do
+      expect(@factory.create_vehicles(wa_ev_registrations)
     end
   end
 
-
-
+  :vin_1_10=>"WMEEJ9AA7E",
+  :dol_vehicle_id=>"349158127",
+  :model_year=>"2014",
+  :make=>"SMART",
+  :model=>"Fortwo Electric Drive",
+  :vehicle_primary_use=>"Passenger",
+  :electric_range=>"58",
+  :odometer_reading=>"0",
+  :odometer_code=>"Odometer reading is not collected at time of renewal",
+  :new_or_used_vehicle=>"Used",
+  :sale_price=>"0",
+  :base_msrp=>"0",
+  :transaction_type=>"Registration Renewal",
 
 
 end
