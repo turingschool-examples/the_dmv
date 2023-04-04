@@ -61,16 +61,13 @@ class Facility
   end
 
   def renew_drivers_license(registrant)
-
     return false if !@services.include?('Renew License')
-
     if registrant.license_data[:license] == true
       registrant.update_renew_status
       true
     elsif registrant.license_data[:license] == false
       false
     end
-    
   end
 
 end
