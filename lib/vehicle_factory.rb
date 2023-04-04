@@ -17,7 +17,7 @@ class VehicleFactory
     wa_ev_registrations.each do |car|
       vehicle_details = {
         vin: car[:vin_1_10],
-        year: car[:model_year],
+        year: car[:model_year].to_i,
         make: car[:make],
         model: car[:model],
         engine: "ev",
