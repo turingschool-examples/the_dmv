@@ -1,5 +1,5 @@
 class VehicleFactory
-  attr_reader :vehicles, :all_makes_models, :makes_models_tally, :popular, :trying
+  attr_reader :vehicles
   def initialize
     @vehicles = []
   end
