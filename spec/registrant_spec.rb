@@ -45,5 +45,5 @@ RSpec.describe Registrant do
     expect(registrant_1.permit?).to eq(true)
     expect(facility_1.administer_written_test(registrant_1)).to eq(false)
   end
-
+end
 

@@ -1,10 +1,10 @@
 class Facility
   attr_accessor :name, 
-              :address, 
-              :phone, 
-              :services, 
-              :registered_vehicles,
-              :collected_fees
+                :address, 
+                :phone, 
+                :services, 
+                :registered_vehicles,
+                :collected_fees
 
   def initialize(facility_details)
     @name = facility_details[:name]
@@ -23,7 +23,7 @@ class Facility
     if @services.include?('Vehicle Registration')
       collect_fees(vehicle)
       vehicle.plate_type
-      update_registration_date(vehicle)
+      vehicle.registration_date = Date.today
       @registered_vehicles << vehicle
     end
   end
@@ -38,63 +38,35 @@ class Facility
     end
   end
   
-  def update_registration_date(vehicle)
-    vehicle.registration_date = Date.today
-  end
-
   def administer_written_test(registrant)
-    if @services.include?('Written Test') && 
-      registrant.license_data[:written] == false &&
-      registrant.permit? == true &&
-      registrant.age >= 16
-      
-      registrant.takes_written
-    else
-      false
-    end
+   if @services.include?('Written Test') && 
+     registrant.permit? &&
+     registrant.age >= 16
+     registrant.license_data[:written] = true
+        return true
+     end
+     false
   end
-
+  
   def administer_road_test(registrant)
     if @services.include?('Road Test') &&
-      registrant.license_data[:written] == true &&
-      registrant.license_data[:license] == false &&
-      registrant.age >= 16
-      
-     registrant.takes_road
-    else
-      false
+      registrant.license_data[:written]
+      registrant.license_data[:license] = true
+      return true
     end
+    false
   end
 
   def renew_drivers_license(registrant)
     if @services.include?('Renew License') &&
-      registrant.license_data[:written] == true &&
-      registrant.license_data[:license] == true
-
-     registrant.is_renewed
-    
-    else
-      false
+      registrant.license_data[:license]
+      registrant.license_data[:renewed] = true
+      return true
     end
+    false
   end
+
 
 end
 
 
-#register a vehicle
-#Vehicles 25 years and older antiquest, $25
-#EV $200
-#all other $100
-
-#plate_type = :regular, :antique, or :ev
-
-#administer a written test
-#must have permit
-#must be 16 or older
-
-#road test
-#must have passed written test
-#qualify for road test, you have a license
-
-#renew license
-#only if you've passed road test and have a license
