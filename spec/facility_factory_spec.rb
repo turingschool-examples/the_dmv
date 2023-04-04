@@ -17,6 +17,7 @@ RSpec.describe FacilityFactory do
     it 'can create OR facility object' do
       expect(@factory.facilities).to eq([])
       @factory.create_facilities(@oregon_facilities)
+      require 'pry'; binding.pry
       expect(@factory.facilities.first).to be_an_instance_of(Facility)
     end
 
