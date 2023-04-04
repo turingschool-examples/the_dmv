@@ -11,31 +11,38 @@ class FacilityFactory
 
   def oregon_transform(original_dataset)
     original_dataset.find_all do |original_datum|
-      original_datum[:name] = original_datum.delete :title
-      original_datum[:address] = original_datum.delete :location_1 
-      original_datum[:phone] = original_datum.delete :phone_number
+      original_datum[:name] = original_datum[:title]
+      original_datum[:address] = original_datum[:location_1][:human_address] 
+      original_datum[:phone] = original_datum[:phone_number]
     end
+# helper method
   end
 
-  # def oregon_transform_2(new_dataset)
-  #   new_dataset.find_all do |new_datum|
-  #     new_datum[:address] = new_datum.delete :human_address
-  #   end
-  # end
+  # def oregon_
+
 
   def ny_transform(original_dataset)
-    original_dataset.find_all do |original_datum|
-      original_datum[:name] = original_datum.delete :office_name
-      original_datum[:address] = original_datum.delete :street_address_line_1
-      original_datum[:phone] = original_datum.delete :public_phone_number
+    original_dataset.each do |original_datum|
+      facility_details = {
+        name: original_datum[:office_name],
+        address: original_datum[:street_address_line_1],
+        phone: original_datum[:public_phone_number]
+      }
+    # create_facility(facility_details)
+
+
+      # original_datum[:name] = original_datum[:office_name]
+      # original_datum[:address] = original_datum[:street_address_line_1]
+      # original_datum[:phone] = original_datum[:public_phone_number]
+
     end
   end
 
   def mo_transform(original_dataset)
     original_dataset.find_all do |original_datum|
-      original_datum[:name] = original_datum.delete :name
-      original_datum[:address] = original_datum.delete :address1
-      original_datum[:phone] = original_datum.delete :phone
+      original_datum[:name] = original_datum[:name]
+      original_datum[:address] = original_datum[:address1]
+      original_datum[:phone] = original_datum[:phone]
     end
   end
   
