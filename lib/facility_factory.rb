@@ -32,6 +32,7 @@ class FacilityFactory
   end
 
   def OR_format_phone_number(facility)
+    return nil if !facility[:phone_number]
     facility[:phone_number]
   end
 
