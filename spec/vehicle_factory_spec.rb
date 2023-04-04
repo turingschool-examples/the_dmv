@@ -22,6 +22,7 @@ RSpec.describe VehicleFactory do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     created_vehicles = factory.create_vehicles([{vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice}, {vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev}])
+    
     expect(created_vehicles[0].vin).to eq(@cruz.vin)
     expect(created_vehicles[0].year).to eq(@cruz.year)
     expect(created_vehicles[0].make).to eq(@cruz.make)
@@ -37,11 +38,13 @@ RSpec.describe VehicleFactory do
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     renamed_vehicles = factory.rename_vehicles(wa_ev_registrations)
     created_vehicles = factory.create_vehicles(renamed_vehicles)
+    
     expect(created_vehicles[0]).to be_an_instance_of(Vehicle)
     expect(created_vehicles).to be_an(Array)
     expect(created_vehicles.count).to eq(1000) 
   end
-  # factory.renamed_vehicles.models
 
-
+  # it "can determine the most common make/model in a list" do
+  #   created_vehicles.models  
+  # end
 end

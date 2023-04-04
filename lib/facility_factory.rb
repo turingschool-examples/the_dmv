@@ -10,56 +10,26 @@ class FacilityFactory
   end
 
   def oregon_transform(original_dataset)
-    original_dataset.find_all do |original_datum|
-      original_datum[:name] = original_datum.delete :title
-      original_datum[:address] = original_datum.delete :location_1 
-      original_datum[:phone] = original_datum.delete :phone_number
+    original_dataset.each do |original_facility|
+      original_facility[:name] = original_facility[:title]
+      original_facility[:address] = original_facility[:location_1][:human_address] 
+      original_facility[:phone] = original_facility[:phone_number]
     end
   end
 
-  # def oregon_transform_2(new_dataset)
-  #   new_dataset.find_all do |new_datum|
-  #     new_datum[:address] = new_datum.delete :human_address
-  #   end
-  # end
-
   def ny_transform(original_dataset)
-    original_dataset.find_all do |original_datum|
-      original_datum[:name] = original_datum.delete :office_name
-      original_datum[:address] = original_datum.delete :street_address_line_1
-      original_datum[:phone] = original_datum.delete :public_phone_number
+    original_dataset.each do |original_facility|
+      original_facility[:name] = original_facility[:office_name]
+      original_facility[:address] = original_facility[:street_address_line_1] +" "+ original_facility[:city] +" "+ original_facility[:state] +" "+ original_facility[:zip_code]
+      original_facility[:phone] = original_facility[:public_phone_number]
     end
   end
 
   def mo_transform(original_dataset)
-    original_dataset.find_all do |original_datum|
-      original_datum[:name] = original_datum.delete :name
-      original_datum[:address] = original_datum.delete :address1
-      original_datum[:phone] = original_datum.delete :phone
+    original_dataset.each do |original_facility|
+      original_facility[:name] = original_facility[:name]
+      original_facility[:address] = original_facility[:address1] +" "+ original_facility[:city] +" "+ original_facility[:state] +" "+ original_facility[:zipcode]
+      original_facility[:phone] = original_facility[:phone]
     end
   end
-  
-
-
-    # human_address = or_dmv_office_locations[1][:location_1][:human_address]
-    # human_address.delete("{").delete("}")
-    # human_address.join("")
-    # human_address.delete("address").delete("city").delete("state").delete("zip")
-    # human_address 
-  
-
-  # def rename_vehicles(vehicle_list)
-  #   vehicle_list.find_all do |vehicle_data|
-  #     vehicle_data[:vin] = vehicle_data.delete :dol_vehicle_id
-  #     vehicle_data[:year] = vehicle_data.delete :model_year
-  #     vehicle_data[:engine] = :ev
-  #   end
-  # end
-
-
-#   or_dmv_office_locations[1][:location_1][:human_address]
-#   {name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' }
-
-
-  
 end
