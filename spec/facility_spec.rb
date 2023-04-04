@@ -10,7 +10,7 @@ RSpec.describe Facility do
   end
 
   describe '#initialize' do
-    it 'can initialize' do
+    it 'exists' do
       expect(@facility_1).to be_an_instance_of(Facility)
     end
 
@@ -31,6 +31,16 @@ RSpec.describe Facility do
       expect(@facility_1.add_service('Renew Drivers License')).to eq(['New Drivers License', 'Renew Drivers License'])
       expect(@facility_1.add_service('Vehicle Registration')).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+    end
+  end
+
+  describe '#collection_fee_assignment' do
+    it "has collection fee values" do 
+      expect(@facility_1.collection_fee_assignment).to eq({
+        :ev => 200,
+        :antique => 25,
+        :regular => 100
+        })
     end
   end
   
@@ -105,7 +115,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe  '#administer_written_test(registrant)' do
+  describe '#administer_written_test(registrant)' do
     before(:each) do 
       @registrant_1 = Registrant.new('Bruce', 18, true )
       @registrant_2 = Registrant.new('Penny', 16 )

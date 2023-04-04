@@ -7,7 +7,7 @@ RSpec.describe Vehicle do
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
   end
   describe '#initialize' do
-    it 'can initialize' do
+    it 'exists' do
       expect(@cruz).to be_an_instance_of(Vehicle)
       expect(@cruz.vin).to eq('123456789abcdefgh')
       expect(@cruz.year).to eq(2012)
@@ -32,6 +32,15 @@ RSpec.describe Vehicle do
       expect(@bolt.electric_vehicle?).to eq(true)
       expect(@camaro.electric_vehicle?).to eq(false)
     end
+  end
+
+  describe '#plate_type' do 
+    it 'assigns a plate_type' do
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@camaro.plate_type).to eq(:antique)
+    end
+
   end
 
 end

@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe FacilityFactory do
 
   describe '#initialize' do
-    it 'can initialize' do
+    it 'exists' do
       factory = FacilityFactory.new
       expect(factory).to be_an_instance_of(FacilityFactory)
     end

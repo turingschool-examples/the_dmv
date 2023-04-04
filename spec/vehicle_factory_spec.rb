@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe VehicleFactory do
   describe "#initialize"
-    it 'can initialize' do 
+    it 'exists' do 
       factory = VehicleFactory.new
 
       expect(factory).to be_a(VehicleFactory)

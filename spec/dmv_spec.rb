@@ -9,7 +9,7 @@ RSpec.describe Dmv do
   end
 
   describe '#initialize' do
-    it 'can initialize' do
+    it 'exists' do
       expect(@dmv).to be_an_instance_of(Dmv)
       expect(@dmv.facilities).to eq([])
     end
