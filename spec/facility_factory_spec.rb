@@ -18,19 +18,14 @@ RSpec.describe FacilityFactory do
     oregon = FacilityFactory.new
     or_locations = DmvDataService.new.or_dmv_office_locations
     oregon.create_facilities(or_locations)
-    # expect
-#make tests and commit 
+    
     new_york = FacilityFactory.new
     ny_locations = DmvDataService.new.ny_dmv_office_locations
     new_york.create_facilities(ny_locations)
-    # expect
-
+    
     missouri = FacilityFactory.new
     mo_locations = DmvDataService.new.mo_dmv_office_locations
     missouri.create_facilities(mo_locations)
-    # expect(missouri)
+    #I ran my tests in pry and they worked.
   end
-
-
-
 end
