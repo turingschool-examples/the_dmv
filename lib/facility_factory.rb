@@ -9,8 +9,8 @@ class FacilityFactory
   end
 
   def parse_or_address(raw_address)
-    x = raw_address[:human_address]
-    parsed_address = JSON.parse(x)
+    raw = raw_address[:human_address]
+    parsed_address = JSON.parse(raw)
     "#{parsed_address["address"]}, #{parsed_address["city"]}, #{parsed_address["state"]} #{parsed_address["zip"]}"
   end
 
@@ -35,6 +35,5 @@ class FacilityFactory
 
   def parse_mo_address(raw_address)
     "#{raw_address[:address1]}, #{raw_address[:city]}, #{raw_address[:state]} #{raw_address[:zipcode]}"
-
   end
 end
