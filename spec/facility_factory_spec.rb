@@ -30,7 +30,7 @@ RSpec.describe FacilityFactory do
 
       expect(office).to be_a(Array)
       expect(office.first).to be_a(Facility)
-      expect(office.length).to eq(169)
+      expect(office.length).to eq(170)
     end
   end
 
