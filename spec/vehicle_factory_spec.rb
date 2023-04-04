@@ -9,6 +9,7 @@ RSpec.describe VehicleFactory do
   describe '#initialize' do
     it 'exists' do
       expect(@factory).to be_a(VehicleFactory)
+      expect(@wa_ev_registrations.first).to be_a(Hash)
     end
   end
 
