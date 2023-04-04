@@ -16,6 +16,7 @@ class VehicleFactory
       }
       
       @vehicles << vehicle = Vehicle.new(vehicle_details)
+      binding.pry
     end
   end
 

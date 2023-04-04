@@ -14,7 +14,7 @@ RSpec.describe VehicleFactory do
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     
     factory.create_vehicles(wa_ev_registrations)
-    
+   
     expect(factory.vehicles[0]).to be_a Vehicle
   end
 end
