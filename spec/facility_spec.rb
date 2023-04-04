@@ -449,15 +449,4 @@ RSpec.describe Facility do
       end
     end
   end
-
-  describe "Iteration 3" do
-    context "it can pull DMV data" do
-      new_york_facilities = DmvDataService.new.ny_dmv_office_locations
-      missouri_facilities = DmvDataService.new.mo_dmv_office_locations
-
-      require 'pry'; binding.pry
-
-      facilities = create_facility(new_york_facilities)
-    end
-  end
 end

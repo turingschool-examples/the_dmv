@@ -17,8 +17,17 @@ RSpec.describe FacilityFactory do
         ny_facility_maker = FacilityFactory.new
         new_york_facilities = DmvDataService.new.ny_dmv_office_locations
         ny_facilities = ny_facility_maker.create_facilities(new_york_facilities)
-
+        require 'pry'; binding.pry
         expect(ny_facility_maker.create_facilities(new_york_facilities)).to be_an(Array)
+      end
+      
+      it "can make a facility out of MO facilities" do
+        mo_facility_maker = FacilityFactory.new
+        missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+        mo_facilities = mo_facility_maker.create_facilities(missouri_facilities)
+        
+        require 'pry'; binding.pry
+        expect(mo_facility_maker.create_facilities(missouri_facilities)).to be_an(Array)
       end
     end
   end
