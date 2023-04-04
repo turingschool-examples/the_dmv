@@ -14,10 +14,10 @@ class VehicleFactory
         year: vehicle[:model_year], 
         make: vehicle[:make], 
         model: vehicle[:model], 
-        engine: :ev
+        engine: :ev,
+        registration_date: vehicle[:registration_date] ||= "N/A"
         }
       )
-
     end
     new_vehicles
   end
