@@ -22,6 +22,4 @@ class Registrant
       @permit = false
     end
   end
-
-  
 end
