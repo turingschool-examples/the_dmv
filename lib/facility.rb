@@ -20,25 +20,25 @@ class Facility
   end
 
   def register_vehicle(vehicle, service="Vehicle Registration")
-    return nil unless self.performs_service?(service)
+    return nil unless performs_service?(service)
     vehicle.registration_date = Date.today
     fee_type = vehicle.set_plate
-    self.collect_fees(fee_type)
+    collect_fees(fee_type)
     @registered_vehicles << vehicle
   end
 
   def administer_written_test(registrant, service="Written Test")
-    return false unless self.performs_service?(service)
+    return false unless performs_service?(service)
     if registrant.age >= 16 && registrant.permit? then registrant.license_data[:written] = true else false end
   end
 
   def administer_road_test(registrant, service="Road Test")
-    return false unless self.performs_service?(service)
+    return false unless performs_service?(service)
     if registrant.license_data[:written] then registrant.license_data[:license] = true else false end
   end
 
   def renew_drivers_license(registrant, service="Renew License")
-    return false unless self.performs_service?(service)
+    return false unless performs_service?(service)
     if registrant.license_data[:license] then registrant.license_data[:renewed] = true else false end
   end
 

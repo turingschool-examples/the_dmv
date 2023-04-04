@@ -17,7 +17,7 @@ class FacilityCreator
   def oregon_facility_creator(data)
     @facilities = data.map do |facility|
       address = JSON.parse(facility[:location_1][:human_address]).values.join(" ")
-      new_facility = Facility.new({ name: facility[:"title"], address: address, phone: facility[:"phone_number"] })
+      Facility.new({ name: facility[:"title"], address: address, phone: facility[:"phone_number"] })
     end
   end
 
@@ -31,14 +31,14 @@ class FacilityCreator
         friday: "#{facility[:"friday_beginning_hours"]} to #{facility[:friday_ending_hours]}"
         }
       address = "#{ facility[:"street_address_line_1"] } #{ facility[:"city"] } #{ facility[:"state"] } #{ facility[:"zip_code"] }"
-      new_facility = Facility.new({ name: facility[:"office_name"], address: address, phone: facility[:"public_phone_number"], operating_hours: hours })
+      Facility.new({ name: facility[:"office_name"], address: address, phone: facility[:"public_phone_number"], operating_hours: hours })
     end
   end
 
   def missouri_facility_creator(data)
     @facilities = data.map do |facility|
       address = "#{facility[:"address1"]} #{facility[:"city"]} #{facility[:"state"]} #{facility[:"zipcode"]}"
-      new_facility = Facility.new({name: facility[:"name"], address: address, phone: facility[:"phone"], operating_hours: facility[:"daysopen"], holidays: facility[:"holidaysclosed"], non_holiday_closures: facility[:"additionaldaysclosed"]})
+      Facility.new({name: facility[:"name"], address: address, phone: facility[:"phone"], operating_hours: facility[:"daysopen"], holidays: facility[:"holidaysclosed"], non_holiday_closures: facility[:"additionaldaysclosed"]})
     end
   end
 end
