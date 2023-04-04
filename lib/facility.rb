@@ -19,6 +19,7 @@ class Facility
   def register_vehicle(vehicle)
     return nil unless services.include?("Vehicle Registration")
     vehicle.register
+    vehicle.registration_date == Date.today
     @collected_fees += fee_amount(vehicle)
      @registered_vehicles << vehicle
   end

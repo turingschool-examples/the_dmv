@@ -29,10 +29,18 @@ RSpec.describe FacilityFactory do
 
   it "can make a new NY office" do 
     facility_factory = FacilityFactory.new
-    facility = facility_factory.create_ny_facility(:new york)
+    facility = facility_factory.create_ny_facility(:new_york)
     expect(facility.name).to eq("SELDEN")
     expect(facility.address).to eq("407 SELDEN RD, Selden, NY 11784")
-    expect(facility.phone).to eq("541-967-2014")
+    expect(facility.phone).to eq(nil)
+  end
+
+  it "can make a new MO office" do
+    facility_factory = FacilityFactory.new
+    facility = facility_factory.create_mo_facility(:missouri)
+    expect(facility.name).to eq("OAKVILLE")
+    expect(facility.address).to eq("3164 TELEGRAPH ROAD, ST LOUIS , MO 63125")
+    expect(facility.phone).to eq("(314) 887-1050")
   end
   
 end
