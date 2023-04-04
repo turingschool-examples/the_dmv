@@ -36,6 +36,7 @@ RSpec.describe FacilityFactory do
       expect(@oregon.first).to be_a(Facility)
       expect(@oregon.sample).to be_a(Facility)
     end
+    
     it 'formats :OR facility attributes' do
       expect(@oregon.first.name).to eq("Albany DMV Office")
       expect(@oregon.sample.name).to be_a(String)
