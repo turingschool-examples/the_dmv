@@ -1,6 +1,5 @@
 class VehicleFactory
-  def initialize()
-
+  def initialize
   end
  
   def create_vehicles(registration_location)
