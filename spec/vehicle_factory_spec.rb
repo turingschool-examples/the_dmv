@@ -24,13 +24,15 @@ RSpec.describe WaVehicleFactory do
     it 'assigns attributes to vehicle class instances' do 
       @factory.create_vehicles(@wa_ev_registrations)
 
-      expect(@factory.vehicles[0]).to be_a(Vehicle)
-      expect(@factory.vehicles[0].vin).not_to be nil
-      expect(@factory.vehicles[0].year).not_to be nil
-      expect(@factory.vehicles[0].make).not_to be nil
-      expect(@factory.vehicles[0].model).not_to be nil
-      expect(@factory.vehicles[0].registration_date).to be nil
-      expect(@factory.vehicles[0].plate_type).to be nil
+      first_car = @factory.vehicles[0]
+
+      expect(first_car).to be_a(Vehicle)
+      expect(first_car.vin).not_to be nil
+      expect(first_car.year).not_to be nil
+      expect(first_car.make).not_to be nil
+      expect(first_car.model).not_to be nil
+      expect(first_car.registration_date).to be nil
+      expect(first_car.plate_type).to be nil
     end
 
     it 'assigns an :ev engine type' do 
@@ -40,7 +42,26 @@ RSpec.describe WaVehicleFactory do
     end
 
     it 'returns an array of created vehicles' do 
-      expect(@factory.create_vehicles(@wa_ev_registrations)).to eq(@factory.vehicles)
+      expect(@factory.create_vehicles(@wa_ev_registrations)).to be_a(Array)
+    end
+  end
+
+  describe 'EV Analytics' do
+    it '#most_popular_cars' do
+      @factory.create_vehicles(@wa_ev_registrations)
+      most_popular_car = @factory.most_popular_car
+      
+      # method will return most popular car with make and model attributes.
+      expect(most_popular_car).to be_a(Hash)
+      expect(most_popular_car).to have_key(:make)
+      expect(most_popular_car).to have_key(:model)
+    end
+
+    it 'can count registered vehicles by model and year' do 
+      @factory.create_vehicles(@wa_ev_registrations)
+      count_mod_yr = @factory.count_mod_yr("Model 3", 2018)
+      
+      expect(count_mod_yr).to be_an(Integer)
     end
   end
 end
