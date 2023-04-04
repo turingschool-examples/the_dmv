@@ -68,6 +68,7 @@ end
   describe '#missouri processing' do
     it 'creates missouri facility objects' do
       expect(@missouri.first).to be_a(Facility)
+      require 'pry'; binding.pry
       expect(@missouri.sample).to be_a(Facility)
     end
 
