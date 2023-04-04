@@ -6,9 +6,9 @@ RSpec.describe Facility do
     @facility   = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014'})
     @facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014'})
     @facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
-    @or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
-    @new_york_facilities = DmvDataService.new.ny_dmv_office_locations
-    @missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+    # @or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
+    # @new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+    # @missouri_facilities = DmvDataService.new.mo_dmv_office_locations
 
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
@@ -217,19 +217,19 @@ RSpec.describe Facility do
   end
 
   describe "creating new facilities from existing data sources" do
-    it "creates Oregon facility" do
-      @facility_new.create_facility_oregon(@or_dmv_office_locations)
-      expect(@facility_new.create_facility_oregon(@or_dmv_office_locations)).to be_an(Array)
+    it "creates oregon facility" do
+      @facility_new.create_facility("oregon")
+      expect(@facility_new.create_facility("oregon")).to be_an(Array)
     end
 
     it "creates New York facility" do
-      @facility_new.create_facility_ny(@new_york_facilities)
-      expect(@facility_new.create_facility_ny(@new_york_facilities)).to be_an(Array)
+      @facility_new.create_facility("new_york")
+      expect(@facility_new.create_facility("new_york")).to be_an(Array)
     end
 
     it "creates Missouri faciilty" do
-        @facility_new.create_facility_missouri(@missouri_facilities)
-        expect(@facility_new.create_facility_missouri(@missouri_facilities)).to be_an(Array)
+        @facility_new.create_facility("missouri")
+        expect(@facility_new.create_facility("missouri")).to be_an(Array)
     end
   end
 end
