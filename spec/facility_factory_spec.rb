@@ -21,6 +21,17 @@ RSpec.describe FacilityFactory do
       expect(office.length).to eq(59)
     end
   end
+  
+  describe 'ny_offices' do
+    it 'has ny office info' do
+      office = FacilityFactory.new
+      ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
+      office = office.checks_location(ny_dmv_office_locations)
 
+      expect(office).to be_a(Array)
+      expect(office.first).to be_a(Facility)
+      expect(office.length).to eq(169)
+    end
+  end
 
 end
