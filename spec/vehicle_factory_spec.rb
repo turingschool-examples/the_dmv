@@ -67,12 +67,17 @@ RSpec.describe VehicleFactory do
       expect(most_popular_car).to have_key(:model)
     end
 
-    it 'can count registered vehicles by model and year' do 
+    it '#count_mod_yr' do 
       @factory.add_wa_ev_source(@wa_ev_registrations)
       @factory.create_vehicles
       count_mod_yr = @factory.count_mod_yr("Model 3", 2018)
       
       expect(count_mod_yr).to be_an(Integer)
+    end
+
+    it '#most_registered_county' do 
+
+      expect(@factory.most_registered_county(@wa_ev_registrations)).to be_a(String)
     end
   end
 end

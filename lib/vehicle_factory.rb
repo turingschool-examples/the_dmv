@@ -48,6 +48,16 @@ class VehicleFactory
         vehicle.year == year_.to_s
       end.count
     end
+
+    def most_registered_county(source)
+      county_count = Hash.new(0)
+      source.each do |vehicle|
+        county_count[vehicle[:county]] += 1
+      end
+      county_count.sort_by do |county, num|
+        num
+      end.reverse[0].first
+    end
   end
 
   
