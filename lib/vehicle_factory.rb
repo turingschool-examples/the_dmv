@@ -1,4 +1,4 @@
-class WaVehicleFactory
+class VehicleFactory
   
   attr_reader :vehicles
 
@@ -6,14 +6,19 @@ class WaVehicleFactory
       @vehicles = []
     end
 
-    def create_vehicles(source)
-      @vehicles << source
-      @vehicles.flatten!
-      @vehicles.each do |vehicle|
-        vehicle[:vin] = vehicle[:vin_1_10]
-        vehicle[:year] = vehicle[:model_year]
-        vehicle[:engine] = :ev   
+    def add_wa_ev_source(source)
+      source.each do |vehicle|
+        normalized_data = Hash.new
+        normalized_data[:vin] = vehicle[:vin_1_10]
+        normalized_data[:year] = vehicle[:model_year]
+        normalized_data[:make] = vehicle[:make]
+        normalized_data[:model] = vehicle[:model]
+        normalized_data[:engine] = :ev 
+        @vehicles << normalized_data
       end
+    end
+
+    def create_vehicles
       @vehicles.map! do |vehicle|
         Vehicle.new(vehicle)
       end
