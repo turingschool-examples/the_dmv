@@ -31,6 +31,7 @@ RSpec.describe Registrant do
 
   describe "earn permit method" do
     it "earns permit" do
+      @registrant_2 = Registrant.new('Penny', 15 )
       @registrant_2.earn_permit
       expect(@registrant_2.permit?).to eq(true)
     end
