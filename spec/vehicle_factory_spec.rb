@@ -16,13 +16,22 @@ RSpec.describe Vehicle do
   end
 
   describe "creates vehicles" do
-    it "will get vin data from database" do
+    it "will get 'vin' data from database" do
       expect(@factory.create_vehicles(@wa_ev_registrations)[0].vin).to eq("WMEEJ9AA7E")
     end
 
-    it "will get year data from database" do
+    it "will get 'year' data from database" do
       expect(@factory.create_vehicles(@wa_ev_registrations)[0].year).to eq("2014")
     end
+
+    it "will get 'make' data from database" do
+      expect(@factory.create_vehicles(@wa_ev_registrations)[0].make).to eq("SMART")
+    end
+
+    it "will get 'model' data from database" do
+      expect(@factory.create_vehicles(@wa_ev_registrations)[0].model).to eq("Fortwo Electric Driv")
+    end
+
   end
 
   # :vin_1_10=>"WMEEJ9AA7E",
