@@ -1,15 +1,14 @@
 require 'date'
 
 class Vehicle
-  attr_accessor :vin,
+  attr_reader   :vin,
                 :year,
                 :make,
                 :model,
-                :engine,
-                :registration_date,
+                :engine
+
+  attr_accessor :registration_date,
                 :plate_type
-# perhaps only put :registration_date and :plate_type 
-# in accessor
 
   def initialize(vehicle_details)
     @vin = vehicle_details[:vin]
@@ -35,5 +34,4 @@ class Vehicle
       else :ev 
       end
   end
-
 end
