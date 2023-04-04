@@ -47,3 +47,4 @@ RSpec.describe Registrant do
   end
 end
 
+
