@@ -3,9 +3,9 @@ require './lib/facility'
 
 RSpec.describe Facility do
   before(:each) do
-     @facility = Facility.new({name: 'Albany DMV Office', 
-     address: '2242 Santiam Hwy SE Albany OR 97321', 
-     phone: '541-967-2014'})
+    @facility = Facility.new({name: 'Albany DMV Office', 
+    address: '2242 Santiam Hwy SE Albany OR 97321', 
+    phone: '541-967-2014'})
   end
 
   describe '#initialize' do
@@ -18,12 +18,12 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#add service' do
+  describe 'add service' do
     it 'can add available services' do
       expect(@facility.services).to eq([])
-      @facility.add_services('New Drivers License')
-      @facility.add_services('Renew Drivers License')
-      @facility.add_services('Vehicle Registration')
+      @facility.add_service('New Drivers License')
+      @facility.add_service('Renew Drivers License')
+      @facility.add_service('Vehicle Registration')
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
@@ -35,7 +35,7 @@ RSpec.describe Facility do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
       bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
       camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
-      facility_1.add_services('Vehicle Registration')
+      facility_1.add_service('Vehicle Registration')
       expect(facility_1.services).to include('Vehicle Registration')
       expect(cruz.registration_date).to eq(nil)
       expect(facility_1.registered_vehicles).to eq([])
@@ -48,7 +48,7 @@ RSpec.describe Facility do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
       bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
       camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
-      facility_1.add_services('Vehicle Registration')
+      facility_1.add_service('Vehicle Registration')
       expect(facility_1.services).to include('Vehicle Registration')
       facility_1.register_vehicle(cruz)
       expect(facility_1.registered_vehicles).to eq([cruz])
@@ -62,7 +62,7 @@ RSpec.describe Facility do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
       bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
       camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
-      facility_1.add_services('Vehicle Registration')
+      facility_1.add_service('Vehicle Registration')
       expect(facility_1.services).to include('Vehicle Registration')
       facility_1.register_vehicle(cruz)
       expect(facility_1.collected_fees).to eq(100)
@@ -82,7 +82,7 @@ RSpec.describe Facility do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
       bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
       camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
-      facility_1.add_services('Vehicle Registration')
+      facility_1.add_service('Vehicle Registration')
       expect(facility_1.services).to include('Vehicle Registration')
       facility_1.register_vehicle(cruz)
       facility_1.register_vehicle(camaro)
