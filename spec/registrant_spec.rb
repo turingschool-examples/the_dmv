@@ -38,14 +38,14 @@ RSpec.describe Registrant do
     it "tests for registrant's ability to earn a permit" do
       registrant_1 = Registrant.new("Bruce", 18, true )
       registrant_2 = Registrant.new("Penny", 15 )
-      registrant_1.earn_permit
-      registrant_2.earn_permit
-      
+      expect(registrant_1.earn_permit).to eq(true)
+      expect(registrant_2.earn_permit).to eq(true)
+    
       expect(registrant_1.permit?).to eq(true)
       expect(registrant_2.permit?).to eq(true)
     end
 
-    
+
   end
 
 
