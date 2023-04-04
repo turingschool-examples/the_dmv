@@ -18,11 +18,10 @@ class VehicleFactory
   end
 
   # def models(vehicle_list)
-  #   require 'pry'; binding.pry
-  #   new_array = []
-  #   vehicle_list.select do |vehicle|
-  #     new_array << vehicle.model
+  #   models = vehicles.map do |vehicle|
+  #     vehicle.model
   #   end
-  #   new_array.tally
+  #   models.tally
   # end
+
 end
