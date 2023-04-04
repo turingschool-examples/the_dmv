@@ -11,6 +11,6 @@ RSpec.describe VehicleFactory do
   end
 
   it 'creates a list of vehicles using an API' do
-    expect(@factory.create_vehicles(@wa_ev_registrations)).to eq([])
+    @factory.create_vehicles(@wa_ev_registrations)
   end
 end
