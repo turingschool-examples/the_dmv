@@ -13,6 +13,15 @@ RSpec.describe FacilityFactory do
 
   end
 
+  describe '#create OR Facility' do
+    it 'can create OR facility object' do
+      expect(@factory.facilities).to eq([])
+      @factory.create_facilities(@oregon_facilities)
+      expect(@factory.facilities.first).to be_an_instance_of(Facility)
+    end
+
+  end
+
 
 
 
