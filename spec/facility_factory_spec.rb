@@ -33,22 +33,26 @@ RSpec.describe FacilityFactory do
         expect(ny_facilities[2].services).to eq([])
         expect(ny_facilities[2].collected_fees).to eq(0)
       end
-      
-      it "can make a facility out of MO facilities" do
-        ny_facility_maker = FacilityFactory.new
-        new_york_facilities_raw_data = DmvDataService.new.ny_dmv_office_locations
-        ny_facilities = ny_facility_maker.create_facilities(new_york_facilities_raw_data)
-        mo_facility_maker = FacilityFactory.new
-        missouri_facilities = DmvDataService.new.mo_dmv_office_locations
-        mo_facilities = mo_facility_maker.create_facilities(missouri_facilities)
-        or_facility_maker = FacilityFactory.new
-        oregon_facilities = DmvDataService.new.or_dmv_office_locations
-        or_facilities = or_facility_maker.create_facilities(oregon_facilities)
 
-        return_value = mo_facility_maker.facility_location(missouri_facilities)
+      it "can make a facility out of MO facilities" do
+        facility_maker = FacilityFactory.new
+        missouri_facilities_raw_data = DmvDataService.new.mo_dmv_office_locations
+        mo_facilities = facility_maker.create_facilities(missouri_facilities_raw_data)
         
-        require 'pry'; binding.pry
-        expect(mo_facility_maker.create_facilities(missouri_facilities)).to be_an(Array)
+        expect(mo_facilities).to be_an(Array)
+        expect(mo_facilities[0].name).to eq("OAKVILLE")
+        expect(mo_facilities[0].phone).to eq("(314) 887-1050")
+        expect(mo_facilities[0].address).to eq("3164 TELEGRAPH ROAD, ST LOUIS, MO 63125")
+        expect(mo_facilities[0].registered_vehicles).to eq([])
+        expect(mo_facilities[0].services).to eq([])
+        expect(mo_facilities[0].collected_fees).to eq(0)
+        
+        expect(mo_facilities[2].name).to eq("LICKING (closed)")
+        expect(mo_facilities[2].phone).to be nil
+        expect(mo_facilities[2].address).to eq("117A NORTH MAIN, LICKING, MO 65542")
+        expect(mo_facilities[2].registered_vehicles).to eq([])
+        expect(mo_facilities[2].services).to eq([])
+        expect(mo_facilities[2].collected_fees).to eq(0)
       end
     end
   end
