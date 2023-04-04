@@ -1,4 +1,9 @@
 require 'spec_helper'
+require './lib/registrant'
+require './lib/vehicle'
+require './lib/facility'
+
+
 
 RSpec.describe Vehicle do
   before(:each) do

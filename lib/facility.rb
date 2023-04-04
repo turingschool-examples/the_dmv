@@ -5,8 +5,9 @@ class Facility
                 :services,
                 :registered_vehicles,
                 :collected_fees
+               
 
-  def initialize(name, address, phone)
+  def initialize(name:, address:, phone:)
     @name = name
     @address = address
     @phone = phone
@@ -23,32 +24,59 @@ class Facility
     antique_fee = 25
     ev_fee = 200
     regular_fee = 100
-     if vehicle.antique? == true && @services.include?('Vehicle Registration')
+    if !@services.include?('Vehicle Registration')
+      nil
+    elsif vehicle.antique? == true 
       vehicle.registered = true
       vehicle.registration_date = Date.today
       vehicle.plate_type = :antique
       @collected_fees += antique_fee
       @registered_vehicles << vehicle
-     elsif vehicle.engine == :ev && @services.include?('Vehicle Registration')
+     elsif vehicle.engine == :ev 
       vehicle.registered = true
       vehicle.registration_date = Date.today
       vehicle.plate_type = :ev
       @collected_fees += ev_fee
       @registered_vehicles << vehicle
-     else @services.include?('Vehicle Registration')
+     else 
       vehicle.registered = true
       vehicle.registration_date = Date.today
       vehicle.plate_type = :regular
       @collected_fees += regular_fee
       @registered_vehicles << vehicle 
     end
-    nil
   end
 
   def administer_written_test(registrant)
-    if registrant.age >= 16 && @permit == true
-      
+    if !self.services.include?('Written Test') || registrant.age < 16
+      false
+    elsif self.services.include?('Written Test') && registrant.permit? == true
+      registrant.license_data[:written] = true
+    else
+      registrant.license_data[:written] = false
     end
   end
+
+  def administer_road_test(registrant)
+    if !self.services.include?('Road Test')
+      false
+    elsif self.services.include?('Road Test') && registrant.license_data[:written] == true
+      registrant.license_data[:license] = true
+    else
+      false
+    end
+  end
+    
+  def renew_drivers_license(registrant)
+    if !self.services.include?('Renew License')
+      false
+    elsif self.services.include?('Renew License') && registrant.license_data[:license] == true && registrant.license_data[:written] == true 
+      registrant.license_data[:renewed] = true
+    else
+      false
+    end
+
+  end
+
 
 end
