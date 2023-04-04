@@ -1,23 +1,17 @@
 class FacilityFactory
 
   # def create_facility(dmv_database)
-  #   dmv_database.map do |data|
+  #   dmv_database.map do |facility|
   #     facility = Facility.new({
 
-  #             vin: data[:vin_1_10],
-  #            year: data[:model_year],
-  #            make: data[:make],
-  #           model: data[:model],
-  #          engine: :ev
-  #                           })
+    #     name: facility[:title] || facility[:office_name] || facility[:name]
+    #     address: facility[0][:location_1][:human_address] || facility[:street_address_line_1] || facility[0][:address1]
+    #     phone: facility[:phone_number] || facility[:public_phone_number]
+      
+    #  })
       
   #   end
   # end
 
 
 end
-
-#facility_1 = Facility.new({
-  # name: 'Albany DMV Office', 
-  # address: '2242 Santiam Hwy SE Albany OR 97321', 
-  # phone: '541-967-2014' })
