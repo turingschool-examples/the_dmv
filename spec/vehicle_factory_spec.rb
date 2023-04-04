@@ -3,7 +3,6 @@ require 'spec_helper'
 RSpec.describe VehicleFactory do
   it "exists" do
     factory = VehicleFactory.new
-    require 'pry'; binding.pry
     expect(factory).to be_an_instance_of(VehicleFactory)
   end
 
@@ -45,9 +44,24 @@ RSpec.describe VehicleFactory do
     expect(created_vehicles.count).to eq(1000) 
   end
 
-  # it "can determine the most common make/model in a list" do
-  #   factory.created_vehicles.models  
-    # >>>expect(facility_1.fees_and_plates(cruz)).to eq(:regular)
+  it "can rename vehicle variables" do
+    factory = VehicleFactory.new
+    wa_ev_registrations = DmvDataService.new.wa_ev_registrations
 
-  # end
+    expect(factory.rename_vehicles(wa_ev_registrations).first[:vin]).to be_a(String)
+    expect(factory.rename_vehicles(wa_ev_registrations).first[:year]).to be_a(String)
+    expect(factory.rename_vehicles(wa_ev_registrations).first[:engine]).to be_a(Symbol)
+  end
 end
+
+# Iteration 4 (failed) attempt:
+  # it "can determine the most common make/model in a list" do
+  #   factory = VehicleFactory.new
+  #   @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+  #   @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+  #   @cruz = Vehicle.new({vin: '333333333abcdefgh', year: 2013, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+  #   created_vehicles = factory.create_vehicles([{vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice}, {vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev}])
+    
+  #   short_list = factory.create_vehicles([{vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice}, {vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev}, {vin: '333333333abcdefgh', year: 2013, make: 'Chevrolet', model: 'Cruz', engine: :ice}])
+  #   expect(common_models(short_list)).to eq ("cruz") 
+  # end

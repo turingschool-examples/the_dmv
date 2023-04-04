@@ -16,12 +16,12 @@ class VehicleFactory
       vehicle_data[:engine] = :ev
     end
   end
+end
 
-  # def models(vehicle_list)
-  #   models = vehicles.map do |vehicle|
+# Iteration 4 (failed) attempt:
+  # def common_models(list)
+  #   models = list.map do |vehicle|
   #     vehicle.model
   #   end
   #   models.tally
   # end
-
-end
