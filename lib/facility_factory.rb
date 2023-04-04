@@ -19,7 +19,7 @@ class FacilityFactory
         name: facility[:title],
         address: JSON.parse(facility[:location_1][:human_address]).values.join(" "),
         phone: OR_format_phone_number(facility)
-                  })
+      })
     end
   end
 
@@ -34,7 +34,7 @@ class FacilityFactory
         name: facility[:office_name].capitalize + " DMV Office",
         address: "#{facility[:street_address_line_1]} #{facility[:city]} #{facility[:state]} #{facility[:zip_code]}",
         phone: NY_format_phone(facility)
-      })
+        })
     end
   end
 
