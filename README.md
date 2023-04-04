@@ -83,3 +83,41 @@
 [14] pry(RSpec::ExampleGroups::DmvDataService)> DmvDataService.new.wa_ev_registrations[5][:make]
 => "VOLKSWAGEN"
 ```
+
+## Iteration 3
+
+- When creating a facility factory, it appears you can use `||` as a way to check for different keys but not `or`
+- Ideally, we would normalize street address and not have it be all caps (an example of how you might go about this is below):
+
+```
+[2] pry(#<RSpec::ExampleGroups::FacilityFactory::Iteration3::DifferentFactories>)> a = "hello world"
+=> "hello world"
+[3] pry(#<RSpec::ExampleGroups::FacilityFactory::Iteration3::DifferentFactories>)> a.capitalize
+=> "Hello world"
+[4] pry(#<RSpec::ExampleGroups::FacilityFactory::Iteration3::DifferentFactories>)> a.capitalize
+=> "Hello world"
+[5] pry(#<RSpec::ExampleGroups::FacilityFactory::Iteration3::DifferentFactories>)> a.split(" ").capitalize.join
+NoMethodError: undefined method `capitalize' for ["hello", "world"]:Array
+from (pry):5:in `block (4 levels) in <top (required)>'
+[6] pry(#<RSpec::ExampleGroups::FacilityFactory::Iteration3::DifferentFactories>)> a.split(" ").each do |caps|
+[6] pry(#<RSpec::ExampleGroups::FacilityFactory::Iteration3::DifferentFactories>)*   caps.capitalize
+[6] pry(#<RSpec::ExampleGroups::FacilityFactory::Iteration3::DifferentFactories>)* end  
+=> ["hello", "world"]
+[7] pry(#<RSpec::ExampleGroups::FacilityFactory::Iteration3::DifferentFactories>)> ret = a.split(" ").each do |caps|
+[7] pry(#<RSpec::ExampleGroups::FacilityFactory::Iteration3::DifferentFactories>)*   caps.capitalize!  
+[7] pry(#<RSpec::ExampleGroups::FacilityFactory::Iteration3::DifferentFactories>)* end  
+=> ["Hello", "World"]
+[8] pry(#<RSpec::ExampleGroups::FacilityFactory::Iteration3::DifferentFactories>)> a
+=> "hello world"
+[9] pry(#<RSpec::ExampleGroups::FacilityFactory::Iteration3::DifferentFactories>)> a.capitalize!
+=> "Hello world"
+[10] pry(#<RSpec::ExampleGroups::FacilityFactory::Iteration3::DifferentFactories>)> ret
+=> ["Hello", "World"]
+[11] pry(#<RSpec::ExampleGroups::FacilityFactory::Iteration3::DifferentFactories>)> ret.join
+=> "HelloWorld"
+[12] pry(#<RSpec::ExampleGroups::FacilityFactory::Iteration3::DifferentFactories>)> ret
+=> ["Hello", "World"]
+[13] pry(#<RSpec::ExampleGroups::FacilityFactory::Iteration3::DifferentFactories>)> ret.join(" ")
+=> "Hello World"
+[14] pry(#<RSpec::ExampleGroups::FacilityFactory::Iteration3::DifferentFactories>)> 
+```
