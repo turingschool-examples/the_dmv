@@ -31,8 +31,5 @@ class Vehicle
       @plate_type = :regular
     end
   end
-  
-  DmvDataService.new.wa_ev_registrations
-
 
 end
