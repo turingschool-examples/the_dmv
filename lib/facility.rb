@@ -33,10 +33,10 @@ class Facility
       elsif (age < 25) && (car.engine != :ev)
         @collected_fees += 100
       else
-        @collected_fees += 200
+      @collected_fees += 200
       end
     else
-      nil
+    nil
     end
   end
 
@@ -49,7 +49,7 @@ class Facility
         false
       end
     else
-      false
+    false
     end
   end
 
@@ -68,7 +68,7 @@ class Facility
         false
       end
     else
-      false
+    false
     end
   end
 
@@ -81,7 +81,7 @@ class Facility
         false
       end
     else
-      false
+    false
     end
   end
 
