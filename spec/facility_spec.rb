@@ -12,45 +12,46 @@ RSpec.describe Facility do
   describe '#initialize' do
     it 'can initialize' do
       expect(@facility_1).to be_an_instance_of(Facility)
+    end
+
+    it 'has readable attributes' do 
       expect(@facility_1.name).to eq('Albany DMV Office')
       expect(@facility_1.address).to eq('2242 Santiam Hwy SE Albany OR 97321')
       expect(@facility_1.phone).to eq('541-967-2014')
       expect(@facility_1.services).to eq([])
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_1.collected_fees).to eq(0)
     end
   end
 
-  describe '#add service' do
-    it 'can add available services' do
+  describe '#add_service' do
+    it 'can add services to a facility' do
       expect(@facility_1.services).to eq([])
-      @facility_1.add_service('New Drivers License')
-      @facility_1.add_service('Renew Drivers License')
-      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.add_service('New Drivers License')).to eq(['New Drivers License'])
+      expect(@facility_1.add_service('Renew Drivers License')).to eq(['New Drivers License', 'Renew Drivers License'])
+      expect(@facility_1.add_service('Vehicle Registration')).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
-      
-    end
-  end
-
-  describe 'add vehicle registration to facility 1' do
-    it 'adds vehicle registration as a service to the facility' do
-      expect(@facility_1.add_service('Vehicle Registration')).to eq(['Vehicle Registration'])
     end
   end
   
-  describe 'facility 1' do
-
+  describe '#register_vehicle' do
     before(:each) do
       @facility_1.add_service('Vehicle Registration')
     end
 
-    it 'checks the registration date on the vehicle' do 
+    it 'has added Vehicle Registration as a service' do 
+      expect(@facility_1.services).to eq(['Vehicle Registration'])
+    end
+
+    it 'checks the current registration date on the vehicle' do 
       expect(@cruz.registration_date).to eq(nil)
     end
 
-    it 'makes a list of registered vehicles' do 
+    it 'retrieves a list of registered vehicles' do 
       expect(@facility_1.registered_vehicles).to eq([])
     end
 
-    it '#collected_fees' do
+    it 'checks the total amount of collected fees' do
       expect(@facility_1.collected_fees).to eq(0)
     end
 
@@ -85,35 +86,33 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro,@bolt])
       expect(@facility_1.collected_fees).to eq(325)
     end
-  end
-
-  describe 'facility_2' do
-    it 'checks for registered vehicles' do
+  
+    it 'checks for registered vehicles at other facilities' do
       expect(@facility_2.registered_vehicles).to eq([])
     end
 
-    it 'checks for services' do
+    it 'checks for services at other facilities' do
       expect(@facility_2.services).to eq([])
     end
 
-    it 'does not offer Vehicle Registration as a service' do 
+    it 'does not offer Vehicle Registration as a service at all facilities' do 
       expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
     end
 
-    it 'has no registered vehicles or collected fees' do
+    it 'A facility can have no registered vehicles or zero collected fees' do
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.collected_fees).to eq(0)
     end
   end
 
-  describe  'administers a written test' do
+  describe  '#administer_written_test(registrant)' do
     before(:each) do 
       @registrant_1 = Registrant.new('Bruce', 18, true )
       @registrant_2 = Registrant.new('Penny', 16 )
       @registrant_3 = Registrant.new('Tucker', 15 )
     end
 
-    describe 'administers a written test for registrant 1' do
+    describe 'administers a written test for registrants with a permit and older than 15' do
       it 'checks license data' do 
         expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       end
@@ -122,12 +121,12 @@ RSpec.describe Facility do
         expect(@registrant_1.permit?).to be(true)
       end
 
-      it "does not offer administered written test as a service" do 
+      it "the facility has to offer the provided service" do 
         expect(@facility_1.administer_written_test(@registrant_1)).to be(false)
         expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       end
 
-      it 'adds administering written test as a service' do 
+      it 'aadministers written test when a service is offered and registrant conditions are met' do 
         expect(@facility_1.add_service('Written Test')).to eq(['Written Test'])
         expect(@facility_1.administer_written_test(@registrant_1)).to be(true)
         expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
@@ -135,24 +134,24 @@ RSpec.describe Facility do
     end
   
   
-    describe 'administers a written test for registrant 2' do
+    describe 'does not administer written test to all registrants' do
       before(:each) do
         @facility_1.add_service('Written Test')
       end
 
-        it '#age' do 
+        it 'checks registrants age' do 
         expect(@registrant_2.age).to eq(16)
         end
 
-        it '#permit?' do 
+        it 'checks registrant permit status' do 
         expect(@registrant_2.permit?).to be(false)
         end
 
-        it '#administer_written_test(registrant)' do 
+        it 'cannot administer test to registrant with no permit' do 
         expect(@facility_1.administer_written_test(@registrant_2)).to be(false)
         end
 
-        it 'only permit holders can be administered a written test' do 
+        it 'can administer a written test to a registrant that has recently earned their permit and is older than 15' do 
           expect(@registrant_2.permit?).to be(false)
           @registrant_2.earn_permit
           expect(@facility_1.administer_written_test(@registrant_2)).to be(true)
@@ -162,19 +161,19 @@ RSpec.describe Facility do
   
 
     describe 'administers a written test for registrant 3' do 
-      it '#age' do 
+      it 'checks the age' do 
       expect(@registrant_3.age).to eq(15)
       end
 
-      it '#permit?' do 
+      it 'checks registrant permit status' do 
       expect(@registrant_3.permit?).to be(false)
       end
 
-      it '#administer_written_test(registrant)' do 
+      it 'cannot administer test to registrant with no permit or if underage ' do 
       expect(@facility_1.administer_written_test(@registrant_3)).to be(false)
       end
 
-      it 'only permit holders can be administered a written test' do
+      it 'can only administer written test to permit holders older than 15' do
         expect(@registrant_3.permit?).to be(false)
         @registrant_3.earn_permit
         expect(@facility_1.administer_written_test(@registrant_3)).to be(false)
@@ -183,7 +182,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe 'road test' do
+  describe '#administer_road_test(registrant)' do
     before(:each) do
       @registrant_1 = Registrant.new('Bruce', 18, true )
       @registrant_2 = Registrant.new('Penny', 16 )
@@ -194,8 +193,8 @@ RSpec.describe Facility do
       @facility_1.administer_written_test(@registrant_2)
     end
 
-    describe 'does not offer road tests as a service for anyone' do
-      it 'does not offer road tests as a service for permit-holders' do 
+    describe 'must offer Road Test as a provided service' do
+      it 'does not offer road tests as a service for permit-holding registrants' do 
           expect(@facility_1.administer_road_test(@registrant_3)).to be(false)
           @registrant_3.earn_permit
           expect(@facility_1.administer_road_test(@registrant_3)).to be(false)
@@ -203,7 +202,7 @@ RSpec.describe Facility do
       end
     
 
-      it 'does not offer road tests as a service to people with a passing written test' do
+      it 'does not offer road tests as a service to registrants with a passing written test' do
         expect(@facility_1.administer_road_test(@registrant_1)).to be(false)
       end
 
@@ -213,24 +212,24 @@ RSpec.describe Facility do
     end
   
 
-    describe 'road test for registrant 1 and registrant 2' do
+    describe 'administered road test' do
       before(:each) do
         @facility_1.add_service('Road Test')
       end
 
-      it '#administer_road_test' do 
+      it 'administers road test for registrants with a passing written test' do 
       expect(@facility_1.administer_road_test(@registrant_1)).to be(true)
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
       end
 
-      it 'adminsters road test for registrant 2 and updates license data' do
+      it 'updates the license data after administering a road test' do
         expect(@facility_1.administer_road_test(@registrant_2)).to be(true)
         expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
       end
     end
   end
 
-  describe 'renew license' do
+  describe '#renew_drivers_license(registrant)' do
     before (:each) do
       @registrant_1 = Registrant.new('Bruce', 18, true )
       @registrant_2 = Registrant.new('Penny', 16 )
@@ -245,47 +244,35 @@ RSpec.describe Facility do
     end
 
 
-    describe 'does not offer license renewal as a provided service' do
-      it 'does not offer license renewal as a provided service' do
+      it 'must offer license renewal as a provided service' do
         expect(@facility_1.renew_drivers_license(@registrant_1)).to be(false)
       end
-    end
-
-
-    describe 'adds license renewal service' do 
+    
+   
       it 'adds license renewal service ' do
         expect(@facility_1.add_service('Renew License')).to eq(['Written Test', 'Road Test', 'Renew License'])
       end
-    end
+   
 
-    describe 'only allows license holders who meet requirements to renew ' do
+    describe 'only allows license renewal if registrant conditions are also met' do
       before(:each) do
         @facility_1.add_service('Renew License')
       end
 
-      it 'renews the license of registrant 1' do
-        # expect(@facility_1.services).to eq(["Written Test", "Road Test", "Renew License"])
+      it 'renews the license of a registrant with a current license' do
         expect(@facility_1.renew_drivers_license(@registrant_1)).to be(true)
         expect(@registrant_1.license_data).to eq({:license=>true, :renewed=>true, :written=>true})
       end
 
-      it 'does not renew the license of registrant 3' do
-        # expect(@facility_1.services).to eq(["Written Test", "Road Test", "Renew License"])
+      it 'does not renew a license if a registrant does have license' do
         expect(@facility_1.renew_drivers_license(@registrant_3)).to be(false)
         expect(@registrant_3.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
-        # expect(@registrant_1.license_data).to eq({:license=>true, :renewed=>true, :written=>true})
       end
 
-      it 'renews the license of registrant 2' do
-        # expect(@facility_1.services).to eq(['Written Test', 'Road Test', 'Renew License'])
-        # expect(@registrant_2.permit?).to be (true)
-        # expect(@registrant_2.age).to eq(16)
-        # expect(@facility_1.administer_written_test(@registrant_2)).to be(true)
-        # expect(@facility_1.administer_road_test(@registrant_2)).to be(true)
+      it 'renews the license of a registrant that has passed the road test' do
         expect(@facility_1.renew_drivers_license(@registrant_2)).to be(true)
         expect(@registrant_2.license_data).to eq({:license=>true, :renewed=>true, :written=>true})
       end
     end 
   end
-  
 end

@@ -14,7 +14,7 @@ RSpec.describe Registrant do
       expect(@registrant_1).to be_an_instance_of(Registrant)
     end
 
-    it 'has attributes' do
+    it 'has readable attributes' do
       expect(@registrant_1.name).to eq('Bruce')
       expect(@registrant_1.age).to eq(18)
       expect(@registrant_1.permit?).to eq(true)
@@ -27,6 +27,14 @@ RSpec.describe Registrant do
     end
   end
 
+  describe '#permit?' do
+    it 'returns the current permit status' do
+      expect(@registrant_1.permit?).to eq(true)
+
+      expect(@registrant_2.permit?).to eq(false)
+    end
+  end
+
   describe '#earn_permit' do
     it 'changes permit status from false to true' do
       @registrant_2.earn_permit
@@ -34,5 +42,35 @@ RSpec.describe Registrant do
       expect(@registrant_2.permit?).to be(true)
     end
   end
-  
+
+  describe '#update_written_test_status' do
+    it 'updates the written test status' do
+      expect(@registrant_1.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
+
+      expect(@registrant_1.update_written_test_status).to eq(true)
+      expect(@registrant_1.license_data).to eq({:license=>false, :renewed=>false, :written=>true})
+    end
+  end
+
+  describe '#update_license_status' do
+    it 'updates the license status' do
+      expect(@registrant_1.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
+
+      @registrant_1.update_written_test_status
+      expect(@registrant_1.update_license_status).to eq(true)
+      expect(@registrant_1.license_data).to eq({:license=>true, :renewed=>false, :written=>true})
+    end
+  end
+
+  describe '#update_renew_status' do
+    it 'updates the renewal status' do
+      expect(@registrant_1.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
+
+      @registrant_1.update_written_test_status
+      @registrant_1.update_license_status
+      expect(@registrant_1.update_renew_status).to eq(true)
+      expect(@registrant_1.license_data).to eq({:license=>true, :renewed=>true, :written=>true})
+    end
+  end
+
 end
