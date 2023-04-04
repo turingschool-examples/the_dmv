@@ -22,7 +22,7 @@ class DMVFacility
 
 
 
-    def ny_dmv_office_locations(data)
+    def create_ny_dmv_office_locations(data)
       data.to_a.map do |facility|
         binding.pry
         facility_details = {

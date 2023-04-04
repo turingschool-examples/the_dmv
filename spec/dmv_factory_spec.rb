@@ -23,7 +23,7 @@ RSpec.describe DMVFacility do
 
     ny_dmv_data = DmvDataService.new.ny_dmv_office_locations
 
-    dmv_factory.ny_dmv_office_locations(ny_dmv_data)
+    dmv_factory.create_ny_dmv_office_locations(ny_dmv_data)
 
     expect(dmv_factory.list_of_NY_Facilities[0]).to be_a Facility
   end
