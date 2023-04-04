@@ -21,8 +21,14 @@ RSpec.describe DmvDataService do
   end
 
   describe "#wa_ev_registrations" do
-    it "can load washington ev registration data" do
+    it "can load Washington ev registration data" do
       expect(@dds.wa_ev_registrations.size).to eq(1000)
+    end
+  end
+
+  describe "#ny_registrations" do
+    it "can load New York registration data" do
+      expect(@dds.ny_registrations.size).to eq(1000)
     end
   end
 

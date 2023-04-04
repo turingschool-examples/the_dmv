@@ -4,6 +4,7 @@ RSpec.describe VehicleFactory do
   before(:each) do
     @factory = VehicleFactory.new
     @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+    @ny_registrations = DmvDataService.new.ny_registrations
     @three_mock_wa_ev_regs = [
       {
         electric_vehicle_type: "Battery Electric Vehicle (BEV)",
@@ -116,6 +117,68 @@ RSpec.describe VehicleFactory do
         electric_utility: "PUGET SOUND ENERGY INC||CITY OF TACOMA - (WA)"
       }
     ]
+    @three_mock_ny_regs = [
+      {
+        record_type: "VEH",
+        vin: "9999236",
+        registration_class: "HIS",
+        city: "ROSLYN",
+        state: "NY",
+        zip: "11576",
+        county: "NASSAU",
+        model_year: "1937",
+        make: "CHRY",
+        body_type: "4DSD",
+        fuel_type: "GAS",
+        unladen_weight: "6300",
+        reg_valid_date: "2022-05-25T00:00:00.000",
+        reg_expiration_date: "2023-06-23T00:00:00.000",
+        color: "BK",
+        scofflaw_indicator: "N",
+        suspension_indicator: "N",
+        revocation_indicator: "N"
+      },
+      {
+        record_type: "VEH",
+        vin: "9996",
+        registration_class: "MOT",
+        city: "GLEN COVE",
+        state: "NY",
+        zip: "11542",
+        county: "NASSAU",
+        model_year: "1951",
+        make: "NIMBU",
+        body_type: "MCY",
+        fuel_type: "GAS",
+        unladen_weight: "408",
+        reg_valid_date: "2022-06-21T00:00:00.000",
+        reg_expiration_date: "2023-04-30T00:00:00.000",
+        color: "DK RD",
+        scofflaw_indicator: "N",
+        suspension_indicator: "N",
+        revocation_indicator: "N"
+      },
+      {
+        record_type: "VEH",
+        vin: "999407G3573",
+        registration_class: "PAS",
+        city: "SARATOGA SPRIN",
+        state: "NY",
+        zip: "12866",
+        county: "SARATOGA",
+        model_year: "1976",
+        make: "LA/RO",
+        body_type: "SUBN",
+        fuel_type: "GAS",
+        unladen_weight: "3500",
+        reg_valid_date: "2021-03-03T00:00:00.000",
+        reg_expiration_date: "2023-05-12T00:00:00.000",
+        color: "WH",
+        scofflaw_indicator: "N",
+        suspension_indicator: "N",
+        revocation_indicator: "N"
+      }
+    ]
   end
 
   describe "#initialize" do
@@ -126,40 +189,77 @@ RSpec.describe VehicleFactory do
   end
 
   describe "#create_vehicles" do
-    it "can create a vehicle from a mock database" do
+    it "can create vehicles from a mock Washington ev database" do
       expect(@factory.vehicles).to eq([])
       @factory.create_vehicles(@three_mock_wa_ev_regs)
+      expect(@factory.vehicles.count).to be == 3
+
       expect(@factory.vehicles.first).to be_an_instance_of(Vehicle)
       expect(@factory.vehicles.first.vin).to eq("WMEEJ9AA7E")
       expect(@factory.vehicles.first.year).to eq("2014")
       expect(@factory.vehicles.first.make).to eq("SMART")
       expect(@factory.vehicles.first.model).to eq("Fortwo Electric Drive")
-    end
+      expect(@factory.vehicles.first.engine).to eq(:ev)
 
-    it "can create many vehicles from a mock database" do
-      expect(@factory.vehicles).to eq([])
-      @factory.create_vehicles(@three_mock_wa_ev_regs)
-      expect(@factory.vehicles.count).to be == 3
       expect(@factory.vehicles.last).to be_an_instance_of(Vehicle)
       expect(@factory.vehicles.last.vin).to eq("WP0AE2A77K")
       expect(@factory.vehicles.last.year).to eq("2019")
       expect(@factory.vehicles.last.make).to eq("PORSCHE")
       expect(@factory.vehicles.last.model).to eq("Panamera")
+      expect(@factory.vehicles.last.engine).to eq(:ev)
     end
 
-    it "can create a vehicle from a real database" do
+    it "can create vehicles from a mock New York database" do
+      expect(@factory.vehicles).to eq([])
+      @factory.create_vehicles(@three_mock_ny_regs)
+      expect(@factory.vehicles.count).to be == 3
+
+      expect(@factory.vehicles.first).to be_an_instance_of(Vehicle)
+      expect(@factory.vehicles.first.vin).to eq("9999236")
+      expect(@factory.vehicles.first.year).to eq("1937")
+      expect(@factory.vehicles.first.make).to eq("CHRY")
+      expect(@factory.vehicles.first.model).to eq("4DSD")
+      expect(@factory.vehicles.first.engine).to eq(:ice)
+
+      expect(@factory.vehicles.last).to be_an_instance_of(Vehicle)
+      expect(@factory.vehicles.last.vin).to eq("999407G3573")
+      expect(@factory.vehicles.last.year).to eq("1976")
+      expect(@factory.vehicles.last.make).to eq("LA/RO")
+      expect(@factory.vehicles.last.model).to eq("SUBN")
+      expect(@factory.vehicles.last.engine).to eq(:ice)
+    end
+
+    it "can create vehicles from the real Washington ev database" do
       expect(@factory.vehicles).to eq([])
       @factory.create_vehicles(@wa_ev_registrations)
+      expect(@factory.vehicles.count).to be > 100
+
       expect(@factory.vehicles.first).to be_an_instance_of(Vehicle)
       expect(@factory.vehicles.first.vin).to be_truthy
       expect(@factory.vehicles.first.year).to be_truthy
       expect(@factory.vehicles.first.make).to be_truthy
       expect(@factory.vehicles.first.model).to be_truthy
+      expect(@factory.vehicles.first.engine).to be_truthy
+
+      expect(@factory.vehicles.last).to be_an_instance_of(Vehicle)
+      expect(@factory.vehicles.last.vin).to be_truthy
+      expect(@factory.vehicles.last.year).to be_truthy
+      expect(@factory.vehicles.last.make).to be_truthy
+      expect(@factory.vehicles.last.model).to be_truthy
+      expect(@factory.vehicles.last.engine).to be_truthy
     end
 
-    it "can create many vehicles from a real database" do
-      @factory.create_vehicles(@wa_ev_registrations)
+    it "can create vehicles from the real New York database" do
+      expect(@factory.vehicles).to eq([])
+      @factory.create_vehicles(@ny_registrations)
       expect(@factory.vehicles.count).to be > 100
+
+      expect(@factory.vehicles.first).to be_an_instance_of(Vehicle)
+      expect(@factory.vehicles.first.vin).to be_truthy
+      expect(@factory.vehicles.first.year).to be_truthy
+      expect(@factory.vehicles.first.make).to be_truthy
+      expect(@factory.vehicles.first.model).to be_truthy
+
       expect(@factory.vehicles.last).to be_an_instance_of(Vehicle)
       expect(@factory.vehicles.last.vin).to be_truthy
       expect(@factory.vehicles.last.year).to be_truthy
