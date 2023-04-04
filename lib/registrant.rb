@@ -23,15 +23,27 @@ class Registrant
   end
 
   def update_written_test_status
-    @license_data[:written] = true
+    if permit?
+      @license_data[:written] = true
+    else
+      nil
+    end
   end
 
   def update_license_status
-    @license_data[:license] = true
+    if @license_data[:written] = true
+      @license_data[:license] = true
+    else 
+      nil
+    end
   end
 
   def update_renew_status
-    @license_data[:renewed] = true
+    if @license_data[:license] = true
+      @license_data[:renewed] = true
+    else
+      nil
+    end
   end
 
 end
