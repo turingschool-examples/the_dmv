@@ -14,7 +14,11 @@ RSpec.describe FacilityFactory do
 
     context "different factories" do
       it "can make a facility out of NY facilities" do
-        
+        ny_facility_maker = FacilityFactory.new
+        new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+        ny_facilities = ny_facility_maker.create_facilities(new_york_facilities)
+
+        expect(ny_facility_maker.create_facilities(new_york_facilities)).to be_an(Array)
       end
     end
   end

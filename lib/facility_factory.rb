@@ -7,11 +7,19 @@ class FacilityFactory
     created_facilities = facilities_data.map do |facility_data|
       Facility.new(
         {
-          name:         facility_data[:office_name] || facility_data[:name],
-          address:      facility_data[:city],
+          name:         "#{facility_data[:office_name]} DMV Office" || "#{facility_data[:name]} DMV Office",
+          address:      "#{facility_data[:street_address_line_1]}, #{facility_data[:city]}, #{facility_data[:state]}" || "#{facility_data[:address1]}, #{facility_data[:city]}, #{facility_data[:state]}",
           phone:        facility_data[:public_phone_number] || facility_data[:phone]
         }
       )
+      ## Working
+      # Facility.new(
+      #   {
+      #     name:         facility_data[:office_name] || facility_data[:name],
+      #     address:      facility_data[:city],
+      #     phone:        facility_data[:public_phone_number] || facility_data[:phone]
+      #   }
+      # )
     end
     #   Facility.new(
     #     {
