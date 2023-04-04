@@ -54,7 +54,7 @@ RSpec.describe FacilityFactory do
   describe '#create_facilities' do 
     it 'can create facility objects with attributes' do 
       @fac_factory.add_oregon_source(@or_dmv_office_locations)
-      @fac_factory.create_facilities2
+      @fac_factory.create_facilities
       first_fac = @fac_factory.facilities[0]
 
       expect(first_fac).to be_a(Facility)
@@ -68,7 +68,7 @@ RSpec.describe FacilityFactory do
 
     it 'adds new facilities to facilities attribute' do 
       @fac_factory.add_oregon_source(@or_dmv_office_locations)
-      @fac_factory.create_facilities2
+      @fac_factory.create_facilities
 
       expect(@fac_factory.facilities).to be_a(Array)
       expect(@fac_factory.facilities.length).not_to eq(0)
@@ -78,7 +78,7 @@ RSpec.describe FacilityFactory do
       @fac_factory.add_oregon_source(@or_dmv_office_locations)
       @fac_factory.add_ny_source(@ny_dmv_office_locations)
       @fac_factory.add_mo_source(@mo_dmv_office_locations)
-      @fac_factory.create_facilities2
+      @fac_factory.create_facilities
       first_fac = @fac_factory.facilities[0]
 
       expect(first_fac).to be_a(Facility)
