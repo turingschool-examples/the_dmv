@@ -27,8 +27,8 @@ RSpec.describe FacilityFactory do
   end
 
   describe "create_facility_mo" do
-    xit "creates MO facility" do
-      expect(@facility.create_facility(@mo_facilities)).to all(be_an_instance_of Facility)
+    it "creates MO facility" do
+      expect(@facility.create_facility_mo(@mo_facilities)).to all(be_an_instance_of Facility)
 
     end
   end
