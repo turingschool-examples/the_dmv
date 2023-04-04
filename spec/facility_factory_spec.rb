@@ -79,6 +79,7 @@ RSpec.describe FacilityFactory do
   describe "#initialize" do
     it "can initialize" do
       expect(@factory).to be_an_instance_of(FacilityFactory)
+      expect(@factory.facilities).to eq([])
     end
   end
 
@@ -98,15 +99,15 @@ RSpec.describe FacilityFactory do
 
   describe "#determine_address" do
     it "can determine the address of a mock Oregon facility" do
-      expect(@factory.determine_address(@mock_oregon_facility)).to eq("221 S Oregon St")
+      expect(@factory.determine_address(@mock_oregon_facility)).to eq("221 S Oregon St, Condon, OR 97823")
     end
 
     it "can determine the address of a mock New York facility" do
-      expect(@factory.determine_address(@mock_new_york_facility)).to eq("1227 US HIGHWAY 11")
+      expect(@factory.determine_address(@mock_new_york_facility)).to eq("1227 US HIGHWAY 11, GOUVERNEUR, NY 13642")
     end
 
     it "can determine the address of a mock Missouri facility" do
-      expect(@factory.determine_address(@mock_missouri_facility)).to eq("508 LANA DR")
+      expect(@factory.determine_address(@mock_missouri_facility)).to eq("508 LANA DR, CAMERON, MO 64429")
     end
   end
 
@@ -125,54 +126,48 @@ RSpec.describe FacilityFactory do
   end
 
   describe "#create_facilities" do
-    it "can create a facility from the Oregon database" do
+    it "can create facilities from the Oregon database" do
       expect(@factory.facilities).to eq([])
       @factory.create_facilities(@oregon_facilities)
+      expect(@factory.facilities.count).to be > 10
+
       expect(@factory.facilities.first).to be_an_instance_of(Facility)
       expect(@factory.facilities.first.name).to be_truthy
       expect(@factory.facilities.first.address).to be_truthy
       expect(@factory.facilities.first.phone).to be_truthy
-    end
 
-    it "can create many facilities from the Oregon database" do
-      @factory.create_facilities(@oregon_facilities)
-      expect(@factory.facilities.count).to be > 10
       expect(@factory.facilities.last).to be_an_instance_of(Facility)
       expect(@factory.facilities.last.name).to be_truthy
       expect(@factory.facilities.last.address).to be_truthy
       expect(@factory.facilities.last.phone).to be_truthy
     end
 
-    it "can create a facility from the New York database" do
+    it "can create facilities from the New York database" do
       expect(@factory.facilities).to eq([])
       @factory.create_facilities(@new_york_facilities)
+      expect(@factory.facilities.count).to be > 10
+
       expect(@factory.facilities.first).to be_an_instance_of(Facility)
       expect(@factory.facilities.first.name).to be_truthy
       expect(@factory.facilities.first.address).to be_truthy
       expect(@factory.facilities.first.phone).to be_truthy
-    end
 
-    it "can create many facilities from the New York database" do
-      @factory.create_facilities(@new_york_facilities)
-      expect(@factory.facilities.count).to be > 10
       expect(@factory.facilities.last).to be_an_instance_of(Facility)
       expect(@factory.facilities.last.name).to be_truthy
       expect(@factory.facilities.last.address).to be_truthy
       expect(@factory.facilities.last.phone).to be_truthy
     end
 
-    it "can create a facility from the Misssouri database" do
+    it "can create facilities from the Misssouri database" do
       expect(@factory.facilities).to eq([])
       @factory.create_facilities(@missouri_facilities)
+      expect(@factory.facilities.count).to be > 10
+
       expect(@factory.facilities.first).to be_an_instance_of(Facility)
       expect(@factory.facilities.first.name).to be_truthy
       expect(@factory.facilities.first.address).to be_truthy
       expect(@factory.facilities.first.phone).to be_truthy
-    end
 
-    it "can create many facilities from the Misssouri database" do
-      @factory.create_facilities(@missouri_facilities)
-      expect(@factory.facilities.count).to be > 10
       expect(@factory.facilities.last).to be_an_instance_of(Facility)
       expect(@factory.facilities.last.name).to be_truthy
       expect(@factory.facilities.last.address).to be_truthy
