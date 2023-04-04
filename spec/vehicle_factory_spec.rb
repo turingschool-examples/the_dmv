@@ -5,6 +5,8 @@ RSpec.describe VehicleFactory do
 
     @factory = VehicleFactory.new 
     @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+  
+
   end
     
   describe "Vehicle Factory" do
