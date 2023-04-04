@@ -83,3 +83,7 @@
 [14] pry(RSpec::ExampleGroups::DmvDataService)> DmvDataService.new.wa_ev_registrations[5][:make]
 => "VOLKSWAGEN"
 ```
+
+## Iteration 3
+
+- When creating a facility factory, it appears you can use `||` as a way to check for different keys but not `or`
