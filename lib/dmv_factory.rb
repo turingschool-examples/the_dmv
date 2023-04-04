@@ -8,7 +8,7 @@ class DMVFacility
     @list_of_MO_Facilities = []
   end
 
-  def create_dmv_facilities(dmv_data)
+  def create_or_dmv_facilities(dmv_data)
     dmv_data.map do |facility|
       facility_details = {
         name: facility[:title], 
