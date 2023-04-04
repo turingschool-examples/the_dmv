@@ -38,6 +38,9 @@ RSpec.describe FacilityFactory do
       expect(@oregon.sample.name).to be_a(String)
       expect(@oregon.first.address).to eq("2242 Santiam Hwy SE Albany OR 97321")
       expect(@oregon.sample.address).to be_a(String)
+      expect(@oregon.sample.services).to eq([])
+      expect(@oregon.sample.registered_vehicles).to eq([])
+      expect(@oregon.sample.collected_fees).to eq(0)
     end
     
     it 'formats :OR facility phone number' do
@@ -57,6 +60,9 @@ end
       expect(@new_york.sample.name).to be_a(String)
       expect(@new_york.first.address).to eq("407 SELDEN RD SELDEN NY 11784")
       expect(@new_york.sample.address).to be_a(String)
+      expect(@new_york.sample.services).to eq([])
+      expect(@new_york.sample.registered_vehicles).to eq([])
+      expect(@new_york.sample.collected_fees).to eq(0)
     end
 
     it 'formats :NY facility phone number' do
@@ -68,7 +74,6 @@ end
   describe '#missouri processing' do
     it 'creates missouri facility objects' do
       expect(@missouri.first).to be_a(Facility)
-      require 'pry'; binding.pry
       expect(@missouri.sample).to be_a(Facility)
     end
 
@@ -77,6 +82,9 @@ end
       expect(@missouri.first.address).to eq("3164 TELEGRAPH ROAD ST LOUIS MO 63125")
       expect(@missouri.sample.name).to be_a(String)
       expect(@missouri.sample.address).to be_a(String)
+      expect(@missouri.sample.services).to eq([])
+      expect(@missouri.sample.registered_vehicles).to eq([])
+      expect(@missouri.sample.collected_fees).to eq(0)
 
     end
 
