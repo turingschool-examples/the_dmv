@@ -35,7 +35,6 @@ attr_reader :facilities
   end
 
   def create_facilities2
-    @facilities.flatten!(2)
     @facilities.each do |facility|
       if facility[:phone] == nil
         facility[:phone] = "no phone listed"
@@ -48,10 +47,11 @@ attr_reader :facilities
 
   def add_oregon_source(source)
     source.each do |facility|
-    facility[:name] = facility[:title]
-    facility[:address] = facility[:location_1][:human_address]
-    facility[:phone] = facility[:phone_number]   
+      normalized_data = Hash.new(0)
+      normalized_data[:name] = facility[:title]
+      normalized_data[:address] = facility[:location_1][:human_address]
+      normalized_data[:phone] = facility[:phone_number]   
+      @facilities << normalized_data
     end
-    @facilities << source
   end
 end
