@@ -29,7 +29,6 @@ RSpec.describe FacilityFactory do
     mo_locations = DmvDataService.new.mo_dmv_office_locations
     missouri.create_facilities(mo_locations)
     # expect(missouri)
-   require 'pry'; binding.pry
   end
 
 
