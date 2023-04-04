@@ -19,11 +19,12 @@ class FacilityFactory
 
   def determine_address(facility)
     if facility.keys.include?(:location_1)
-      facility[:location_1][:human_address].split(":")[1].split(",")[0][2..-2]
+      address_hash = JSON.parse(facility[:location_1][:human_address], symbolize_names: true)
+      "#{address_hash[:address]}, #{address_hash[:city]}, #{address_hash[:state]} #{address_hash[:zip]}"
     elsif facility.keys.include?(:street_address_line_1)
-      facility[:street_address_line_1]
+      "#{facility[:street_address_line_1]}, #{facility[:city]}, #{facility[:state]} #{facility[:zip_code]}"
     elsif facility.keys.include?(:address1)
-      facility[:address1]
+      "#{facility[:address1]}, #{facility[:city]}, #{facility[:state]} #{facility[:zipcode]}"
     end
   end
 
