@@ -97,7 +97,7 @@ class Facility
     location.each do |station|
       facility_or_hash = {name: nil, address: nil, phone: nil}
       facility_or_hash[:name] = station[:title]
-      facility_or_hash[:address] = station.values_at[:location_1][:human_address]
+      facility_or_hash[:address] = JSON.parse(station[:location_1][:human_address]).values.join(" ")
       facility_or_hash[:phone] = station[:phone_number]
       new_facility_1 = Facility.new(facility_or_hash)
       new_facility_list1 << new_facility_1
