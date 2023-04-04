@@ -54,6 +54,7 @@ RSpec.describe Facility do
     end
   end
 
+
   describe 'vehicle registrations' do 
     it 'Facility 1 registers the cruz' do
       
@@ -123,6 +124,7 @@ RSpec.describe Facility do
     end
 
   end
+
 
   describe 'written tests' do 
     it 'add Written Test services to Facility 1' do
@@ -267,6 +269,7 @@ RSpec.describe Facility do
   
     end
   end
-
-
 end
+
+
+

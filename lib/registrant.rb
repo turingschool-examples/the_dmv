@@ -1,5 +1,5 @@
 class Registrant
-  attr_accessor :name,
+  attr_reader :name,
               :age,
               :permit,
               :license_data
@@ -18,21 +18,3 @@ class Registrant
   def earn_permit
     @permit = true
   end
-
-  def takes_written
-    @license_data[:written] = true
-
-  end
-
-  def takes_road
-    @license_data[:license] = true
-
-  end
-
-  def is_renewed
-    @license_data[:renewed] = true
-  end
-
-end
-
-

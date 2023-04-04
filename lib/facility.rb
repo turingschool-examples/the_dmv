@@ -1,4 +1,5 @@
 class Facility
+
   attr_reader     :name, 
                   :address, 
                   :phone, 
@@ -34,6 +35,7 @@ class Facility
     end
   end
 
+
   def administer_written_test(registrant)
     if @services.include?('Written Test') && 
       registrant.permit? &&
@@ -43,8 +45,17 @@ class Facility
         return true
       end
       false
+  
+  def administer_written_test(registrant)
+   if @services.include?('Written Test') && 
+     registrant.permit? &&
+     registrant.age >= 16
+     registrant.license_data[:written] = true
+        return true
+     end
+     false
   end
-
+  
   def administer_road_test(registrant)
     if @services.include?('Road Test') &&
       registrant.license_data[:written]
@@ -62,6 +73,5 @@ class Facility
     end
     false
   end
-
 end
 
