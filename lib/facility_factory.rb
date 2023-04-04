@@ -1,10 +1,4 @@
 class FacilityFactory
-  #attr_reader: 
-
-  # def initialize(facility)
-    # @create_or_facility = create_or_facility 
-    
-  # end
 
   def create_or_facility(facility)
     facility = facility.slice(:title,:location_1, :phone_number)
