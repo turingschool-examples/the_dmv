@@ -24,6 +24,7 @@ class DMVFacility
         create_mo_dmv_office_locations(data)
         @list_of_DMVs << @list_of_MO_Facilities
       end
+      binding.pry
     end
       
   end
