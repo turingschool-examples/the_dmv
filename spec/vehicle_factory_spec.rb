@@ -1,15 +1,13 @@
 require 'spec_helper'
 
-RSpec.describe Dataset do
-  before(:each) do 
+RSpec.describe VehicleFactory do
+  before(:each) do
     @factory = VehicleFactory.new
     @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
   end
-  describe 'initializing a dataset' do 
-    it 'exists' do
-
-      
+  describe '#initialize' do
+    it'exits' do
+      expect(@factory).to be_a(VehicleFactory)
     end
-
   end
 end
