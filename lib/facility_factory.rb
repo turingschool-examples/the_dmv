@@ -6,15 +6,28 @@ class FacilityFactory
   end
 
   def create_facilities(facilities)
-    
-    facilities.each do |facility|
-      @new_facilities << Facility.new({
-        name: facility[:title],
-        address: facility[:human_address],
-        phone: facility[:phone_number]
-      })
-    end
+    or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
+    wa_registrations(location_details)
+    @created_vehicles
+  end 
+   
+  
+  def checks_location(location_data)
+      dmv_office_locations(location_data)
   end
-
-
-end
+  
+  def dmv_office_locations(location_data)
+    or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
+     location_data == or_dmv_office_locations
+        or_dmv_office_locations.each do |office|
+           location_data = {
+            name: office[:title],
+            address: office[:human_address],
+            phone: office[:phone_number],
+            }
+            @new_facilities << (offices = Facility.new(location_data))
+        end
+        @new_facilities
+      end
+   
+  end

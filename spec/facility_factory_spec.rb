@@ -10,14 +10,16 @@ RSpec.describe FacilityFactory do
     expect(office).to be_an_instance_of(FacilityFactory)
   end
 
-  it 'creates new facilities in oregon' do
-    office = FacilityFactory.new 
-    oregon = DmvDataService.new.or_dmv_office_locations
+  describe 'oregon_offices' do
+    it 'has oregon office info' do
+      office = FacilityFactory.new
+      or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
+      office = office.checks_location(or_dmv_office_locations)
 
-    office.create_facilities(oregon)
-
-    expect(@new_facilities).to be_an(Array)
-    expect(@new_facilities.first).to be_a(Facility)
+      expect(office).to be_a(Array)
+      expect(office.first).to be_a(Facility)
+      expect(office.length).to eq(59)
+    end
   end
 
 
