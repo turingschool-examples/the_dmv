@@ -18,5 +18,4 @@ class Registrant
       false
     end
   end
-
 end

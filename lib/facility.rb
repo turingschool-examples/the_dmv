@@ -130,7 +130,4 @@ class Facility
     end
     new_facility_list3
   end
-
-
-
 end

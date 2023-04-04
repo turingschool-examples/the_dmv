@@ -18,5 +18,4 @@ RSpec.describe VehicleFactory do
       expect(@factory.create_vehicles(@wa_ev_registrations)).to be_an(Array)
     end
   end
-
 end

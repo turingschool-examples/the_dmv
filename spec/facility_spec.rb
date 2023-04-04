@@ -218,7 +218,6 @@ RSpec.describe Facility do
 
   describe "creating new facilities from existing data sources" do
     it "creates Oregon facility" do
-      require 'pry'; binding.pry
       @facility_new.create_facility_oregon(@or_dmv_office_locations)
       expect(@facility_new.create_facility_oregon(@or_dmv_office_locations)).to be_an(Array)
     end
@@ -233,5 +232,4 @@ RSpec.describe Facility do
         expect(@facility_new.create_facility_missouri(@missouri_facilities)).to be_an(Array)
     end
   end
-
 end
