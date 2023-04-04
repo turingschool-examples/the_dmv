@@ -7,10 +7,9 @@ RSpec.describe Vehicle do
   before(:each) do
     @factory = VehicleFactory.new
     @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-    # require 'pry'; binding.pry
   end
 
-  describe "Vehicle Factory" do
+  describe "#Vehicle Factory" do
     it "exists" do 
       expect(@factory).to be_a(VehicleFactory)
     end
@@ -20,7 +19,7 @@ RSpec.describe Vehicle do
     end
   end
 
-  describe "creates vehicles" do
+  describe "#assigns data to created vehicles" do
     it "will get 'vin' data from database" do
       expect(@factory.create_vehicles(@wa_ev_registrations)[0].vin).to eq("WMEEJ9AA7E")
     end
