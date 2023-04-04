@@ -33,11 +33,9 @@ RSpec.describe Dmv do
       @facility_2.add_service('Written Test')
       @facility_3.add_service('New Drivers License')
       @facility_3.add_service('Road Test')
-
       @dmv.add_facility(@facility_1)
       @dmv.add_facility(@facility_2)
       @dmv.add_facility(@facility_3)
-      
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
@@ -46,13 +44,12 @@ RSpec.describe Dmv do
     it 'can add facility from data' do
       @dmv = Dmv.new
       or_dmv = DmvDataService.new.or_dmv_office_locations
-      @dmv.new_facility(or_dmv)
-      expect(@dmv.facilities).to eq(@dmv.facilities)
+      mo_dmv = DmvDataService.new.mo_dmv_office_locations
       ny_dmv = DmvDataService.new.ny_dmv_office_locations
+      @dmv.new_facility(or_dmv)
       @dmv.new_facility(ny_dmv)
-      # expect(@dmv.facilities).to eq(@dmv.facilities)
+      @dmv.new_facility(mo_dmv)
+      expect(@dmv.facilities).to eq([@dmv.facilities])
     end
   end
-  
-  
 end

@@ -57,7 +57,6 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@bolt)
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
       expect(@facility_1.collected_fees).to eq(325)
-    
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.services).to eq([])
       @facility_2.register_vehicle(@bolt)
@@ -81,14 +80,12 @@ RSpec.describe Facility do
       @facility_1.add_service('Written Test')
       @facility_1.administer_written_test(@registrant_1)
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
-
       expect(@registrant_2.age).to eq(16)
       expect(@registrant_2.permit?).to eq(false)
       expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
       @registrant_2.earn_permit
       expect(@facility_1.administer_written_test(@registrant_2)).to eq(true)
       expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
-
       expect(@registrant_3.age).to eq(15)
       expect(@registrant_3.permit?).to eq(false)
       expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
@@ -104,7 +101,6 @@ RSpec.describe Facility do
       @facility_1.administer_written_test(@registrant_1)
       @registrant_2.earn_permit
       expect(@facility_1.administer_written_test(@registrant_2)).to eq(true)
-
       expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
       @registrant_3.earn_permit
       expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
@@ -128,7 +124,6 @@ RSpec.describe Facility do
       @facility_1.administer_written_test(@registrant_2)
       @facility_1.administer_road_test(@registrant_2)
       @facility_1.administer_road_test(@registrant_1)
-
       expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
       @facility_1.add_service('Renew License')
       expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(true)
