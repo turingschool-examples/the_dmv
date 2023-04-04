@@ -54,4 +54,14 @@ attr_reader :facilities
       @facilities << normalized_data
     end
   end
+
+  def add_mo_source(source)
+    source.each do |facility|
+      normalized_data = Hash.new
+      normalized_data[:name] = facility[:name]
+      normalized_data[:address] = "#{facility[:address1]}, #{facility[:city]}, #{facility[:state]}, #{facility[:zipcode]}"
+      normalized_data[:phone] = facility[:phone]
+      @facilities << normalized_data
+    end
+  end
 end
