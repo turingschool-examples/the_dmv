@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-RSpec.describe WaVehicleFactory do 
+RSpec.describe VehicleFactory do 
   before(:each) do 
-    @factory = WaVehicleFactory.new
+    @factory = VehicleFactory.new
     @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
   end
   describe '#initialize' do
     it "exists" do 
-      expect(@factory).to be_a(WaVehicleFactory)
+      expect(@factory).to be_a(VehicleFactory)
     end
 
     it 'has a vehicles attribute that is empty be default' do 
@@ -21,8 +21,9 @@ RSpec.describe WaVehicleFactory do
       expect(@factory.vehicles.length).not_to eq(0)
     end
 
-    it 'assigns attributes to vehicle class instances' do 
-      @factory.create_vehicles(@wa_ev_registrations)
+    it 'creates vehicle objects with attributes' do 
+      @factory.add_wa_ev_source(@wa_ev_registrations)
+      @factory.create_vehicles2
 
       first_car = @factory.vehicles[0]
 

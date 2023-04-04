@@ -25,6 +25,13 @@ RSpec.describe FacilityFactory do
       expect(first_fac[:address]).not_to be nil
       expect(first_fac[:phone]).not_to be nil
     end
+
+    it 'adds the data to facilities array' do 
+      @fac_factory.add_oregon_source(@or_dmv_office_locations)
+
+      expect(@fac_factory.facilities).to be_a(Array)
+      expect(@fac_factory.facilities.length).not_to eq(0)
+    end
   end
 
   describe '#add_ny_source' do 
@@ -37,6 +44,13 @@ RSpec.describe FacilityFactory do
       expect(first_fac[:address]).not_to be nil
       expect(first_fac[:phone]).not_to be nil
     end
+
+    it 'adds the data to facilities array' do 
+      @fac_factory.add_ny_source(@ny_dmv_office_locations)
+
+      expect(@fac_factory.facilities).to be_a(Array)
+      expect(@fac_factory.facilities.length).not_to eq(0)
+    end
   end
 
   describe '#add_mo_source' do 
@@ -48,6 +62,13 @@ RSpec.describe FacilityFactory do
       expect(first_fac[:name]).not_to be nil
       expect(first_fac[:address]).not_to be nil
       expect(first_fac[:phone]).not_to be nil
+    end
+
+    it 'adds the data to facilities array' do 
+      @fac_factory.add_mo_source(@mo_dmv_office_locations)
+
+      expect(@fac_factory.facilities).to be_a(Array)
+      expect(@fac_factory.facilities.length).not_to eq(0)
     end
   end
 
@@ -64,14 +85,6 @@ RSpec.describe FacilityFactory do
       expect(first_fac.services).to eq([])
       expect(first_fac.registered_vehicles).to eq([])
       expect(first_fac.collected_fees).to eq(0)
-    end
-
-    it 'adds new facilities to facilities attribute' do 
-      @fac_factory.add_oregon_source(@or_dmv_office_locations)
-      @fac_factory.create_facilities
-
-      expect(@fac_factory.facilities).to be_a(Array)
-      expect(@fac_factory.facilities.length).not_to eq(0)
     end
 
     it 'runs with any of the three above data sources' do 
