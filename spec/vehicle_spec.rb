@@ -6,8 +6,9 @@ RSpec.describe Vehicle do
     @bolt = Vehicle.new({ vin: "987654321abcdefgh", year: 2019, make: "Chevrolet", model: "Bolt", engine: :ev })
     @camaro = Vehicle.new({ vin: "1a2b3c4d5e6f", year: 1969, make: "Chevrolet", model: "Camaro", engine: :ice })
   end
+
   describe "#initialize" do
-    it "can initialize" do
+    it "can initialize a vehicle" do
       expect(@cruz).to be_an_instance_of(Vehicle)
       expect(@cruz.vin).to eq("123456789abcdefgh")
       expect(@cruz.year).to eq(2012)
@@ -15,6 +16,16 @@ RSpec.describe Vehicle do
       expect(@cruz.model).to eq("Cruz")
       expect(@cruz.engine).to eq(:ice)
       expect(@cruz.registration_date).to eq(nil)
+    end
+
+    it "can initialize a different vehicle" do
+      expect(@camaro).to be_an_instance_of(Vehicle)
+      expect(@camaro.vin).to eq("1a2b3c4d5e6f")
+      expect(@camaro.year).to eq(1969)
+      expect(@camaro.make).to eq("Chevrolet")
+      expect(@camaro.model).to eq("Camaro")
+      expect(@camaro.engine).to eq(:ice)
+      expect(@camaro.registration_date).to eq(nil)
     end
   end
 
