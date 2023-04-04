@@ -14,6 +14,10 @@ RSpec.describe Vehicle do
     it "exists" do 
       expect(@factory).to be_a(VehicleFactory)
     end
+   
+    it "is an array" do
+      expect(@factory.create_vehicles(@wa_ev_registrations)).to be_a(Array)
+    end
   end
 
   describe "creates vehicles" do
@@ -30,10 +34,10 @@ RSpec.describe Vehicle do
     end
 
     it "will get 'model' data from database" do
-      expect(@factory.create_vehicles(@wa_ev_registrations)[0].model).to eq("Fortwo Electric Driv")
+      expect(@factory.create_vehicles(@wa_ev_registrations)[0].model).to eq("Fortwo Electric Drive")
     end
-
   end
+end
 
   # :vin_1_10=>"WMEEJ9AA7E",
   # :dol_vehicle_id=>"349158127",
@@ -48,6 +52,3 @@ RSpec.describe Vehicle do
   # :sale_price=>"0",
   # :base_msrp=>"0",
   # :transaction_type=>"Registration Renewal",
-
-
-end
