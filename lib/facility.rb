@@ -65,6 +65,7 @@ class Facility
 
   def qualified_for_written_test(registrant)
     return true if registrant.permit == true && registrant.age >= 16
+    false
   end
 
   def administer_road_test(registrant)

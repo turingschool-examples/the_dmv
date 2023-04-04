@@ -94,10 +94,11 @@ RSpec.describe Facility do
 
     it 'checks if registrants are qualified for written test' do
       @facility_1.add_service('Written Test')
-    
-      expect(@registrant_1.permit?).to eq(true)
-      expect(@registrant_1.age).to eq(18)
+
       expect(@facility_1.qualified_for_written_test(@registrant_1)).to eq(true)
+      expect(@facility_1.qualified_for_written_test(@registrant_2)).to eq(false)
+      expect(@facility_1.qualified_for_written_test(@registrant_3)).to eq(false)
+
     end
     
     it 'can administer written tests and updates license data' do
@@ -105,7 +106,7 @@ RSpec.describe Facility do
       @facility_1.administer_written_test(@registrant_1)
       
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
-      expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
+      expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
   end
@@ -143,6 +144,7 @@ RSpec.describe Facility do
       @facility_1.administer_road_test(@registrant_1)
 
       expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(true)
+      expect(@facility_1.renew_drivers_license(@registrant_2)).to eq(false)
       expect(@facility_2.renew_drivers_license(@registrant_1)).to eq(false)
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
     end
