@@ -35,7 +35,6 @@ RSpec.describe FacilityFactory do
     expect(or_created_facilities[0]).to be_an_instance_of(Facility)
     expect(or_created_facilities).to be_an(Array)
     expect(or_created_facilities.count).to eq(59)
-    require 'pry'; binding.pry
   end
 
   it "creates facilities in New York from an external list of facilities" do
