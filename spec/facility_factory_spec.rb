@@ -31,6 +31,7 @@ RSpec.describe FacilityFactory do
     or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations 
     or_data = facility_factory.oregon_transform(or_dmv_office_locations)
     or_created_facilities = facility_factory.create_facility(or_data)
+    
     expect(or_created_facilities[0]).to be_an_instance_of(Facility)
     expect(or_created_facilities).to be_an(Array)
     expect(or_created_facilities.count).to eq(59)
@@ -45,6 +46,7 @@ RSpec.describe FacilityFactory do
     expect(ny_created_facilities[0]).to be_an_instance_of(Facility)
     expect(ny_created_facilities).to be_an(Array)
     expect(ny_created_facilities.count).to eq(170) 
+    require 'pry'; binding.pry
   end
 
   it "creates facilities in Missouri from an external list of facilities" do
