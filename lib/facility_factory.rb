@@ -11,7 +11,7 @@ class FacilityFactory
 
   def or_dmv(data)
     data.map do |facility|
-      #how does it differ from other state registrations?
+      #figure out how does it differ from other state registrations
       data[:name]
       data[:address]  
       data[:phone]
