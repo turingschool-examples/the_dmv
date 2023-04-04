@@ -22,7 +22,8 @@ RSpec.describe FacilityFactory do
     end
 
     it 'can create facility objects with attributes' do
-      @fac_factory.create_facilities(@or_dmv_office_locations)
+      @fac_factory.add_oregon_source(@or_dmv_office_locations)
+      @fac_factory.create_facilities2
       first_fac = @fac_factory.facilities[0]
 
       expect(first_fac).to be_a(Facility)

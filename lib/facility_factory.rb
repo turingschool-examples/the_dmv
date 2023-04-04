@@ -1,5 +1,6 @@
 class FacilityFactory
 attr_reader :facilities
+
   def initialize()
     @facilities = []
   end
@@ -31,5 +32,26 @@ attr_reader :facilities
     @facilities.map! do |facility|
       Facility.new(facility)
     end
+  end
+
+  def create_facilities2
+    @facilities.flatten!(2)
+    @facilities.each do |facility|
+      if facility[:phone] == nil
+        facility[:phone] = "no phone listed"
+      end
+    end
+    @facilities.map! do |facility|
+      Facility.new(facility)
+    end
+  end
+
+  def add_oregon_source(source)
+    source.each do |facility|
+    facility[:name] = facility[:title]
+    facility[:address] = facility[:location_1][:human_address]
+    facility[:phone] = facility[:phone_number]   
+    end
+    @facilities << source
   end
 end
