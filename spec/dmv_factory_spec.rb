@@ -25,7 +25,17 @@ RSpec.describe DMVFacility do
 
     dmv_factory.create_ny_dmv_office_locations(ny_dmv_data)
 
-    expect(dmv_factory.list_of_NY_Facilities[0]).to be_a Facility
+    expect(dmv_factory.list_of_NY_Facilities[2]).to be_a Facility
+  end
+
+  it 'can create mo facilities' do
+    dmv_factory = DMVFacility.new
+
+    mo_dmv_data = DmvDataService.new.mo_dmv_office_locations
+
+    dmv_factory.create_mo_dmv_office_locations(mo_dmv_data)
+
+    expect(dmv_factory.list_of_MO_Facilities[3]).to be_a Facility
   end
 
 end
