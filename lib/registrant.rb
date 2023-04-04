@@ -1,4 +1,4 @@
-class registrant
+class Registrant
   binding.pry
   attr_reader :name, :age, :permit, :license_data
 
@@ -15,5 +15,8 @@ class registrant
 
     def earn_permit
       permit = true
+    end
+    def license_data
+      @license_data
     end
 end
