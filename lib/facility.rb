@@ -91,10 +91,21 @@ class Facility
     end
   end 
 
+  def create_facility(state)
+    if state == "oregon"
+      create_facility_oregon(state)
+    elsif state == "new_york"
+      create_facility_ny(state)
+    elsif state == "missouri"
+      create_facility_missouri(state)
+    end
+  end
 
-  def create_facility_oregon(location)
+
+  def create_facility_oregon(state)
+    oregon = DmvDataService.new.or_dmv_office_locations
     new_facility_list1 = []
-    location.each do |station|
+    oregon.each do |station|
       facility_or_hash = {name: nil, address: nil, phone: nil}
       facility_or_hash[:name] = station[:title]
       facility_or_hash[:address] = JSON.parse(station[:location_1][:human_address]).values.join(" ")
@@ -105,9 +116,10 @@ class Facility
     new_facility_list1
   end
 
-  def create_facility_ny(location)
+  def create_facility_ny(state)
+    new_york = DmvDataService.new.ny_dmv_office_locations
     new_facility_list2 = []
-    location.each do |station|
+    new_york.each do |station|
       facility_ny_hash = {name: nil, address: nil, phone: nil}
       facility_ny_hash[:name] = station[:office_name]
       facility_ny_hash[:address] = station.values_at(:street_address_line_1, :city, :state, :zip_code).join(" ")
@@ -118,9 +130,10 @@ class Facility
     new_facility_list2
   end
 
-  def create_facility_missouri(location)
+  def create_facility_missouri(state)
+    missouri = DmvDataService.new.mo_dmv_office_locations
     new_facility_list3 = []
-    location.each do |station|
+    missouri.each do |station|
       facility_mo_hash = {name: nil, address: nil, phone: nil}
       facility_mo_hash[:name] = station[:name]
       facility_mo_hash[:address] = station.values_at(:address1, :city, :state, :zipcode).join(" ")
