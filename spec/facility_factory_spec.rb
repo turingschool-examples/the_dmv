@@ -8,13 +8,10 @@ RSpec.describe FacilityFactory do
       expect(facility).to be_a(FacilityFactory)
     end
 
-    xit "creates new facilities from oregon data set" do
+    it "creates new facilities from oregon data set" do
       facility = FacilityFactory.new
       oregon = DmvDataService.new.or_dmv_office_locations
-      
-      
       facilities = facility.create_facility(oregon)
-      
       
       expect(facilities[0].name).to eq("Albany DMV Office")
       expect(facilities[0].phone).to eq("541-967-2014")
@@ -24,11 +21,11 @@ RSpec.describe FacilityFactory do
       expect(facilities[0].zipcode).to eq("97321")
     end
     
-    xit "creates new facilities from new york data set" do
+    it "creates new facilities from new york data set" do
       facility = FacilityFactory.new
       new_york_facilities = DmvDataService.new.ny_dmv_office_locations
-
       ny_facilities = facility.create_facility(new_york_facilities)
+      
       expect(ny_facilities[0].name).to eq("SELDEN")
       expect(ny_facilities[0].address).to eq("407 SELDEN RD")
       expect(ny_facilities[0].zipcode).to eq("11784")
@@ -37,12 +34,17 @@ RSpec.describe FacilityFactory do
       expect(ny_facilities[2].address).to eq("39 MAIN STREET")
       expect(ny_facilities[3].zipcode).to eq("12072")
       expect(ny_facilities[6].name).to eq("OLEAN")
+      expect(ny_facilities[0].open_hour).to eq("8:00 AM")
+      expect(ny_facilities[0].closing_hour).to eq("6:00 PM")
+      expect(ny_facilities[2].open_hour).to eq(nil)
+      expect(ny_facilities[2].closing_hour).to eq(nil)
+      expect(ny_facilities[3].open_hour).to eq("24 HOURS")
+      expect(ny_facilities[3].closing_hour).to eq("24 HOURS")
     end
     
     it "creates new facilities from missouri dmv data set" do
       facility = FacilityFactory.new
       missouri_facilities = DmvDataService.new.mo_dmv_office_locations
-      
       mizzou_facilities = facility.create_facility(missouri_facilities)
 
       expect(mizzou_facilities[0].name).to eq("OAKVILLE")

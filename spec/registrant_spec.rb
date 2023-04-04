@@ -9,7 +9,7 @@ RSpec.describe Registrant do
       expect(registrant_1).to be_a(Registrant)
       expect(registrant_2).to be_a(Registrant)
     end
-
+    
     it "has attributes" do
       registrant_1 = Registrant.new('Bruce', 18, true )
       registrant_2 = Registrant.new('Penny', 15 )
@@ -21,7 +21,7 @@ RSpec.describe Registrant do
       expect(registrant_1.permit?).to eq(true)
       expect(registrant_2.permit?).to eq(false)
     end
-
+    
     it "has list of license data" do
       registrant_1 = Registrant.new('Bruce', 18, true )
       registrant_2 = Registrant.new('Penny', 15 )
@@ -29,7 +29,7 @@ RSpec.describe Registrant do
       expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       expect(registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
-
+    
     it "can earn_permit" do
       registrant_1 = Registrant.new('Bruce', 18, true )
       registrant_2 = Registrant.new('Penny', 15 )
@@ -39,6 +39,7 @@ RSpec.describe Registrant do
       expect(registrant_2.permit?).to eq(true)
     end
   end
+  
   describe "iteration 2 written, road tests, renew license" do
     it "license_data :written updated" do
       registrant_1 = Registrant.new('Bruce', 18, true )
@@ -76,14 +77,14 @@ RSpec.describe Registrant do
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
 
       facility_1.add_service('Written Test')
-      facility_1.administer_written_test(registrant_1)
-
+      
       registrant_3.earn_permit
       facility_1.administer_road_test(registrant_3)
       
       expect(registrant_3.license_data).to eq({:written => false, :license => false, :renewed => false})
       
       facility_1.add_service('Road Test')
+      facility_1.administer_written_test(registrant_1)
       facility_1.administer_road_test(registrant_1)
       
       expect(registrant_1.license_data).to eq({:written => true, :license => true, :renewed => false})
@@ -93,7 +94,7 @@ RSpec.describe Registrant do
 
       expect(registrant_2.license_data).to eq({:written => true, :license => true, :renewed => false})
     end
-
+    
     it "license_data :renewal updated" do
       registrant_1 = Registrant.new('Bruce', 18, true )
       registrant_2 = Registrant.new('Penny', 16 )
