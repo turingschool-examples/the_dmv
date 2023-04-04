@@ -2,6 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Dmv do
   before(:each) do
+    def initialize
     @dmv = Dmv.new
     @facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
     @facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
@@ -41,3 +42,4 @@ RSpec.describe Dmv do
     end
   end
 end
+
