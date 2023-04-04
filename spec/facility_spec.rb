@@ -6,7 +6,7 @@ RSpec.describe Facility do
                   {name: 'Albany DMV Office', 
                    address: '2242 Santiam Hwy SE Albany OR 97321', 
                    phone: '541-967-2014' })
-    
+                   
     @facility_2 = Facility.new(
                   {name: 'Ashland DMV Office', 
                    address: '600 Tolman Creek Rd Ashland OR 97520', 
