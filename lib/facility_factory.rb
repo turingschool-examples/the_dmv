@@ -47,7 +47,7 @@ attr_reader :facilities
 
   def add_oregon_source(source)
     source.each do |facility|
-      normalized_data = Hash.new(0)
+      normalized_data = Hash.new
       normalized_data[:name] = facility[:title]
       normalized_data[:address] = facility[:location_1][:human_address]
       normalized_data[:phone] = facility[:phone_number]   
