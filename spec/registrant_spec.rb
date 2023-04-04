@@ -7,16 +7,13 @@ RSpec.describe Registrant do
   end
 
   describe "Initialize" do
-
     it "exists" do
       expect(@registrant_1).to be_an_instance_of(Registrant)
       expect(@registrant_2).to be_an_instance_of(Registrant)
     end
-
   end
 
   describe "registrant data" do
-
     it "checks registrant_1 data" do
       expect(@registrant_1.name).to eq("Bruce")
       expect(@registrant_1.age).to eq(18)
@@ -30,19 +27,12 @@ RSpec.describe Registrant do
       expect(@registrant_2.permit?).to eq(false)
       expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
-
   end
 
   describe "earn permit method" do
-
     it "earns permit" do
       @registrant_2.earn_permit
       expect(@registrant_2.permit?).to eq(true)
     end
-
   end
-
-
-
-
 end
