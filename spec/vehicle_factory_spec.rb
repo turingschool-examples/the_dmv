@@ -3,6 +3,7 @@ require 'spec_helper'
 RSpec.describe VehicleFactory do
   it "exists" do
     factory = VehicleFactory.new
+    require 'pry'; binding.pry
     expect(factory).to be_an_instance_of(VehicleFactory)
   end
 
@@ -45,6 +46,8 @@ RSpec.describe VehicleFactory do
   end
 
   # it "can determine the most common make/model in a list" do
-  #   created_vehicles.models  
+  #   factory.created_vehicles.models  
+    # >>>expect(facility_1.fees_and_plates(cruz)).to eq(:regular)
+
   # end
 end
