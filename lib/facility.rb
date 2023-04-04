@@ -28,6 +28,16 @@ attr_reader   :services,
     end
   end
 
+  def collect_fees(vehicle)
+    if vehicle.antique?
+      @collected_fees += 25
+    elsif vehicle.electric_vehicle?
+      @collected_fees += 200
+    else
+      @collected_fees += 100
+    end
+  end
+  
   def change_registration_date(vehicle)
     vehicle.registration_date = Date.today
   end
@@ -42,15 +52,6 @@ attr_reader   :services,
     end
   end
 
-  def collect_fees(vehicle)
-    if vehicle.antique?
-      @collected_fees += 25
-    elsif vehicle.electric_vehicle?
-      @collected_fees += 200
-    else
-      @collected_fees += 100
-    end
-  end
 
   def administer_written_test(registrant)
     if @services.include?('Written Test') && qualified_for_written_test(registrant) == true
