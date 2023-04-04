@@ -13,17 +13,15 @@ RSpec.describe FacilityFactory do
 
   end
 
-  describe '#create OR Facility' do
+  describe '#create Facilities' do
     it 'can create OR facility object' do
       expect(@factory.facilities).to eq([])
+      
       @factory.create_facilities(@oregon_facilities)
-      require 'pry'; binding.pry
-      expect(@factory.facilities.first).to be_an_instance_of(Facility)
+
+      expect(@factory.determine_name(@oregon_facilities.first)).to eq("Albany DMV Office")
+      expect(@factory.determine_phone(@oregon_facilities.first)).to eq("541-967-2014")
     end
-
   end
-
-
-
 
 end
