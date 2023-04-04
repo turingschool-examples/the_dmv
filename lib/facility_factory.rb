@@ -28,7 +28,7 @@ class FacilityFactory
   def mo_transform(original_dataset)
     original_dataset.each do |original_facility|
       original_facility[:name] = original_facility[:name]
-      original_facility[:address] = original_facility[:address1]
+      original_facility[:address] = original_facility[:address1] +" "+ original_facility[:city] +" "+ original_facility[:state] +" "+ original_facility[:zipcode]
       original_facility[:phone] = original_facility[:phone]
     end
   end
