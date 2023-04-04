@@ -11,6 +11,9 @@ RSpec.describe FacilityFactory do
   describe '#initialize' do
     it 'exists' do
       expect(@factory).to be_a(FacilityFactory)
+      expect(@oregon_facilities.sample).to be_an(Hash)
+      expect(@new_york_facilities.sample).to be_an(Hash)
+      expect(@missouri_facilities.sample).to be_an(Hash)
     end
   end
 
@@ -19,7 +22,7 @@ RSpec.describe FacilityFactory do
     @new_york = @factory.create_facilities(@new_york_facilities, :NY)
     @missouri = @factory.create_facilities(@missouri_facilities, :MO)
   end
- 
+
   describe '#creates facilities' do
     it 'returns an array of facilities' do
       expect(@oregon).to be_an(Array)
