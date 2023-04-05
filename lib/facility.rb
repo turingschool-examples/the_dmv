@@ -6,14 +6,6 @@ class Facility
   attr_accessor :registered_vehicles,
                 :collected_fees
 
-  # def initialize(facility_details)
-  #   @name                 = facility_details[:name] or facility_details[:office_name]
-  #   @address              = facility_details[:address] or facility_details[:address1]
-  #   @phone                = facility_details[:phone] or facility_details[:public_phone_number]
-  #   @services             = []
-  #   @registered_vehicles  = []
-  #   @collected_fees       = 0
-  # end
   def initialize(facility_details)
     @name                 = facility_details[:name]
     @address              = facility_details[:address]
