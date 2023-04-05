@@ -20,6 +20,13 @@ class Facility
     @services
   end
 
+  def collection_fee_assignment
+    {
+    :ev => 200,
+    :antique => 25,
+    :regular => 100
+    }
+  end
 
   def register_vehicle(vehicle)
     if @services.include?('Vehicle Registration')
@@ -32,13 +39,6 @@ class Facility
     end
   end
 
-  def collection_fee_assignment
-    {
-    :ev => 200,
-    :antique => 25,
-    :regular => 100
-    }
-  end
 
   def administer_written_test(registrant)
     return false if !@services.include?('Written Test')
