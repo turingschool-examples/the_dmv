@@ -4,9 +4,9 @@ class FacilityFactory
       facility_details = format_facility(facility)
         Facility.new(
           {
-            name:         facility_details[:name],
-            address:      facility_details[:address],
-            phone:        facility_details[:phone]
+            name:      facility_details[:name],
+            address:   facility_details[:address],
+            phone:     facility_details[:phone]
           }
         )
       end
@@ -15,9 +15,9 @@ class FacilityFactory
 
   def format_facility(data)
     data = {
-        name:         format_name(data),
-        address:      format_address(data),
-        phone:        format_phone(data)
+        name:          format_name(data),
+        address:       format_address(data),
+        phone:         format_phone(data)
       }
   end
 

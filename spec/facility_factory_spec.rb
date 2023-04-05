@@ -26,9 +26,9 @@ RSpec.describe FacilityFactory do
         expect(ny_facilities[0].services).to eq([])
         expect(ny_facilities[0].collected_fees).to eq(0)
         
-        expect(ny_facilities[2].name).to eq("SARANAC LAKE")
-        expect(ny_facilities[2].phone).to eq("5188911748")
-        expect(ny_facilities[2].address).to eq("39 MAIN STREET, SARANAC LAKE, NY 12983")
+        expect(ny_facilities[2].name).to eq("ROCHESTER DOWNTOWN")
+        expect(ny_facilities[2].phone).to eq("5857531604")
+        expect(ny_facilities[2].address).to eq("200 E. MAIN STREET, ROCHESTER, NY 14604")
         expect(ny_facilities[2].registered_vehicles).to eq([])
         expect(ny_facilities[2].services).to eq([])
         expect(ny_facilities[2].collected_fees).to eq(0)
