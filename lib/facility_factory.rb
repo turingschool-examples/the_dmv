@@ -26,7 +26,7 @@ class FacilityFactory
       data[:office_name]
     elsif data[:state] == "MO"
       data[:name].rstrip 
-    elsif data[:wesbite].include?("ODOT")  
+    elsif data[:website].include?("ODOT")  
       data[:title]
     end
   end
@@ -36,9 +36,9 @@ class FacilityFactory
       "#{data[:street_address_line_1]}, #{data[:city]}, #{data[:state]} #{data[:zip_code]}"
     elsif data[:state] == "MO"
       "#{data[:address1]}, #{data[:city]}, #{data[:state]} #{data[:zipcode]}"
-    elsif data[:wesbite].include?("ODOT")  
-      address = JSON.parse(data[:location_][:human_address], {symbolize_names: true})
-      "#{data[:address1]}, #{data[:city]}, #{data[:state]} #{data[:zipcode]}"
+    elsif data[:website].include?("ODOT")  
+      parsed = JSON.parse(data[:location_1][:human_address], {symbolize_names: true})
+      "#{parsed[:address]}, #{parsed[:city]}, #{parsed[:state]} #{parsed[:zip]}"
     end
   end
 
@@ -47,7 +47,7 @@ class FacilityFactory
       data[:public_phone_number]
     elsif data[:state] == "MO"
       data[:phone]
-    elsif data[:wesbite].include?("ODOT")  
+    elsif data[:website].include?("ODOT")  
       data[:phone_number]
     end
   end
