@@ -5,10 +5,10 @@ class Facility
     @name = data[:name]
     @address = data[:address]
     @phone = data[:phone]
-    # @services = []
+    @services = []
   end
 
-  def add_services(service)
+  def add_service(service)
     @services << service
   end
 end
