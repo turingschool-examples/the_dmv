@@ -42,8 +42,15 @@ describe Facility do
     expect(facility_1.register_vehicle(cruz)).to eq([cruz])
   end
 
-  it 'creates registration data' do
+  it 'creates registration for cruz' do
     expect(cruz.registration_date).to eq(Date.today)
+    expect(cruz.plate_type).to eq(:regular)
+    expect(facility_1.registered_vehicles).to eq([cruz])
+    expect(facility_1.collected_fees).to eq(100)
+  end
+
+  it 'creates refistration for camaro' do
+
   end
 
 
