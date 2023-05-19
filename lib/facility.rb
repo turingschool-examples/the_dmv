@@ -21,10 +21,14 @@ class Facility
   end
 
   def register_vehicle(vehicle)
+    if @services.include?('Vehicle Registration')
     @registered_vehicles << vehicle
     vehicle.registered_date
     vehicle.assign_plate
     add_collected_fees(vehicle)
+    else
+      nil
+    end
   end
 
   def add_collected_fees(vehicle)
