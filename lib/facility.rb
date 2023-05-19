@@ -17,18 +17,21 @@ class Facility
   def register_vehicle(car)
     if car.electric_vehicle?
       car.plate_type = :ev
-      collected_fees(200) 
+      collect_cash(200) 
       @registered_vehicles << car 
     elsif car.antique? 
       car.plate_type = :antique
-      collected_fees(25)
+      collect_cash(25)
       @registered_vehicles << car 
     else
       car.plate_type = :regular
-      collected_fees(100) 
+      collect_cash(100) 
       @registered_vehicles << car 
     end
   end
 
-  
+  def collect_cash(cash) 
+    @collected_fees += cash
+  end
+
 end
