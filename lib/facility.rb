@@ -37,7 +37,7 @@ class Facility
         vehicle.registration_fee = 100
       end
     else
-      p "Service not available for this facility"
+      #p "Service not available for this facility"
     end
   end
 
@@ -48,4 +48,7 @@ class Facility
     end
     fee_total
   end
+
+  
+
 end
