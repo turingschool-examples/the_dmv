@@ -2,7 +2,6 @@ require 'spec_helper'
 
 
 RSpec.describe Facility do
-
   describe 'initialize' do
     it 'can initialize' do
       expect(@facility).to be_an_instance_of(Facility)
@@ -24,11 +23,19 @@ RSpec.describe Facility do
   end
 
   describe "services" do
-    it "can register vehicles" do 
+    it "can register vehicles and store them" do 
       @facility.register_vehicle(@cruz)
       @facility.register_vehicle(@bolt)
       @facility.register_vehicle(@camaro)
       expect(@facility.registered_vehicles).to eq([@cruz, @bolt, @camaro])      
     end
+
+    it "can collect fees and total them" do 
+      @facility.register_vehicle(@cruz)
+      @facility.register_vehicle(@bolt)
+      @facility.register_vehicle(@camaro)
+      expect(@facility.collected_fees).to eq(325) 
+    end 
+
   end 
 end
