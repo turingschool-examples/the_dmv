@@ -19,7 +19,7 @@ RSpec.describe Facility do
       expect(@facility_1.services).to eq([])
     end
     
-    it "Can hold registered vehicals" do 
+    it "Can hold registered vehicles" do 
       expect(@facility_1.registered_vehicles).to eq([])
       expect(@facility_2.registered_vehicles).to eq([])
     end
@@ -35,7 +35,7 @@ RSpec.describe Facility do
     it 'can register a vehicle, if it has the service avalible.' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
-      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+      camero = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
 
       expect(cruz.registration_date).to eq(nil) 
       expect(bolt.registration_date).to eq(nil)
@@ -48,14 +48,14 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(cruz)
 
       expect(@facility_1.registered_vehicles).to eq([cruz])
-      expect(cruz.registration_date).to be_a(integer)
+      expect(cruz.registration_date).to be_a(Integer)
 
       @facility_1.register_vehicle(bolt)
       
       expect(@facility_1.registered_vehicles).to eq([cruz, bolt])
       expect(bolt.registration_date).to eq(Date.today.year)
 
-      expect(@facility_2.register_vehicle(camaro)).to eq("Service not offered at this location.")
+      expect(@facility_2.register_vehicle(camero)).to eq("Service not offered at this location.")
       expect(camero.registration_date).to eq(nil)
     end
   end
