@@ -35,9 +35,7 @@ RSpec.describe Facility do
       expect(@cruz.registration_date).to eq(nil)
       expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
       expect(@cruz.registration_date).to be_a(Date)
-      expect(@cruz.registration_date.year).to eq(Date.today)
-      # expect(@cruz.registration_date.year).to eq(2023)
-      # expect(@cruz.registration_date.month).to eq(5)
+      expect(@cruz.registration_date).to eq(Date.today) #should be hard coded?
       expect(@cruz.plate_type).to eq(:regular)
       expect(@facility_1.register_vehicle(@camaro)).to eq([@cruz, @camaro])
       expect(@camaro.registration_date).to eq(Date.today)
@@ -47,7 +45,7 @@ RSpec.describe Facility do
       expect(@bolt.plate_type).to eq(:ev)
     end
 
-    xit 'cannot register a vehicle if service is not offered' do
+    it 'cannot register a vehicle if service is not offered' do
       expect(@facility_2.services.include?("Vehicle Registration")).to be false
       expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
       expect(@facility_2.registered_vehicles).to eq([])
@@ -55,7 +53,7 @@ RSpec.describe Facility do
     end
 
   describe '#registered vehicles' do
-    xit 'can return list of registered vehicles' do
+    it 'can return list of registered vehicles' do
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.registered_vehicles).to eq []
       @facility_1.register_vehicle(@cruz)
@@ -64,12 +62,11 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@bolt)
       expect(@facility_1.registered_vehicles).to eq [@cruz, @camaro, @bolt]
       expect(@facility_2.registered_vehicles).to eq []
-      #run test for empty array first, then add vehicles, register, and test again
     end
   end
 
   describe '#collected fees' do
-    xit 'can return total of fees collected' do
+    it 'can return total of fees collected' do
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.collected_fees).to eq 0
       @facility_1.register_vehicle(@cruz)
@@ -77,8 +74,6 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
       expect(@facility_1.collected_fees).to eq 325
-
-      #run test for 0 first, then add vehicles, register, and test again
     end
   end
   end

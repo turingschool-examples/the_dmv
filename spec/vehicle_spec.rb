@@ -35,6 +35,7 @@ RSpec.describe Vehicle do
     end
   end
   #Iteration 2
+  # Refactor so these changes happen from Facility class, and delete these tests later?
   describe '#register' do
     it 'updates registration date' do
       expect(@cruz.registration_date).to eq(nil)
