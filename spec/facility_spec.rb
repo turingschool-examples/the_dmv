@@ -53,12 +53,12 @@ RSpec.describe Facility do
     end 
 
     it "can renew license for qualified registrants" do 
-      expect(@facility.renew_drivers_license(@penny)).to eq("Penny does not qualify for renewal.")
-      expect(@bruce.license_data[:renewal]).to be false 
+      expect(@facility.renew_drivers_license(@penny)).to eq("Penny does not qualify for license renewal.")
+      expect(@bruce.license_data[:renewed]).to be false 
       @facility.administer_written_test(@bruce)
       @facility.administer_road_test(@bruce)
       @facility.renew_drivers_license(@bruce)
-      expect(@bruce.license_data[:renew]).to be true  
+      expect(@bruce.license_data[:renewed]).to be true  
     end 
   end 
 end

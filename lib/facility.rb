@@ -31,7 +31,7 @@ class Facility
   end
 
   def administer_written_test(person)
-    if person.age >= 16 && person.permit == true 
+    if person.age >= 16 && person.permit? 
       person.license_data[:written] = true 
     else 
       "#{person.name} does not qualify for written test."
@@ -46,6 +46,13 @@ class Facility
     end 
   end 
 
+  def renew_drivers_license(person)
+    if person.license_data[:drivers_license] == true 
+      person.license_data[:renewed] = true 
+    else 
+      "#{person.name} does not qualify for license renewal."
+    end 
+  end 
 
   def collect_cash(cash) 
     @collected_fees += cash
