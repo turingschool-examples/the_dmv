@@ -2,8 +2,6 @@ require 'spec_helper'
 
 RSpec.describe Vehicle do
   before(:each) do
-    @facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
-
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
@@ -37,28 +35,24 @@ RSpec.describe Vehicle do
     end
   end
   #Iteration 2
-  describe '#registration date' do
-    it 'updates when registered' do
-      @facility_1.add_service('Vehicle Registration')
+  describe '#register' do
+    it 'updates registration date' do
       expect(@cruz.registration_date).to eq(nil)
-      @facility_1.register_vehicle(@cruz)
+      @cruz.register
+      @camaro.register
+      @bolt.register
       expect(@cruz.registration_date.year).to eq(Date.today)
-      @facility_1.register_vehicle(@camaro)
       expect(@camaro.registration_date).to eq(Date.today)
-      @facility_1.register_vehicle(@bolt)
       expect(@bolt.registration_date).to eq(Date.today)
     end
-  end
-
-  describe '#plate type' do
-    it 'updates when registered' do
-      @facility_1.add_service('Vehicle Registration')
+    
+    it 'updates plate type' do
       expect(@cruz.plate_type).to eq(nil)
-      @facility_1.register_vehicle(@cruz)
+      @cruz.register
+      @camaro.register
+      @bolt.register
       expect(@cruz.plate_type).to eq(:regular)
-      @facility_1.register_vehicle(@camaro)
       expect(@camaro.plate_type).to eq(:antique)
-      @facility_1.register_vehicle(@bolt)
       expect(@bolt.plate_type).to eq(:ev)
     end
   end
