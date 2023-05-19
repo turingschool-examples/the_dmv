@@ -26,6 +26,8 @@ RSpec.describe Registrant do
       }
       expect(@registrant_1.license_data).to eq(data)
       expect(@registrant_1.permit?).to be true
+      expect(@registrant_2.permit?).to be false
+      expect(@registrant_2.license_data).to eq(data)
     end
   end
 end
