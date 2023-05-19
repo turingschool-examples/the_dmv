@@ -30,6 +30,15 @@ class Facility
     end
   end
 
+  def administer_written_test(person)
+    if person.age >= 16 && person.permit == true 
+      person.license_data[:written] = true 
+    else 
+      "#{person.name} does not qualify for written test."
+    end 
+  end 
+
+
   def collect_cash(cash) 
     @collected_fees += cash
   end
