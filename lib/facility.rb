@@ -26,6 +26,7 @@ class Facility
     vehicle.determine_plate_type
     @registered_vehicles << vehicle
     calculate_collected_fees(vehicle)
+    @registered_vehicles
   end
 
   # Vehicles 25 years old or older are considered antique and cost $25 to register
