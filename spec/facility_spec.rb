@@ -66,11 +66,25 @@ RSpec.describe Facility do
   end
 
   describe '#collected_fees' do
-    it 'collected_fees returns correct value' do
+    it 'collected_fees returns correct value for regular' do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
 
       expect(@facility_1.collected_fees).to eq(100)
+    end
+
+    it 'collected_fees returns correct value for antique' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@camaro)
+
+      expect(@facility_1.collected_fees).to eq(25)
+    end
+
+    it 'collected_fees returns correct value for ev' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@bolt)
+
+      expect(@facility_1.collected_fees).to eq(200)
     end
   end
 end
