@@ -2,8 +2,8 @@ require './lib/registrant'
 
 RSpec.describe Registrant do
     it 'is an instance of Registrant' do
-        registrant = Registrant.new
-        expect(Registrant.new).to be_a_instance_of(Registrant)
+        registrant = Registrant.new('Bruce', 18, true )
+        expect(registrant).to be_a_instance_of(Registrant)
     end
 
     it 'returns the data for a Registrant' do
