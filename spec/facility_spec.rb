@@ -50,7 +50,18 @@ RSpec.describe Facility do
     it 'register_vehicle registers the vehicle' do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
+
       expect(@cruz.registration_date).to eq(Date.today)
+    end
+  end
+
+  describe '#plate_type' do
+    it 'plate_type method returns correct plate' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
     end
   end
 end
