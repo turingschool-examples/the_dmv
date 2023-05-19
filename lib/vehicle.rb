@@ -44,6 +44,7 @@ class Vehicle
     end
   end
 
+
   # def registration_date
   #   if @vehicle.register_vehicle
   #     @registration_date = Date.today.year
