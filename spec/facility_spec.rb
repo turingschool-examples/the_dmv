@@ -1,6 +1,7 @@
 require 'spec_helper'
 require './lib/facility'
 require './lib/vehicle'
+require 'date'
 
 RSpec.describe Facility do
   before(:each) do
@@ -52,6 +53,20 @@ RSpec.describe Facility do
       @facility_1.collect_fees
       expect(@facility_1.registered_vehicles).to eq([@cruz])
       expect(@facility_1.collected_fees).to eq(100)
+    end
+  end
+
+  describe 'register more vehicles' do
+    it 'registers more vehicles' do
+      date = Date.today
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+      @camaro.add_registration_date(date)
+      @bolt.add_registration_date(date)
+      expect(@camaro.registration_date).to eq(date)
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@bolt.registration_date).to eq(date)
+      expect(@bolt.plate_type).to eq(:ev)
     end
   end
 
