@@ -3,7 +3,8 @@ class Facility
               :address,
               :phone,
               :services,
-              :registered_vehicles
+              :registered_vehicles,
+              :collected_fees
 
 
   #change to look for keyword instead of positional 
@@ -13,7 +14,7 @@ class Facility
     @phone = phone
     @services = []
     @registered_vehicles = []
-    @collected_fees
+    @collected_fees = 0
   end
 
   def add_service(service)
