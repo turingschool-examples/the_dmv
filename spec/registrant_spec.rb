@@ -39,3 +39,17 @@ RSpec.describe Registrant do
         registrant_2.earn_permit
         expect(registrant_2.permit?).to eq(true)
     end
+
+    it 'Can allow access to @license_data hash' do
+        registrant_1 = Registrant.new('Bruce', 18, true)
+        registrant_2 = Registrant.new('Penny', 15)
+
+        expect(registrant_1.license_data).to eq({
+            written: false,
+            license: false,
+            renewed: false
+        })
+
+        registrant_1.change_license_date[:written] = true
+    end
+end
