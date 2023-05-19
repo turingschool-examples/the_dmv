@@ -1,5 +1,10 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
+  attr_reader :name,
+              :address,
+              :phone,
+              :services,
+              :registered_vehicles,
+              :collected_fees
 
   def initialize(data)
     @name = data[:name]
@@ -16,6 +21,7 @@ class Facility
 
   def register_vehicle(vehicle)
     vehicle.registration_date = Date.today
+    vehicle.determine_plate_type
     @registered_vehicles << vehicle
   end
 end
