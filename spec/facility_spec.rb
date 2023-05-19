@@ -34,7 +34,7 @@ RSpec.describe Facility do
       
       expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       expect(registrant_1.permit?).to eq(true)
-      expect(facility_1.administer_written_test(registrant_1)).to eq(false)
+      expect(@facility_1.administer_written_test(registrant_1)).to eq(false)
     end
   end
   describe 'register vehicle' do

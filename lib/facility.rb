@@ -41,5 +41,12 @@ class Facility
       nil
     end
   end
-  
+  def administer_written_test(student)
+    if @services.include?('Written Test')
+      license_data[:written] = true
+      true
+    else
+      false
+    end
+  end
 end
