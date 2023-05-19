@@ -14,7 +14,20 @@ class Registrant
 
     def earn_permit
         @permit = true
-    end
+    end# Arrays
+    # - Ordered List 
+    # - Can hold any data type 
+    # - Uses square brackets
+    # - use index to acces elements
+    
+    
+    # Hashes
+    # - Unordered List 
+    # - Uses Key/value pairs 
+    # - Uses curly brackets
+    # - Can also hold any data type 
+    # - use keys to access values
+    # - keys will always be unique
   end
   
 
