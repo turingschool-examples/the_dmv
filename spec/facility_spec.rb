@@ -29,15 +29,14 @@ RSpec.describe Facility do
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
 
-    it 'has to have the service in order to do the function' do
+    it '#has to have the service in order to do the function' do
       registrant_1 = Registrant.new('Bruce', 18, true )
-      
       expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       expect(registrant_1.permit?).to eq(true)
       expect(@facility_1.administer_written_test(registrant_1)).to eq(false)
     end
   end
-  describe 'register vehicle' do
+  describe '#register vehicle' do
     it 'can register a vehicle' do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
@@ -53,6 +52,12 @@ RSpec.describe Facility do
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
     end
-    
+    describe '#administer_written_test' do
+      it 'can give written tests' do
+        registrant_1 = Registrant.new('Bruce', 18, true )
+        @facility_1.add_service('Written Test')
+        expect(@facility_1.administer_written_test(registrant_1)).to eq(true)
+      end
+    end
   end
 end
