@@ -50,5 +50,10 @@ RSpec.describe Facility do
 
       expect(@facility_1.registered_vehicles).to eq([@cruz])
     end
+
+    it "can assign a plate type" do
+      @facility_1.register_vehicle(@cruz)
+      expect(@cruz.plate_type).to eq(:regular)
+    end
   end
 end
