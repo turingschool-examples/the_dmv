@@ -30,7 +30,7 @@ RSpec.describe Facility do
   end
   #Iteration two
   describe '#register vehicle' do
-    xit 'can register vehicles' do
+    it 'can register vehicles' do
       @facility_1.add_service('Vehicle Registration')
       expect(@cruz.registration_date).to eq(nil)
       expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
@@ -47,14 +47,13 @@ RSpec.describe Facility do
       expect(@bolt.plate_type).to eq(:ev)
     end
 
-    xit 'cannot register a vehicle that is already registered' do
-      @facility_1.add_service('Vehicle Registration')
-      @facility_1.register_vehicle(@bolt)
+    xit 'cannot register a vehicle if service is not offered' do
+      expect(@facility_2.services.include?("Vehicle Registration")).to be false
       expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.collected_fees).to eq 0
     end
-    
+
   describe '#registered vehicles' do
     xit 'can return list of registered vehicles' do
       @facility_1.add_service('Vehicle Registration')
