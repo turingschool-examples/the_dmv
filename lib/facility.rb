@@ -22,18 +22,22 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    @registered_vehicles << vehicle
-    vehicle.registration_date = Date.today
-    #add plate type and registration fees
-    if vehicle.antique?
-      vehicle.plate_type = :antique
-      vehicle.registration_fee = 25
-    elsif vehicle.engine == :ev
-      vehicle.plate_type = :ev
-      vehicle.registration_fee = 200
+    if @services.include?("Vehicle Registration")
+      @registered_vehicles << vehicle
+      vehicle.registration_date = Date.today
+      #add plate type and registration fees
+      if vehicle.antique?
+        vehicle.plate_type = :antique
+        vehicle.registration_fee = 25
+      elsif vehicle.engine == :ev
+        vehicle.plate_type = :ev
+        vehicle.registration_fee = 200
+      else
+        vehicle.plate_type = :regular
+        vehicle.registration_fee = 100
+      end
     else
-      vehicle.plate_type = :regular
-      vehicle.registration_fee = 100
+      p "Service not available for this facility"
     end
   end
 
