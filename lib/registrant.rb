@@ -8,4 +8,12 @@ class Registrant
     @license_data = {:written => false, :drivers_license => false, :renewed => false}
     @permit = permit 
   end 
+
+  def permit?
+    @permit
+  end 
+
+  def earn_permit
+    @permit = true 
+  end 
 end 
