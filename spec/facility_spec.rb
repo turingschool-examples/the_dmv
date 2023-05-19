@@ -31,29 +31,25 @@ RSpec.describe Facility do
     end
   end
   
-  describe "#registered_vehicles" do
+  describe "#register_vehicles" do
     it "returns the registration date for the vehicle" do
-      @facility_1.register_vehicle(@cruz)
-      expect(@cruz.registration_date).to be_within(0.01).of(Time.now)
-    end
-    
-    it "has a list of registered vehicles" do
       expect(@facility_1.registered_vehicles).to eq []
-    end
-    
-    it "collects registration fees" do
       expect(@facility_1.collected_fees).to eq 0
-    end
-
-    it "can complete vehicle registration" do
+      
       @facility_1.register_vehicle(@cruz)
-
       expect(@facility_1.registered_vehicles).to eq([@cruz])
-    end
-
-    it "can assign a plate type" do
-      @facility_1.register_vehicle(@cruz)
+      expect(@cruz.registration_date).to be_within(0.01).of(Time.now)
       expect(@cruz.plate_type).to eq(:regular)
+    end
+  end
+
+  describe "#collected_fees" do
+    it "collects different fees for different vehicles" do
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@camaro)
+      expect(@facility_1.registered_vehicles).to eq [@cruz, @bolt, @camaro]
+      expect(@facility_1.collected_fees).to eq 325
     end
   end
 end
