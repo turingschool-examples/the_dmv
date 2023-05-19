@@ -8,6 +8,7 @@ RSpec.describe Facility do
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
   end
+  
   describe '#initialize' do
     it 'can initialize' do
       expect(@facility_1).to be_an_instance_of(Facility)
@@ -31,16 +32,23 @@ RSpec.describe Facility do
   end
   
   describe "#registered_vehicles" do
+    it "returns the registration date for the vehicle" do
+      @facility_1.register_vehicle(@cruz)
+      expect(@cruz.registration_date).to be_within(0.01).of(Time.now)
+    end
+    
     it "has a list of registered vehicles" do
       expect(@facility_1.registered_vehicles).to eq []
     end
     
-    it "can register vehicles and add them to collection" do
-      expect(@facility_1.register_vehicle(@cruz)).to eq(@cruz)
+    it "collects registration fees" do
+      expect(@facility_1.collected_fees).to eq 0
     end
-    
-    it "can report the registration date of the vehicle" do
-      expect(@cruz.registration_date).to eq()
+
+    it "can complete vehicle registration" do
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
     end
   end
 end
