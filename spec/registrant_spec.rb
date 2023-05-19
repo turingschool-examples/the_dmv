@@ -6,7 +6,7 @@ RSpec.describe Registrant do
         expect(registrant).to be_a_instance_of(Registrant)
     end
 
-    it 'returns the data for a Registrant' do
+    it 'returns attributes for a Registrant' do
         registrant_1 = Registrant.new('Bruce', 18, true )
         registrant_2 = Registrant.new('Penny', 15 )
 
@@ -21,7 +21,7 @@ RSpec.describe Registrant do
         expect(registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
 
-    it 'returns true once registrant earns a permit' do
+    it '#earn_permit' do
         registrant_2 = Registrant.new('Penny', 15 )
 
         registrant_2.earn_permit
