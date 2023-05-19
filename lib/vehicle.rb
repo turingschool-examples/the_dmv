@@ -3,8 +3,8 @@ class Vehicle
               :year,
               :make,
               :model,
-              :engine,
-              :registration_date
+              :engine
+attr_accessor :registration_date
 
   def initialize(vehicle_details)
     @engine = vehicle_details[:engine]
