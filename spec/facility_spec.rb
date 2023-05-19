@@ -94,4 +94,8 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data[:license]).to eq(true)
     end
   end
+
+  describe 'Iteration 2, Renew License' do
+    #
+  end
 end
