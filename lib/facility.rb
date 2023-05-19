@@ -52,13 +52,29 @@ class Facility
   def administer_written_test(registrant)
     if registrant.permit?
       if @services.include?("Written Test")
+        #p "Written service available"
         registrant.license_data[:written] = true
       else
-        #p "Service not available for this facility"
+        #p "Written Test not available for this facility"
         false
       end
     else
       #p "Permit required"
+      false
+    end
+  end
+
+  def administer_road_test(registrant)
+    if @services.include?("Road Test")
+      #p "Road Test service available"
+      if registrant.license_data[:written] == true
+        registrant.license_data[:license] = true
+      else
+        #p "Successful written test required"
+        false
+      end
+    else
+      #p "Road Test not available for this facility"
       false
     end
   end
