@@ -49,6 +49,13 @@ class Facility
     fee_total
   end
 
-  
+  def administer_written_test(registrant)
+    if @services.include?("Written Test")
+      registrant.license_data[:written] = true
+    else
+      p "Service not available for this facility"
+      false
+    end
+  end
 
 end
