@@ -38,6 +38,14 @@ class Facility
     end 
   end 
 
+  def administer_road_test(person)
+    if person.license_data[:written] == true 
+      person.license_data[:drivers_license] = true
+    else 
+      "#{person.name} does not qualify for road test."
+    end 
+  end 
+
 
   def collect_cash(cash) 
     @collected_fees += cash
