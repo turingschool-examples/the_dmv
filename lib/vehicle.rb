@@ -3,9 +3,10 @@ class Vehicle
               :year,
               :make,
               :model,
-              :engine
-attr_accessor :registration_date,
-              :plate_type
+              :engine,
+              :plate_type,
+              :registration_date
+            
 
   def initialize(vehicle_details)
     @engine = vehicle_details[:engine]
@@ -23,5 +24,13 @@ attr_accessor :registration_date,
 
   def electric_vehicle?
     @engine == :ev
+  end
+
+  def assign_plate(type)
+    @plate_type = type
+  end
+
+  def time_stamp
+    @registration_date = Time.now
   end
 end
