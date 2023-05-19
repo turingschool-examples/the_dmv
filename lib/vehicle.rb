@@ -24,5 +24,8 @@ class Vehicle
   def electric_vehicle?
     @engine == :ev
   end
-  
+
 end
+
+#todo = Add plate type
+#todo = fix reg date
