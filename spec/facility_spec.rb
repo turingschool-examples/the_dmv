@@ -46,6 +46,7 @@ RSpec.describe Facility do
       facility_1.register_vehicle(cruz)
 
       expect(facility_1.registered_vehicles).to contain_exactly(cruz)
+      expect(cruz.registration_date).to eq(Date.new(2023, 1, 12))
     end
   end
 
