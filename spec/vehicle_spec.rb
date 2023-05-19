@@ -15,6 +15,7 @@ RSpec.describe Vehicle do
       expect(@cruz.model).to eq('Cruz')
       expect(@cruz.engine).to eq(:ice)
       expect(@cruz.registration_date).to eq(nil)
+      expect(@cruz.plate_type).to eq(nil)
     end
   end
 
@@ -31,6 +32,29 @@ RSpec.describe Vehicle do
       expect(@cruz.electric_vehicle?).to eq(false)
       expect(@bolt.electric_vehicle?).to eq(true)
       expect(@camaro.electric_vehicle?).to eq(false)
+    end
+  end
+  #Iteration 2
+  # Refactor so these changes happen from Facility class, and delete these tests later?
+  describe '#register' do
+    it 'updates registration date' do
+      expect(@cruz.registration_date).to eq(nil)
+      @cruz.register
+      @camaro.register
+      @bolt.register
+      expect(@cruz.registration_date).to eq(Date.today)
+      expect(@camaro.registration_date).to eq(Date.today)
+      expect(@bolt.registration_date).to eq(Date.today)
+    end
+    
+    it 'updates plate type' do
+      expect(@cruz.plate_type).to eq(nil)
+      @cruz.register
+      @camaro.register
+      @bolt.register
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@bolt.plate_type).to eq(:ev)
     end
   end
 end
