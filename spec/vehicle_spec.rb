@@ -41,7 +41,7 @@ RSpec.describe Vehicle do
       @cruz.register
       @camaro.register
       @bolt.register
-      expect(@cruz.registration_date.year).to eq(Date.today)
+      expect(@cruz.registration_date).to eq(Date.today)
       expect(@camaro.registration_date).to eq(Date.today)
       expect(@bolt.registration_date).to eq(Date.today)
     end
