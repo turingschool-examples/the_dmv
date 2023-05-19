@@ -44,6 +44,7 @@ RSpec.describe Vehicle do
   describe "#time_stamp" do
     it "can toggle registration date" do
       expect(@cruz.time_stamp).to be_within(0.01).of(Time.now)
+      expect(@cruz.registration_date).to be_within(0.01).of(Time.now)
     end
   end
 end
