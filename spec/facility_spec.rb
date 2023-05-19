@@ -49,6 +49,7 @@ RSpec.describe Facility do
   describe '#collect fees' do
     it 'finds collected fees amount' do
       @facility_1.register_vehicle(@cruz)
+      @facility_1.collect_fees
       expect(@facility_1.registered_vehicles).to eq([@cruz])
       expect(@facility_1.collected_fees).to eq(100)
     end

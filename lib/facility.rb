@@ -20,7 +20,20 @@ class Facility
   end
 
   def register_vehicle(vehicle)
+    vehicle.add_plate_type
     @registered_vehicles << vehicle
+  end
+
+  def collect_fees
+    @registered_vehicles.each do |vehicle|
+      if vehicle.plate_type == :regular
+        @collected_fees += 100
+      elsif vehicle.plate_type == :antique
+        @collected_fees += 25
+      else
+        @collected_fees += 200
+      end
+    end
   end
 
 
