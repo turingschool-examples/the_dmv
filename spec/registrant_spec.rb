@@ -4,7 +4,7 @@ RSpec.describe Registrant do
     before(:each) do
         @registrant_1 = Registrant.new('Bruce', 18, true )
         @registrant_2 = Registrant.new('Penny', 15 )
-        registrant_3 = Registrant.new('Tucker', 15 )
+        @registrant_3 = Registrant.new('Tucker', 15 )
         @facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
         @facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
 
@@ -29,6 +29,15 @@ RSpec.describe Registrant do
             
             @registrant_2.earn_permit
             expect(@registrant_2.permit?).to eq(true)
+        end
+
+        it 'cannot #earn_permit if age < 16' do
+            @facility_1.add_service('Written Test')
+            expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
+
+            @registrant_3.earn_permit
+            expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
+            expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
         end
     end
 
