@@ -37,5 +37,12 @@ RSpec.describe Facility do
       expect(@facility.collected_fees).to eq(325) 
     end 
 
+    it "can administer written_test to qualified registrants" do 
+      expect(@facility.administer_written_test(@penny)).to eq("Penny does not qualify for written test.")
+      expect(@bruce.license_data[:written]).to be false 
+      @facility.administer_written_test(@bruce)
+      expect(@bruce.license_data[:written]).to be true 
+    end 
+
   end 
 end
