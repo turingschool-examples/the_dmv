@@ -32,6 +32,14 @@ RSpec.describe Facility do
     cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    
+    it 'can register a vehicle' do
+      expect(facility_1.add_service('Vehicle Registration')).to eq(["Vehicle Registration"])
+      expect(cruz.registration_date).to eq nil
+      expect(facility_1.registered_vehicles).to eq([])
+      expect(facility_1.collected_fees).to eq(0)
+
+    end
 
   end
 
