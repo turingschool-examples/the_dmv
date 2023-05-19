@@ -24,12 +24,15 @@ class Facility
     @registered_vehicles << vehicle
     vehicle.registration_date = Time.now
 
-    if vehicle.antique? == true
-      vehicle.plate_type = :antique
-    elsif vehicle.electric_vehicle? == true
-      vehicle.plate_type = :ev
+    if vehicle.antique? 
+      vehicle.plate_type = :antique 
+      @collected_fees += 25
+    elsif vehicle.electric_vehicle? 
+      vehicle.plate_type = :ev 
+      @collected_fees += 200
     else
-      vehicle.plate_type = :regular
+      vehicle.plate_type = :regular 
+      @collected_fees += 100
     end
   end
 
