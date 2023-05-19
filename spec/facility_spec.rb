@@ -117,4 +117,20 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(200)
     end
   end
+
+  describe 'registered_vehicles' do
+    it 'facility will have all three vehicles registered.' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+    end
+  end
+
+  describe 'facility.services' do
+    it 'facilities without "Vehicle Registration" service cannot register vehicles' do
+    end
+  end
 end
