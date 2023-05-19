@@ -1,5 +1,6 @@
 class Facility
-  attr_reader :facility_details, :services
+  attr_reader :facility_details, 
+              :services
 
   def initialize(facility_details)
     @facility_details = facility_details
