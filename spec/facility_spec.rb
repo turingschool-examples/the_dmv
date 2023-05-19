@@ -157,7 +157,7 @@ RSpec.describe Facility do
   end
 
   describe '#renew drivers license' do
-    xit 'cannot renew drivers license if service is not offered' do
+    it 'cannot renew drivers license if service is not offered' do
       @facility_1.add_service("Written Test")
       @facility_1.add_service("Road Test")
       @facility_1.administer_written_test(@registrant_1)
@@ -167,7 +167,7 @@ RSpec.describe Facility do
       expect(@facility_1.renew_drivers_license(@registrant_1)).to be true
     end
 
-    xit 'can only renew licenses that already exist' do
+    it 'can only renew licenses that already exist' do
       @facility_1.add_service("Written Test")
       @facility_1.add_service("Road Test")
       @facility_1.administer_written_test(@registrant_1)
@@ -186,7 +186,7 @@ RSpec.describe Facility do
       expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
 
-    xit 'renews registrant drivers license' do
+    it 'renews registrant drivers license' do
       @facility_1.add_service("Written Test")
       @facility_1.add_service("Road Test")
       @facility_1.administer_written_test(@registrant_1)
@@ -200,4 +200,5 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
       expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
     end
+  end
 end
