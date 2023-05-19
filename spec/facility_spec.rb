@@ -32,43 +32,52 @@ RSpec.describe Facility do
     end
   end
 
-  describe "#register_vehicles" do
-    it "can register a Vehicle if the Facility offers Vehicle Registration" do
+  describe "#register_vehicle" do
+    it "can register a Vehicle if it offers Vehicle Registration service" do
       expect(@facility_1.services).to eq([])
       
       @facility_1.add_service("Vehicle Registration")
       expect(@facility_1.services).to eq(["Vehicle Registration"])
       
+      # require "pry"; binding.pry
       expect(@facility_1.registered_vehicles).to eq([])
       
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.registered_vehicles).to eq([@cruz])
-      
-      @facility_1.register_vehicle(@bolt)
-      @facility_1.register_vehicle(@camaro)
-      expect(@facility_1.registered_vehicles).to eq([@cruz, @bolt, @camaro])
     end
     
-    it "cannot register a Vehicle if the Facility doesn't offer Vehicle Registration" do
+    it "cannot register a Vehicle if it does not offer Vehicle Registration service" do
       expect(@facility_1.services).to eq([])
-
-      @facility_1.add_service("Renew Drivers License")
-      expect(@facility_1.registered_vehicles).to eq(["Renew Drivers License"])
-
+      
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.registered_vehicles).to eq([])
+      
+      @facility_1.add_service("Renew Drivers License")
+      expect(@facility_1.services).to eq(["Renew Drivers License"])
+
+      @facility_1.register_vehicle(@camaro)
+      expect(@facility_1.registered_vehicles).to eq([])
     end
-
-    it "can assign a #registration_date to a Vehicle" do
+    
+    it "can only register Vehicle objects" do
       @facility_1.add_service("Vehicle Registration")
-
+      
+      registrant = Registrant.new("Ethan", 28)
+      
+      @facility_1.register_vehicle(registrant)
+      expect(@facility_1.registered_vehicles).to eq([])
+    end
+    
+    it "can assign a registration_date to a Vehicle" do
+      @facility_1.add_service("Vehicle Registration")
+      
       expect(@cruz.registration_date).to be nil
       
       @facility_1.register_vehicle(@cruz)
       expect(@cruz.registration_date).to be_a(Date)
     end
     
-    it "can assign a #plate_type to a Vehicle" do
+    it "can assign a plate_type to a Vehicle" do
       @facility_1.add_service("Vehicle Registration")
       
       expect(@cruz.plate_type).to be nil
@@ -93,7 +102,7 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(25)
     end
 
-    it "can collect $200 to register an :ev Vehicle" do
+    it "can collect a $200 fee to register an :ev Vehicle" do
       @facility_1.add_service("Vehicle Registration")
 
       expect(@facility_1.collected_fees).to eq(0)
@@ -103,7 +112,7 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(200)
     end
 
-    it "can collect $100 to register all other Vehicles" do
+    it "can collect a $100 fee to register all other Vehicles that are not :ev or :antique" do
       @facility_1.add_service("Vehicle Registration")
 
       expect(@facility_1.collected_fees).to eq(0)
@@ -113,24 +122,53 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(100)
     end
     
-    it "can collect money from all different kinds of Vehicle" do
+    it "can collect registration fees from all kinds of Vehicles" do
       @facility_1.add_service("Vehicle Registration")
-
-      expect(@facility_1.collected_fees).to eq(0)
 
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.collected_fees).to eq(100)
-
+      
       @facility_1.register_vehicle(@camaro)
       expect(@facility_1.collected_fees).to eq(125)
-
+      
       @facility_1.register_vehicle(@bolt)
       expect(@facility_1.collected_fees).to eq(325)
     end
   end
-
-  describe "#administer_written_test" do
-
+  
+  describe "#collect_fee" do
+    it "can collect a $25 fee from an :antique Vehicle" do
+      expect(@facility_1.collected_fees).to eq(0)
+      
+      @facility_1.collect_fee(@camaro)
+      
+      expect(@facility_1.collected_fees).to eq(25)
+    end
+    
+    it "can collect a $200 fee from an :ev Vehicle" do
+      expect(@facility_1.collected_fees).to eq(0)
+      
+      @facility_1.collect_fee(@bolt)
+      
+      expect(@facility_1.collected_fees).to eq(200)
+    end
+    
+    it "can collect a $100 fee from all other Vehicles that are not :ev or :antique" do
+      expect(@facility_1.collected_fees).to eq(0)
+      
+      @facility_1.collect_fee(@cruz)
+      
+      expect(@facility_1.collected_fees).to eq(100)
+    end
+    
+    it "can collect fees from all kinds of Vehicles" do
+      expect(@facility_1.collected_fees).to eq(0)
+      
+      @facility_1.collect_fee(@camaro)
+      @facility_1.collect_fee(@bolt)
+      @facility_1.collect_fee(@cruz)
+      expect(@facility_1.collected_fees).to eq(325)
+    end
   end
 
   describe "#administer_road_test" do
