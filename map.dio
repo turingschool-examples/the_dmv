@@ -1,50 +1,110 @@
 <mxfile host="65bd71144e">
     <diagram id="lex-oY93Ng12vMlhTwSb" name="Page-1">
-        <mxGraphModel dx="951" dy="1162" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1094" dy="1291" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="25" value="" style="group" vertex="1" connectable="0" parent="1">
-                    <mxGeometry x="10" y="20" width="410" height="410" as="geometry"/>
+                <mxCell id="2" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="10" y="20" width="290" height="290" as="geometry"/>
                 </mxCell>
-                <mxCell id="2" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="25">
-                    <mxGeometry width="410" height="410" as="geometry"/>
+                <mxCell id="5" value="&lt;font style=&quot;font-size: 25px;&quot;&gt;DMV&lt;/font&gt;" style="text;strokeColor=#006EAF;align=center;fillColor=#1ba1e2;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="30" width="130" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="5" value="&lt;font style=&quot;font-size: 25px;&quot;&gt;DMV&lt;/font&gt;" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="25">
-                    <mxGeometry x="65" width="280" height="50" as="geometry"/>
+                <mxCell id="7" value="Facilities" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;fontSize=25;" parent="1" vertex="1">
+                    <mxGeometry x="40.00000000000001" y="130" width="190.00000000000006" height="130" as="geometry"/>
                 </mxCell>
-                <mxCell id="7" value="Facilities" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;fontSize=25;" vertex="1" parent="25">
-                    <mxGeometry x="30" y="110" width="190" height="130" as="geometry"/>
+                <mxCell id="41" value="" style="group" vertex="1" connectable="0" parent="1">
+                    <mxGeometry x="425" y="520" width="310" height="340" as="geometry"/>
                 </mxCell>
-                <mxCell id="27" value="" style="group" vertex="1" connectable="0" parent="1">
-                    <mxGeometry x="20" y="540" width="470" height="270" as="geometry"/>
+                <mxCell id="28" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" parent="41" vertex="1">
+                    <mxGeometry width="310" height="340" as="geometry"/>
                 </mxCell>
-                <mxCell id="26" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="27">
-                    <mxGeometry width="470" height="270" as="geometry"/>
+                <mxCell id="29" value="Vehicle" style="text;strokeColor=#006EAF;align=center;fillColor=#1ba1e2;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=25;fontColor=#ffffff;" parent="41" vertex="1">
+                    <mxGeometry x="103.33333333333334" y="10.303030303030303" width="103.33333333333334" height="30.909090909090907" as="geometry"/>
                 </mxCell>
-                <mxCell id="6" value="Facility" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=25;" vertex="1" parent="27">
-                    <mxGeometry x="160" width="150" height="50" as="geometry"/>
+                <mxCell id="30" value="&lt;ul style=&quot;font-size: 18px;&quot;&gt;&lt;li&gt;vin&lt;/li&gt;&lt;li&gt;year&lt;/li&gt;&lt;li&gt;make&lt;/li&gt;&lt;li&gt;model&lt;/li&gt;&lt;li&gt;engine&lt;/li&gt;&lt;li&gt;plate type&lt;/li&gt;&lt;li&gt;reg_date&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;fontSize=25;" parent="41" vertex="1">
+                    <mxGeometry x="8.61" y="20.61" width="141.39" height="239.39" as="geometry"/>
                 </mxCell>
-                <mxCell id="22" value="&lt;ul&gt;&lt;li&gt;name&lt;/li&gt;&lt;li&gt;address&lt;/li&gt;&lt;li&gt;phone&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;fontSize=25;" vertex="1" parent="27">
-                    <mxGeometry x="20" y="60" width="170" height="160" as="geometry"/>
+                <mxCell id="31" value="antique?" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fontSize=18;" parent="41" vertex="1">
+                    <mxGeometry x="170.0011111111111" y="99.9951515151515" width="103.33333333333334" height="82.42424242424242" as="geometry"/>
                 </mxCell>
-                <mxCell id="23" value="Services" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;fontSize=25;" vertex="1" parent="27">
-                    <mxGeometry x="220" y="80" width="190" height="140" as="geometry"/>
+                <mxCell id="32" value="electric_vehicle?" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fontSize=18;" parent="41" vertex="1">
+                    <mxGeometry x="129.16666666666669" y="216.36363636363637" width="155" height="92.72727272727273" as="geometry"/>
                 </mxCell>
-                <mxCell id="28" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="1">
-                    <mxGeometry x="460" y="30" width="360" height="330" as="geometry"/>
+                <mxCell id="43" value="" style="group" vertex="1" connectable="0" parent="1">
+                    <mxGeometry x="20" y="670" width="360" height="260" as="geometry"/>
                 </mxCell>
-                <mxCell id="29" value="Vehicle" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=25;" vertex="1" parent="1">
-                    <mxGeometry x="580" y="40" width="120" height="30" as="geometry"/>
+                <mxCell id="35" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="43">
+                    <mxGeometry width="360" height="260" as="geometry"/>
                 </mxCell>
-                <mxCell id="30" value="&lt;ul style=&quot;font-size: 18px;&quot;&gt;&lt;li&gt;vin&lt;/li&gt;&lt;li&gt;year&lt;/li&gt;&lt;li&gt;make&lt;/li&gt;&lt;li&gt;model&lt;/li&gt;&lt;li&gt;engine&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;fontSize=25;" vertex="1" parent="1">
-                    <mxGeometry x="470" y="50" width="120" height="180" as="geometry"/>
+                <mxCell id="36" value="&lt;font style=&quot;font-size: 25px;&quot;&gt;Registrant&lt;/font&gt;" style="text;strokeColor=#006EAF;align=center;fillColor=#1ba1e2;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#ffffff;" vertex="1" parent="43">
+                    <mxGeometry x="140" y="6" width="160" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="31" value="antique?" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fontSize=18;" vertex="1" parent="1">
-                    <mxGeometry x="470" y="245" width="120" height="80" as="geometry"/>
+                <mxCell id="37" value="&lt;ul style=&quot;font-size: 18px;&quot;&gt;&lt;li&gt;name&lt;/li&gt;&lt;li&gt;age&lt;/li&gt;&lt;li&gt;permit&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;fontSize=25;" vertex="1" parent="43">
+                    <mxGeometry x="20" width="120" height="120" as="geometry"/>
                 </mxCell>
-                <mxCell id="32" value="electric_vehicle?" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fontSize=18;" vertex="1" parent="1">
-                    <mxGeometry x="610" y="240" width="180" height="90" as="geometry"/>
+                <mxCell id="42" value="" style="group" vertex="1" connectable="0" parent="43">
+                    <mxGeometry x="20" y="110" width="220" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="" style="rounded=1;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="42">
+                    <mxGeometry width="220" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" value="&lt;font style=&quot;font-size: 17px;&quot;&gt;license_data&lt;/font&gt;" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=25;" vertex="1" parent="42">
+                    <mxGeometry x="70" width="110" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" value="&lt;ul&gt;&lt;li&gt;written&lt;/li&gt;&lt;li&gt;license&lt;/li&gt;&lt;li&gt;renewed&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;fontSize=17;" vertex="1" parent="42">
+                    <mxGeometry y="20" width="140" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" value="" style="group" vertex="1" connectable="0" parent="1">
+                    <mxGeometry x="10" y="410" width="340" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="" style="group;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;container=0;" parent="44" vertex="1" connectable="0">
+                    <mxGeometry width="340" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" parent="44" vertex="1">
+                    <mxGeometry width="340" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Facility" style="text;strokeColor=#006EAF;align=center;fillColor=#1ba1e2;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=25;fontColor=#ffffff;" parent="44" vertex="1">
+                    <mxGeometry x="71.87371310912832" y="7.411764705882353" width="108.51063829787233" height="37.037037037037045" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="&lt;ul style=&quot;font-size: 18px;&quot;&gt;&lt;li&gt;name&lt;/li&gt;&lt;li&gt;address&lt;/li&gt;&lt;li&gt;phone&lt;/li&gt;&lt;li&gt;collected fees&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;fontSize=25;" parent="44" vertex="1">
+                    <mxGeometry x="14.47" y="44.44" width="165.53" height="145.56" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="&lt;font style=&quot;font-size: 17px;&quot;&gt;Services&lt;/font&gt;" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;fontSize=25;" parent="44" vertex="1">
+                    <mxGeometry x="190.00483870967741" y="19.999411764705883" width="104.07290322580644" height="70.15294117647059" as="geometry"/>
+                </mxCell>
+                <mxCell id="46" value="&lt;font style=&quot;font-size: 17px;&quot;&gt;registered vehicles&lt;/font&gt;" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;fontSize=25;" vertex="1" parent="44">
+                    <mxGeometry x="200" y="110" width="127.43" height="74.12" as="geometry"/>
+                </mxCell>
+                <mxCell id="45" value="" style="shape=flexArrow;endArrow=classic;html=1;fontSize=18;exitX=0.5;exitY=0;exitDx=0;exitDy=0;fillColor=#1ba1e2;strokeColor=#006EAF;" edge="1" parent="1" source="6" target="7">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="90" y="280" as="sourcePoint"/>
+                        <mxPoint x="140" y="230" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="53" value="" style="group" vertex="1" connectable="0" parent="1">
+                    <mxGeometry x="425" y="220" width="280" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="49" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=17;" vertex="1" parent="53">
+                    <mxGeometry x="10" width="270" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="50" value="&lt;font style=&quot;font-size: 25px;&quot;&gt;Services&lt;/font&gt;" style="text;strokeColor=#006EAF;align=center;fillColor=#1ba1e2;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=17;fontColor=#ffffff;" vertex="1" parent="53">
+                    <mxGeometry x="110" y="10" width="130" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="51" value="" style="shape=flexArrow;endArrow=classic;html=1;fontSize=25;exitX=0;exitY=0.5;exitDx=0;exitDy=0;fillColor=#1ba1e2;strokeColor=#006EAF;entryX=0.878;entryY=0.065;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="53" source="50" target="23">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="50" y="-20" as="sourcePoint"/>
+                        <mxPoint x="50" y="30" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="52" value="&lt;ul style=&quot;font-size: 18px;&quot;&gt;&lt;li&gt;register a vehicle&lt;/li&gt;&lt;li&gt;written test&lt;/li&gt;&lt;li&gt;road test&lt;/li&gt;&lt;li&gt;renew license&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;fontSize=25;" vertex="1" parent="53">
+                    <mxGeometry y="80" width="190" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="55" value="" style="shape=flexArrow;endArrow=classic;html=1;fontSize=18;exitX=0;exitY=0.25;exitDx=0;exitDy=0;fillColor=#1ba1e2;strokeColor=#006EAF;" edge="1" parent="1" source="29" target="46">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="330" y="460" as="sourcePoint"/>
+                        <mxPoint x="380" y="410" as="targetPoint"/>
+                    </mxGeometry>
                 </mxCell>
             </root>
         </mxGraphModel>
