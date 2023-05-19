@@ -34,5 +34,13 @@ RSpec.describe Facility do
     it "has a list of registered vehicles" do
       expect(@facility_1.registered_vehicles).to eq []
     end
+    
+    it "can register vehicles and add them to collection" do
+      expect(@facility_1.register_vehicle(@cruz)).to eq(@cruz)
+    end
+    
+    it "can report the registration date of the vehicle" do
+      expect(@cruz.registration_date).to eq()
+    end
   end
 end

@@ -1,22 +1,19 @@
 class Facility
-  attr_reader :facility_details, 
+  attr_reader :address,
+              :collected_fees,
+              :name,
+              :phone,
+              :registered_vehicles, 
               :services
 
-  def initialize(facility_details)
-    @facility_details = facility_details
+  def initialize(contact_info)
+    @contact_info = contact_info
+    @address = contact_info.fetch(:address)
+    @collected_fees = 0
+    @name = contact_info.fetch(:name)
+    @phone = contact_info.fetch(:phone)
+    @registered_vehicles = []
     @services = []
-  end
-
-  def name
-    @facility_details.fetch(:name)
-  end
-
-  def address
-    @facility_details.fetch(:address)
-  end
-
-  def phone
-    @facility_details.fetch(:phone)
   end
 
   def add_service(service)
