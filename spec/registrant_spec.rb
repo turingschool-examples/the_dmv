@@ -30,4 +30,16 @@ RSpec.describe Registrant do
       expect(@registrant_1.license_data[:renewed]).to be false 
     end 
   end 
+
+  describe "instance methods" do 
+    it "can return the current permit boolean" do 
+      expect(@registrant_1.permit?).to be true
+      expect(@registrant_2.permit?).to be false 
+    end 
+
+    it can "issue permits" do 
+      registrant_2.earn_permit
+      expect(registrant_2.permit?).to be true
+    end 
+  end 
 end 
