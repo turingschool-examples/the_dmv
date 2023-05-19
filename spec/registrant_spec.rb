@@ -28,4 +28,18 @@ RSpec.describe Registrant do
       expect(@registrant_2.license_data).to eq(written: false, license: false, renewed: false)
     end
   end
+
+  describe '#earn_permit' do
+    it 'earn_permit method starts false and changes to true' do
+      expect(@registrant_2.permit?).to eq(false)
+      @registrant_2.earn_permit
+      expect(@registrant_2.permit?).to eq(true)
+    end
+
+    it 'earn_permit method starts true and remains true' do
+      expect(@registrant_1.permit?).to eq(true)
+      @registrant_1.earn_permit
+      expect(@registrant_1.permit?).to eq(true)
+    end
+  end
 end
