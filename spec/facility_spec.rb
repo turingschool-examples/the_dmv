@@ -84,10 +84,10 @@ RSpec.describe Facility do
   end
 
   describe 'Iteration 2, Road Test' do
-    it '#administer_written_test only if service available' do
-      expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
-      @facility_1.add_service('New Drivers License')
-      expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
+    it '#administer_road_test only if service available' do
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
+      @facility_1.add_service('Road Test')
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
     end
   end
 end
