@@ -56,12 +56,28 @@ RSpec.describe Facility do
   end
 
   describe '#plate_type' do
-    it 'plate_type method returns correct plate' do
+    it 'plate_type method returns correct plate for regular' do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
 
       expect(@cruz.plate_type).to eq(:regular)
       expect(@facility_1.registered_vehicles).to eq([@cruz])
+    end
+
+    it 'plate_type method returns correct plate for antique' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@camaro)
+
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@facility_1.registered_vehicles).to eq([@camaro])
+    end
+
+    it 'plate_type method returns correct plate for ev' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@bolt)
+
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@facility_1.registered_vehicles).to eq([@bolt])
     end
   end
 
