@@ -11,4 +11,6 @@ class Facility
   def add_service(service)
     @services << service
   end
+
+  # make sure git is connected
 end
