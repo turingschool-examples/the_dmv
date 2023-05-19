@@ -45,4 +45,11 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([@cruz])
     end
   end
+
 end
+
+# describe '#add registration date' do
+#   it 'adds registrations date to vehicle' do
+#     expect(@cruz.registration_date).to eq(@registration_date)
+#   end
+# end

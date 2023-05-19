@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'date'
 
 RSpec.describe Vehicle do
   before(:each) do
@@ -31,6 +32,12 @@ RSpec.describe Vehicle do
       expect(@cruz.electric_vehicle?).to eq(false)
       expect(@bolt.electric_vehicle?).to eq(true)
       expect(@camaro.electric_vehicle?).to eq(false)
+    end
+  end
+
+  describe '#add registration date' do
+    it 'adds registrations date to vehicle' do
+      expect(@cruz.registration_date).to eq(Date)
     end
   end
 end
