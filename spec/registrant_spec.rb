@@ -14,8 +14,8 @@ RSpec.describe Registrant do
     end
     describe 'permit?' do
         it 'returns true if the registrant has permit' do
-            expect(@registrant_1.permit?).to permit(true)
-            expect(@registrant_2.permit?).to permit(false)
+            expect(@registrant_1.permit?).to eq(true)
+            expect(@registrant_2.permit?).to eq(false)
         end
     end
 
