@@ -1,6 +1,11 @@
 class Dmv
 
+attr_reader :name, :address, :phone, 
+            :facilities 
   def initialize
+    @name = name
+    @address = address
+    @phone = phone
     @facilities = []
   end
 
@@ -9,8 +14,12 @@ class Dmv
   end
 
   def facilities_offering_service(service)
-    @facilities.find do |facility|
-      facility.services.include?(service)
-    end
+    selected_facility = []
+    @facilities.each do |facility|
+     if facility.services.include?(service)
+        selected_facility.push(facility)
+      end
+    end   
+    selected_facility
   end
 end
