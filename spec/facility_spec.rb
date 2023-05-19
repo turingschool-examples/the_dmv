@@ -8,6 +8,7 @@ RSpec.describe Facility do
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
   end
+
   describe '#initialize' do
     it 'can initialize' do
       expect(@facility_1).to be_an_instance_of(Facility)
@@ -51,6 +52,7 @@ RSpec.describe Facility do
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.collected_fees).to eq 0
     end
+  end
 
   describe '#registered vehicles' do
     it 'can return list of registered vehicles' do
@@ -75,7 +77,6 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@bolt)
       expect(@facility_1.collected_fees).to eq 325
     end
-  end
   end
 
 end
