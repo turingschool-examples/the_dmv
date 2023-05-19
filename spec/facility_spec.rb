@@ -121,7 +121,7 @@ RSpec.describe Facility do
   end
 
   describe '#administer road test' do
-    xit 'cannot give test if service is not offered' do
+    it 'cannot give test if service is not offered' do
       @facility_1.add_service("Written Test")
       @facility_1.administer_written_test(@registrant_1)
       expect(@facility_1.administer_road_test(@registrant_1)).to be false
@@ -130,7 +130,7 @@ RSpec.describe Facility do
 
     end
 
-    xit 'can only give test if registrant has passed written test' do
+    it 'can only give test if registrant has passed written test' do
       @facility_1.add_service("Written Test")
       @facility_1.add_service("Road Test")
       expect(@facility_1.administer_road_test(@registrant_3)).to be false 
@@ -143,15 +143,61 @@ RSpec.describe Facility do
       expect(@facility_1.administer_road_test(@registrant_1)).to be true
     end
 
-    xit 'grants licenses to registrants' do
+    it 'grants licenses to registrants' do
       @facility_1.add_service("Written Test")
       @facility_1.add_service("Road Test")
       @facility_1.administer_written_test(@registrant_1)
       @facility_1.administer_road_test(@registrant_1)
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+      @registrant_2.earn_permit
       @facility_1.administer_written_test(@registrant_2)
       expect(@facility_1.administer_road_test(@registrant_2)).to be true
       expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
     end
   end
+
+  describe '#renew drivers license' do
+    xit 'cannot renew drivers license if service is not offered' do
+      @facility_1.add_service("Written Test")
+      @facility_1.add_service("Road Test")
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to be false
+      expect(@facility_1.add_service("Renew License")).to eq ["Written Test", "Road Test", "Renew License"]
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to be true
+    end
+
+    xit 'can only renew licenses that already exist' do
+      @facility_1.add_service("Written Test")
+      @facility_1.add_service("Road Test")
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+      @registrant_2.earn_permit
+      @facility_1.administer_written_test(@registrant_2)
+      @facility_1.add_service("Renew License")
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to be true
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@facility_1.renew_drivers_license(@registrant_3)).to be false
+      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+      expect(@facility_1.renew_drivers_license(@registrant_2)).to be false
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
+
+    xit 'renews registrant drivers license' do
+      @facility_1.add_service("Written Test")
+      @facility_1.add_service("Road Test")
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+      @registrant_2.earn_permit
+      @facility_1.administer_written_test(@registrant_2)
+      @facility_1.administer_road_test(@registrant_2)
+      @facility_1.add_service("Renew License")
+      @facility_1.renew_drivers_license(@registrant_1)
+      @facility_1.renew_drivers_license(@registrant_2)
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+    end
 end
