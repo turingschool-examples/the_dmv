@@ -12,5 +12,16 @@ class Registrant
     }
   end
 
+  def permit?
+    @permit
+  end
+
+  def license_data
+    @license_data
+  end
+
+  def earn_permit
+    @permit = true
+  end
 
 end
