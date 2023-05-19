@@ -33,12 +33,12 @@ class Facility
   # All other vehicles cost $100 to register
   # A vehicle’s plate_type should be set to :regular, :antique, or :ev upon successful registration.
   def calculate_collected_fees(vehicle)
-    @collected_fees = if vehicle.plate_type == :ev
-                        200
-                      elsif vehicle.plate_type == :antique
-                        25
-                      else
-                        100
-                      end
+    @collected_fees = @collected_fees += if vehicle.plate_type == :ev
+                                           200
+                                         elsif vehicle.plate_type == :antique
+                                           25
+                                         else
+                                           100
+                                         end
   end
 end
