@@ -58,7 +58,7 @@ class Facility
         false
       end
     else
-      p "Permit required"
+      #p "Permit required"
       false
     end
   end

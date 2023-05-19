@@ -14,6 +14,11 @@ class Registrant
     end
 
     def earn_permit 
-        @permit = true
+        if @age >= 16
+            @permit = true
+            #p "permit issued"
+        else
+            #p "permit not issued"
+        end
     end
 end
