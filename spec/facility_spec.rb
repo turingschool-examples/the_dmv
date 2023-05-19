@@ -87,61 +87,116 @@ RSpec.describe Facility do
   end
 
   describe "administer_written_test" do
-    it "can administer a written test ata a facility with the appropriate services" do
-      registrant_1 = Registrant.new('Bruce', 18, true )
-      registrant_2 = Registrant.new('Penny', 16 )
-      registrant_3 = Registrant.new('Tucker', 15 )
-      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
-      facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
-      #can't administer written test if facility does not have appropriate services
-      expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-      expect(registrant_1.permit?).to eq(true)
-      expect(facility_1.administer_written_test(registrant_1)).to eq(false)
-      expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-      #can't administer written test if registrant does not have a permit
-      facility_1.add_service('Written Test')
+    before(:each) do
+    @registrant_1 = Registrant.new('Bruce', 18, true )
+    @registrant_2 = Registrant.new('Penny', 16 )
+    @registrant_3 = Registrant.new('Tucker', 15 )
+    @facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+    @facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+    end
 
-      expect(registrant_2.age).to eq(16)
-      expect(registrant_2.permit?).to eq(false)
-      expect(facility_1.administer_written_test(registrant_2)).to eq(false)
+    it "can't administer written test if facility does not have appropriate services" do
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@registrant_1.permit?).to eq(true)
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
 
-      #can administer written test if facility has appropriate services and applicant is of age and has permit
-      registrant_2.earn_permit
+    it "can't administer written test if registrant does not have a permit" do
+      @facility_1.add_service('Written Test')
 
-      expect(facility_1.administer_written_test(registrant_2)).to eq(true)
-      expect(registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+      expect(@registrant_2.age).to eq(16)
+      expect(@registrant_2.permit?).to eq(false)
+      expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
+    end
 
-      # can't administer written test if registrant is not of age
-      expect(registrant_3.age).to eq(15)
-      expect(registrant_3.permit?).to eq(false)
-      expect(facility_1.administer_written_test(registrant_3)).to eq(false)
+    it "can administer written test if facility has appropriate services and applicant is of age and has permit" do
+      @facility_1.add_service('Written Test')
+      @registrant_2.earn_permit
 
-      registrant_3.earn_permit
-      expect(facility_1.administer_written_test(registrant_3)).to eq(false)
-      expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@facility_1.administer_written_test(@registrant_2)).to eq(true)
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
+
+    it "can't administer written test if registrant is not of age" do
+      expect(@registrant_3.age).to eq(15)
+      expect(@registrant_3.permit?).to eq(false)
+      expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
+
+      @registrant_3.earn_permit
+      expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
+      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
 
   describe "#administer_road_test" do
-    it "can administer a road test" do
-      registrant_1 = Registrant.new('Bruce', 18, true )
-      registrant_2 = Registrant.new('Penny', 16 )
-      registrant_3 = Registrant.new('Tucker', 15 )
-      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
-      facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
-# cant administer a road test if registrant is underage
-      expect(facility_1.administer_road_test(registrant_3)).to eq(false)
-      registrant_3.earn_permit
-      expect(facility_1.administer_road_test(registrant_3)).to eq(false)
-      expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-# can administer a road test if the facility offers the appropriate services
-      expect(facility_1.administer_road_test(registrant_1)).to eq(false)
-      facility_1.add_service('Written Test')
-      facility_1.add_service('Road Test')
-      expect(facility_1.administer_road_test(registrant_1)).to eq(true)
-      expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
-      expect(facility_1.administer_road_test(registrant_2)).to eq(true)
-      expect(registrant_2.license_data).to eq(true)
+    before(:each) do
+      @registrant_1 = Registrant.new('Bruce', 18, true )
+      @registrant_2 = Registrant.new('Penny', 16 )
+      @registrant_3 = Registrant.new('Tucker', 15 )
+      @facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      @facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+      @facility_1.add_service('Written Test')
+      @registrant_2.earn_permit
+      @registrant_2.earn_permit
+      @registrant_3.earn_permit
+      @facility_1.administer_written_test(@registrant_2)
+    end
+
+    it "can not administer a road test if registrant is underage" do
+      expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
+      @registrant_3.earn_permit
+      expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
+      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+
+    it "can administer a road test if the facility offers the appropriate services" do
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+
+      expect(@facility_1.administer_road_test(@registrant_2)).to eq(true)
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+    end
+  end
+
+  describe "#renew_drivers_license" do
+    before(:each) do
+      @registrant_1 = Registrant.new('Bruce', 18, true )
+      @registrant_2 = Registrant.new('Penny', 16 )
+      @registrant_3 = Registrant.new('Tucker', 15 )
+      @facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      @facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+      @registrant_2.earn_permit
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      @facility_1.administer_written_test(@registrant_2)
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_2)
+    end
+
+    it "can not renew drivers license if the facility does not offer the appropriate services" do
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
+      @facility_1.add_service('Renew License')
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(true)
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+    end
+
+    it "can not not renew a license to a registrant who is underage" do
+      @facility_1.add_service('Renew License')
+
+      expect(@facility_1.renew_drivers_license(@registrant_3)).to eq(false)
+      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+
+    it "can renew a drivers license if the registrant meets the requiremnts and the facility offers the appropriate services" do
+      @facility_1.add_service('Renew License')
+      expect(@facility_1.renew_drivers_license(@registrant_2)).to eq(true)
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
     end
   end
 end
