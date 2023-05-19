@@ -10,5 +10,8 @@ class Registrant
     @permit
   end
 
+  def license_data 
+    {:written=>false, :license=>false, :renewed=>false}
+  end
 
 end
