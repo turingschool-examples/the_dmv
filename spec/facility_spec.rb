@@ -82,4 +82,12 @@ RSpec.describe Facility do
       expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
   end
+
+  describe 'Iteration 2, Road Test' do
+    it '#administer_written_test only if service available' do
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
+      @facility_1.add_service('New Drivers License')
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
+    end
+  end
 end

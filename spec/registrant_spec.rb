@@ -26,7 +26,6 @@ RSpec.describe Registrant do
     describe '#earn_permit' do
         it "updates 'permit' to true" do
             expect(@registrant_2.permit?).to eq(false)
-            #require 'pry'; binding.pry
             @registrant_2.earn_permit
             expect(@registrant_2.permit?).to eq(true)
         end
