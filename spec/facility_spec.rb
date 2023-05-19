@@ -28,6 +28,14 @@ RSpec.describe Facility do
       @facility.add_service('Vehicle Registration')
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
+
+    it 'has to have the service in order to do the function' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      
+      expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(registrant_1.permit?).to eq(true)
+      expect(facility_1.administer_written_test(registrant_1)).to eq(false)
+    end
   end
   describe 'register vehicle' do
     it 'can register a vehicle' do

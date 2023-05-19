@@ -1,3 +1,5 @@
+require './lib/registrant'
+
 class Facility
   attr_reader :name, 
               :address, 
@@ -39,4 +41,5 @@ class Facility
       nil
     end
   end
+  
 end
