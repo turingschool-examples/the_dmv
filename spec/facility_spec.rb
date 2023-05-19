@@ -15,6 +15,7 @@ RSpec.describe Facility do
       expect(@facility_1.address).to eq('2242 Santiam Hwy SE Albany OR 97321')
       expect(@facility_1.phone).to eq('541-967-2014')
       expect(@facility_1.services).to eq([])
+      expect(@facility_2).to be_a(Facility)
     end
   end
 
@@ -24,6 +25,7 @@ RSpec.describe Facility do
       @facility_1.add_service('Vehicle Registration')
       expect(@cruz.registration_date).to eq(nil)
       expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_2.services).to eq([])
 
       expect(@facility_1.services).to eq(['Vehicle Registration'])
       @facility_1.register_vehicle(@cruz)
@@ -32,6 +34,8 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro])
       @facility_1.register_vehicle(@bolt)
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+      expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
+      expect(@facility_2.registered_vehicles).to eq([])
     end
 
     it 'can assign a registration date' do
@@ -42,6 +46,7 @@ RSpec.describe Facility do
       expect(@camaro.registered_date).to eq(Date.today)
       @facility_1.register_vehicle(@bolt)
       expect(@bolt.registered_date).to eq(Date.today)
+
     end
     
     it 'can assign a plate type based on type of vehicle' do
@@ -62,6 +67,7 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
       expect(@facility_1.collected_fees).to eq(325)
+      expect(@facility_2.collected_fees).to eq(0)
     end
   end
 end
