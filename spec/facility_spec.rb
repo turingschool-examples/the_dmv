@@ -44,5 +44,12 @@ RSpec.describe Facility do
       expect(@bruce.license_data[:written]).to be true 
     end 
 
+    it "can administer road test to qualified registrants" do 
+      expect(@facility.administer_road_test(@penny)).to eq("Penny does not qualify for road test.")
+      expect(@bruce.license_data[:drivers_license]).to be false 
+      @facility.administer_written_test(@bruce)
+      @facility.administer_road_test(@bruce)
+      expect(@bruce.license_data[:drivers_license]).to be true  
+    end 
   end 
 end
