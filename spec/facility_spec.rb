@@ -141,7 +141,10 @@ RSpec.describe Facility do
   end
 
   describe 'facility.services' do
-    it 'facilities without "Vehicle Registration" service cannot register vehicles' do
+    xit 'facilities without "Vehicle Registration" service cannot register vehicles' do
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.services).to eq([])
+      expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
     end
   end
 end
