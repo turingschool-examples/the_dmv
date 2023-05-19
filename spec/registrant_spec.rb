@@ -25,6 +25,14 @@ RSpec.describe Registrant do
     expect(@registrant_2.permit?).to eq(false)
   end
 
+  it "can check the license data" do
+    expected_hash = {
+      :written=>false, :license=>false, :renewed=>false}
+
+    expect(@registrant_1.license_data).to eq(expected_hash)
+    expect(@registrant_2.license_data).to eq(expected_hash)
+  end
+
   it "can earn a permit" do
     @registrant_2.earn_permit
 
