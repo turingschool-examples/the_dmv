@@ -30,4 +30,11 @@ RSpec.describe Registrant do
       expect(@registrant_2.license_data).to eq(data)
     end
   end
+
+  describe "#earn_permit" do
+    it "can toggle permit? if earn_permit" do
+      @registrant_2.earn_permit
+      expect(@registrant_2.permit?).to be true
+    end
+  end
 end
