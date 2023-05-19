@@ -25,6 +25,10 @@ RSpec.describe Facility do
 
   describe "services" do
     it "can register vehicles" do 
+      @facility.register_vehicle(@cruz)
+      @facility.register_vehicle(@bolt)
+      @facility.register_vehicle(@camaro)
+      expect(@facility.registered_vehicles).to eq([@cruz, @bolt, @camaro])      
     end
   end 
 end
