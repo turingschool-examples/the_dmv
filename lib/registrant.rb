@@ -8,6 +8,9 @@ class Registrant
       @permit = has_permit
     end
 
+    def permit?
+        @permit
+    end
   end
   
 
