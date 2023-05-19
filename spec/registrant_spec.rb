@@ -50,6 +50,18 @@ RSpec.describe Registrant do
             renewed: false
         })
 
-        registrant_1.change_license_date[:written] = true
+        registrant_1.change_license_date(:written, true)
+        expect(registrant_1.license_data).to eq({
+            written: true,
+            license: false,
+            renewed: false
+        })
+
+        registrant_1.change_license_date(:license, true)
+        expect(registrant_1.license_data).to eq({
+            written: true,
+            license: true,
+            renewed: false
+        })
     end
 end
