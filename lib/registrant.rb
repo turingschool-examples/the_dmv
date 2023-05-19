@@ -12,4 +12,7 @@ class Registrant
     }
   end
   
+  def permit?
+    @permit
+  end
 end
