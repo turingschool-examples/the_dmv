@@ -45,7 +45,7 @@ RSpec.describe Facility do
 
       facility_1.register_vehicle(cruz)
 
-      expect(facility_1.registered_vehicles).to contain_exactly(cruz)
+      expect(facility_1.registered_vehicles).to eq([cruz])
     end
 
     it 'registers a vehicle and sets the registration date' do
@@ -85,6 +85,9 @@ RSpec.describe Facility do
       bolt.get_registered
 
       expect(bolt.registration_date).to eq(Date.today)
+      expect(bolt.plate_type).to eq(:ev)
+      expect(facility_1.registered_vehicles).to eq([cruz, camaro, bolt])
+      expect(facility_1.collected_fees).to eq(325)
     end
 
 
