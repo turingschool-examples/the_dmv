@@ -47,11 +47,25 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([])
       expect(@facility_1.collected_fees).to eq(0)
     end
-    it 'register_vehicle registers the vehicle' do
+    it 'register_vehicle registers the vehicle for cruz' do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
 
       expect(@cruz.registration_date).to eq(Date.today)
+    end
+
+    it 'register_vehicle registers the vehicle for camaro' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@camaro)
+
+      expect(@camaro.registration_date).to eq(Date.today)
+    end
+
+    it 'register_vehicle registers the vehicle for bolt' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@bolt)
+
+      expect(@bolt.registration_date).to eq(Date.today)
     end
   end
 
