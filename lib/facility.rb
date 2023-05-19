@@ -1,6 +1,5 @@
-require "/vehicle"
-
 class Facility
+  
   attr_reader :name, :address, :phone, :services, :registered_vehicles
 
   def initialize(facility_hash)

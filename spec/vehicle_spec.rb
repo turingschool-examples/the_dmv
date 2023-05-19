@@ -33,4 +33,18 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  it 'Can add a registration date' do
+
+    expect(@cruz.registration_date).to eq(nil)
+    @cruz.add_registration
+    expect(@cruz.registration_date).to be_a(Integer)
+  end
+
+  it 'can add a plate type' do
+
+    expect(@cruz.plate_type).to eq(nil)
+    @cruz.add_plate(:regular)
+    expect(@cruz.plate_type).to eq(:regular)
+  end
 end
