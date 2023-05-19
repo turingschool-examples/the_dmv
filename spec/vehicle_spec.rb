@@ -36,8 +36,10 @@ RSpec.describe Vehicle do
   end
 
   describe '#add registration date' do
-    it 'adds registrations date to vehicle' do
-      expect(@cruz.registration_date).to eq(Date)
+    it 'adds registration date to vehicle' do
+      date = Date.today
+      @cruz.add_registration_date(date)
+      expect(@cruz.registration_date).to eq(date)
     end
   end
 end

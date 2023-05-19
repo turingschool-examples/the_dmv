@@ -26,5 +26,7 @@ class Vehicle
     @engine == :ev
   end
 
-
+  def add_registration_date(date)
+    @registration_date = date
+  end
 end
