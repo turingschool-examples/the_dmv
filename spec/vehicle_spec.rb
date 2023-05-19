@@ -2,9 +2,9 @@ require 'spec_helper'
 
 RSpec.describe Vehicle do
   before(:each) do
-    @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-    @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
-    @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    @cruz = Vehicle.new({ vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice })
+    @bolt = Vehicle.new({ vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev })
+    @camaro = Vehicle.new({ vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice })
   end
   describe '#initialize' do
     it 'can initialize' do
@@ -24,6 +24,9 @@ RSpec.describe Vehicle do
       expect(@bolt.antique?).to eq(false)
       expect(@camaro.antique?).to eq(true)
     end
+    it 'returns correct plate type for antique' do
+      expect(@camaro.determine_plate_type).to eq(:antique)
+    end
   end
 
   describe '#electric_vehicle?' do
@@ -31,6 +34,12 @@ RSpec.describe Vehicle do
       expect(@cruz.electric_vehicle?).to eq(false)
       expect(@bolt.electric_vehicle?).to eq(true)
       expect(@camaro.electric_vehicle?).to eq(false)
+    end
+    it 'returns correct plate for ev' do
+      expect(@bolt.determine_plate_type).to eq(:ev)
+    end
+    it 'returns correct plate type for neither ev nor antique' do
+      expect(@cruz.determine_plate_type).to eq(:regular)
     end
   end
 end
