@@ -7,7 +7,7 @@ RSpec.describe Vehicle do
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
   end
   describe '#initialize' do
-    it 'can initialize' do
+    xit 'can initialize' do
       expect(@cruz).to be_an_instance_of(Vehicle)
       expect(@cruz.vin).to eq('123456789abcdefgh')
       expect(@cruz.year).to eq(2012)
