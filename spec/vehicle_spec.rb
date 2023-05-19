@@ -34,3 +34,19 @@ RSpec.describe Vehicle do
     end
   end
 end
+
+RSpec.describe Vehicle do
+  before(:each) do
+    @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+    @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+    @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+  end
+
+  describe "Iteration 2" do
+    it 'should still have a nil registration date' do
+      expect(@cruz.registration_date).to eq nil
+    end
+
+    
+  end
+end
