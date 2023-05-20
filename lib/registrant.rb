@@ -23,4 +23,7 @@ class Registrant
     @license_data[:written] = true
   end
 
+  def takes_road_test
+    @license_data[:license] = true
+  end
 end
