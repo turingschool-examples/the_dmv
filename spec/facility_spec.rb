@@ -25,6 +25,7 @@ RSpec.describe Facility do
   end
 end
 
+# REGISTERING A VEHICLE
 RSpec.describe Facility do
   before(:each) do
     @facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
@@ -95,6 +96,41 @@ RSpec.describe Facility do
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.collected_fees).to eq(0)
     end
-    
+  end
+end
+
+# GETTING A DRIVERS LICENSE
+RSpec.describe Facility do
+  before(:each) do
+    @registrant_1 = Registrant.new('Bruce', 18, true )
+    @registrant_2 = Registrant.new('Penny', 16 )
+    @registrant_3 = Registrant.new('Tucker', 15 )
+    @facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+    @facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+  end
+  describe "Iteration 2" do
+    it 'Registrants and Facilities exist' do
+      expect(@registrant_1).to be_an_instance_of(Registrant) 
+      expect(@registrant_2).to be_an_instance_of(Registrant) 
+      expect(@registrant_3).to be_an_instance_of(Registrant)
+      expect(@facility_1).to be_an_instance_of(Facility)
+      expect(@facility_2).to be_an_instance_of(Facility)
+    end
+
+    it 'cannot administer written test without service' do
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@registrant_1.permit?).to eq true
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+
+    it 'now has Written Test Service and can administer test' do
+      @facility_1.add_service('Written Test')
+      expect(@facility_1.services).to eq(['Written Test'])
+
+      @facility_1.administer_written_test(@registrant_1)
+      require 'pry'; binding.pry
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
   end
 end
