@@ -27,11 +27,11 @@ class Facility
         vehicle.plate_type = :regular
         @collected_fees += 100
       end
+      vehicle.registration_date = Date.today.year
+      @registered_vehicles.push(vehicle)
     else
       nil
     end
 
-    vehicle.registration_date = Date.today.year
-    @registered_vehicles.push(vehicle)
   end
 end
