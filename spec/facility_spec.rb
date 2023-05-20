@@ -198,5 +198,17 @@ RSpec.describe Facility do
 
       expect(@registrant_2.license_data).to eq({ written: false, license: false, renewed: false })
     end
+
+    it 'earn_permit and administer_written_test' do
+      @facility_1.add_service('Written Test')
+      @registrant_2.earn_permit
+
+      expect(@registrant_2.permit?).to eq(true)
+      expect(@registrant_2.license_data).to eq({ written: false, license: false, renewed: false })
+
+      @facility_1.administer_written_test(@registrant_2)
+
+      expect(@registrant_2.license_data).to eq({ written: true, license: false, renewed: false })
+    end
   end
 end
