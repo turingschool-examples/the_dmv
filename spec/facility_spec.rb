@@ -345,6 +345,9 @@ RSpec.describe Facility do
       expect(@facility_1.renew_drivers_license(@registrant_1)).to be true
       expect(@facility_1.renew_drivers_license(@registrant_2)).to be false
       
+      @facility_1.renew_drivers_license(@registrant_1)
+      @facility_1.renew_drivers_license(@registrant_2)
+
       expect(@registrant_1.license_data[:renewed]).to be true
       expect(@registrant_2.license_data[:renewed]).to be false
     end
