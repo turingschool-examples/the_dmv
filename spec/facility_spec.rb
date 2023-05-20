@@ -35,10 +35,28 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#register vehicle' do
-   it 'can register a vehicle' do
+  describe '#register vehicle and collect fees' do
+   it 'can register a vehicle and collect fees' do
+     expect(@facility_1.registered_vehicles).to eq([]) 
+     expect(@facility_1.collected_fees).to eq(0)
+     
      expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
      expect(@facility_1.registered_vehicles).to eq([@cruz])
-   end
+     # expect(@facility_1.collected_fees).to eq(100)
+     
+     expect(@facility_1.register_vehicle(@camaro)).to eq([@cruz, @camaro])
+     expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro])
+     #  expect(@facility_1.collected_fees).to eq(125)
+      
+     expect(@facility_1.register_vehicle(@bolt)).to eq([@cruz, @camaro, @bolt])
+     expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+     # expect(@facility_1.collected_fees).to eq(325)
+
+      # expect(@facility_2.registered_vehicles).to eq([])
+      # expect(@facility_2.services).to eq([])
+      # expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
+      # expect(@facility_2.registered_vehicles).to eq([])
+      # expect(@facility_2.collected_fees).to eq(0)
+    end
   end
 end
