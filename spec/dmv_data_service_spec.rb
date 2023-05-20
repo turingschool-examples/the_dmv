@@ -9,19 +9,19 @@ RSpec.describe DmvDataService do
       expect(@dds).to be_an_instance_of(DmvDataService)
     end
   end
-
+  
   describe '#load_data' do
-    it 'can load data from a given source' do
-      source = 'https://data.oregon.gov/resource/rj4w-f4jc.json'
-      data_response = @dds.load_data(source)
-      expect(data_response).to be_an_instance_of(Array)
-      expect(data_response.size).to eq(59)
-    end
+  it 'can load data from a given source' do
+    source = 'https://data.oregon.gov/resource/rj4w-f4jc.json'
+    data_response = @dds.load_data(source)
+    expect(data_response).to be_an_instance_of(Array)
+    expect(data_response.size).to eq(59)
   end
+end
 
-  describe '#wa_ev_registrations' do
-    it 'can load washington ev registration data' do
-      expect(@dds.wa_ev_registrations.size).to eq(1000)
+describe '#wa_ev_registrations' do
+it 'can load washington ev registration data' do
+  expect(@dds.wa_ev_registrations.size).to eq(1000)
     end
   end
 
