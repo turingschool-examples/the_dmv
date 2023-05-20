@@ -45,6 +45,13 @@ class Facility
     end
   end
 
+  def renew_drivers_license(registrant)
+    if services.include?('Renew License') && registrant.license?
+      registrant.license_data[:renewed] = true
+    else false
+    end
+  end
+
   def add_collected_fees(vehicle)
     if vehicle.antique?
       @collected_fees += 25
