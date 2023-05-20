@@ -19,7 +19,12 @@ class Facility
     @services.push(service)
   end
 
-  def register_vehicle(new_car)
-    @registered_vehicles.push(new_car)
+  def register_vehicle(vehicle)
+    if @services.include?('Vehicle Registration')
+    @registered_vehicles.push(vehicle)
+    vehicle.date_registered
+    vehicle.plate_finder
+    else nil
+    end
   end
 end
