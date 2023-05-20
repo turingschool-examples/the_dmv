@@ -67,6 +67,34 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.collected_fees).to eq(100)
     end
+
+    it 'can register more vehicles' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+
+      # Here comes the 69 Camaro *vroom vroom*
+      @facility_1.register_vehicle(@camaro)
+      expect(@camaro.registration_date).to eq(Date.today)
+
+      # Here comes the EV Bolt *bzzZzzz*
+      @facility_1.register_vehicle(@bolt)
+      expect(@bolt.registration_date).to eq(Date.today)
+      expect(@bolt.plate_finder).to eq(:ev)
+
+      # There's 3 cars registered
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+
+      # The fees total after 3 vehicles have been registered
+      expect(@facility_1.collected_fees).to eq(325)
+    end
+
+    it 'can create a new facility with empty attributes' do
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.services).to eq([])
+      @facility_2.register_vehicle(@bolt)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
+    end
     
   end
 end
