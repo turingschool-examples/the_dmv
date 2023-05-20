@@ -38,6 +38,7 @@ class Facility
     if @services.include?("Written Test")
       if registrant.permit && registrant.age >= 16
         true
+        registrant.license_data[:written] = true
       else
         false
       end
