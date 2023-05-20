@@ -21,25 +21,23 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    if @services.include?("Vehicle Registration")
-      @registered_vehicles << vehicle
-      vehicle.time_stamp
-      
-      if vehicle.antique? 
-        vehicle.assign_plate(:antique) 
-        @collected_fees += 25
-      elsif vehicle.electric_vehicle? 
-        vehicle.assign_plate(:ev)
-        @collected_fees += 200
-      else
-        vehicle.assign_plate(:regular)
-        @collected_fees += 100
-      end
+    return nil unless @services.include?("Vehicle Registration")
+    
+    if vehicle.antique? 
+      vehicle.assign_plate(:antique) 
+      @collected_fees += 25
+    elsif vehicle.electric_vehicle? 
+      vehicle.assign_plate(:ev)
+      @collected_fees += 200
     else
-      nil
+      vehicle.assign_plate(:regular)
+      @collected_fees += 100
     end
+    
+    @registered_vehicles << vehicle
+    vehicle.time_stamp
   end
-
+ 
   def administer_written_test(registrant)
     return false unless @services.include?("Written Test")
     return false unless registrant.permit?
