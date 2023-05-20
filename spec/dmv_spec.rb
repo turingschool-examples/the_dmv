@@ -55,14 +55,11 @@ RSpec.describe Dmv do
   end
 
   describe "#add state offices" do
-    it "can create facility objects from other state offices" do
-      @dmv.add_facility(@or_dmv_office_locations)
-      @dmv.add_facility(@ny_dmv_office_locations)
-      @dmv.add_facility(@mo_dmv_office_locations)
-
-      expect(@dmv.facilities).to include(@or_dmv_office_locations)
-      expect(@dmv.facilities).to include(@ny_dmv_office_locations)
-      expect(@dmv.facilities).to include(@mo_dmv_office_locations)
+    it "can create facility objects from Oregon offices" do
+      expect(@dmv.create_facilities(@or_dmv_office_locations)).to be_an_instance_of(Array)
+      expect(@dmv.create_facilities(@or_dmv_office_locations).first.name).to eq(@facility_1.name)
+      expect(@dmv.create_facilities(@or_dmv_office_locations).first.address).to eq(@facility_1.address)
+      expect(@dmv.create_facilities(@or_dmv_office_locations).first.phone).to eq(@facility_1.phone)
     end
   end
 end
