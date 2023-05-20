@@ -26,5 +26,7 @@ RSpec.configure do |config|
     @facility_3 = Facility.new({name: 'Bend DMV Office', address: '63030 O B Riley Rd Bend OR 97701', phone: '541-388-6322'})
 
     @dmv = Dmv.new
+
+    @factory = VehicleFactory.new 
   end
 end
