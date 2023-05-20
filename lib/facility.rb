@@ -79,4 +79,20 @@ class Facility
     end
   end
 
+  def renew_drivers_license(registrant)
+    if @services.include?("Renew License")
+      #p "License renewal service available"
+      if registrant.license_data[:license] == true
+        #p "License renewed"
+        registrant.license_data[:renewed] = true
+      else
+        #p "No license found"
+        false
+      end
+    else
+      #p "No license renewal service available"
+      false
+    end
+  end
+
 end
