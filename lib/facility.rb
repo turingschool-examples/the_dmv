@@ -40,6 +40,14 @@ class Facility
     end
   end
 
+  def administer_written_test(registrant)
+    if registrant.permit? == true && registrant.age >= 16
+      true
+    else
+      false
+    end
+  end
+
 
 
 
