@@ -9,7 +9,7 @@ class Vehicle
               :register,
               :plate_type,
               :registration_date
-  attr_accessor :is_registered
+              :is_registered
 
   def initialize(vehicle_details)
     @vin = vehicle_details[:vin]
