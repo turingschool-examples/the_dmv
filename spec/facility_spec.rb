@@ -171,8 +171,64 @@ RSpec.describe Facility do
     end
   end
 
-  describe "#administer_road_test" do
+  describe "#administer_written_test" do
+    before(:each) do
+      @registrant_1 = Registrant.new("Bruce", 18, true)
+      @registrant_2 = Registrant.new("Penny", 16)
+      @registrant_3 = Registrant.new("Tucker", 15)
+    end
 
+    it "can administer a written test if it offers Written Test service" do
+      expect(@facility_1.services).to eq([])
+      expect(@registrant_1.license_data[:written]).to be false
+      
+      @facility_1.add_service("Written Test")
+      @facility_1.administer_written_test(@registrant_1)
+      
+      expect(@registrant_1.license_data[:written]).to be true
+      expect(@facility_1.administer_written_test(@registrant_1)).to be true
+      expect(@facility_1.services).to eq(["Written Test"])
+    end
+    
+    it "cannot administer a written test if does not offer Written Test service" do
+      expect(@facility_1.services).to eq([])
+      expect(@registrant_1.license_data[:written]).to be false
+      
+      @facility_1.administer_written_test(@registrant_1)
+      
+      expect(@registrant_1.license_data[:written]).to be false
+    end
+    
+    it "can only administer written tests to Registrants with permits and who are at least 16 years old" do
+      @facility_1.add_service("Written Test")
+      
+      expect(@registrant_1.permit?).to be true
+      expect(@registrant_1.age >= 16).to be true
+      expect(@registrant_2.permit?).to be false
+      expect(@registrant_2.age >= 16).to be true
+      expect(@registrant_3.permit?).to be false
+      expect(@registrant_3.age >= 16).to be false
+
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_written_test(@registrant_2)
+      @facility_1.administer_written_test(@registrant_3)
+
+      expect(@registrant_1.license_data[:written]).to be true
+      expect(@registrant_2.license_data[:written]).to be false
+      expect(@registrant_1.license_data[:written]).to be false
+
+      @registrant_2.earn_permit
+      @registrant_3.earn_permit
+      
+      expect(@registrant_2.permit?).to be true
+      expect(@registrant_3.permit?).to be true
+
+      @facility_1.administer_written_test(@registrant_2)
+      @facility_1.administer_written_test(@registrant_3)
+
+      expect(@registrant_2.license_data[:written]).to be true
+      expect(@registrant_1.license_data[:written]).to be false
+    end
   end
   
   describe "#renew_drivers_license" do
