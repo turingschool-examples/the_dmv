@@ -303,7 +303,57 @@ RSpec.describe Facility do
   end
 
   describe "#renew_drivers_license" do
+    before(:each) do
+      @facility_1.add_service("Written Test")
+      @facility_1.add_service("Road Test")
 
+      @registrant_1 = Registrant.new("Bruce", 18, true)
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+      
+      @registrant_2 = Registrant.new("Penny", 16)
+      @facility_1.administer_written_test(@registrant_2)
+      @facility_1.administer_road_test(@registrant_2)
+
+      @registrant_3 = Registrant.new("Tucker", 15)
+      @facility_1.administer_written_test(@registrant_3)
+      @facility_1.administer_road_test(@registrant_3)
+    end
+
+    it "can renew a license if it offers Renew License service" do
+      expect(@facility_1.services).to eq(["Written Test", "Road Test"])
+
+      @facility_1.add_service("Renew License")
+      
+      expect(@facility_1.services).to eq(["Written Test", "Road Test", "Renew License"])
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to be true
+    end
+    
+    it "cannot renew a license if it does not offer Renew License service" do
+      expect(@facility_1.services).to eq(["Written Test", "Road Test"])
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to be false
+    end
+    
+    it "can only renew a license for Registrants who passed their road test and earned a license" do
+      @facility_1.add_service("Renew License")
+
+      expect(@registrant_1.license_data[:license]).to be true
+      expect(@registrant_2.license_data[:license]).to be false
+      expect(@registrant_1.license_data[:renewed]).to be false
+      expect(@registrant_2.license_data[:renewed]).to be false
+      
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to be true
+      expect(@facility_1.renew_drivers_license(@registrant_2)).to be false
+      
+      expect(@registrant_1.license_data[:renewed]).to be true
+      expect(@registrant_2.license_data[:renewed]).to be false
+    end
+
+    it "can only renew a license for Registrant objects" do
+      @facility_1.add_service("Renew License")
+
+      expect(@facility_1.renew_drivers_license(@cruz)).to be false
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to be true
+    end
   end
-
 end
