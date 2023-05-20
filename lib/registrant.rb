@@ -24,6 +24,14 @@ class Registrant
   end
   
   def written?
-    @license_data[:written] = true
+    if permit?
+      @license_data[:written] = true
+    end
+  end
+
+  def license?
+    if written?
+      @license_data[:license] = true
+    end
   end
 end 
