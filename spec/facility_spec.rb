@@ -27,7 +27,7 @@ RSpec.describe Facility do
   describe '#register vehicles' do
     it 'can register vehicles' do
       @facility.register_vehicle(@cruz)
-      expect(@facility.registered_vehicles).to eq([@cruz])
+      # expect(@facility.registered_vehicles).to eq([@cruz])
     end
     it 'can update registration dates on vehicles' do
       @facility.register_vehicle(@cruz)
@@ -36,6 +36,11 @@ RSpec.describe Facility do
     it 'can assign plate type' do
       @facility.register_vehicle(@cruz)
       expect(@cruz.plate_type).to eq :regular
+    end
+    it 'can add registered vehicles to data' do
+      @facility.register_vehicle(@cruz)
+      expect(@facility.registered_vehicles).to eq([@cruz]) #didn't I add this test. note to self to look back
+      expect(@facility.collected_fees).to eq (100)
     end
   end
   describe '#collected fees' do
