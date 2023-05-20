@@ -30,7 +30,7 @@ RSpec.describe Facility do
     end
   end
 
-  #facility_1
+  #facility_1 & facility_2
   it 'can register vehicles' do
     expect(facility_1.add_service('Vehicle Registration')).to eq(["Vehicle Registration"])
     expect(cruz.registration_date).to eq(nil)
