@@ -39,6 +39,8 @@ class Facility
   end
 
   def administer_written_test(registrant)
+    return nil unless registrant.permit?
+
     registrant.administer_written_test
   end
 end
