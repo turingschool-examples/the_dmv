@@ -88,9 +88,48 @@ RSpec.describe Facility do
       expect(@facility_1.services).to eq(['Written Test'])
       expect(@facility_2.services).to eq([])
       expect(@facility_1.administer_written_test(registrant_1)).to eq(true)
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
       expect(@facility_1.administer_written_test(registrant_2)).to eq(false)
+      expect(registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       expect(@facility_1.administer_written_test(registrant_3)).to eq(true)
+      expect(registrant_3.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
       expect(@facility_1.administer_written_test(registrant_4)).to eq(false)
+      expect(registrant_4.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+  describe '#administer_road_test' do
+    it 'can check if service offered' do
+      registrant_1 = Registrant.new('Bruce', 18, true)
+      
+      expect(@facility_1.administer_road_test(registrant_1)).to eq(false)
+      expect(@facility_2.administer_road_test(registrant_1)).to eq(false)
+
+      @facility_1.add_service('Road Test')
+        
+      expect(@facility_1.administer_road_test(registrant_1)).to eq(true)
+      expect(@facility_2.administer_road_test(registrant_1)).to eq(false)
+    end
+    it 'checks if written test == true' do
+      registrant_1 = Registrant.new('Bruce', 18, true)
+      registrant_3 = Registrant.new('Timmy', 16, true)
+
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Written Test')
+
+      @facility_1.administer_written_test(registrant_1)
+
+      expect(@facility_1.administer_road_test(registrant_1)).to eq(true)
+      expect(@facility_1.administer_road_test(registrant_2)).to eq(false)
+    end
+    it 'sets Registrant @license == true if written == true' do
+      registrant_1 = Registrant.new('Bruce', 18, true)
+      registrant_3 = Registrant.new('Timmy', 16, true)
+      
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(registrant_1)
+      
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+      expect(registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
 end
