@@ -39,7 +39,7 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    return nil unless registrant.permit? && registrant.age > 15
+    return nil unless registrant.permit? && registrant.age > 15 && @services.include?('Written Test')
 
     registrant.administer_written_test
   end
