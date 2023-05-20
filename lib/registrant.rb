@@ -21,7 +21,7 @@ class Registrant
         @permit = true
     end
 
-    def change_license_date(key, value)
+    def change_license_data(key, value)
         @license_data[key] = value
     end
 end
