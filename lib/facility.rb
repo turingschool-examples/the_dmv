@@ -15,13 +15,12 @@ class Facility
     @services = []
     @collected_fees = 0
     @registered_vehicles = []
-
   end
 
   def add_service(service)
     @services.push(service)
   end
-  
+
   def register_vehicle(vehicle)
     if @services.include?('Vehicle Registration')
       @registered_vehicles.push(vehicle)
@@ -41,6 +40,7 @@ class Facility
       nil
     end
   end
+
   def administer_written_test(student)
     if @services.include?('Written Test') && student.age >= 16 && student.permit == true
       student.license_data[:written] = true
@@ -48,10 +48,27 @@ class Facility
     else
       false
     end
-
   end
-#The administer_written_test works differently from the register_vehicle method by
-#The data type passing through administer_written_test uses an attr_accessor to change the assigned value
-#The register_vehicle method only uses an attr_reader, so a method within vehicle.rb had to be made to work around this function
 
+  def administer_road_test(student)
+    if @services.include?('Road Test') && student.license_data[:written] == true
+      student.license_data[:license] = true
+      true
+    else
+      false
+    end
+  end
+
+  def renew_drivers_license(driver)
+    if @services.include?('Renew License') && driver.license_data[:license] == true
+      driver.license_data[:renewed] = true
+      true
+    else
+      false
+    end
+  end
+
+#The administer_x_tests/renew tests work differently from the register_vehicle method by one major factor
+#The data type passing through administer_x_tests uses an attr_accessor to change the assigned value in the hash
+#The register_vehicle method only uses an attr_reader, so a method within vehicle.rb had to be made to work around this function
 end
