@@ -23,14 +23,17 @@ class Facility
     return "Service not available at selected location." unless services.include?("Vehicle Registration")
     if car.electric_vehicle?
       car.plate_type = :ev
+      car.registration_date = Date.today.strftime("%Y-%m-%d")
       collect_cash(200) 
       @registered_vehicles << car 
     elsif car.antique? 
       car.plate_type = :antique
+      car.registration_date = Date.today.strftime("%Y-%m-%d")
       collect_cash(25)
       @registered_vehicles << car 
     else
       car.plate_type = :regular
+      car.registration_date = Date.today.strftime("%Y-%m-%d")
       collect_cash(100) 
       @registered_vehicles << car 
     end
