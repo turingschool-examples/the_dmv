@@ -1,9 +1,10 @@
 class VehicleFactory
 
   def initialize
-    
+
   end
 
+  # Only works with Washington EV car data
   def create_vehicles(vehicle_data)
     vehicle_data.map do |vehicle|
       Vehicle.new({
