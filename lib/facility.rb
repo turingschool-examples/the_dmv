@@ -19,6 +19,14 @@ class Facility
   def register_vehicle(data)
     @registered_vehicles.push(data)
     data.registration_date = Date.today
+    if data.antique? 
+      @plate_type = :antique
+    elsif
+        data.electric_vehicle? 
+        @plate_type = :ev
+      else
+        data.plate_type = :regular
+    end
   end
 
   def add_service(service)

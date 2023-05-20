@@ -33,6 +33,10 @@ RSpec.describe Facility do
       @facility.register_vehicle(@cruz)
       expect(@cruz.registration_date).to eq(Date.today)
     end
+    it 'can assign plate type' do
+      @facility.register_vehicle(@cruz)
+      expect(@cruz.plate_type).to eq :regular
+    end
   end
   describe '#collected fees' do
     it 'keeps track of collected fees' do
