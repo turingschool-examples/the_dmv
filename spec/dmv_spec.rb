@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 RSpec.describe Dmv do
-
   describe '#initialize' do
     it 'can initialize' do
       expect(@dmv).to be_an_instance_of(Dmv)
