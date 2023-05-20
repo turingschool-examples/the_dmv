@@ -30,6 +30,7 @@ RSpec.describe Facility do
     end
   end
 
+  #facility_1
   it 'can register vehicles' do
     expect(facility_1.add_service('Vehicle Registration')).to eq(["Vehicle Registration"])
     expect(cruz.registration_date).to eq(nil)
@@ -40,5 +41,6 @@ RSpec.describe Facility do
     expect(cruz.plate_type).to eq(:regular)
     expect(facility_1.registered_vehicles).to eq([cruz])
     expect(facility_1.collected_fees).to eq(100)
+    facility_1.register_vehicle(camaro)
   end
 end
