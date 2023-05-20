@@ -1,6 +1,3 @@
-require 'faraday'
-require 'json'
-
 class DmvDataService
 
   def load_data(source)

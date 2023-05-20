@@ -1,10 +1,15 @@
 require 'pry'
+require 'date'
+require 'faraday'
+require 'json'
+
 require './lib/dmv'
 require './lib/facility'
 require './lib/vehicle'
 require './lib/dmv_data_service'
 require './lib/registrant'
-require 'date'
+require './lib/vehicle_factory'
+
 
 RSpec.configure do |config|
   config.before(:each) do
