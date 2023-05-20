@@ -7,7 +7,7 @@ describe "Registrant" do
     @registrant_2 = Registrant.new("Penny", 15)
   end
 
-  context "#initialize" do
+  describe "#initialize" do
     it "exists" do
       expect(@registrant_1).to be_a(Registrant)
       expect(@registrant_2).to be_a(Registrant)
@@ -44,7 +44,7 @@ describe "Registrant" do
     end
   end
 
-  context "#permit?" do
+  describe "#permit?" do
     it "can start with a permit" do
       expect(@registrant_1.permit?).to be true
     end
@@ -54,13 +54,43 @@ describe "Registrant" do
     end
   end
   
-  context "#earn_permit" do
+  describe "#earn_permit" do
     it "can earn a permit" do
       expect(@registrant_2.permit?).to be false
 
       @registrant_2.earn_permit
 
       expect(@registrant_2.permit?).to be true
+    end
+  end
+
+  describe "#pass_written_test" do
+    it "can pass a written test" do
+      expect(@registrant_1.license_data[:written]).to be false
+      
+      @registrant_1.pass_written_test
+      
+      expect(@registrant_1.license_data[:written]).to be true
+    end
+  end
+  
+  describe "#earn_license" do
+    it "can earn a license" do
+      expect(@registrant_1.license_data[:license]).to be false
+      
+      @registrant_1.earn_license
+      
+      expect(@registrant_1.license_data[:license]).to be true
+    end
+  end
+
+  describe "#renew_license" do
+    it "can renew a license" do
+      expect(@registrant_1.license_data[:renewed]).to be false
+      
+      @registrant_1.renew_license
+      
+      expect(@registrant_1.license_data[:renewed]).to be true
     end
   end
 end

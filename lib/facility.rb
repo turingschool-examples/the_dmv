@@ -3,8 +3,8 @@ class Facility
               :address, 
               :phone, 
               :services, 
-              :registered_vehicles,
-              :collected_fees
+              :collected_fees,
+              :registered_vehicles
 
   def initialize(facility_details)
     @name                = facility_details[:name]
@@ -35,6 +35,42 @@ class Facility
       @collected_fees += 200
     else
       @collected_fees += 100
+    end
+  end
+
+  def administer_written_test(registrant)
+    return false if !@services.include?("Written Test")
+    return false if !registrant.is_a?(Registrant)
+    
+    if registrant.age >= 16 && registrant.permit? == true
+      registrant.pass_written_test
+      true
+    else
+      false
+    end
+  end
+  
+  def administer_road_test(registrant)
+    return false if !@services.include?("Road Test")
+    return false if !registrant.is_a?(Registrant)
+    
+    if registrant.license_data[:written] == true
+      registrant.earn_license
+      true
+    else
+      false
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    return false if !@services.include?("Renew License")
+    return false if !registrant.is_a?(Registrant)
+
+    if registrant.license_data[:license] == true
+      registrant.renew_license
+      true
+    else
+      false
     end
   end
 end
