@@ -90,6 +90,7 @@ RSpec.describe Facility do
       facility_1.administer_written_test(registrant_1)
       expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
+
     it 'can give written test only if permitted' do
       expect(registrant_2.age).to eq(16)
       expect(registrant_2.permit?).to be false
@@ -99,33 +100,19 @@ RSpec.describe Facility do
       facility_1.administer_written_test(registrant_2)
       expect(registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
-    it 'can only give permit if old enough'
+
+    it 'can only give written test if old enough'
+      expect(registrant_3.age).to eq(15)
+      expect(registrant_3.permit?).to be false
+      facility_1.administer_written_test(registrant_3)
+      expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      registrant_3.earn_permit
+      expect(registrant_3.permit?).to be true
+      facility_1.administer_written_test(registrant_3)
+      expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
   end
 end
 
-
-# facility_1.administer_written_test(registrant_2)
-#true
-
-# registrant_2.license_data
-#{:written=>true, :license=>false, :renewed=>false}
-
-# registrant_3.age
-#15
-
-# registrant_3.permit?
-#false
-
-# facility_1.administer_written_test(registrant_3)
-#false
-
-# registrant_3.earn_permit
-
-# facility_1.administer_written_test(registrant_3)
-#false
-
-# registrant_3.license_data
-#{:written=>false, :license=>false, :renewed=>false}
 
 # # Road Test
 
