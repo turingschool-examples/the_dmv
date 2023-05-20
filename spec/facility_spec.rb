@@ -1,6 +1,7 @@
 require 'spec_helper'
 require './lib/facility'
 require './lib/vehicle'
+require './lib/registrant'
 
 RSpec.describe Facility do
   before(:each) do
@@ -96,10 +97,24 @@ RSpec.describe Facility do
       expect(facility_2.registered_vehicles).to eq([])
       expect(facility_2.collected_fees).to eq(0)
     end
+  end
 
+  describe 'Getting a Driver License' do
+    registrant_1 = Registrant.new('Bruce', 18, true )
+    registrant_2 = Registrant.new('Penny', 16 )
+    registrant_3 = Registrant.new('Tucker', 15 )
+    facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+    facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
 
+    it 'administer a written test to registrant_1' do
 
+      expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(registrant_1.permit?).to eq(true)
+      expect(facility_1.administer_written_test(registrant_1)).to eq(false)
+
+    end
 
   end
+
 
 end
