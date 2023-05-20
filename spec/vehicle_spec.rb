@@ -33,4 +33,10 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe '#register' do
+    it 'can register a vehicle' do
+      expect(@cruz.register). to eq(:regular)
+    end
+  end
 end
