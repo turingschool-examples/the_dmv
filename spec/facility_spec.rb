@@ -57,6 +57,18 @@ RSpec.describe Facility do
         registrant_1 = Registrant.new('Bruce', 18, true )
         @facility_1.add_service('Written Test')
         expect(@facility_1.administer_written_test(registrant_1)).to eq(true)
+        expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+      end
+      it 'can check attributes required for test taking' do
+        registrant_2 = Registrant.new('Penny', 16 )
+        registrant_3 = Registrant.new('Tucker', 15 )
+        @facility_1.add_service('Written Test')
+        expect(@facility_1.administer_written_test(registrant_2)).to eq(false)
+        expect(@facility_1.administer_written_test(registrant_3)).to eq(false)
+        registrant_2.earn_permit
+        expect(@facility_1.administer_written_test(registrant_2)).to eq(true)
+        registrant_3.earn_permit
+        expect(@facility_1.administer_written_test(registrant_3)).to eq(false)
       end
     end
   end

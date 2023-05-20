@@ -42,11 +42,16 @@ class Facility
     end
   end
   def administer_written_test(student)
-    if @services.include?('Written Test')
+    if @services.include?('Written Test') && student.age >= 16 && student.permit == true
       student.license_data[:written] = true
       true
     else
       false
     end
+
   end
+#The administer_written_test works differently from the register_vehicle method by
+#The data type passing through administer_written_test uses an attr_accessor to change the assigned value
+#The register_vehicle method only uses an attr_reader, so a method within vehicle.rb had to be made to work around this function
+
 end
