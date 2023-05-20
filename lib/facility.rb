@@ -11,10 +11,16 @@ class Facility
   end
 
   def add_service(service)
+    valid_entries = ["Road Test", "Written Test", "Renew License", "Vehicle Registration"]
+    unless service.is_a?(String) && valid_entries.include?(service)
+      return "Invalid entry. Services offered are: #{valid_entries.join(", ")}"
+    end
     @services << service
   end
+  
 
   def register_vehicle(car)
+    return "Service not available at selected location." unless services.include?("Vehicle Registration")
     if car.electric_vehicle?
       car.plate_type = :ev
       collect_cash(200) 
@@ -31,6 +37,7 @@ class Facility
   end
 
   def administer_written_test(person)
+    return "Service not available at selected location." unless services.include?("Written Test")
     if person.age >= 16 && person.permit? 
       person.license_data[:written] = true 
     else 
@@ -39,6 +46,7 @@ class Facility
   end 
 
   def administer_road_test(person)
+    return "Service not available at selected location." unless services.include?("Road Test")
     if person.license_data[:written] == true 
       person.license_data[:drivers_license] = true
     else 
@@ -47,6 +55,7 @@ class Facility
   end 
 
   def renew_drivers_license(person)
+    return "Service not available at selected location." unless services.include?("Renew License")
     if person.license_data[:drivers_license] == true 
       person.license_data[:renewed] = true 
     else 
