@@ -3,8 +3,8 @@ class Facility
               :address, 
               :phone, 
               :services, 
-              :registered_vehicles,
-              :collected_fees
+              :collected_fees,
+              :registered_vehicles
 
   def initialize(facility_details)
     @name                = facility_details[:name]
@@ -35,6 +35,18 @@ class Facility
       @collected_fees += 200
     else
       @collected_fees += 100
+    end
+  end
+
+  def administer_written_test(registrant)
+    return nil if !@services.include?("Written Test")
+    return false if !registrant.is_a?(Registrant)
+
+    if registrant.age >= 16 && registrant.permit? == true
+      registrant.pass_written_test
+      true
+    else
+      false
     end
   end
 end
