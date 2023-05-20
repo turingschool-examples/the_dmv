@@ -121,6 +121,31 @@ RSpec.describe Facility do
       expect(registrant_2.age).to eq(16)
       expect(registrant_2.permit?).to eq(false)
       expect(facility_1.administer_written_test(registrant_2)).to eq(false)
+
+      registrant_2.earn_permit
+
+      expect(facility_1.administer_written_test(registrant_2)).to eq(true)
+      expect(registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
+
+    it 'administer a written test to registrant_3' do
+      expect(registrant_3.age).to eq(15)
+      expect(registrant_3.permit?).to eq(false)
+      expect(facility_1.administer_written_test(registrant_3)).to eq(false)
+
+      registrant_3.earn_permit
+
+      expect(facility_1.administer_written_test(registrant_3)).to eq(false)
+      expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+
+    it 'administer a road test' do
+      expect(facility_1.administer_road_test(registrant_3)).to eq(false)
+
+      registrant_3.earn_permit
+
+      expect(facility_1.administer_road_test(registrant_3)).to eq(false)
+      expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
 
 
