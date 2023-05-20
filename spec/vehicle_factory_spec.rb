@@ -19,11 +19,15 @@ RSpec.describe VehicleFactory do
     expect(@factory.created_vehicles.count).to eq(2)
   end 
 
-  it "can create multiple vehicles" do 
+  it "can create multiple vehicles at once" do 
     vehicle_array = [{}, {}] 
     @factory.create_vehicles(vehicle_array)
     expect(@factory.created_vehicles.count).to eq(2)
-    expect(@factory.created_vehicles[0]).to be_an_instance_of(Vehicle)
-    expect(@factory.created_vehicles[1]).to be_an_instance_of(Vehicle)
+  end 
+
+  it "sets engine type to :ev" do 
+    vehicle_array = [{}, {}] 
+    @factory.create_vehicles(vehicle_array)
+    expect(@factory.created_vehicles[0].engine).to eq(:ev)
   end 
 end 
