@@ -24,7 +24,10 @@ class Facility
     @registered_vehicles.push(vehicle)
     vehicle.date_registered
     vehicle.plate_finder
+    @collected_fees += vehicle.registration_fee
     else nil
     end
   end
+
+
 end
