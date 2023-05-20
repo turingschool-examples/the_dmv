@@ -15,15 +15,19 @@ RSpec.describe Facility do
   describe '#add service' do
     it 'can add available services' do
       expect(@facility.services).to eq([])
-      @facility.add_service('New Drivers License')
-      @facility.add_service('Renew Drivers License')
+      expect(@facility.add_service("ALL THE SERVICES")).to eq ("Invalid entry. Services offered are: Road Test, Written Test, Renew License, Vehicle Registration")
+      @facility.add_service('Road Test')
+      @facility.add_service('Written Test')
+      @facility.add_service('Renew License')
       @facility.add_service('Vehicle Registration')
-      expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+      expect(@facility.services).to eq(['Road Test', "Written Test", 'Renew License', 'Vehicle Registration'])
     end
   end
 
   describe "services" do
     it "can register vehicles and store them" do 
+      expect(@facility.register_vehicle(@bolt)).to eq("Service not available at selected location.")
+      @facility.add_service("Vehicle Registration")
       @facility.register_vehicle(@cruz)
       @facility.register_vehicle(@bolt)
       @facility.register_vehicle(@camaro)
@@ -31,6 +35,7 @@ RSpec.describe Facility do
     end
 
     it "can collect fees and total them" do 
+      @facility.add_service("Vehicle Registration")
       @facility.register_vehicle(@cruz)
       @facility.register_vehicle(@bolt)
       @facility.register_vehicle(@camaro)
@@ -38,27 +43,37 @@ RSpec.describe Facility do
     end 
 
     it "can administer written_test to qualified registrants" do 
-      expect(@facility.administer_written_test(@penny)).to eq("Penny does not qualify for written test.")
-      expect(@bruce.license_data[:written]).to be false 
-      @facility.administer_written_test(@bruce)
-      expect(@bruce.license_data[:written]).to be true 
+      expect(@facility.administer_written_test(@registrant_1)).to eq("Service not available at selected location.")
+      @facility.add_service('Written Test')
+      expect(@facility.administer_written_test(@registrant_2)).to eq("Penny does not qualify for written test.")
+      expect(@registrant_1.license_data[:written]).to be false 
+      @facility.administer_written_test(@registrant_1)
+      expect(@registrant_1.license_data[:written]).to be true 
     end 
 
     it "can administer road test to qualified registrants" do 
-      expect(@facility.administer_road_test(@penny)).to eq("Penny does not qualify for road test.")
-      expect(@bruce.license_data[:drivers_license]).to be false 
-      @facility.administer_written_test(@bruce)
-      @facility.administer_road_test(@bruce)
-      expect(@bruce.license_data[:drivers_license]).to be true  
+      expect(@facility.administer_road_test(@registrant_1)).to eq("Service not available at selected location.")
+      @facility.add_service('Written Test')
+      @facility.add_service('Road Test')
+      expect(@facility.administer_road_test(@registrant_2)).to eq("Penny does not qualify for road test.")
+      expect(@registrant_1.license_data[:drivers_license]).to be false 
+      @facility.administer_written_test(@registrant_1)
+      @facility.administer_road_test(@registrant_1)
+      expect(@registrant_1.license_data[:drivers_license]).to be true  
     end 
 
     it "can renew license for qualified registrants" do 
-      expect(@facility.renew_drivers_license(@penny)).to eq("Penny does not qualify for license renewal.")
-      expect(@bruce.license_data[:renewed]).to be false 
-      @facility.administer_written_test(@bruce)
-      @facility.administer_road_test(@bruce)
-      @facility.renew_drivers_license(@bruce)
-      expect(@bruce.license_data[:renewed]).to be true  
+      expect(@facility.renew_drivers_license(@registrant_1)).to eq("Service not available at selected location.")
+      @facility.add_service('Written Test')
+      @facility.add_service('Road Test')
+      expect(@facility.renew_drivers_license(@registrant_1)).to eq("Service not available at selected location.")
+      @facility.add_service('Renew License')
+      expect(@facility.renew_drivers_license(@registrant_2)).to eq("Penny does not qualify for license renewal.")
+      expect(@registrant_1.license_data[:renewed]).to be false 
+      @facility.administer_written_test(@registrant_1)
+      @facility.administer_road_test(@registrant_1)
+      @facility.renew_drivers_license(@registrant_1)
+      expect(@registrant_1.license_data[:renewed]).to be true  
     end 
   end 
 end
