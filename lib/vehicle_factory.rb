@@ -7,7 +7,7 @@ class VehicleFactory
 
   def create_vehicle(vehicle)
     new_car = Vehicle.new(vehicle)
-    created_vehicles << new_car
-    created_vehicles
+    @created_vehicles << new_car
+    @created_vehicles
   end
 end
