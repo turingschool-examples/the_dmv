@@ -49,8 +49,8 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#will collect fees from vehicle registration' do
-    it 'will collect fees after registering a vehicle' do
+  describe '#will collect fees from vehicle registration and put registration date' do
+    it 'will collect fees after registering a vehicle and put registration date' do
       @facility_1.add_service('New Drivers License')
       @facility_1.add_service('Renew Drivers License')
       @facility_1.add_service('Vehicle Registration')
@@ -60,23 +60,26 @@ RSpec.describe Facility do
       @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
 
       expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
-      expect(facility_1.collected_fees).to eq(100)
+      expect(@facility_1.collected_fees).to eq(100)
+      expect(@cruz.registration_date).to eq(Date.today)
+      expect(@facility_1.register_vehicle(@camaro)).to eq([@cruz, @camaro])
+      expect(@camaro.registration_date).to eq(Date.today)
+      expect(@facility_1.register_vehicle(@bolt)).to eq([@cruz, @camaro, @bolt])
+      expect(@bolt.registration_date).to eq(Date.today)
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+      expect(@facility_1.collected_fees).to eq(325)
     end
   end
-
-
-
-  # describe '#has a plate type' do
-  #   it 'has a plate type' do
-  #     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
-  #     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
-  #     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+  
+  describe '#has a plate type' do
+  it 'has a plate type' do
+    @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+    @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
+    @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
     
-  #     facility_1.register_vehicle(cruz)
-      
-  #     expect(@cruz.plate_type).to eq(:regular)
-  #     expect(@camaro.plate_type).to eq(:antique)
-  #   end
-  # end
+    expect(@camaro.plate_type).to eq([:antique])
+    expect(@bolt.plate_type).to eq(:ev)
+    end
+  end
 
 end
