@@ -164,5 +164,20 @@ RSpec.describe Facility do
       expect(@registrant_2.license_data).to eq({ written: false, license: false, renewed: false })
       expect(@registrant_3.license_data).to eq({ written: false, license: false, renewed: false })
     end
+    it 'registrants permit data is correct (tests permit? method)' do
+      expect(@registrant_1.permit?).to eq(true)
+    end
+  end
+
+  describe 'administer_written_test' do
+    before(:each) do
+      @registrant_1 = Registrant.new('Bruce', 18, true)
+      @registrant_2 = Registrant.new('Penny', 16)
+      @registrant_3 = Registrant.new('Tucker', 15)
+    end
+    it 'administer_written_test updates license_data' do
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@registrant_1.license_data).to eq({ written: true, license: false, renewed: false })
+    end
   end
 end
