@@ -15,6 +15,10 @@ class Facility
     @registered_vehicles = []
   end
 
+  def add_service(service)
+    @services << service
+  end
+
   def register_vehicle(vehicle)
     if @services.include?("Vehicle Registration")
       vehicle.registration_date = Date.today.year
@@ -30,11 +34,19 @@ class Facility
         @collected_fees += 100
       end
     else
-      p "Facility does not currently offer this service"
+      p "Facility does not currently offer this service."
     end
   end
 
-  def add_service(service)
-    @services << service
+  def administer_written_test(registrant)
+    if @services.include?("Written Test") && registrant.age >= 16 && registrant.permit?
+      registrant.license_data[:written] = true
+    elsif @services.include?("Written Test") && registrant.age < 16
+      p "Sorry, the registrant is not old enough to take the written test."
+    elsif @services.include?("Written Test") && registrant.permit? == false
+      p "Registrant has not yet earned permit."
+    else
+      p "Facility does not currently offer this service."
+    end
   end
 end
