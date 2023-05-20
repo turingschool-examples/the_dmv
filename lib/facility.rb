@@ -37,4 +37,8 @@ class Facility
 
     @collected_fees += plate_type_fees[vehicle.plate_type] || 100
   end
+
+  def administer_written_test(registrant)
+    registrant.administer_written_test
+  end
 end
