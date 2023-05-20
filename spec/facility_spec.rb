@@ -26,7 +26,6 @@ RSpec.describe Facility do
       @facility.add_service('New Drivers License')
       @facility.add_service('Renew Drivers License')
       @facility.add_service('Vehicle Registration')
-      require 'pry'; binding.pry
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
@@ -44,16 +43,45 @@ RSpec.describe Facility do
       expect(@facility_1.register_vehicle(@cruz)).to eq "Facility does not currently offer this service"
     end
 
-    xit 'can collect fees' do
+    it 'can collect fees' do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.collected_fees).to eq 100
     end
 
-    xit 'can add vehicle to list of registered vehicles' do
+    it 'can add vehicle to list of registered vehicles' do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.registered_vehicles).to eq [@cruz]
+    end
+
+    it 'can set vehicle registration date' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      expect(@cruz.registration_date).to eq Date.today.year
+    end
+
+    it 'can set vehicle plate type' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      expect(@cruz.plate_type).to eq :regular
+    end
+
+    it 'can properly register multiple vehicles' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@camaro)
+      expect(@bolt.plate_type).to eq :ev
+      expect(@bolt.registration_date).to eq Date.today.year
+      expect(@camaro.plate_type).to eq :antique
+      expect(@camaro.registration_date).to eq Date.today.year
+      expect(@facility_1.registered_vehicles).to eq [@cruz, @bolt, @camaro]
+      expect(@facility_1.collected_fees).to eq 325
+      expect(@facility_2.services).to eq []
+      expect(@facility_2.register_vehicle(@bolt)).to eq "Facility does not currently offer this service"
+      expect(@facility_2.registered_vehicles).to eq []
+      expect(@facility_2.collected_fees).to eq 0
     end
 
   end
