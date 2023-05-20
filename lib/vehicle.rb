@@ -41,4 +41,14 @@ class Vehicle
     else nil
     end
   end
+
+  def registration_fee
+    debt_collector = 0
+    if antique?
+      debt_collector += 25
+    elsif electric_vehicle?
+      debt_collector += 200
+    else debt_collector +=100
+    end
+  end
 end
