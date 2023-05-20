@@ -1,5 +1,3 @@
-require 'vehicle'
-
 class Facility
   attr_reader :name,
               :address,
@@ -31,17 +29,12 @@ class Facility
     @registered_vehicles
   end
 
-  # Vehicles 25 years old or older are considered antique and cost $25 to register
-  # Electric Vehicles (EV) cost $200 to register
-  # All other vehicles cost $100 to register
-  # A vehicle’s plate_type should be set to :regular, :antique, or :ev upon successful registration.
   def calculate_collected_fees(vehicle)
-    @collected_fees = @collected_fees += if vehicle.plate_type == :ev
-                                           200
-                                         elsif vehicle.plate_type == :antique
-                                           25
-                                         else
-                                           100
-                                         end
+    plate_type_fees = {
+      ev: 200,
+      antique: 25
+    }
+
+    @collected_fees += plate_type_fees[vehicle.plate_type] || 100
   end
 end
