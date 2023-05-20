@@ -18,6 +18,7 @@ class Facility
 
   def register_vehicle(data)
     @registered_vehicles.push(data)
+    data.registration_date = Date.today
   end
 
   def add_service(service)

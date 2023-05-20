@@ -29,8 +29,11 @@ RSpec.describe Facility do
       @facility.register_vehicle(@cruz)
       expect(@facility.registered_vehicles).to eq([@cruz])
     end
+    it 'can update registration dates on vehicles' do
+      @facility.register_vehicle(@cruz)
+      expect(@cruz.registration_date).to eq(Date.today)
+    end
   end
-  describe 
   describe '#collected fees' do
     it 'keeps track of collected fees' do
       expect(@facility.collected_fees).to eq(0)
