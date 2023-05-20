@@ -38,6 +38,13 @@ class Facility
     end
   end
 
+  def administer_road_test(registrant)
+    if services.include?('Road Test') && registrant.written? 
+      registrant.license_data[:license] = true
+    else false
+    end
+  end
+
   def add_collected_fees(vehicle)
     if vehicle.antique?
       @collected_fees += 25
@@ -47,3 +54,4 @@ class Facility
     end
   end
 end
+
