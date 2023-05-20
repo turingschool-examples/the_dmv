@@ -25,7 +25,20 @@ class Vehicle
     @engine == :ev
   end
 
+  def plate_type
+    if self.antique?
+      :antique
+    elsif self.electric_vehicle?
+      :ev
+    else
+      :regular
+    end
+  end
+
+
 end
 
 #todo = Add plate type
 #todo = fix reg date
+
+p now = Date.new(2023,1,12).to_s
