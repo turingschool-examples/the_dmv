@@ -34,6 +34,12 @@ RSpec.describe Facility do
       expect(@facility.registered_vehicles).to eq([@cruz, @bolt, @camaro])      
     end
 
+    it "can record the registration date" do 
+      @facility.add_service("Vehicle Registration")
+      @facility.register_vehicle(@cruz)
+      expect(@cruz.registration_date).to eq(Date.today.strftime("%Y-%m-%d"))
+    end 
+
     it "can collect fees and total them" do 
       @facility.add_service("Vehicle Registration")
       @facility.register_vehicle(@cruz)
