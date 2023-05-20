@@ -73,43 +73,113 @@ RSpec.describe Facility do
       expect(facility_2.registered_vehicles).to eq([])
     end
   end
+
+  describe '#administer written test' do
+    it 'can give written test if facility has service' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Penny', 16 )
+      registrant_3 = Registrant.new('Tucker', 15 )
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
+      
+      expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(registrant_1.permit?).to be true
+      facility_1.administer_written_test(registrant_1)
+      expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      facility_1.add_service('Written Test')
+      facility_1.administer_written_test(registrant_1)
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
+    it 'can give written test only if permitted' do
+      expect(registrant_2.age).to eq(16)
+      expect(registrant_2.permit?).to be false
+      facility_1.administer_written_test(registrant_2)
+      expect(registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      registrant_2.earn_permit
+      facility_1.administer_written_test(registrant_2)
+      expect(registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
+    it 'can only give permit if old enough'
+  end
 end
 
-# facility_1.register_vehicle(camaro)
-# #=> [#<Vehicle:0x0000000135a48b08...>, #<Vehicle:0x0000000135adb610...>]
 
-# camaro.registration_date
-# #=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
+# facility_1.administer_written_test(registrant_2)
+#true
 
-# camaro.plate_type
-# #=> :antique
+# registrant_2.license_data
+#{:written=>true, :license=>false, :renewed=>false}
 
-# facility_1.register_vehicle(bolt)
-# #=> [#<Vehicle:0x0000000135a48b08...>, #<Vehicle:0x0000000135adb610...>, #<Vehicle:0x0000000125832180...>]
+# registrant_3.age
+#15
 
-# bolt.registration_date
-# #=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
+# registrant_3.permit?
+#false
 
-# bolt.plate_type
-# #=> :ev
+# facility_1.administer_written_test(registrant_3)
+#false
 
-# facility_1.registered_vehicles
-# #=> [#<Vehicle:0x0000000135a48b08...>, #<Vehicle:0x0000000135adb610...>, #<Vehicle:0x0000000125832180...>]
+# registrant_3.earn_permit
 
-# facility_1.collected_fees
-# #=> 325
+# facility_1.administer_written_test(registrant_3)
+#false
 
-# facility_2.registered_vehicles
-# #=> []
+# registrant_3.license_data
+#{:written=>false, :license=>false, :renewed=>false}
 
-# facility_2.services
-# #=> []
+# # Road Test
 
-# facility_2.register_vehicle(bolt)
-# #=> nil
+# facility_1.administer_road_test(registrant_3)
+#false
 
-# facility_2.registered_vehicles
-# #=> []
+# registrant_3.earn_permit
 
-# facility_2.collected_fees
-# #=> 0
+# facility_1.administer_road_test(registrant_3)
+#false
+
+# registrant_3.license_data
+#{:written=>false, :license=>false, :renewed=>false}
+
+# facility_1.administer_road_test(registrant_1)
+#false
+
+# facility_1.add_service('Road Test')
+#["Written Test", "Road Test"]
+
+# facility_1.administer_road_test(registrant_1)
+#true
+
+# registrant_1.license_data
+#{:written=>true, :license=>true, :renewed=>false}
+
+# facility_1.administer_road_test(registrant_2)
+#true
+
+# registrant_2.license_data
+#{:written=>true, :license=>true, :renewed=>false}
+
+# # Renew License
+
+# facility_1.renew_drivers_license(registrant_1)
+#false
+
+# facility_1.add_service('Renew License')
+#["Written Test", "Road Test", "Renew License"]
+
+# facility_1.renew_drivers_license(registrant_1)
+#true
+
+# registrant_1.license_data
+#{:written=>true, :license=>true, :renewed=>true}
+
+# facility_1.renew_drivers_license(registrant_3)
+#false
+
+# registrant_3.license_data
+#{:written=>false, :license=>false, :renewed=>false}
+
+# facility_1.renew_drivers_license(registrant_2)
+#true
+
+# registrant_2.license_data
+#{:written=>true, :license=>true, :renewed=>true}
