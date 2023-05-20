@@ -1,21 +1,22 @@
 class Facility
-  attr_reader :services
+  attr_reader :address,
+              :name,
+              :phone,
+              :services,
+              :collected_fees, 
+              :registered_vehicles
 
   def initialize(office)
-    @office = office
+    @address = office[:address]
+    @name = office[:name]
+    @phone = office[:phone]
     @services = []
+    @collected_fees = 0
+    @registered_vehicles = []
   end
 
-  def name
-    @office[:name]
-  end
-
-  def address
-    @office[:address]
-  end
-
-  def phone
-    @office[:phone]
+  def register_vehicle(vehicle)
+    
   end
 
   def add_service(service)
