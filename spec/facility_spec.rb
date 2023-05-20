@@ -49,6 +49,15 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
       expect(@facility_1.collected_fees).to eq(325)
     end
+    
+    it 'can generate a registration date' do
+      @facility_1.add_service('Vehicle Registration')
+      expect(@cruz.registration_date).to eq(nil)
+      @facility_1.register_vehicle(@cruz)
+      expect(@cruz.registration_date).to eq(Date.new(2023,1,12))
+      # expect(@bolt.registration_date).to eq(<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>)
+      # expect(@camaro.registration_date).to eq(<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>)
+    end
 
     xit 'only some locations can register vehicles' do
       expect(@facility_2.registered_vehicles).to eq([])
