@@ -10,4 +10,12 @@ RSpec.describe VehicleFactory do
             expect(factory = VehicleFactory.new).to be_an_instance_of(VehicleFactory)
         end
     end
+
+    describe '#create_vehicles' do
+        it 'should create vehicle objects from imported data' do
+            factory = VehicleFactory.new
+            wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+            factory.create_vehicles(wa_ev_registrations)
+        end
+    end
 end
