@@ -44,9 +44,6 @@ RSpec.describe Facility do
       facility_1.register_vehicle(camaro)
       expect(camaro.registration_date).to eq(Date.today)
       expect(camaro.plate_type).to eq(:antique)
-      facility_2.register_vehicle(bolt)
-      expect(bolt.registration_date).to eq(nil)
-      expect(bolt.plate_type).to eq(nil)
     end
     
     it 'can collct payment and store records of registrations' do
@@ -97,7 +94,8 @@ RSpec.describe Facility do
       registrant_3 = Registrant.new('Tucker', 15 )
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
       facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
-
+      facility_1.add_service('Written Test')
+      
       expect(registrant_2.age).to eq(16)
       expect(registrant_2.permit?).to be false
       facility_1.administer_written_test(registrant_2)

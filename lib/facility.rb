@@ -21,6 +21,7 @@ class Facility
 
   def register_vehicle(vehicle)
     if @services.include?('Vehicle Registration') && vehicle.registration_date.nil?
+      vehicle.registration_date = Date.today
       if vehicle.antique?
         vehicle.plate_type = :antique
         @collected_fees += 25
@@ -36,7 +37,7 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    if registrant.permit? && registrant.age >=16
+    if @services.include?('Written Test') && registrant.permit? && registrant.age >=16 
       registrant.license_data[:written] = true
     end
   end
