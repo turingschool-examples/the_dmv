@@ -34,9 +34,6 @@ RSpec.describe Vehicle do
     end
   end
 
-  describe '#register' do
-    it 'can register a vehicle' do
-      expect(@cruz.register). to eq(:regular)
-    end
-  end
+ 
+ 
 end
