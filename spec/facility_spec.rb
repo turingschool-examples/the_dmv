@@ -34,13 +34,21 @@ RSpec.describe Facility do
       facility_1.add_service('Vehicle Registration')
       
       expect(cruz.registration_date).to eq(nil)
-      expect(facility_1.registered_vehicles).to eq([])
-      expect(facility_1.collected_fees).to eq(0)
+      expect(cruz.plate_type).to eq(nil)
       facility_1.register_vehicle(cruz)
-      expect(cruz.registration_date).to eq('<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>')
+      expect(cruz.registration_date).to eq(Date.today)
       expect(cruz.plate_type).to eq(:regular)
+      facility_1.register_vehicle(bolt)
+      expect(bolt.registration_date).to eq(Date.today)
+      expect(bolt.plate_type).to eq(:ev)
+      facility_1.register_vehicle(camaro)
+      expect(camaro.registration_date).to eq(Date.today)
+      expect(camaro.plate_type).to eq(:antique)
+      facility_2.register_vehicle(bolt)
+      expect(bolt.registration_date).to eq(nil)
+      expect(bolt.plate_type).to eq(nil)
     end
-
+    
     it 'can collct payment and store records of registrations' do
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
       facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
@@ -48,10 +56,21 @@ RSpec.describe Facility do
       bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
       camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
       facility_1.add_service('Vehicle Registration')
+      
+      expect(facility_1.collected_fees).to eq(0)
+      expect(facility_1.registered_vehicles).to eq([])
       facility_1.register_vehicle(cruz)
-
-      expect(facility_1.registered_vehicles).to eq([cruz])
       expect(facility_1.collected_fees).to eq(100)
+      expect(facility_1.registered_vehicles).to eq([cruz])
+      facility_1.register_vehicle(bolt)
+      expect(facility_1.collected_fees).to eq(300)
+      expect(facility_1.registered_vehicles).to eq([cruz, bolt])
+      facility_1.register_vehicle(camaro)
+      expect(facility_1.collected_fees).to eq(325)
+      expect(facility_1.registered_vehicles).to eq([cruz, bolt, camaro])
+      facility_2.register_vehicle(camaro)
+      expect(facility_2.collected_fees).to eq(0)
+      expect(facility_2.registered_vehicles).to eq([])
     end
   end
 end
