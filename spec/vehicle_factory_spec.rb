@@ -13,4 +13,11 @@ RSpec.describe VehicleFactory do
       expect(@factory).to be_a(VehicleFactory)
     end
   end
+
+  describe '#create_vehicles' do
+    it 'can create vehicles using external data' do 
+      expect(@factory.create_vehicles(@wa_ev_registrations)).to be_a(Array)
+      expect(@factory.create_vehicles(@wa_ev_registrations).first).to be_a(Vehicle)
+    end
+  end
 end
