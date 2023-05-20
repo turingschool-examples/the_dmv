@@ -67,10 +67,20 @@ describe "Registrant" do
   describe "#pass_written_test" do
     it "can pass a written test" do
       expect(@registrant_1.license_data[:written]).to be false
-
+      
       @registrant_1.pass_written_test
-
+      
       expect(@registrant_1.license_data[:written]).to be true
+    end
+  end
+  
+  describe "#earn_license" do
+    it "can earn a license" do
+      expect(@registrant_1.license_data[:license]).to be false
+      
+      @registrant_1.earn_license
+      
+      expect(@registrant_1.license_data[:license]).to be true
     end
   end
 end
