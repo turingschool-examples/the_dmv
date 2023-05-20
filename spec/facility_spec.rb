@@ -105,10 +105,25 @@ RSpec.describe Facility do
 
     it 'updates registrants license data if eligible for written test' do
       @facility_1.add_service('Written Test')
-      require 'pry'; binding.pry
       expect(@registrant_1.license_data[:written]).to eq false
       @facility_1.administer_written_test(@registrant_1)
       expect(@registrant_1.license_data[:written]).to eq true
+    end
+
+    it 'can allow registrant to earn permit then take written test' do
+      @facility_1.add_service('Written Test')
+      expect(@registrant_2.license_data[:written]).to eq false
+      @registrant_2.earn_permit
+      @facility_1.administer_written_test(@registrant_2)
+      expect(@registrant_2.license_data[:written]).to eq true
+    end
+
+    it 'will not allow underage registrant to earn permit then take written test' do
+      @facility_1.add_service('Written Test')
+      expect(@registrant_3.license_data[:written]).to eq false
+      @registrant_3.earn_permit
+      @facility_1.administer_written_test(@registrant_3)
+      expect(@registrant_3.license_data[:written]).to eq false
     end
   end
 end
