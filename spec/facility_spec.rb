@@ -72,14 +72,27 @@ RSpec.describe Facility do
   end
   
   describe '#has a plate type' do
-  it 'has a plate type' do
-    @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
-    @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
-    @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+    it 'has a plate type' do
+      @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+      @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
+      @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
     
-    expect(@camaro.plate_type).to eq([:antique])
-    expect(@bolt.plate_type).to eq(:ev)
+      expect(@camaro.plate_type).to eq([:antique])
+      expect(@bolt.plate_type).to eq(:ev)
+      end
+  end
+
+  describe '#must have services listed to complete that service' do
+    it 'should not register a vehicle at this location' do
+
+      expect(facility_2.registered_vehicles).to eq([])
+      expect(facility_2.services).to eq([])
+      expect(facility_2.register_vehicle(bolt)).to eq(nil)
+      expect(facility_2.registered_vehicles).to eq([])
+      expect(facility_2.collected_fees).to eq(0)
     end
   end
+
+
 
 end
