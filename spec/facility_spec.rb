@@ -177,7 +177,16 @@ RSpec.describe Facility do
     end
     it 'administer_written_test updates license_data' do
       @facility_1.administer_written_test(@registrant_1)
+
       expect(@registrant_1.license_data).to eq({ written: true, license: false, renewed: false })
+    end
+    it 'administer_written_test on facility updates license_data' do
+      @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@registrant_1)
+
+      expect(@registrant_1.license_data).to eq({ written: true, license: false, renewed: false })
+      expect(@registrant_2.age).to eq(16)
+      expect(@registrant_2.permit?).to eq(false)
     end
   end
 end
