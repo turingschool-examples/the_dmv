@@ -8,6 +8,9 @@ RSpec.describe Facility do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    @registrant_1 = Registrant.new('Bruce', 18, true )
+    @registrant_2 = Registrant.new('Penny', 16 )
+    @registrant_3 = Registrant.new('Tucker', 15 )
   end
 
   describe '#initialize' do
@@ -40,7 +43,7 @@ RSpec.describe Facility do
     end
 
     it 'returns a prompt if someone attempts to register their vehicle and service isnt offered' do
-      expect(@facility_1.register_vehicle(@cruz)).to eq "Facility does not currently offer this service"
+      expect(@facility_1.register_vehicle(@cruz)).to eq "Facility does not currently offer this service."
     end
 
     it 'can collect fees' do
@@ -79,10 +82,33 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq [@cruz, @bolt, @camaro]
       expect(@facility_1.collected_fees).to eq 325
       expect(@facility_2.services).to eq []
-      expect(@facility_2.register_vehicle(@bolt)).to eq "Facility does not currently offer this service"
+      expect(@facility_2.register_vehicle(@bolt)).to eq "Facility does not currently offer this service."
       expect(@facility_2.registered_vehicles).to eq []
       expect(@facility_2.collected_fees).to eq 0
     end
+  end
 
+  describe '#administer_written_test' do
+    it 'checks if facility offers this service' do
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq "Facility does not currently offer this service."
+    end
+  
+    it 'checks if registrant has permit' do
+      @facility_1.add_service('Written Test')
+      expect(@facility_1.administer_written_test(@registrant_2)).to eq "Registrant has not yet earned permit."
+    end
+
+    it 'checks if registrant is at least 16 years of age' do
+      @facility_1.add_service('Written Test')
+      expect(@facility_1.administer_written_test(@registrant_3)).to eq "Sorry, the registrant is not old enough to take the written test."
+    end
+
+    it 'updates registrants license data if eligible for written test' do
+      @facility_1.add_service('Written Test')
+      require 'pry'; binding.pry
+      expect(@registrant_1.license_data[:written]).to eq false
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@registrant_1.license_data[:written]).to eq true
+    end
   end
 end
