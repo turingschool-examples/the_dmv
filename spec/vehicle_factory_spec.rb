@@ -15,7 +15,8 @@ RSpec.describe VehicleFactory do
         it 'should create vehicle objects from imported data' do
             factory = VehicleFactory.new
             wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-            factory.create_vehicles(wa_ev_registrations)
+            #require 'pry'; binding.pry
+            expect(factory.create_vehicles(wa_ev_registrations)).to be_an_instance_of(Array)
         end
     end
 end
