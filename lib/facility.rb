@@ -1,7 +1,7 @@
 class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
-  attr_writer :plate_type,
+  attr_writer :plate_type
 
   def initialize(name:, address:, phone:)
     @name = name
