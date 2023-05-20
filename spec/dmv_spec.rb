@@ -3,6 +3,9 @@ require 'spec_helper'
 RSpec.describe Dmv do
   before(:each) do
     @dmv = Dmv.new
+    @or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
+    @new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+    @missouri_facilities = DmvDataService.new.mo_dmv_office_locations
     @facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
     @facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
     @facility_3 = Facility.new({name: 'Bend DMV Office', address: '63030 O B Riley Rd Bend OR 97701', phone: '541-388-6322' })
@@ -12,6 +15,7 @@ RSpec.describe Dmv do
     it 'can initialize' do
       expect(@dmv).to be_an_instance_of(Dmv)
       expect(@dmv.facilities).to eq([])
+      expect(@or_dmv_office_locations).to be_an_instance_of(Array)
     end
   end
 
@@ -38,6 +42,18 @@ RSpec.describe Dmv do
       @dmv.add_facility(@facility_3)
 
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
+    end
+  end
+
+  describe "#add state offices" do
+    it "can create facility objects from other state offices" do
+      @dmv.add_facility(@or_dmv_office_locations)
+      @dmv.add_facility(@ny_dmv_office_locations)
+      @dmv.add_facility(@mo_dmv_office_locations)
+
+      expect(@dmv.facilities).to include(@or_dmv_office_locations)
+      expect(@dmv.facilities).to include(@ny_dmv_office_locations)
+      expect(@dmv.facilities).to include(@mo_dmv_office_locations)
     end
   end
 end
