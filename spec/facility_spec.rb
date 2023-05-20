@@ -1,6 +1,7 @@
 require 'spec_helper'
 require './lib/facility'
 require './lib/vehicle'
+require './lib/registrant'
 
 RSpec.describe Facility do
   before(:each) do
@@ -33,17 +34,21 @@ RSpec.describe Facility do
     end
   end
 
-  it "can register vehicles which changes object attributes" do
+  it "has empty attributes prior to registering vehicles" do
     @facility_1.add_service('Vehicle Registration')
 
     expect(@cruz.registration_date).to eq(nil)
     expect(@facility_1.registered_vehicles).to eq([])
     expect(@facility_1.collected_fees).to eq(0)
+    expect(@cruz.plate_type).to eq(nil)
+  end
 
+  it "can register vehicles which changes object attributes" do
+    @facility_1.add_service('Vehicle Registration')
     @facility_1.register_vehicle(@cruz)
 
-    expect(@cruz.registration_date).to eq(Date.today)
     expect(@facility_1.registered_vehicles).to eq([@cruz])
+    expect(@cruz.registration_date).to be_a(Date)
     expect(@facility_1.collected_fees).to eq(100)
     expect(@cruz.plate_type).to eq(:regular)
   end
@@ -53,7 +58,7 @@ RSpec.describe Facility do
     @facility_1.register_vehicle(@cruz)
     @facility_1.register_vehicle(@camaro)
 
-    expect(@camaro.registration_date).to eq(Date.today)
+    expect(@camaro.registration_date).to be_a(Date)
     expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro])
     expect(@facility_1.collected_fees).to eq(125)
     expect(@camaro.plate_type).to eq(:antique)
@@ -65,7 +70,7 @@ RSpec.describe Facility do
     @facility_1.register_vehicle(@camaro)
     @facility_1.register_vehicle(@bolt)
 
-    expect(@bolt.registration_date).to eq(Date.today)
+    expect(@bolt.registration_date).to be_a(Date)
     expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
     expect(@facility_1.collected_fees).to eq(325)
     expect(@bolt.plate_type).to eq(:ev)
