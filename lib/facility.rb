@@ -31,6 +31,13 @@ class Facility
     end
   end
 
+  def administer_written_test(registrant)
+    if services.include?('Written Test') && registrant.permit?
+      registrant.license_data[:written] = true
+    else false
+    end
+  end
+
   def add_collected_fees(vehicle)
     if vehicle.antique?
       @collected_fees += 25
