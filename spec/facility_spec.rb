@@ -95,7 +95,15 @@ RSpec.describe Facility do
     end
   end
 
-  describe 'Iteration 2, Renew License' do
-    #
+  describe 'Iteration 2, Renew License' do #must have service, have license, [and passed road test]<- redundant
+    it '#renew_drivers_license requires service' do
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
+      
+      @facility_1.add_service('Renew License')
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
+      
+      @registrant_1.license_data[:license] = true
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(true)
+    end
   end
 end
