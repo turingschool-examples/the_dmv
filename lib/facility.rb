@@ -31,4 +31,11 @@ class Facility
     end
     @collected_fees
   end
+
+  def administer_written_test(registrant)
+    return false unless services.include?('Written Test') && registrant.permit?
+    registrant.license_data[:written] = true
+    true
+  end
+
 end
