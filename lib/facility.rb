@@ -24,7 +24,6 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    vehicle.is_registered = true
     @registered_vehicles << vehicle
     vehicle.register
   end
