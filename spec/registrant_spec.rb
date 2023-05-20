@@ -83,4 +83,14 @@ describe "Registrant" do
       expect(@registrant_1.license_data[:license]).to be true
     end
   end
+
+  describe "#renew_license" do
+    it "can renew a license" do
+      expect(@registrant_1.license_data[:renewed]).to be false
+      
+      @registrant_1.renew_license
+      
+      expect(@registrant_1.license_data[:renewed]).to be true
+    end
+  end
 end
