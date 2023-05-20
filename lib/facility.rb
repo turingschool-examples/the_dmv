@@ -22,7 +22,7 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    raise StandardError, 'Facility does not offer the Vehicle Registration service.' unless @services.include?('Vehicle Registration')
+    return nil unless @services.include?('Vehicle Registration')
 
     vehicle.registration_date = Date.today
     vehicle.determine_plate_type
