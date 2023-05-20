@@ -6,9 +6,18 @@ RSpec.describe Dmv do
     @or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
     @new_york_facilities = DmvDataService.new.ny_dmv_office_locations
     @missouri_facilities = DmvDataService.new.mo_dmv_office_locations
-    @facility_1 = Facility.new({name: "Albany DMV Office", address: "2242 Santiam Hwy SE Albany OR 97321", phone: "541-967-2014" })
-    @facility_2 = Facility.new({name: "Ashland DMV Office", address: "600 Tolman Creek Rd Ashland OR 97520", phone: "541-776-6092" })
-    @facility_3 = Facility.new({name: "Bend DMV Office", address: "63030 O B Riley Rd Bend OR 97701", phone: "541-388-6322" })
+    @facility_1 = Facility.new({
+      name: "Albany DMV Office", 
+      address: "2242 Santiam Hwy SE Albany OR 97321", 
+      phone: "541-967-2014" })
+    @facility_2 = Facility.new({
+      name: "Ashland DMV Office", 
+      address: "600 Tolman Creek Rd Ashland OR 97520", 
+      phone: "541-776-6092" })
+    @facility_3 = Facility.new({
+      name: "Bend DMV Office", 
+      address: "63030 O B Riley Rd Bend OR 97701", 
+      phone: "541-388-6322" })
   end
 
   describe "#initialize" do
