@@ -46,8 +46,23 @@ RSpec.describe Facility do
     end
 
     it 'can register a new vehicle' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.registered_vehicles).to eq([@cruz])
     end
+    
+    it 'should still have a nil registration date' do
+      expect(@cruz.registration_date).to eq nil
+    end
+
+    it 'should now have a registration date & a plate type' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      expect(@cruz.date_registered).to eq(Date.today)
+      expect(@cruz.plate_finder).to eq(:regular)
+    end
+
+    
+    
   end
 end
