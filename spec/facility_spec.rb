@@ -85,11 +85,11 @@ RSpec.describe Facility do
   describe '#must have services listed to complete that service' do
     it 'should not register a vehicle at this location' do
 
-      expect(facility_2.registered_vehicles).to eq([])
-      expect(facility_2.services).to eq([])
-      expect(facility_2.register_vehicle(bolt)).to eq(nil)
-      expect(facility_2.registered_vehicles).to eq([])
-      expect(facility_2.collected_fees).to eq(0)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.services).to eq([])
+      expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
     end
   end
 
