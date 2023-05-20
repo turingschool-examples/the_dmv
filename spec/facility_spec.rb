@@ -1,4 +1,6 @@
 require 'spec_helper'
+require './lib/facility'
+require './lib/vehicle'
 
 RSpec.describe Facility do
   before(:each) do
@@ -7,6 +9,9 @@ RSpec.describe Facility do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    @registrant_1 = Registrant.new('Bruce', 18, true )
+    @registrant_2 = Registrant.new('Penny', 16 )
+    @registrant_3 = Registrant.new('Tucker', 15 )
   end
   describe '#initialize' do
     it 'can initialize' do
@@ -37,7 +42,7 @@ RSpec.describe Facility do
 
     @facility_1.register_vehicle(@cruz)
 
-    expect(@cruz.registration_date).to eq#(date)
+    expect(@cruz.registration_date).to eq(Date.today)
     expect(@facility_1.registered_vehicles).to eq([@cruz])
     expect(@facility_1.collected_fees).to eq(100)
     expect(@cruz.plate_type).to eq(:regular)
@@ -48,7 +53,7 @@ RSpec.describe Facility do
     @facility_1.register_vehicle(@cruz)
     @facility_1.register_vehicle(@camaro)
 
-    expect(@camaro.registration_date).to eq#(date)
+    expect(@camaro.registration_date).to eq(Date.today)
     expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro])
     expect(@facility_1.collected_fees).to eq(125)
     expect(@camaro.plate_type).to eq(:antique)
@@ -60,7 +65,7 @@ RSpec.describe Facility do
     @facility_1.register_vehicle(@camaro)
     @facility_1.register_vehicle(@bolt)
 
-    expect(@bolt.registration_date).to eq#(date)
+    expect(@bolt.registration_date).to eq(Date.today)
     expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
     expect(@facility_1.collected_fees).to eq(325)
     expect(@bolt.plate_type).to eq(:ev)
