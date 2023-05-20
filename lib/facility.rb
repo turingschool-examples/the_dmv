@@ -40,14 +40,5 @@ class Facility
     @collected_fees += fee
   end
 
-
 end
-
-
-#todo = can track registered vehicles
-#todo = can track collected fees - collect when reg vehicle
-#todo = set plate type
-#todo = fee based on antique?, EV, or regular
-#todo = write logic so FAC will not reg a vehicle without that service
-
 

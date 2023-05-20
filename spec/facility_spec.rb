@@ -52,7 +52,7 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(325)
     end
     
-    xit 'can set registration date on register' do
+    it 'can set registration date on register' do
       @facility_1.add_service('Vehicle Registration')
       expect(@cruz.registration_date).to eq(nil)
       @facility_1.register_vehicle(@cruz)
@@ -72,7 +72,6 @@ RSpec.describe Facility do
       expect(@cruz.plate_type).to eq(:regular)
       expect(@bolt.plate_type).to eq(:ev)
       expect(@camaro.plate_type).to eq(:antique)
-      
     end
 
     it 'only some locations can register vehicles' do
@@ -82,10 +81,6 @@ RSpec.describe Facility do
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.collected_fees).to eq(0)
     end
-
-
-
-
 
   end
 end
