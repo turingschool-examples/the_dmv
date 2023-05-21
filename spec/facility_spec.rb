@@ -109,10 +109,19 @@ RSpec.describe Facility do
       expect(@facility.administer_written_test(@registrant_1)).to eq(true)
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false} )
     end
-    it 'cant give some services to those under 16 with no permit' do
-      expect(@registrant_2.age).to eq (16)
-      expect(@registrant_2.permit?). to eq (false)
+    it 'cant give some services to those 16 with no permit' do
+      expect(@registrant_2.age).to eq(16)
+      expect(@registrant_2.permit?).to eq(false)
       expect(@facility.administer_written_test(@registrant_2)).to eq(false)
+    end
+    it 'can give give a written test to those who are 16 with a permit' do
+      @facility.add_service('Written Test')
+      @registrant_2.earn_permit
+      @registrant_2.permit?
+      expect(@facility.services.include?('Written Test')).to eq (true)
+      expect(@facility.administer_written_test(@registrant_2)).to eq(true)
+      expect(@registrant_2.permit?).to eq(true)
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false} )
     end
   end
 end
