@@ -1,6 +1,7 @@
 require 'spec_helper'
 require './lib/facility'
 require './lib/vehicle'
+require './lib/registrant'
 require 'date'
 
 RSpec.describe Facility do
@@ -104,6 +105,16 @@ RSpec.describe Facility do
     it 'collects the fees for facility_2' do
       @facility_2.collect_fees
       expect(@facility_2.collected_fees).to eq(0)
+    end
+  end
+
+  describe '#drivers license' do
+    it 'assess registrant info' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Penny', 16 )
+      registrant_3 = Registrant.new('Tucker', 15 )
+      expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(registrant_1.permit?).to eq(true)
     end
   end
 end
