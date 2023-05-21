@@ -18,6 +18,4 @@ class VehicleFactory
     end
     @created_vehicles
   end
-
-  
 end
