@@ -18,11 +18,13 @@ RSpec.describe VehicleFactory do
     expect(@factory.created_vehicles.count).to eq(2)
   end 
 
-  it "can create multiple vehicles at once" do 
-    vehicle_array = [{}, {}] 
+  it "can create multiple unique vehicles at once" do 
+    vehicle_array = [{vin: 98}, {make: "Lambo"}] 
     @factory.create_vehicle_order(vehicle_array)
     expect(@factory.created_vehicles[0]).to be_an_instance_of(Vehicle)
     expect(@factory.created_vehicles[1]).to be_an_instance_of(Vehicle)
+    expect(@factory.created_vehicles[0].vin).to eq(98)
+    expect(@factory.created_vehicles[1].make).to eq("Lambo")    
     expect(@factory.created_vehicles.count).to eq(2)
   end 
 
