@@ -11,6 +11,10 @@ class Registrant
     @permit
   end
 
+  def old_enough?
+    @age >= 16
+  end
+
   def earn_permit
     @permit = true
   end

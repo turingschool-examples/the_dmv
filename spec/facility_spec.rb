@@ -107,7 +107,7 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
     
-    xit 'can check if registrant is qualified' do
+    it 'can check if registrant is qualified' do
       @facility_1.add_service('Written Test')
       expect(@registrant_2.age).to eq(16)
       expect(@registrant_2.permit?).to eq(false)
@@ -117,7 +117,7 @@ RSpec.describe Facility do
       expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
 
-    xit 'can reject unqualified registrant' do
+    it 'can reject unqualified registrant' do
       @facility_1.add_service('Written Test')
       expect(@registrant_3.age).to eq(15)
       expect(@registrant_3.permit?).to eq(false)
@@ -132,13 +132,13 @@ RSpec.describe Facility do
   describe '#Road Test' do
     xit 'will selectively administer road test if service is added' do
       @facility_1.add_service('Written Test')
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
+      @facility_1.add_service('Road Test')
+      expect(@facility_1.services).to eq(['Written Test', 'Road Test'])
       expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
       @registrant_3.earn_permit
       expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
       expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-      expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
-      @facility_1.add_service('Road Test')
-      expect(@facility_1.services).to eq(['Written Test', 'Road Test'])
       expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
       expect(@facility_1.administer_road_test(@registrant_2)).to eq(true)
