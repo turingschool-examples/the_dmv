@@ -34,4 +34,15 @@ RSpec.describe Registrant do
       expect(registrant_1.license_data).to eq(expected)
     end
   end
+
+  describe '#earn_permit' do
+    it 'can allow registrant to earn permit if age 16 or above' do
+      registrant_2 = Registrant.new("Penny", 15)
+      registrant_3 = Registrant.new("Otis", 16)
+      expect(registrant_2.earn_permit).to eq "Registrant is not yet old enough to earn permit."
+      expect(registrant_3.permit?).to eq false
+      registrant_3.earn_permit
+      expect(registrant_3.permit?).to eq true
+    end
+  end
 end
