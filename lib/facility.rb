@@ -59,4 +59,14 @@ class Facility
       p "Facility does not currently offer this service."
     end
   end
+
+  def renew_drivers_license(registrant)
+    if @services.include?("Renew License") && registrant.license_data[:license] == true
+      registrant.license_data[:renewed] = true
+    elsif @services.include?("Renew License") && registrant.license_data[:license] == false
+      p "Registrant must first obtain a license for it to be renewed."
+    else
+      p "Facility does not currently offer this service."
+    end
+  end
 end
