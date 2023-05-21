@@ -27,7 +27,7 @@ class Facility
       collect_fee(vehicle)
     end
   end
-
+  
   def collect_fee(vehicle)
     fee = 0
     if vehicle.plate_type == :antique
@@ -39,6 +39,21 @@ class Facility
     end
     @collected_fees += fee
   end
+  
+  def administer_written_test(registrant)
+    if @services.include?('Written Test') && (registrant.age >= 16)
+      if registrant.permit?
+        registrant.license_data[:written] = true
+      else
+        false
+      end
+    else
+      false
+    end
+    
+  end
+
+
 
 end
 

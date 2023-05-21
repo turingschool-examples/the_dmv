@@ -90,17 +90,17 @@ RSpec.describe Facility do
   end
 
   describe '#written Test' do
-    xit 'will only provide service if added' do
+    it 'will only provide service if added' do
       expect(@facility_1.services).to eq([])
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
     end
     
-    xit 'can check registrant status' do
+    it 'can check registrant status' do
       expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       expect(@registrant_1.permit?).to eq(true)
     end
     
-    xit 'can administer written test' do
+    it 'can administer written test' do
       @facility_1.add_service('Written Test')
       expect(@facility_1.services).to eq(['Written Test'])
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
