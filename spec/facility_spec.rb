@@ -9,9 +9,9 @@ RSpec.describe Facility do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
-    registrant_1 = Registrant.new('Bruce', 18, true )
-    registrant_2 = Registrant.new('Penny', 16 )
-    registrant_3 = Registrant.new('Tucker', 15 )
+    @registrant_1 = Registrant.new('Bruce', 18, true )
+    @registrant_2 = Registrant.new('Penny', 16 )
+    @registrant_3 = Registrant.new('Tucker', 15 )
 
   end
   describe '#initialize' do
@@ -83,17 +83,17 @@ RSpec.describe Facility do
       expect(@facility_2.services).to eq([])
     end
   end
-  # describe 'registrants can use facility' do
-  #   it 'can provide driver data' do
-  #     registrant_1 = Registrant.new('Bruce', 18, true )
-  #     registrant_2 = Registrant.new('Penny', 16 )
-  #     registrant_3 = Registrant.new('Tucker', 15 )
-  #     registrant_1.license_data
-  #     registrant_1.permit?
-  #     expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false} )
-  #     expect(registrant_1.permit?).to eq(true)
-  #   end
-  # end
+  describe 'registrants can use facility' do
+    it 'can provide driver data' do
+      # registrant_1 = Registrant.new('Bruce', 18, true )
+      # registrant_2 = Registrant.new('Penny', 16 )
+      # registrant_3 = Registrant.new('Tucker', 15 )
+      @registrant_1.license_data
+      @registrant_1.permit?
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false} )
+      expect(@registrant_1.permit?).to eq(true)
+    end
+  end
   # xdescribe 'facility cannot administer a test it does not offer' do #why administer a test before the facility offer the service?
   #   xit "facility cant administer a test it doesn't offer" do
   #   registrant_1 = Registrant.new('Bruce', 18, true )
