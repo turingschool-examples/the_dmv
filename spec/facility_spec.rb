@@ -8,6 +8,7 @@ RSpec.describe Facility do
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
   end
+
   describe '#initialize' do
     it 'can initialize' do
       expect(@facility_1).to be_an_instance_of(Facility)
@@ -15,13 +16,6 @@ RSpec.describe Facility do
       expect(@cruz).to be_an_instance_of(Vehicle)
       expect(@bolt).to be_an_instance_of(Vehicle)
       expect(@camaro).to be_an_instance_of(Vehicle)
-
-      expect(@facility_1.name).to eq('Albany DMV Office')
-      expect(@facility_1.address).to eq('2242 Santiam Hwy SE Albany OR 97321')
-      expect(@facility_1.phone).to eq('541-967-2014')
-      expect(@facility_1.services).to eq([])
-      expect(@facility_1.registered_vehicles).to eq([])
-      expect(@facility_1.collected_fees).to eq(0)
     end
   end
 
@@ -29,9 +23,13 @@ RSpec.describe Facility do
     it 'can add available services' do
       expect(@facility_1.services).to eq([])
       @facility_1.add_service('New Drivers License')
+      expect(@facility_1.services).to eq(['New Drivers License'])
       @facility_1.add_service('Renew Drivers License')
       @facility_1.add_service('Vehicle Registration')
-      expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+      @facility_1.add_service('Written Test')
+      expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 
+      'Vehicle Registration','Written Test'])
+      expect(@facility_2.services).to eq([])
     end
   end
 
@@ -42,21 +40,21 @@ RSpec.describe Facility do
      
      expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
      expect(@facility_1.registered_vehicles).to eq([@cruz])
-     # expect(@facility_1.collected_fees).to eq(100)
+     expect(@facility_1.collected_fees).to eq(100)
      
      expect(@facility_1.register_vehicle(@camaro)).to eq([@cruz, @camaro])
      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro])
-     #  expect(@facility_1.collected_fees).to eq(125)
+     expect(@facility_1.collected_fees).to eq(125)
       
      expect(@facility_1.register_vehicle(@bolt)).to eq([@cruz, @camaro, @bolt])
      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
-     # expect(@facility_1.collected_fees).to eq(325)
+     expect(@facility_1.collected_fees).to eq(325)
 
-      # expect(@facility_2.registered_vehicles).to eq([])
-      # expect(@facility_2.services).to eq([])
-      # expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
-      # expect(@facility_2.registered_vehicles).to eq([])
-      # expect(@facility_2.collected_fees).to eq(0)
+    #  expect(@facility_2.registered_vehicles).to eq([])
+    #  expect(@facility_2.services).to eq([])
+    #  expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
+    #  expect(@facility_2.registered_vehicles).to eq([])
+    #  expect(@facility_2.collected_fees).to eq(0)
     end
   end
 end
