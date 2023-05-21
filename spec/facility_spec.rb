@@ -35,6 +35,9 @@ RSpec.describe Facility do
 
   describe '#add attributes' do
     it 'add registered_vehicles and collected_fees' do
+      @facility_1.add_service('New Drivers License')
+      @facility_1.add_service('Renew Drivers License')
+      @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.registered_vehicles).to eq([])
       expect(@facility_1.collected_fees).to eq(0)
     end
@@ -42,6 +45,7 @@ RSpec.describe Facility do
 
   describe '#register_vehicle' do
     it 'add method to register vehicles' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.registered_vehicles).to eq([@cruz])
     end
@@ -49,6 +53,7 @@ RSpec.describe Facility do
 
   describe '#collect fees' do
     it 'finds collected fees amount' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       @facility_1.collect_fees
       expect(@facility_1.registered_vehicles).to eq([@cruz])
@@ -59,6 +64,7 @@ RSpec.describe Facility do
   describe '#register more vehicles' do
     it 'registers more vehicles' do
       date = Date.today
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
@@ -75,6 +81,7 @@ RSpec.describe Facility do
 
   describe '#collect fees' do
     it 'collects fees from all vehicles' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
@@ -85,9 +92,6 @@ RSpec.describe Facility do
 
   describe '#facility_2' do
     it 'check facility_2' do
-      @facility_1.register_vehicle(@cruz)
-      @facility_1.register_vehicle(@camaro)
-      @facility_1.register_vehicle(@bolt)
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.services).to eq([])
       @facility_2.register_vehicle(@bolt)

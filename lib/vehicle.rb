@@ -49,5 +49,4 @@ class Vehicle
   def register
     @registered = true
   end
-  
 end
