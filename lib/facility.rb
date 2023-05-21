@@ -38,4 +38,7 @@ class Facility
   def add_service(service)
     @services << service
   end
+
+#   def administer_written_test(data)
+#   end
 end
