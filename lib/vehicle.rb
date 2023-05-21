@@ -32,8 +32,9 @@ class Vehicle
      if self.antique? 
         @plate_type = :antique
      elsif self.electric_vehicle?
-      @plate_type = :ev 
-     else @plate_type = :regular 
+        @plate_type = :ev 
+     else 
+      @plate_type = :regular 
      end
   end 
 
