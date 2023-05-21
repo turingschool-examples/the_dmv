@@ -38,6 +38,12 @@ class Facility
     @collected_fees += plate_type_fees[vehicle.plate_type] || 100
   end
 
+  def earn_permit(registrant)
+    return nil unless registrant.age > 15
+
+    registrant.earn_permit
+  end
+
   def administer_written_test(registrant)
     return nil unless registrant.permit? && registrant.age > 15 && @services.include?('Written Test')
 
@@ -48,5 +54,11 @@ class Facility
     return nil unless registrant.written_test? && @services.include?('Road Test')
 
     registrant.administer_road_test
+  end
+
+  def renew_drivers_license(registrant)
+    return nil unless registrant.written_test? && registrant.road_test? && services.include?('Renew License')
+
+    registrant.renew_drivers_license
   end
 end
