@@ -29,6 +29,16 @@ RSpec.describe Dmv do
       phone: "5857531604"})
     
     @missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+    @mo_office_1 = Facility.new({
+      name: "FERGUSON-OFFICE CLOSED UNTIL FURTHER NOTICE",
+      address: "10425 WEST FLORISSANT",
+      phone: "(314) 733-5316"
+    })
+    @mo_office_2 = Facility.new({
+      name: "BONNE TERRE",
+      address: "30 N ALLEN ST",
+      phone: "(573) 358-3584"
+    })
   end
 
   describe "#initialize" do
@@ -68,6 +78,7 @@ RSpec.describe Dmv do
 
   describe "#add Oregon offices" do
     it "can create facility objects from Oregon data" do
+      @dmv.or_parse(@or_dmv_office_locations)
       expect(@dmv.create_facilities(@or_dmv_office_locations).first.name).to eq(@facility_1.name)
       expect(@dmv.create_facilities(@or_dmv_office_locations).first.address).to eq(@facility_1.address)
       expect(@dmv.create_facilities(@or_dmv_office_locations).first.phone).to eq(@facility_1.phone)
@@ -76,10 +87,21 @@ RSpec.describe Dmv do
 
   describe "#add New York offices" do
     it "can create facility objects from New York data" do
+      @dmv.ny_parse(@new_york_facilities)
       expect(@dmv.create_facilities(@new_york_facilities).first.name).to eq(@ny_office_1.name)
       expect(@dmv.create_facilities(@new_york_facilities).first.address).to eq(@ny_office_1.address)
       expect(@dmv.create_facilities(@new_york_facilities).first.phone).to eq(@ny_office_1.phone)
       expect(@dmv.create_facilities(@new_york_facilities)[1].phone).to eq(@ny_office_2.phone)
+    end
+  end
+
+  describe "#add Missouri offices" do
+    it "can create facility objects from Missouri data" do
+      @dmv.mo_parse(@missouri_facilities)
+      expect(@dmv.create_facilities(@missouri_facilities).first.name).to eq(@mo_office_1.name)
+      expect(@dmv.create_facilities(@missouri_facilities).first.address).to eq(@mo_office_1.address)
+      expect(@dmv.create_facilities(@missouri_facilities).first.phone).to eq(@mo_office_1.phone)
+      expect(@dmv.create_facilities(@missouri_facilities)[1].phone).to eq(@mo_office_2.phone)
     end
   end
 end
