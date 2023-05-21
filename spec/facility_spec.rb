@@ -107,7 +107,12 @@ RSpec.describe Facility do
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration', 'Written Test'])
       expect(@facility.services.include?('Written Test')).to eq (true)
       expect(@facility.administer_written_test(@registrant_1)).to eq(true)
-      # expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false} )
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false} )
+    end
+    it 'cant give some services to those under 16 with no permit' do
+      expect(@registrant_2.age).to eq (16)
+      expect(@registrant_2.permit?). to eq (false)
+      expect(@facility.administer_written_test(@registrant_2)).to eq(false)
     end
   end
 end
