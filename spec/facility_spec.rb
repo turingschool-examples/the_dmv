@@ -262,7 +262,12 @@ RSpec.describe Facility do
       expect(@registrant_3.license_data).to eq({ written: false, license: false, renewed: false })
 
       @facility_1.add_service('Road Test')
+      expect(@facility_1.services).to eq(['Written Test', 'Road Test'])
+
       @facility_1.administer_road_test(@registrant_1)
+      expect(@registrant_1.license_data).to eq({ written: true, license: true, renewed: false })
+
+      @facility_1.administer_road_test(@registrant_2)
       expect(@registrant_1.license_data).to eq({ written: true, license: true, renewed: false })
     end
   end
