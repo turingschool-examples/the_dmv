@@ -1,10 +1,15 @@
 require 'pry'
+require 'date'
+require 'faraday'
+require 'json'
+
 require './lib/dmv'
 require './lib/facility'
 require './lib/vehicle'
 require './lib/dmv_data_service'
 require './lib/registrant'
-require 'date'
+require './lib/vehicle_factory'
+
 
 RSpec.configure do |config|
   config.before(:each) do
@@ -21,5 +26,7 @@ RSpec.configure do |config|
     @facility_3 = Facility.new({name: 'Bend DMV Office', address: '63030 O B Riley Rd Bend OR 97701', phone: '541-388-6322'})
 
     @dmv = Dmv.new
+
+    @factory = VehicleFactory.new 
   end
 end
