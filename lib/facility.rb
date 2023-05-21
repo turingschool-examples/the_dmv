@@ -39,6 +39,7 @@ class Facility
     @services << service
   end
 
-#   def administer_written_test(data)
-#   end
+  # def administer_written_test(data)
+  #     @facility.administer_written_test.include?(data)
+  # end
 end
