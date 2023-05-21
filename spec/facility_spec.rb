@@ -130,8 +130,11 @@ RSpec.describe Facility do
   end
   
   describe '#Road Test' do
-    xit 'will selectively administer road test if service is added' do
+    it 'will selectively administer road test if service is added' do
       @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@registrant_1)
+      @registrant_2.earn_permit
+      @facility_1.administer_written_test(@registrant_2)
       expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
       @facility_1.add_service('Road Test')
       expect(@facility_1.services).to eq(['Written Test', 'Road Test'])
