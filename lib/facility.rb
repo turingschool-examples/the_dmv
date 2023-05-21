@@ -5,7 +5,8 @@ class Facility
               :phone, 
               :services, 
               :registered_vehicles,
-              :collected_fees
+              :collected_fees,
+              :services
 
   def initialize(data)
     @name = data[:name]
