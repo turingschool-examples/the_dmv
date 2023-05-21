@@ -27,7 +27,7 @@ class Facility
       collect_fee(vehicle)
     end
   end
-
+  
   def collect_fee(vehicle)
     fee = 0
     if vehicle.plate_type == :antique
@@ -38,6 +38,34 @@ class Facility
       fee = 100
     end
     @collected_fees += fee
+  end
+  
+  def administer_written_test(registrant)
+    if @services.include?('Written Test') && registrant.old_enough?
+      if registrant.permit?
+        registrant.license_data[:written] = true
+      else
+        false
+      end
+    else
+      false
+    end
+  end
+  
+  def administer_road_test(registrant)
+    if @services.include?('Road Test') && registrant.license_data[:written]
+      registrant.license_data[:license] = true
+    else
+      false
+    end
+  end
+  
+  def renew_drivers_license(registrant)
+    if @services.include?('Renew License') && registrant.license_data[:license]
+      registrant.license_data[:renewed] = true
+    else
+      false
+    end
   end
 
 end
