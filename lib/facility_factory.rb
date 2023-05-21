@@ -22,7 +22,7 @@ class FacilityFactory
           phone: facility_data[:public_phone_number]
           })
           @operating_facilities << facility 
-      else
+        else 
       end
     end
     @operating_facilities
