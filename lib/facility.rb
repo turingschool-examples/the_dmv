@@ -39,7 +39,12 @@ class Facility
     @services << service
   end
 
-  # def administer_written_test(data)
-  #     @facility.administer_written_test.include?(data)
-  # end
+  def administer_written_test(data)
+    if @services.include?('Written Test')
+      true 
+      else 
+      false 
+    end
+  #     @facility.administer_written_test.include?(data) 
+  end
 end

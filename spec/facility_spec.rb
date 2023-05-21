@@ -83,7 +83,7 @@ RSpec.describe Facility do
       expect(@facility_2.services).to eq([])
     end
   end
-  describe 'registrants can use facility' do
+  describe '#registrants can use facility' do
     it 'can provide driver data' do
       # registrant_1 = Registrant.new('Bruce', 18, true )
       # registrant_2 = Registrant.new('Penny', 16 )
@@ -94,20 +94,19 @@ RSpec.describe Facility do
       expect(@registrant_1.permit?).to eq(true)
     end
   end
-  # xdescribe 'facility cannot administer a test it does not offer' do #why administer a test before the facility offer the service?
-  #   xit "facility cant administer a test it doesn't offer" do
-  #   registrant_1 = Registrant.new('Bruce', 18, true )
-  #   @facility.administer_written_test(registrant_1)
-  #   expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false} )
-  #   expect(@facility.administer_written_test(registrant_1)).to eq(false)
-  #   end
-  # end
+  describe '#written test' do #why administer a test before the facility offer the service?
+    it "facility cant administer a test it doesn't offer" do
+    # @facility.administer_written_test(@registrant_1)
+    expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false} )
+    expect(@registrant_1.permit?).to eq(true)
+    expect(@facility.administer_written_test(@registrant_1)).to eq(false)
+    end
+  end
   # describe 'facility can check data' do
   #   it 'can do service checks' do
-  #     registrant_1 = Registrant.new('Bruce', 18, true )
-  #     @facility.administer_written_test(registrant_1)
+  #     @facility.administer_written_test(@registrant_1)
   #     # @facility.add_service('Written Test')
-  #     expect(@facility.administer_written_test(registrant_1)).to eq(true)
+  #     expect(@facility.administer_written_test(@registrant_1)).to eq(true)
   #     # expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration', 'Written Test'])
   #   end
   # end
