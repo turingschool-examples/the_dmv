@@ -18,7 +18,7 @@ class Facility
   def add_service(service)
     @services << service
   end
-# Redo later? Add accessor to vehicle method and assign plate type from here as well?
+
   def register_vehicle(vehicle)
     if @services.include?("Vehicle Registration")
       vehicle.register
@@ -35,27 +35,21 @@ class Facility
 
   def administer_written_test(registrant)
     if @services.include?("Written Test")
-      if registrant.age >= 16 && registrant.permit?
-        registrant.license_data[:written] = true
-      end
+        registrant.pass_written_test
     end
     registrant.license_data[:written]
   end
 
   def administer_road_test(registrant)
     if @services.include?("Road Test")
-      if registrant.license_data[:written] == true
-        registrant.license_data[:license] = true
-      end
+        registrant.earn_license
     end
     registrant.license_data[:license]
   end
 
   def renew_drivers_license(registrant)
     if @services.include?("Renew License")
-      if registrant.license_data[:license] == true
-        registrant.license_data[:renewed] = true
-      end
+        registrant.renew_license
     end
     registrant.license_data[:renewed]
   end
