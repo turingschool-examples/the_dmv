@@ -33,4 +33,14 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  it "can be registered" do
+    expect(@camaro.is_registered).to eq(false)
+
+    @camaro.register
+
+    expect(@camaro.is_registered).to eq(true)
+    expect(@camaro.registration_date).to be_a(Date)
+    expect(@camaro.plate_type).to eq(:antique)
+  end
 end
