@@ -39,6 +39,4 @@ class Facility
       nil
     end
   end
-  
-
 end
