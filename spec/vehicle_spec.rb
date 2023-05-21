@@ -33,4 +33,7 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+ 
+ 
 end
