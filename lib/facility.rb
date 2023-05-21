@@ -50,8 +50,24 @@ class Facility
     end
   end
 
+  def administer_road_test(registrant)
+    if registrant.license_data[:written] == true
+      true
+      registrant.license_data[:license] = true
+      registrant.license_data[:written] = true
+    else
+      registrant.license_data[:written] = false
+      registrant.license_data[:license] = false
+    end
+  end
 
-
-
-
+  def renew_drivers_license(registrant)
+    if registrant.license_data[:license] == true
+      true
+      registrant.license_data[:renewed] = true
+    else
+      false
+      registrant.license_data[:renewed] = false
+    end
+  end
 end
