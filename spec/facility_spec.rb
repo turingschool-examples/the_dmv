@@ -147,4 +147,27 @@ RSpec.describe Facility do
       expect(@facility_1.administer_road_test(@registrant_2)).to eq "Registrant must first pass written exam before being administered road test."
     end
   end
+
+  describe '#renew_drivers_license' do
+    it 'gives proper notification if service isnt offered' do
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq "Facility does not currently offer this service."
+    end
+
+    it 'notifies the registrant if they havent first obtained a license' do
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Renew License')
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq "Registrant must first obtain a license for it to be renewed."
+    end
+
+    it 'successfully renews license for those eligible' do
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Renew License')
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+      @facility_1.renew_drivers_license(@registrant_1)
+      expect(@registrant_1.license_data[:renewed]).to eq true
+    end
+  end
 end
