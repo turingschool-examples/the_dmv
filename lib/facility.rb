@@ -49,4 +49,14 @@ class Facility
       p "Facility does not currently offer this service."
     end
   end
+
+  def administer_road_test(registrant)
+    if @services.include?("Road Test") && registrant.license_data[:written] == true
+      registrant.license_data[:license] = true
+    elsif @services.include?("Road Test") && registrant.license_data[:written] == false
+      p "Registrant must first pass written exam before being administered road test."
+    else
+      p "Facility does not currently offer this service."
+    end
+  end
 end
