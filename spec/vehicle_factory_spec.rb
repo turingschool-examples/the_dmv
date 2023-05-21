@@ -9,4 +9,9 @@ RSpec.describe VehicleFactory do
       expect(factory).to be_an_instance_of(VehicleFactory)
     end
   end
+  describe '#create_vehicles' do
+    it 'takes in car registrations and makes them Vehicle objects' do
+      
+    end
+  end
 end
