@@ -1,4 +1,3 @@
-#permit of registrant_2 not following interaction pattern fully, shouldn't have to include. Maybe false by default? 
 RSpec.describe Registrant do
   before(:each) do
       @registrant_1 = Registrant.new({name: 'Bruce', age: 18, permit: true} )

@@ -34,7 +34,7 @@ class Facility
       @registered_vehicles
     end
   end
-  
+
   def add_service(service)
     @services << service
   end
