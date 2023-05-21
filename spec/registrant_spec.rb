@@ -2,6 +2,7 @@ require 'spec_helper'
 
 registrant_1 = Registrant.new('Bruce', 18, true )
 registrant_2 = Registrant.new('Penny', 15 )
+registrant_3 = Registrant.new('Tucker', 15 )
 
 describe Registrant do
   it 'checks registrant_1' do
