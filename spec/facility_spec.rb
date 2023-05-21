@@ -66,7 +66,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#adminster_written_test' do
+  describe '#administer_written_test' do
     it 'can give a written test' do
       require 'pry'; binding.pry
       expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
