@@ -26,26 +26,45 @@ RSpec.describe Facility do
   end
   describe '#register vehicles' do
     it 'can register vehicles' do
+      @facility.add_service('Vehicle Registration')
       @facility.register_vehicle(@cruz)
-      # expect(@facility.registered_vehicles).to eq([@cruz])
+      @facility.register_vehicle(@camaro)
+      @facility.register_vehicle(@bolt)
+      expect(@facility.registered_vehicles).to eq([@cruz, @camaro, @bolt])
     end
     it 'can update registration dates on vehicles' do
+      @facility.add_service('Vehicle Registration')
       @facility.register_vehicle(@cruz)
+      @facility.register_vehicle(@camaro)
+      @facility.register_vehicle(@bolt)
       expect(@cruz.registration_date).to eq(Date.today)
+      expect(@camaro.registration_date).to eq(Date.today)
+      expect(@bolt.registration_date).to eq(Date.today)
     end
     it 'can assign plate type' do
+      @facility.add_service('Vehicle Registration')
       @facility.register_vehicle(@cruz)
+      @facility.register_vehicle(@camaro)
+      @facility.register_vehicle(@bolt)
       expect(@cruz.plate_type).to eq :regular
+      expect(@camaro.plate_type).to eq :antique
+      expect(@bolt.plate_type).to eq :ev
     end
-    it 'can add registered vehicles to data' do
+    it 'cannot register vehicle if does not offer service' do
+      @facility.add_service('Vehicle Registration')
       @facility.register_vehicle(@cruz)
-      expect(@facility.registered_vehicles).to eq([@cruz]) #didn't I add this test. note to self to look back
-      expect(@facility.collected_fees).to eq (100)
+      @facility.register_vehicle(@camaro)
+      @facility.register_vehicle(@bolt)
+      expect(@facility.registered_vehicles).to eq([@cruz, @camaro, @bolt]) 
+      expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
+      expect(@facility_2.registered_vehicles).to eq([])
     end
-  end
-  describe '#collected fees' do
     it 'keeps track of collected fees' do
-      expect(@facility.collected_fees).to eq(0)
+      @facility.add_service('Vehicle Registration')
+      @facility.register_vehicle(@cruz)
+      @facility.register_vehicle(@camaro)
+      @facility.register_vehicle(@bolt)
+      expect(@facility.collected_fees).to eq(325)
       expect(@facility_2.collected_fees).to eq(0)
     end
   end
@@ -56,6 +75,7 @@ RSpec.describe Facility do
       @facility.add_service('Renew Drivers License')
       @facility.add_service('Vehicle Registration')
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+      expect(@facility_2.services).to eq([])
     end
   end
 end
