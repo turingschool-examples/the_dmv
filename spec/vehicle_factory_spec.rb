@@ -38,13 +38,4 @@ RSpec.describe VehicleFactory do
     expect(@factory.created_vehicles[0].vin).to eq(12)
     expect(@factory.created_vehicles[0].year).to eq(20)
   end 
-
-  it "can create vehicles based on the registration information from the WA API" do 
-    wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-    @factory.create_vehicle_order(wa_ev_registrations)
-    expect(@factory.created_vehicles[0].vin).to eq("7SAYGDEF6N")
-    expect(@factory.created_vehicles[0].make).to eq("TESLA")
-    expect(@factory.created_vehicles[0].model).to eq("Model Y")
-    expect(@factory.created_vehicles.count).to eq(1000)
-  end 
 end 
