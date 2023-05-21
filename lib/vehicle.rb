@@ -8,7 +8,7 @@ class Vehicle
               :engine,
               :register,
               :plate_type,
-              :registration_date
+              :registration_date,
               :is_registered
 
   def initialize(vehicle_details)
@@ -35,11 +35,11 @@ class Vehicle
     @registration_date = Date.today
     
     if self.antique? == true
-      plate_type = :antique
+      @plate_type = :antique
     elsif @engine == :ev
-      plate_type = :ev
+      @plate_type = :ev
     else
-      plate_type = :regular
+      @plate_type = :regular
     end
   end
 end
