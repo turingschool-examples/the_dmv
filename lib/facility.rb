@@ -24,7 +24,17 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    @registered_vehicles << vehicle
-    vehicle.register
+    if @services.include?('Vehicle Registration')
+      vehicle.register
+      @registered_vehicles << vehicle
+        if vehicle.engine == :ev
+          @collected_fees += 200
+        elsif vehicle.plate_type == :antique
+          @collected_fees += 25
+        else
+          @collected_fees += 100
+        end
+      else
+    end
   end
 end
