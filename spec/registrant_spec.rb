@@ -31,9 +31,5 @@ RSpec.describe Registrant do
         expect(@registrant_2.permit?).to be true
       end
     end
-
-
-
-
     
   end
