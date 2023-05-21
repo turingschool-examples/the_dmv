@@ -11,7 +11,16 @@ RSpec.describe VehicleFactory do
   end
   describe '#create_vehicles' do
     it 'takes in car registrations and makes them Vehicle objects' do
+      factory = VehicleFactory.new
+      @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      vehicle_array = factory.create_vehicles(@wa_ev_registrations)
+      expect(vehicle_array.first).to be_an_instance_of(Vehicle)
+      expect(vehicle_array).to be_a(Array)
+      expect(vehicle_array.first.make).to eq("TESLA")
+    end
+    it 'can take in registration information from more than one source' do
       
     end
+
   end
 end
