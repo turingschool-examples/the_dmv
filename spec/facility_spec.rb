@@ -83,7 +83,17 @@ RSpec.describe Facility do
     end
   end
 
-
+  describe '#facility_2' do
+    it 'check facility_2' do
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.services).to eq([])
+      @facility_2.register_vehicle(@bolt)
+      expect(@facility_2.registered_vehicles).to eq([])
+    end
+  end
 end
 
 # describe '#add registration date' do

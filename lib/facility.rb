@@ -14,16 +14,18 @@ class Facility
     @registered_vehicles =[]
     @collected_fees = 0
   end
-
+              
   def add_service(service)
     @services << service
   end
-
+              
   def register_vehicle(vehicle)
+    vehicle.add_registration_date(Date.today)
     vehicle.add_plate_type
-    @registered_vehicles << vehicle
+    @registered_vehicles << vehicle unless vehicle_registered?(vehicle) || vehicle.registered?
+    vehicle.register
   end
-
+              
   def collect_fees
     @registered_vehicles.each do |vehicle|
       if vehicle.plate_type == :regular
@@ -36,5 +38,9 @@ class Facility
     end
   end
 
+  def vehicle_registered?(vehicle)
+    @registered_vehicles.include?(vehicle)
+  end
 
 end
+
