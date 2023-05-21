@@ -41,5 +41,13 @@ class Vehicle
       @plate_type = :regular
     end
   end
+
+  def registered?
+    @registered
+  end
+
+  def register
+    @registered = true
+  end
   
 end

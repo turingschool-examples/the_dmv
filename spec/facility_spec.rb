@@ -56,20 +56,44 @@ RSpec.describe Facility do
     end
   end
 
-  describe 'register more vehicles' do
+  describe '#register more vehicles' do
     it 'registers more vehicles' do
       date = Date.today
+      @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
+      @cruz.add_registration_date(date)
       @camaro.add_registration_date(date)
       @bolt.add_registration_date(date)
       expect(@camaro.registration_date).to eq(date)
       expect(@camaro.plate_type).to eq(:antique)
       expect(@bolt.registration_date).to eq(date)
       expect(@bolt.plate_type).to eq(:ev)
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
     end
   end
 
+  describe '#collect fees' do
+    it 'collects fees from all vehicles' do
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+      @facility_1.collect_fees
+      expect(@facility_1.collected_fees).to eq(325)
+    end
+  end
+
+  describe '#facility_2' do
+    it 'check facility_2' do
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.services).to eq([])
+      @facility_2.register_vehicle(@bolt)
+      expect(@facility_2.registered_vehicles).to eq([])
+    end
+  end
 end
 
 # describe '#add registration date' do
