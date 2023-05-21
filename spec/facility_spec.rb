@@ -25,7 +25,9 @@ RSpec.describe Facility do
   end
 end
 
-# REGISTERING A VEHICLE
+
+# ---------- REGISTERING A VEHICLE ----------
+
 RSpec.describe Facility do
   before(:each) do
     @facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
@@ -99,7 +101,9 @@ RSpec.describe Facility do
   end
 end
 
-# GETTING A DRIVERS LICENSE
+
+# ---------- GETTING A DRIVERS LICENSE ----------
+
 RSpec.describe Facility do
   before(:each) do
     @registrant_1 = Registrant.new('Bruce', 18, true )
@@ -117,7 +121,7 @@ RSpec.describe Facility do
       expect(@facility_2).to be_an_instance_of(Facility)
     end
 
-    # WRITTEN TEST
+    # ---------- WRITTEN TEST ----------
 
     it 'cannot administer written test without service' do
       expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
@@ -163,7 +167,7 @@ RSpec.describe Facility do
       expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
     
-    # ROAD TEST
+    # ---------- ROAD TEST ----------
     
     it 'cannot administer Road Test without service
     or to registrant without permit and written test' do
@@ -188,7 +192,7 @@ RSpec.describe Facility do
     expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
   end
   
-  it ' can administer Road Test to registrant 2' do
+  it 'can administer Road Test to registrant 2' do
     @facility_1.add_service('Written Test')
     @facility_1.add_service('Road Test')
     
@@ -202,7 +206,55 @@ RSpec.describe Facility do
     expect(@facility_1.administer_written_test(@registrant_2)).to eq true
     expect(@facility_1.administer_road_test(@registrant_2)).to eq true
     expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+    end
 
+    # ---------- RENEW LICENSE ----------
+
+    it 'cannot renew license without Renew Service' do
+      @facility_1.renew_drivers_license(@registrant_1)
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq false
+    end
+
+    it 'now has the service and can Renew Licenses to registrants with license' do
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Renew License')
+      
+      @registrant_1.earn_permit
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+
+      @facility_1.renew_drivers_license(@registrant_1)
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq true
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+    end
+
+    it 'cannot Renew License of registrant without license' do
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Renew License')
+
+      @registrant_3.earn_permit
+      @facility_1.administer_written_test(@registrant_3)
+      @facility_1.administer_road_test(@registrant_3)
+
+      @facility_1.renew_drivers_license(@registrant_3)
+      expect(@facility_1.renew_drivers_license(@registrant_3)).to eq false
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+
+    it 'can renew registrant 2s license' do
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Renew License')
+
+      @registrant_2.earn_permit
+      @facility_1.administer_written_test(@registrant_2)
+      @facility_1.administer_road_test(@registrant_2)
+
+      @facility_1.renew_drivers_license(@registrant_2)
+      expect(@facility_1.renew_drivers_license(@registrant_2)).to eq true
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
     end
   end
 end
