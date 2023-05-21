@@ -5,5 +5,9 @@ RSpec.describe VehicleFactory do
     factory = VehicleFactory.new
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     expect(factory.create_vehicles(wa_ev_registrations)).to be_an_instance_of(Array)
+    wa_vehicles = factory.create_vehicles(wa_ev_registrations)
+    wa_vehicles.each do |vehicle|
+      expect(vehicle).to be_an_instance_of(Vehicle)
+    end
   end
 end
