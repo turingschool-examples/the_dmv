@@ -19,6 +19,14 @@ RSpec.describe VehicleFactory do
       expect(vehicle_array.first.make).to eq("TESLA")
     end
     it 'can take in registration information from more than one source' do
+      factory = VehicleFactory.new
+      @or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
+      vehicle_array = factory.create_vehicles(@or_dmv_office_locations)
+      require 'pry'; binding.pry
+      expect(vehicle_array.first).to be_an_instance_of(Vehicle)
+      expect(vehicle_array).to be_a(Array)
+    end
+    it 'can handle data of multiple sources' do
       
     end
 
