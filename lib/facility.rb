@@ -35,6 +35,7 @@ class Facility
         registrant.takes_written_test
       else false
       end
+    else false
     end
   end
 
@@ -44,6 +45,17 @@ class Facility
         registrant.takes_road_test
       else false
       end
+    else false
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    if @services.include?('Renew License')
+      if registrant.license_data[:written] && registrant.license_data[:license]
+        registrant.renews_license
+      else false
+      end
+    else false
     end
   end
 
