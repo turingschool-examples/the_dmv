@@ -42,10 +42,10 @@ class Facility
 
   def administer_written_test(data)
     if @services.include?('Written Test')
-      true 
-      else 
-      false 
+      if data.permit? && data.age >= 16
+      data.license_data[:written] = true
+      end
     end
-  #     @facility.administer_written_test.include?(data) 
+      data.license_data[:written]
   end
 end
