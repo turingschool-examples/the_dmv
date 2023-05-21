@@ -109,15 +109,14 @@ RSpec.describe Facility do
     end
 
     it ('renew_drivers_license works') do
-
       expect(facility_1.renew_drivers_license(registrant_1)).to be false
       expect(facility_1.add_service('Renew License')).to eq(["Written Test", "Road Test", "Renew License"])
       expect(facility_1.renew_drivers_license(registrant_1)).to be true
       expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
       expect(facility_1.renew_drivers_license(registrant_3)).to be false
-      expect()
-
-
+      expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(facility_1.renew_drivers_license(registrant_2)).to be true
+      expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
     end
 
   end
