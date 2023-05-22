@@ -7,14 +7,18 @@ RSpec.describe FacilityBuilder do
     expect(facility).to be_a(FacilityBuilder)
   end
 
-  xit 'loads oregon locations' do
-    facility = FacilityBuilder.new()
+  it 'recognizes data types from JSON' do 
     or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
-    facility.load_locations(or_dmv_office_locations)
 
-    expect(facility.locations.length).to eq(59)
-    expect(facility.locations[0][:name]).to eq("Albany DMV Office")
-    expect(facility.locations[1][:address]).to eq("600 Tolman Creek Rd Ashland OR 97520")
-    expect(facility.locations[2][:phone]).to eq("503-325-3951")
+    expect(or_dmv_office_locations).to be_a(Array)
+    expect(or_dmv_office_locations.first).to be_a(Hash)
+    expect(or_dmv_office_locations.length).to eq(59)
+
+    facility = FacilityBuilder.new
+
+    or_facilities = facility.create_facilities(or_dmv_office_locations)
+
+    expect(or_facilities).to be_a(Array)
+    expect(or_facilities.first).to be_a(Facility)
   end
 end
