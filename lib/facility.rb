@@ -66,9 +66,13 @@ class Facility
   end
 
   def renew_drivers_license(registrant)
-    registrant.license_data[:renewed] = true
-    true
-    return registrant.license_data[:license] = true && registrant.license_data[:written] = true
+    if registrant.age > 15
+      registrant.license_data[:renewed] = true
+      true
+      return registrant.license_data[:license] = true && registrant.license_data[:written] = true
+    else
+      false
+    end
   end
 end
 

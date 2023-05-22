@@ -198,6 +198,19 @@ RSpec.describe Facility do
       expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
     end
   end
+
+  describe '#renew license for other registrants' do
+    it 'renew registrant_2 and registrant_3 license' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Penny', 16 )
+      registrant_3 = Registrant.new('Tucker', 15 )
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Renew License')
+      expect(@facility_1.renew_drivers_license(registrant_3)).to eq(false)
+
+    end
+  end
 end
 # registrant_1.earn_permit
 # @facility_1.administer_written_test(registrant_1)
