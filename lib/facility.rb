@@ -3,8 +3,8 @@ class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
   def initialize(facility_hash)
-    @name = facility_hash[:name] || facility_hash[:title]
-    @address =  facility_hash[:address] || facility_hash[:street_address_line_1] || facility_hash[:address1] || facility_hash[:location_1]
+    @name = facility_hash[:name] || facility_hash[:title] || facility_hash[:office_name]
+    @address =  facility_hash[:address] || facility_hash[:street_address_line_1] || facility_hash[:location_1]
     @phone = facility_hash[:phone] || facility_hash[:phone_number] || facility_hash[:public_phone_number]
     @services = []
     @registered_vehicles = []
@@ -30,7 +30,7 @@ class Facility
         vehicle.add_plate(:regular)
       end
     else
-      "Service not offered at this location."
+      false
     end
   end
 
