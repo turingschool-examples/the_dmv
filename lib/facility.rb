@@ -17,23 +17,29 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    # if @services.include?('Vehicle Registration')
-    vehicle.register
-    # end
-    if vehicle.plate_type == :antique 
-      @collected_fees += 25
-    elsif vehicle.plate_type == :ev 
-      @collected_fees += 200
-    else
-      @collected_fees += 100
-    end
-    @registered_vehicles << vehicle 
+    if @services.include?('Vehicle Registration')
+      vehicle.register
+
+      if vehicle.plate_type == :antique 
+        @collected_fees += 25
+      elsif vehicle.plate_type == :ev 
+        @collected_fees += 200
+      else
+        @collected_fees += 100
+      end
+
+      @registered_vehicles << vehicle 
+    end 
   end
 
   def administer_written_test(registrant)
-    @services.each do |service|
-      services.('Written Test')
-
+    if @services.include?("Written Test") && registrant.permit? && registrant.age >= 16
+      true
+      registrant.license_data[:written] = true
+    else 
+      false 
     end
   end
+
+  def 
 end
