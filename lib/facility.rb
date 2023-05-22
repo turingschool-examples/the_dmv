@@ -56,7 +56,13 @@ class Facility
   end
 
   def administer_road_test(registrant)
-    registrant.permit? && registrant.license_data[:written]
+    if registrant.permit? && registrant.license_data[:written]
+      if @services.include?('Road Test') || registrant.license_data[:license]
+        registrant.license_data[:license] = true
+      end
+    end
+    
+    return registrant.permit? && registrant.license_data[:license]
   end
 
 end
