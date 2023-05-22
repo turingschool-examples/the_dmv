@@ -26,7 +26,6 @@ class FacilityFactory
             else
                 p "Unknown name match: #{facility}"
             end
-
             output << Facility.new({
                 name: final_name, 
                 address: final_address, 
