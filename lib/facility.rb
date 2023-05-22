@@ -14,8 +14,6 @@ class Facility
     @address = data[:address]
     @phone = data[:phone]
     @website = data[:website]
-    @type = data[:type]
-    @agency = data[:agency]
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
@@ -44,8 +42,6 @@ class Facility
       zip_code = address_json['zip']
       phone = data[:phone_number]
       website = data[:website]
-      type = data[:type]
-      agency = data[:agency]
 
       address = "#{street}, #{city}, #{state}, #{zip_code}" # Concatenate address components
 
@@ -60,7 +56,7 @@ class Facility
       city = data[:city]
       state = data[:state]
       zip_code = data[:zip_code]
-      phone = 'undefined'
+      phone = data[:public_phone_number]
       website = 'undefined'
       address = "#{street}, #{city}, #{state}, #{zip_code}" # Concatenate address components
 
