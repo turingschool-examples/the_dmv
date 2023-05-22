@@ -34,4 +34,13 @@ class Facility
     @registered_vehicles << vehicle
    end
   end
+
+  def administer_written_test(registrant)
+    if @services.include?("Written Test")
+        registrant.pass_written_test
+    end
+    registrant.license_data[:written]
+  end
+
+  # end of class
 end
