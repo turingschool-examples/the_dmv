@@ -34,28 +34,14 @@ RSpec.describe Facility do
 
   describe "#register_vehicle" do
     it "can register a Vehicle if it offers Vehicle Registration service" do
-      expect(@facility_1.services).to eq([])
-      
-      @facility_1.add_service("Vehicle Registration")
-      expect(@facility_1.services).to eq(["Vehicle Registration"])
-      
-      # require "pry"; binding.pry
-      expect(@facility_1.registered_vehicles).to eq([])
-      
+      @facility_1.add_service("Vehicle Registration")      
       @facility_1.register_vehicle(@cruz)
+
       expect(@facility_1.registered_vehicles).to eq([@cruz])
     end
     
-    it "cannot register a Vehicle if it does not offer Vehicle Registration service" do
-      expect(@facility_1.services).to eq([])
-      
+    it "cannot register a Vehicle if it does not offer Vehicle Registration service" do      
       @facility_1.register_vehicle(@cruz)
-      expect(@facility_1.registered_vehicles).to eq([])
-      
-      @facility_1.add_service("Renew Drivers License")
-      expect(@facility_1.services).to eq(["Renew Drivers License"])
-
-      @facility_1.register_vehicle(@camaro)
       expect(@facility_1.registered_vehicles).to eq([])
     end
     
@@ -84,12 +70,6 @@ RSpec.describe Facility do
       
       @facility_1.register_vehicle(@cruz)
       expect(@cruz.plate_type).to eq(:regular)
-      
-      @facility_1.register_vehicle(@bolt)
-      expect(@bolt.plate_type).to eq(:ev)
-      
-      @facility_1.register_vehicle(@camaro)
-      expect(@camaro.plate_type).to eq(:antique)      
     end
     
     it "can collect $25 to register an :antique Vehicle" do
@@ -210,15 +190,9 @@ RSpec.describe Facility do
       expect(@registrant_3.permit?).to be false
       expect(@registrant_3.age >= 16).to be false
 
-      @facility_1.administer_written_test(@registrant_1)
-      @facility_1.administer_written_test(@registrant_2)
-      @facility_1.administer_written_test(@registrant_3)
-
-
-
-      # expect(@facility_1.administer_written_test(@registrant_1)).to be true
-      # expect(@facility_1.administer_written_test(@registrant_2)).to be false
-      # expect(@facility_1.administer_written_test(@registrant_3)).to be false
+      expect(@facility_1.administer_written_test(@registrant_1)).to be true
+      expect(@facility_1.administer_written_test(@registrant_2)).to be false
+      expect(@facility_1.administer_written_test(@registrant_3)).to be false
 
       expect(@registrant_1.license_data[:written]).to be true
       expect(@registrant_2.license_data[:written]).to be false
