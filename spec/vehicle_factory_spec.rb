@@ -5,7 +5,7 @@ RSpec.describe VehicleFactory do
     it 'can initialize' do
       factory = VehicleFactory.new
       expect(factory).to be_an_instance_of(VehicleFactory)
-
+      
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
       expect(wa_ev_registrations).to be_a(Array)
       expect(wa_ev_registrations[0]).to be_a(Hash)
