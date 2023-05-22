@@ -55,5 +55,9 @@ class Facility
     @license_data[:written]
   end
 
+  def administer_road_test(registrant)
+    registrant.permit? && registrant.license_data[:written]
+  end
+
 end
 

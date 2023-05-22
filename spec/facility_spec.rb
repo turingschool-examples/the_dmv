@@ -100,7 +100,6 @@ RSpec.describe Facility do
     end
   end
 
-
   describe '#fees for facility_2' do
     it 'collects the fees for facility_2' do
       @facility_2.collect_fees
@@ -148,6 +147,20 @@ RSpec.describe Facility do
       registrant_3.earn_permit
       expect(@facility_1.administer_written_test(registrant_3)).to eq(false)
       expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+  end
+
+  describe '#road test' do
+    it 'administers road tests' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Penny', 16 )
+      registrant_3 = Registrant.new('Tucker', 15 )
+      expect(@facility_1.administer_road_test(registrant_3)).to eq(false)
+      registrant_3.earn_permit
+      expect(@facility_1.administer_road_test(registrant_3)).to eq(false)
+      expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+
+
     end
   end
 end
