@@ -7,7 +7,8 @@ RSpec.describe VehicleFactory do
 
     describe '#initialize' do
         it 'should create a new vehicle factory' do
-            expect(factory = VehicleFactory.new).to be_an_instance_of(VehicleFactory)
+            factory = VehicleFactory.new
+            expect(factory).to be_an_instance_of(VehicleFactory)
         end
     end
 
