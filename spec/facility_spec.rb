@@ -12,7 +12,6 @@ RSpec.describe Facility do
     @registrant_1 = Registrant.new('Bruce', 18, true )
     @registrant_2 = Registrant.new('Penny', 16 )
     @registrant_3 = Registrant.new('Tucker', 15 )
-
   end
   describe '#initialize' do
     it 'can initialize' do
@@ -132,14 +131,29 @@ RSpec.describe Facility do
     end
     it 'cannot give a written test if they are not of age' do
       @facility.add_service('Written Test')
-      expect(@registrant_3.age).to eq(15)
       @registrant_3.earn_permit
+      expect(@registrant_3.age).to eq(15)
       expect(@registrant_3.permit?).to eq(true)
       expect(@facility.administer_written_test(@registrant_3)).to eq(false)
       expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false} )
     end
   end
   describe '#road test' do
-
+    it 'cannot provide a license with no written test' do
+      @registrant_3.earn_permit
+      expect(@facility.administer_road_test(@registrant_3)).to eq(false)
+      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false} )
+    end
+    it 'cannot give a road test if it does not offer the service' do
+      expect(@facility.administer_road_test(@registrant_1)).to eq(false)
+    end
+    it ' can add services to those who qualify' do 
+    @facility.add_service('Road Test')
+    @facility.add_service('Written Test')
+    expect(@facility.administer_road_test(@registrant_1)).to eq(true)
+    expect(@facility.administer_road_test(@registrant_2)).to eq(true)
+    expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+    expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+    end
   end
 end

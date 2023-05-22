@@ -43,9 +43,18 @@ class Facility
   def administer_written_test(data)
     if @services.include?('Written Test')
       if data.permit? && data.age >= 16
-      data.license_data[:written] = true
+          data.license_data[:written] = true
       end
     end
       data.license_data[:written]
+  end
+
+  def administer_road_test(data)
+    if @services.include?('Road Test')
+      if data.license_data[:written] = true
+          data.license_data[:license] = true
+      end
+    end
+      data.license_data[:license]
   end
 end
