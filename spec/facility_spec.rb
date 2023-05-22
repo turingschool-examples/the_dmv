@@ -70,6 +70,13 @@ RSpec.describe Facility do
 
       expect(@bolt.registration_date).to eq(Date.today)
     end
+
+    it 'prevent vehicle registration if vehicle already registered' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      expect(@cruz.registration_date).to eq(Date.today)
+      expect { @facility_1.register_vehicle(@cruz) }.to raise_error(StandardError, 'Vehicle already registered.')
+    end
   end
 
   describe '#plate_type' do
