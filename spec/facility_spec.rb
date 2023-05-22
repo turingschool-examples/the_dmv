@@ -415,5 +415,10 @@ RSpec.describe Facility do
       expect(new_york_facilities[2].phone).to eq('undefined')
       expect(new_york_facilities[21].website).to eq('undefined')
     end
+
+    it 'returns error if unsupported state is called' do
+      facility_data = DmvDataService.new.or_dmv_office_locations
+      expect { Facility.create_facility('CA', facility_data) }.to raise_error(RuntimeError, 'Unsupported state: CA')
+    end
   end
 end
