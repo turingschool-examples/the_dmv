@@ -169,14 +169,17 @@ RSpec.describe Facility do
       @registrant_2 = Registrant.new('Penny', 16)
       @registrant_3 = Registrant.new('Tucker', 15)
     end
+
     it 'registrants license data is correct' do
       expect(@registrant_1.license_data).to eq({ written: false, license: false, renewed: false })
       expect(@registrant_2.license_data).to eq({ written: false, license: false, renewed: false })
       expect(@registrant_3.license_data).to eq({ written: false, license: false, renewed: false })
     end
+
     it 'registrants permit data is correct (tests permit? method)' do
       expect(@registrant_1.permit?).to eq(true)
     end
+
     it 'return error on earn_permit if registrant already has a permit' do
       @registrant_2.earn_permit
       expect(@registrant_2.permit?).to eq(true)
@@ -190,12 +193,14 @@ RSpec.describe Facility do
       @registrant_2 = Registrant.new('Penny', 16)
       @registrant_3 = Registrant.new('Tucker', 15)
     end
+
     it 'administer_written_test updates license_data' do
       @facility_1.add_service('Written Test')
       @facility_1.administer_written_test(@registrant_1)
 
       expect(@registrant_1.license_data).to eq({ written: true, license: false, renewed: false })
     end
+
     it 'administer_written_test on facility updates license_data' do
       @facility_1.add_service('Written Test')
       @facility_1.administer_written_test(@registrant_1)
@@ -204,6 +209,7 @@ RSpec.describe Facility do
       expect(@registrant_2.age).to eq(16)
       expect(@registrant_2.permit?).to eq(false)
     end
+
     it 'tests administer_written_test on registrant without permit' do
       @facility_1.add_service('Written Test')
       @facility_1.administer_written_test(@registrant_2)
