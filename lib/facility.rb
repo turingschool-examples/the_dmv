@@ -20,6 +20,8 @@ class Facility
   end
 
   def register_vehicle(vehicle)
+    raise 'Vehicle already registered.' if @registered_vehicles.include?(vehicle)
+
     return nil unless @services.include?('Vehicle Registration')
 
     vehicle.registration_date = Date.today
