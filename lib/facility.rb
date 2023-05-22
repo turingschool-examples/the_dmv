@@ -53,6 +53,14 @@ class Facility
     end
   end
 
+  def self.create_facility_from_new_york(facility_data)
+    facility_data.map do |data|
+      name = data[:office_name]
+
+      Facility.new(name: name)
+    end
+  end
+
   def add_service(service)
     @services << service
   end
