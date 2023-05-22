@@ -56,7 +56,6 @@ class Facility
   def self.create_facility_from_new_york(facility_data)
     facility_data.map do |data|
       name = data[:office_name]
-      # address_json = JSON.parse(data)[:street_address_line_1]
       street = data[:street_address_line_1]
       city = data[:city]
       state = data[:state]
@@ -72,13 +71,12 @@ class Facility
   def self.create_facility_from_missouri(facility_data)
     facility_data.map do |data|
       name = data[:name]
-      # address_json = JSON.parse(data)[:street_address_line_1]
       street = data[:address1]
       city = data[:city]
       state = data[:state]
       zip_code = data[:zipcode]
       phone = data[:phone]
-      website = 'undefined'
+      website = data[:facebook_url]
       address = "#{street}, #{city}, #{state}, #{zip_code}" # Concatenate address components
 
       Facility.new(name: name, address: address, phone: phone, website: website)
