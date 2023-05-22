@@ -7,6 +7,8 @@ class VehicleFactory
       make = vehicle_data[:make]
       model = vehicle_data[:model]
       year = vehicle_data[:model_year]
+
+      Vehicle.new(vin: vin, make: make, model: model, year: year, engine: :ev)
     end
   end
 end
