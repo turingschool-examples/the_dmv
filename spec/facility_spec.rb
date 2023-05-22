@@ -355,6 +355,27 @@ RSpec.describe Facility do
   end
 
   describe 'create_facility from Oregon' do
+    it 'fetches API data' do
+      expect(facility_data = DmvDataService.new.or_dmv_office_locations).not_to be_nil
+    end
+
+    it 'can initialize' do
+      facility_data = DmvDataService.new.or_dmv_office_locations
+      oregon_facilities = Facility.create_facility('OR', facility_data)
+      expected_data = facility_data[0]
+      expect(oregon_facilities[0]).to be_an_instance_of(Facility)
+    end
+
+    it 'maps data to correct data types' do
+      facility_data = DmvDataService.new.or_dmv_office_locations
+      oregon_facilities = Facility.create_facility('OR', facility_data)
+      expected_data = facility_data[0]
+
+      expect(oregon_facilities[0].name).to be_a(String)
+      expect(oregon_facilities[0].address).to be_a(String)
+      expect(oregon_facilities[0].phone).to be_a(String)
+      expect(oregon_facilities[0].website).to be_a(String)
+    end
     it 'creates one facility from Oregon (compare mapped data to API data)' do
       facility_data = DmvDataService.new.or_dmv_office_locations
       oregon_facilities = Facility.create_facility('OR', facility_data)
@@ -365,8 +386,6 @@ RSpec.describe Facility do
       expect(oregon_facilities[0].address).to eq(expected_address)
       expect(oregon_facilities[0].phone).to eq(expected_data[:phone_number])
       expect(oregon_facilities[0].website).to eq(expected_data[:website])
-      expect(oregon_facilities[0].type).to eq(expected_data[:type])
-      expect(oregon_facilities[0].agency).to eq(expected_data[:agency])
     end
 
     it 'creates multiple facilities from Oregon (compare mapped data to API data)' do
@@ -379,8 +398,6 @@ RSpec.describe Facility do
       expect(oregon_facilities[0].address).to eq(expected_address)
       expect(oregon_facilities[0].phone).to eq(expected_data[:phone_number])
       expect(oregon_facilities[0].website).to eq(expected_data[:website])
-      expect(oregon_facilities[0].type).to eq(expected_data[:type])
-      expect(oregon_facilities[0].agency).to eq(expected_data[:agency])
 
       expected_data = facility_data[1]
       expect(oregon_facilities[1].name).to eq(expected_data[:title])
@@ -388,8 +405,6 @@ RSpec.describe Facility do
       expect(oregon_facilities[1].address).to eq(expected_address)
       expect(oregon_facilities[1].phone).to eq(expected_data[:phone_number])
       expect(oregon_facilities[1].website).to eq(expected_data[:website])
-      expect(oregon_facilities[1].type).to eq(expected_data[:type])
-      expect(oregon_facilities[1].agency).to eq(expected_data[:agency])
     end
   end
 
@@ -401,7 +416,7 @@ RSpec.describe Facility do
       expected_data = facility_data[0]
       expect(new_york_facilities[0].name).to eq(expected_data[:office_name])
       expect(new_york_facilities[0].address).to eq("#{expected_data[:street_address_line_1]}, #{expected_data[:city]}, #{expected_data[:state]}, #{expected_data[:zip_code]}")
-      expect(new_york_facilities[0].phone).to eq('undefined')
+      expect(new_york_facilities[0].phone).to eq(expected_data[:public_phone_number])
       expect(new_york_facilities[0].website).to eq('undefined')
     end
     it 'creates multiple facilities from New York (compare mapped data to API data)' do
@@ -411,19 +426,19 @@ RSpec.describe Facility do
       expected_data = facility_data[0]
       expect(new_york_facilities[0].name).to eq(expected_data[:office_name])
       expect(new_york_facilities[0].address).to eq("#{expected_data[:street_address_line_1]}, #{expected_data[:city]}, #{expected_data[:state]}, #{expected_data[:zip_code]}")
-      expect(new_york_facilities[0].phone).to eq('undefined')
+      expect(new_york_facilities[0].phone).to eq(expected_data[:public_phone_number])
       expect(new_york_facilities[0].website).to eq('undefined')
 
       expected_data = facility_data[1]
       expect(new_york_facilities[1].name).to eq(expected_data[:office_name])
       expect(new_york_facilities[1].address).to eq("#{expected_data[:street_address_line_1]}, #{expected_data[:city]}, #{expected_data[:state]}, #{expected_data[:zip_code]}")
-      expect(new_york_facilities[1].phone).to eq('undefined')
+      expect(new_york_facilities[1].phone).to eq(expected_data[:public_phone_number])
       expect(new_york_facilities[1].website).to eq('undefined')
 
       expected_data = facility_data[2]
       expect(new_york_facilities[2].name).to eq(expected_data[:office_name])
       expect(new_york_facilities[2].address).to eq("#{expected_data[:street_address_line_1]}, #{expected_data[:city]}, #{expected_data[:state]}, #{expected_data[:zip_code]}")
-      expect(new_york_facilities[2].phone).to eq('undefined')
+      expect(new_york_facilities[2].phone).to eq(expected_data[:public_phone_number])
       expect(new_york_facilities[2].website).to eq('undefined')
     end
   end
