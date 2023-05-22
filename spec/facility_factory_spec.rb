@@ -9,7 +9,7 @@ RSpec.describe FacilityFactory do
   describe '#initialize' do
         it 'can initialize' do
             factory = FacilityFactory.new
-            expect(factory).to be_an_instance_of(Facility)
+            expect(factory).to be_an_instance_of(FacilityFactory)
         end
     end
 end
