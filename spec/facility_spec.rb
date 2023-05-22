@@ -347,9 +347,25 @@ RSpec.describe Facility do
   end
 
   # Iteration 3
-  describe 'create_from_data' do
-    it 'pulls data from Oregon' do
-      oregon_facilities = DmvDataService.new.or_dmv_office_locations
+  describe 'create_facility' do
+    it 'creates a facility from Oregon' do
+      facility_data = DmvDataService.new.or_dmv_office_locations
+      oregon_facilities = Facility.create_facility('OR', facility_data)
+      expected_data = facility_data[0]
+
+      expect(oregon_facilities[0].name).to eq(expected_data[:title])
+      expected_address = JSON.parse(expected_data[:location_1][:human_address]).values.join(', ')
+      expect(oregon_facilities[0].address).to eq(expected_address)
+      expect(oregon_facilities[0].address).to eq(expected_address)
+      expect(oregon_facilities[0].phone).to eq(expected_data[:phone_number])
+
+      expected_data = facility_data[1]
+
+      expect(oregon_facilities[1].name).to eq(expected_data[:title])
+      expected_address = JSON.parse(expected_data[:location_1][:human_address]).values.join(', ')
+      expect(oregon_facilities[1].address).to eq(expected_address)
+      expect(oregon_facilities[1].address).to eq(expected_address)
+      expect(oregon_facilities[1].phone).to eq(expected_data[:phone_number])
     end
   end
 end
