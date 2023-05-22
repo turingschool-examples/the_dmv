@@ -2,6 +2,9 @@ class Facility
   attr_reader :name,
               :address,
               :phone,
+              :website,
+              :type,
+              :agency,
               :services,
               :registered_vehicles,
               :collected_fees
@@ -10,6 +13,9 @@ class Facility
     @name = data[:name]
     @address = data[:address]
     @phone = data[:phone]
+    @website = data[:website]
+    @type = data[:type]
+    @agency = data[:agency]
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
@@ -37,10 +43,13 @@ class Facility
       state = address_json['state']
       zip_code = address_json['zip']
       phone = data[:phone_number]
+      website = data[:website]
+      type = data[:type]
+      agency = data[:agency]
 
       address = "#{street}, #{city}, #{state}, #{zip_code}" # Concatenate address components
 
-      Facility.new(name: name, address: address, phone: phone)
+      Facility.new(name: name, address: address, phone: phone, website: website, type: type, agency: agency)
     end
   end
 
