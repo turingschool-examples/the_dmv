@@ -26,9 +26,12 @@ RSpec.describe Registrant do
       expect(@registrant_1.age).to eq(18)
       expect(@registrant_2.age).to eq(15)
   end
+      it 'does not have permit by default and can earn a permit' do
+        expect(@registrant_1.permit?).to eq(true)
+        expect(@registrant_2.permit?).to eq(false)
+
+        @registrant_2.earn_permit
+
+        expect(@registrant_2.permit?).to eq(true)
+    end
 end
-#     it 'does not have a permit by default' 
-#       expect(@registrant_1.permit?).to eq(true)
-#       expect(@registrant_2.permit?).to eq(false)
-#     end
-#   end
