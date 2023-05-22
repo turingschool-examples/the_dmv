@@ -42,4 +42,8 @@ class Registrant
     @license_data[:license] = true if @license_data[:written] == true
   end
 
+  def renew_license
+    @license_data[:renewed] = true if @license_data[:license] == true
+  end
+
 end
