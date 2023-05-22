@@ -13,8 +13,10 @@ class Registrant
     end
 
     def earn_permit
+      if age >= 16
         @permit = true
         @license_data[:written] = true
+      end
     end
   end
   
