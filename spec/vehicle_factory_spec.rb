@@ -9,8 +9,11 @@ RSpec.describe VehicleFactory do
   describe "Iteration 2" do
     it 'exists' do
       expect(@factory).to be_a(VehicleFactory)
-
+      expect(@wa_ev_registrations).to be_a(Array)
+      expect(@wa_ev_registrations.first).to be_a(Hash)
+      expect(@wa_ev_registrations.first[:make]).to eq("TESLA")
     end
+    
     it 'can create new vehicles from an API Call' do
       wa_ev = @factory.create_vehicles(@wa_ev_registrations)
       expect(wa_ev).to be_a(Array)
@@ -22,7 +25,7 @@ RSpec.describe VehicleFactory do
       expect(wa_ev.first.year).to eq(2022)
     end
 
-    it 'has key value updater method to add new key value pairs from keys in hash' do
+    it 'has key updater method to add new key value pairs to match Vehicle attributes from keys in hash' do
       unformatted_hash = @wa_ev_registrations.first
       expect(unformatted_hash[:vin]).to be_nil
       expect(unformatted_hash[:year]).to be_nil
