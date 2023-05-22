@@ -7,3 +7,7 @@ require "./lib/registrant"
 require "./lib/vehicle_factory"
 require "./lib/facility_factory"
 require "date"
+
+RSpec.configure do |config|
+  config.formatter = :documentation
+end
