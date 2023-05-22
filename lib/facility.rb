@@ -1,10 +1,26 @@
+module Helper
+  def self.title_case(input_string)
+    words = input_string.split
+    title_words = words.map do |word|
+      if exempt_words.include?(word.upcase)
+        word.upcase
+      else
+        word.capitalize
+      end
+    end
+    title_words.join(' ')
+  end
+
+  def self.exempt_words
+    %w[DMV NY MD OR SE NE NW SW]
+  end
+end
+
 class Facility
   attr_reader :name,
               :address,
               :phone,
               :website,
-              :type,
-              :agency,
               :services,
               :registered_vehicles,
               :collected_fees
@@ -34,10 +50,10 @@ class Facility
 
   def self.create_facility_from_oregon(facility_data)
     facility_data.map do |data|
-      name = data[:title]
+      name = Helper.title_case(data[:title])
       address_json = JSON.parse(data[:location_1][:human_address])
-      street = address_json['address']
-      city = address_json['city']
+      street = Helper.title_case(address_json['address'])
+      city = Helper.title_case(address_json['city'])
       state = address_json['state']
       zip_code = address_json['zip']
       phone = data[:phone_number]
