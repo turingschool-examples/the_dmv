@@ -345,4 +345,11 @@ RSpec.describe Facility do
       expect { @facility_1.renew_drivers_license(@registrant_1) }.to raise_error(StandardError, 'Already renewed drivers license.')
     end
   end
+
+  # Iteration 3
+  describe 'create_from_data' do
+    it 'pulls data from Oregon' do
+      oregon_facilities = DmvDataService.new.or_dmv_office_locations
+    end
+  end
 end
