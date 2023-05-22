@@ -46,5 +46,11 @@ class Facility
   def vehicle_registered?(vehicle)
     @registered_vehicles.include?(vehicle)
   end
+
+  def administer_written_test(registrant)
+    @license_data = { written: false, license: false, renewed: false } unless defined?(@license_data)
+    @license_data[:written]
+  end
+
 end
 

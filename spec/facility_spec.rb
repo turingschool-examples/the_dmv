@@ -117,4 +117,14 @@ RSpec.describe Facility do
       expect(registrant_1.permit?).to eq(true)
     end
   end
+
+  describe '#written test' do
+    it 'administers written test' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Penny', 16 )
+      registrant_3 = Registrant.new('Tucker', 15 )
+      expect(@facility_1.administer_written_test(registrant_1)).to eq(false)
+      expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+  end
 end
