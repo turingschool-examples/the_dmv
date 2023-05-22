@@ -16,6 +16,10 @@ RSpec.describe Vehicle do
       expect(@cruz.engine).to eq(:ice)
       expect(@cruz.registration_date).to eq(nil)
     end
+
+    it 'can take multiple types of hash keys' do
+      
+    end
   end
 
   describe '#antique?' do
