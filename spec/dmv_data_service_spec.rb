@@ -3,6 +3,7 @@ require 'spec_helper'
 RSpec.describe DmvDataService do
   before(:each) do
     @dds = DmvDataService.new
+    require 'pry'; binding.pry
   end
   describe '#initialize' do
     it 'can initialize' do
