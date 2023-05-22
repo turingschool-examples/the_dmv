@@ -127,4 +127,15 @@ RSpec.describe Facility do
       expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
+
+  describe '#registrant_2' do
+    it 'checks registrant_2 attributes' do
+      registrant_2 = Registrant.new('Penny', 16 )
+      expect(registrant_2.age).to eq(16)
+      expect(registrant_2.permit?).to eq(false)
+      expect(@facility_1.administer_written_test(registrant_2)).to eq(false)
+      registrant_2.earn_permit
+      expect(@facility_1.administer_written_test(registrant_2)).to eq(true)
+    end
+  end
 end

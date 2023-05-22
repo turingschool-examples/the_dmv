@@ -48,7 +48,10 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    @license_data = { written: false, license: false, renewed: false } unless defined?(@license_data)
+    @license_data ||= { written: false, license: false, renewed: false }
+    if registrant.license_data[:written]
+      @license_data[:written] = true
+    end
     @license_data[:written]
   end
 
