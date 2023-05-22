@@ -59,16 +59,16 @@ RSpec.describe Dmv do
 
       expect(@dmv.facilities[0].name).to eq ("Albany DMV Office")
       expect(@dmv.facilities[59].name).to eq ("JAMAICA KIOSK")
-      expect(@dmv.facilities[231].name).to eq ("FERGUSON-OFFICE CLOSED UNTIL FURTHER NOTICE")
+      expect(@dmv.facilities[231].name).to eq ("OAKVILLE")
 
       expect(@dmv.facilities[0].address).to eq ("2242 Santiam Hwy SE")
       expect(@dmv.facilities[59].address).to eq ("168-46 91ST AVE., 2ND FLR")
-      expect(@dmv.facilities[231].address).to eq ("10425 WEST FLORISSANT")
+      expect(@dmv.facilities[231].address).to eq ("3164 TELEGRAPH ROAD")
 
       expect(@dmv.facilities[0].phone).to eq ("541-967-2014")
       expect(@dmv.facilities[59].phone).to eq (nil)
       expect(@dmv.facilities[60].phone).to eq ("5857531604")
-      expect(@dmv.facilities[231].phone).to eq ("(314) 733-5316")
+      expect(@dmv.facilities[231].phone).to eq ("(314) 887-1050")
     end  
   end
 end
