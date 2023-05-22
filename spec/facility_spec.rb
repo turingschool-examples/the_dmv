@@ -361,6 +361,10 @@ RSpec.describe Facility do
       expect(oregon_facilities[0].type).to eq(expected_data[:type])
       expect(oregon_facilities[0].agency).to eq(expected_data[:agency])
     end
+    it 'returns error if unsupported state is called' do
+      facility_data = DmvDataService.new.or_dmv_office_locations
+      expect { Facility.create_facility('CA', facility_data) }.to raise_error(RuntimeError, 'Unsupported state: CA')
+    end
     it 'creates multiple facilities from Oregon' do
       facility_data = DmvDataService.new.or_dmv_office_locations
       oregon_facilities = Facility.create_facility('OR', facility_data)
@@ -384,7 +388,7 @@ RSpec.describe Facility do
       expect(oregon_facilities[1].agency).to eq(expected_data[:agency])
     end
     it 'creates a facility from New York' do
-      facility_data = DmvDataService.new.or_dmv_office_locations
+      facility_data = DmvDataService.new.ny_dmv_office_locations
       new_york_facilities = Facility.create_facility('NY', facility_data)
 
       expected_data = facility_data[0]
@@ -394,11 +398,11 @@ RSpec.describe Facility do
       expect(new_york_facilities[0].website).to eq('undefined')
     end
     it 'creates multiple facilities from New York' do
-      facility_data = DmvDataService.new.or_dmv_office_locations
+      facility_data = DmvDataService.new.ny_dmv_office_locations
       new_york_facilities = Facility.create_facility('NY', facility_data)
 
       expected_data = facility_data[0]
-      expect(new_york_facilities[0].name).to eq(expected_data[:office_name])
+      puts expect(new_york_facilities[0].name).to eq(expected_data[:office_name])
       expect(new_york_facilities[0].address).to eq("#{expected_data[:street_address_line_1]}, #{expected_data[:city]}, #{expected_data[:state]}, #{expected_data[:zip_code]}")
       expect(new_york_facilities[0].phone).to eq('undefined')
       expect(new_york_facilities[0].website).to eq('undefined')
@@ -413,12 +417,19 @@ RSpec.describe Facility do
       expect(new_york_facilities[2].name).to eq(expected_data[:office_name])
       expect(new_york_facilities[2].address).to eq("#{expected_data[:street_address_line_1]}, #{expected_data[:city]}, #{expected_data[:state]}, #{expected_data[:zip_code]}")
       expect(new_york_facilities[2].phone).to eq('undefined')
-      expect(new_york_facilities[21].website).to eq('undefined')
+      expect(new_york_facilities[2].website).to eq('undefined')
     end
 
-    it 'returns error if unsupported state is called' do
-      facility_data = DmvDataService.new.or_dmv_office_locations
-      expect { Facility.create_facility('CA', facility_data) }.to raise_error(RuntimeError, 'Unsupported state: CA')
+    it 'creates one facility from Missouri' do
+      facility_data = DmvDataService.new.mo_dmv_office_locations
+      missouri_facilities = Facility.create_facility('MO', facility_data)
+
+      expected_data = facility_data[0]
+      binding.pry
+      expect(missouri_facilities[0].name).to eq(expected_data[:name])
+      expect(missouri_facilities[0].address).to eq("#{expected_data[:address1]}, #{expected_data[:city]}, #{expected_data[:state]}, #{expected_data[:zipcode]}")
+      expect(missouri_facilities[0].phone).to eq(expected_data[:phone])
+      expect(missouri_facilities[0].website).to eq(expected_data[:facebook_url])
     end
   end
 end
