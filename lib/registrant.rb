@@ -15,11 +15,11 @@ attr_reader :name,
     }
   end
 
-#   def permit?
-#     @permit == true 
-#   end
+  def permit?
+    @permit == true 
+  end
 
-#   def earn_permit
-#     @permit = true 
-#   end
+  def earn_permit
+    @permit = true 
+  end
 end
