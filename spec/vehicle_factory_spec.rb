@@ -9,10 +9,11 @@ RSpec.describe VehicleFactory do
         @factory = VehicleFactory.new
         @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
         @or_dmv = DmvDataService.new.or_dmv_office_locations
+        @new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+        @missouri_facilities = DmvDataService.new.mo_dmv_office_locations
     end
 
     it 'exists' do
-
         expect(@factory).to be_an_instance_of(VehicleFactory)
     end
 
@@ -21,8 +22,12 @@ RSpec.describe VehicleFactory do
         expect(new_vehicles).to be_an_instance_of(Vehicle)
     end
 
-    it 'creates Oregon facility objects' do
-        new_facilities = @factory.create_facility(@or_dmv)
-        expect(new_facilities).to be_an_instance_of(Facility)
+    it 'creates facility objects' do
+        oregon_facilities = @factory.create_facility(@or_dmv)
+        expect(oregon_facilities).to be_an_instance_of(Facility)
+        ny_facilities = @factory.create_facility(@new_york_facilities)
+        expect(ny_facilities).to be_an_instance_of(Facility)
+        missouri_facilities = @factory.create_facility(@missouri_facilities)
+        expect(missouri_facilities).to be_an_instance_of(Facility)
     end
 end
