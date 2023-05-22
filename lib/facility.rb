@@ -42,5 +42,12 @@ class Facility
     registrant.license_data[:written]
   end
 
+  def administer_road_test(registrant)
+    if @services.include?("Road Test")
+        registrant.earn_license
+    end
+    registrant.license_data[:license]
+  end
+
   # end of class
 end

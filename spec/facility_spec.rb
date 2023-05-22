@@ -95,6 +95,7 @@ describe Facility do
     expect(facility_1.administer_written_test(registrant_3)).to be false
     registrant_3.earn_permit
     expect(facility_1.administer_written_test(registrant_3)).to be false
+    expect(facility_1.administer_road_test(registrant_3)).to be false
   end
 
 end
