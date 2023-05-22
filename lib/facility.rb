@@ -39,24 +39,32 @@ class Facility
   end
 
   def earn_permit(registrant)
+    raise 'Already has permit.' if registrant.permit?
+
     return nil unless registrant.age > 15
 
     registrant.earn_permit
   end
 
   def administer_written_test(registrant)
+    raise 'Already took written test.' if registrant.written_test?
+
     return nil unless registrant.permit? && registrant.age > 15 && @services.include?('Written Test')
 
     registrant.administer_written_test
   end
 
   def administer_road_test(registrant)
+    raise 'Already took road test and has license.' if registrant.road_test?
+
     return nil unless registrant.written_test? && @services.include?('Road Test')
 
     registrant.administer_road_test
   end
 
   def renew_drivers_license(registrant)
+    raise 'Already renewed drivers license.' if registrant.renewed_drivers_license?
+
     return nil unless registrant.written_test? && registrant.road_test? && services.include?('Renew License')
 
     registrant.renew_drivers_license
