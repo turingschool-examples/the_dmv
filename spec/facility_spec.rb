@@ -170,6 +170,11 @@ RSpec.describe Facility do
     it 'registrants permit data is correct (tests permit? method)' do
       expect(@registrant_1.permit?).to eq(true)
     end
+    it 'return error on earn_permit if registrant already has a permit' do
+      @registrant_2.earn_permit
+      expect(@registrant_2.permit?).to eq(true)
+      expect { @facility.earn_permit(@registrant_2) }.to raise_error(StandardError, 'Already has permit.')
+    end
   end
 
   describe 'administer_written_test' do
@@ -242,6 +247,13 @@ RSpec.describe Facility do
 
       expect(@registrant_1.license_data).to eq({ written: true, license: false, renewed: false })
     end
+
+    it 'return error on administer_written_test if registrant already took written test' do
+      @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@registrant_1.license_data).to eq({ written: true, license: false, renewed: false })
+      expect { @facility_1.administer_written_test(@registrant_1) }.to raise_error(StandardError, 'Already took written test.')
+    end
   end
 
   describe 'administer_road_test' do
@@ -269,6 +281,13 @@ RSpec.describe Facility do
 
       @facility_1.administer_road_test(@registrant_2)
       expect(@registrant_1.license_data).to eq({ written: true, license: true, renewed: false })
+    end
+
+    it 'return error on administer_road_test if registrant already took road test and has license' do
+      @facility_1.add_service('Road Test')
+      @facility_1.administer_road_test(@registrant_1)
+      expect(@registrant_1.license_data).to eq({ written: true, license: true, renewed: false })
+      expect { @facility_1.administer_road_test(@registrant_1) }.to raise_error(StandardError, 'Already took road test and has license.')
     end
   end
 
@@ -298,6 +317,13 @@ RSpec.describe Facility do
       @facility_1.add_service('Renew License')
       @facility_1.renew_drivers_license(@registrant_2)
       expect(@registrant_2.license_data).to eq({ written: true, license: false, renewed: false })
+    end
+
+    it 'return error on renew_drivers_license if registrant already renewed drivers license' do
+      @facility_1.add_service('Renew License')
+      @facility_1.renew_drivers_license(@registrant_1)
+      expect(@registrant_1.license_data).to eq({ written: true, license: true, renewed: true })
+      expect { @facility_1.renew_drivers_license(@registrant_1) }.to raise_error(StandardError, 'Already renewed drivers license.')
     end
   end
 end
