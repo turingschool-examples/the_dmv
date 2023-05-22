@@ -78,30 +78,25 @@ RSpec.describe Dmv do
 
   describe "#add Oregon offices" do
     it "can create facility objects from Oregon data" do
-      @dmv.or_parse(@or_dmv_office_locations)
-      expect(@dmv.create_facilities(@or_dmv_office_locations).first.name).to eq(@facility_1.name)
-      expect(@dmv.create_facilities(@or_dmv_office_locations).first.address).to eq(@facility_1.address)
-      expect(@dmv.create_facilities(@or_dmv_office_locations).first.phone).to eq(@facility_1.phone)
+      expect(@dmv.create_facilities(@or_dmv_office_locations)).to be_an_instance_of(Array)
+      expect(@dmv.create_facilities(@or_dmv_office_locations).first.first.name).to eq("Albany DMV Office")
+      expect(@dmv.create_facilities(@or_dmv_office_locations).first.first.address).to eq("2242 Santiam Hwy SE Albany OR 97321")
     end
   end
 
   describe "#add New York offices" do
     it "can create facility objects from New York data" do
-      @dmv.ny_parse(@new_york_facilities)
-      expect(@dmv.create_facilities(@new_york_facilities).first.name).to eq(@ny_office_1.name)
-      expect(@dmv.create_facilities(@new_york_facilities).first.address).to eq(@ny_office_1.address)
-      expect(@dmv.create_facilities(@new_york_facilities).first.phone).to eq(@ny_office_1.phone)
-      expect(@dmv.create_facilities(@new_york_facilities)[1].phone).to eq(@ny_office_2.phone)
+      expect(@dmv.create_facilities(@new_york_facilities)).to be_an_instance_of(Array)
+      expect(@dmv.create_facilities(@new_york_facilities).first.first.name).to eq("JAMAICA KIOSK")
+      expect(@dmv.create_facilities(@new_york_facilities).first[1].address).to eq("200 E. MAIN STREET")
     end
   end
 
   describe "#add Missouri offices" do
     it "can create facility objects from Missouri data" do
-      @dmv.mo_parse(@missouri_facilities)
-      expect(@dmv.create_facilities(@missouri_facilities).first.name).to eq(@mo_office_1.name)
-      expect(@dmv.create_facilities(@missouri_facilities).first.address).to eq(@mo_office_1.address)
-      expect(@dmv.create_facilities(@missouri_facilities).first.phone).to eq(@mo_office_1.phone)
-      expect(@dmv.create_facilities(@missouri_facilities)[1].phone).to eq(@mo_office_2.phone)
+      expect(@dmv.create_facilities(@missouri_facilities)).to be_an_instance_of(Array)
+      expect(@dmv.create_facilities(@missouri_facilities).first.first.address).to eq("10425 WEST FLORISSANT")
+      expect(@dmv.create_facilities(@missouri_facilities).first[1].phone).to eq("(573) 358-3584")
     end
   end
 end

@@ -1,5 +1,5 @@
 class Dmv
-  attr_reader :facilities 
+  attr_reader :facilities
 
   def initialize
     @facilities = []
@@ -15,7 +15,7 @@ class Dmv
     end
   end
 
-  def or_parse(oregon)
+  def oregon_parse(oregon)
     oregon.select do |office|
       name = office[:title]
       address_to_parse = JSON.parse(office[:location_1][:human_address])
@@ -27,7 +27,7 @@ class Dmv
     end   
   end
 
-  def ny_parse(new_york)
+  def new_york_parse(new_york)
     new_york.select do |office|
       name = office[:office_name]
       address = office[:street_address_line_1]
@@ -38,7 +38,7 @@ class Dmv
     end
   end
 
-  def mo_parse(missouri)
+  def missouri_parse(missouri)
     missouri.select do |office|
       name = office[:name]
       address = office[:address1]
