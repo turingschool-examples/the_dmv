@@ -332,7 +332,7 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq({ written: true, license: true, renewed: true })
     end
 
-    it 'renew_drivers_license cannot renew unless registrant has a license' do
+    it 'return error on renew_drivers_license if registrant already has a license' do
       @facility_1.add_service('Renew License')
       @facility_1.renew_drivers_license(@registrant_2)
       expect(@registrant_2.license_data).to eq({ written: true, license: false, renewed: false })
