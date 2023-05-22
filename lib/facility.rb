@@ -15,6 +15,16 @@ class Facility
     @collected_fees = 0
   end
 
+  def self.create_from_data(data)
+    data.map do |facility_data|
+      Facility.new(
+        name: facility_data[:title],
+        address: facility_data[:location_1][:human_address],
+        phone: facility_data[:phone_number]
+      )
+    end
+  end
+
   def add_service(service)
     @services << service
   end
