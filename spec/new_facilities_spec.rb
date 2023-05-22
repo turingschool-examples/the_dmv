@@ -14,6 +14,14 @@ RSpec.describe FacilityBuilder do
     expect(or_dmv_office_locations.first).to be_a(Hash)
     expect(or_dmv_office_locations.length).to eq(59)
 
+    or_dmv_office_locations.each do |dmv| 
+      expect(dmv).to have_key(:title)
+      expect(dmv[:title]).to be_a(String)
+      expect(dmv[:location_1]).to have_key(:human_address)
+      expect(dmv[:location_1][:human_address]).to be_a(String)
+      # require 'pry'; binding.pry
+    end
+
     facility = FacilityBuilder.new
 
     or_facilities = facility.create_facilities(or_dmv_office_locations)
@@ -35,6 +43,12 @@ RSpec.describe FacilityBuilder do
 
       expect(ny_facilities).to be_a(Array)
       expect(ny_facilities.first).to be_a(Facility)
+
+      ny_dmv_office_locations.each do |dmv| 
+        expect(dmv).to have_key(:office_name)
+        expect(dmv[:office_name]).to be_a(String)
+        expect(dmv[:street_address_line_1]).to be_a(String)
+      end
     end
   end
 
@@ -51,6 +65,12 @@ RSpec.describe FacilityBuilder do
 
       expect(mo_facilities).to be_a(Array)
       expect(mo_facilities.first).to be_a(Facility)
+
+      mo_dmv_office_locations.each do |dmv| 
+        expect(dmv).to have_key(:dorregionnumber)
+        expect(dmv[:name]).to be_a(String)
+        expect(dmv[:address1]).to be_a(String)
+      end
     end
   end
 end
