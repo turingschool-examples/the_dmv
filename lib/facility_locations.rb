@@ -22,4 +22,14 @@ class FacilityLocation
     dmv_formatted
   end
 
+  def parsed_address(location)
+    if location[:location_1]
+        (JSON.parse location[:location_1][:human_address]).values.join(" ")
+    elsif location[:state] == "NY"
+        [location[:street_address_line_1], location[:street_address_line_2], location[:city], location[:state], location[:zip_code]].compact.join(" ")
+    elsif location[:state] == "MO"
+        [location[:address1], location[:city], location[:state], location[:zipcode]].join(" ")
+    end
+  end
+
 end
