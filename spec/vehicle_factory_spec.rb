@@ -17,7 +17,6 @@ RSpec.describe VehicleFactory do
       expect(@wa_ev_registrations).to be_an(Array)
       expect(@wa_ev_registrations.size).to eq(1000)
       expect(@wa_ev_registrations[0][:"electric_vehicle_type"]).to eq("Battery Electric Vehicle (BEV)")
-      
     end
     
     it 'can create vehicles from data' do
@@ -27,16 +26,17 @@ RSpec.describe VehicleFactory do
       expect(production_1.first.year).to eq("2022")
       expect(production_1.first.make).to eq("TESLA")
       expect(production_1.first.model).to eq("Model Y")
-      expect(production_1.first.engine).to eq("ev")
+      expect(production_1.first.engine).to eq(:ev)
       expect(production_1.first.registration_date).to eq(nil)
       expect(production_1.first.plate_type).to eq(nil)
     end
 
-
-
+    it 'can count vehicles by make or model' do
+      make_inventory = @factory.vehicles_by_make(@wa_ev_registrations)
+      expect(make_inventory["TESLA"]).to eq(408)
+      expect(make_inventory["TOYOTA"]).to eq(23)
+      expect(make_inventory["PORSCHE"]).to eq(3)
+    end
   end
-
-
-
 
 end
