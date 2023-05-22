@@ -1,10 +1,7 @@
 class VehicleFactory
 
-  def initialize 
-    
+
+  def create_vehicles(data)
+
   end
-
-  # def create_vehicles(data)
-
-  # end
 end
