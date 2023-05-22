@@ -10,25 +10,40 @@ class Registrant
     @name = name
     @age = age
     @permit = permit
-    @license_data = license_data
+    @license_data = {
+      :written => false,
+      :license => false,
+      :renewed => false
+    }
   end
 
   def permit?
     permit
   end
 
-  def license_data
-    @license_data = {
-            :written => false,
-            :license => false,
-            :renewed => false
-          }
-  end
+  #move to init
+  # def license_data
+  #   @license_data = {
+  #           :written => false,
+  #           :license => false,
+  #           :renewed => false
+  #         }
+  # end
 
   def earn_permit
     @permit = true
   end
 
+  def pass_test
+    @license_data[:written] = true if age >= 16 && permit == true
+  end
 
+  def earn_license
+    @license_data[:license] = true if @license_data[:written] == true
+  end
+
+  def renew_license
+    @license_data[:renewed] = true if @license_data[:license] == true
+  end
 
 end
