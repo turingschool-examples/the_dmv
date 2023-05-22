@@ -409,6 +409,29 @@ RSpec.describe Facility do
   end
 
   describe 'create_facility from New York' do
+    it 'fetches API data' do
+      expect(facility_data = DmvDataService.new.ny_dmv_office_locations).not_to be_nil
+    end
+
+    it 'can initialize' do
+      facility_data = DmvDataService.new.ny_dmv_office_locations
+      new_york_facilities = Facility.create_facility('NY', facility_data)
+      expected_data = facility_data[0]
+      expect(new_york_facilities[0]).to be_an_instance_of(Facility)
+    end
+
+    it 'maps data to correct data types' do
+      facility_data = DmvDataService.new.ny_dmv_office_locations
+      new_york_facilities = Facility.create_facility('NY', facility_data)
+      expected_data = facility_data[0]
+
+      expect(new_york_facilities[0].name).to be_a(String)
+      expect(new_york_facilities[0].address).to be_a(String)
+      # Certain locations in New York (kiosks) do not have phone numbers and
+      # the endpoint is just not there if that is the case.
+      expect(new_york_facilities[0].phone).to be_a(String).or be_nil
+      expect(new_york_facilities[0].website).to be_a(String)
+    end
     it 'creates a single facility from New York (compare mapped data to API data)' do
       facility_data = DmvDataService.new.ny_dmv_office_locations
       new_york_facilities = Facility.create_facility('NY', facility_data)
@@ -444,6 +467,27 @@ RSpec.describe Facility do
   end
 
   describe 'create_facility from Missouri' do
+    it 'fetches API data' do
+      expect(facility_data = DmvDataService.new.mo_dmv_office_locations).not_to be_nil
+    end
+
+    it 'can initialize' do
+      facility_data = DmvDataService.new.mo_dmv_office_locations
+      missouri_facilities = Facility.create_facility('MO', facility_data)
+      expected_data = facility_data[0]
+      expect(missouri_facilities[0]).to be_an_instance_of(Facility)
+    end
+
+    it 'maps data to correct data types' do
+      facility_data = DmvDataService.new.mo_dmv_office_locations
+      missouri_facilities = Facility.create_facility('MO', facility_data)
+      expected_data = facility_data[0]
+
+      expect(missouri_facilities[0].name).to be_a(String)
+      expect(missouri_facilities[0].address).to be_a(String)
+      expect(missouri_facilities[0].phone).to be_a(String)
+      expect(missouri_facilities[0].website).to be_a(String)
+    end
     it 'creates one facility from Missouri (compare mapped data to API data)' do
       facility_data = DmvDataService.new.mo_dmv_office_locations
       missouri_facilities = Facility.create_facility('MO', facility_data)
