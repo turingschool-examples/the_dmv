@@ -389,6 +389,9 @@ RSpec.describe Facility do
       expected_data = facility_data[0]
 
       expect(new_york_facilities[0].name).to eq(expected_data[:office_name])
+      expect(new_york_facilities[0].address).to eq("#{expected_data[:street_address_line_1]}, #{expected_data[:city]}, #{expected_data[:state]}, #{expected_data[:zip_code]}")
+      expect(new_york_facilities[0].phone).to eq('undefined')
+      expect(new_york_facilities[0].website).to eq('undefined')
     end
   end
 end
