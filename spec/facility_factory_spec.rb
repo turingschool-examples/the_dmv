@@ -46,5 +46,18 @@ RSpec.describe FacilityFactory do
       expect(@new_york.operating_facilities[1].name).to eq "ROCHESTER DOWNTOWN"
       expect(@new_york.operating_facilities.length).to eq @new_york_facilities.length  
     end
+
+    it 'can instantiate facilities from missouri' do
+      @oregon.define_facilities(@oregon_facilities)
+      @new_york.define_facilities(@new_york_facilities)
+      @missouri.define_facilities(@missouri_facilities)
+      expect(@missouri.operating_facilities[0].address).to eq "10425 WEST FLORISSANT FERGUSON MO 63136"
+      expect(@missouri.operating_facilities[0].phone).to eq "(314) 733-5316"
+      expect(@missouri.operating_facilities[0].name).to eq "FERGUSON-OFFICE CLOSED UNTIL FURTHER NOTICE"
+      expect(@missouri.operating_facilities[1].address).to eq "30 N ALLEN ST BONNE TERRE MO 63628"
+      expect(@missouri.operating_facilities[1].phone).to eq "(573) 358-3584"
+      expect(@missouri.operating_facilities[1].name).to eq "BONNE TERRE"
+      expect(@missouri.operating_facilities.length).to eq @missouri_facilities.length  
+    end
   end
 end
