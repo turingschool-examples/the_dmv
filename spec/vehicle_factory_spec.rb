@@ -5,7 +5,6 @@ require './lib/dmv_data_service'
 RSpec.describe VehicleFactory do 
   before(:each) do 
     @factory = VehicleFactory.new
-    @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
   end
 
   describe '#initialize' do 
@@ -16,8 +15,16 @@ RSpec.describe VehicleFactory do
 
   describe '#create_vehicles' do
     it 'can create vehicles using external data' do 
-      expect(@factory.create_vehicles(@wa_ev_registrations)).to be_a(Array)
-      expect(@factory.create_vehicles(@wa_ev_registrations).first).to be_a(Vehicle)
+
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+            expect(wa_ev_registrations).to be_a(Array)
+            expect(wa_ev_registrations.first).to be_a(Hash)
+
+      vehicles = @factory.create_vehicles(wa_ev_registrations)
+            expect(vehicles).to be_a(Array)
+            expect(vehicles.first).to be_a(Vehicle)
+      
+      expect(@factory.new_vehicles.length).to eq(1000)
     end
   end
 end
