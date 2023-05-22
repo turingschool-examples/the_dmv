@@ -10,25 +10,23 @@ class FacilityConstructor
 
     def format_data(locations)
         formatted_locations = []
-        locations.each do |location|
+        [locations].flatten.each do |location|
             location_data = {}
             location_data[:name] = (location[:title] || location[:office_name] || location[:name])
-            if location[:location_1]
-                address_string = location[:location_1][:human_address]
-                address_hash = JSON.parse address_string
-                location_data[:address] = address_hash.values.join(" ")
-            elsif location[:state] == "NY"
-                address_array = [location[:street_address_line_1], location[:street_address_line_2], location[:city], location[:state], location[:zip_code]]
-                address_array.compact!
-                address_string = address_array.join(" ")
-                location_data[:address] = address_string
-            elsif location[:state] == "MO"
-                address_array = [location[:address1], location[:city], location[:state], location[:zipcode]]
-                location_data[:address] = address_array.join(" ")
-            end
+            location_data[:address] = parsed_address(location)
             location_data[:phone] = (location[:phone_number] || location[:public_phone_number] || location[:phone])
             formatted_locations << location_data
         end
         formatted_locations
+    end
+    
+    def parsed_address(location)
+        if location[:location_1]
+            (JSON.parse location[:location_1][:human_address]).values.join(" ")
+        elsif location[:state] == "NY"
+            [location[:street_address_line_1], location[:street_address_line_2], location[:city], location[:state], location[:zip_code]].compact.join(" ")
+        elsif location[:state] == "MO"
+            [location[:address1], location[:city], location[:state], location[:zipcode]].join(" ")
+        end
     end
 end
