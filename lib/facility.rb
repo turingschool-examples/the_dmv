@@ -51,7 +51,7 @@ class Facility
 
   def administer_road_test(data)
     if @services.include?('Road Test')
-      if data.license_data[:written] = true
+      if data.license_data[:written] == true
           data.license_data[:license] = true
       end
     end
@@ -60,7 +60,7 @@ class Facility
 
   def renew_drivers_license(data)
     if @services.include?('Renew License')
-      if data.license_data[:written] = true 
+      if data.license_data[:written] == true 
           data.license_data[:license] = true
             data.license_data[:renewed] = true
       end
