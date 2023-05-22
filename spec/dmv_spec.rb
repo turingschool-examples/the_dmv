@@ -14,14 +14,14 @@ RSpec.describe Dmv do
   end
 
   describe '#initialize' do
-    it 'can initialize' do
+    it 'Can initialize' do
       expect(@dmv).to be_an_instance_of(Dmv)
       expect(@dmv.facilities).to eq([])
     end
   end
 
   describe '#add facilities' do
-    it 'can add available facilities' do
+    it 'Can add available facilities' do
       
       @or_locations = DmvDataService.new.or_dmv_office_locations
       expect(@dmv.facilities).to eq([])
@@ -29,7 +29,7 @@ RSpec.describe Dmv do
       expect(@dmv.facilities[1].address).to eq(@or_locations[1][:location_1])
     end
 
-    it 'can add facilities from Oregon DMV api' do 
+    it 'Can add facilities from Oregon DMV api' do 
       
 
       expect(@dmv.facilities).to eq([])
@@ -42,7 +42,7 @@ RSpec.describe Dmv do
 
     end
 
-    it 'cam add facilities from New York dmv api' do
+    it 'Can add facilities from New York dmv api' do
 
       expect(@dmv.facilities).to eq([])
       @dmv.add_facilities(@ny_locations)
@@ -54,10 +54,21 @@ RSpec.describe Dmv do
 
     end
 
+    it 'Can add facilities from Missiouri dmv api' do
+      expect(@dmv.facilities).to eq([])
+      @dmv.add_facilities(@mo_locations)
+
+      expect(@dmv.facilities[1]).to be_a(Facility)
+      expect(@dmv.facilities[1].name).to eq(@mo_locations[1][:name])
+      expect(@dmv.facilities[1].address).to eq(@mo_locations[1][:address1])
+      expect(@dmv.facilities[1].phone).to eq(@mo_locations[1][:phone])
+
+    end
+
   end
 
   describe '#facilities_offering_service' do
-    it 'can return list of facilities offering a specified Service' do
+    it 'Can return list of facilities offering a specified Service' do
       @dmv.add_facilities([@facility_1, @facility_2, @facility_3])
 
 
