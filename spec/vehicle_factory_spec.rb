@@ -12,7 +12,7 @@ RSpec.describe VehicleFactory do
     end
 
     it 'exists' do
-        
+
         expect(@factory).to be_an_instance_of(VehicleFactory)
     end
 
