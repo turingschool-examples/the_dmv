@@ -351,8 +351,8 @@ RSpec.describe Facility do
     it 'creates a facility from Oregon' do
       facility_data = DmvDataService.new.or_dmv_office_locations
       oregon_facilities = Facility.create_facility('OR', facility_data)
-      expected_data = facility_data[0]
 
+      expected_data = facility_data[0]
       expect(oregon_facilities[0].name).to eq(expected_data[:title])
       expected_address = JSON.parse(expected_data[:location_1][:human_address]).values.join(', ')
       expect(oregon_facilities[0].address).to eq(expected_address)
@@ -361,7 +361,27 @@ RSpec.describe Facility do
       expect(oregon_facilities[0].type).to eq(expected_data[:type])
       expect(oregon_facilities[0].agency).to eq(expected_data[:agency])
     end
-    xit 'creates multiple facilities from Oregon' do
+    it 'creates multiple facilities from Oregon' do
+      facility_data = DmvDataService.new.or_dmv_office_locations
+      oregon_facilities = Facility.create_facility('OR', facility_data)
+
+      expected_data = facility_data[0]
+      expect(oregon_facilities[0].name).to eq(expected_data[:title])
+      expected_address = JSON.parse(expected_data[:location_1][:human_address]).values.join(', ')
+      expect(oregon_facilities[0].address).to eq(expected_address)
+      expect(oregon_facilities[0].phone).to eq(expected_data[:phone_number])
+      expect(oregon_facilities[0].website).to eq(expected_data[:website])
+      expect(oregon_facilities[0].type).to eq(expected_data[:type])
+      expect(oregon_facilities[0].agency).to eq(expected_data[:agency])
+
+      expected_data = facility_data[1]
+      expect(oregon_facilities[1].name).to eq(expected_data[:title])
+      expected_address = JSON.parse(expected_data[:location_1][:human_address]).values.join(', ')
+      expect(oregon_facilities[1].address).to eq(expected_address)
+      expect(oregon_facilities[1].phone).to eq(expected_data[:phone_number])
+      expect(oregon_facilities[1].website).to eq(expected_data[:website])
+      expect(oregon_facilities[1].type).to eq(expected_data[:type])
+      expect(oregon_facilities[1].agency).to eq(expected_data[:agency])
     end
     it 'creates a facility from New York' do
       facility_data = DmvDataService.new.or_dmv_office_locations
