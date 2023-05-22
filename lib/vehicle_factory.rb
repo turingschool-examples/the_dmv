@@ -1,11 +1,9 @@
 
 class VehicleFactory
- attr_reader :
- #attr__accessor :
-    def initialize()
-       
+ #attr_reader :
+ #attr__accessor : 
 
-
-    end  
-
+    def create_vehicles(reg)
+      reg
+    end
 end
