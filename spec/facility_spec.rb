@@ -355,7 +355,7 @@ RSpec.describe Facility do
   end
 
   describe 'create_facility from Oregon' do
-    it 'creates one facility from Oregon' do
+    it 'creates one facility from Oregon (compare mapped data to API data)' do
       facility_data = DmvDataService.new.or_dmv_office_locations
       oregon_facilities = Facility.create_facility('OR', facility_data)
 
@@ -369,7 +369,7 @@ RSpec.describe Facility do
       expect(oregon_facilities[0].agency).to eq(expected_data[:agency])
     end
 
-    it 'creates multiple facilities from Oregon' do
+    it 'creates multiple facilities from Oregon (compare mapped data to API data)' do
       facility_data = DmvDataService.new.or_dmv_office_locations
       oregon_facilities = Facility.create_facility('OR', facility_data)
 
@@ -394,7 +394,7 @@ RSpec.describe Facility do
   end
 
   describe 'create_facility from New York' do
-    it 'creates a single facility from New York' do
+    it 'creates a single facility from New York (compare mapped data to API data)' do
       facility_data = DmvDataService.new.ny_dmv_office_locations
       new_york_facilities = Facility.create_facility('NY', facility_data)
 
@@ -404,7 +404,7 @@ RSpec.describe Facility do
       expect(new_york_facilities[0].phone).to eq('undefined')
       expect(new_york_facilities[0].website).to eq('undefined')
     end
-    it 'creates multiple facilities from New York' do
+    it 'creates multiple facilities from New York (compare mapped data to API data)' do
       facility_data = DmvDataService.new.ny_dmv_office_locations
       new_york_facilities = Facility.create_facility('NY', facility_data)
 
@@ -429,7 +429,7 @@ RSpec.describe Facility do
   end
 
   describe 'create_facility from Missouri' do
-    it 'creates one facility from Missouri' do
+    it 'creates one facility from Missouri (compare mapped data to API data)' do
       facility_data = DmvDataService.new.mo_dmv_office_locations
       missouri_facilities = Facility.create_facility('MO', facility_data)
 
@@ -440,7 +440,7 @@ RSpec.describe Facility do
       expect(missouri_facilities[0].website).to eq(expected_data[:facebook_url])
     end
 
-    it 'creates multiple facilities from Missouri' do
+    it 'creates multiple facilities from Missouri (compare mapped data to API data)' do
       facility_data = DmvDataService.new.mo_dmv_office_locations
       missouri_facilities = Facility.create_facility('MO', facility_data)
 
