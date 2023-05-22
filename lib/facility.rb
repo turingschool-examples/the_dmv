@@ -15,13 +15,32 @@ class Facility
     @collected_fees = 0
   end
 
-  def self.create_from_data(data)
-    data.map do |facility_data|
-      Facility.new(
-        name: facility_data[:title],
-        address: facility_data[:location_1][:human_address],
-        phone: facility_data[:phone_number]
-      )
+  def self.create_facility(state, facility_data)
+    case state
+    when 'OR' # Oregon
+      create_facility_from_oregon(facility_data)
+    when 'NY' # New York
+      create_facility_from_new_york(facility_data)
+    when 'MO' # Missouri
+      create_facility_from_missouri(facility_data)
+    else
+      raise "Unsupported state: #{state}"
+    end
+  end
+
+  def self.create_facility_from_oregon(facility_data)
+    facility_data.map do |data|
+      name = data[:title]
+      address_json = JSON.parse(data[:location_1][:human_address])
+      street = address_json['address']
+      city = address_json['city']
+      state = address_json['state']
+      zip_code = address_json['zip']
+      phone = data[:phone_number]
+
+      address = "#{street}, #{city}, #{state}, #{zip_code}" # Concatenate address components
+
+      Facility.new(name: name, address: address, phone: phone)
     end
   end
 
