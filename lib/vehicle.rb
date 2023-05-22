@@ -32,7 +32,6 @@ class Vehicle
     else
       @engine = @engine
     end
-    
   end
   
 end
