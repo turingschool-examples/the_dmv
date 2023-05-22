@@ -45,7 +45,7 @@ class Facility
 
       address = "#{street}, #{city}, #{state}, #{zip_code}" # Concatenate address components
 
-      Facility.new(name: name, address: address, phone: phone, website: website, type: type, agency: agency)
+      Facility.new(name: name, address: address, phone: phone, website: website)
     end
   end
 
