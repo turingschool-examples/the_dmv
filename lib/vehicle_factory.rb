@@ -17,13 +17,14 @@ class VehicleFactory
 
     def create_facility(locations)
         locations.each do |location|
-            if location[:title].nil? == false &&
-            location[:phone_number].nil? == false &&
-            location[:human_address].nil? == false
 
-            new_facility = Facility.new({name: location[:title], phone: location[:phone_number], address: location[:human_address]})
-            end
-            #binding.pry
+            x = location[:location_1][:human_address]
+            y = JSON.parse(x)
+            string_address = y["address"] + " " + y["city"] + " " + y["state"]+ " " + y["zip"]
+                
+                new_facility = Facility.new({name: location[:title], phone: location[:phone_number], address: string_address})
+                
+            
             return new_facility 
         end
     end
