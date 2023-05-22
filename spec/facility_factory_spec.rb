@@ -14,8 +14,10 @@ RSpec.describe FacilityFactory do
     end
 
     describe '#create_facilities' do
-        it 'allows creating facilities' do
-            require 'pry'; binding.pry
+        it 'allows creating facilities for Oregon' do
+            @oregon_offices = @factory.create_facilities(@oregon_facilities)
+            expect(@oregon_offices[0]).to be_an_instance_of(Facility)
         end
+
     end
 end
