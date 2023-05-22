@@ -13,26 +13,22 @@ RSpec.describe Registrant do
       expect(@registrant_2).to be_a(Registrant)
     end
   end
-#     describe '#attributes' do
-#     it 'has a name' do
+    describe '#attributes' do
+    it 'has a name' do
 
-#       expect(@registrant_1.name).to eq('Bruce')
-#       expect(@registrant_2.name).to eq('Penny')
-#     end
-#   end
+      expect(@registrant_1.name).to eq('Bruce')
+      expect(@registrant_2.name).to eq('Penny')
+    end
+  end
 
-#     it 'has an age' do
+    it 'has an age' do
 
-#       expect(@registrant_1.age).to eq(18)
-#       expect(@registrant_2.age).to eq(15)
-#     end
-#   end 
-
-#     it 'does not have a permit by default' do
-      
-
+      expect(@registrant_1.age).to eq(18)
+      expect(@registrant_2.age).to eq(15)
+  end
+end
+#     it 'does not have a permit by default' 
 #       expect(@registrant_1.permit?).to eq(true)
 #       expect(@registrant_2.permit?).to eq(false)
 #     end
 #   end
-end
