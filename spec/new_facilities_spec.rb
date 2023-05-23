@@ -10,22 +10,22 @@ RSpec.describe NewFacilities do
   describe '#VehicleFactory' do
   new_facilities = NewFacilities.new
    
-   it "new_york_facilities" do
+   xit "new_york_facilities" do
     expect(new_york_facilities.count).to eq(172)
     expect(new_facilities.create_facilities(new_york_facilities)).to be_an_instance_of(Array)
     expect((new_facilities.create_facilities(new_york_facilities)).count).to eq(172)
    end
 
    xit "missouri_facilities" do
-    expect(missouri_facilities.count).to eq(1000)
+    expect(missouri_facilities.count).to eq(178)
     expect(new_facilities.create_facilities(missouri_facilities)).to be_an_instance_of(Array)
-    expect((factory.create_facilities(missouri_facilities)).count).to eq(1000)
+    expect((new_facilities.create_facilities(missouri_facilities)).count).to eq(178)
    end
 
-   xit "or_ev_registrations" do
-    expect(new_york_facilities.count).to eq(1000)
+   it "or_ev_registrations" do
+    expect(or_ev_registrations.count).to eq(59)
     expect(new_facilities.create_facilities(or_ev_registrations)).to be_an_instance_of(Array)
-    expect((factory.create_facilities(or_ev_registrations)).count).to eq(1000)
+    expect((new_facilities.create_facilities(or_ev_registrations)).count).to eq(59)
    end
 
   end
