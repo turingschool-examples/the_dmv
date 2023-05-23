@@ -81,3 +81,42 @@ RSpec.describe FacilityArchitect do
     end
   end
 end
+
+RSpec.describe FacilityArchitect do
+  before(:each) do
+    @facility_architect = FacilityArchitect.new
+    @mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
+  end
+
+  describe 'MO Office' do
+    it 'exists' do
+      expect(@facility_architect).to be_a(FacilityArchitect)
+      expect(@mo_dmv_office_locations).to be_a(Array)
+      expect(@mo_dmv_office_locations.first).to be_a(Hash)
+      expect(@mo_dmv_office_locations.first[:name]).to eq("OAKVILLE")
+      expect(@mo_dmv_office_locations.first[:phone]).to eq("(314) 887-1050")
+      expect(@mo_dmv_office_locations.first[:address1]).to eq("3164 TELEGRAPH ROAD")
+    end
+
+    it 'can design new facilities from JSON data' do
+      mo_facility = @facility_architect.mo_design_facility(@mo_dmv_office_locations)
+      expect(mo_facility).to be_a(Array)
+      expect(mo_facility[0]).to be_a(Facility)
+      expect(mo_facility[0].name).to eq("Oakville")
+      expect(mo_facility[0].phone).to eq("(314) 887-1050")
+      expect(mo_facility[0].address).to eq("3164 Telegraph Road, St Louis Mo, 63125")
+    end
+
+    it 'has key adder method' do
+      unformatted_keys = @mo_dmv_office_locations[14]
+      expect(unformatted_keys[:name]).to eq("BELTON")
+      expect(unformatted_keys[:address]).to be_nil
+      
+      facility_array = @facility_architect.mo_facility_key_updater(unformatted_keys)
+
+      expect(facility_array.first[:name]).to eq("Belton")
+      expect(facility_array.first[:address]).to eq("325 Main Street, Belton Mo, 64012")
+
+    end
+  end
+end
