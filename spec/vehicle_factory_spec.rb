@@ -53,10 +53,18 @@ RSpec.describe VehicleFactory do
     expect(@factory.created_vehicles.count).to eq(1000)
   end 
 
-  it "can remove duplicate entries based on vin number" do
+  it "can remove duplicate vehicles based on vin number to give total number of cars" do
     vehicle_array = [{vin: 98}, {vin: 98}, {vin: 98}] 
     @factory.create_vehicle_order(vehicle_array)
     expect(@factory.created_vehicles.count).to eq(3)
-    @factory.destory!
-    expect(@factory.created_vehicles.count).to eq(1)
+    @factory.all_cars
+    expect(@factory.all_cars.count).to eq(1)
+  end 
+
+  it "returns total number of EV vehicles registered in WA" do
+    wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+    @factory.create_vehicle_order(wa_ev_registrations)
+    expect(@factory.all_cars.count).to eq(301)
+    #I was very surprised by this but after going through the source data, I was indeed finding that each vehicle was typically registered around 2-4 times!
+  end 
 end 
