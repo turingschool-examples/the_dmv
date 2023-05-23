@@ -25,8 +25,22 @@ describe "FacilityFactory" do
     end
   end
 
+  describe "#format_name" do
+    it "can format a facility name from the Oregon API" do
+      or_facility = @or_dmvs.first
+      name_or = @facility_factory.format_name(or_facility)
+      expect(name_or).to be_a(String)
+    end
+    
+    it "can format a facility name from the New York API" do
+      ny_facility = @ny_dmvs.first
+      name_ny = @facility_factory.format_name(ny_facility)
+      expect(name_ny).to be_a(String)
+    end
+  end
+  
   describe "#format_address" do
-    it "can format a DMV address from the Oregon API" do
+    it "can format an address from the Oregon API" do
       or_facility = @or_dmvs.first
       special_or_facility = @or_dmvs.find { |facility| facility[:location_2] }
 
@@ -37,6 +51,16 @@ describe "FacilityFactory" do
       expect(address2).to be_a(String)
     end
     
+    it "can format an address from the New York API" do
+      ny_facility = @ny_dmvs.first
+      special_ny_facility = @ny_dmvs.find { |facility| facility[:street_address_line_2] }
+
+      address1 = @facility_factory.format_address(ny_facility)
+      address2 = @facility_factory.format_address(special_ny_facility) 
+
+      expect(address1).to be_a(String)
+      expect(address2).to be_a(String)
+    end
   end
 
 end
@@ -49,7 +73,9 @@ end
 # })
 
 
-
+# ---------
+# OR OFFICE
+# ---------
 # {
 #   :title=>"Albany DMV Office",
 #   :zip_code=>"97321",
@@ -69,28 +95,39 @@ end
 #     }
 #   }
 
-
-
-  #{:office_name=>"JAMAICA KIOSK",
-  # :office_type=>"DISTRICT OFFICE",
-  # :street_address_line_1=>"168-46 91ST AVE., 2ND FLR",
-  # :city=>"JAMAICA",
-  # :state=>"NY",
-  # :zip_code=>"11432",
-  # :monday_beginning_hours=>"7:30 AM",
-  # :monday_ending_hours=>"5:00 PM",
-  # :tuesday_beginning_hours=>"7:30 AM",
-  # :tuesday_ending_hours=>"5:00 PM",
-  # :wednesday_beginning_hours=>"7:30 AM",
-  # :wednesday_ending_hours=>"5:00 PM",
-  # :thursday_beginning_hours=>"7:30 AM",
-  # :thursday_ending_hours=>"5:00 PM",
-  # :friday_beginning_hours=>"7:30 AM",
-  # :friday_ending_hours=>"5:00 PM",
-  # :georeference=>{:type=>"Point", :coordinates=>[-73.79219, 40.70742]},
-  # :":@computed_region_yamh_8v7k"=>"196",
-  # :":@computed_region_wbg7_3whc"=>"1216",
-  # :":@computed_region_kjdx_g34t"=>"2137"}
+# ---------
+# NY OFFICE
+# ---------
+# {
+#   "office_name": "CANTON",
+#   "office_type": "COUNTY OFFICE",
+#   "public_phone_number": "3153861408",
+#   "street_address_line_1": "80 STATE HIGHWAY 310",
+#   "street_address_line_2": "SUITE 3",
+#   "city": "CANTON",
+#   "state": "NY",
+#   "zip_code": "13617",
+#   "monday_beginning_hours": "8:00 AM",
+#   "monday_ending_hours": "4:00 PM",
+#   "tuesday_beginning_hours": "8:00 AM",
+#   "tuesday_ending_hours": "4:00 PM",
+#   "wednesday_beginning_hours": "8:00 AM",
+#   "wednesday_ending_hours": "4:00 PM",
+#   "thursday_beginning_hours": "8:00 AM",
+#   "thursday_ending_hours": "4:00 PM",
+#   "friday_beginning_hours": "8:00 AM",
+#   "friday_ending_hours": "4:00 PM",
+#   "georeference": {
+#     "type": "Point",
+#     "coordinates": [
+#       -75.15065,
+#       44.60166
+#     ]
+#   },
+#   ":@computed_region_yamh_8v7k": "339",
+#   ":@computed_region_wbg7_3whc": "1478",
+#   ":@computed_region_kjdx_g34t": "2140"
+# },
 
 
 
