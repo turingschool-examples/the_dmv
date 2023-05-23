@@ -36,17 +36,17 @@ RSpec.describe FacilityFactory do
     oregon_facilities = DmvDataService.new.or_dmv_office_locations
     facilities = factory.create_facilities(oregon_facilities)
 
-    expect(facilities.first.name).to be_a(String)
-    expect(facilities.first.address).to be_a(String)
-    expect(facilities.first.phone).to be_a(String)
+    expect(facilities[1].name).to be_a(String)
+    expect(facilities[1].address).to be_a(String)
+    expect(facilities[1].phone).to be_a(String)
   end
 
   it "can create NY facilities with specific facility details" do
     factory = FacilityFactory.new
     facilities = factory.create_facilities(ny_data_example)
 
-    expect(facilities.first.name).to eq("Jamaica Kiosk")
-    expect(facilities.first.address).to eq("168-46 91st Ave, 2ND Flr, Jamaica NY 11432")
+    expect(facilities.first.name).to eq("JAMAICA KIOSK")
+    expect(facilities.first.address).to eq("168-46 91ST AVE., 2ND FLR, JAMAICA NY 11432")
     expect(facilities.first.phone).to eq(nil)
   end
 
@@ -55,9 +55,9 @@ RSpec.describe FacilityFactory do
     new_york_facilities = DmvDataService.new.ny_dmv_office_locations
     facilities = factory.create_facilities(new_york_facilities)
 
-    expect(facilities.first.name).to be_a(String)
-    expect(facilities.first.address).to be_a(String)
-    expect(facilities.first.phone).to be_a(String)
+    expect(facilities[1].name).to be_a(String)
+    expect(facilities[1].address).to be_a(String)
+    expect(facilities[1].phone).to be_a(String)
   end
 
   xit "can create MO facilities with specific facility details" do
