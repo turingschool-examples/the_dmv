@@ -1,6 +1,7 @@
 require './lib/vehicle'
 require './lib/vehicle_factory'
 require './lib/dmv_data_service'
+require './lib/vehicle_detail_handler'
 
 RSpec.describe VehicleFactory do
   describe '#initialize' do
@@ -17,10 +18,7 @@ RSpec.describe VehicleFactory do
       expect(vehicle_array.first).to be_an_instance_of(Vehicle)
       expect(vehicle_array).to be_a(Array)
       expect(vehicle_array.first.make).to eq("TESLA")
+      expect(vehicle_array.first.vin).to eq("7SAYGDEF6N")
     end
-    it 'can take in registration information from more than one source' do
-      
-    end
-
   end
 end
