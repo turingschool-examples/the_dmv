@@ -55,9 +55,6 @@ class Dmv
     new_facilities_hash
 
    
-end
-
-
-
+  end
 
 end
