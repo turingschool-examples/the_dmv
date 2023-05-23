@@ -14,19 +14,30 @@ RSpec.describe Dmv do
   end
 
   describe '#initialize' do
-    it 'Can initialize' do
+    
+    it 'Exist' do
+      
       expect(@dmv).to be_an_instance_of(Dmv)
       expect(@dmv.facilities).to eq([])
+    end
+    
+    it 'Holds an @facilitys array that starts empty' do
+
+      expect(@dmv.facilities). to eq([])
     end
   end
 
   describe '#add facilities' do
+    
     it 'Can add available facilities' do
-      
-      @or_locations = DmvDataService.new.or_dmv_office_locations
+
       expect(@dmv.facilities).to eq([])
-      @dmv.add_facilities(@or_locations)
-      expect(@dmv.facilities[1].address).to eq(@or_locations[1][:location_1])
+      @dmv.add_facilities([@facility_1, @facility_2, @facility_3])
+
+      expect(@dmv.facilities[0].address).to eq(@facility_1[:address])
+      expect(@dmv.facilities[1].address).to eq(@facility_2[:address])
+      expect(@dmv.facilities[2].address).to eq(@facility_3[:address])
+
     end
 
     it 'Can add facilities from Oregon DMV api' do 
