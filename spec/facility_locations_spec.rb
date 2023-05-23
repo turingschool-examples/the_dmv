@@ -38,7 +38,7 @@ RSpec.describe FacilityLocations do
       expect(or_facilities[39].collected_fees).to eq(0)
     end
 
-    it 'can integrate location_2 data' do
+    it 'can integrate location_2 address data' do
       or_facilities = @locations.create_facilities(@or_dmv_office_locations)
       expect(or_facilities[3].name).to eq("Baker City DMV Office")
       expect(or_facilities[3].address).to eq("3370 10th St Suite A Baker City OR 97814")

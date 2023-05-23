@@ -14,6 +14,8 @@ class VehicleFactory
     end
   end
 
+  # Not part of the official requirements.
+  # I was just experimenting gathering specific data.
   def vehicles_by_make(vehicles)
     make_inventory = {}
     vehicles.each do |vehicle|

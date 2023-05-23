@@ -2,14 +2,36 @@ require 'json'
 require './lib/facility'
 require './lib/dmv_data_service'
 
+=begin
+Since there are different formatting rules for each state,
+these first 3 blocks will determine which state API was passed
+in and call the method specific to that stae.
+A more direct solution would have been to just add a second
+parameter after 'facilities' in create_facilities and pass in an
+argument for the state you are working with. The spirit of the
+assignment seemed to encourage solving problems progamattically,
+thus my chosen solution.
+All addresses were formated to match those of the original
+interaction patterns.
+=end
+
 class FacilityLocations
   def create_facilities(facilities)
+    # This block fetches the zipcode from the first element.
+    # The IF block is needed because the zipcode key is named
+    # differetly across APIs.
+    # I realize that there is the possibility that a state might have a
+    # bad or no zipcode for the first element. I did not code for this
+    # because I ran out of time. If I had another day, I would have included
+    # an IF block to test for nil OR wrong-length zipcode and then
+    # move to the next element.
     if facilities.first.include?(:zip_code)
       zipcode = facilities.first[:zip_code]
     else
       zipcode = facilities.first[:zipcode]
     end
 
+# Call the appropriate method based on the state we are working with.
     location = zipcode_locator(zipcode)
     if location == "or"
       or_facilities(facilities)
@@ -19,7 +41,8 @@ class FacilityLocations
       ny_facilities(facilities)
     end
   end
-
+  
+  # The zipcode_locator determines which state API to use.
   def zipcode_locator(zipcode)
     zipcode = zipcode.to_i
     if zipcode.between?(97001, 97920)
@@ -31,6 +54,7 @@ class FacilityLocations
     end
   end
 
+  ###            OREGON State Methods            ###
   def or_facilities(facilities)
     facilities.map do |facility|
       formatted_address = format_or_address(facility)
@@ -52,6 +76,7 @@ class FacilityLocations
     formatted.join(" ")
   end
   
+  ###            MISSOURI State Methods            ###
   def mo_facilities(facilities)
     facilities.map do |facility|
       formatted_address = format_mo_address(facility)
@@ -73,13 +98,16 @@ class FacilityLocations
     address.join(" ")
   end
 
+  # I chose to include a phone number formatter to make MO numbers
+  # match those of the other states.
   def format_mo_phone(facility)
     return "N/A" if facility[:phone] == nil
     raw_phone = facility[:phone]
     digits_only = raw_phone.gsub(/\D/, '')
     formatted_phone = digits_only.insert(3, '-').insert(-5, '-')
   end
-  
+
+  ###            NEW YORK State Methods            ###
   def ny_facilities(facilities)
     facilities.map do |facility|
       formatted_address = format_ny_address(facility)
@@ -103,34 +131,4 @@ class FacilityLocations
     address.join(" ")
   end
 
-
-
-
-
 end
-
-
-# locations = FacilityLocations.new
-# or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
-
-#   #* Oregon 97***
-#   #* NY 6390 OR 10001 - 14975
-#   #* MO 6390 OR 63001 - 65899
-
-#   # raw = "{\"address\": \"2242 Santiam Hwy SE\", \"city\": \"Albany\", \"state\": \"OR\", \"zip\": \"97321\"}"
-
-
-#   # parsed = JSON.parse(raw_2)
-#   # p parsed
-#   # p parsed.values.join(" ")
-#or_location = mo_dmv_office_locations[108]
-
-# or_dmv_office_locations.each do |location|
-#   parsed = JSON.parse(location[:location_1][:human_address])
-#     formatted = parsed.values
-#   if location.include?(:location_2)
-#     parsed_2 = JSON.parse(location[:location_2][:human_address])
-#     formatted.insert(1, parsed_2["address"])
-#     p formatted.join(" ")
-#   end
-# end
