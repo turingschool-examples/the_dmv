@@ -19,9 +19,9 @@ RSpec.describe VehicleFactory do
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
       vehicles = factory.create_vehicles(wa_ev_registrations)
    
-      expect(factory.create_vehicles(wa_ev_registrations)).to be_a(Array)
-      expect(factory.create_vehicles(wa_ev_registrations)[0]).to be_a(Vehicle)
-      expect(factory.create_vehicles(wa_ev_registrations)[0].engine).to eq(:ev)
+      expect(vehicles).to be_a(Array)
+      expect(vehicles[0]).to be_a(Vehicle)
+      expect(vehicles[0].engine).to eq(:ev)
     end
   end
 end  
