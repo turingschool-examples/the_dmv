@@ -1,7 +1,6 @@
 
 class VehicleFactory
- #attr_reader :
- #attr__accessor : 
+ 
 
     def create_vehicles(reg)
       vehicles_deatails = {vin: nil, year: nil, make: nil, model: nil, engine: nil }
