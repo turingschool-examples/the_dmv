@@ -48,6 +48,14 @@ class FacilityHandler
     address = "#{data[:street_address_line_1]}, #{data[:city]}, #{data[:state]}, #{data[:zip_code]}"
   end
 end
+
+
+
+
+
+#The code below is drafted code based on trying to do the create_state_facilities in one large method
+#This idea was abandoned in favor of doing individual methods for each state and then doing a sorter
+
 #   def name_sorter(data)
 #     if data[:website].include?('oregon')
 #       data[:title]
