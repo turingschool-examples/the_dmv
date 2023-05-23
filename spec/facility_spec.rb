@@ -127,7 +127,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe 'administer_road_test' do
+  describe '#administer_road_test' do
 
     it 'requires facility service' do
       registrant_1 = Registrant.new('Bruce', 18, true )
@@ -157,32 +157,20 @@ RSpec.describe Facility do
       expect(registrant_2.license_data).to eq({:license=>true})
     end
   end
+
+  describe '#renew_drivers_license' do
+    it 'can renew drivers license' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      facility_1.add_service('Written Test')
+      facility_1.add_service('Road Test')
+      facility_1.add_service('Renew License')
+      facility_1.administer_written_test(registrant_1)
+      facility_1.administer_road_test(registrant_1)
+
+      expect(registrant_1.license_data).to eq({:renewed=>false})
+      facility_1.renew_drivers_license(registrant_1)
+      expect(registrant_1.license_data).to eq({:renewed=>true})
+    end
+  end
 end
-
-
-
-# Renew License
-
-facility_1.renew_drivers_license(registrant_1)
-false
-
-facility_1.add_service('Renew License')
-["Written Test", "Road Test", "Renew License"]
-
-facility_1.renew_drivers_license(registrant_1)
-true
-
-registrant_1.license_data
-{:written=>true, :license=>true, :renewed=>true}
-
-facility_1.renew_drivers_license(registrant_3)
-false
-
-registrant_3.license_data
-{:written=>false, :license=>false, :renewed=>false}
-
-facility_1.renew_drivers_license(registrant_2)
-true
-
-registrant_2.license_data
-{:written=>true, :license=>true, :renewed=>true}
