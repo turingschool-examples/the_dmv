@@ -345,4 +345,181 @@ RSpec.describe Facility do
       expect { @facility_1.renew_drivers_license(@registrant_1) }.to raise_error(StandardError, 'Already renewed drivers license.')
     end
   end
+
+  # Iteration 3
+  describe 'invalid state check' do
+    it 'returns error if unsupported state is called' do
+      facility_data = DmvDataService.new.or_dmv_office_locations
+      expect { Facility.create_facility('CA', facility_data) }.to raise_error(RuntimeError, 'Unsupported state: CA')
+    end
+  end
+
+  describe 'create_facility from Oregon' do
+    it 'fetches API data' do
+      expect(facility_data = DmvDataService.new.or_dmv_office_locations).not_to be_nil
+    end
+
+    it 'can initialize' do
+      facility_data = DmvDataService.new.or_dmv_office_locations
+      oregon_facilities = Facility.create_facility('OR', facility_data)
+      expected_data = facility_data[0]
+      expect(oregon_facilities[0]).to be_an_instance_of(Facility)
+    end
+
+    it 'maps data to correct data types' do
+      facility_data = DmvDataService.new.or_dmv_office_locations
+      oregon_facilities = Facility.create_facility('OR', facility_data)
+      expected_data = facility_data[0]
+
+      expect(oregon_facilities[0].name).to be_a(String)
+      expect(oregon_facilities[0].address).to be_a(String)
+      expect(oregon_facilities[0].phone).to be_a(String)
+      expect(oregon_facilities[0].website).to be_a(String)
+    end
+    it 'creates one facility from Oregon (compare mapped data to API data)' do
+      facility_data = DmvDataService.new.or_dmv_office_locations
+      oregon_facilities = Facility.create_facility('OR', facility_data)
+
+      expected_data = facility_data[0]
+      expect(oregon_facilities[0].name).to eq(expected_data[:title])
+      expected_address = JSON.parse(expected_data[:location_1][:human_address]).values.join(', ')
+      expect(oregon_facilities[0].address).to eq(expected_address)
+      expect(oregon_facilities[0].phone).to eq(expected_data[:phone_number])
+      expect(oregon_facilities[0].website).to eq(expected_data[:website])
+    end
+
+    it 'creates multiple facilities from Oregon (compare mapped data to API data)' do
+      facility_data = DmvDataService.new.or_dmv_office_locations
+      oregon_facilities = Facility.create_facility('OR', facility_data)
+
+      expected_data = facility_data[0]
+      expect(oregon_facilities[0].name).to eq(expected_data[:title])
+      expected_address = JSON.parse(expected_data[:location_1][:human_address]).values.join(', ')
+      expect(oregon_facilities[0].address).to eq(expected_address)
+      expect(oregon_facilities[0].phone).to eq(expected_data[:phone_number])
+      expect(oregon_facilities[0].website).to eq(expected_data[:website])
+
+      expected_data = facility_data[1]
+      expect(oregon_facilities[1].name).to eq(expected_data[:title])
+      expected_address = JSON.parse(expected_data[:location_1][:human_address]).values.join(', ')
+      expect(oregon_facilities[1].address).to eq(expected_address)
+      expect(oregon_facilities[1].phone).to eq(expected_data[:phone_number])
+      expect(oregon_facilities[1].website).to eq(expected_data[:website])
+    end
+  end
+
+  describe 'create_facility from New York' do
+    it 'fetches API data' do
+      expect(facility_data = DmvDataService.new.ny_dmv_office_locations).not_to be_nil
+    end
+
+    it 'can initialize' do
+      facility_data = DmvDataService.new.ny_dmv_office_locations
+      new_york_facilities = Facility.create_facility('NY', facility_data)
+      expected_data = facility_data[0]
+      expect(new_york_facilities[0]).to be_an_instance_of(Facility)
+    end
+
+    it 'maps data to correct data types' do
+      facility_data = DmvDataService.new.ny_dmv_office_locations
+      new_york_facilities = Facility.create_facility('NY', facility_data)
+      expected_data = facility_data[0]
+
+      expect(new_york_facilities[0].name).to be_a(String)
+      expect(new_york_facilities[0].address).to be_a(String)
+      # Certain locations in New York (kiosks) do not have phone numbers and
+      # the endpoint is just not there if that is the case.
+      expect(new_york_facilities[0].phone).to be_a(String).or be_nil
+      expect(new_york_facilities[0].website).to be_a(String)
+    end
+    it 'creates a single facility from New York (compare mapped data to API data)' do
+      facility_data = DmvDataService.new.ny_dmv_office_locations
+      new_york_facilities = Facility.create_facility('NY', facility_data)
+
+      expected_data = facility_data[0]
+      expect(new_york_facilities[0].name).to eq(Helper.title_case(expected_data[:office_name]))
+      expect(new_york_facilities[0].address).to eq("#{Helper.title_case(expected_data[:street_address_line_1])}, #{Helper.title_case(expected_data[:city])}, #{Helper.title_case(expected_data[:state])}, #{expected_data[:zip_code]}")
+      expect(new_york_facilities[0].phone).to eq(expected_data[:public_phone_number])
+      expect(new_york_facilities[0].website).to eq('undefined')
+    end
+    it 'creates multiple facilities from New York (compare mapped data to API data)' do
+      facility_data = DmvDataService.new.ny_dmv_office_locations
+      new_york_facilities = Facility.create_facility('NY', facility_data)
+
+      expected_data = facility_data[0]
+      expect(new_york_facilities[0].name).to eq(Helper.title_case(expected_data[:office_name]))
+      expect(new_york_facilities[0].address).to eq("#{Helper.title_case(expected_data[:street_address_line_1])}, #{Helper.title_case(expected_data[:city])}, #{Helper.title_case(expected_data[:state])}, #{expected_data[:zip_code]}")
+      expect(new_york_facilities[0].phone).to eq(expected_data[:public_phone_number])
+      expect(new_york_facilities[0].website).to eq('undefined')
+
+      expected_data = facility_data[1]
+      expect(new_york_facilities[1].name).to eq(Helper.title_case(expected_data[:office_name]))
+      expect(new_york_facilities[1].address).to eq("#{Helper.title_case(expected_data[:street_address_line_1])}, #{Helper.title_case(expected_data[:city])}, #{Helper.title_case(expected_data[:state])}, #{expected_data[:zip_code]}")
+      expect(new_york_facilities[1].phone).to eq(expected_data[:public_phone_number])
+      expect(new_york_facilities[1].website).to eq('undefined')
+
+      expected_data = facility_data[2]
+      expect(new_york_facilities[2].name).to eq(Helper.title_case(expected_data[:office_name]))
+      expect(new_york_facilities[2].address).to eq("#{Helper.title_case(expected_data[:street_address_line_1])}, #{Helper.title_case(expected_data[:city])}, #{Helper.title_case(expected_data[:state])}, #{expected_data[:zip_code]}")
+      expect(new_york_facilities[2].phone).to eq(expected_data[:public_phone_number])
+      expect(new_york_facilities[2].website).to eq('undefined')
+    end
+  end
+
+  describe 'create_facility from Missouri' do
+    it 'fetches API data' do
+      expect(facility_data = DmvDataService.new.mo_dmv_office_locations).not_to be_nil
+    end
+
+    it 'can initialize' do
+      facility_data = DmvDataService.new.mo_dmv_office_locations
+      missouri_facilities = Facility.create_facility('MO', facility_data)
+      expected_data = facility_data[0]
+      expect(missouri_facilities[0]).to be_an_instance_of(Facility)
+    end
+
+    it 'maps data to correct data types' do
+      facility_data = DmvDataService.new.mo_dmv_office_locations
+      missouri_facilities = Facility.create_facility('MO', facility_data)
+      expected_data = facility_data[0]
+
+      expect(missouri_facilities[0].name).to be_a(String)
+      expect(missouri_facilities[0].address).to be_a(String)
+      expect(missouri_facilities[0].phone).to be_a(String)
+      expect(missouri_facilities[0].website).to be_a(String)
+    end
+    it 'creates one facility from Missouri (compare mapped data to API data)' do
+      facility_data = DmvDataService.new.mo_dmv_office_locations
+      missouri_facilities = Facility.create_facility('MO', facility_data)
+
+      expected_data = facility_data[0]
+      expect(missouri_facilities[0].name).to eq(Helper.title_case(expected_data[:name]))
+      expect(missouri_facilities[0].address).to eq("#{Helper.title_case(expected_data[:address1])}, #{Helper.title_case(expected_data[:city])}, #{expected_data[:state]}, #{expected_data[:zipcode]}")
+      expect(missouri_facilities[0].phone).to eq(expected_data[:phone])
+      expect(missouri_facilities[0].website).to eq(expected_data[:facebook_url])
+    end
+
+    it 'creates multiple facilities from Missouri (compare mapped data to API data)' do
+      facility_data = DmvDataService.new.mo_dmv_office_locations
+      missouri_facilities = Facility.create_facility('MO', facility_data)
+
+      expected_data = facility_data[0]
+      expect(missouri_facilities[0].name).to eq(Helper.title_case(expected_data[:name]))
+      expect(missouri_facilities[0].address).to eq("#{Helper.title_case(expected_data[:address1])}, #{Helper.title_case(expected_data[:city])}, #{expected_data[:state]}, #{expected_data[:zipcode]}")
+      expect(missouri_facilities[0].phone).to eq(expected_data[:phone])
+      expect(missouri_facilities[0].website).to eq(expected_data[:facebook_url])
+
+      expected_data = facility_data[1]
+      expect(missouri_facilities[1].name).to eq(Helper.title_case(expected_data[:name]))
+      expect(missouri_facilities[1].address).to eq("#{Helper.title_case(expected_data[:address1])}, #{Helper.title_case(expected_data[:city])}, #{expected_data[:state]}, #{expected_data[:zipcode]}")
+      expect(missouri_facilities[1].phone).to eq(expected_data[:phone])
+      expect(missouri_facilities[1].website).to eq(expected_data[:facebook_url])
+
+      expected_data = facility_data[2]
+      expect(missouri_facilities[2].name).to eq(Helper.title_case(expected_data[:name]))
+      expect(missouri_facilities[2].address).to eq("#{Helper.title_case(expected_data[:address1])}, #{Helper.title_case(expected_data[:city])}, #{expected_data[:state]}, #{expected_data[:zipcode]}")
+      expect(missouri_facilities[2].phone).to eq(expected_data[:phone])
+      expect(missouri_facilities[2].website).to eq(expected_data[:facebook_url])
+    end
+  end
 end
