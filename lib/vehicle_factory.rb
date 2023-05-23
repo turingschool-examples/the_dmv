@@ -22,6 +22,22 @@ class VehicleFactory
     @created_vehicles
   end
 
+  def all_cars
+    cars = []
+    vin_list = []
+  
+    @created_vehicles.each do |vehicle|
+      if vin_list.include?(vehicle.vin)
+        next
+      else
+        vin_list << vehicle.vin
+        cars << vehicle
+      end
+    end
+    cars
+  end
+  
+
   def data_formatter(vehicle)
     formatted_vehicle = {}
     vehicle.each do |key, value|
