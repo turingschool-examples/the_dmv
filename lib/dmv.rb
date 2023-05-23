@@ -54,6 +54,10 @@ class Dmv
 
   private
 
+  def capitalize_words(string)
+    string.split.map(&:capitalize).join(' ')
+  end
+
   def parse_oregon_address(human_address)
     address_data = JSON.parse(human_address)
     "#{address_data['address']}, #{address_data['city']}, #{address_data['state']}, #{address_data['zip']}"
