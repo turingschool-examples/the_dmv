@@ -25,7 +25,7 @@ class FacilityCreator
     end
 
     def format_facility_data(facility)
-      data = {
+        data = {
         name: format_name(facility),
         address: format_address(facility),
         phone: format_phone_number(facility)
@@ -33,6 +33,13 @@ class FacilityCreator
     end
 
     def format_name(data)
+        if data[:website] && data[:website].include?("oregon")
+          data[:title]
+        elsif data[:state] && data[:state] == "ny"
+          data[:office_name]
+        else data[:state] && data[:state] == "missouri"
+          data[:name]
+        end
     end
 
     def format_address(data)
