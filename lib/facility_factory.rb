@@ -13,11 +13,12 @@ class FacilityFactory
   def format_address(facility)
     # OREGON DMV
     if facility[:location_2]
-      location_1 = JSON.parse(facility[:location_1][:human_address]).values
-      location_2 = JSON.parse(facility[:location_2][:human_address]).values
-      location_1.insert(1, location_2[0]).join(" ")
+      address = JSON.parse(facility[:location_1][:human_address])
+      suite_number = JSON.parse(facility[:location_2][:human_address])      
+      "#{address[:address]} #{suite_number[:address]} #{address[:city]} #{address[:state]} #{address[:zip]}"
     else
-      JSON.parse(facility[:location_1][:human_address]).values.join(" ")
+      address = JSON.parse(facility[:location_1][:human_address])
+      "#{address[:address]} #{address[:city]} #{address[:state]} #{address[:zip]}"
     end
   end
 
