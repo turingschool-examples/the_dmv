@@ -41,7 +41,10 @@ RSpec.describe Facility do
 
       expect(cruz.registration_date).to eq(Date.today)
       expect(facility_1.registered_vehicles).to eq([cruz])
-      expect(facility_1.collected_fees).to eq(0)
+      expect(facility_1.collected_fees).to eq(100)
+      
+      facility_2.register_vehicle(cruz)
+
     end
   end
 
