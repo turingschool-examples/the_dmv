@@ -62,6 +62,27 @@ describe "FacilityFactory" do
       expect(address2).to be_a(String)
     end
   end
+  
+  describe "#format_phone" do
+    it "can format a phone number from the Oregon API" do
+      or_facility = @or_dmvs.first
+      phone = @facility_factory.format_address(special_or_facility) 
+
+      expect(address1).to be_a(String)
+      expect(address2).to be_a(String)
+    end
+    
+    it "can format an address from the New York API" do
+      ny_facility = @ny_dmvs.first
+      special_ny_facility = @ny_dmvs.find { |facility| facility[:street_address_line_2] }
+
+      address1 = @facility_factory.format_address(ny_facility)
+      address2 = @facility_factory.format_address(special_ny_facility) 
+
+      expect(address1).to be_a(String)
+      expect(address2).to be_a(String)
+    end
+  end
 
 end
 
