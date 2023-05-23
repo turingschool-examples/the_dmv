@@ -18,12 +18,11 @@ RSpec.describe VehicleFactory do
 
     describe '#create_vehicles' do
 
-        it 'can add vehicles to @vehicle from an array of ' do
+        it 'can add vehicles to @vehicle from an array of vehicle hashes' do
             factory = VehicleFactory.new
             wa_ev_registrations = DmvDataService.new.wa_ev_registrations
 
             factory.create_vehicles(wa_ev_registrations)
-            binding.pry
 
             expect(factory.vehicles[0]).to be_a(Vehicle)
         end

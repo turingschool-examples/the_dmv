@@ -17,6 +17,12 @@ RSpec.describe Facility do
       expect(@facility_1.phone).to eq('541-967-2014')
       expect(@facility_1.services).to eq([])
     end
+
+    it 'can hold avalible services' do
+      expect(@facility_1.services).to eq([])
+      expect(@facility_2.services).to eq([])
+
+    end
     
     it "Can hold registered vehicles" do 
       expect(@facility_1.registered_vehicles).to eq([])
@@ -68,7 +74,7 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(bolt)
       expect(@facility_1.registered_vehicles).to eq([cruz, bolt])
       expect(bolt.registration_date).to eq(Date.today.year)
-      expect(@facility_2.register_vehicle(camaro)).to eq("Service not offered at this location.")
+      expect(@facility_2.register_vehicle(camaro)).to eq(false)
       expect(camaro.registration_date).to eq(nil)
     end
   end

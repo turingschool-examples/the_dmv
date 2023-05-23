@@ -3,9 +3,9 @@ class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
   def initialize(facility_hash)
-    @name = facility_hash[:name]
-    @address = facility_hash[:address]
-    @phone = facility_hash[:phone]
+    @name = facility_hash[:name] || facility_hash[:title] || facility_hash[:office_name]
+    @address =  facility_hash[:address] || facility_hash[:street_address_line_1] || facility_hash[:location_1] || facility_hash[:address1]
+    @phone = facility_hash[:phone] || facility_hash[:phone_number] || facility_hash[:public_phone_number]
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
@@ -16,7 +16,7 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    if @services.include?("Vehicle Registration")
+    if @services.include?("Vehicle Registration") && !@registration_date
       vehicle.add_registration
       @registered_vehicles << vehicle
       if vehicle.antique?
@@ -30,18 +30,18 @@ class Facility
         vehicle.add_plate(:regular)
       end
     else
-      "Service not offered at this location."
+      false
     end
   end
 
   def administer_written_test(registrant)
     if @services.include?("Written Test")
-       if registrant.age >= 16 && registrant.permit?
+      if registrant.age >= 16 && registrant.permit?
         registrant.change_license_data(:written, true)
         true
-       else
+      else
         false
-       end
+      end
     else
       false
     end

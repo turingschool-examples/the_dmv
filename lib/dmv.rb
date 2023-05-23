@@ -5,8 +5,10 @@ class Dmv
     @facilities = []
   end
 
-  def add_facility(facility)
-    @facilities << facility
+  def add_facilities(dmv_locations)
+    dmv_locations.each do |location|
+       @facilities.push(Facility.new(location))
+    end
   end
 
   def facilities_offering_service(service)

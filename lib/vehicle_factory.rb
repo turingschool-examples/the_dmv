@@ -6,6 +6,7 @@ class VehicleFactory
     end
 
     def create_vehicles(vehicle_list)
+
         vehicle_list.each do |vehicle|
             @vehicles << Vehicle.new(vehicle)
         end
