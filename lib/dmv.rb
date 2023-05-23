@@ -28,4 +28,16 @@ class Dmv
     end
   end
 
+  def create_new_york_facilities
+    ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
+    ny_dmv_office_locations.each do |data|
+      facility = Facility.new(
+        name: capitalize_words(data[:office_name]),
+        address: parse_new_york_address(data),
+        phone: data[:public_phone_number]
+      )
+      @facilities << facility
+    end
+  end
+
 end
