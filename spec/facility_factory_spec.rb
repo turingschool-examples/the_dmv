@@ -21,7 +21,6 @@ RSpec.describe FacilityFactory do
       expect(@oregon.operating_facilities).to eq []
       @oregon.define_facilities(@oregon_facilities)
       expect(@oregon.operating_facilities).to include(Facility)
-   
     end
 
     it 'each instantiated facility from oregon is formatted properly' do
