@@ -9,9 +9,12 @@ class FacilityLocations
     else
       zipcode = facilities.first[:zipcode]
     end
+
     location = zipcode_locator(zipcode)
     if location == "or"
       or_facilities(facilities)
+    elsif location == "mo"
+      mo_facilities(facilities)
     elsif location == "ny"
       ny_facilities(facilities)
     end
@@ -44,6 +47,26 @@ class FacilityLocations
     parsed.values.join(" ")
   end
   
+  def mo_facilities(facilities)
+    facilities.map do |facility|
+      formatted_address = format_mo_address(facility)
+      Facility.new({
+        name: facility[:office_name],
+        address: formatted_address,
+        phone: facility[:phone],
+      })
+    end
+  end
+
+  def format_mo_address(facility)
+    address = []
+    address.push(facility[:address1])
+    address.push(facility[:city])
+    address.push(facility[:state])
+    address.push(facility[:zipcode])
+    address.join(" ")
+  end
+  
   def ny_facilities(facilities)
     facilities.map do |facility|
       formatted_address = format_ny_address(facility)
@@ -51,11 +74,11 @@ class FacilityLocations
         name: facility[:office_name],
         address: formatted_address,
         phone: "N/A",
-      })
+        })
+      end
     end
-  end
-  
-  def format_ny_address(facility)
+    
+    def format_ny_address(facility)
     address = []
     address.push(facility[:street_address_line_1])
     if facility.include?(:street_address_line_2)
@@ -82,6 +105,9 @@ end
 #   #* MO 6390 OR 63001 - 65899
 
 #   # raw = "{\"address\": \"2242 Santiam Hwy SE\", \"city\": \"Albany\", \"state\": \"OR\", \"zip\": \"97321\"}"
+
+# clean_string = old_string.gsub(/[()]/, "")
+# s.gsub(/"|\[|\]/, '')
 
 #   # parsed = JSON.parse(raw_2)
 #   # p parsed
