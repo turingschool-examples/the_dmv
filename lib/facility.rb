@@ -8,10 +8,10 @@ class Facility
               :collected_fees,
               :services
 
-  def initialize(data)
-    @name = data[:name]
-    @address = data[:address]
-    @phone = data[:phone]
+  def initialize(office_details)
+    @name = parse_name(office_details)
+    @address = parse_address(office_details)
+    @phone = parse_phone(office_details)
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
@@ -65,6 +65,49 @@ class Facility
             data.license_data[:renewed] = true
       end
     end
-    data.license_data[:renewed]
+      data.license_data[:renewed]
+  end
+
+  def parse_name(office_details)
+    if office_details[:name]
+        office_details[:name]
+    elsif office_details[:title] 
+          office_details[:title] 
+    elsif office_details[:office_name]
+          office_details[:office_name]
+    end
+  end
+
+  def parse_address(office_details)
+    if office_details[:address]
+        office_details[:address]
+    elsif office_details[:location_1]
+          address = Hash.new
+          location_1 = JSON.parse office_details[:location_1][:human_address]
+          address.store(:new_address, location_1)
+          if office_details[:location_2]
+            address_2 = Hash.new
+                location_2 = JSON.parse office_details[:location_2][:human_address] 
+                address_2.store(:suite, location_2['address'])
+                address[:new_address]["suite"] = address_2[:suite]
+          end
+          address[:new_address].values.join(', ')
+      elsif office_details[:street_address_line_1]
+            address = office_details[:street_address_line_1], office_details[:street_address_line_2], office_details[:city], office_details[:state], office_details[:zip_code]
+            address.join(', ')
+      elsif office_details[:address1]
+            address = office_details[:address1], office_details[:city], office_details[:state], office_details[:zipcode]
+            address.join(', ')
+      end 
+  end
+
+  def parse_phone(office_details)
+    if office_details[:phone]
+      office_details[:phone]
+    elsif office_details[:phone_number] 
+          office_details[:phone_number]
+    elsif office_details[:public_phone_number]
+          office_details[:public_phone_number]
+    end
   end
 end
