@@ -18,6 +18,7 @@ RSpec.describe VehicleFactory do
   it "can create vehicles with vehicle details" do
     factory = VehicleFactory.new
     vehicles = factory.create_vehicles(wa_dmv_data)
+
     expect(vehicles.first.vin).to eq("WMEEJ9AA7E")
     expect(vehicles.first.year).to eq("2014")
     expect(vehicles.first.make).to eq("SMART")
@@ -29,6 +30,7 @@ RSpec.describe VehicleFactory do
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     factory = VehicleFactory.new
     vehicles = factory.create_vehicles(wa_ev_registrations)
+    
     expect(vehicles.first.vin).to be_a(String)
     expect(vehicles.first.year.length).to eq(4)
     expect(vehicles.first.make).to be_a(String)

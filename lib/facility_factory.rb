@@ -59,14 +59,4 @@ class FacilityFactory
       end
     end
   end
-
 end
-
-
-
-
-# from Facility class:
-# def initialize(facility_details)
-#   @name = facility_details [:name]
-#   @address = facility_details [:address]
-#   @phone = facility_details [:phone]

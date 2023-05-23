@@ -94,6 +94,7 @@ RSpec.describe Facility do
 
   it "can't administer written test if registrant has no permit" do
     @facility_1.add_service('Written Test')
+
     expect(@registrant_2.age).to eq(16)
     expect(@registrant_2.permit?).to be false
     expect(@facility_1.administer_written_test(@registrant_2)).to be false
@@ -106,6 +107,7 @@ RSpec.describe Facility do
 
   it "can't administer written test if registrant is under 16" do
     @facility_1.add_service('Written Test')
+    
     expect(@registrant_3.age).to eq(15)
     expect(@registrant_3.permit?).to be false
     expect(@facility_1.administer_written_test(@registrant_3)).to be false
