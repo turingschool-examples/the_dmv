@@ -60,16 +60,16 @@ RSpec.describe FacilityFactory do
     expect(facilities[1].phone).to be_a(String)
   end
 
-  xit "can create MO facilities with specific facility details" do
+  it "can create MO facilities with specific facility details" do
     factory = FacilityFactory.new
     facilities = factory.create_facilities(mo_data_example)
 
-    expect(facilities.first.name).to eq("Oakville")
-    expect(facilities.first.address).to eq("3164 Telegraph Rd, St Louis MO 63125")
+    expect(facilities.first.name).to eq("OAKVILLE")
+    expect(facilities.first.address).to eq("3164 TELEGRAPH ROAD, ST LOUIS MO 63125")
     expect(facilities.first.phone).to eq("314-887-1050")
   end
 
-  xit "can create MO facilities with large datasets" do
+  it "can create MO facilities with large datasets" do
     factory = FacilityFactory.new
     missouri_facilities = DmvDataService.new.mo_dmv_office_locations
     facilities = factory.create_facilities(missouri_facilities)
