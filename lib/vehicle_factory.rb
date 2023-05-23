@@ -1,7 +1,7 @@
 class VehicleFactory
 
-  def create_vehicles(dmv_data)
-    dmv_data.map do |vehicle_data|
+  def create_vehicles(dmv_vehicles_data)
+    dmv_vehicles_data.map do |vehicle_data|
       vehicle_data = vehicle_data.slice(:vin_1_10, :model_year, :make, :model)
       vehicle_data[:vin] = vehicle_data.delete(:vin_1_10)
       vehicle_data[:year] = vehicle_data.delete(:model_year)
