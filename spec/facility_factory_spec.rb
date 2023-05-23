@@ -39,7 +39,7 @@ RSpec.describe FacilityFactory do
       :state=>"MO",
       :zipcode=>"63125"
     }
-    expected = "3164 Telegraph Road, St Louis, Mo, 63125"    #fuck this address!! i know this aint right
+    expected = "3164 Telegraph Road, St Louis, Mo, 63125"
     expect(factory.formatted_mo_address(address_hash)).to eq(expected)
   end
 
