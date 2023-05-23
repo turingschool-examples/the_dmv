@@ -17,6 +17,15 @@ RSpec.describe VehicleFactory do
       expect(@factory.created_vehicles).to eq []
       @factory.create_vehicles(wa_ev_registrations)
       expect(@factory.created_vehicles).to include(Vehicle)
+      expect(@factory.created_vehicles.length).to eq wa_ev_registrations.length
+    end
+
+    it 'works with new york data also' do
+      ny_registrations = DmvDataService.new.ny_registrations
+      expect(@factory.created_vehicles).to eq []
+      @factory.create_vehicles(ny_registrations)
+      expect(@factory.created_vehicles).to include(Vehicle)
+      expect(@factory.created_vehicles.length).to eq ny_registrations.length
     end
   end
 
