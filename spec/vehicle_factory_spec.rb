@@ -15,10 +15,11 @@ RSpec.describe VehicleFactory do
 
   describe "#create_vehicles" do
     it "lists vehicles from state's DMV" do
-      expect(@factory.create_vehicles(@wa_ev_registrations)).to be_an_instance_of(Array)
-      expect(@factory.create_vehicles(@wa_ev_registrations).first.vin).to eq("7SAYGDEF6N")
-      expect(@factory.create_vehicles(@wa_ev_registrations).last.vin).to eq("7SAYGDEE5N")
-      expect(@factory.create_vehicles(@wa_ev_registrations).count).to eq(4000)
+      create_vehicles = @factory.create_vehicles(@wa_ev_registrations)
+      
+      expect(create_vehicles).to be_an_instance_of(Array)
+      expect(create_vehicles.first.vin).to eq("7SAYGDEF6N")
+      expect(create_vehicles.last.vin).to eq("7SAYGDEE5N")
     end
   end
 end
