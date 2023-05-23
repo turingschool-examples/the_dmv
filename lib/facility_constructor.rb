@@ -22,7 +22,12 @@ class FacilityConstructor
     
     def parsed_address(location)
         if location[:location_1]
-            (JSON.parse location[:location_1][:human_address]).values.join(" ")
+            address = JSON.parse location[:location_1][:human_address]
+            if location[:location_2]
+                unit_num = JSON.parse location[:location_2][:human_address]
+                address["address"] << " " << unit_num["address"]
+            end
+            address.values.join(" ")
         elsif location[:state] == "NY"
             [location[:street_address_line_1], location[:street_address_line_2], location[:city], location[:state], location[:zip_code]].compact.join(" ")
         elsif location[:state] == "MO"
