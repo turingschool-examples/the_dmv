@@ -18,7 +18,7 @@ RSpec.describe FacilityLocations do
     it 'can fetch or_dmv_office_locations' do
       expect(@or_dmv_office_locations).to be_an(Array)
       expect(@or_dmv_office_locations.size).to eq(59)
-      expect(@or_dmv_office_locations[0][:"title"]).to eq("Albany DMV Office")
+      expect(@or_dmv_office_locations[0][:title]).to eq("Albany DMV Office")
     end
     
     it 'can create facilities' do
@@ -43,7 +43,7 @@ RSpec.describe FacilityLocations do
     it 'can fetch or_dmv_office_locations' do
       expect(@ny_dmv_office_locations).to be_an(Array)
       expect(@ny_dmv_office_locations.size).to eq(172)
-      expect(@ny_dmv_office_locations[0][:"office_name"]).to eq("JAMAICA KIOSK")
+      expect(@ny_dmv_office_locations[0][:office_name]).to eq("JAMAICA KIOSK")
     end
     
     it 'can create facilities from second data set' do
@@ -61,6 +61,31 @@ RSpec.describe FacilityLocations do
       expect(ny_facilities[125].services).to eq([])
       expect(ny_facilities[125].registered_vehicles).to eq([])
       expect(ny_facilities[125].collected_fees).to eq(0)
+    end
+  end
+
+  describe '#generate_third_location_data' do
+    it 'can fetch mo_dmv_office_locations' do
+      expect(@mo_dmv_office_locations).to be_an(Array)
+      expect(@mo_dmv_office_locations.size).to eq(178)
+      expect(@mo_dmv_office_locations[0][:name]).to eq("OAKVILLE")
+    end
+    
+    it 'can create facilities from second data set' do
+      mo_facilities = @locations.create_facilities(@mo_dmv_office_locations)
+      expect(mo_facilities.first.name).to eq("OAKVILLE")
+      expect(mo_facilities.first.address).to eq("3164 TELEGRAPH ROAD ST LOUIS MO 63125")
+      expect(mo_facilities.first.phone).to eq("(314) 887-1050")
+      expect(mo_facilities.first.services).to eq([])
+      expect(mo_facilities.first.registered_vehicles).to eq([])
+      expect(mo_facilities.first.collected_fees).to eq(0)
+
+      expect(mo_facilities[108].name).to eq("MALDEN")
+      expect(mo_facilities[108].address).to eq("1112 N Douglass MALDEN MO 63863")
+      expect(mo_facilities[108].phone).to eq("(573) 276-5006")
+      expect(mo_facilities[108].services).to eq([])
+      expect(mo_facilities[108].registered_vehicles).to eq([])
+      expect(mo_facilities[108].collected_fees).to eq(0)
     end
   end
 
