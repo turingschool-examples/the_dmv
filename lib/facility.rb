@@ -15,12 +15,14 @@ class Facility
   end
 
   def register_vehicle(car)
-      if car.engine == :ev
-        car.plate_type = :ev
-      elsif car.antique?
-        car.plate_type = :antique
-      else
-        car.plate_type = :regular
-      end
+        if car.engine == :ev
+          car.plate_type = :ev
+        elsif car.antique?
+          car.plate_type = :antique
+        else
+          car.plate_type = :regular
+        end
+      car.registration_date = Date.today
+      @registered_vehicles.push(car)
   end
 end
