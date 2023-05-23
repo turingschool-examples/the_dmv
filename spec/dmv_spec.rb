@@ -88,4 +88,19 @@ RSpec.describe Dmv do
     end
   end
 
+  describe '#create_missouri_facilities' do
+    it 'creates Facility objects with correct addresses' do
+      dmv = Dmv.new
+      dmv.create_missouri_facilities
+
+      facilities = dmv.facilities
+
+      expect(facilities.size).to eq(178)
+
+      facility = facilities[0]
+      expect(facility.name).to eq('Oakville')
+      expect(facility.address).to eq('3164 TELEGRAPH ROAD, ST LOUIS, MO, 63125')
+      expect(facility.phone).to eq('(314) 887-1050')
+    end
+  end
 end
