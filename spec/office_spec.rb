@@ -16,6 +16,7 @@ RSpec.describe Office do
       company = offices.create_offices(or_dmv_office_locations)
       expect(company).to be_an_instance_of(Array)
       expect(company[0]).to be_an_instance_of(Facility)
+      expect(company[1].name).to eq('Ashland DMV Office')
     end
   end 
 end

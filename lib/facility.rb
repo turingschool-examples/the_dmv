@@ -9,7 +9,7 @@ class Facility
               :services
 
   def initialize(office_details)
-    @name = office_details[:name]
+    @name = parse_name(office_details)
     @address = office_details[:address]
     @phone = office_details[:phone]
     @services = []
@@ -66,5 +66,13 @@ class Facility
       end
     end
     data.license_data[:renewed]
+  end
+end
+
+def parse_name(office_details)
+  if office_details[:name]
+    office_details[:name]
+  elsif office_details[:title]
+    office_details[:title]
   end
 end
