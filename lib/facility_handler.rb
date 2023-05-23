@@ -11,7 +11,6 @@ class FacilityHandler
   end
   #this method will sort through each JSON file to confirm which state the facility builder should do
 
-
   def create_oregon_facilities(dmv_locations)
       oregon_facility = dmv_locations.map do |data|
         Facility.new(name:  data[:title],
