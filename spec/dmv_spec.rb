@@ -68,7 +68,6 @@ RSpec.describe Dmv do
     it 'Can add facilities from Missiouri dmv api' do
       expect(@dmv.facilities).to eq([])
       @dmv.add_facilities(@mo_locations)
-
       expect(@dmv.facilities[1]).to be_a(Facility)
       expect(@dmv.facilities[1].name).to eq(@mo_locations[1][:name])
       expect(@dmv.facilities[1].address).to eq(@mo_locations[1][:address1])
@@ -98,4 +97,40 @@ RSpec.describe Dmv do
       expect(@dmv.facilities_offering_service('Road Test')).to eq(@dmv.facilities[1..2])
     end
   end
-end
+
+  describe '#format_name' do
+    it 'takes a given hash argument and returns a name string' do
+      
+      expect(@dmv.format_name(@facility_1)).to eq("Albany DMV Office")
+      expect(@dmv.format_name(@facility_2)).to eq('Ashland DMV Office')
+      expect(@dmv.format_name(@facility_3)).to eq('Bend DMV Office')
+    end
+
+    it 'takes a diffrent value from the hash argument' do
+
+      expect(@dmv.format_name(@or_locations[1])).to eq("Ashland DMV Office")
+      expect(@dmv.format_name(@ny_locations[1])).to eq("Rochester Downtown")
+      expect(@dmv.format_name(@mo_locations[1])).to eq("Bonne Terre")
+
+    end
+  end
+
+  describe '#format_address' do
+    it 'takes a hash and returns a string' do
+
+      expect(@dmv.format_address(@facility_1)).to eq("2242 Santiam Hwy SE Albany OR 97321")
+      expect(@dmv.format_address(@facility_2)).to eq('600 Tolman Creek Rd Ashland OR 97520')
+      expect(@dmv.format_address(@facility_3)).to eq('63030 O B Riley Rd Bend OR 97701')
+
+    end
+
+    it 'can take diffrent values from the hash and formate them' do
+
+      expect(@dmv.format_address(@or_locations[1])).to eq("600 Tolman Creek Rd Ashland OR 97520")
+      expect(@dmv.format_address(@ny_locations[1])).to eq("200 E Main Street Ste. 101 Rochester NY 14604")
+      expect(@dmv.format_address(@mo_locations[1])).to eq("30 N Allen St Bonne Terre MO 63628")
+    end
+  end
+
+  describe
+end 
