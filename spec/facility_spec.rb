@@ -159,7 +159,7 @@ RSpec.describe Facility do
   end
 
   describe '#renew_drivers_license' do
-    it 'can renew drivers license' do
+    it 'can renew drivers license if service available' do
       registrant_1 = Registrant.new('Bruce', 18, true )
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
       facility_1.add_service('Written Test')
