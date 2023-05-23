@@ -52,4 +52,21 @@ class Dmv
     end
   end
 
+  private
+
+  def parse_oregon_address(human_address)
+    address_data = JSON.parse(human_address)
+    "#{address_data['address']}, #{address_data['city']}, #{address_data['state']}, #{address_data['zip']}"
+  end
+
+  def parse_new_york_address(data)
+    state = data[:state].upcase
+    address = "#{data[:street_address_line_1]}, #{data[:city]}, #{state}, #{data[:zip_code]}"
+    capitalize_words(address)
+  end
+
+  # I would make this the standard one and then build custom for states that don't match this
+  def parse_missouri_address(data)
+    "#{data[:address1]}, #{data[:city]}, #{data[:state]}, #{data[:zipcode]}"
+  end
 end
