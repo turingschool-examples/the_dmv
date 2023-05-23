@@ -67,9 +67,9 @@ class Facility
 
   def self.create_facility_from_new_york(facility_data)
     facility_data.map do |data|
-      name = data[:office_name]
-      street = data[:street_address_line_1]
-      city = data[:city]
+      name = Helper.title_case(data[:office_name])
+      street = Helper.title_case(data[:street_address_line_1])
+      city = Helper.title_case(data[:city])
       state = data[:state]
       zip_code = data[:zip_code]
       phone = data[:public_phone_number]
@@ -82,9 +82,9 @@ class Facility
 
   def self.create_facility_from_missouri(facility_data)
     facility_data.map do |data|
-      name = data[:name]
-      street = data[:address1]
-      city = data[:city]
+      name = Helper.title_case(data[:name])
+      street = Helper.title_case(data[:address1])
+      city = Helper.title_case(data[:city])
       state = data[:state]
       zip_code = data[:zipcode]
       phone = data[:phone]
