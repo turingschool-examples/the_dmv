@@ -12,7 +12,7 @@ class Vehicle
 
   def initialize(vehicle_details)
     @vin = vehicle_details[:vin]
-    @year = vehicle_details[:year]
+    @year = parse_year(vehicle_details)
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
@@ -26,5 +26,13 @@ class Vehicle
 
   def electric_vehicle?
     @engine == :ev
+  end
+  
+  def parse_year(vehicle_details)
+    if vehicle_details[:year]
+      vehicle_details[:year]
+    elsif vehicle_details[:model_year]
+      vehicle_details[:model_year]
+    end
   end
 end
