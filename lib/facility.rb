@@ -4,12 +4,16 @@ class Facility
               :phone,
               :services,
               :collected_fees, 
-              :registered_vehicles
+              :registered_vehicles,
+              :operating_hours,
+              :holiday_closures
 
   def initialize(office)
     @address = office[:address]
     @name = office[:name]
     @phone = office[:phone]
+    @operating_hours = office[:operating_hours]
+    @holiday_closures = office[:holiday_closures]
     @services = []
     @collected_fees = 0
     @registered_vehicles = []
