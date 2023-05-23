@@ -41,8 +41,18 @@ def facility_formatter(facility)
       else
         formatted_facility[:address] = value
       end
-    elsif key.to_s.downcase.include?("phone") && formatted_facility[:phone] == nil
+    elsif key.to_s.downcase.include?("phone") && formatted_facility[:phone].nil?
       formatted_facility[:phone] = value
+    elsif key.to_s.downcase.include?("zip")
+      formatted_facility[:zip] = value
+    elsif key.to_s.downcase.include?("type")
+      formatted_facility[:type] = value
+    elsif key.to_s.downcase.include?("web")
+      formatted_facility[:website] = value
+    elsif key.to_s.downcase == "othercontactinfo"
+      website_parts = value.split("Website: ")
+        website = website_parts[1]
+        formatted_facility[:website] = website
     else
       formatted_facility[key] = value
     end

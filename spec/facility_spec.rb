@@ -9,6 +9,8 @@ RSpec.describe Facility do
       expect(@facility.address).to eq('2242 Santiam Hwy SE Albany OR 97321')
       expect(@facility.phone).to eq('541-967-2014')
       expect(@facility.services).to eq([])
+      expect(@facility.website).to be nil
+      expect(@facility.type).to be nil
     end
   end
 
