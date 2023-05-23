@@ -10,8 +10,8 @@ class Facility
 
   def initialize(office_details)
     @name = parse_name(office_details)
-    @address = office_details[:address]
-    @phone = office_details[:phone]
+    @address = parse_address(office_details)
+    @phone = parse_phone(office_details)
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
@@ -65,14 +65,37 @@ class Facility
             data.license_data[:renewed] = true
       end
     end
-    data.license_data[:renewed]
+      data.license_data[:renewed]
   end
-end
 
-def parse_name(office_details)
-  if office_details[:name]
-    office_details[:name]
-  elsif office_details[:title]
-    office_details[:title]
+  def parse_name(office_details)
+    if office_details[:name]
+        office_details[:name]
+    elsif office_details[:title] 
+          office_details[:title] 
+    elsif office_details[:office_name]
+          office_details[:office_name]
+    end
+  end
+
+  def parse_address(office_details)
+    if office_details[:address]
+        office_details[:address]
+    elsif office_details.dig(:location_1, :human_address)
+          office_details.dig(:location_1, :human_address)
+    end
+    office_address = office_details.dig(:location_1, :human_address).to_s.delete('{}')
+    new_address = office_address
+    new_address
+  end
+
+  def parse_phone(office_details)
+    if office_details[:phone]
+      office_details[:phone]
+    elsif office_details[:phone_number] 
+          office_details[:phone_number]
+    elsif office_details[:public_phone_number]
+          office_details[:public_phone_number]
+    end
   end
 end
