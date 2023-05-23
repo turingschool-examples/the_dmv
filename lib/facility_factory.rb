@@ -18,16 +18,36 @@ class FacilityFactory
   end
 
   def standardize_name(facility_data)
-    facility_data[:title]
+    if facility_data.has_key?(:website) && facility_data[:website].include?("oregon")
+      facility_data[:title]
+    else facility_data[:state] == "NY"
+      facility_data[:office_name]
+    end
   end
 
   def standardize_address(facility_data)
-    address = JSON.parse(facility_data[:location_1][:human_address], :symbolize_names => true)
-    "#{address[:address]}, #{address[:city]} #{address[:state]} #{address[:zip]}"
+    if facility_data.has_key?(:website) && facility_data[:website].include?("oregon")
+      address = JSON.parse(facility_data[:location_1][:human_address], :symbolize_names => true)
+      "#{address[:address]}, #{address[:city]} #{address[:state]} #{address[:zip]}"
+    else facility_data[:state] == "NY"
+      if facility_data[:street_address_line_2].nil?
+        "#{facility_data[:street_address_line_1]}, #{facility_data[:city]} #{facility_data[:state]} #{facility_data[:zip_code]}" 
+      else 
+        "#{facility_data[:street_address_line_1]} #{facility_data[:street_address_line_2]}, #{facility_data[:city]} #{facility_data[:state]} #{facility_data[:zip_code]}" 
+      end
+    end
   end
 
   def standardize_phone(facility_data)
-    facility_data[:phone_number]
+    if facility_data.has_key?(:website) && facility_data[:website].include?("oregon")
+      facility_data[:phone_number]
+    else facility_data[:state] == "NY"
+      if facility_data[:public_phone_number].nil?
+        nil
+      else
+      facility_data[:public_phone_number].insert(3, "-").insert(7, "-")
+      end
+    end
   end
 
 end
