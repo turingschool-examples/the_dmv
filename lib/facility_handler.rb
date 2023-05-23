@@ -49,7 +49,7 @@ class FacilityHandler
   end
 end
 
-
+#The address_formatter_state methods essemble the address from each database into a more readable format
 
 
 
