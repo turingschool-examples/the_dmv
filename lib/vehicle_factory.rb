@@ -37,10 +37,23 @@ class VehicleFactory
     most_popular_make_model
   end
 
-  def count(model, year)
-
-
+  def models_in_a_year(model, year)
+    count = 0
+    @created_vehicles.each do |vehicle|
+      if vehicle.model == model && vehicle.year == year
+        count += 1
+      end
+    end
+    count
   end
 
-
+  def vehicles_in_a_year(year)
+    count = 0
+    @created_vehicles.each do |vehicle|
+      if vehicle.year == year
+        count += 1
+      end
+    end
+    count
+  end
 end
