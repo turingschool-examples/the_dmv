@@ -39,4 +39,14 @@ class Dmv
       "#{facility_hash[:address1].split.map{|word| word.capitalize}.join(" ")} #{facility_hash[:city].split.map{|word| word.capitalize}.join(" ")} #{facility_hash[:state]} #{facility_hash[:zipcode]}"
     end
   end
+
+  def format_phone(facility_hash)
+    if (facility_hash[:phone] && facility_hash[:address]) || (facility_hash[:phone_number] && facility_hash[:title])
+      facility_hash[:phone] || facility_hash[:phone_number]
+    elsif facility_hash[:public_phone_number]
+      "#{facility_hash[:public_phone_number][0..2]}-#{facility_hash[:public_phone_number][3..5]}-#{facility_hash[:public_phone_number][6..9]}"
+    elsif facility_hash[:phone]
+      facility_hash[:phone].tr("()", "").tr(" ","-")
+    end
+  end
 end

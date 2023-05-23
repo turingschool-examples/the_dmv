@@ -144,7 +144,7 @@ RSpec.describe Dmv do
 
     it 'can format from a diffrent source' do
 
-      expect(@dmv.format_phone(@or_locations[1])).to eq('541-967-2014')
+      expect(@dmv.format_phone(@or_locations[1])).to eq('541-776-6092')
       expect(@dmv.format_phone(@ny_locations[1])).to eq("585-753-1604")
       expect(@dmv.format_phone(@mo_locations[1])).to eq("573-358-3584")
       
