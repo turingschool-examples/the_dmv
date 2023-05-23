@@ -17,10 +17,7 @@ class Registrant
   end
 
   def earn_permit
-    if age >= 16
-      @permit = true
-    else
-      p "Registrant is not yet old enough to earn permit."
-    end
+    return p "Registrant is not yet old enough to earn permit." if age < 16
+    @permit = true
   end
 end
