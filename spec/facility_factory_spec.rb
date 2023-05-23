@@ -30,4 +30,21 @@ RSpec.describe FacilityFactory do
       expect(facility).to be_an_instance_of(Facility)
     end
   end
+
+  it 'reformats addresses' do
+    factory = FacilityFactory.new
+    address_hash = {
+      :address1=>"3164 TELEGRAPH ROAD",
+      :city=>"ST LOUIS",
+      :state=>"MO",
+      :zipcode=>"63125"
+    }
+    expected = "3164 Telegraph Road, St Louis, Mo, 63125"    #fuck this address!! i know this aint right
+    expect(factory.formatted_mo_address(address_hash)).to eq(expected)
+  end
+
+  it 'reformats phone numbers' do
+    factory = FacilityFactory.new
+    expect(factory.formatted_mo_phone("(314) 887-1050")).to eq("314-887-1050")
+  end
 end
