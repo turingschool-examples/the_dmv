@@ -53,9 +53,9 @@ class Dmv
       locations = new_york_parse(dmv_office)
     elsif dmv_office.first.has_key?(:name)
       locations = missouri_parse(dmv_office)
-    else
-      nil
     end
+    
+    locations
   end
 
   def create_facilities(dmv_office)
