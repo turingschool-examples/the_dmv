@@ -20,7 +20,7 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    if @services.include?("Vehicle Registration")
+    return p "Facility does not currently offer this service." unless @services.include?("Vehicle Registration")
       vehicle.registration_date = Date.today.year
       @registered_vehicles << vehicle
       if vehicle.antique?
@@ -33,9 +33,6 @@ class Facility
         vehicle.plate_type = :regular
         @collected_fees += 100
       end
-    else
-      p "Facility does not currently offer this service."
-    end
   end
 
   def administer_written_test(registrant)
