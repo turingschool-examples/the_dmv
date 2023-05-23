@@ -3,3 +3,7 @@ Gemfile.lock
 iteration1_pry_tests.rb
 iteration2_pry_tests.rb
 .vscode/settings.json
+iteration_1_workflow_test.rb
+iteration_2_workflow_test_1.rb
+iteration_2_workflow_test_2.rb
+iteration_3_workflow_test.rb
