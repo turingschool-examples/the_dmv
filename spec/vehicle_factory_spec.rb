@@ -17,11 +17,11 @@ RSpec.describe VehicleFactory do
 
   it "can create vehicles" do
     factory = VehicleFactory.new
-    vehicle = factory.create_vehicles(wa_dmv_data)
-    expect(vehicle.first.vin).to eq("WMEEJ9AA7E")
-    expect(vehicle.first.year).to eq("2014")
-    expect(vehicle.first.make).to eq("SMART")
-    expect(vehicle.first.model).to eq("Fortwo Electric Drive")
-    expect(vehicle.first.engine).to eq(:ev)
+    vehicles = factory.create_vehicles(wa_dmv_data)
+    expect(vehicles.first.vin).to eq("WMEEJ9AA7E")
+    expect(vehicles.first.year).to eq("2014")
+    expect(vehicles.first.make).to eq("SMART")
+    expect(vehicles.first.model).to eq("Fortwo Electric Drive")
+    expect(vehicles.first.engine).to eq(:ev)
   end
 end
