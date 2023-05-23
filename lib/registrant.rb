@@ -7,9 +7,7 @@ class Registrant
         @permit = permit
         @license_data = {written: false, 
                         license: false, 
-                        renewed: false}
-                        
-        # needs to be a hash BUT WHERE LOL @license_data={:written=>false, :license=>false, :renewed=>false}
+                        renewed: false}              
     end
 
 def permit?
