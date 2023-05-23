@@ -1,11 +1,23 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees, :website, :type, :zip
+  attr_reader :name, 
+              :address, 
+              :city,
+              :state,
+              :zip,
+              :phone, 
+              :website, 
+              :type, 
+              :services, 
+              :registered_vehicles, 
+              :collected_fees
 
   def initialize(information)
     @name = information[:name]
     @address = information[:address]
-    @phone = information[:phone]
+    @city = information[:city]
+    @state = information[:state]
     @zip = information[:zip]
+    @phone = information[:phone]
     @website = information[:website]
     @type = information[:type]    
     @services = []
