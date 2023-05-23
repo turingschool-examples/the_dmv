@@ -29,7 +29,7 @@ class Facility
       car.registration_date = Date.today
       @registered_vehicles.push(car)
     else
-      p "Service not Availiable"
+      nil
     end
   end
 end
