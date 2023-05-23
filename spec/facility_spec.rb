@@ -131,54 +131,35 @@ RSpec.describe Facility do
 
     it 'requires facility service' do
       registrant_1 = Registrant.new('Bruce', 18, true )
-      registrant_2 = Registrant.new('Penny', 16 )
-      registrant_3 = Registrant.new('Tucker', 15 )
       facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
-      facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
       facility_1.add_service('Written Test')
       registrant_1.administer_written_test(registrant_1)
-
+      
       facility_1.administer_road_test(registrant_1)
       expect(registrant_1.license_data).to eq({:license=>false})
       facility_1.add_service('Road Test')
       facility_1.administer_road_test(registrant_1)
       expect(registrant_1.license_data).to eq({:license=>true})
     end
+    
+    it 'requires permit and written test' do
+      registrant_2 = Registrant.new('Penny', 16 )
+      facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
+      facility_1.add_service('Written Test')
 
-    it 'requires permit and written test'
+      facility_1.administer_road_test(registrant_2)
+      expect(registrant_2.license_data).to eq({:license=>false})
+      registrant_2.earn_permit
+      facility_1.administer_road_test(registrant_2)
+      expect(registrant_2.license_data).to eq({:license=>false})
+      facility_1.administer_written_test(registrant_2)
+      facility_1.administer_road_test(registrant_2)
+      expect(registrant_2.license_data).to eq({:license=>true})
+    end
   end
 end
 
 
-
-# # Road Test
-
-false
-
-registrant_3.earn_permit
-
-facility_1.administer_road_test(registrant_3)
-false
-
-registrant_3.license_data
-{:written=>false, :license=>false, :renewed=>false}
-
-facility_1.administer_road_test(registrant_1)
-false
-
-["Written Test", "Road Test"]
-
-facility_1.administer_road_test(registrant_1)
-true
-
-registrant_1.license_data
-{:written=>true, :license=>true, :renewed=>false}
-
-facility_1.administer_road_test(registrant_2)
-true
-
-registrant_2.license_data
-{:written=>true, :license=>true, :renewed=>false}
 
 # Renew License
 
