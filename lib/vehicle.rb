@@ -1,6 +1,7 @@
 require 'date'
 
 class Vehicle
+
   attr_reader :vin,
               :year,
               :make,
@@ -9,6 +10,7 @@ class Vehicle
               :registration_date,
               :plate_type
 
+    #allow all data keys to fall under vehicle_details to call self
   def initialize(vehicle_details)
     @vin = vehicle_details[:vin]
     @year = vehicle_details[:year]
@@ -19,6 +21,7 @@ class Vehicle
     @plate_type = nil
   end
 
+  #define differences to key for vehilces to fee can be applied appropriately
   def antique?
     Date.today.year - @year > 25
   end
@@ -29,6 +32,7 @@ class Vehicle
 
 
   #self refers to current object
+  #aplies vehicle type when registering
   def register
     @registration_date = Date.today
     if self.electric_vehicle?
@@ -40,6 +44,5 @@ class Vehicle
     end
   end
 
-
-  
+  #end class
 end
