@@ -30,9 +30,9 @@ RSpec.describe Dmv do
     
     @missouri_facilities = DmvDataService.new.mo_dmv_office_locations
     @mo_office_1 = Facility.new({
-      name: "FERGUSON-OFFICE CLOSED UNTIL FURTHER NOTICE",
-      address: "10425 WEST FLORISSANT",
-      phone: "(314) 733-5316"
+      name: "OAKVILLE",
+      address: "3164 TELEGRAPH ROAD",
+      phone: "(314) 887-1050"
     })
     @mo_office_2 = Facility.new({
       name: "BONNE TERRE",
@@ -76,27 +76,72 @@ RSpec.describe Dmv do
     end
   end
 
-  describe "#add Oregon offices" do
-    it "can create facility objects from Oregon data" do
-      expect(@dmv.create_facilities(@or_dmv_office_locations)).to be_an_instance_of(Array)
-      expect(@dmv.create_facilities(@or_dmv_office_locations).first.first.name).to eq("Albany DMV Office")
-      expect(@dmv.create_facilities(@or_dmv_office_locations).first.first.address).to eq("2242 Santiam Hwy SE Albany OR 97321")
+  describe "#oregon_parse" do
+    it "can parse oregon data" do
+      oregon_parse = @dmv.oregon_parse(@or_dmv_office_locations).first
+      expect(oregon_parse[:name]).to eq(@facility_1.name) 
+      expect(oregon_parse[:address]).to eq(@facility_1.address) 
+      expect(oregon_parse[:phone]).to eq(@facility_1.phone) 
     end
   end
 
-  describe "#add New York offices" do
-    it "can create facility objects from New York data" do
-      expect(@dmv.create_facilities(@new_york_facilities)).to be_an_instance_of(Array)
-      expect(@dmv.create_facilities(@new_york_facilities).first.first.name).to eq("JAMAICA KIOSK")
-      expect(@dmv.create_facilities(@new_york_facilities).first[1].address).to eq("200 E. MAIN STREET")
+  describe "#new_york_parse" do
+    it "can parse new_york" do
+      new_york_parse = @dmv.new_york_parse(@new_york_facilities).first
+
+      expect(new_york_parse[:name]).to eq(@ny_office_1.name)
+      expect(new_york_parse[:address]).to eq(@ny_office_1.address)
+      expect(new_york_parse[:phone]).to eq(@ny_office_1.phone)
     end
   end
 
-  describe "#add Missouri offices" do
-    it "can create facility objects from Missouri data" do
-      expect(@dmv.create_facilities(@missouri_facilities)).to be_an_instance_of(Array)
-      expect(@dmv.create_facilities(@missouri_facilities).first.first.address).to eq("10425 WEST FLORISSANT")
-      expect(@dmv.create_facilities(@missouri_facilities).first[1].phone).to eq("(573) 358-3584")
+  describe "#missouri_parse" do
+    it "can parse missouri" do
+      missouri_parse = @dmv.missouri_parse(@missouri_facilities).first
+
+      expect(missouri_parse[:name]).to eq(@mo_office_1.name)
+      expect(missouri_parse[:address]).to eq(@mo_office_1.address)
+      expect(missouri_parse[:phone]).to eq(@mo_office_1.phone)
+    end
+  end
+
+  describe "#parse_states_data" do
+    it "can parse oregon data" do
+      parse_oregon_data = @dmv.parse_states_data(@or_dmv_office_locations)
+      expect(parse_oregon_data).to eq(@dmv.oregon_parse(@or_dmv_office_locations))
+    end
+
+    it "can parse new york data" do
+      parse_new_york_data = @dmv.parse_states_data(@new_york_facilities)
+      expect(parse_new_york_data).to eq(@dmv.new_york_parse(@new_york_facilities))
+    end
+
+    it "can parse missouri data" do
+      missouri_data = @dmv.parse_states_data(@missouri_facilities)
+      expect(missouri_data).to eq(@dmv.missouri_parse(@missouri_facilities))
+    end
+  end
+
+  describe "#create_facilities" do
+    it "can add oregon facilities" do
+      oregon_facilities = @dmv.create_facilities(@or_dmv_office_locations)
+      expect(oregon_facilities.count).to eq(@dmv.facilities.count)
+      expect(oregon_facilities.first.first).to eq(@dmv.facilities.first)
+      expect(oregon_facilities.first.first.name).to eq(@facility_1.name)
+    end
+
+    it "can add new york facilities" do
+      new_york_data = @dmv.create_facilities(@new_york_facilities)
+      expect(new_york_data.first.first.name).to eq(@ny_office_1.name)
+      expect(new_york_data.first.first.address).to eq(@ny_office_1.address)
+      expect(new_york_data.first.first.phone).to eq(@ny_office_1.phone)
+    end
+
+    it "can add missouri facilities" do
+      missouri_data = @dmv.create_facilities(@missouri_facilities)
+      expect(missouri_data.count).to eq(@dmv.facilities.count)
+      expect(missouri_data.first.first).to eq(@dmv.facilities.first)
+      expect(missouri_data.first.first.address).to eq(@mo_office_1.address)
     end
   end
 end
