@@ -50,7 +50,6 @@ class FacilityFactory
 
   def format_phone_number(phone)
     return nil if phone.nil?
-
     digits = phone.gsub(/\D/, '')
     formatted_number = "#{digits[0..2]}-#{digits[3..5]}-#{digits[6..9]}"
     formatted_number
