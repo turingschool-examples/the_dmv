@@ -41,6 +41,7 @@ RSpec.describe FacilityConstructor do
             expect(or_facilities.first.address).to eq("2242 Santiam Hwy SE Albany OR 97321")
             expect(or_facilities.first.phone).to eq("541-967-2014")
             expect(or_facilities.length).to eq 59
+            expect(or_facilities[3].address).to eq("3370 10th St Suite A Baker City OR 97814")
         end
 
         it 'generates facilities from New York data' do
@@ -60,9 +61,9 @@ RSpec.describe FacilityConstructor do
             mo_facilities = @constructor.create_facilities(mo_dmv_office_locations)
             expect(mo_facilities).to be_a(Array)
             expect(mo_facilities.first).to be_a(Facility)
-            expect(mo_facilities.first.name).to eq("FERGUSON-OFFICE CLOSED UNTIL FURTHER NOTICE")
-            expect(mo_facilities.first.address).to eq("10425 WEST FLORISSANT FERGUSON MO 63136")
-            expect(mo_facilities.first.phone).to eq("(314) 733-5316")
+            expect(mo_facilities.first.name).to eq("OAKVILLE")
+            expect(mo_facilities.first.address).to eq("3164 TELEGRAPH ROAD ST LOUIS MO 63125")
+            expect(mo_facilities.first.phone).to eq("(314) 887-1050")
             expect(mo_facilities.length).to eq 178
         end
     end
