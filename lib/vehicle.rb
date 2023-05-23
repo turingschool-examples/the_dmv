@@ -42,5 +42,3 @@ class Vehicle
   end
 
 end
-
-p now = Date.new(2023,1,12)

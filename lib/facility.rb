@@ -70,3 +70,4 @@ class Facility
 
 end
 
+#@facility = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
