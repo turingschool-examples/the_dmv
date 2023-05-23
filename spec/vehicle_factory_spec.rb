@@ -24,7 +24,7 @@ RSpec.describe VehicleFactory do
     it 'can find most popular make and model from an array of created vehicles' do
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
       @factory.create_vehicles(wa_ev_registrations)
-      expect(@factory.find_most_popular).to eq "NISSAN Leaf"
+      expect(@factory.most_popular_make_model).to eq "NISSAN Leaf"
     end
   end
 
@@ -41,6 +41,14 @@ RSpec.describe VehicleFactory do
       @factory.create_vehicles(wa_ev_registrations)
       expect(@factory.vehicles_in_a_year("2015")).to eq 93
       expect(@factory.vehicles_in_a_year("2016")).to eq 95
+    end
+  end
+
+  describe '#most_popular_county method' do
+    it 'returns name of county with most registered vehicles' do
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      @factory.create_vehicles(wa_ev_registrations)
+      expect(@factory.most_popular_county).to eq "King"
     end
   end
 end
