@@ -62,4 +62,30 @@ RSpec.describe Dmv do
     end
   end
 
+  describe '#create_new_york_facilities' do
+    it 'creates Facility objects with correct addresses' do
+      dmv = Dmv.new
+      dmv.create_new_york_facilities
+
+      facilities = dmv.facilities
+
+      expect(facilities.size).to eq(172)
+
+      facility1 = facilities[0]
+      expect(facility1.name).to eq('Jamaica Kiosk')
+      expect(facility1.address).to eq('168-46 91st Ave., 2nd Flr, Jamaica, Ny, 11432')
+      expect(facility1.phone).to eq(nil)
+
+      facility2 = facilities[1]
+      expect(facility2.name).to eq('Rochester Downtown')
+      expect(facility2.address).to eq('200 E. Main Street, Rochester, Ny, 14604')
+      expect(facility2.phone).to eq('5857531604')
+
+      facility3 = facilities[2]
+      expect(facility3.name).to eq('Millbrook')
+      expect(facility3.address).to eq('15 Merritt Avenue, Millbrook, Ny, 12545')
+      expect(facility3.phone).to eq('8456774080')
+    end
+  end
+
 end
