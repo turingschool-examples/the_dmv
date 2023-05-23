@@ -29,5 +29,14 @@ RSpec.describe Office do
       expect(company[1].name).to eq('ROCHESTER DOWNTOWN')
       expect(company[6].phone).to eq("3153693301")
     end
+    it 'can create offices from more than two data links' do
+      offices = Office.new
+      mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
+      company = offices.create_offices(mo_dmv_office_locations)
+      expect(company).to be_an_instance_of(Array)
+      expect(company[0]).to be_an_instance_of(Facility)
+      expect(company[4].name).to eq("LINN LICENSE OFFICE")
+      expect(company[6].phone).to eq("(417) 745-6409")
+    end
   end 
 end
