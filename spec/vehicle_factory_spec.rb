@@ -27,4 +27,20 @@ RSpec.describe VehicleFactory do
       expect(@factory.find_most_popular).to eq "NISSAN Leaf"
     end
   end
+
+  describe '#count methods' do
+    it 'can count the number of vehicles that are the same model registered in a given year' do
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      @factory.create_vehicles(wa_ev_registrations)
+      expect(@factory.models_in_a_year("Leaf", "2015")).to eq 48
+      expect(@factory.models_in_a_year("Focus", "2016")).to eq 4
+    end
+
+    it 'can count the number of vehicles that are registered in a given year' do
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      @factory.create_vehicles(wa_ev_registrations)
+      expect(@factory.vehicles_in_a_year("2015")).to eq 93
+      expect(@factory.vehicles_in_a_year("2016")).to eq 95
+    end
+  end
 end
