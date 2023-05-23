@@ -1,20 +1,43 @@
 class FacilityArchitect
 
-  def design_facility(facility_array)
-    updated_keys = facility_key_updater(facility_array)
+  def or_design_facility(facility_array)
+    updated_keys = or_facility_key_updater(facility_array)
     updated_keys.map do |attr|
       Facility.new(attr)
     end
   end
 
-  def facility_key_updater(unformatted_facilities)
-    flattened_array = [unformatted_facilities].flatten
-    new_keys = flattened_array.each do |facility|
+  def or_facility_key_updater(unformatted_facilities)
+    flat_array = [unformatted_facilities].flatten
+    new_keys = flat_array.each do |facility|
+      parsed_address = JSON.parse(facility[:location_1][:human_address])
       facility[:name] = facility[:title]
       facility[:phone] = facility[:phone_number]
-      facility[:address] = JSON.parse(facility[:location_1][:human_address])
+      facility[:address] = parsed_address.values.join(", ")
     end
-    new_keys
   end
 
+  def ny_design_facility(facility_array)
+    updated_keys = ny_facility_key_updater(facility_array)
+    updated_keys.map do |attr|
+      Facility.new(attr)
+    end
+  end
+
+  # A NOTE FOR MYSELF! - .split.map{|word| word.capitalize}.join(" ") - This splits the string into an array, 
+  # maps and capitializes each element and then joins the elements into a string
+
+  # Could not get hyphen_phone_num.insert(-8, '-').insert(-5, '-') to work in the .each block.. meh
+
+  def ny_facility_key_updater(unformatted_facilities)
+    flat_array = [unformatted_facilities].flatten
+    new_keys = flat_array.each do |facility|
+      capitailized_name = "#{facility[:office_name]} #{facility[:office_type]}"
+      hyphen_phone_num = facility[:public_phone_number]
+      capitailized_address = "#{facility[:street_address_line_1]} #{facility[:street_address_line_2]}, #{facility[:city]} #{facility[:state]}, #{facility[:zip_code]}"
+      facility[:name] = capitailized_name.split.map{|word| word.capitalize}.join(" ")
+      facility[:phone] = hyphen_phone_num
+      facility[:address] = capitailized_address.split.map{|word| word.capitalize}.join(" ")
+    end
+  end
 end
