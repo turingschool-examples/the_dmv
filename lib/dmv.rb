@@ -7,7 +7,12 @@ class Dmv
 
   def add_facilities(dmv_locations)
     dmv_locations.each do |location|
-       @facilities.push(Facility.new(location))
+      facility_hold = {
+        name: format_name(location),
+        address: format_address(location),
+        phone: format_phone(location)
+      }
+      @facilities.push(Facility.new(facility_hold))
     end
   end
 
@@ -33,8 +38,10 @@ class Dmv
     elsif facility_hash[:location_1]
       new_hash = JSON.parse(facility_hash[:location_1][:human_address])
       new_hash.values.join(" ")
-    elsif facility_hash[:street_address_line_1]
+    elsif facility_hash[:street_address_line_1] && facility_hash[:street_address_line_2]
       "#{facility_hash[:street_address_line_1].tr(".","").split.map{|word| word.capitalize}.join(" ")} #{facility_hash[:street_address_line_2].capitalize} #{facility_hash[:city].capitalize} #{facility_hash[:state]} #{facility_hash[:zip_code]}"
+    elsif facility_hash[:street_address_line_1]
+      "#{facility_hash[:street_address_line_1].tr(".","").split.map{|word| word.capitalize}.join(" ")} #{facility_hash[:city].capitalize} #{facility_hash[:state]} #{facility_hash[:zip_code]}"
     elsif facility_hash[:address1]
       "#{facility_hash[:address1].split.map{|word| word.capitalize}.join(" ")} #{facility_hash[:city].split.map{|word| word.capitalize}.join(" ")} #{facility_hash[:state]} #{facility_hash[:zipcode]}"
     end

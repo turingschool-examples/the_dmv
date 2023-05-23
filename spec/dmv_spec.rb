@@ -47,9 +47,9 @@ RSpec.describe Dmv do
       @dmv.add_facilities(@or_locations)
 
       expect(@dmv.facilities[1]).to be_a(Facility)
-      expect(@dmv.facilities[1].name).to eq(@or_locations[1][:title])
-      expect(@dmv.facilities[1].address).to eq(@or_locations[1][:location_1])
-      expect(@dmv.facilities[1].phone).to eq(@or_locations[1][:phone_number])
+      expect(@dmv.facilities[1].name).to eq('Ashland DMV Office')
+      expect(@dmv.facilities[1].address).to eq("600 Tolman Creek Rd Ashland OR 97520")
+      expect(@dmv.facilities[1].phone).to eq('541-776-6092')
 
     end
 
@@ -59,9 +59,9 @@ RSpec.describe Dmv do
       @dmv.add_facilities(@ny_locations)
 
       expect(@dmv.facilities[1]).to be_a(Facility)
-      expect(@dmv.facilities[1].name).to eq(@ny_locations[1][:office_name])
-      expect(@dmv.facilities[1].address).to eq(@ny_locations[1][:street_address_line_1])
-      expect(@dmv.facilities[1].phone).to eq(@ny_locations[1][:public_phone_number])
+      expect(@dmv.facilities[1].name).to eq("Rochester Downtown")
+      expect(@dmv.facilities[1].address).to eq("200 E Main Street Ste. 101 Rochester NY 14604")
+      expect(@dmv.facilities[1].phone).to eq("585-753-1604")
 
     end
 
@@ -69,9 +69,9 @@ RSpec.describe Dmv do
       expect(@dmv.facilities).to eq([])
       @dmv.add_facilities(@mo_locations)
       expect(@dmv.facilities[1]).to be_a(Facility)
-      expect(@dmv.facilities[1].name).to eq(@mo_locations[1][:name])
-      expect(@dmv.facilities[1].address).to eq(@mo_locations[1][:address1])
-      expect(@dmv.facilities[1].phone).to eq(@mo_locations[1][:phone])
+      expect(@dmv.facilities[1].name).to eq("Bonne Terre")
+      expect(@dmv.facilities[1].address).to eq("30 N Allen St Bonne Terre MO 63628")
+      expect(@dmv.facilities[1].phone).to eq("573-358-3584")
 
     end
 
