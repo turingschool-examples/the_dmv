@@ -11,10 +11,12 @@ class FacilityFactory
   end
 
   def format_name(facility)
-    if facility[:website] && facility[:website].include?("oregon.gov")     # Oregon API
+    if facility[:website] && facility[:website].include?("oregon.gov")
       facility[:title]
-    elsif facility[:state] == "NY"                   # New York API
+    elsif facility[:state] == "NY"                  
       facility[:office_name]
+    elsif facility[:state] == "MO"
+      facility[:name]
     end
   end
 
@@ -34,6 +36,8 @@ class FacilityFactory
       else
         "#{facility[:street_address_line_1]} #{facility[:city]} #{facility[:state]} #{facility[:zip_code]}"
       end
+    elsif facility[:state] == "MO"
+      "#{facility[:address1]} #{facility[:city]} #{facility[:state]} #{facility[:zipcode]}"
     end
   end
 
@@ -44,6 +48,8 @@ class FacilityFactory
     elsif facility[:website] && facility[:website].include?("oregon.gov")
       phone = facility[:phone_number]
       "(#{phone[0..2]}) #{phone[4..6]}-#{phone[8..11]}"
+    elsif facility[:state] == "MO"
+      facility[:phone]
     else
       ""
     end
