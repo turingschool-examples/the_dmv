@@ -12,14 +12,15 @@ class VehicleFactory
         year: vehicle_data[:model_year],
         make: vehicle_data[:make],
         model: vehicle_data[:model],
-        engine: :ev
+        engine: :ev,
+        county: vehicle_data[:county]
         })
         @created_vehicles << vehicle
     end
     @created_vehicles
   end
 
-  def find_most_popular
+  def most_popular_make_model
     make_model_counts = Hash.new(0)
     @created_vehicles.each do |vehicle|
       make_model =  "#{vehicle.make} #{vehicle.model}" 
@@ -55,5 +56,23 @@ class VehicleFactory
       end
     end
     count
+  end
+
+  def most_popular_county
+    county_counts = Hash.new(0)
+    @created_vehicles.each do |vehicle|
+      county = "#{vehicle.county}" 
+      county_counts[county] += 1
+    end
+
+    max_count = 0
+    most_popular_county = "No vehicles listed."
+    county_counts.each do |county, count|
+      if count > max_count
+        max_count = count
+        most_popular_county = county
+      end
+    end
+    most_popular_county
   end
 end
