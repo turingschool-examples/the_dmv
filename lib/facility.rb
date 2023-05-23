@@ -8,10 +8,10 @@ class Facility
               :collected_fees,
               :services
 
-  def initialize(data)
-    @name = data[:name]
-    @address = data[:address]
-    @phone = data[:phone]
+  def initialize(office_details)
+    @name = office_details[:name]
+    @address = office_details[:address]
+    @phone = office_details[:phone]
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
