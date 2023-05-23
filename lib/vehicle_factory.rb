@@ -6,18 +6,35 @@ class VehicleFactory
   end
 
   def create_vehicles(vehicles)
-    vehicles.each do |vehicle_data|
-      vehicle = Vehicle.new({
-        vin: vehicle_data[:vin_1_10],
-        year: vehicle_data[:model_year],
-        make: vehicle_data[:make],
-        model: vehicle_data[:model],
-        engine: :ev,
-        county: vehicle_data[:county]
-        })
-        @created_vehicles << vehicle
+    if vehicles[0][:electric_vehicle_type]
+      vehicles.each do |vehicle_data|
+        vehicle = Vehicle.new({
+          vin: vehicle_data[:vin_1_10],
+          year: vehicle_data[:model_year],
+          make: vehicle_data[:make],
+          model: vehicle_data[:model],
+          engine: :ev,
+          county: vehicle_data[:county]
+          })
+          @created_vehicles << vehicle
+      end
+      @created_vehicles
+    elsif vehicles[0][:record_type]
+      vehicles.each do |vehicle_data|
+        vehicle = Vehicle.new({
+          vin: vehicle_data[:vin],
+          year: vehicle_data[:model_year],
+          make: vehicle_data[:make],
+          model: vehicle_data[:body_type],
+          engine: vehicle_data[:fuel_type],
+          county: vehicle_data[:county]
+          })
+          @created_vehicles << vehicle
+      end
+      @created_vehicles
+    else
+      "Invalid argument, please pass in data from ny or wa_ev registrations" 
     end
-    @created_vehicles
   end
 
   def most_popular_make_model
