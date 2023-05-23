@@ -36,4 +36,12 @@ class Facility
       @collected_fees += 100
     end
   end
+
+  def administer_written_test(registrant)
+    if registrant.permit? == true && @services.include?('Written Test') && registrant.age >= 16
+      registrant.license_data[:written] = true
+    else
+    false
+    end
+  end
 end
