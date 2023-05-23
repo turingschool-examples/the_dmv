@@ -65,6 +65,12 @@ class FacilityCreator
     end
 
     def format_phone_number(data)
-    
+      if data[:website] && data[:website].include?("oregon")
+        data[:phone_number]
+      elsif data[:state] && data[:state] == "ny"
+        data[:public_phone_number]
+      else data[:state] && data[:state] == "missouri"
+        data[:phone_number]
+      end
     end
 end

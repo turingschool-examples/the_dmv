@@ -12,6 +12,7 @@ RSpec.describe FacilityCreator do
     facility = oregon_facility.create_oregon_facilities(state_data)
     expect(oregon_facility).to be_an_instance_of(FacilityCreator)
     expect(facility.length).to eq(state_data.length)
+    expect(facility.first).to eq(facility[0])
   end
   
   it 'creates ny facility' do
@@ -21,7 +22,7 @@ RSpec.describe FacilityCreator do
     facility = ny_facility.create_ny_facilities(state_data)
     expect(ny_facility).to be_an_instance_of(FacilityCreator)
     expect(facility.length).to eq(state_data.length)
-    
+    expect(facility.first).to eq(facility[0])
   end
   
   it 'creates missouri facility' do
@@ -31,6 +32,7 @@ RSpec.describe FacilityCreator do
     facility = mo_facility.create_mo_facility(state_data)
     expect(mo_facility).to be_an_instance_of(FacilityCreator)
     expect(facility.length).to eq(state_data.length)
+    expect(facility.first).to eq(facility[0])
   end
 
   
