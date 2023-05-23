@@ -15,14 +15,21 @@ class Facility
   end
 
   def register_vehicle(car)
+    if @services.include?("Vehicle Registration")
         if car.engine == :ev
           car.plate_type = :ev
+          @collected_fees += 200
         elsif car.antique?
           car.plate_type = :antique
+          @collected_fees += 25
         else
           car.plate_type = :regular
+          @collected_fees += 100
         end
       car.registration_date = Date.today
       @registered_vehicles.push(car)
+    else
+      p "Service not Availiable"
+    end
   end
 end
