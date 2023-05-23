@@ -18,4 +18,29 @@ class VehicleFactory
     end
     @created_vehicles
   end
+
+  def find_most_popular
+    make_model_counts = Hash.new(0)
+    @created_vehicles.each do |vehicle|
+      make_model =  "#{vehicle.make} #{vehicle.model}" 
+      make_model_counts[make_model] += 1
+    end
+
+    max_count = 0
+    most_popular_make_model = "No vehicles."
+    make_model_counts.each do |make_model, count|
+      if count > max_count
+        max_count = count
+        most_popular_make_model = make_model
+      end
+    end
+    most_popular_make_model
+  end
+
+  def count(model, year)
+
+
+  end
+
+
 end
