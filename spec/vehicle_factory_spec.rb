@@ -15,7 +15,6 @@ RSpec.describe VehicleFactory do
       factory = VehicleFactory.new
       @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
       vehicle_array = factory.create_vehicles(@wa_ev_registrations)
-      require 'pry'; binding.pry
       expect(vehicle_array.first).to be_an_instance_of(Vehicle)
       expect(vehicle_array).to be_a(Array)
       expect(vehicle_array.first.make).to eq("TESLA")

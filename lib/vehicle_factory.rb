@@ -1,11 +1,6 @@
 
 
-class VehicleFactory
-  attr_reader :registered_vehicles, :dmv
-  def initialize
-    @dmv = Vehicle_detail_handler.new
-  end
- 
+class VehicleFactory 
   def create_vehicles(car_registrations)
     vehicle_key_editor(car_registrations)
     car_registrations.map do |car|
