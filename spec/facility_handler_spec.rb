@@ -3,13 +3,23 @@ require './lib/facility_handler'
 require './lib/dmv_data_service'
 require './lib/facility'
 
-RSpec.describe Facility_handler do
-  it 'can parce data from api sources' do
-    facility_array = Facility_handler.new
+RSpec.describe FacilityHandler do
+  it 'can parse from oregon' do
+    facility_array = FacilityHandler.new
     oregon = DmvDataService.new.or_dmv_office_locations
-    oregon_facility = facility_array.create_facilities(oregon)
-    expect(oregon_facilities).to be_a(Array)
+    oregon_facilities = facility_array.create_oregon_facilities(oregon)
+    oregon_facilities.each do |facility|
+      expect(facility.address.include?('OR')).to eq(true)
+    end
   end
-  #@or_dmv_office_locations
+  it 'can parce data from missouri' do
+    facility_array = FacilityHandler.new
+    missouri = DmvDataService.new.mo_dmv_office_locations
+    missouri_facilities = facility_array.create_missouri_facilities(missouri)
+    missouri_facilities.each do |facility|
+      expect(facility.address.include?('MO')).to eq(true)
+    end
+  end
+
 
 end
