@@ -56,4 +56,5 @@ class Dmv
       facility_hash[:phone].tr("()", "").tr(" ","-")
     end
   end
+  
 end

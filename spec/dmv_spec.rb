@@ -150,4 +150,10 @@ RSpec.describe Dmv do
       
     end
   end
+  
+  describe '#format_hours' do
+    it 'takes hours from a facility hash' do
+      
+    end
+  end
 end 
