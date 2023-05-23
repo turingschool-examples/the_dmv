@@ -2,6 +2,8 @@ class Registrant
   attr_reader :name, :age, :permit, :license_data
 
   # Initializes a registrant with a name, age, and permit status
+  # Cannot make this a keyword argument because of the way the workflow
+  # is set up in the iteration instructions.
   def initialize(name, age, permit = false)
     @name = name
     @age = age
