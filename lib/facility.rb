@@ -92,7 +92,12 @@ class Facility
                 address[:new_address]["suite"] = address_2[:suite]
           end
           address[:new_address].values.join(', ')
-      else 
+      elsif office_details[:street_address_line_1]
+            address = office_details[:street_address_line_1], office_details[:street_address_line_2], office_details[:city], office_details[:state], office_details[:zip_code]
+            address.join(', ')
+      elsif office_details[:address1]
+            address = office_details[:address1], office_details[:city], office_details[:state], office_details[:zipcode]
+            address.join(', ')
       end 
   end
 
