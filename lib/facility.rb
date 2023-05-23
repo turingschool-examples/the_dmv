@@ -1,18 +1,25 @@
 # Helper module to title case strings.
 module Helper
+  # Capitalizes the first letter of each word in a string
   def self.title_case(input_string)
+    # Split the string into an array of words
     words = input_string.split
+    # Map over the array of words and capitalize the first letter of each word
     title_words = words.map do |word|
+      # If the word is in the exempt_words array, capitalize it
       if exempt_words.include?(word.upcase)
         word.upcase
+      # Otherwise, capitalize the first letter of the word
       else
         word.capitalize
       end
     end
+    # Join the array of words back into a string
     title_words.join(' ')
   end
 
   def self.exempt_words
+    # List of words that should not be capitalized (states, DMV, road directions, etc.)
     %w[DMV NY MD OR SE NE NW SW]
   end
 end
@@ -39,7 +46,9 @@ class Facility
 
   # Determines which state the facility is in and calls the appropriate method
   def self.create_facility(state, facility_data)
+    # Switch statement to determine which state the facility is in
     case state
+      # Calls the appropriate method based on the state
     when 'OR' # Oregon
       create_facility_from_oregon(facility_data)
     when 'NY' # New York
@@ -54,6 +63,7 @@ class Facility
 
   # Creates a facility if the first argument in Facility.create_facility is 'OR'
   def self.create_facility_from_oregon(facility_data)
+    # Map over the array of facility data and create a new Facility object for each facility
     facility_data.map do |data|
       name = Helper.title_case(data[:title])
       address_json = JSON.parse(data[:location_1][:human_address])
