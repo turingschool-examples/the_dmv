@@ -46,21 +46,21 @@ RSpec.describe FacilityLocations do
       expect(@ny_dmv_office_locations[0][:"office_name"]).to eq("JAMAICA KIOSK")
     end
     
-    xit 'can create facilities from second data set' do
-      or_facilities = @locations.create_facilities(@or_dmv_office_locations)
-      expect(or_facilities.first.name).to eq("Albany DMV Office")
-      expect(or_facilities.first.address).to eq("2242 Santiam Hwy SE Albany OR 97321")
-      expect(or_facilities.first.phone).to eq("541-967-2014")
-      expect(or_facilities.first.services).to eq([])
-      expect(or_facilities.first.registered_vehicles).to eq([])
-      expect(or_facilities.first.collected_fees).to eq(0)
+    it 'can create facilities from second data set' do
+      ny_facilities = @locations.create_facilities(@ny_dmv_office_locations)
+      expect(ny_facilities.first.name).to eq("JAMAICA KIOSK")
+      expect(ny_facilities.first.address).to eq("168-46 91ST AVE., 2ND FLR JAMAICA NY 11432")
+      expect(ny_facilities.first.phone).to eq("N/A")
+      expect(ny_facilities.first.services).to eq([])
+      expect(ny_facilities.first.registered_vehicles).to eq([])
+      expect(ny_facilities.first.collected_fees).to eq(0)
 
-      # expect(or_facilities[39].name).to eq("Oakridge DMV Office")
-      # expect(or_facilities[39].address).to eq("47660 Highway 58 Oakridge OR 97463")
-      # expect(or_facilities[39].phone).to eq("541-889-8712")
-      # expect(or_facilities[39].services).to eq([])
-      # expect(or_facilities[39].registered_vehicles).to eq([])
-      # expect(or_facilities[39].collected_fees).to eq(0)
+      expect(ny_facilities[125].name).to eq("POUGHKEEPSIE")
+      expect(ny_facilities[125].address).to eq("22 MARKET STREET COUNTY OFFICE BUILDING POUGHKEEPSIE NY 12601")
+      expect(ny_facilities[125].phone).to eq("N/A")
+      expect(ny_facilities[125].services).to eq([])
+      expect(ny_facilities[125].registered_vehicles).to eq([])
+      expect(ny_facilities[125].collected_fees).to eq(0)
     end
   end
 
