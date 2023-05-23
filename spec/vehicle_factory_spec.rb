@@ -25,5 +25,10 @@ RSpec.describe VehicleFactory do
       expect(vehicles.sample.engine).to eq(:ev)
       expect(vehicles.sample.vin).to be_a(String)
     end
+
+    it 'can work on one vehicle' do
+      vehicle = @factory.create_vehicles(@wa_ev_registrations.first)
+      expect(vehicle).to be_a(Vehicle)
+    end
   end
 end
