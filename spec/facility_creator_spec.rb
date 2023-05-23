@@ -34,6 +34,4 @@ RSpec.describe FacilityCreator do
     expect(facility.length).to eq(state_data.length)
     expect(facility.first).to eq(facility[0])
   end
-
-  
 end
