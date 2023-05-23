@@ -8,6 +8,7 @@ oregon = {"title":"Albany DMV Office","zip_code":"97321","website":"http://www.o
 new_york = {"office_name":"ROCHESTER DOWNTOWN","office_type":"COUNTY OFFICE","public_phone_number":"5857531604","street_address_line_1":"200 E. MAIN STREET","street_address_line_2":"STE. 101","city":"ROCHESTER","state":"NY","zip_code":"14604","monday_beginning_hours":"9:00 AM","monday_ending_hours":"5:00 PM","tuesday_beginning_hours":"9:00 AM","tuesday_ending_hours":"5:00 PM","wednesday_beginning_hours":"9:00 AM","wednesday_ending_hours":"5:00 PM","thursday_beginning_hours":"9:00 AM","thursday_ending_hours":"5:00 PM","friday_beginning_hours":"9:00 AM","friday_ending_hours":"5:00 PM","georeference":{"type":"Point","coordinates":[-77.60697,43.15701]},":@computed_region_yamh_8v7k":"537",":@computed_region_wbg7_3whc":"1662",":@computed_region_kjdx_g34t":"2093"}
 
 missouri = {"name":"OAKVILLE","address1":"3164 TELEGRAPH ROAD","city":"ST LOUIS","state":"MO","zipcode":"63125","county":"St. Louis County","phone":"(314) 887-1050","fax":"(314) 887-1051","size":"3","email":"OAKVILLEAGENTOFFICE@DOR.MO.GOV"}
+# I did clip some of tha data off from oakville so that data wasnt taking up so much space. hits all the same points.
 
 describe FacilityLocation do
 
@@ -40,6 +41,7 @@ describe FacilityLocation do
     expect(or_dmv.first.phone).to eq('541-967-2014')
   end
 
+  #did check for other locations in the files to show that it isnt pulling from already set vars
   it 'creates data form new york api' do
     ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
     ny_dmv = locations.create_facility(ny_dmv_office_locations)
@@ -59,4 +61,6 @@ describe FacilityLocation do
     expect(mo_dmv[2].address).to eq('520 RYAN STREET UNIT F BOONVILLE MO 65233')
     expect(mo_dmv[2].phone).to eq('(660) 882-7077')
   end
+  
+  #end describe
 end
