@@ -16,8 +16,9 @@ RSpec.describe VehicleFactory do
       hot_rods = factory.create_vehicles(wa_ev_registrations)
       expect(hot_rods).to be_an_instance_of(Array)
       expect(hot_rods[0]).to be_an_instance_of(Vehicle)
-      # expect(hot_rods[1].engine).to eq(:ev)
+      expect(hot_rods[1].engine).to eq([:ev])
       expect(hot_rods[1].year).to eq("2022")
+      expect(hot_rods[1].vin).to eq([:vin])
     end
   end 
 end
