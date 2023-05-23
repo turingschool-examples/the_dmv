@@ -34,7 +34,7 @@ class FacilityHandler
     address:address_formatter_new_york(data))
     end
   end
-
+#each of the create_state_facilities runs a specific method for each state to parse the information
   def address_formatter_oregon(data)
     address = JSON.parse(data[:location_1][:human_address])
     address.values.join(", ")
