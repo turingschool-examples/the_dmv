@@ -437,8 +437,8 @@ RSpec.describe Facility do
       new_york_facilities = Facility.create_facility('NY', facility_data)
 
       expected_data = facility_data[0]
-      expect(new_york_facilities[0].name).to eq(expected_data[:office_name])
-      expect(new_york_facilities[0].address).to eq("#{expected_data[:street_address_line_1]}, #{expected_data[:city]}, #{expected_data[:state]}, #{expected_data[:zip_code]}")
+      expect(new_york_facilities[0].name).to eq(Helper.title_case(expected_data[:office_name]))
+      expect(new_york_facilities[0].address).to eq("#{Helper.title_case(expected_data[:street_address_line_1])}, #{Helper.title_case(expected_data[:city])}, #{Helper.title_case(expected_data[:state])}, #{expected_data[:zip_code]}")
       expect(new_york_facilities[0].phone).to eq(expected_data[:public_phone_number])
       expect(new_york_facilities[0].website).to eq('undefined')
     end
@@ -447,20 +447,20 @@ RSpec.describe Facility do
       new_york_facilities = Facility.create_facility('NY', facility_data)
 
       expected_data = facility_data[0]
-      expect(new_york_facilities[0].name).to eq(expected_data[:office_name])
-      expect(new_york_facilities[0].address).to eq("#{expected_data[:street_address_line_1]}, #{expected_data[:city]}, #{expected_data[:state]}, #{expected_data[:zip_code]}")
+      expect(new_york_facilities[0].name).to eq(Helper.title_case(expected_data[:office_name]))
+      expect(new_york_facilities[0].address).to eq("#{Helper.title_case(expected_data[:street_address_line_1])}, #{Helper.title_case(expected_data[:city])}, #{Helper.title_case(expected_data[:state])}, #{expected_data[:zip_code]}")
       expect(new_york_facilities[0].phone).to eq(expected_data[:public_phone_number])
       expect(new_york_facilities[0].website).to eq('undefined')
 
       expected_data = facility_data[1]
-      expect(new_york_facilities[1].name).to eq(expected_data[:office_name])
-      expect(new_york_facilities[1].address).to eq("#{expected_data[:street_address_line_1]}, #{expected_data[:city]}, #{expected_data[:state]}, #{expected_data[:zip_code]}")
+      expect(new_york_facilities[1].name).to eq(Helper.title_case(expected_data[:office_name]))
+      expect(new_york_facilities[1].address).to eq("#{Helper.title_case(expected_data[:street_address_line_1])}, #{Helper.title_case(expected_data[:city])}, #{Helper.title_case(expected_data[:state])}, #{expected_data[:zip_code]}")
       expect(new_york_facilities[1].phone).to eq(expected_data[:public_phone_number])
       expect(new_york_facilities[1].website).to eq('undefined')
 
       expected_data = facility_data[2]
-      expect(new_york_facilities[2].name).to eq(expected_data[:office_name])
-      expect(new_york_facilities[2].address).to eq("#{expected_data[:street_address_line_1]}, #{expected_data[:city]}, #{expected_data[:state]}, #{expected_data[:zip_code]}")
+      expect(new_york_facilities[2].name).to eq(Helper.title_case(expected_data[:office_name]))
+      expect(new_york_facilities[2].address).to eq("#{Helper.title_case(expected_data[:street_address_line_1])}, #{Helper.title_case(expected_data[:city])}, #{Helper.title_case(expected_data[:state])}, #{expected_data[:zip_code]}")
       expect(new_york_facilities[2].phone).to eq(expected_data[:public_phone_number])
       expect(new_york_facilities[2].website).to eq('undefined')
     end
@@ -493,8 +493,8 @@ RSpec.describe Facility do
       missouri_facilities = Facility.create_facility('MO', facility_data)
 
       expected_data = facility_data[0]
-      expect(missouri_facilities[0].name).to eq(expected_data[:name])
-      expect(missouri_facilities[0].address).to eq("#{expected_data[:address1]}, #{expected_data[:city]}, #{expected_data[:state]}, #{expected_data[:zipcode]}")
+      expect(missouri_facilities[0].name).to eq(Helper.title_case(expected_data[:name]))
+      expect(missouri_facilities[0].address).to eq("#{Helper.title_case(expected_data[:address1])}, #{Helper.title_case(expected_data[:city])}, #{expected_data[:state]}, #{expected_data[:zipcode]}")
       expect(missouri_facilities[0].phone).to eq(expected_data[:phone])
       expect(missouri_facilities[0].website).to eq(expected_data[:facebook_url])
     end
@@ -504,20 +504,20 @@ RSpec.describe Facility do
       missouri_facilities = Facility.create_facility('MO', facility_data)
 
       expected_data = facility_data[0]
-      expect(missouri_facilities[0].name).to eq(expected_data[:name])
-      expect(missouri_facilities[0].address).to eq("#{expected_data[:address1]}, #{expected_data[:city]}, #{expected_data[:state]}, #{expected_data[:zipcode]}")
+      expect(missouri_facilities[0].name).to eq(Helper.title_case(expected_data[:name]))
+      expect(missouri_facilities[0].address).to eq("#{Helper.title_case(expected_data[:address1])}, #{Helper.title_case(expected_data[:city])}, #{expected_data[:state]}, #{expected_data[:zipcode]}")
       expect(missouri_facilities[0].phone).to eq(expected_data[:phone])
       expect(missouri_facilities[0].website).to eq(expected_data[:facebook_url])
 
       expected_data = facility_data[1]
-      expect(missouri_facilities[1].name).to eq(expected_data[:name])
-      expect(missouri_facilities[1].address).to eq("#{expected_data[:address1]}, #{expected_data[:city]}, #{expected_data[:state]}, #{expected_data[:zipcode]}")
+      expect(missouri_facilities[1].name).to eq(Helper.title_case(expected_data[:name]))
+      expect(missouri_facilities[1].address).to eq("#{Helper.title_case(expected_data[:address1])}, #{Helper.title_case(expected_data[:city])}, #{expected_data[:state]}, #{expected_data[:zipcode]}")
       expect(missouri_facilities[1].phone).to eq(expected_data[:phone])
       expect(missouri_facilities[1].website).to eq(expected_data[:facebook_url])
 
       expected_data = facility_data[2]
-      expect(missouri_facilities[2].name).to eq(expected_data[:name])
-      expect(missouri_facilities[2].address).to eq("#{expected_data[:address1]}, #{expected_data[:city]}, #{expected_data[:state]}, #{expected_data[:zipcode]}")
+      expect(missouri_facilities[2].name).to eq(Helper.title_case(expected_data[:name]))
+      expect(missouri_facilities[2].address).to eq("#{Helper.title_case(expected_data[:address1])}, #{Helper.title_case(expected_data[:city])}, #{expected_data[:state]}, #{expected_data[:zipcode]}")
       expect(missouri_facilities[2].phone).to eq(expected_data[:phone])
       expect(missouri_facilities[2].website).to eq(expected_data[:facebook_url])
     end
