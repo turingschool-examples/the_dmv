@@ -58,5 +58,20 @@ RSpec.describe FacilityFactory do
       expect(@missouri.operating_facilities[1].name).to eq "Bonne Terre"
       expect(@missouri.operating_facilities.length).to eq @missouri_facilities.length  
     end
+
+    it 'can list daily hours for NY and MO facilities' do
+      @new_york.define_facilities(@new_york_facilities)
+      @missouri.define_facilities(@missouri_facilities)
+      expect(@new_york.operating_facilities[0].operating_hours).to eq "Monday - 7:30 AM to 5:00 PM, Tuesday - 7:30 AM to 5:00 PM, Wednesday - 7:30 AM to 5:00 PM, Thursday - 7:30 AM to 5:00 PM, Friday - 7:30 AM to 5:00 PM, Sat & Sun - Closed"
+      expect(@new_york.operating_facilities[1].operating_hours).to eq "Monday - 9:00 AM to 5:00 PM, Tuesday - 9:00 AM to 5:00 PM, Wednesday - 9:00 AM to 5:00 PM, Thursday - 9:00 AM to 5:00 PM, Friday - 9:00 AM to 5:00 PM, Sat & Sun - Closed"
+      expect(@missouri.operating_facilities[0].operating_hours).to eq "Monday-friday - 9:00 To 5:00, Last Saturday - 9:00 To 12:00"
+      expect(@missouri.operating_facilities[1].operating_hours).to eq "Monday-friday - 9:00 To 5:00, Last Saturday - 9:00 To 1:00, 1st & Last Business Day Of Month - 8:30 To 5:30"
+    end
+
+    it 'can list holiday closures in MO' do
+      @missouri.define_facilities(@missouri_facilities)
+      expect(@missouri.operating_facilities[0].holiday_closures).to eq "Thanksgiving (11/24/22), Christmas Day Observed (12/26/22), New Year's Day Observed (01/02/23), Martin Luther King Day (01/16/23), President’s Day (02/20/23), Memorial Day (05/29/23), Juneteenth (06/19/2023), Independence Day (07/04/23), Labor Day (09/04/23), Veterans Day (11/10/23), Thanksgiving (11/23/23), Christmas Day Observed (12/25/23)"
+      expect(@missouri.operating_facilities[1].holiday_closures).to eq "Independence Day (07/04/22), Labor Day (09/05/22), Columbus Day (10/10/22), Veterans Day (11/11/22), Thanksgiving (11/24/22), Christmas Day Observed (12/26/22), New Year's Day Observed (01/02/23), Martin Luther King Day (01/16/23), President’s Day (02/20/23), Memorial Day (05/29/23), Juneteenth (06/19/2023), Independence Day (07/04/23), Labor Day (09/04/23), Columbus Day (10/09/23), Veterans Day (11/10/23), Thanksgiving (11/23/23), Christmas Day Observed (12/25/23)"
+    end
   end
 end
