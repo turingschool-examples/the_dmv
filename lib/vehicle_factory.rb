@@ -1,5 +1,6 @@
 class VehicleFactory
 
+    #takes formatted data and puts into var list
   def create_vehicles(registrations)
       vehicles = format(registrations)
       vehicles.map do |vehicle|
@@ -7,6 +8,7 @@ class VehicleFactory
       end
   end
 
+  # takes data and formats to fit data taken for vehicle class
   def format(registrations)
       formatted = []
       [registrations].flatten.each do |registration|
@@ -20,4 +22,6 @@ class VehicleFactory
       end
       formatted
   end
+
+  #end class
 end

@@ -1,4 +1,5 @@
 class Facility
+
   attr_reader :name,
               :address,
               :phone,
@@ -21,6 +22,7 @@ class Facility
     @services << service
   end
 
+  #each time a vehicle is registered, a fee is collected based on vehicle type
   def register_vehicle(vehicle)
    if @services.include?('Vehicle Registration')
     vehicle.register 
@@ -35,6 +37,8 @@ class Facility
    end
   end
 
+
+  # road and written tests, renewing license. 
   def administer_written_test(registrant)
     if @services.include?('Written Test')
       registrant.pass_test

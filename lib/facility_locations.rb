@@ -1,6 +1,6 @@
 class FacilityLocation
 
-
+  #push locations with new format into a new array then call array
   def create_facility(locations)
     dmv_locations = formatted_location(locations)
     facilities = []
@@ -10,6 +10,7 @@ class FacilityLocation
     facilities
   end
 
+  #check for each type of location key used, shovel formmated into array
   def formatted_location(locations)
     dmv_formatted = []
     [locations].flatten.each do |location|
@@ -22,6 +23,8 @@ class FacilityLocation
     dmv_formatted
   end
 
+  #pars location hashes from JSON so that each useage type 
+  #is put into a single string
   def parsed_address(location)
     if location[:location_1]
         (JSON.parse location[:location_1][:human_address]).values.join(" ")
@@ -32,4 +35,5 @@ class FacilityLocation
     end
   end
 
+  #end class
 end

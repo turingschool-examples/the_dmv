@@ -6,6 +6,8 @@ class Registrant
 
   attr_accessor :permit
 
+  #license data did not work with own method
+  #data better outside of init but works here
   def initialize(name, age, permit = false)
     @name = name
     @age = age
@@ -34,6 +36,7 @@ class Registrant
     @permit = true
   end
 
+  #check for conditions
   def pass_test
     @license_data[:written] = true if age >= 16 && permit == true
   end
@@ -46,4 +49,5 @@ class Registrant
     @license_data[:renewed] = true if @license_data[:license] == true
   end
 
+  #end class
 end
