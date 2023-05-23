@@ -81,12 +81,14 @@ class Facility
   def parse_address(office_details)
     if office_details[:address]
         office_details[:address]
-    elsif office_details.dig(:location_1, :human_address)
-          office_details.dig(:location_1, :human_address)
-    end
-    office_address = office_details.dig(:location_1, :human_address).to_s.delete('{}')
-    new_address = office_address
-    new_address
+    elsif office_details[:location_1]
+          address = JSON.parse office_details[:location_1][:human_address]
+          if office_details[:location_2]
+                suite = JSON.parse office_details[:location_2][:human_address]
+                address = address.merge suite
+          end
+          address.values.join(', ')
+      end 
   end
 
   def parse_phone(office_details)
