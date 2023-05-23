@@ -18,7 +18,8 @@ RSpec.describe VehicleFactory do
       expect(hot_rods[0]).to be_an_instance_of(Vehicle)
       expect(hot_rods[1].engine).to eq([:ev])
       expect(hot_rods[1].year).to eq("2022")
-      expect(hot_rods[1].vin).to eq([:vin])
+      expect(hot_rods[1].vin).to eq("KNDCC3LG2N")
+      expect(hot_rods[1].make).to eq('KIA')
     end
   end 
 end

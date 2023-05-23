@@ -48,7 +48,7 @@ class Vehicle
     if vehicle_details[:vin]
       vehicle_details[:vin]
       elsif vehicle_details[:vin_1_10]
-        vehicle_details[:vin_1_10] = [:vin]
+        vehicle_details[:vin_1_10]
     end
   end
 end
