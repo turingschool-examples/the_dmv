@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 RSpec.describe VehicleFactory do 
-
   it "exists" do 
     expect(@factory).to be_an_instance_of(VehicleFactory)
   end 
