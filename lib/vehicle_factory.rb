@@ -14,6 +14,7 @@ class VehicleFactory
       parts[:year] = parts[:model_year]
       parts[:make] = parts[:make]
       parts[:model] = parts[:model]
+      parts[:engine] = :ev
     end
   end
 end

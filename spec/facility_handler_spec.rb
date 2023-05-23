@@ -8,7 +8,7 @@ RSpec.describe Facility_handler do
     facility_array = Facility_handler.new
     oregon = DmvDataService.new.or_dmv_office_locations
     oregon_facility = facility_array.create_facilities(oregon)
-    expect(oregon_facility).to be_a(Array)
+    expect(oregon_facilities).to be_a(Array)
   end
   #@or_dmv_office_locations
 

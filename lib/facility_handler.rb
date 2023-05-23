@@ -1,16 +1,41 @@
 
 class Facility_handler
+  # def create_facilities(dmv_locations)
+  #   facility_data_sorter(dmv_locations)
+  #   new_facility = dmv_locations.map do |location|
+  #     Facility.new
+      
+  #   end 
+  # end
   def create_facilities(dmv_locations)
-    facility_data_sorter(dmv_locations)
-    new_facility = @dmv_key.map do |location|
-    require 'pry'; binding.pry
-      Facility.new(location)
-    end 
+    if dmv_locations[1][:website].include?('oregon')
+      @oregon_facilities = dmv_locations.map do |data|
+        Facility.new(name:  data[:title],
+        phone: data[:phone_number], 
+        address: address_formatter(data[:location_1][:human_address]))
+        
+      
+      end
+      require 'pry'; binding.pry
+    end
+    if dmv_locations
   end
-  def name_sorter(data)
-    
+  def address_formatter(data)
+      address = JSON.parse(data[:location_1][:human_address])
+      "#{address[:address]}, #{address[:city]}, #{address[:state]}, #{address[:zip]}"
+  end
+
+  def phone_editor
+
   end
 end
+#   def name_sorter(data)
+#     if data[:website].include?('oregon')
+#       data[:title]
+#     #elsif data[:state].include?('NY')66
+#     end
+#   end
+# end
   # def facility_data_sorter(dmv_locations)
   #   if dmv_locations[1][:website].include?('oregon')
   #     @dmv_key = dmv_locations.each do |data|
