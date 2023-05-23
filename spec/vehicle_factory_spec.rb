@@ -21,7 +21,7 @@ RSpec.describe VehicleFactory do
         new_vehicles = @factory.create_vehicles(@wa_ev_registrations)
         expect(new_vehicles).to be_an_instance_of(Vehicle)
     end
-
+    
     it 'creates facility objects' do
         oregon_facilities = @factory.create_facility(@or_dmv)
         expect(oregon_facilities).to be_an_instance_of(Facility)
