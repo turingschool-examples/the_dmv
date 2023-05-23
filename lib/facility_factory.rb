@@ -13,21 +13,25 @@ class FacilityFactory
 
   def create_ny_facilities(facilities)
     facilities.map do |facility|
-      formatted_ny_address = facility[:street_address_line_1] + ", " +  facility[:city] + ", " + facility[:state] + ", " + facility[:zip_code]
-      # phone = facility[:public_phone_number]  
-      # formatted_phone = phone ? phone.insert(3, '-').insert(-5, '-') : nil
-      formatted_phone = facility[:public_phone_number].insert(3, '-').insert(-5, '-') unless facility[:public_phone_number] == nil
       facility_details = {}
       facility_details[:name] = facility[:office_name].split.map(&:capitalize).join(" ")
-      facility_details[:phone] = formatted_phone
-      facility_details[:address] = formatted_ny_address
+      facility_details[:phone] = formatted_ny_phone(facility[:public_phone_number])
+      facility_details[:address] = formatted_ny_address(facility)
       Facility.new(facility_details)
     end
   end
 
+  def formatted_ny_phone(number)
+    number ? number.insert(3, '-').insert(-5, '-') : nil
+  end
+
+  def formatted_ny_address(facility)
+    formatted_ny_address = facility[:street_address_line_1] + ", " +  facility[:city] + ", " + facility[:state] + ", " + facility[:zip_code]
+    formatted_ny_address.split.map(&:capitalize).join(' ')
+  end
+
   def create_mo_facilities(facilities)
     facilities.map do |facility|
-      #require 'pry'; binding.pry
       facility_details = {}
       facility_details[:name] = facility[:name]
       facility_details[:phone] = formatted_mo_phone(facility[:phone])
