@@ -13,6 +13,7 @@ describe VehicleFactory do
     expect(factory.format(vehicle)).to eq([vehicle_formatted])
   end
 
+  #wasnt totally sure what to test so just checked what would be checked with vehicle class
   it 'creates vehicles' do
     vehicles = factory.create_vehicles(wa_ev_registrations)
 
@@ -27,4 +28,5 @@ describe VehicleFactory do
     expect(vehicles.first.registration_date).to eq(nil)
   end
 
+  # end test
 end
