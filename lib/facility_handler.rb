@@ -1,11 +1,15 @@
 
 class FacilityHandler
-  def state_sorter
-    dmv_locations[1][:state].include?("MO")
-    dmv_locations[1][:website].include?('oregon')
-    dmv_locations[1][:state].include?("NY")
+  def state_sorter(dmv_locations)
+    if dmv_locations[1][:state].include?("MO")
+      create_missouri_facilities(dmv_locations)
+    elsif dmv_locations[1][:state].include?("NY")
+      create_new_york_facilities(dmv_locations)
+    else dmv_locations[1][:website].include?('oregon')
+      create_oregon_facilities(dmv_locations)
+    end
   end
-
+  
   def create_oregon_facilities(dmv_locations)
       oregon_facility = dmv_locations.map do |data|
         Facility.new(name:  data[:title],
@@ -24,8 +28,8 @@ class FacilityHandler
   def create_new_york_facilities(dmv_locations)
     new_york_facility = dmv_locations.map do |data|
       Facility.new(name: data[:office_name], 
-    phone: data[public_phone_number],
-    address: )
+    phone: data[:public_phone_number],
+    address:address_formatter_new_york(data))
     end
   end
 
@@ -33,11 +37,14 @@ class FacilityHandler
     address = JSON.parse(data[:location_1][:human_address])
     address.values.join(", ")
   end
+
   def address_formatter_missouri(data)
     address = "#{data[:address1]}, #{data[:city]}, #{data[:state]}, #{data[:zipcode]}"
   end
 
-
+  def address_formatter_new_york(data)
+    address = "#{data[:street_address_line_1]}, #{data[:city]}, #{data[:state]}, #{data[:zip_code]}"
+  end
 end
 #   def name_sorter(data)
 #     if data[:website].include?('oregon')
