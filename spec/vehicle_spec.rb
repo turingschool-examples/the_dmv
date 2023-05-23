@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 RSpec.describe Vehicle do
-  
   describe '#initialize' do
     it 'can initialize' do
       expect(@cruz).to be_an_instance_of(Vehicle)

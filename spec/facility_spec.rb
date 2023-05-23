@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 RSpec.describe Facility do
   describe 'initialize' do
     it 'can initialize' do
