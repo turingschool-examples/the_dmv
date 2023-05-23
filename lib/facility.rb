@@ -88,10 +88,11 @@ class Facility
           if office_details[:location_2]
             address_2 = Hash.new
                 location_2 = JSON.parse office_details[:location_2][:human_address] 
-                address_2.store(:b_suite, location_2['address'])
-                address[:new_address]["b_suite"] = address_2[:b_suite]
+                address_2.store(:suite, location_2['address'])
+                address[:new_address]["suite"] = address_2[:suite]
           end
           address[:new_address].values.join(', ')
+      else 
       end 
   end
 

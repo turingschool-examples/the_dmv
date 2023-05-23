@@ -29,6 +29,7 @@ RSpec.describe Office do
       expect(company[0]).to be_an_instance_of(Facility)
       expect(company[1].name).to eq('ROCHESTER DOWNTOWN')
       expect(company[6].phone).to eq("3153693301")
+      expect(company[1].address).to eq("200 E. MAIN STREET, STE. 101, ROCHESTER NY 14604")
     end
     it 'can create offices from more than two data links' do
       offices = Office.new
@@ -38,6 +39,7 @@ RSpec.describe Office do
       expect(company[0]).to be_an_instance_of(Facility)
       expect(company[4].name).to eq("LINN LICENSE OFFICE")
       expect(company[6].phone).to eq("(417) 745-6409")
+      expect(company[0].address).to eq('3164 TELEGRAPH ROAD, ST LOUIS, MO, 63125')
     end
   end 
 end
