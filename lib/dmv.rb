@@ -37,7 +37,7 @@ class Dmv
   end
 
   def missouri_parse(missouri)
-    missouri.map do |office|
+    missouri.flat_map do |office|
       name = office[:name]
       address = office[:address1]
       phone = office[:phone]
@@ -46,7 +46,7 @@ class Dmv
     end
   end
 
-  def create_facilities(dmv_office)
+  def parse_states_data(dmv_office)
     if dmv_office.first.has_key?(:title)
       locations = oregon_parse(dmv_office)
     elsif dmv_office.first.has_key?(:office_name)
@@ -56,7 +56,10 @@ class Dmv
     else
       nil
     end
-    
+  end
+
+  def create_facilities(dmv_office)
+    locations = parse_states_data(dmv_office)
     locations.map do |location|
       facility = Facility.new(location)
       @facilities << facility
