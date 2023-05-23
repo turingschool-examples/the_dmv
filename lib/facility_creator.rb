@@ -24,6 +24,17 @@ class FacilityCreator
       end
     end
 
+    def create_mo_facility(state_data)
+      state_data.map do |facility|
+        facility_data = format_facility_data(facility)
+        Facility.new({
+          name: facility_data[:name],
+          address: facility_data[:address],
+          phone: facility_data[:phone]
+        })
+      end
+    end
+
     def format_facility_data(facility)
         data = {
         name: format_name(facility),
