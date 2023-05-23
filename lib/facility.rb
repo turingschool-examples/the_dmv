@@ -32,4 +32,40 @@ class Facility
       nil
     end
   end
+
+  def administer_written_test(registrant)
+    if @services.include?("Written Test")
+        if registrant.age >= 16 && registrant.permit? == true
+            registrant.license_data[:written] = true
+        else 
+          false
+        end
+    else
+        false
+    end
+  end
+
+  def administer_road_test(registrant)
+    if @services.include?("Road Test")
+      if registrant.license_data[:written] == true
+          registrant.license_data[:license] = true
+      else 
+        false
+      end
+    else
+      false
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    if @services.include?("Renew License")
+      if registrant.license_data[:written] == true && registrant.license_data[:license] == true
+          registrant.license_data[:renewed] = true
+      else 
+        false
+      end
+    else
+      false
+    end
+  end
 end
