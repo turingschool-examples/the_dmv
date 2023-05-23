@@ -1,14 +1,15 @@
 require 'json'
 
 class FacilityCreator
-  def create_facility_from_oregon(dmv_details)
-    vehicle_details.map do |vehicle|
-      vehicle_hash = {
-      :vin => vehicle[:vin_1_10],
-      :year => vehicle[:model_year],
-      :make => vehicle[:make],
-      :model => vehicle[:model],
-      :engine => :ev
-      }
-  end
+
+    def create_facilities(state_data)
+      state_data.map do |facility|
+        facility_data = format_facility_data(facility)
+        Facility.new({
+          title: facility_data[:title],
+          address: facility_data[:address],
+          phone: facility_data[:phone]
+          })
+      end
+    end
 end
