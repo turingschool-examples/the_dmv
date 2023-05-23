@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 # untouched since I never changed anything for this.
-# Maybe would have changed formmating to be inline with how I would have written it
+# Maybe would have changed formatting to be inline with how I would have written it
 
 RSpec.describe Dmv do
   before(:each) do
