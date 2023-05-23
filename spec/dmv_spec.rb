@@ -40,4 +40,26 @@ RSpec.describe Dmv do
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
+
+  describe '#create_oregon_facilities' do
+    it 'creates Facility objects with correct addresses' do
+      or_dmv = Dmv.new
+      or_dmv.create_oregon_facilities
+
+      facilities = or_dmv.facilities
+
+      expect(facilities.size).to eq(59)
+
+      facility1 = facilities[0]
+      expect(facility1.name).to eq('Albany DMV Office')
+      expect(facility1.address).to eq('2242 Santiam Hwy SE, Albany, OR, 97321')
+      expect(facility1.phone).to eq('541-967-2014')
+
+      facility2 = facilities[1]
+      expect(facility2.name).to eq('Ashland DMV Office')
+      expect(facility2.address).to eq('600 Tolman Creek Rd, Ashland, OR, 97520')
+      expect(facility2.phone).to eq('541-776-6092')
+    end
+  end
+
 end
