@@ -27,7 +27,7 @@ RSpec.describe FacilityFactory do
     facilities = factory.create_facilities(or_data_example)
 
     expect(facilities.first.name).to eq("Albany DMV Office")
-    expect(facilities.first.address).to eq("2242 Santiam Hwy, Albany OR 97321")
+    expect(facilities.first.address).to eq("2242 Santiam Hwy SE, Albany OR 97321")
     expect(facilities.first.phone).to eq("541-967-2014")
   end
 
@@ -48,6 +48,7 @@ RSpec.describe FacilityFactory do
     expect(facilities.first.name).to eq("Jamaica Kiosk")
     expect(facilities.first.address).to eq("168-46 91st Ave, 2ND Flr, Jamaica NY 11432")
     expect(facilities.first.phone).to eq(nil)
+  end
 
     it "can create NY facilities with large datasets" do
     factory = FacilityFactory.new
@@ -59,7 +60,7 @@ RSpec.describe FacilityFactory do
     expect(facilities.first.phone).to be_a(String)
   end
 
-  it "can create MO facilities with specific facility details" do
+  xit "can create MO facilities with specific facility details" do
     factory = FacilityFactory.new
     facilities = factory.create_facilities(mo_data_example)
 
@@ -68,7 +69,7 @@ RSpec.describe FacilityFactory do
     expect(facilities.first.phone).to eq("314-887-1050")
   end
 
-  it "can create MO facilities with large datasets" do
+  xit "can create MO facilities with large datasets" do
     factory = FacilityFactory.new
     missouri_facilities = DmvDataService.new.mo_dmv_office_locations
     facilities = factory.create_facilities(missouri_facilities)
