@@ -12,24 +12,30 @@ RSpec.describe FacilityConstructor do
     expect(@constructor).to be_a(FacilityConstructor)
   end
 
-  describe '#parsed address' do
-    it 'parses address data into one string' do
-      expect(@constructor.parsed_address(@or_office)).to eq("2242 Santiam Hwy SE Albany OR 97321")
-      expect(@constructor.parsed_address(@ny_office)).to eq("200 E. MAIN STREET STE. 101 ROCHESTER NY 14604")
-      expect(@constructor.parsed_address(@mo_office)).to eq("10425 WEST FLORISSANT FERGUSON MO 63136")
+  describe '#name' do
+    it 'returns name of facility' do
+      expect(@constructor.name(@or_office)).to eq("Albany DMV Office")
+      expect(@constructor.name(@ny_office)).to eq("ROCHESTER DOWNTOWN")
+      expect(@constructor.name(@mo_office)).to eq("FERGUSON-OFFICE CLOSED UNTIL FURTHER NOTICE")
     end
   end
 
-  describe '#format data' do
-    it 'returns an array of hash elements accepted by Facility class' do
-      or_office_formatted = [{name: "Albany DMV Office", address: "2242 Santiam Hwy SE Albany OR 97321", phone: "541-967-2014"}]
-      ny_office_formatted = [{name: "ROCHESTER DOWNTOWN", address: "200 E. MAIN STREET STE. 101 ROCHESTER NY 14604", phone: "5857531604"}]
-      mo_office_formatted = [{name: "FERGUSON-OFFICE CLOSED UNTIL FURTHER NOTICE", address: "10425 WEST FLORISSANT FERGUSON MO 63136", phone: "(314) 733-5316"}]
-      expect(@constructor.format_data(@or_office)).to eq(or_office_formatted)
-      expect(@constructor.format_data(@ny_office)).to eq(ny_office_formatted)
-      expect(@constructor.format_data(@mo_office)).to eq(mo_office_formatted)
+  describe '#address' do
+    it 'parses address data into one string' do
+      expect(@constructor.address(@or_office)).to eq("2242 Santiam Hwy SE Albany OR 97321")
+      expect(@constructor.address(@ny_office)).to eq("200 E. MAIN STREET STE. 101 ROCHESTER NY 14604")
+      expect(@constructor.address(@mo_office)).to eq("10425 WEST FLORISSANT FERGUSON MO 63136")
     end
   end
+
+  describe '#phone' do
+    it 'returns phone number' do
+      expect(@constructor.phone(@or_office)).to eq("541-967-2014")
+      expect(@constructor.phone(@ny_office)).to eq("5857531604")
+      expect(@constructor.phone(@mo_office)).to eq("(314) 733-5316")
+    end
+  end
+
 
   describe '#create facilities' do
     it 'generates facilities from Oregon data' do
@@ -51,9 +57,9 @@ RSpec.describe FacilityConstructor do
       expect(ny_facilities.first).to be_a(Facility)
       expect(ny_facilities.first.name).to eq("JAMAICA KIOSK")
       expect(ny_facilities.first.address).to eq("168-46 91ST AVE., 2ND FLR JAMAICA NY 11432")
-      expect(ny_facilities.first.phone).to be_nil
+      expect(ny_facilities.first.phone).to eq(nil)
       expect(ny_facilities[1].phone).to eq("5857531604")
-      expect(ny_facilities.length).to eq 172
+      expect(ny_facilities.length).to eq(172)
     end
 
     it 'generates facilities from Missouri data' do
@@ -64,7 +70,7 @@ RSpec.describe FacilityConstructor do
       expect(mo_facilities.first.name).to eq("OAKVILLE")
       expect(mo_facilities.first.address).to eq("3164 TELEGRAPH ROAD ST LOUIS MO 63125")
       expect(mo_facilities.first.phone).to eq("(314) 887-1050")
-      expect(mo_facilities.length).to eq 178
+      expect(mo_facilities.length).to eq(178)
     end
   end
 end
