@@ -3,9 +3,9 @@ class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
   def initialize(facility_hash)
-    @name = facility_hash[:name] || facility_hash[:title] || facility_hash[:office_name]
-    @address =  facility_hash[:address] || facility_hash[:street_address_line_1] || facility_hash[:location_1] || facility_hash[:address1]
-    @phone = facility_hash[:phone] || facility_hash[:phone_number] || facility_hash[:public_phone_number]
+    @name = facility_hash[:name] 
+    @address =  facility_hash[:address] 
+    @phone = facility_hash[:phone]
     @services = []
     @registered_vehicles = []
     @collected_fees = 0

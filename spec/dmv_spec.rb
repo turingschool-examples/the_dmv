@@ -47,9 +47,9 @@ RSpec.describe Dmv do
       @dmv.add_facilities(@or_locations)
 
       expect(@dmv.facilities[1]).to be_a(Facility)
-      expect(@dmv.facilities[1].name).to eq(@or_locations[1][:title])
-      expect(@dmv.facilities[1].address).to eq(@or_locations[1][:location_1])
-      expect(@dmv.facilities[1].phone).to eq(@or_locations[1][:phone_number])
+      expect(@dmv.facilities[1].name).to eq('Ashland DMV Office')
+      expect(@dmv.facilities[1].address).to eq("600 Tolman Creek Rd Ashland OR 97520")
+      expect(@dmv.facilities[1].phone).to eq('541-776-6092')
 
     end
 
@@ -59,20 +59,19 @@ RSpec.describe Dmv do
       @dmv.add_facilities(@ny_locations)
 
       expect(@dmv.facilities[1]).to be_a(Facility)
-      expect(@dmv.facilities[1].name).to eq(@ny_locations[1][:office_name])
-      expect(@dmv.facilities[1].address).to eq(@ny_locations[1][:street_address_line_1])
-      expect(@dmv.facilities[1].phone).to eq(@ny_locations[1][:public_phone_number])
+      expect(@dmv.facilities[1].name).to eq("Rochester Downtown")
+      expect(@dmv.facilities[1].address).to eq("200 E Main Street Ste. 101 Rochester NY 14604")
+      expect(@dmv.facilities[1].phone).to eq("585-753-1604")
 
     end
 
     it 'Can add facilities from Missiouri dmv api' do
       expect(@dmv.facilities).to eq([])
       @dmv.add_facilities(@mo_locations)
-
       expect(@dmv.facilities[1]).to be_a(Facility)
-      expect(@dmv.facilities[1].name).to eq(@mo_locations[1][:name])
-      expect(@dmv.facilities[1].address).to eq(@mo_locations[1][:address1])
-      expect(@dmv.facilities[1].phone).to eq(@mo_locations[1][:phone])
+      expect(@dmv.facilities[1].name).to eq("Bonne Terre")
+      expect(@dmv.facilities[1].address).to eq("30 N Allen St Bonne Terre MO 63628")
+      expect(@dmv.facilities[1].phone).to eq("573-358-3584")
 
     end
 
@@ -98,4 +97,63 @@ RSpec.describe Dmv do
       expect(@dmv.facilities_offering_service('Road Test')).to eq(@dmv.facilities[1..2])
     end
   end
-end
+
+  describe '#format_name' do
+    it 'takes a given hash argument and returns a name string' do
+      
+      expect(@dmv.format_name(@facility_1)).to eq("Albany DMV Office")
+      expect(@dmv.format_name(@facility_2)).to eq('Ashland DMV Office')
+      expect(@dmv.format_name(@facility_3)).to eq('Bend DMV Office')
+    end
+
+    it 'takes a diffrent value from the hash argument' do
+
+      expect(@dmv.format_name(@or_locations[1])).to eq("Ashland DMV Office")
+      expect(@dmv.format_name(@ny_locations[1])).to eq("Rochester Downtown")
+      expect(@dmv.format_name(@mo_locations[1])).to eq("Bonne Terre")
+
+    end
+  end
+
+  describe '#format_address' do
+    it 'takes a hash and returns a string' do
+
+      expect(@dmv.format_address(@facility_1)).to eq("2242 Santiam Hwy SE Albany OR 97321")
+      expect(@dmv.format_address(@facility_2)).to eq('600 Tolman Creek Rd Ashland OR 97520')
+      expect(@dmv.format_address(@facility_3)).to eq('63030 O B Riley Rd Bend OR 97701')
+
+    end
+
+    it 'can take diffrent values from the hash and formate them' do
+
+      expect(@dmv.format_address(@or_locations[1])).to eq("600 Tolman Creek Rd Ashland OR 97520")
+      expect(@dmv.format_address(@ny_locations[1])).to eq("200 E Main Street Ste. 101 Rochester NY 14604")
+      expect(@dmv.format_address(@mo_locations[1])).to eq("30 N Allen St Bonne Terre MO 63628")
+    end
+  end
+
+  describe '#format_phone' do
+    it 'takes a phone string and formats' do
+
+
+      expect(@dmv.format_phone(@facility_1)).to eq('541-967-2014')
+      expect(@dmv.format_phone(@facility_2)).to eq('541-776-6092')
+      expect(@dmv.format_phone(@facility_3)).to eq('541-388-6322')
+
+    end
+
+    it 'can format from a diffrent source' do
+
+      expect(@dmv.format_phone(@or_locations[1])).to eq('541-776-6092')
+      expect(@dmv.format_phone(@ny_locations[1])).to eq("585-753-1604")
+      expect(@dmv.format_phone(@mo_locations[1])).to eq("573-358-3584")
+      
+    end
+  end
+  
+  describe '#format_hours' do
+    it 'takes hours from a facility hash' do
+      
+    end
+  end
+end 
