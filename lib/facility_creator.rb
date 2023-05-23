@@ -12,4 +12,21 @@ class FacilityCreator
           })
       end
     end
+
+    def format_facility_data(facility)
+      data = {
+        name: format_name(facility),
+        address: format_address(facility),
+        phone: format_phone_number(facility)
+      }
+    end
+
+    def format_name(data)
+    end
+
+    def format_address(data)
+    end
+
+    def format_phone_number(data)
+    end
 end
