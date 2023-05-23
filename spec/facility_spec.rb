@@ -132,7 +132,6 @@ RSpec.describe Facility do
       expect(@facility_1.administer_road_test(@registrant_1)).to be false
       expect(@facility_1.add_service("Road Test")).to eq ["Written Test", "Road Test"]
       expect(@facility_1.administer_road_test(@registrant_1)).to be true
-
     end
 
     it 'can only give test if registrant has passed written test' do
