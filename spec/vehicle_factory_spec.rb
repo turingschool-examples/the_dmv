@@ -53,5 +53,10 @@ RSpec.describe VehicleFactory do
     expect(@factory.created_vehicles.count).to eq(1000)
   end 
 
-
+  it "can remove duplicate entries based on vin number" do
+    vehicle_array = [{vin: 98}, {vin: 98}, {vin: 98}] 
+    @factory.create_vehicle_order(vehicle_array)
+    expect(@factory.created_vehicles.count).to eq(3)
+    @factory.destory!
+    expect(@factory.created_vehicles.count).to eq(1)
 end 
