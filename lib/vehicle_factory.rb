@@ -17,8 +17,8 @@ class VehicleFactory
      new_vehicles[:model] = data[:model]
      new_vehicles[:engine] = :ev
      new_vehicles[:plate_type] = :ev
-      @new_vehicles << Vehicle.new(new_vehicles)
-      end
-      @new_vehicles
+     @new_vehicles << Vehicle.new(new_vehicles)
+    end
+   @new_vehicles
     end
 end

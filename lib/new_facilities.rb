@@ -10,9 +10,9 @@ class FacilityBuilder
   def create_facilities(source)
     if source == DmvDataService.new.or_dmv_office_locations
     oregon_locations(source)
-  elsif source == DmvDataService.new.ny_dmv_office_locations
-    nys_locations(source)
-  elsif source == DmvDataService.new.mo_dmv_office_locations
+    elsif source == DmvDataService.new.ny_dmv_office_locations
+      nys_locations(source)
+    elsif source == DmvDataService.new.mo_dmv_office_locations
     mo_locations(source)
     end
     @locations
