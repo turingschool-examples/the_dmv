@@ -19,7 +19,7 @@ RSpec.describe Office do
       expect(company[1].name).to eq('Ashland DMV Office')
       expect(company[0].address).to eq("2242 Santiam Hwy SE, Albany, OR, 97321")
       expect(company[0].phone).to eq("541-967-2014")
-      expect(company[12].address).to eq("ddd")
+      expect(company[12].address).to eq("749 Riverside Dr, Coquille, OR, 97423, Suite B")
     end
     it 'can create offices from more than one data link' do 
       offices = Office.new

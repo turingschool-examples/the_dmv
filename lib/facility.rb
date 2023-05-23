@@ -82,12 +82,16 @@ class Facility
     if office_details[:address]
         office_details[:address]
     elsif office_details[:location_1]
-          address = JSON.parse office_details[:location_1][:human_address]
+          address = Hash.new
+          location_1 = JSON.parse office_details[:location_1][:human_address]
+          address.store(:new_address, location_1)
           if office_details[:location_2]
-                suite = JSON.parse office_details[:location_2][:human_address]
-                address = address.merge suite
+            address_2 = Hash.new
+                location_2 = JSON.parse office_details[:location_2][:human_address] 
+                address_2.store(:b_suite, location_2['address'])
+                address[:new_address]["b_suite"] = address_2[:b_suite]
           end
-          address.values.join(', ')
+          address[:new_address].values.join(', ')
       end 
   end
 
