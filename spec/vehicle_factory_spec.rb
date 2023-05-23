@@ -1,7 +1,7 @@
 require './lib/vehicle'
 require './lib/vehicle_factory'
 require './lib/dmv_data_service'
-wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+
 
 RSpec.describe VehicleFactory do
 
@@ -15,13 +15,24 @@ RSpec.describe VehicleFactory do
     expect(factory).to be_an_instance_of(VehicleFactory)
   end
 
-  it "can create vehicles" do
+  it "can create vehicles with vehicle details" do
     factory = VehicleFactory.new
     vehicles = factory.create_vehicles(wa_dmv_data)
     expect(vehicles.first.vin).to eq("WMEEJ9AA7E")
     expect(vehicles.first.year).to eq("2014")
     expect(vehicles.first.make).to eq("SMART")
     expect(vehicles.first.model).to eq("Fortwo Electric Drive")
+    expect(vehicles.first.engine).to eq(:ev)
+  end
+
+  it "can create vehicles from large datasets" do
+    wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+    factory = VehicleFactory.new
+    vehicles = factory.create_vehicles(wa_ev_registrations)
+    expect(vehicles.first.vin).to be_a(String)
+    expect(vehicles.first.year.length).to eq(4)
+    expect(vehicles.first.make).to be_a(String)
+    expect(vehicles.first.model).to be_a(String)
     expect(vehicles.first.engine).to eq(:ev)
   end
 end
