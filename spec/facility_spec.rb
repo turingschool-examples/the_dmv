@@ -8,6 +8,7 @@ RSpec.describe Facility do
     @facility_1 = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
     @facility_2 = Facility.new({name: 'Ashland DMV Office', address: '600 Tolman Creek Rd Ashland OR 97520', phone: '541-776-6092' })
   end
+  
   describe '#initialize' do
     it 'can initialize' do
       expect(@facility_1).to be_an_instance_of(Facility)
@@ -21,9 +22,11 @@ RSpec.describe Facility do
   describe '#add service' do
     it 'can add available services' do
       expect(@facility_1.services).to eq([])
+      
       @facility_1.add_service('New Drivers License')
       @facility_1.add_service('Renew Drivers License')
       @facility_1.add_service('Vehicle Registration')
+      
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
@@ -85,7 +88,6 @@ RSpec.describe Facility do
 
   describe '#must have services listed to complete that service' do
     it 'should not register a vehicle at this location' do
-
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.services).to eq([])
       expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
@@ -93,7 +95,4 @@ RSpec.describe Facility do
       expect(@facility_2.collected_fees).to eq(0)
     end
   end
-
-
-
 end
