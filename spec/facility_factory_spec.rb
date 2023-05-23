@@ -16,13 +16,27 @@ describe "FacilityFactory" do
 
   describe "#create_facilities" do
     it "returns an array of Facilities" do
-      facilities = @facility_factory.create_facility(@or_dmvs)
+      facilities = @facility_factory.create_facilities(@or_dmvs)
       first_facility = facilities.first
       
       expect(facilities).to be_a(Array)
       expect(facilities.count).to eq(59)
       expect(first_facility).to be_a(Facility)
     end
+  end
+
+  describe "#format_address" do
+    it "can format a DMV address from the Oregon API" do
+      or_facility = @or_dmvs.first
+      special_or_facility = @or_dmvs.find { |facility| facility[:location_2] }
+
+      address1 = @facility_factory.format_address(or_facility)
+      address2 = @facility_factory.format_address(special_or_facility) 
+
+      expect(address1).to be_a(String)
+      expect(address2).to be_a(String)
+    end
+    
   end
 
 end
