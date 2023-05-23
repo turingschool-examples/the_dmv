@@ -33,7 +33,7 @@ class FacilityLocations
 
   def or_facilities(facilities)
     facilities.map do |facility|
-      formatted_address = format_or_address(facility[:location_1][:human_address])
+      formatted_address = format_or_address(facility)
       Facility.new({
         name: facility[:title],
         address: formatted_address,
@@ -43,17 +43,23 @@ class FacilityLocations
   end
   
   def format_or_address(raw_address)
-    parsed = JSON.parse(raw_address)
-    parsed.values.join(" ")
+    parsed = JSON.parse(raw_address[:location_1][:human_address])
+    formatted = parsed.values
+    if raw_address.include?(:location_2)
+      parsed_2 = JSON.parse(raw_address[:location_2][:human_address])
+      formatted.insert(1, parsed_2["address"])
+    end
+    formatted.join(" ")
   end
   
   def mo_facilities(facilities)
     facilities.map do |facility|
       formatted_address = format_mo_address(facility)
+      formatted_phone = format_mo_phone(facility)
       Facility.new({
-        name: facility[:office_name],
+        name: facility[:name],
         address: formatted_address,
-        phone: facility[:phone],
+        phone: formatted_phone,
       })
     end
   end
@@ -65,6 +71,13 @@ class FacilityLocations
     address.push(facility[:state])
     address.push(facility[:zipcode])
     address.join(" ")
+  end
+
+  def format_mo_phone(facility)
+    return "N/A" if facility[:phone] == nil
+    raw_phone = facility[:phone]
+    digits_only = raw_phone.gsub(/\D/, '')
+    formatted_phone = digits_only.insert(3, '-').insert(-5, '-')
   end
   
   def ny_facilities(facilities)
@@ -98,7 +111,7 @@ end
 
 
 # locations = FacilityLocations.new
-# ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
+# or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
 
 #   #* Oregon 97***
 #   #* NY 6390 OR 10001 - 14975
@@ -106,11 +119,18 @@ end
 
 #   # raw = "{\"address\": \"2242 Santiam Hwy SE\", \"city\": \"Albany\", \"state\": \"OR\", \"zip\": \"97321\"}"
 
-# clean_string = old_string.gsub(/[()]/, "")
-# s.gsub(/"|\[|\]/, '')
 
 #   # parsed = JSON.parse(raw_2)
 #   # p parsed
 #   # p parsed.values.join(" ")
-# ny_location = ny_dmv_office_locations[125]
-# p locations.format_ny_address(ny_location)
+#or_location = mo_dmv_office_locations[108]
+
+# or_dmv_office_locations.each do |location|
+#   parsed = JSON.parse(location[:location_1][:human_address])
+#     formatted = parsed.values
+#   if location.include?(:location_2)
+#     parsed_2 = JSON.parse(location[:location_2][:human_address])
+#     formatted.insert(1, parsed_2["address"])
+#     p formatted.join(" ")
+#   end
+# end
