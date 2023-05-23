@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+# no change to formatting since nothing was changed by me
 RSpec.describe Vehicle do
   before(:each) do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
@@ -33,4 +34,6 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  # end test
 end
