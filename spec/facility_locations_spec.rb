@@ -37,6 +37,16 @@ RSpec.describe FacilityLocations do
       expect(or_facilities[39].registered_vehicles).to eq([])
       expect(or_facilities[39].collected_fees).to eq(0)
     end
+
+    it 'can integrate location_2 data' do
+      or_facilities = @locations.create_facilities(@or_dmv_office_locations)
+      expect(or_facilities[3].name).to eq("Baker City DMV Office")
+      expect(or_facilities[3].address).to eq("3370 10th St Suite A Baker City OR 97814")
+      expect(or_facilities[3].phone).to eq("541-523-4355")
+      expect(or_facilities[3].services).to eq([])
+      expect(or_facilities[3].registered_vehicles).to eq([])
+      expect(or_facilities[3].collected_fees).to eq(0)
+    end
   end
 
   describe '#generate_second_location_data' do
@@ -75,14 +85,14 @@ RSpec.describe FacilityLocations do
       mo_facilities = @locations.create_facilities(@mo_dmv_office_locations)
       expect(mo_facilities.first.name).to eq("OAKVILLE")
       expect(mo_facilities.first.address).to eq("3164 TELEGRAPH ROAD ST LOUIS MO 63125")
-      expect(mo_facilities.first.phone).to eq("(314) 887-1050")
+      expect(mo_facilities.first.phone).to eq("314-887-1050")
       expect(mo_facilities.first.services).to eq([])
       expect(mo_facilities.first.registered_vehicles).to eq([])
       expect(mo_facilities.first.collected_fees).to eq(0)
 
       expect(mo_facilities[108].name).to eq("MALDEN")
       expect(mo_facilities[108].address).to eq("1112 N Douglass MALDEN MO 63863")
-      expect(mo_facilities[108].phone).to eq("(573) 276-5006")
+      expect(mo_facilities[108].phone).to eq("573-276-5006")
       expect(mo_facilities[108].services).to eq([])
       expect(mo_facilities[108].registered_vehicles).to eq([])
       expect(mo_facilities[108].collected_fees).to eq(0)
