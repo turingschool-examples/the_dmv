@@ -51,14 +51,10 @@ class Dmv
             new_facility_arr << facility_deatails
         end
     end
-    new_facility_arr
     new_facilities_hash = new_facility_arr.map{ |i| Facility.new(i) }
     new_facilities_hash
 
    
-end
-
-
-
+  end
 
 end
