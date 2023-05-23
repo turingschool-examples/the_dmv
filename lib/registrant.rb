@@ -19,4 +19,16 @@ class Registrant
   def earn_permit
     @permit = true
   end
+
+  def take_written_test
+    license_data[:written] = true
+  end
+
+  def take_road_test
+    license_data[:license] = true
+  end
+
+  def have_license_renewed
+    license_data[:renewed] = true
+  end
 end
