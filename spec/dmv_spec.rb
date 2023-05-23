@@ -94,5 +94,15 @@ RSpec.describe Dmv do
         expect(@dmv.facilities[231].website).to eq(nil)
         expect(@dmv.facilities[237].website).to eq("losllc.com")
       end 
+      it "can list city" do 
+        expect(@dmv.facilities[0].city).to eq("Albany")
+        expect(@dmv.facilities[59].city).to eq("JAMAICA")
+        expect(@dmv.facilities[231].city).to eq("ST LOUIS")
+      end 
+      it "can list state" do 
+        expect(@dmv.facilities[0].state).to eq("OR")
+        expect(@dmv.facilities[59].state).to eq("NY")
+        expect(@dmv.facilities[231].state).to eq("MO")
+      end 
     end
 end
