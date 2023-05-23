@@ -19,14 +19,17 @@ class FacilityFactory
         facility = Facility.new({
           name: capitalize_words(facility_data[:office_name]),
           address: capitalize_words("#{facility_data[:street_address_line_1]} #{facility_data[:city]} #{facility_data[:state]} #{facility_data[:zip_code]}"),
-          phone: format_phone_number(facility_data[:public_phone_number])
+          phone: format_phone_number(facility_data[:public_phone_number]),
+          operating_hours: "Monday - #{facility_data[:monday_beginning_hours]} to #{facility_data[:monday_ending_hours]}, Tuesday - #{facility_data[:tuesday_beginning_hours]} to #{facility_data[:tuesday_ending_hours]}, Wednesday - #{facility_data[:wednesday_beginning_hours]} to #{facility_data[:wednesday_ending_hours]}, Thursday - #{facility_data[:thursday_beginning_hours]} to #{facility_data[:thursday_ending_hours]}, Friday - #{facility_data[:friday_beginning_hours]} to #{facility_data[:friday_ending_hours]}, Sat & Sun - Closed"
         })
         @operating_facilities << facility
       elsif facility_data[:state] == "MO"
         facility = Facility.new({
           name: capitalize_words(facility_data[:name]),
           address: capitalize_words("#{facility_data[:address1]} #{facility_data[:city]} #{facility_data[:state]} #{facility_data[:zipcode]}"),
-          phone: format_phone_number(facility_data[:phone])
+          phone: format_phone_number(facility_data[:phone]),
+          operating_hours: capitalize_operating_hours(facility_data[:daysopen]),
+          holiday_closures: facility_data[:holidaysclosed]
         })
         @operating_facilities << facility
       else
@@ -46,6 +49,15 @@ class FacilityFactory
       end
     end
     words.join(" ")
+  end
+
+  def capitalize_operating_hours(hours)
+    if hours
+    words = hours.split.map {|word| word.capitalize}
+    words.join(" ")
+    else
+      nil
+    end
   end
 
   def format_phone_number(phone)
