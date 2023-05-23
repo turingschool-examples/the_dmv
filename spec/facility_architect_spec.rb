@@ -6,7 +6,7 @@ RSpec.describe FacilityArchitect do
     @or_dmv_office_locations = DmvDataService.new.or_dmv_office_locations
   end
 
-  describe 'Iteration 3' do
+  describe 'OR Office' do
     it 'exists' do
       expect(@facility_architect).to be_a(FacilityArchitect)
       expect(@or_dmv_office_locations).to be_a(Array)
@@ -16,12 +16,11 @@ RSpec.describe FacilityArchitect do
     end
 
     it 'can design new facilities from API Call data' do
-      or_facility = @facility_architect.design_facility(@or_dmv_office_locations)
+      or_facility = @facility_architect.or_design_facility(@or_dmv_office_locations)
       expect(or_facility).to be_a(Array)
       expect(or_facility.first).to be_a(Facility)
       expect(or_facility.first.name).to eq("Albany DMV Office")
-      expect(or_facility.first.address).to be_a(Hash)
-      # I'll get back to the address. Need to keep moving with the other locations
+      expect(or_facility.first.address).to eq("2242 Santiam Hwy SE, Albany, OR, 97321")
       expect(or_facility.first.phone).to eq("541-967-2014")
     end
 
@@ -31,11 +30,53 @@ RSpec.describe FacilityArchitect do
       expect(unformatted_keys[:phone]).to be_nil
       expect(unformatted_keys[:address]).to be_nil
       
-      facility_array = @facility_architect.facility_key_updater(unformatted_keys)
-      
+      facility_array = @facility_architect.or_facility_key_updater(unformatted_keys)
+
       expect(facility_array.first[:name]).to eq("Astoria DMV Office")
       expect(facility_array.first[:phone]).to eq("503-325-3951")
-      expect(facility_array.first[:address]).to be_a(Hash)
+      expect(facility_array.first[:address]).to eq("705 W Marine Dr, Astoria, OR, 97103")
+
+    end
+  end
+end
+
+
+RSpec.describe FacilityArchitect do
+  before(:each) do
+    @facility_architect = FacilityArchitect.new
+    @ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
+  end
+
+  describe 'NY Office' do
+    it 'exists' do
+      expect(@facility_architect).to be_a(FacilityArchitect)
+      expect(@ny_dmv_office_locations).to be_a(Array)
+      expect(@ny_dmv_office_locations.first).to be_a(Hash)
+      expect(@ny_dmv_office_locations.first[:office_name]).to eq("JAMAICA KIOSK")
+      expect(@ny_dmv_office_locations[1][:public_phone_number]).to eq("5857531604")
+      expect(@ny_dmv_office_locations.first[:georeference][:coordinates][0]).to eq(-73.79219)
+    end
+
+    it 'can design new facilities from JSON data' do
+      ny_facility = @facility_architect.ny_design_facility(@ny_dmv_office_locations)
+      expect(ny_facility).to be_a(Array)
+      expect(ny_facility[1]).to be_a(Facility)
+      expect(ny_facility[1].name).to eq("Rochester Downtown County Office")
+      expect(ny_facility[1].phone).to eq("5857531604")
+      expect(ny_facility[1].address).to eq("200 E. Main Street Ste. 101, Rochester Ny, 14604")
+    end
+
+    it 'has key adder method' do
+      unformatted_keys = @ny_dmv_office_locations[2]
+      expect(unformatted_keys[:name]).to be_nil
+      expect(unformatted_keys[:phone]).to be_nil
+      expect(unformatted_keys[:address]).to be_nil
+      
+      facility_array = @facility_architect.ny_facility_key_updater(unformatted_keys)
+
+      expect(facility_array.first[:name]).to eq("Millbrook County Office")
+      expect(facility_array.first[:phone]).to eq("8456774080")
+      expect(facility_array.first[:address]).to eq("15 Merritt Avenue , Millbrook Ny, 12545")
 
     end
   end
