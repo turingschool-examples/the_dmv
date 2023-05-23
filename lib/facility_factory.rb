@@ -1,4 +1,5 @@
 class FacilityFactory
+  attr_reader :locations
 
   def initialize
     @locations = []
