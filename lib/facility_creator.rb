@@ -45,17 +45,26 @@ class FacilityCreator
 
     def format_name(data)
         if data[:website] && data[:website].include?("oregon")
-          data[:title]
+          return data[:title]
         elsif data[:state] && data[:state] == "ny"
-          data[:office_name]
+          return data[:office_name]
         else data[:state] && data[:state] == "missouri"
-          data[:name]
+          return data[:name]
         end
     end
 
     def format_address(data)
+      if data[:website] && data[:website].include?("oregon")
+        address = JSON.parse(data[:location_1][:human_address])
+        return "#{address[:address]}, #{address[:city]}, #{address[:zip]}"
+      elsif data[:state] && data[:state] == "ny"
+        return "#{data[:street_address]}, #{data[:city]}, #{data[:state]}, #{data[:zip_code]}"
+      else data[:state] && data[:state] == "missouri"
+        return "#{data[:address]}, #{data[:city]}, #{data[:state]}, #{data[:zipcode]}"
+      end
     end
 
     def format_phone_number(data)
+    
     end
 end
