@@ -32,3 +32,5 @@ class Data
         @facilities
     end
 end
+
+def vehicle_factory(vehicle_list)
