@@ -47,3 +47,13 @@ class Facility
       false 
     end
   end
+
+  def renew_drivers_licence(registrant)
+    if @services.include?('Renew Licence') == true && registrant.road_test? == true 
+      true
+      registrant.renew_licence
+    else 
+      false 
+    end
+  end
+end
