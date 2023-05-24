@@ -43,3 +43,16 @@ def vehicle_factory(vehicle_list)
                 vehicle[:make] =  vehicle[element]
             elsif element.to_s.include?('model') && element.to_s.include?('year') == false
                 vehicle[:model] =  vehicle[element]
+            elsif element.to_s.include?('year')
+                vehicle[:year] =  vehicle[element]
+            else
+                vehicle.delete(element)
+            end 
+            end
+            vehicle.delete_if{|k,v| k != :vin && k != :make && k != :model && k != :year}
+            @vehicle_new = Vehicle.new(vehicle)
+            @vehicles<<@vehicle_new
+            end
+        @vehicles
+        end
+    end
