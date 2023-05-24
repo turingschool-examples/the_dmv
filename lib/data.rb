@@ -1,5 +1,11 @@
+require './lib/dmv'
+require './lib/facility'
+require './lib/vehicle'
+require './lib/dmv_data_service'
 require 'json'
-class Data
+
+class Create
+attr_reader :facilities, :vehicles
     def initialize
         @facilities = []
         @vehicles =[]
@@ -31,4 +37,29 @@ class Data
     end
         @facilities
     end
+
+
+def vehicle_factory(vehicle_list)
+    vehicle_list.each do|vehicle|
+    
+        vehicle.flatten.each do|element|
+            if element.to_s.include?('vin') 
+                vehicle[:vin]  = vehicle[element]
+            elsif element.to_s.include?('make')
+                vehicle[:make] =  vehicle[element]
+            elsif element.to_s.include?('model') && element.to_s.include?('year') == false
+                vehicle[:model] =  vehicle[element]
+            elsif element.to_s.include?('year')
+                vehicle[:year] =  vehicle[element]
+            else
+                vehicle.delete(element)
+            end 
+        end
+            vehicle.delete_if{|k,v| k != :vin && k != :make && k != :model && k != :year}
+            @vehicle_new = Vehicle.new(vehicle)
+            @vehicles<<@vehicle_new
+    end
+        @vehicles
+    end
 end
+

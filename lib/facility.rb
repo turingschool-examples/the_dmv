@@ -1,5 +1,11 @@
+require './lib/dmv'
+require './lib/facility'
+require './lib/vehicle'
+require './lib/dmv_data_service'
+
+
 class Facility
-  attr_reader :name, :address, :phone, :services
+  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
   def initialize(facility_details)
     @address = facility_details[:address]
