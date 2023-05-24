@@ -33,7 +33,7 @@ RSpec.describe Create do
             
                 it 'can create facilities' do
                     or_facilities = DmvDataService.new.or_dmv_office_locations
-            expect(@data.create_facility(or_facilities).first.address).to eq("2242 Santiam Hwy SE")
+            expect(@data.create_facility(or_facilities).first.address).to eq("2242 Santiam Hwy SE, Albany, OR 97321")
             expect(@data.create_facility(or_facilities).first.collected_fees).to eq(0)
             expect(@data.create_facility(or_facilities).first.name).to eq("Albany DMV Office")
             expect(@data.create_facility(or_facilities).first.phone).to eq("541-967-2014")
