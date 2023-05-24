@@ -16,3 +16,6 @@ class Data
                             hash = JSON.parse(facility.dig(:location_1, :human_address))
                             facility.update({:address => hash.fetch("address")})
                         else
+                            facility.update({:address => facility.fetch(key)})
+                        end 
+                elsif   key.to_s.include?('title') ||  key.to_s.include?('name') 
