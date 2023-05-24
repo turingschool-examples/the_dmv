@@ -14,3 +14,36 @@ class Facility
   def add_service(service)
     @services << service
   end
+
+  
+  def register_vehicle(vehicle)
+    vehicle.change_plate
+    vehicle.change_date
+    @registered_vehicles << vehicle
+    if vehicle.antique?
+      @collected_fees += 25
+    elsif vehicle.electric_vehicle?
+      @collected_fees += 200
+    else
+      @collected_fees += 100
+    end
+    
+  end
+  
+  def administer_written_test(registrant)
+    if @services.include?('Written Test') == true && registrant.permit? ==true && registrant.age >=16
+      true
+      registrant.write_test
+    else 
+      false 
+    end
+  end
+
+  def administer_road_test(registrant)
+    if @services.include?('Road Test') == true && registrant.test_written? ==true 
+      true
+      registrant.road_test
+    else 
+      false 
+    end
+  end
