@@ -4,7 +4,7 @@ class Registrant
               :age,
               :license_data
 
-  attr_accessor :permit
+  #attr_accessor :permit
 
   #license data did not work with own method
   #data better outside of init but works here
@@ -20,7 +20,7 @@ class Registrant
   end
 
   def permit?
-    permit
+    @permit
   end
 
   #move to init
