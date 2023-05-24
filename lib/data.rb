@@ -41,3 +41,5 @@ def vehicle_factory(vehicle_list)
                 vehicle[:vin]  = vehicle[element]
             elsif element.to_s.include?('make')
                 vehicle[:make] =  vehicle[element]
+            elsif element.to_s.include?('model') && element.to_s.include?('year') == false
+                vehicle[:model] =  vehicle[element]
