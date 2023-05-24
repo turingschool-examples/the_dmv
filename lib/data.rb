@@ -19,3 +19,16 @@ class Data
                             facility.update({:address => facility.fetch(key)})
                         end 
                 elsif   key.to_s.include?('title') ||  key.to_s.include?('name') 
+                    facility.update ({:name => facility.fetch(key)})
+        
+                elsif   key.to_s.include?('phone') 
+                        facility.update({:phone => facility.fetch(key)}) 
+                end
+    
+            end
+            facility_new = Facility.new(facility)
+                @facilities << facility_new
+    end
+        @facilities
+    end
+end
