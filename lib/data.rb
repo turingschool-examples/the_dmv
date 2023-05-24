@@ -4,3 +4,4 @@ class Data
         @facilities = []
         @vehicles =[]
     end
+    
