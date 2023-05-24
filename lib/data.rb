@@ -34,3 +34,6 @@ class Data
 end
 
 def vehicle_factory(vehicle_list)
+    vehicle_list.each do|vehicle|
+    
+        vehicle.flatten.each do|element|
