@@ -1,3 +1,9 @@
+require './lib/dmv'
+require './lib/facility'
+require './lib/vehicle'
+require './lib/dmv_data_service'
+
+
 class Facility
   attr_reader :name, :address, :phone, :services
 
