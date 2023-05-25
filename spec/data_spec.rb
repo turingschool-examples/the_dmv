@@ -16,7 +16,7 @@ RSpec.describe Create do
             or_facilities = DmvDataService.new.or_dmv_office_locations
             new_york_facilities = DmvDataService.new.ny_dmv_office_locations
             missouri_facilities = DmvDataService.new.mo_dmv_office_locations
-            expect(@data.create_facility(new_york_facilities).first.address).to eq("168-46 91ST AVE., 2ND FLR")
+            expect(@data.create_facility(new_york_facilities).first.address).to eq("168-46 91ST AVE., 2ND FLR, JAMAICA, NY 11432")
             expect(@data.create_facility(new_york_facilities).first.collected_fees).to eq(0)
             expect(@data.create_facility(new_york_facilities).first.name).to eq("JAMAICA KIOSK")
             expect(@data.create_facility(new_york_facilities).first.phone).to eq(nil)
@@ -25,7 +25,7 @@ RSpec.describe Create do
     
                 missouri_facilities = DmvDataService.new.mo_dmv_office_locations
             
-            expect(@data.create_facility(missouri_facilities).first.address).to eq("3164 TELEGRAPH ROAD")
+            expect(@data.create_facility(missouri_facilities).first.address).to eq("3164 TELEGRAPH ROAD, ST LOUIS, MO 63125")
             expect(@data.create_facility(missouri_facilities).first.collected_fees).to eq(0)
             expect(@data.create_facility(missouri_facilities).first.name).to eq("OAKVILLE")
             expect(@data.create_facility(missouri_facilities).first.phone).to eq("(314) 730-0606")
