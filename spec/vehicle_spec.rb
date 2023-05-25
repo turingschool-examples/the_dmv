@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Facility do
+RSpec.describe Vehicle do
   before(:each) do
     @facility = Facility.new({ name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
     @facility_1 = Facility.new({ name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
