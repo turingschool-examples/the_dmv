@@ -13,32 +13,49 @@ attr_reader :facilities, :vehicles
 
     def create_facility(facility_list)
     
-        facility_list.each do|facility|
-            keys =  facility.keys
-
-
-
-            keys.each do |key|
-                if key.to_s.include?('address') ||  key.to_s.include?('location') 
-                        if facility.has_key?(:location_1) ==true 
-                            hash = JSON.parse(facility.dig(:location_1, :human_address))
-                            facility.update({:address => "#{hash["address"]}, #{hash["city"]}, #{hash["state"]} #{hash["zip"]}"})
-                        else
-                            facility.update({:address => facility.fetch(key)})
-                        end 
-                elsif   key.to_s.include?('title') ||  key.to_s.include?('name') 
-                    facility.update ({:name => facility.fetch(key)})
+            facility_list.each do|facility|    
+                keys =  facility.keys
+                @h_address ={}
+                keys.each do |key|
         
-                elsif   key.to_s.include?('phone') 
+                    if key.to_s.include?('address')
+                        @h_address.update({:address => facility.fetch(key)})
+            
+                    elsif key.to_s.include?('zip')
+                        @h_address.update({:zip => facility.fetch(key)})
+            
+                    elsif key.to_s.include?('city')
+                        @h_address.update({:city => facility.fetch(key)})
+        
+                    elsif key.to_s.include?('state')
+                        @h_address.update({:state=> facility.fetch(key)})  
+                
+                    elsif  key.to_s.include?('title') ||  key.to_s.include?('name') 
+                        facility.update ({:name => facility.fetch(key)})
+            
+                    elsif  key.to_s.include?('phone') 
                         facility.update({:phone => facility.fetch(key)}) 
+
+                    elsif facility.has_key?(:location_1)
+                        hash = JSON.parse(facility.dig(:location_1, :human_address))
+                        facility.update({:address => "#{hash["address"]}, #{hash["city"]}, #{hash["state"]} #{hash["zip"]}"})
+
+                    elsif facility.has_key?(:location_1) == false
+                        address_1 = JSON.generate(@h_address)
+                        address_2=JSON.parse(address_1)
+                        facility.update({:address => "#{address_2["address"]}, #{address_2["city"]}, #{address_2["state"]} #{address_2["zip"]}"}) 
+        
+                    end
                 end
-    
-            end
+
+            facility.delete_if{|k,v| k != :name && k != :address && k != :phone}
             facility_new = Facility.new(facility)
-                @facilities << facility_new
-    end
-        @facilities
-    end
+            @facilities << facility_new
+        end
+            @facilities
+
+    end  
+            
 
 
 def vehicle_factory(vehicle_list)
