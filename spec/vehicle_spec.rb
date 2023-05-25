@@ -33,4 +33,27 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe '#change_plate' do
+    it 'can change plate' do
+      @cruz.change_plate
+      @bolt.change_plate
+      @camaro.change_plate
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@camaro.plate_type).to eq(:antique)
+    end
+  end
+
+  describe '#change_date' do
+    it 'can change registration date' do
+      @cruz.change_date
+      @bolt.change_date
+      @camaro.change_date
+      expect(@cruz.registration_date).to eq(Time.new)
+      expect(@bolt.registration_date).to eq(Time.new)
+      expect(@camaro.registration_date).to eq(Time.new)
+    end
+  end
+
 end
