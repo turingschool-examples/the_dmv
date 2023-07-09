@@ -6,7 +6,8 @@ class Registrant
         @name = name
         @age = age
         @permit = permit
-        @license_data = {}
+        @license_data = {:written=>false, 
+        :license=>false, :renewed=>false}
     end
 
 end
