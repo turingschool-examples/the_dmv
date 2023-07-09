@@ -10,4 +10,11 @@ class Registrant
         :license=>false, :renewed=>false}
     end
 
+    def permit?
+        @permit
+    end
+
+    def earn_permit
+        @permit = true
+    end
 end
