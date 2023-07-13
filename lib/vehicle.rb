@@ -25,6 +25,10 @@ class Vehicle
     @engine == :ev
   end
 
+  def register(registration_date)
+    @registration_date = registration_date
+  end
+  
   def plate_type
     if @engine == :ev
       :ev 
@@ -34,5 +38,6 @@ class Vehicle
       :regular
     end
   end
+
 
 end
