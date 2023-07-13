@@ -6,6 +6,7 @@ RSpec.describe Facility do
   end
   describe '#initialize' do
     it 'can initialize' do
+      # require 'pry';binding.pry
       expect(@facility).to be_an_instance_of(Facility)
       expect(@facility.name).to eq('DMV Tremont Branch')
       expect(@facility.address).to eq('2855 Tremont Place Suite 118 Denver CO 80205')
