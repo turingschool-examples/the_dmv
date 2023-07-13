@@ -13,4 +13,12 @@ RSpec.describe Registrant do
       expect(@registrant_2).to be_an_instance_of(Registrant)
     end
   end
+
+  describe '#register info' do
+    it 'name, age, permit' do
+      expect(@registrant_1.name).to eq("Bruce")
+      expect(@registrant_1.age).to eq(18)
+      expect(@registrant_1.permit?).to eq(true)
+    end
+  end
 end
