@@ -1,7 +1,10 @@
 class Dmv
   attr_reader :facilities
 
-  def initialize
+  def initialize(details = {})
+    @name = details[:name]
+   @address = details[:address]
+   @phone = details[:phone]
     @facilities = []
   end
 
