@@ -45,7 +45,7 @@ RSpec.describe Registrant do
         expect(@registrant1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
       end
 
-      xit 'can utilize one facility for multiple people' do 
+      it 'can utilize one facility for multiple people' do 
         @facility_1.add_service("Written Test")
         expect(@facility_1.administer_written_test(@registrant1)).to eq(true)
         expect(@registrant1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
@@ -56,7 +56,7 @@ RSpec.describe Registrant do
         expect(@registrant2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
 
         expect(@facility_1.administer_written_test(@registrant3)).to eq(false)
-        @registrant_3.earn_permit
+        @registrant3.earn_permit
         expect(@facility_1.administer_written_test(@registrant3)).to eq(false)
         expect(@registrant3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       end
