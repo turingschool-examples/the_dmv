@@ -25,8 +25,16 @@ RSpec.describe Registrant do
     
     it "has liscense data" do 
       registrant_2 = Registrant.new('Penny', 15 )
-
-      expect(license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      
+      expect(registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end 
+    
+    it "can earn a permit" do 
+      registrant_2 = Registrant.new('Penny', 15 )
+
+      registrant_2.earn_permit
+
+      expect(registrant_2.permit).to eq(true)
+    end
   end
 end
