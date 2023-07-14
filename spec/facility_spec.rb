@@ -9,6 +9,9 @@ RSpec.describe Facility do
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
     @facility_1.add_service('Vehicle Registration')
+    @registrant_1 = Registrant.new("Bruce", 18, true)
+    @registrant_2 = Registrant.new("Penny", 16)
+    @registrant_3 = Registrant.new("Tucker", 15)
   end
   describe '#initialize' do
     it 'can initialize' do
@@ -117,6 +120,118 @@ RSpec.describe Facility do
 
       @facility_1.collect_registration_fees(@camaro)
       expect(@facility_1.collected_fees).to eq(325)
+    end
+  end
+
+  describe "#administer_written_test" do
+    it "can only be done by a facility offering Written Test service" do
+      expect(@registrant_1.license_data).to eq({:written => false, :license => false, :renewed => false})
+      expect(@registrant_1.permit?).to be true
+      
+      @facility_1.administer_written_test(@registrant_1)
+      
+      expect(@registrant_1.license_data).to eq({:written => false, :license => false, :renewed => false})
+      
+      @facility_1.add_service("Written Test")
+      @facility_1.administer_written_test(@registrant_1)
+      
+      expect(@registrant_1.license_data).to eq({:written => true, :license => false, :renewed => false})
+    end
+
+    it "can only be administered to registrants with a permit" do
+      @facility_1.add_service("Written Test")
+
+      expect(@registrant_2.permit?).to be false
+      
+      @facility_1.administer_written_test(@registrant_2)
+      expect(@registrant_2.permit?).to be false
+      
+      @registrant_2.earn_permit
+      @facility_1.administer_written_test(@registrant_2)
+
+      expect(@registrant_2.license_data).to eq({:written => true, :license => false, :renewed => false})
+    end
+    
+    it "can only be administered to registrants age 16 or older" do
+      @facility_1.add_service("Written Test")
+      @registrant_2.earn_permit
+      @registrant_3.earn_permit
+      
+      expect(@registrant_2.age).to eq(16)
+      expect(@registrant_3.age).to eq(15)
+      
+      @facility_1.administer_written_test(@registrant_2)
+      @facility_1.administer_written_test(@registrant_3)
+      
+      expect(@registrant_2.license_data).to eq({:written => true, :license => false, :renewed => false})
+      expect(@registrant_3.license_data).to eq({:written => false, :license => false, :renewed => false})
+    end
+  end
+
+  describe "#administer_road_test" do
+    it "can only be administered by a facility offering 'Road Test' service" do
+      @facility_1.add_service("Written Test")
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@registrant_1.license_data[:written]).to be true
+
+      @facility_1.administer_road_test(@registrant_1)
+      expect(@registrant_1.license_data[:license]).to be false
+      
+      @facility_1.add_service("Road Test")
+      @facility_1.administer_road_test(@registrant_1)
+      
+      expect(@registrant_1.license_data).to eq({:written => true, :license => true, :renewed => false})
+    end
+
+    it "can only be administered to a registrant who has passed the written test" do
+      @facility_1.add_service("Written Test")
+      @facility_1.add_service("Road Test")
+
+      expect(@registrant_2.license_data).to eq({:written => false, :license => false, :renewed => false})
+      @facility_1.administer_road_test(@registrant_2)
+      expect(@registrant_2.license_data).to eq({:written => false, :license => false, :renewed => false})
+
+      @registrant_2.earn_permit
+      @facility_1.administer_written_test(@registrant_2)
+      expect(@registrant_2.license_data[:written]).to be true
+
+      @facility_1.administer_road_test(@registrant_2)
+
+      expect(@registrant_2.license_data).to eq({:written => true, :license => true, :renewed => false})
+    end
+  end
+
+  describe "#renew_drivers_license" do
+    it "can only be done by a facility offering 'Renew License' service" do
+      @facility_1.add_service("Written Test")
+      @facility_1.add_service("Road Test")
+
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+      @facility_1.renew_drivers_license(@registrant_1)
+      expect(@registrant_1.license_data).to eq({:written => true, :license => true, :renewed => false})
+      
+      @facility_1.add_service("Renew License")
+      @facility_1.renew_drivers_license(@registrant_1)
+      
+      expect(@registrant_1.license_data).to eq({:written => true, :license => true, :renewed => true})
+    end
+    
+    it "can only be offered to a registrant who has passed the road test" do
+      @facility_1.add_service("Written Test")
+      @facility_1.add_service("Road Test")
+      @facility_1.add_service("Renew License")
+
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@registrant_1.license_data).to eq({:written => true, :license => false, :renewed => false})
+      
+      @facility_1.renew_drivers_license(@registrant_1)
+      expect(@registrant_1.license_data).to eq({:written => true, :license => false, :renewed => false})
+      
+      @facility_1.administer_road_test(@registrant_1)
+      @facility_1.renew_drivers_license(@registrant_1)
+
+      expect(@registrant_1.license_data).to eq({:written => true, :license => true, :renewed => true})
     end
   end
 end
