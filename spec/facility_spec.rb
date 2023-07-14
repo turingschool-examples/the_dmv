@@ -63,7 +63,7 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(100)
     end
 
-    xit "can only register a vehicle if the facility offers registration service" do
+    it "can only register a vehicle if the facility offers registration service" do
       expect(@facility_2.registered_vehicles).to be_empty
       expect(@facility_2.services).to be_empty
 
