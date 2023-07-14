@@ -15,9 +15,13 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    @registered_vehicles << vehicle
-    vehicle.register
-    collect_fees(vehicle)
+    if services.include?("Vehicle Registration")
+      @registered_vehicles << vehicle
+      vehicle.register
+      collect_fees(vehicle)
+    else
+      nil
+    end
   end
 
   def collect_fees(vehicle)
@@ -27,6 +31,33 @@ class Facility
       @collected_fees += 200
     else
       @collected_fees += 100
+    end
+  end
+
+  def administer_written_test(registrant)
+    if services.include?("Written Test") && registrant.age >= 16 && registrant.permit?
+      registrant.pass_written
+      true
+    else
+      false
+    end
+  end
+
+  def administer_road_test(registrant)
+    if services.include?("Road Test") && registrant.license_data[:written]
+      registrant.get_license
+      true
+    else
+      false
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    if services.include?("Renew License") && registrant.license_data[:license]
+      registrant.renew_license
+      true
+    else
+      false
     end
   end
 end
