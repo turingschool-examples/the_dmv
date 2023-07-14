@@ -22,44 +22,34 @@ RSpec.describe Facility do
   end
 end
 
-  describe '#add service' do  
-    it 'can add available services' do
+  describe '#add_service' do  
+    it 'can add available services' do 
       expect(@facility.services).to eq([])
+      @facility_1.add_service("Vehicle Registration")
+
+      expect(@facility_1.services).to eq(["Vehicle Registration"])
+    end
+
+    it 'can add available services' do
       @facility.add_service('New Drivers License')
       @facility.add_service('Renew Drivers License')
       @facility.add_service('Vehicle Registration')
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
-
-  describe '#add service' do 
-    it 'can add available services' do 
-      @facility_1.add_service("Vehicle Registration")
   
-      expect(@facility_1.services).to eq(["Vehicle Registration"])
-    end
-  end
-
-  describe '#registered_vehicles' do 
+  describe '#register_vehicle' do 
     it "has no registered vehicles" do 
      expect(@facility_1.registered_vehicles).to eq([])
     end
-  end
 
-  describe '#collected_fees' do 
-    it "has no collected fees" do 
-      expect(@facility_1.collected_fees).to eq(0)
-    end
-  end
-
-  describe '#register_vehicle' do 
     it "adds vehicle to registered vehicles" do
       expect(@cruz.registration_date).to eq nil
-
+      
       @facility_1.add_service("Vehicle Registration")
       @facility_1.register_vehicle(@cruz)
       # require 'pry';binding.pry
-  
+      
       expect(@facility_1.registered_vehicles).to eq([@cruz])
     end
     #should these two be one test? 
@@ -69,7 +59,7 @@ end
       # require 'pry';binding.pry
       expect(@cruz.registration_date).to eq(Date.today)
     end
-
+    
     it "will not register vehicle unless service offered at facility" do 
       @facility_2.register_vehicle(@bolt)
       
@@ -78,11 +68,11 @@ end
       expect(@bolt.registration_date).to eq(nil)
     end
   end 
-  
+
   describe "#set_plate_type" do 
   # it "set_plate_type unit test" do ???????
   #    set_plate_type(@cruz)
-  
+
   #    expect(@cruz.plate_type).to eq(:regular)
   # end
     it "sets plate type upon registration" do 
@@ -97,24 +87,28 @@ end
     end 
   end
 
-  describe "#collect fees" do 
+  describe "#collect_fees" do   
+    it "has no collected fees" do 
+      expect(@facility_1.collected_fees).to eq(0)
+    end
+
     it "adds fees to collected_fees array based on vehicle type" do
       @facility_1.add_service("Vehicle Registration")
       @facility_1.register_vehicle(@cruz)
-  
+    
       expect(@facility_1.registered_vehicles).to eq([@cruz])
       expect(@facility_1.collected_fees).to eq(100)
-      
+    
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
-      # facility_1.register_vehicle
+        # facility_1.register_vehicle
       expect(@facility_1.collected_fees).to eq(325)
     end
 
     it "will not collect fees unless registration service if offered at facility" do 
-      @facility_2.register_vehicle(@bolt)
-      
-      expect(@facility_2.collected_fees).to eq(0)
+        @facility_2.register_vehicle(@bolt)
+        
+        expect(@facility_2.collected_fees).to eq(0)
     end 
   end
 end
