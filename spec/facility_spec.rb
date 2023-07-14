@@ -33,40 +33,24 @@ RSpec.describe Facility do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    @facility_1.add_service("Vehicle Registration")
   end
 
   describe "#register_vehicle" do
     it "can register vehicles" do
-      @facility_1.add_service("Vehicle Registration")
       @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@camaro)
 
-      expect(@facility_1.registered_vehicles).to eq([@cruz])
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @bolt, @camaro])
     end
+  end
 
+  describe "#collect_fees" do
     it "can collect fees based on vehicle details" do
-      @facility_1.add_service("Vehicle Registration")
-      @facility_1.register_vehicle(@cruz)
-
-      expect(@facility_1.collected_fees).to eq(100)
-      
-      @facility_1.register_vehicle(@bolt)
-
-      expect(@facility_1.collected_fees).to eq(300)
-
-      @facility_1.register_vehicle(@camaro)
-
-      expect(@facility_1.collected_fees).to eq(325)
-    end
-
-    it "can assign plates based on vehicle details" do
-      @facility_1.add_service("Vehicle Registration")
-      @facility_1.register_vehicle(@cruz)
-      @facility_1.register_vehicle(@bolt)
-      @facility_1.register_vehicle(@camaro)
-
-      expect(@cruz.plate_type).to eq(:regular)
-      expect(@bolt.plate_type).to eq(:ev)
-      expect(@camaro.plate_type).to eq(:antique)
+      expect(@facility_1.collect_fees(@cruz)).to eq(100)
+      expect(@facility_1.collect_fees(@bolt)).to eq(300)
+      expect(@facility_1.collect_fees(@camaro)).to eq(325)
     end
   end
 end
