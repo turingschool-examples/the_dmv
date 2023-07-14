@@ -13,4 +13,12 @@ RSpec.describe Registrant do
             expect(@registrant_2).to be_a(Registrant)
         end
     end
+
+    describe '#name' do
+        it 'can return a name' do
+            expect(@registrant_1.name).to eq("Bruce")
+            expect(@registrant_2.name).to eq("Penny")
+        end
+    end
+
 end
