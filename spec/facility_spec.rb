@@ -147,11 +147,11 @@ RSpec.describe Facility do
     expect(@registrant_1.license_data[:written]).to eq(true)
     
     @facility_1.administer_road_test(@registrant_1)
-    expect(@registrant_1.license_data[:road]).to eq(false)
+    expect(@registrant_1.license_data[:license]).to eq(false)
     
     @facility_1.add_service('Road Test')
     @facility_1.administer_road_test(@registrant_1)
-    expect(@registrant_1.license_data[:road]).to eq(true)
+    expect(@registrant_1.license_data[:license]).to eq(true)
   end
   
   it "can only administer a road test to registrants who have taken the written test" do 
@@ -163,8 +163,8 @@ RSpec.describe Facility do
     expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
 
     @registrant_2.earn_permit
-    facility_1.administer_written_test(@registrant_2)
-    expect(@registrant_2.license_data(:written)).to eq(true)
+    @facility_1.administer_written_test(@registrant_2)
+    expect(@registrant_2.license_data[:written]).to eq(true)
 
     @facility_1.administer_road_test(@registrant_2)
     expect(@registrant_2.license_data[:license]).to eq(true)    
