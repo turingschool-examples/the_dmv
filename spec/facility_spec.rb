@@ -183,7 +183,7 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq({:written => true, :license => true, :renewed => false})
     end
 
-    xit "can only be administered to a registrant who has passed the written test" do
+    it "can only be administered to a registrant who has passed the written test" do
       @facility_1.add_service("Written Test")
       @facility_1.add_service("Road Test")
 
@@ -193,11 +193,11 @@ RSpec.describe Facility do
 
       @registrant_2.earn_permit
       @facility_1.administer_written_test(@registrant_2)
-      expect(@registrant2.license_data[:written]).to be true
+      expect(@registrant_2.license_data[:written]).to be true
 
       @facility_1.administer_road_test(@registrant_2)
 
-      expect(@registrant_2.license_data).to eq({:written => true, :license => true, :renewed => true})
+      expect(@registrant_2.license_data).to eq({:written => true, :license => true, :renewed => false})
     end
   end
 end
