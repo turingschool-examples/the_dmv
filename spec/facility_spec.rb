@@ -89,4 +89,19 @@ RSpec.describe Facility do
       expect(@camaro.plate_type).to eq(:antique)
     end
   end
+
+  describe "#collect_registration_fees" do
+    it "collects a fee based on vehicle age and EV status" do
+      expect(@facility_1.collected_fees).to eq(0)
+
+      @facility_1.collect_registration_fees(@cruz)
+      expect(@facility_1.collected_fees).to eq(100)
+      
+      @facility_1.collect_registration_fees(@bolt)
+      expect(@facility_1.collected_fees).to eq(300)
+
+      @facility_1.collect_registration_fees(@camaro)
+      expect(@facility_1.collected_fees).to eq(325)
+    end
+  end
 end
