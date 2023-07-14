@@ -28,40 +28,48 @@ RSpec.describe Facility do
   end
   
   describe "#register_vehicle" do
-  it "Register vehicles and charge fees if Facility has Vehicle Registration service" do
-    cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
-    bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
-    camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+    it "can't register if facility doesn't have 'Vehicle Registration' service" do
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
 
-    @facility_1.add_service("Vehicle Registration")
-    expect(cruz.registration_date).to eq(nil)
-    expect(@facility_1.registered_vehicles).to eq([])
-    expect(@facility_1.collected_fees).to eq(0)
+      expect(@facility_1.register_vehicle(cruz)).to eq(nil)
+      expect(@facility_1.registered_vehicles).to eq([])
 
-    @facility_1.register_vehicle(cruz)
-    expect(cruz.registration_date).to eq(Date.today)
-    expect(cruz.plate_type).to eq(:regular)
-    expect(@facility_1.registered_vehicles).to eq([cruz])
-    expect(@facility_1.collected_fees).to eq(100)
+    end
 
-    @facility_1.register_vehicle(camaro)
-    expect(camaro.registration_date).to eq(Date.today)
-    expect(camaro.plate_type).to eq(:antique)
+    it "Register vehicles and charge fees if Facility has Vehicle Registration service" do
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
 
-    @facility_1.register_vehicle(bolt)
-    expect(bolt.registration_date).to eq(Date.today)
-    expect(bolt.plate_type).to eq(:ev)
-    expect(@facility_1.registered_vehicles).to eq([cruz, camaro, bolt])
-    expect(@facility_1.collected_fees).to eq(325)
+      @facility_1.add_service("Vehicle Registration")
+      expect(cruz.registration_date).to eq(nil)
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_1.collected_fees).to eq(0)
 
-    expect(@facility_2.registered_vehicles).to eq([])
-    expect(@facility_2.services).to eq([])
-    expect(@facility_2.register_vehicle(bolt)).to eq(nil)
-    expect(@facility_2.registered_vehicles).to eq([])
-    expect(@facility_2.collected_fees).to eq(0)
+      @facility_1.register_vehicle(cruz)
+      expect(cruz.registration_date).to eq(Date.today)
+      expect(cruz.plate_type).to eq(:regular)
+      expect(@facility_1.registered_vehicles).to eq([cruz])
+      expect(@facility_1.collected_fees).to eq(100)
 
+      @facility_1.register_vehicle(camaro)
+      expect(camaro.registration_date).to eq(Date.today)
+      expect(camaro.plate_type).to eq(:antique)
+
+      @facility_1.register_vehicle(bolt)
+      expect(bolt.registration_date).to eq(Date.today)
+      expect(bolt.plate_type).to eq(:ev)
+      expect(@facility_1.registered_vehicles).to eq([cruz, camaro, bolt])
+      expect(@facility_1.collected_fees).to eq(325)
+
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.services).to eq([])
+      expect(@facility_2.register_vehicle(bolt)).to eq(nil)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
+
+    end
   end
-end
 
   describe "Getting a drivers license" do
     describe "#Administer_written_test" do
@@ -133,7 +141,6 @@ end
         @facility_1.administer_written_test(registrant_2)
         expect(@facility_1.administer_road_test(registrant_2)).to eq(true)
         expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
-        
 
       end
     end
