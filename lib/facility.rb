@@ -1,5 +1,4 @@
 class Facility
-
   attr_reader :name, 
               :address, 
               :phone, 
@@ -43,6 +42,16 @@ class Facility
     else 
       false 
       registrant.license_data[:written] = false
+    end
+  end
+
+  def administer_road_test(registrant)
+    if @services.include?('Road Test') && registrant.permit? == true && registrant.age >= 16
+      true
+      registrant.license_data[:license] = true
+    else 
+      false 
+      registrant.license_data[:license] = false
     end
   end
 end
