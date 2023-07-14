@@ -5,8 +5,6 @@ class VehicleFactory
 
   def create_vehicles(data)
     vehicles = []
-    #starting with making one to debug easier
-    # need vin, year, make, model, engine (always ev for this)
     data.each do |api_data|
       vehicle_details = Hash.new
       vehicle_details[:vin] = api_data[:vin_1_10]

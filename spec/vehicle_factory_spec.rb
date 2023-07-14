@@ -10,7 +10,7 @@ RSpec.describe VehicleFactory do
   end
 
   describe "#create_vehicles" do
-    it "returns a new vehicle from WAs external API data in an array" do
+    it "returns new vehicles from WAs external API data in an array" do
       factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
 
