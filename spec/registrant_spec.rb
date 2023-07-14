@@ -24,3 +24,14 @@ describe "#permit?" do
   end
 end
 
+describe "#earn_permit" do
+  it "changes permit to true" do
+    reg_1 = Registrant.new("Penny", 15)
+
+    expect(reg_1.permit).to eq(false)
+
+    perm_1 = reg_1.earn_permit
+
+    expect(reg_1.permit).to eq(true)
+  end
+end
