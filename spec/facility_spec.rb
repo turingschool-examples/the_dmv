@@ -86,7 +86,15 @@ RSpec.describe Facility do
       @registrant_3.earn_permit
       expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
       expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+  end
 
+  describe '#raod test' do
+    it 'administers road tests to get a license' do
+      expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
+      @registrant_3.earn_permit
+      expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
+      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
 end
