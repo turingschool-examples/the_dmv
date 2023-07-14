@@ -70,10 +70,11 @@ end
   end 
     
   describe "#set_plate_type" do 
-    it "sets plate type based on vehicle class electric? or antique? methods"
-    @facility_1.add_service("Vehicle Registration")
-    @facility_1.register_vehicle(@cruz)
-    #do I need to test this helper method invidually that I am about to create? 
-    expect(@cruz.plate_type).to eq(:regular)
+    it "sets plate type upon registration" do 
+      @facility_1.add_service("Vehicle Registration")
+      @facility_1.register_vehicle(@cruz)
+      #do I need to test this helper method invidually that I am about to create? 
+      expect(@cruz.plate_type).to eq(:regular)
+    end 
   end
 end
