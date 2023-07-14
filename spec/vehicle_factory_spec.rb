@@ -7,9 +7,11 @@ RSpec.describe VehicleFactory do
   end
 
   it ".create_vehicles" do
+    factory = VehicleFactory.new
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-    # require 'pry';binding.pry
     #what are you supposed to expect with limitless return
-  end
+    # factory.create_vehicles(wa_ev_registrations)
+    # require 'pry';binding.pry
 
+  end
 end

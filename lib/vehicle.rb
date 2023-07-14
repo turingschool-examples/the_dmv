@@ -35,6 +35,4 @@ class Vehicle
       :regular
     end
   end
-
-
 end
