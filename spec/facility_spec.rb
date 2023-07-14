@@ -78,8 +78,12 @@ end
     it "sets plate type upon registration" do 
       @facility_1.add_service("Vehicle Registration")
       @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
       #do I need to test this helper method invidually that I am about to create? 
       expect(@cruz.plate_type).to eq(:regular)
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@bolt.plate_type).to eq(:ev)
     end 
   end
   
@@ -87,10 +91,16 @@ end
   it "adds fees to collected_fees array based on vehicle type" do
     @facility_1.add_service("Vehicle Registration")
     @facility_1.register_vehicle(@cruz)
-
+    
     expect(@facility_1.registered_vehicles).to eq([@cruz])
-    # require 'pry';binding.pry
     expect(@facility_1.collected_fees).to eq(100)
-    end 
+    
+    @facility_1.register_vehicle(@camaro)
+    @facility_1.register_vehicle(@bolt)
+      # facility_1.register_vehicle
+    expect(@facility_1.collected_fees).to eq(325)
+    end
+
+    
   end
 end
