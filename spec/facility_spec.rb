@@ -22,50 +22,58 @@ RSpec.describe Facility do
   end
 end
 
-describe '#add service' do
-it 'can add available services' do
-  expect(@facility.services).to eq([])
-  @facility.add_service('New Drivers License')
-  @facility.add_service('Renew Drivers License')
-  @facility.add_service('Vehicle Registration')
-  expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
-end
-end
+  describe '#add service' do  
+    it 'can add available services' do
+      expect(@facility.services).to eq([])
+      @facility.add_service('New Drivers License')
+      @facility.add_service('Renew Drivers License')
+      @facility.add_service('Vehicle Registration')
+      expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+    end
+  end
 
-describe '#add service' do 
-it 'can add available services' do 
-  @facility_1.add_service("Vehicle Registration")
+  describe '#add service' do 
+    it 'can add available services' do 
+      @facility_1.add_service("Vehicle Registration")
   
-  expect(@facility_1.services).to eq(["Vehicle Registration"])
-end
-end
+      expect(@facility_1.services).to eq(["Vehicle Registration"])
+    end
+  end
 
-describe '#registered_vehicles' do 
-it "has no registered vehicles" do 
-  expect(@facility_1.registered_vehicles).to eq([])
-end
-end
+  describe '#registered_vehicles' do 
+    it "has no registered vehicles" do 
+     expect(@facility_1.registered_vehicles).to eq([])
+    end
+  end
 
-describe '#collected_fees' do 
-it "has no collected fees" do 
-  expect(@facility_1.collected_fees).to eq(0)
-end
-end
+  describe '#collected_fees' do 
+    it "has no collected fees" do 
+      expect(@facility_1.collected_fees).to eq(0)
+    end
+  end
 
-describe '#register_vehicle' do 
-it "adds vehicle to registered vehicles" do
-  expect(@cruz.registration_date).to eq nil
-  @facility_1.register_vehicle(@cruz)
-  # require 'pry';binding.pry
+  describe '#register_vehicle' do 
+    it "adds vehicle to registered vehicles" do
+      expect(@cruz.registration_date).to eq nil
+      @facility_1.register_vehicle(@cruz)
+      # require 'pry';binding.pry
   
-  expect(@facility_1.registered_vehicles).to eq([@cruz])
-end
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+    end
 
-it "sets registration date of vehicle registered" do 
-  @facility_1.add_service("Vehicle Registration")
-  @facility_1.register_vehicle(@cruz)
-  # require 'pry';binding.pry
-  expect(@cruz.registration_date).to eq(Date.today)
-end
-end
+    it "sets registration date of vehicle registered" do 
+      @facility_1.add_service("Vehicle Registration")
+      @facility_1.register_vehicle(@cruz)
+      # require 'pry';binding.pry
+      expect(@cruz.registration_date).to eq(Date.today)
+    end
+  end 
+    
+  describe "#set_plate_type" do 
+    it "sets plate type based on vehicle class electric? or antique? methods"
+    @facility_1.add_service("Vehicle Registration")
+    @facility_1.register_vehicle(@cruz)
+    #do I need to test this helper method invidually that I am about to create? 
+    expect(@cruz.plate_type).to eq(:regular)
+  end
 end
