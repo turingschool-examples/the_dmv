@@ -37,6 +37,11 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@cruz)
 
       expect(@facility_1.registered_vehicles).to eq([@cruz])
+
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
     end
 
     it "sets the vehicles registration date during registration" do
@@ -49,18 +54,28 @@ RSpec.describe Facility do
 
     it "sets the vehicles plate type during registration" do
       expect(@cruz.plate_type).to be nil
+      expect(@camaro.plate_type).to be nil
 
       @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
 
       expect(@cruz.plate_type).to eq(:regular)
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@bolt.plate_type).to eq(:ev)
     end
 
     it "collects registration fees during registration" do
       expect(@facility_1.collected_fees).to eq(0)
 
       @facility_1.register_vehicle(@cruz)
-
+      
       expect(@facility_1.collected_fees).to eq(100)
+      
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+      
+      expect(@facility_1.collected_fees).to eq(325)
     end
 
     it "can only register a vehicle if the facility offers registration service" do
