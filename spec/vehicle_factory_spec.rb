@@ -9,9 +9,7 @@ RSpec.describe VehicleFactory do
   it ".create_vehicles" do
     factory = VehicleFactory.new
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-    #what are you supposed to expect with limitless return
-    # factory.create_vehicles(wa_ev_registrations)
-    # require 'pry';binding.pry
-
+    expect(@factory.create_vehicles(@wa_ev_registrations)).to all be_a Vehicle
+    expect(@factory.create_vehicles(@wa_ev_registrations)).to be_an Array
   end
 end
