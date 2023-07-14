@@ -9,7 +9,6 @@ class Facility
     @address = details[:address]
     @phone = details[:phone]
     @services = []
-
   end
 
   def add_services(service)
