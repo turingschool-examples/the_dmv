@@ -77,4 +77,21 @@ RSpec.describe Dmv do
 
     end
   end
+
+  describe "Getting a drivers license" do
+    describe "#Administer_written_test" do
+      it "sets :written to true if Facility has Written Test service, registrant has permit
+      and registrant is 16 or older" do
+        registrant_1 = Registrant.new('Bruce', 18, true )
+        registrant_2 = Registrant.new('Penny', 16 )
+        registrant_3 = Registrant.new('Tucker', 15 )
+
+        expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+        expect(registrant_1.permit?).to eq(true)
+
+        facility_1.administer_written_test(registrant_1)
+
+      end
+    end
+  end
 end
