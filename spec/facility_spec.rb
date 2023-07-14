@@ -80,9 +80,18 @@ RSpec.describe Facility do
       @facility_1.add_service('Written Test')
       @facility_1.administer_written_test(@registrant_1)
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
-      expect(@registrant_2.age_.to eq(16))
+      expect(@registrant_2.age).to eq(16)
       expect(@registrant_2.permit?).to eq(false)
-      @facility_1.administer_written_test(@registrant_2).to eq(false)
+      expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
     end
   end
+
+  describe "#Administer Road Test" do
+    xit "allows registrants to earn a license" do
+      expect(@registrant_3.age).to eq(15)
+      @registrant_3.earn_permit
+      # expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
+    end
+  end
+
 end
