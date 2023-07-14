@@ -5,15 +5,16 @@ class VehicleFactory
   end
 
   def create_vehicles(data)
+    #require 'pry';binding.pry
     data.each do |vehicle|
       #(vehicle) :ev
       @vehicle_list << Vehicle.new({
         vin: vehicle[:vin_1_10],
-       year: vehicle[:model_year],
+        year: vehicle[:model_year],
         make: vehicle[:make],
-         model: vehicle[:model],
-          engine: :ev
-        })
+        model: vehicle[:model],
+        engine: :ev
+      })
     end
         #require 'pry';binding.pry
 
