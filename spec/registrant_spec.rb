@@ -41,7 +41,7 @@ RSpec.describe Registrant do
     end
   end
   
-  xdescribe "#license_data" do
+  describe "#license_data" do
     it "returns license data hash" do
       registrant_1 = Registrant.new('Bruce', 18, true )
       registrant_2 = Registrant.new('Penny', 15 )
