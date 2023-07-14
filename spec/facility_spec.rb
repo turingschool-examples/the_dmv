@@ -45,4 +45,10 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([])
     end
   end
+
+  describe '#collected_fees' do 
+    it "has no collected feed" do 
+      expect(@facility_1.collected_fees).to eq(0)
+    end
+  end
 end
