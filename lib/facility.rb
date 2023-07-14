@@ -16,5 +16,16 @@ class Facility
 
   def register_vehicle(vehicle)
     @registered_vehicles << vehicle
+
+    if vehicle.antique?
+      @collected_fees += 25
+      vehicle.plate_type = :antique
+    elsif vehicle.electric_vehicle?
+      @collected_fees += 200
+      vehicle.plate_type = :ev
+    else
+      @collected_fees += 100
+      vehicle.plate_type = :regular
+    end
   end
 end
