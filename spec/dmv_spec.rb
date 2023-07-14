@@ -10,9 +10,6 @@ RSpec.describe Dmv do
 
   describe '#initialize' do
     it 'can initialize' do
-      
-      require 'pry';binding.pry
-
       expect(@dmv).to be_an_instance_of(Dmv)
       expect(@dmv.facilities).to eq([])
     end
