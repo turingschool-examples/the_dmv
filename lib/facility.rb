@@ -23,9 +23,7 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    if vehicle.registration_date != nil
-      nil
-    else
+    if @services == ['Vehicle Registration']
       vehicle.registration_date = Date.today
       r_vehicles << vehicle
         if Date.today.year - vehicle.year > 25
@@ -38,7 +36,9 @@ class Facility
           @total += 100
           vehicle.plate_type = :regular
         end
-      end
+    else
+      nil
+    end
   end
 
   
