@@ -8,7 +8,6 @@ RSpec.describe Registrant do
 
   describe '#initialize' do
     it 'can initialize' do
-
       expect(@registrant_1).to be_an_instance_of(Registrant)
       expect(@registrant_1.name).to eq("Bruce")
       expect(@registrant_1.age).to eq(18)
@@ -23,7 +22,6 @@ RSpec.describe Registrant do
 
   describe '#earn_permit' do
     it 'can earn a permit' do
-    
       @registrant_2.earn_permit
 
       expect(@registrant_2.permit?).to eq(true)
