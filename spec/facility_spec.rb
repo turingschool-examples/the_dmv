@@ -67,6 +67,14 @@ end
       # require 'pry';binding.pry
       expect(@cruz.registration_date).to eq(Date.today)
     end
+
+    it "will not register vehicle unless service offered at facility" do 
+      @facility_2.register_vehicle(@bolt)
+
+      expect(@facility_2.services).to eq([])
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@bolt.registration_date).to eq(nil)
+    end
   end 
     
   describe "#set_plate_type" do 
@@ -88,19 +96,21 @@ end
   end
   
   describe "#collect fees" do 
-  it "adds fees to collected_fees array based on vehicle type" do
-    @facility_1.add_service("Vehicle Registration")
-    @facility_1.register_vehicle(@cruz)
+    it "adds fees to collected_fees array based on vehicle type" do
+      @facility_1.add_service("Vehicle Registration")
+      @facility_1.register_vehicle(@cruz)
     
-    expect(@facility_1.registered_vehicles).to eq([@cruz])
-    expect(@facility_1.collected_fees).to eq(100)
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+      expect(@facility_1.collected_fees).to eq(100)
     
-    @facility_1.register_vehicle(@camaro)
-    @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
       # facility_1.register_vehicle
-    expect(@facility_1.collected_fees).to eq(325)
+      expect(@facility_1.collected_fees).to eq(325)
     end
 
-    
+    it "will not collect fees unless registration service if offered at facility" do 
+
+    end 
   end
 end
