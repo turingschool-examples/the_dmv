@@ -74,7 +74,7 @@ RSpec.describe Facility do
 
       expect(bolt.plate_type).to eq(:ev)
 
-      expect(facility_1.registered_vehicles).to eq([cruz, camro, bolt])
+      expect(facility_1.registered_vehicles).to eq([cruz, camaro, bolt])
 
       expect(facility_1.collected_fees).to eq(325)
 
