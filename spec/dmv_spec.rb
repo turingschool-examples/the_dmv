@@ -116,5 +116,22 @@ RSpec.describe Dmv do
         expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       end
     end
+
+    describe "#administer_road_test" do
+    registrant_1 = Registrant.new('Bruce', 18, true )
+    registrant_2 = Registrant.new('Penny', 16 )
+    registrant_3 = Registrant.new('Tucker', 15 )
+
+      it "only administer road test if written test has been passed and registrant has permit" do
+        @facility_1.add_service('Road Test')
+
+        expect(@facility_1.administer_road_test(registrant_3)).to eq(false)
+        registrant_3.earn_permit
+        expect(@facility_1.administer_road_test(registrant_3)).to eq(false)
+        expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+
+
+      end
+    end
   end
 end
