@@ -20,6 +20,7 @@ class Facility
   end
 
   def register_vehicle(vehicle)
+    return if !self.services.include?("Vehicle Registration")
     vehicle.registration_date = Date.today
     @registered_vehicles << vehicle
     set_plate_type(vehicle)
