@@ -1,6 +1,4 @@
 require 'spec_helper'
-require './lib/facility'
-require './lib/vehicle'
 
 RSpec.describe Facility do
   before(:each) do
@@ -29,6 +27,50 @@ RSpec.describe Facility do
       @facility.add_service('Renew Drivers License')
       @facility.add_service('Vehicle Registration')
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+    end
+  end
+
+  describe "#register_vehicle" do
+    it "can register a new vehicle" do
+      expect(@facility_1.registered_vehicles).to be_empty
+
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+    end
+
+    it "sets the vehicles registration date during registration" do
+      expect(@cruz.registration_date).to be nil
+
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@cruz.registration_date).to eq(Date.today)
+    end
+
+    it "sets the vehicles plate type during registration" do
+      expect(@cruz.plate_type).to be nil
+
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@cruz.plate_type).to eq(:regular)
+    end
+
+    it "collects registration fees during registration" do
+      expect(@facility_1.collected_fees).to eq(0)
+
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@facility_1.collected_fees).to eq(100)
+    end
+
+    it "can only register a vehicle if the facility offers registration service" do
+      expect(@facility_2.registered_vehicles).to be_empty
+      expect(@facility_2.services).to be_empty
+
+      @facility_2.register_vehicle(@bolt)
+
+      expect(@facility_2.registered_vehicles).to be_empty
+      expect(@facility_2.collected_fees).to eq(0)
     end
   end
 end
