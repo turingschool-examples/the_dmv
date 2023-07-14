@@ -46,12 +46,12 @@ RSpec.describe Facility do
       expect(@cruz.registration_date).to eq(Date.today)
       expect(@cruz.plate_type).to eq(:regular)
     end
-    
-    # facility_1.registered_vehicles
-    # #=> [#<Vehicle:0x0000000135a48b08...>]
-    
-    # facility_1.collected_fees
-    # #=> 100
+
+    it 'updates registered vehicles and collected fees for the facility the vehicle was registered to' do
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+      expect(@facility_1.collected_fees).to eq(100)
+    end
     
     # facility_1.register_vehicle(camaro)
     # #=> [#<Vehicle:0x0000000135a48b08...>, #<Vehicle:0x0000000135adb610...>]

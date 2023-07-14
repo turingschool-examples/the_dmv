@@ -1,5 +1,10 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
+  attr_reader :name,
+              :address, 
+              :phone, 
+              :services,
+              :registered_vehicles,
+              :collected_fees
 
   def initialize(info)
     @name = info[:name]
@@ -15,7 +20,6 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    vehicle.registration_date = Date.today
     if vehicle.antique?
       vehicle.plate_type = :antique
       @collected_fees += 25
@@ -26,5 +30,7 @@ class Facility
       vehicle.plate_type = :regular
       @collected_fees += 100
     end
+    vehicle.registration_date = Date.today
+    @registered_vehicles << vehicle
   end
 end
