@@ -10,8 +10,14 @@ class Registrant
     @name = name
     @permit = permit
   end
+
+  def earn_permit
+    @permit = true
+  end
+
   def permit?
     @permit
   end
+  
 end
     
