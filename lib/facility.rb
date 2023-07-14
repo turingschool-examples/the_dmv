@@ -2,6 +2,7 @@ class Facility
   attr_reader :name, :address, :phone
 
   attr_accessor :services, :registered_vehicles, :collected_fees
+
   def initialize(attributes)
     @name = attributes[:name]
     @address = attributes[:address]
@@ -33,7 +34,8 @@ class Facility
     @registered_vehicles << car
   end
 
-  def administer_written_test(person)
-    person.age >= 16 && person.permit && @services.include?('Written Test')
+  def administer_written_test(registrant)
+    registrant.license_data[:written] = true if (registrant.age >= 16 && registrant.permit && @services.include?('Written Test'))
+    return registrant.license_data[:written]
   end
 end
