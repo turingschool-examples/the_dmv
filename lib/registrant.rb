@@ -9,7 +9,7 @@ class Registrant
     @license_data = {
       written: false,
       license: false,
-      renewed:false
+      renewed: false
     }
   end
 
