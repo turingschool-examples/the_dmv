@@ -22,3 +22,5 @@ class Registrant
     @permit = true
   end
 end
+
+# pull test
