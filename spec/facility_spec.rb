@@ -47,7 +47,7 @@ RSpec.describe Facility do
       expect(@cruz.registration_date).to eq(Date.today)
     end
 
-    xit "sets the vehicles plate type during registration" do
+    it "sets the vehicles plate type during registration" do
       expect(@cruz.plate_type).to be nil
 
       @facility_1.register_vehicle(@cruz)
@@ -71,6 +71,22 @@ RSpec.describe Facility do
 
       expect(@facility_2.registered_vehicles).to be_empty
       expect(@facility_2.collected_fees).to eq(0)
+    end
+  end
+
+  describe "#set_plate_type" do
+    it "sets the plate type based on vehicle age and EV status" do
+      expect(@cruz.plate_type).to be nil
+      expect(@bolt.plate_type).to be nil
+      expect(@camaro.plate_type).to be nil
+
+      @facility_1.set_plate_type(@cruz)
+      @facility_1.set_plate_type(@bolt)
+      @facility_1.set_plate_type(@camaro)
+
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@camaro.plate_type).to eq(:antique)
     end
   end
 end
