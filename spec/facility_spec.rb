@@ -52,44 +52,25 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([@cruz])
       expect(@facility_1.collected_fees).to eq(100)
     end
-    
-    # facility_1.register_vehicle(camaro)
-    # #=> [#<Vehicle:0x0000000135a48b08...>, #<Vehicle:0x0000000135adb610...>]
-    
-    # camaro.registration_date
-    # #=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
-    
-    # camaro.plate_type
-    # #=> :antique
-    
-    # facility_1.register_vehicle(bolt)
-    # #=> [#<Vehicle:0x0000000135a48b08...>, #<Vehicle:0x0000000135adb610...>, #<Vehicle:0x0000000125832180...>]
-    
-    # bolt.registration_date
-    # #=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
-    
-    # bolt.plate_type
-    # #=> :ev
-    
-    # facility_1.registered_vehicles
-    # #=> [#<Vehicle:0x0000000135a48b08...>, #<Vehicle:0x0000000135adb610...>, #<Vehicle:0x0000000125832180...>]
-    
-    # facility_1.collected_fees
-    # #=> 325
-    
-    # facility_2.registered_vehicles
-    # #=> []
-    
-    # facility_2.services
-    # #=> []
-    
-    # facility_2.register_vehicle(bolt)
-    # #=> nil
-    
-    # facility_2.registered_vehicles
-    # #=> []
-    
-    # facility_2.collected_fees
-    # #=> 0
+
+    it 'makes changes based on the called object' do
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      expect(@camaro.registration_date).to eq(Date.today)
+      expect(@camaro.plate_type).to eq(:antique)
+      @facility_1.register_vehicle(@bolt)
+      expect(@bolt.registration_date).to eq(Date.today)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+      expect(@facility_1.collected_fees).to eq(325)
+    end
+
+    it 'will not perform services the facility does not offer' do
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.services).to eq([])
+      @facility_2.register_vehicle(@bolt)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
+    end
   end
 end
