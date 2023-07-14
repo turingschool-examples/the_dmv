@@ -35,4 +35,46 @@ class Facility
       @registered_vehicles << car
     end
   end
+
+  def administer_written_test(registar)
+    if @services.include?("Written Test") && registar.permit && registar.age > 15
+      old_hash = registar.license_data
+      registar.license_data = {
+        :written=>true,
+        :license=>old_hash[:license],
+        :renewed=>old_hash[:renewed]
+      }
+      true
+    else
+      false
+    end
+  end
+
+  def administer_road_test(registar)
+    if @services.include?("Road Test") && registar.permit && registar.age > 15
+      old_hash = registar.license_data
+      registar.license_data = {
+        :written=>old_hash[:written],
+        :license=>true,
+        :renewed=>old_hash[:renewed]
+      }
+      true
+    else
+      false
+    end
+  end
+
+  def renew_drivers_license(registar)
+    if @services.include?("Renew License") && registar.permit && registar.age > 15
+      old_hash = registar.license_data
+      registar.license_data = {
+        :written=>old_hash[:written],
+        :license=>old_hash[:license],
+        :renewed=>true
+      }
+      true
+    else
+      false
+    end
+  end
 end
