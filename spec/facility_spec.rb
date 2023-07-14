@@ -23,17 +23,18 @@ RSpec.describe Facility do
 end
 
   describe '#add_service' do  
-    it 'can add available services' do 
+    it 'can add available service' do 
       expect(@facility.services).to eq([])
       @facility_1.add_service("Vehicle Registration")
 
       expect(@facility_1.services).to eq(["Vehicle Registration"])
     end
 
-    it 'can add available services' do
+    it 'can add multiple available services' do
       @facility.add_service('New Drivers License')
       @facility.add_service('Renew Drivers License')
       @facility.add_service('Vehicle Registration')
+
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
@@ -44,19 +45,17 @@ end
     end
 
     it "adds vehicle to registered vehicles" do
-      expect(@cruz.registration_date).to eq nil
-      
       @facility_1.add_service("Vehicle Registration")
-      @facility_1.register_vehicle(@cruz)
-      # require 'pry';binding.pry
       
+      @facility_1.register_vehicle(@cruz)
       expect(@facility_1.registered_vehicles).to eq([@cruz])
     end
-    #should these two be one test? 
+    
     it "sets registration date of vehicle registered" do 
       @facility_1.add_service("Vehicle Registration")
+      expect(@cruz.registration_date).to eq nil
+      
       @facility_1.register_vehicle(@cruz)
-      # require 'pry';binding.pry
       expect(@cruz.registration_date).to eq(Date.today)
     end
     
@@ -70,17 +69,17 @@ end
   end 
 
   describe "#set_plate_type" do 
-  # it "set_plate_type unit test" do ???????
-  #    set_plate_type(@cruz)
-
-  #    expect(@cruz.plate_type).to eq(:regular)
-  # end
     it "sets plate type upon registration" do 
       @facility_1.add_service("Vehicle Registration")
+
+      expect(@cruz.plate_type).to eq(nil)
+      expect(@camaro.plate_type).to eq(nil)
+      expect(@bolt.plate_type).to eq(nil)
+
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
-    #do I need to test this helper method invidually that I am about to create? 
+
       expect(@cruz.plate_type).to eq(:regular)
       expect(@camaro.plate_type).to eq(:antique)
       expect(@bolt.plate_type).to eq(:ev)
@@ -88,20 +87,17 @@ end
   end
 
   describe "#collect_fees" do   
-    it "has no collected fees" do 
-      expect(@facility_1.collected_fees).to eq(0)
-    end
-
     it "adds fees to collected_fees array based on vehicle type" do
       @facility_1.add_service("Vehicle Registration")
+      expect(@facility_1.collected_fees).to eq(0)
+      
       @facility_1.register_vehicle(@cruz)
-    
-      expect(@facility_1.registered_vehicles).to eq([@cruz])
       expect(@facility_1.collected_fees).to eq(100)
     
       @facility_1.register_vehicle(@camaro)
+      expect(@facility_1.collected_fees).to eq(125)
+
       @facility_1.register_vehicle(@bolt)
-        # facility_1.register_vehicle
       expect(@facility_1.collected_fees).to eq(325)
     end
 
