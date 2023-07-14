@@ -35,6 +35,9 @@ RSpec.describe Facility do
       expect(@cruz.registration_date).to eq(nil)
       expect(@facility_1.registered_vehicles).to eq([])
       expect(@facility_1.collected_fees).to eq(0)
+    
+      @facility_1.register_vehicle(@cruz)
+      expect(@cruz.registration_date).to eq(Date.today)
     end
   end
 end
