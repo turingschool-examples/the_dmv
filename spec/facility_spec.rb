@@ -79,7 +79,8 @@ RSpec.describe Facility do
       @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
     end
 
-    it ".administer_written_test" do
+    it "can administer tests" do
+      #Written Test
       expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       expect(@registrant_1.permit?).to eq(true)
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
@@ -98,9 +99,16 @@ RSpec.describe Facility do
       expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
       @registrant_3.earn_permit
       expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
+      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       
-
-      
+      #Road Test
+      expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
+      @registrant_3.earn_permit
+      expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
+      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
+      expect(@facility_1.add_service('Road Test')).to eq(["Written Test", "Road Test"])
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
     end
   end
 end
