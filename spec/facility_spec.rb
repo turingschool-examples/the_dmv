@@ -24,8 +24,8 @@ RSpec.describe Facility do
   describe '#add service' do
   it 'can add available services' do
     expect(@facility_1.services).to eq([])
-    @facility_1.add_service('New Drivers License')
-    @facility_1.add_service('Renew Drivers License')
+      @facility_1.add_service('New Drivers License')
+      @facility_1.add_service('Renew Drivers License')
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
@@ -64,7 +64,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#License tests' do
+  describe '#license tests' do
     it 'can administer tests to get a license' do
       expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       expect(@registrant_1.permit?).to eq(true)
@@ -96,6 +96,8 @@ RSpec.describe Facility do
       @facility_1.add_service('Road Test')
       expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+      expect(@facility_1.administer_road_test(@registrant_2)).to eq(true)
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
 
     end
   end
