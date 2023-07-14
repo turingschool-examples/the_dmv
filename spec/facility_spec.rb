@@ -144,5 +144,36 @@ RSpec.describe Facility do
 
       end
     end
+
+    describe"#renew_drivers_license" do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Penny', 16 )
+      registrant_3 = Registrant.new('Tucker', 15) 
+      it "set license_data[:renewed] to true if registrant has passed written test and has license" do
+        @facility_1.add_service("Written Test")
+        @facility_1.add_service("Road Test")
+        @facility_1.administer_written_test(registrant_1)
+        @facility_1.administer_road_test(registrant_1)
+        registrant_2.earn_permit
+        @facility_1.administer_written_test(registrant_2)
+        @facility_1.administer_road_test(registrant_2)
+
+        expect(@facility_1.renew_drivers_license(registrant_1)).to eq(false)
+        @facility_1.add_service('Renew License')
+        expect(@facility_1.renew_drivers_license(registrant_1)).to eq(true)
+        expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+
+        expect(@facility_1.renew_drivers_license(registrant_2)).to eq(true)
+        expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+
+
+      end
+
+      it "wont renew license for registrant without a license already earned" do
+        @facility_1.add_service('Renew License')
+
+        expect(@facility_1.renew_drivers_license(registrant_3)).to eq(false)
+      end
+    end
   end
 end

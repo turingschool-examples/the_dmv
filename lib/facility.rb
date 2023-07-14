@@ -44,4 +44,10 @@ class Facility
     return false if !@services.include?("Road Test") || !registrant.license_data[:written]
     registrant.license_data[:license] = true
   end
+
+  def renew_drivers_license(registrant)
+    return false if !services.include?("Renew License") || !registrant.license_data[:license]
+    registrant.license_data[:renewed] = true
+  end
+
 end
