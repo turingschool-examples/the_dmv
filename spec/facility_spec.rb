@@ -43,7 +43,7 @@ RSpec.describe Facility do
     it 'updates vehicle with registration information' do
       @facility_1.register_vehicle(@cruz)
 
-      expect(@cruz.registration_date).to eq("<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>")
+      expect(@cruz.registration_date).to eq(Date.today)
       expect(@cruz.plate_type).to eq(:regular)
     end
     
