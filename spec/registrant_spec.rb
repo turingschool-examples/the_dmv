@@ -35,30 +35,5 @@ RSpec.describe Registrant do
       end
     end
 
-    describe '#administer_written_test' do
-      it 'can administer a written test only if: person is 16yo>=, have a permit and the facility offers the service' do
-        expect(@facility_1.administer_written_test(@registrant1)).to eq(false)
-        expect(@registrant1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-
-        @facility_1.add_service("Written Test")
-        expect(@facility_1.administer_written_test(@registrant1)).to eq(true)
-        expect(@registrant1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
-      end
-
-      it 'can utilize one facility for multiple people' do 
-        @facility_1.add_service("Written Test")
-        expect(@facility_1.administer_written_test(@registrant1)).to eq(true)
-        expect(@registrant1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
-
-        expect(@facility_1.administer_written_test(@registrant2)).to eq(false)
-        @registrant2.earn_permit
-        expect(@facility_1.administer_written_test(@registrant2)).to eq(true)
-        expect(@registrant2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
-
-        expect(@facility_1.administer_written_test(@registrant3)).to eq(false)
-        @registrant3.earn_permit
-        expect(@facility_1.administer_written_test(@registrant3)).to eq(false)
-        expect(@registrant3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-      end
-    end
+    
 end
