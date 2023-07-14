@@ -12,3 +12,15 @@ describe Registrant do
   end
 end
 
+describe "#permit?" do
+  it "checkd permit status" do
+    reg_1 = Registrant.new("Bruce", 18, true)
+    reg_2 = Registrant.new("Penny", 15)
+    perm_1 = reg_1.permit?
+    perm_2 = reg_2.permit?
+
+    expect(perm_1).to eq(true)
+    expect(perm_2).to eq(false)
+  end
+end
+
