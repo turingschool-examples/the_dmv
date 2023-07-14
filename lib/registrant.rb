@@ -9,4 +9,7 @@ class Registrant
     @permit = permit
   end
 
+  def permit?
+    @permit
+  end
 end
