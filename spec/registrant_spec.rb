@@ -31,7 +31,7 @@ RSpec.describe Registrant do
     end
   end
   
-  xdescribe "#permit?" do
+  describe "#permit?" do
     it "returns whether or not registrant has a permit" do
       registrant_1 = Registrant.new('Bruce', 18, true )
       registrant_2 = Registrant.new('Penny', 15 )
