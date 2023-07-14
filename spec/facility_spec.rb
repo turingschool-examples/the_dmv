@@ -70,11 +70,27 @@ end
   end 
     
   describe "#set_plate_type" do 
+    # it "set_plate_type unit test" do ???????
+    #    set_plate_type(@cruz)
+
+    #    expect(@cruz.plate_type).to eq(:regular)
+    # end
     it "sets plate type upon registration" do 
       @facility_1.add_service("Vehicle Registration")
       @facility_1.register_vehicle(@cruz)
       #do I need to test this helper method invidually that I am about to create? 
       expect(@cruz.plate_type).to eq(:regular)
+    end 
+  end
+  
+  describe "#collect fees" do 
+  it "adds fees to collected_fees array based on vehicle type" do
+    @facility_1.add_service("Vehicle Registration")
+    @facility_1.register_vehicle(@cruz)
+
+    expect(@facility_1.registered_vehicles).to eq([@cruz])
+    # require 'pry';binding.pry
+    expect(@facility_1.collected_fees).to eq(100)
     end 
   end
 end
