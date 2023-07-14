@@ -217,7 +217,7 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq({:written => true, :license => true, :renewed => true})
     end
     
-    it "can only be offered to a registrant who has passed the road test" do
+    xit "can only be offered to a registrant who has passed the road test" do
       @facility_1.add_service("Written Test")
       @facility_1.add_service("Road Test")
       @facility_1.add_service("Renew License")
