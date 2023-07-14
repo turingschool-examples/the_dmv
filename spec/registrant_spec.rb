@@ -10,6 +10,8 @@ RSpec.describe Registrant do
     it "can initialize" do
       expect(@registrant_1).to be_an_instance_of(Registrant)
       expect(@registrant_2).to be_an_instance_of(Registrant)
+      expect(@registrant_1.name).to eq("Bruce")
+      expect(@registrant_1.age).to eq(18)
     end
   end
 end
