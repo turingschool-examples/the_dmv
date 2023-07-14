@@ -27,4 +27,8 @@ class Registrant
   def get_license
     @license_data[:license] = true
   end
+
+  def renew_license
+    @license_data[:renewed] = true
+  end
 end
