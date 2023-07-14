@@ -44,6 +44,8 @@ RSpec.describe Facility do
 
   describe "#register_vehicle()" do
     it "will update registration" do
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.services).to eq(['Vehicle Registration'])
       @facility_1.register_vehicle(@cruz)
       expect(@cruz.registration_date).to eq(Date.today)
       expect(@cruz.plate_type).to eq(:regular)
@@ -57,8 +59,11 @@ RSpec.describe Facility do
       expect(@bolt.plate_type).to eq(:ev)
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
       expect(@facility_1.collected_fees).to eq(325)
-      # expect(@facility_1.collected_fees).to eq(100)
-      # expect()
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.services).to eq([])
+      @facility_2.register_vehicle(@bolt)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
     end
   end
 
