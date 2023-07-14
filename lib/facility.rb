@@ -16,4 +16,15 @@ class Facility
   def registered_vehicles
     @r_vehicles
   end
+
+  def collected_fees
+    0
+  end
+
+  def register_vehicle(vehicle)
+    vehicle.registration_date = Date.today
+
+  end
+
+
 end
