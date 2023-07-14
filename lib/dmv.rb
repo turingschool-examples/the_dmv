@@ -1,3 +1,5 @@
+# require './lib/facility'
+
 class Dmv
 
   def initialize

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Dmv do
-  before(:each) do
+  before(:each) do #I'm not sure what this line is doing. I believe it is putting what follows on 'each' example that we see later
     @dmv = Dmv.new
     @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
     @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
@@ -9,7 +9,7 @@ RSpec.describe Dmv do
   end
 
   describe '#initialize' do
-    it 'can initialize' do
+    it 'can initialize' do  
       expect(@dmv).to be_an_instance_of(Dmv)
       expect(@dmv.facilities).to eq([])
     end
