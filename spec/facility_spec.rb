@@ -127,24 +127,23 @@ RSpec.describe Facility do
         expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
         @facility_1.administer_road_test(@registrant_1)
         expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
-
       end
 
-      xit '' do
-
-
-        registrant_3.earn_permit
-        facility_1.administer_road_test(registrant_3)
-        expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-
-        expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-        expect(facility_1.administer_road_test(registrant_1)).to eq(false)
-        facility_1.add_service('Road Test')
-# expect(facility_1.add_service('Road Test').to eq(["Written Test", "Road Test"])
-        expect(facility_1.administer_road_test(registrant_1)).to eq(true)
-        expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
-        expect(facility_1.administer_road_test(registrant_2)).to eq(true)
-        expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+      it 'administers road test only if written test has been passed' do
+        @facility_1.add_service('Written Test')
+        @facility_1.add_service('Road Test')
+        expect(@facility_1.services).to eq(["Written Test", "Road Test"])
+        @registrant_2.earn_permit
+        @facility_1.administer_written_test(@registrant_2)
+        expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+        @facility_1.administer_road_test(@registrant_2)
+        expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+        @facility_1.administer_road_test(@registrant_1)
+        expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+        @registrant_3.earn_permit
+        @facility_1.administer_written_test(@registrant_3)
+        @facility_1.administer_road_test(@registrant_3)
+        expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       end
     end
   end
