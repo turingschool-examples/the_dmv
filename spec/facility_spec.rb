@@ -152,7 +152,7 @@ RSpec.describe Facility do
       expect(@registrant_2.license_data).to eq({:written => true, :license => false, :renewed => false})
     end
     
-    xit "can only be administered to registrants age 16 or older" do
+    it "can only be administered to registrants age 16 or older" do
       @facility_1.add_service("Written Test")
       @registrant_2.earn_permit
       @registrant_3.earn_permit
