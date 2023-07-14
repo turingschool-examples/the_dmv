@@ -1,5 +1,5 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :r_vehicles
+  attr_reader :name, :address, :phone, :services, :r_vehicles, :total
 
   def initialize (information)
     @name = information[:name]
@@ -7,6 +7,7 @@ class Facility
     @phone = information[:phone]
     @services = []
     @r_vehicles = []
+    @total = 0
   end
 
   def add_service(service)
@@ -18,13 +19,25 @@ class Facility
   end
 
   def collected_fees
-    0
+    @total
   end
 
   def register_vehicle(vehicle)
     vehicle.registration_date = Date.today
-
+    r_vehicles << vehicle
+      if Date.today.year - vehicle.year > 25
+        vehicle.plate_type = :antique 
+        @total += 25
+      elsif vehicle.engine == :ev
+        vehicle.plate_type = :ev
+        @total += 200
+      else
+        @total += 100
+        vehicle.plate_type = :regular
+      end
   end
+
+  
 
 
 end

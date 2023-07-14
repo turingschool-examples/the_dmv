@@ -44,7 +44,9 @@ RSpec.describe Facility do
     it "will update registration" do
       @facility_1.register_vehicle(@cruz)
       expect(@cruz.registration_date).to eq(Date.today)
-      # expect(@facility_1.registered_vehicles).to eq(@cruz)
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+      expect(@facility_1.collected_fees).to eq(100)
     end
   end
 
