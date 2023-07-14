@@ -54,4 +54,14 @@ class Facility
       registrant.license_data[:license] = false
     end
   end
+
+  def renew_drivers_license(registrant)
+    if @services.include?('Renew License') && registrant.license_data[:license] == true
+      true      
+      registrant.license_data[:renewed] = true
+    else
+      false 
+      registrant.license_data[:renewed] = false
+    end
+  end
 end
