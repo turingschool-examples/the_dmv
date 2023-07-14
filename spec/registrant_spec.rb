@@ -21,4 +21,11 @@ RSpec.describe Registrant do
         end
     end
 
+    describe '#age' do
+        it 'can return an age' do
+            expect(@registrant_1.age).to eq(18)
+            expect(@registrant_2.age).to eq(15)
+        end
+    end
+
 end
