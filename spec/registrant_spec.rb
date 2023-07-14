@@ -11,3 +11,4 @@ describe Registrant do
     expect(reg_2.permit).to eq(false)
   end
 end
+
