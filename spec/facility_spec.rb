@@ -52,12 +52,20 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#register vehicle' do 
+  describe '#register_vehicle' do 
     it "adds vehicle to registered vehicles" do
       @facility_1.add_service("Vehicle Registration")
       @facility_1.register_vehicle(@cruz)
-
+      # require 'pry';binding.pry
+      
       expect(@facility_1.registered_vehicles).to eq([@cruz])
+    end
+    
+    it "sets registration date of vehicle registered" do 
+      @facility_1.add_service("Vehicle Registration")
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@cruz.registration_date).to eq(Date.today.year)
     end
   end
 end
