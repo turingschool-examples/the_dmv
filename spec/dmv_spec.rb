@@ -40,4 +40,22 @@ RSpec.describe Dmv do
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
+
+  describe "#register_vehicle" do
+    it "can add vehicles to the @registered_vehicles attribute" do
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+
+      @facility_1.add_service("Vehicle Registration")
+      expect(cruz.registration_date).to eq(nil)
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_1.collected_fees).to eq(0)
+      @facility_1.register_vehicle(cruz)
+      expect(cruz.registration_date).to eq #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
+      expect(cruz.plate_type).to eq(:regular)
+      expect(@facility_1.registered_vehicles).to eq([cruz])
+      expect(@facility_1.collected_fees)
+    end
+  end
 end
