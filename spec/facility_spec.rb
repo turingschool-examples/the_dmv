@@ -34,6 +34,9 @@ RSpec.describe Facility do
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
     @facility_1.add_service("Vehicle Registration")
+    @registrant_1 = Registrant.new('Bruce', 18, true )
+    @registrant_2 = Registrant.new('Penny', 16 )
+    @registrant_3 = Registrant.new('Tucker', 15 )
   end
 
   describe "#register_vehicle" do
@@ -63,4 +66,34 @@ RSpec.describe Facility do
       expect(@facility_1.collect_fees(@camaro)).to eq(325)
     end
   end
+
+  describe "#administer_written_test" do
+    it "can't administer a written test until that service is offered" do
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@facility_1.administer_written_test(@registrant_1)).to be false
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+
+      @facility_1.add_service("Written Test")
+
+      expect(@facility_1.administer_written_test(@registrant_1)).to be true
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
+
+    it "can only administer a written test to eligible registrants" do
+      @facility_1.add_service("Written Test")
+      
+      expect(@facility_1.administer_written_test(@registrant_2)).to be false
+
+      @registrant_2.earn_permit
+
+      expect(@facility_1.administer_written_test(@registrant_2)).to be true
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+
+      expect(@facility_1.administer_written_test(@registrant_3)).to be false
+
+      @registrant_3.earn_permit
+
+      expect(@facility_1.administer_written_test(@registrant_3)).to be false
+      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
 end

@@ -29,4 +29,12 @@ describe Registrant do
       expect(@registrant_2.permit?).to be true
     end
   end
+
+  describe "#pass_written" do
+    it "can pass the written test" do
+      @registrant_1.pass_written
+
+      expect(@registrant_1.license_data[:written]).to be true
+    end
+  end
 end
