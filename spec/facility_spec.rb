@@ -23,7 +23,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe "iteration 2" do
+  describe "iteration 2.1" do
     before(:each) do
       @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
       @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
@@ -45,11 +45,27 @@ RSpec.describe Facility do
 
     it ".registration_date" do
       @facility_1.register_vehicle(@cruz)
+      #is the eq test good?
       expect(@cruz.registration_date).to eq(Date.today.inspect)
-      # require 'pry';binding.pry
-      expect(@facility_1.collected_fees).to eq(100)
-      # require 'pry';binding.pry
     end
-
+    
+    it ".collected fees" do
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.collected_fees).to eq(100)
+      @facility_1.register_vehicle(@camaro)
+      #do i need to test each time?
+      expect(@camaro.registration_date).to eq(Date.today.inspect)
+      expect(@camaro.plate_type).to eq(:antique)
+      @facility_1.register_vehicle(@bolt)
+      expect(@bolt.registration_date).to eq(Date.today.inspect)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+      expect(@facility_1.collected_fees).to eq(325)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.services).to eq([])
+      expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
+    end
   end
 end

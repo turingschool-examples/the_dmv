@@ -18,7 +18,7 @@ class Facility
       vehicle.registration_date = Date.today.inspect
       @registered_vehicles << vehicle
     else
-      "This location cannot register vehicles"
+      nil
     end
   end
 
