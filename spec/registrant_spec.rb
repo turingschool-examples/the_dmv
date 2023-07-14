@@ -11,6 +11,3 @@ describe "initialize" do
     expect(registrant_2).to be_an_instance_of(Registrant)
   end
 end
-
-
-    
