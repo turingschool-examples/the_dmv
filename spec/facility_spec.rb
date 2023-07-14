@@ -55,7 +55,7 @@ RSpec.describe Facility do
       expect(@cruz.plate_type).to eq(:regular)
     end
 
-    xit "collects registration fees during registration" do
+    it "collects registration fees during registration" do
       expect(@facility_1.collected_fees).to eq(0)
 
       @facility_1.register_vehicle(@cruz)
