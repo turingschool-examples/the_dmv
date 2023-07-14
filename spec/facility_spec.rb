@@ -110,7 +110,7 @@ RSpec.describe Facility do
   end
 
   describe "#administer_written_test" do 
-    it "it cannot administer_written_test if not a service provided by facility" do
+    it "cannot administer written test if not a service provided by facility" do
       @facility_1.administer_written_test(@registrant_1)
       expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       
@@ -133,10 +133,41 @@ RSpec.describe Facility do
     
     it "can only administer written test to registrants 16 or older" do 
       @facility_1.add_service('Written Test')
-
+      
       expect(@registrant_3.age).to eq(15)
       @facility_1.administer_written_test(@registrant_3)
       expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+  end
+  
+  describe "#administer_road_test" do 
+  it "cannot administer road test if not a service provided by facility" do 
+    @facility_1.add_service('Written Test')
+    @facility_1.administer_written_test(@registrant_1)
+    expect(@registrant_1.license_data[:written]).to eq(true)
+    
+    @facility_1.administer_road_test(@registrant_1)
+    expect(@registrant_1.license_data[:road]).to eq(false)
+    
+    @facility_1.add_service('Road Test')
+    @facility_1.administer_road_test(@registrant_1)
+    expect(@registrant_1.license_data[:road]).to eq(true)
+  end
+  
+  it "can only administer a road test to registrants who have taken the written test" do 
+    @facility_1.add_service('Written Test')
+    @facility_1.add_service('Road Test')
+    
+    expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    @facility_1.administer_road_test(@registrant_2)
+    expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+
+    @registrant_2.earn_permit
+    facility_1.administer_written_test(@registrant_2)
+    expect(@registrant_2.license_data(:written)).to eq(true)
+
+    @facility_1.administer_road_test(@registrant_2)
+    expect(@registrant_2.license_data[:license]).to eq(true)    
     end
   end
 end
