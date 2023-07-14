@@ -34,4 +34,9 @@ class Facility
     vehicle.register(plate)
     @registered_vehicles << vehicle
   end
+
+  def administer_written_test(registrant)
+    return false if !@services.include?("Written Test") || !registrant.permit? || !(registrant.age >= 16)
+    registrant.license_data[:written] = true
+  end
 end
