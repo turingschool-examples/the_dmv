@@ -1,4 +1,6 @@
 require 'spec_helper'
+require './lib/facility'
+require './lib/vehicle'
 
 RSpec.describe Facility do
   before(:each) do
@@ -26,6 +28,21 @@ RSpec.describe Facility do
       @facility_1.add_service('Renew Drivers License')
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+    end
+  end
+
+  describe '#add more services' do
+    it 'registar cars' do
+      @facility_1.add_service("Vehicle Registration")
+      expect(@facility_1.services).to eq(["Vehicle Registration"])
+
+      expect(@cruz.registration_date).to eq(nil)
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_1.collected_fees).to eq(0)
+
+      expect(@facility_1.registar_vehicle(@cruz)).to eq([@cruz])
+      expect(@cruz.registration_date).to eq(Date.today)
+      expect(@cruz.plate_type).to eq(:regular)
     end
   end
 end
