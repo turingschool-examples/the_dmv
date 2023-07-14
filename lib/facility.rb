@@ -15,8 +15,7 @@ class Facility
 
   def register_vehicle(vehicle)
     if @services.include?("Vehicle Registration")
-      registration_date = Date.today.inspect
-      vehicle.register(registration_date)
+      vehicle.registration_date = Date.today.inspect
       @registered_vehicles << vehicle
     else
       "This location cannot register vehicles"
