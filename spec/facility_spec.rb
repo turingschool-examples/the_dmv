@@ -124,7 +124,7 @@ RSpec.describe Facility do
   end
 
   describe "#administer_written_test" do
-    xit "can only be done by a facility offering Written Test service" do
+    it "can only be done by a facility offering Written Test service" do
       expect(@registrant_1.license_data).to eq({:written => false, :license => false, :renewed => false})
       expect(@registrant_1.permit?).to be true
       
