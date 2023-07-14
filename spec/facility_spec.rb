@@ -138,7 +138,7 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq({:written => true, :license => false, :renewed => false})
     end
 
-    xit "can only be administered to registrants with a permit" do
+    it "can only be administered to registrants with a permit" do
       @facility_1.add_service("Written Test")
 
       expect(@registrant_2.permit?).to be false
