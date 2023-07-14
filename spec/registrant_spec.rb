@@ -37,4 +37,12 @@ describe Registrant do
       expect(@registrant_1.license_data[:written]).to be true
     end
   end
+
+  describe "#get_license" do
+    it "can get a license" do
+      @registrant_1.get_license
+
+      expect(@registrant_1.license_data[:license]).to be true
+    end
+  end
 end

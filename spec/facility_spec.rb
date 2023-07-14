@@ -96,4 +96,30 @@ RSpec.describe Facility do
       expect(@facility_1.administer_written_test(@registrant_3)).to be false
       expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
+  end
+  before(:each) do
+    @facility_1.add_service("Written Test")
+    @registrant_2.earn_permit
+    @facility_1.administer_written_test(@registrant_1)
+    @facility_1.administer_written_test(@registrant_2)
+  end
+
+  describe "#administer_road_test" do
+    it "can't administer a road test until that service is offered" do
+      expect(@facility_1.administer_road_test(@registrant_1)).to be false
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+
+      @facility_1.add_service("Road Test")
+
+      expect(@facility_1.administer_road_test(@registrant_1)).to be true
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+    end
+
+    it "can only administer the road test to eligible registrants" do
+      @facility_1.add_service("Road Test")
+      
+      expect(@facility_1.administer_road_test(@registrant_3)).to be false
+      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+  end
 end
