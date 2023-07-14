@@ -39,7 +39,7 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([@cruz])
     end
 
-    xit "sets the vehicles registration date during registration" do
+    it "sets the vehicles registration date during registration" do
       expect(@cruz.registration_date).to be nil
 
       @facility_1.register_vehicle(@cruz)
