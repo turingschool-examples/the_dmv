@@ -61,7 +61,7 @@ RSpec.describe Facility do
   end
 
   describe '#fail to add more services' do
-    it 'can not registar twice' do
+    it 'no service' do
       @facility_1.add_service("Vehicle Registration")
       expect(@facility_1.services).to eq(["Vehicle Registration"])
 
@@ -87,7 +87,13 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
       expect(@facility_1.collected_fees).to eq(325)
 
-      
+      expect(@facility_2.services).to eq([])
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
+
+      expect(@facility_2.registar_vehicle(@bolt)).to eq(nil)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
     end
   end
 end
