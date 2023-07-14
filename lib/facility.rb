@@ -33,5 +33,7 @@ class Facility
     @registered_vehicles << car
   end
 
-  
+  def administer_written_test(person)
+    person.age >= 16 && person.permit && @services.include?('Written Test')
+  end
 end
