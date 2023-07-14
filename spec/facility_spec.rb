@@ -67,6 +67,18 @@ RSpec.describe Facility do
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@bolt.registration_date).to eq(nil)
     end
+
+    it "has set_plate_type method" do 
+      @facility_1.set_plate_type(@cruz)
+
+      expect(@cruz.plate_type).to eq(:regular)
+    end
+
+    it "has collect_fees method" do 
+      @facility.collect_fees(@cruz)
+
+      expect(@facility.collected_fees).to eq(100)
+    end
   end 
 
   describe "#set_plate_type" do 
@@ -110,7 +122,7 @@ RSpec.describe Facility do
   end
 
   describe "#administer_written_test" do 
-    it "cannot administer written test if not a service provided by facility" do
+    it "can only administer if written test provided by facility" do
       @facility_1.administer_written_test(@registrant_1)
       expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       
@@ -141,7 +153,7 @@ RSpec.describe Facility do
   end
   
   describe "#administer_road_test" do 
-  it "cannot administer road test if not a service provided by facility" do 
+  it "can only administer if Road test provided by facility" do 
     @facility_1.add_service('Written Test')
     @facility_1.administer_written_test(@registrant_1)
     expect(@registrant_1.license_data[:written]).to eq(true)
@@ -154,20 +166,57 @@ RSpec.describe Facility do
     expect(@registrant_1.license_data[:license]).to eq(true)
   end
   
-  it "can only administer a road test to registrants who have taken the written test" do 
+  it "can administer only to registrants who have taken the written test" do 
     @facility_1.add_service('Written Test')
     @facility_1.add_service('Road Test')
     
     expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     @facility_1.administer_road_test(@registrant_2)
     expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-
+    
     @registrant_2.earn_permit
     @facility_1.administer_written_test(@registrant_2)
     expect(@registrant_2.license_data[:written]).to eq(true)
-
+    
     @facility_1.administer_road_test(@registrant_2)
     expect(@registrant_2.license_data[:license]).to eq(true)    
+  end
+end
+
+  describe "#renew_drivers_license" do 
+    it "can only administer if renewal is offered by facility" do 
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+      @facility_1.renew_drivers_license(@registrant_1)
+      
+      expect(@registrant_1.license_data[:written]).to eq(true)
+      expect(@registrant_1.license_data[:license]).to eq(true)
+      expect(@registrant_1.license_data[:renewed]).to eq(false)
+      
+      @facility_1.add_service('Renew License')
+      @facility_1.renew_drivers_license(@registrant_1)
+      
+      expect(@registrant_1.license_data[:renewed]).to eq(true)
+    end
+    
+    it "can only renew license to registrants who have previously earned a license" do 
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Renew License')
+
+      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      
+      @registrant_2.earn_permit
+      @facility_1.administer_written_test(@registrant_2)
+      @facility_1.renew_drivers_license(@registrant_2)
+      expect(@registrant_2.license_data[:renewed]).to eq(false)
+
+      @facility_1.administer_road_test(@registrant_2)
+      @facility_1.renew_drivers_license(@registrant_2)
+      expect(@registrant_2.license_data[:renewed]).to eq(true)
     end
   end
 end
