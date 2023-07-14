@@ -46,6 +46,9 @@ RSpec.describe Facility do
     it ".registration_date" do
       @facility_1.register_vehicle(@cruz)
       expect(@cruz.registration_date).to eq(Date.today.inspect)
+      # require 'pry';binding.pry
+      expect(@facility_1.collected_fees).to eq(100)
+      # require 'pry';binding.pry
     end
 
   end

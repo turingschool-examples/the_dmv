@@ -1,7 +1,5 @@
-require 'benchmark'
-
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
+  attr_reader :name, :address, :phone, :services, :registered_vehicles
 
   def initialize(details)
     @name = details[:name]
@@ -9,7 +7,6 @@ class Facility
     @phone = details[:phone]
     @services = []
     @registered_vehicles = []
-    @collected_fees = 0
   end
 
   def add_service(service)
@@ -26,6 +23,17 @@ class Facility
     end
   end
 
-
-
+  def collected_fees
+    total_fees = 0
+    @registered_vehicles.each do |vehicle|
+      if vehicle.plate_type == :ev
+        total_fees += 200
+      elsif vehicle.plate_type == :antique
+        total_fees += 25
+      elsif vehicle.plate_type == :regular
+        total_fees += 100
+      end
+    end
+    total_fees
+  end
 end
