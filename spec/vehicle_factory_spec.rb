@@ -11,6 +11,9 @@ RSpec.describe VehicleFactory do
 
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
       factory.create_vehicles(wa_ev_registrations)
+      expect(factory.vehicle_list.first).to be_an_instance_of(Vehicle) 
+      expect(factory.vehicle_list.last).to be_an_instance_of(Vehicle)
+      expect(factory.vehicle_list.length).to eq(1000)
     end
   end
 end

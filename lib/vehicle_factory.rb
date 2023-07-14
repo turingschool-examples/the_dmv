@@ -6,10 +6,17 @@ class VehicleFactory
 
   def create_vehicles(data)
     data.each do |vehicle|
-      @vehicle_list << Vehicle.new({vin: vehicle[:vin_1_10], year: vehicle[:model_year], make: vehicle[:make], model: vehicle[:model], engine: vehicle[:engine]})
+      #(vehicle) :ev
+      @vehicle_list << Vehicle.new({
+        vin: vehicle[:vin_1_10],
+       year: vehicle[:model_year],
+        make: vehicle[:make],
+         model: vehicle[:model],
+          engine: :ev
+        })
     end
-        require 'pry';binding.pry
+        #require 'pry';binding.pry
 
-    puts @vehicle_list.first.model
+    #puts @vehicle_list.first.model
   end
 end
