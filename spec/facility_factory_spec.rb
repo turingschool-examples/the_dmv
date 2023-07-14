@@ -16,8 +16,8 @@ describe FacilityFactory do
 
   describe "#create_facilities" do
     it "can add facilities from the CO database" do
-      expect(@factory.create_vehicles(@co_dmv_office_locations)).to be_an Array
-      expect(@factory.create_vehicles(@co_dmv_office_locations)).to all be_a Facility
+      expect(@factory.create_facilities(@co_facilities)).to be_an Array
+      expect(@factory.create_facilities(@co_facilities)).to all be_a Facility
     end
   end
 end
