@@ -23,7 +23,7 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    if @services.include?['Vehicle Registration']
+    if @services.include?('Vehicle Registration')
       vehicle.registration_date = Date.today
       r_vehicles << vehicle
         if Date.today.year - vehicle.year > 25
@@ -41,8 +41,8 @@ class Facility
     end
   end
 
-  def administer_written_test(registrant)
-    if @services
+  # def administer_written_test(registrant)
+  #   if @services
 
   
 

@@ -71,8 +71,8 @@ RSpec.describe Facility do
     end
   end
 
-  describe "#written test" do
-    it "administers written tests to applicants" do
-      @facility_1.add_service("Vehicle Registration")
+  # describe "#written test" do
+  #   it "administers written tests to applicants" do
+  #     @facility_1.add_service("Vehicle Registration")
 
 end
