@@ -17,6 +17,12 @@ class FacilityFactory
           address: facility[:address_li],
           phone: facility[:phone]
         })
+      elsif facility[:state] == "NY"
+        @facilities << @facility = Facility.new({
+          name: facility[:office_name],
+          address: facility[:street_address_line_1],
+          phone: facility[:public_phone_number]
+        })
       end
     end
     @facilities
