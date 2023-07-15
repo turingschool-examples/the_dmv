@@ -36,6 +36,4 @@ RSpec.describe Facility do
       expect(@facility.collected_fees).to eq(100)
     end
   end
-
-
 end
