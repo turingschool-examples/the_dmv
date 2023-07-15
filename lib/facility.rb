@@ -7,12 +7,20 @@ class Facility
               :collected_fees
 
   def initialize(info)
-    @name = info[:name]
-    @address = info[:address]
+    @name = info[:name] || info[:dmv_office]
+    @address = address?(info)
     @phone = info[:phone]
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
+  end
+
+  def address?(info)
+    if info[:address] != nil
+      info[:address]
+    else
+    info.values_at(:address_li, :address__1, :city, :state, :zip).join(' ')
+    end
   end
 
   def add_service(service)

@@ -13,8 +13,7 @@ RSpec.describe FacilityFactory do
   
   describe '#create_facility' do
     it 'returns facilities from the factory' do
-      # p @factory.create_facilities(@co_dmv_office_locations)
-      # expect(@factory.create_facilities(@co_dmv_office_locations)).to all be_a(Facility)
+      expect(@factory.create_facilities(@co_dmv_office_locations)).to all be_a(Facility)
     end
   end
 end
