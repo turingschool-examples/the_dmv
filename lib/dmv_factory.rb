@@ -7,6 +7,8 @@ class DmvFactory
       return scrape_co_data(data)
     elsif data[0][:state] == "NY"
       return scrape_ny_data(data)
+    elsif data[0][:state] == "MO"
+      return scrape_mo_data(data)
     end
   end
 
@@ -40,23 +42,22 @@ class DmvFactory
         address: [facility[:street_address_line_1], facility[:city], facility[:state], facility[:zip_code]].join(' '), 
         phone: facility[:phone]
       }
-      require 'pry';binding.pry
       facilities_array << Facility.new(facility_details)
     end
     facilities_array
   end
 
-  # def scrape_mo_data(data)
-  #   facilities_array = []
-  #   data.each do |facility|
-  #     facility_details = {
-  #       name: facility[:name],
-  #       address: [facility[:address1], facility[:city], facility[:state], facility[:zipcode].join(' '), 
-  #       phone: facility[:phone]
-  #     }
-  #     facilities_array << Facility.new(facility_details)
-  #   end
-  #   facilities_array
-  # end
+  def scrape_mo_data(data)
+    facilities_array = []
+    data.each do |facility|
+      facility_details = {
+        name: facility[:name],
+        address: [facility[:address1], facility[:city], facility[:state], facility[:zipcode]].join(' '), 
+        phone: facility[:phone]
+      }
+      facilities_array << Facility.new(facility_details)
+    end
+    facilities_array
+  end
 
 end
