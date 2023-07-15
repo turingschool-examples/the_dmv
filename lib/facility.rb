@@ -22,6 +22,16 @@ class Facility
     @services << service
   end
 
+  def administer_written_test(person)
+    if @services.include?("Written Test") && person.permit
+      person.pass_written
+      true
+    else
+      false
+    end
+  end
+      
+
   #helper UNTESTED
   def issue_plate_fees(vehicle)
     if vehicle.antique?
