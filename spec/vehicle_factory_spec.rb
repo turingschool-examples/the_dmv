@@ -15,6 +15,9 @@ RSpec.describe VehicleFactory do
       registrations = DmvDataService.new.wa_ev_registrations
       # require 'pry';binding.pry
       expect(factory_1.create_vehicles(registrations)).to be_an Array
+
+      expect(factory_1.created_vehicles.length).to eq(registrations.size)
+
       expect(factory_1.create_vehicles(registrations)).to all be_a Vehicle
     end
   end
