@@ -37,4 +37,19 @@ class FacilityFactory
       "No phone number listed"
     end
   end
+
+  def name_formatter(string)
+    if !string.nil?
+      string_array = string.split.map do |word|
+        if word.downcase == "dmv"
+          word.upcase
+        else
+          word.downcase.capitalize
+        end
+      end
+      string_array.join(" ")
+    else
+      "No name listed"
+    end
+  end
 end
