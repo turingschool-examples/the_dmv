@@ -1,6 +1,8 @@
 class VehicleFactory
+  attr_reader :created_vehicles
+
   def initialize
-    @vehicles = []
+    @created_vehicles = []
   end
 
   def create_vehicles(data)
@@ -8,7 +10,7 @@ class VehicleFactory
       #iterate over each object in the DMV data set and pull
       #relevant value for corresponding keys and assign to keys in 
       #new vehicle objects.
-      @vehicles << Vehicle.new({
+      @created_vehicles << Vehicle.new({
         vin: dmv_data[:vin_1_10],
         year: dmv_data[:model_year],
         make: dmv_data[:make],
@@ -16,6 +18,6 @@ class VehicleFactory
         engine: :ev
        })
     end
-    @vehicles
+    @created_vehicles
   end
 end
