@@ -165,7 +165,7 @@ RSpec.describe Facility do
       end
     end
 
-    describle "Renew License" do
+    describe "Renew License" do
       it "t16 can only renew license if it has said service" do
         @facility_1.add_service("Written Test")
         @facility_1.add_service("Road Test")
