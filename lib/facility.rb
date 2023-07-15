@@ -20,7 +20,7 @@ class Facility
   end
 
   #administer_written
-  ## Only if they are 16 or longer
+  ## Only if they are 16 or older && have apermit
 
   #administer_road
   ## To registrants who have passed the written
