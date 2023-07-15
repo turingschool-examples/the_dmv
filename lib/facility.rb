@@ -23,8 +23,26 @@ class Facility
   end
 
   def administer_written_test(person)
-    if @services.include?("Written Test") && person.permit
-      person.pass_written
+    if @services.include?("Written Test") && person.permit && person.age >= 16
+      person.pass_test(:written)
+      true
+    else
+      false
+    end
+  end
+
+  def administer_road_test(person)
+    if @services.include?("Road Test") && person.license_data[:written]
+      person.pass_test(:license)
+      true
+    else
+      false
+    end
+  end
+
+  def renew_drivers_license(person)
+    if @services.include?("Renew License") && person.license_data[:license]
+      person.pass_test(:renewed)
       true
     else
       false
@@ -35,13 +53,13 @@ class Facility
   #helper UNTESTED
   def issue_plate_fees(vehicle)
     if vehicle.antique?
-      vehicle.antique_plate
+      vehicle.issue_plate(:antique)
       @collected_fees += 25
     elsif vehicle.electric_vehicle?
-      vehicle.ev_plate
+      vehicle.issue_plate(:ev)
       @collected_fees += 200
     else
-      vehicle.regular_plate
+      vehicle.issue_plate(:regular)
       @collected_fees += 100
     end
   end
