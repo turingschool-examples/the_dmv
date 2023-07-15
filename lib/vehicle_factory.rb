@@ -16,5 +16,4 @@ class VehicleFactory
         @vehicles << Vehicle.new(details)
       end
   end
-
 end
