@@ -34,22 +34,22 @@ class FacilityFactory
     if string != nil
       string.delete("^0-9").insert(6, "-").insert(3, ") ").prepend("(")
     else
-      "No phone number listed"
+      "Not listed"
     end
   end
 
   def name_formatter(string)
     if !string.nil?
-      string_array = string.split.map do |word|
-        if word.downcase == "dmv"
+      string_array = string.downcase.split.map do |word|
+        if word == "dmv"
           word.upcase
         else
-          word.downcase.capitalize
+          word.capitalize
         end
       end
       string_array.join(" ")
     else
-      "No name listed"
+      "Not listed"
     end
   end
 end
