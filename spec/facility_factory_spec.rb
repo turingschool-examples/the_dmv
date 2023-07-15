@@ -4,9 +4,8 @@ RSpec.describe FacilityFactory do
   it "exists" do
     factory = FacilityFactory.new
     co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
-    # factory.create_locations(co_dmv_office_locations)
-    # require 'pry';binding.pry
-    # expect(factory.create_locations(co_dmv_office_locations)).to all be_a Facility
-    # expect(factory.create_locations(co_dmv_office_locations)).to be_an Array
+    factory.create_facilities(co_dmv_office_locations)
+    expect(factory.facilities).to all be_a Facility
+    expect(factory.facilities).to be_an Array
   end
 end

@@ -9,7 +9,8 @@ RSpec.describe VehicleFactory do
   it ".create_vehicles" do
     factory = VehicleFactory.new
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-    expect(@factory.create_vehicles(@wa_ev_registrations)).to all be_a Vehicle
-    expect(@factory.create_vehicles(@wa_ev_registrations)).to be_an Array
+    factory.create_vehicles(wa_ev_registrations)
+    expect(factory.vehicles).to all be_a Vehicle
+    expect(factory.vehicles).to be_an Array
   end
 end

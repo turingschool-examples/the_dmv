@@ -1,11 +1,11 @@
 class FacilityFactory
   attr_reader :facilities
-  
+
   def initialize
     @facilities = []
   end
 
-  def create_locations(locations)
+  def create_facilities(locations)
     locations.each do |site|
     details = {
       name: format_name(site),
