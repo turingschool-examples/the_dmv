@@ -1,5 +1,3 @@
-# require './lib/facility'
-
 class Dmv
   attr_reader :facilities
 

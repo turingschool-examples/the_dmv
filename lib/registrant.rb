@@ -5,11 +5,18 @@ class Registrant
     @name = name
     @age = age
     @permit = permit
-    # require 'pry';binding.pry
   end
 
   def permit?
     @permit
+  end
+
+  def license_data
+    license_data = {
+      written: false, 
+      license: false, 
+      renewed: false
+    }
   end
 
 end

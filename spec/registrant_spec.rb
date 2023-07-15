@@ -1,4 +1,4 @@
-require './lib/registrant.rb'
+require 'spec_helper'
 
 RSpec.describe Registrant do
   before(:each) do
@@ -18,6 +18,15 @@ RSpec.describe Registrant do
   describe "#permit?" do
     it "can check if a registrant has their permit" do
       expect(@registrant_1.permit?).to be(true)
+      expect(@registrant_2.permit?).to be(false)
+    end
+  end
+
+  describe "#license_data" do
+    it "can determine if a registrant is eligible for their license" do 
+      expect(@registrant_1.license_data).to eq(written: false, 
+      license: false, 
+      renewed: false)
     end
   end
 
