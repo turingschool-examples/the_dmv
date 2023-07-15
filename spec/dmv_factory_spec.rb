@@ -3,6 +3,7 @@ require './lib/dmv_data_service'
 require './lib/facility'
 
 describe DmvFactory do
+  require 'pry';binding.pry
   dmv_factory = DmvFactory.new
   co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
   describe "#create_facilities" do
@@ -22,4 +23,4 @@ describe DmvFactory do
       expect(dmv_factory.create_facilities(co_dmv_office_locations).length).to be_a Integer
     end
   end
-ender
+end
