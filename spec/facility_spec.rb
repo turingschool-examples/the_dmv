@@ -23,4 +23,19 @@ RSpec.describe Facility do
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
+
+  describe '#register_vehicle' do
+    it "adds vehicle to facilities registered vehicles list" do
+      @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+
+      expect(@facility.register_vehicle(@cruz)).to eq("This facility does not register vehicles.")
+      expect(@facility.collected_fees).to eq(0)
+      @facility.add_service('Vehicle Registration')    
+      
+      expect(@facility.register_vehicle(@cruz)).to eq([@cruz])
+      expect(@facility.collected_fees).to eq(100)
+    end
+  end
+
+
 end
