@@ -29,4 +29,8 @@ class FacilityFactory
     end
     @facilities
   end
+
+  def phone_number_formatter(number_string)
+    number_string.delete("^0-9").insert(6, "-").insert(3, ") ").prepend("(")
+  end
 end
