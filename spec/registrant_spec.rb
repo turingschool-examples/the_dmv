@@ -18,7 +18,7 @@ describe Registrant do
       expect(registrant_1.name).to eq("Bruce")
       expect(registrant_1.age).to eq(18)
       expect(registrant_1.permit?).to be(true)
-      expect(registrant_1.licensed_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
 
     it "t3 if permit argument is not provided it defaults to false" do
