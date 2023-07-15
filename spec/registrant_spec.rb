@@ -1,11 +1,11 @@
-require './lib/registrant'
+require 'spec_helper'
 
 RSpec.describe Registrant do
   describe "#exists" do
     it "exists" do
       registrant_1 = Registrant.new('Bruce', 18, true )
       
-      expect(registrant_1).to be_a (Registrant)
+      expect(registrant_1).to be_a(Registrant)
     end
   end
   
@@ -30,7 +30,7 @@ RSpec.describe Registrant do
     it "can return value of true when registrant earns permit" do
       registrant_2 = Registrant.new('Penny', 15 )
       registrant_2.earn_permit
-      
+
       expect(registrant_2.permit?).to eq(true)
     end
   end
