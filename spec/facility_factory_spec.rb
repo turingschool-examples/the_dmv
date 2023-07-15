@@ -45,5 +45,9 @@ describe FacilityFactory do
       expect(@factory.name_formatter("DMV ALL CAPSVILLE")).to eq("DMV All Capsville")
       expect(@factory.name_formatter("dmv all lowercaseville")).to eq("DMV All Lowercaseville")
     end
+
+    it "can format addresses to match CO format" do
+      expect(@factory.name_formatter("123 albatross blvd")).to eq("123 Albatross Blvd")
+    end
   end
 end
