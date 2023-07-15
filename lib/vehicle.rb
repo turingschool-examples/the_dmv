@@ -21,9 +21,16 @@ class Vehicle
 
   def antique?
     Date.today.year - @year > 25
+
   end
 
   def electric_vehicle?
     @engine == :ev
+
   end
+
+  # @plate_type = {:regular, :antique, :ev}
+      # cost $25 to register an antique
+    # cost $200 to register
+    #  all_other_vehicles cost $100 to register
 end
