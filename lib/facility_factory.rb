@@ -11,26 +11,30 @@ class FacilityFactory
         @facilities << Facility.new({
           name: facility[:dmv_office],
           address: facility[:address_li],
-          phone: facility[:phone]
+          phone: phone_number_formatter(facility[:phone])
         })
       elsif facility[:state] == "NY"
         @facilities << Facility.new({
           name: facility[:office_name],
           address: facility[:street_address_line_1],
-          phone: facility[:public_phone_number]
+          phone: phone_number_formatter(facility[:public_phone_number])
         })
       elsif facility[:state] == "MO"
         @facilities << Facility.new({
           name: facility[:name],
           address: facility[:address1],
-          phone: facility[:phone]
+          phone: phone_number_formatter(facility[:phone])
         })
       end
     end
     @facilities
   end
 
-  def phone_number_formatter(number_string)
-    number_string.delete("^0-9").insert(6, "-").insert(3, ") ").prepend("(")
+  def phone_number_formatter(string)
+    if string != nil
+      string.gsub(/[^0-9]/, "").insert(6, "-").insert(3, ") ").prepend("(")
+    else
+      "No phone number listed"
+    end
   end
 end

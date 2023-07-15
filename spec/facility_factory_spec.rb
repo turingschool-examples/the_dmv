@@ -7,7 +7,7 @@ describe FacilityFactory do
     @ny_facilities = DmvDataService.new.ny_dmv_office_locations
     @mo_facilities = DmvDataService.new.mo_dmv_office_locations
   end
-
+# require 'pry';binding.pry
   describe "#initialize" do
     it "can initialize" do
       expect(@factory).to be_an_instance_of(FacilityFactory)
