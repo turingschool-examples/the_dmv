@@ -10,9 +10,9 @@ RSpec.describe FacilityFactory do
   describe '#initialize' do
     it 'can initialize' do
       expect(@factory_1).to be_an_instance_of(FacilityFactory)
-      @factory_1.create_factory(colorado_facilities)
-      expect(@factory_1.create_factory(colorado_facilities)).to be_an Array
-      expect(@factory_1.create_factory(colorado_facilities)).to all be_a Facility
+      @factory_1.create_factory(@colorado_facilities)
+      expect(@factory_1.create_factory(@colorado_facilities)).to be_an Array
+      expect(@factory_1.create_factory(@colorado_facilities)).to all be_a Facility
       @factory_1.create_factory(@new_york_facilities)
       expect(@factory_1.create_factory(@new_york_facilities)).to be_an Array
       expect(@factory_1.create_factory(@new_york_facilities)).to all be_a Facility
