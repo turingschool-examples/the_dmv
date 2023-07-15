@@ -30,4 +30,12 @@ describe FacilityFactory do
       expect(@factory.create_facilities(@mo_facilities)).to all be_a Facility
     end
   end
+
+  describe "#phone_number_formatter" do
+    it "can format phone numbers to match CO format" do
+      expect(@factory.phone_number_formatter("555-555-5555")).to eq("(555) 555-5555")
+      expect(@factory.phone_number_formatter("5555555555")).to eq("(555) 555-5555")
+      expect(@factory.phone_number_formatter("(555)555-5555")).to eq("(555) 555-5555")
+    end
+  end
 end

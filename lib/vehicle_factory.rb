@@ -7,7 +7,7 @@ class VehicleFactory
 
   def create_vehicles(database)
     database.each do |vehicle|
-      @vehicles << @vehicle = Vehicle.new({
+      @vehicles << Vehicle.new({
         vin: vehicle[:vin_1_10],
         year: vehicle[:model_year],
         make: vehicle[:make],
