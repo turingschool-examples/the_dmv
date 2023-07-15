@@ -29,8 +29,8 @@ RSpec.describe Registrant do
   describe "#earn_permit" do
     it "can return value of true when registrant earns permit" do
       registrant_2 = Registrant.new('Penny', 15 )
+      registrant_2.earn_permit
       
-      expect(registrant_2.earn_permit).to eq()
       expect(registrant_2.permit?).to eq(true)
     end
   end
