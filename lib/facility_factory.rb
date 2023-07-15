@@ -9,19 +9,19 @@ class FacilityFactory
     database.each do |facility|
       if facility[:state] == "CO"
         @facilities << Facility.new({
-          name: facility[:dmv_office],
+          name: name_formatter(facility[:dmv_office]),
           address: facility[:address_li],
           phone: phone_number_formatter(facility[:phone])
         })
       elsif facility[:state] == "NY"
         @facilities << Facility.new({
-          name: facility[:office_name],
+          name: name_formatter(facility[:office_name]),
           address: facility[:street_address_line_1],
           phone: phone_number_formatter(facility[:public_phone_number])
         })
       elsif facility[:state] == "MO"
         @facilities << Facility.new({
-          name: facility[:name],
+          name: name_formatter(facility[:name]),
           address: facility[:address1],
           phone: phone_number_formatter(facility[:phone])
         })
