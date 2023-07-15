@@ -38,4 +38,12 @@ describe FacilityFactory do
       expect(@factory.phone_number_formatter("(555)555-5555")).to eq("(555) 555-5555")
     end
   end
+
+  describe "#name_formatter" do
+    it "can format names to match CO format" do
+      expect(@factory.name_formatter("gobble de gook")).to eq("Gobble De Gook")
+      expect(@factory.name_formatter("DMV ALL CAPSVILLE")).to eq("DMV All Capsville")
+      expect(@factory.name_formatter("dmv all lowercaseville")).to eq("DMV All Lowercaseville")
+    end
+  end
 end

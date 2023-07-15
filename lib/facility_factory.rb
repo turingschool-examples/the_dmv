@@ -32,7 +32,7 @@ class FacilityFactory
 
   def phone_number_formatter(string)
     if string != nil
-      string.gsub(/[^0-9]/, "").insert(6, "-").insert(3, ") ").prepend("(")
+      string.delete("^0-9").insert(6, "-").insert(3, ") ").prepend("(")
     else
       "No phone number listed"
     end
