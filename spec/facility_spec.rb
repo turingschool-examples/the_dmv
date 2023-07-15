@@ -27,7 +27,13 @@ RSpec.describe Facility do
   end
 
   #ITERATION2 TESTS & EXPECTS
+  describe "#register_vehicle" do
+    it "can register a vehicle" do
+    end
+  end
 
+
+  
   expect(facility_1.registered_vehicles).to eq([])
   expect(facility_1.collected_fees).to eq(0)
   expect(facility_1.register_vehicle(cruz)).to eq([])
@@ -35,7 +41,10 @@ RSpec.describe Facility do
   expect(cruz.registration_date).to eq(date j0s0n)
   expect(cruz.plate_type).to eq(:regular)
 
-  expect(facility_1.registered_vehicles).to eq([-----])
+  require 'pry';binding.pry
+
+
+  expect(facility_1.registered_vehicles).to eq([])
   expect(facility_1.collected_fees).to eq(100)
 
   expect(facility_1.register_vehicle(camaro)).to eq([vehicle,vehicle])

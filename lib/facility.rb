@@ -19,6 +19,8 @@ class Facility
     @service.include?(service)
   end
 
+  def 
+
   #administer_written
   ## Only if they are 16 or older && have apermit
 
@@ -34,4 +36,6 @@ class Facility
       # cost $25 to register an antique
     # cost $200 to register
     #  all_other_vehicles cost $100 to register
+
+    #collected_fees equal to fees collected for registration?
 end
