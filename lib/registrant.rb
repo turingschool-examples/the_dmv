@@ -16,17 +16,10 @@ class Registrant
   end
 
   #helper UNTESTED
-  def pass_written
-    @license_data[:written] = true
+  def pass_test(test_type)
+    @license_data[test_type] = true
   end
 
-  def pass_road
-    @license_data[:license] = true
-  end
-
-  def pass_renew
-    @license_data[:renewed] = true
-  end
 
 
 
