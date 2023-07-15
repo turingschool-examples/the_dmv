@@ -11,7 +11,6 @@ class Vehicle
                 :plate_type
 
   def initialize(vehicle_details)
-    # require 'pry'; binding.pry
     @vin = vehicle_details[:vin_1_10] || vehicle_details[:vin]
     @year = vehicle_details[:model_year] || vehicle_details[:year]
     @make = vehicle_details[:make]
