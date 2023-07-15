@@ -6,16 +6,8 @@ class VehicleFactory
   end
 
   def create_vehicles(database)
-    #engine = ev
-    #make = :make
-    #model = :model
-    #plate_type = nil
-    #registration_date = nil
-    #vin = :vin_1_10
-    #year = :model_year
-
     database.each do |vehicle|
-      @vehicles << @vehicle = Vehicle.new({
+      @vehicles << Vehicle.new({
         vin: vehicle[:vin_1_10],
         year: vehicle[:model_year],
         make: vehicle[:make],
@@ -23,7 +15,6 @@ class VehicleFactory
         engine: :ev
       })
     end
-
     @vehicles
   end
 end
