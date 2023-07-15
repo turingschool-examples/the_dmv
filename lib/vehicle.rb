@@ -32,16 +32,8 @@ class Vehicle
     @registration_date = Date.today
   end
 
-  def antique_plate
-    @plate_type = :antique
-  end
-   
-  def ev_plate
-    @plate_type = :ev
-  end
-
-  def regular_plate  
-    @plate_type = :regular
+  def issue_plate(plate_type)
+    @plate_type = plate_type
   end
 
 
