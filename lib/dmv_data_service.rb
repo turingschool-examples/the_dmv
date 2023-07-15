@@ -9,11 +9,11 @@ class DmvDataService
 
   def wa_ev_registrations
     @wa_ev_registrations ||= load_data('https://data.wa.gov/resource/rpr4-cgyd.json')
-    require 'pry';binding.pry
   end
-
+  
   def co_dmv_office_locations
     @co_dmv_office_locations ||= load_data('https://data.colorado.gov/resource/dsw3-mrn4.json')
+    require 'pry';binding.pry
   end
 
   def ny_dmv_office_locations

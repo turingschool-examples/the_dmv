@@ -13,7 +13,7 @@ RSpec.describe VehicleFactory do
     it "can create new vehicles" do 
       factory_1 = VehicleFactory.new
       registrations = DmvDataService.new.wa_ev_registrations
-      
+      # require 'pry';binding.pry
       expect(factory_1.create_vehicles(registrations)).to be_an Array
       expect(factory_1.create_vehicles(registrations)).to all be_a Vehicle
     end
