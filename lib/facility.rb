@@ -41,17 +41,4 @@ class Facility
       @registered_vehicles << (vehicle)
     end
   end 
-
-  #administer_written
-  ## Only if age >= 16 && have @permit
-
-  #administer_road
-  ## To registrants who have passed the written
-  ## Registrants automatically get license when qualify for road test
-  ## if passed_written_test, earned_license == true
-
-  #renew_drivers_license
-  ## Can be renewed if the registrain has already passed the road test and earned a license
-  ## if passed_road_test && earned_license
-
 end
