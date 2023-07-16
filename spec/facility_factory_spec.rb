@@ -48,6 +48,9 @@ RSpec.describe FacilityFactory do
 
       ny_facility_sample_1 = @new_york_facilities_data[0]
       expect(@new_york.format_facility_name(ny_facility_sample_1)).to eq("Jamaica District Office")
+      
+      ny_facility_sample_2 = @new_york_facilities_data[1]
+      expect(@new_york.format_facility_name(ny_facility_sample_2)).to eq("Riverhead Kiosk District Office")
     end
   end
   
