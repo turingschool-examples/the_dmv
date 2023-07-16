@@ -47,12 +47,12 @@ RSpec.describe Facility do
 
   describe '#collected_fees' do
     it 'can print total fees collected from registered vehicles in that facility' do
-      expect(@facility.collected_fees).to eq([])
+      expect(@facility.collected_fees).to eq(0)
 
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       @facility.register_vehicle(cruz)
 
-      expect(@facility.registered_vehicles).to eq([cruz])
+      expect(@facility.collected_fees).to eq(100])
     end
   end
 end
