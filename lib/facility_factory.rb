@@ -40,6 +40,8 @@ class FacilityFactory
       data[:phone]
     elsif data[:state] == "NY"
       format_digits(data[:public_phone_number])
+    else data[:state] == "MO"
+      data[:phone]
     end
   end
 
