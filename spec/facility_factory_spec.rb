@@ -15,7 +15,6 @@ RSpec.describe FacilityFactory do
       expect(@factory_1.create_factory(@colorado_facilities)).to be_an Array
       expect(@factory_1.create_factory(@colorado_facilities)).to all be_a Facility
       @factory_1.create_factory(@new_york_facilities)
-      require 'pry';binding.pry
       expect(@factory_1.create_factory(@new_york_facilities)).to be_an Array
       expect(@factory_1.create_factory(@new_york_facilities)).to all be_a Facility
       @factory_1.create_factory(@missouri_facilities)
