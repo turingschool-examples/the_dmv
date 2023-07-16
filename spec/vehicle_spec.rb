@@ -44,6 +44,10 @@ RSpec.describe Vehicle do
 
   describe '#registration_date' do
     it 'can determine registration date of a vehicle' do
+      @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      @facility.register_vehicle(@cruz)
+
+      expect(@cruz.plate_type).to eq(:regular)
       expect(@cruz.registration_date).to eq(Date.today.year)
     end
   end
