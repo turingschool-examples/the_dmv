@@ -2,10 +2,10 @@ class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
   def initialize(facility_details)
-    @name = facility_details[:name]
-    @address = facility_details[:address]
-    @phone = facility_details[:phone]
-    @services = []
+    @name = name_finder(facility_details)
+    @address = address_finder(facility_details)
+    @phone = phone_finder(facility_details)
+    @services = services_finder(facility_details)
     @registered_vehicles = []
     @collected_fees = 0
   end
@@ -68,12 +68,16 @@ class Facility
   def name_finder(facility_details)
     if facility_details[:name]
       facility_details[:name]
+    elsif facility_details[:dmv_office]
+      facility_details[:dmv_office]
     end
   end
 
   def address_finder(facility_details)
     if facility_details[:address]
       facility_details[:address]
+    elsif facility_details[:address_li]
+      address_formatter(facility_details)
     end
   end
 
@@ -86,8 +90,28 @@ class Facility
   def services_finder(facility_details)
     if facility_details[:services]
       facility_details[:services]
+    elsif facility_details[:services]
+      "ahhhhhhh!"
+
     else
       []
     end
+  end
+
+  def address_formatter(facility_details)
+    string = ""
+    if facility_details[:address__1]
+      string << facility_details[:address_li] << " " 
+      string << facility_details[:address__1] << " " 
+      string << facility_details[:city] << " " 
+      string << facility_details[:state] << " "               
+      string << facility_details[:zip]
+    else
+      string << facility_details[:address_li] << " "
+      string << facility_details[:city] << " " 
+      string << facility_details[:state] << " "               
+      string << facility_details[:zip]
+    end
+
   end
 end
