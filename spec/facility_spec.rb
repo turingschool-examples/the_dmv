@@ -84,44 +84,44 @@ RSpec.describe Facility do
   end 
   
   describe "#set_plate_type" do 
-  it "sets plate type upon registration" do 
-    @facility_1.add_service("Vehicle Registration")
-    
-    expect(@cruz.plate_type).to eq(nil)
-    expect(@camaro.plate_type).to eq(nil)
-    expect(@bolt.plate_type).to eq(nil)
-    
-    @facility_1.register_vehicle(@cruz)
-    @facility_1.register_vehicle(@camaro)
-    @facility_1.register_vehicle(@bolt)
-    
-    expect(@cruz.plate_type).to eq(:regular)
-    expect(@camaro.plate_type).to eq(:antique)
-    expect(@bolt.plate_type).to eq(:ev)
-  end 
-end
+    it "sets plate type upon registration" do 
+      @facility_1.add_service("Vehicle Registration")
+      
+      expect(@cruz.plate_type).to eq(nil)
+      expect(@camaro.plate_type).to eq(nil)
+      expect(@bolt.plate_type).to eq(nil)
+      
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+      
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@bolt.plate_type).to eq(:ev)
+    end 
+  end
 
-describe "#collect_fees" do   
-it "adds fees to collected_fees array based on vehicle type" do
-  @facility_1.add_service("Vehicle Registration")
-  expect(@facility_1.collected_fees).to eq(0)
-  
-  @facility_1.register_vehicle(@cruz)
-  expect(@facility_1.collected_fees).to eq(100)
-  
-  @facility_1.register_vehicle(@camaro)
-  expect(@facility_1.collected_fees).to eq(125)
-  
-  @facility_1.register_vehicle(@bolt)
-  expect(@facility_1.collected_fees).to eq(325)
-end
+  describe "#collect_fees" do   
+    it "adds fees to collected_fees array based on vehicle type" do
+      @facility_1.add_service("Vehicle Registration")
+      expect(@facility_1.collected_fees).to eq(0)
+      
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.collected_fees).to eq(100)
+      
+      @facility_1.register_vehicle(@camaro)
+      expect(@facility_1.collected_fees).to eq(125)
+      
+      @facility_1.register_vehicle(@bolt)
+      expect(@facility_1.collected_fees).to eq(325)
+    end
 
-it "will not collect fees unless registration service if offered at facility" do 
-  expect(@facility_2.services).to eq([])
-  
-  @facility_2.register_vehicle(@bolt)
-  
-  expect(@facility_2.collected_fees).to eq(0)
+    it "will not collect fees unless registration service if offered at facility" do 
+      expect(@facility_2.services).to eq([])
+
+      @facility_2.register_vehicle(@bolt)
+      
+      expect(@facility_2.collected_fees).to eq(0)
     end 
   end
 
@@ -157,35 +157,35 @@ it "will not collect fees unless registration service if offered at facility" do
   end
   
   describe "#administer_road_test" do 
-  it "can only administer if Road test provided by facility" do 
-    @facility_1.add_service('Written Test')
-    @facility_1.administer_written_test(@registrant_1)
-    expect(@registrant_1.license_data[:written]).to eq(true)
+    it "can only administer if Road test provided by facility" do 
+      @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@registrant_1.license_data[:written]).to eq(true)
+      
+      @facility_1.administer_road_test(@registrant_1)
+      expect(@registrant_1.license_data[:license]).to eq(false)
+      
+      @facility_1.add_service('Road Test')
+      @facility_1.administer_road_test(@registrant_1)
+      expect(@registrant_1.license_data[:license]).to eq(true)
+    end
     
-    @facility_1.administer_road_test(@registrant_1)
-    expect(@registrant_1.license_data[:license]).to eq(false)
-    
-    @facility_1.add_service('Road Test')
-    @facility_1.administer_road_test(@registrant_1)
-    expect(@registrant_1.license_data[:license]).to eq(true)
+    it "can administer only to registrants who have taken the written test" do 
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      
+      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      @facility_1.administer_road_test(@registrant_2)
+      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      
+      @registrant_2.earn_permit
+      @facility_1.administer_written_test(@registrant_2)
+      expect(@registrant_2.license_data[:written]).to eq(true)
+      
+      @facility_1.administer_road_test(@registrant_2)
+      expect(@registrant_2.license_data[:license]).to eq(true)    
+    end
   end
-  
-  it "can administer only to registrants who have taken the written test" do 
-    @facility_1.add_service('Written Test')
-    @facility_1.add_service('Road Test')
-    
-    expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-    @facility_1.administer_road_test(@registrant_2)
-    expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-    
-    @registrant_2.earn_permit
-    @facility_1.administer_written_test(@registrant_2)
-    expect(@registrant_2.license_data[:written]).to eq(true)
-    
-    @facility_1.administer_road_test(@registrant_2)
-    expect(@registrant_2.license_data[:license]).to eq(true)    
-  end
-end
 
   describe "#renew_drivers_license" do 
     it "can only administer if renewal is offered by facility" do 
