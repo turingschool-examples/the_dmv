@@ -36,9 +36,9 @@ RSpec.describe Vehicle do
 
   describe '#plate_type' do
     it 'can determine plate type of a vehicle' do
-      expect(@cruz.plate_type).to eq("regular")
-      expect(@bolt.plate_type).to eq("electric")
-      expect(@camaro.plate_type).to eq("antique")
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@camaro.plate_type).to eq(:antique)
     end
   end
 end
