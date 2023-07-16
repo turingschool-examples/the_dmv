@@ -1,5 +1,5 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
+  attr_accessor :name, :address, :phone, :services, :registered_vehicles, :collected_fees, :registration_date
 
   def initialize(info)
     @name = info[:name]
@@ -8,6 +8,11 @@ class Facility
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
+    @registration_date = registration_date
+  end
+
+  def registration_date
+    nil
   end
 
   def add_service(service)
@@ -15,6 +20,7 @@ class Facility
   end
 
   def register_vehicle(vehicle)
+    vehicle.registration_date = Date.today
     @registered_vehicles << vehicle
   end
 
