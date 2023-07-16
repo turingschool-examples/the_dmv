@@ -18,6 +18,8 @@ RSpec.describe Facility do
       expect(@facility.address).to eq('2855 Tremont Place Suite 118 Denver CO 80205')
       expect(@facility.phone).to eq('(720) 865-4600')
       expect(@facility.services).to eq([])
+
+      expect(@facility_2.services).to eq([])
     end
   end
 
@@ -30,7 +32,6 @@ RSpec.describe Facility do
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
     it 'can add available services to another facility' do
-      expect(@facility_1.services).to eq([])
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.services).to eq(['Vehicle Registration'])
     end
@@ -39,6 +40,7 @@ RSpec.describe Facility do
   describe '#registered_vehicles' do
     it 'returns an empty array when an instance is created' do
       expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_2.registered_vehicles).to eq([])
     end
   end
 
@@ -48,6 +50,7 @@ RSpec.describe Facility do
     end
 
     it "can add fees after registering vehicles" do
+      @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.collected_fees).to eq(0)
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.collected_fees).to eq(100)
@@ -60,13 +63,20 @@ RSpec.describe Facility do
 
   describe '#register_vehicle' do
     it "adds a vehicle to the facility's registered vehicles" do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.registered_vehicles).not_to eq([])
       @facility_1.register_vehicle(@camaro)
       expect(@facility_1.registered_vehicles).to eq([@cruz,@camaro])
       expect(@facility_1.register_vehicle(@bolt)).to eq([@cruz,@camaro,@bolt])
-
     end
+
+    it "does not register a vehicle when the service is not available" do
+      expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
+    end
+    
   end
 
 end
