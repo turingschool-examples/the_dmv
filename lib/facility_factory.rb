@@ -20,6 +20,8 @@ class FacilityFactory
       data[:dmv_office]
     elsif data[:state] == "NY"
       capitalize_string("#{data[:office_name]} #{data[:office_type]}")
+    else data[:state] == "MO"
+      capitalize_string("#{data[:name]}")
     end
   end
 
@@ -28,6 +30,8 @@ class FacilityFactory
       ("#{data[:address_li]}#{" " + "#{data[:address__1]}" if data[:address__1] } #{data[:city]} #{data[:state]} #{data[:zip]}")  
     elsif data[:state] == "NY"
       capitalize_string("#{data[:street_address_line_1]} #{data[:city]} #{data[:state]} #{data[:zip_code]}")
+    else data[:state] == "MO"
+      capitalize_string("#{data[:address1]} #{data[:city]} #{data[:state]} #{data[:zipcode]}")
     end
   end
 
@@ -40,7 +44,7 @@ class FacilityFactory
   end
 
   def capitalize_string(string)
-    state_abbreviations = ["NY"]
+    state_abbreviations = ["NY", "MO"]
     data_string = string.split.map do |word| 
       state_abbreviations.include?(word) ? word : word.capitalize
     end 
