@@ -27,7 +27,7 @@ RSpec.describe FacilityFactory do
     it "can create new york facilities" do
       expect(@new_york.facilities_created).to eq([])
       @new_york.create_facilities(@new_york_facilities_data)
-        require 'pry';binding.pry
+        # require 'pry';binding.pry
       expect(@new_york.facilities_created).to all be_a Facility
     end
   end
@@ -91,7 +91,12 @@ RSpec.describe FacilityFactory do
   it "formats NY facilities phone number" do 
     random_ny_facility_sample = @new_york_facilities_data.sample
     expect(@new_york.format_facility_phone(random_ny_facility_sample)).to be_a String
-
+    
+    ny_facility_sample_1 = @new_york_facilities_data[0]
+    expect(@new_york.format_facility_phone(ny_facility_sample_1)).to eq("(718) 966-6155")
+    
+    ny_facility_sample_2 = @new_york_facilities_data[1]
+    expect(@new_york.format_facility_phone(ny_facility_sample_2)).to eq("No phone number listed")
     end
   end
 
