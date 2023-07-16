@@ -7,19 +7,43 @@ class Facility
               :collected_fees
 
   def initialize(info)
-    @name = info[:name] || info[:dmv_office]
+    @name = name?(info)
     @address = address?(info)
-    @phone = info[:phone]
+    @phone = phone?(info)
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
   end
 
-  def address?(info)
-    if info[:address] != nil
-      info[:address]
+  def name?(info)
+    if info[:dmv_office] != nil
+      info[:dmv_office]
+    elsif info[:office_name] != nil
+      info.values_at(:office_name, :office_type).join(" ")
+    # elsif caller.join.include?("mo_dmv_office_locations")
+    #   # info[:]
     else
-    info.values_at(:address_li, :address__1, :city, :state, :zip).join(' ')
+      info[:name]
+    end
+  end
+
+  def address?(info)
+    if info[:address_li] != nil
+      info.values_at(:address_li, :address__1, :location, :city, :state, :zip).join(' ')
+    elsif info[:zip_code] != nil
+      info.values_at(:street_address_line_1, :city, :state, :zip_code).join(" ")
+    elsif info[:zipcode] != nil
+    info.values_at(:address1, :city, :state, :zipcode).join(" ")
+    else
+      info[:address]
+    end
+  end
+
+  def phone?(info)
+    if info[:public_phone_number] != nil
+      info[:public_phone_number].gsub(/[-)(\s+]/, '').insert(0, "(").insert(4, ")").insert(5, " ").insert(9, "-")
+    else
+      info[:phone]
     end
   end
 
