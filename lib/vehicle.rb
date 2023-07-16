@@ -15,6 +15,14 @@ class Vehicle
     @engine = vehicle_details[:engine]
   end
 
+  def registration_date 
+    nil
+  end 
+
+   
+    
+  end
+
   def antique?
     Date.today.year - @year > 25
   end
