@@ -34,14 +34,22 @@ class FacilityFactory
   def format_facility_phone(data)
     if data[:state] == "CO"
       data[:phone]
+    elsif data[:state] == "NY"
+      format_digits(data[:public_phone_number])
     end
   end
 
   def capitalize_string(string)
+    state_abbreviations = ["NY"]
     data_string = string.split.map do |word| 
-      word.include?("NY") ? word : word.capitalize
+      state_abbreviations.include?(word) ? word : word.capitalize
     end 
     data_string.join(" ")
+  end
+
+  def format_digits(digit_string)
+    return "No phone number listed" if digit_string.nil?
+    formatted_digits = ("(" + digit_string[0, 3] + ") " + digit_string[3, 3] + "-" + digit_string[6, 4])
   end
 end
 
