@@ -12,7 +12,8 @@ class FacilityFactory
       @facilities_created << Facility.new({
       name: format_facility_name(dmv_data),
       # name: dmv_data[:dmv_office],
-      address: ("#{dmv_data[:address_li]}#{" " + "#{dmv_data[:address__1]}" if dmv_data[:address__1] } #{dmv_data[:city]} #{dmv_data[:state]} #{dmv_data[:zip]}"),
+      address: format_facility_address(dmv_data),
+      # address: ("#{dmv_data[:address_li]}#{" " + "#{dmv_data[:address__1]}" if dmv_data[:address__1] } #{dmv_data[:city]} #{dmv_data[:state]} #{dmv_data[:zip]}"),
       phone: dmv_data[:phone]
       })
       # end 
@@ -23,6 +24,12 @@ class FacilityFactory
   def format_facility_name(data)
     if data[:state] == "CO"
       data[:dmv_office]
+    end
+  end
+
+  def format_facility_address(data)
+    if data[:state] == "CO"
+      ("#{data[:address_li]}#{" " + "#{data[:address__1]}" if data[:address__1] } #{data[:city]} #{data[:state]} #{data[:zip]}")  
     end
   end
 end
