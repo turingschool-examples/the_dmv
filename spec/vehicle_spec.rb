@@ -33,4 +33,13 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe '#vehicle_type' do
+    it 'describes type of vehicle' do
+      @cruz.vehicle_type
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@bolt.vehicle_type).to eq(:ev)
+      expect(@camaro.vehicle_type).to eq(:antique)
+    end
+  end
 end

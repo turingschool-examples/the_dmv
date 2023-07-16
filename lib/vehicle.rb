@@ -26,4 +26,14 @@ class Vehicle
   def electric_vehicle?
     @engine == :ev
   end
+
+  def vehicle_type
+    if Date.today.year - @year > 25
+      @plate_type = :antique 
+    elsif @engine == :ev
+      @plate_type = :ev
+    else
+      @plate_type = :regular
+    end
+  end
 end
