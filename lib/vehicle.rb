@@ -19,10 +19,6 @@ class Vehicle
     nil
   end 
 
-   
-    
-  end
-
   def antique?
     Date.today.year - @year > 25
   end
