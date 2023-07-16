@@ -48,8 +48,8 @@ RSpec.describe Vehicle do
       @facility.register_vehicle(@cruz)
 
       expect(@facility.registered_vehicles).to eq([@cruz])
-      expect(@cruz.plate_type).to eq(:regular)
       expect(@cruz.registration_date).to eq(Date.today.year)
+      expect(@cruz.plate_type).to eq(:regular)
     end
   end
 end

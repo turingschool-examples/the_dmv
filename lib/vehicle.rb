@@ -38,5 +38,7 @@ class Vehicle
       @registration_date = Date.today.year
       @plate_type = :ev
     end
+    return @plate_type
+    return @registration_date
   end
 end
