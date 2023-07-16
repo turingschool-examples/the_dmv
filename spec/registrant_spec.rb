@@ -1,4 +1,5 @@
 require "./lib/registrant"
+require "./facility"
 
 describe "initialize" do
   it "is an instance of" do
