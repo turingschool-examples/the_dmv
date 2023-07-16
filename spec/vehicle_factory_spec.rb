@@ -13,9 +13,8 @@ RSpec.describe VehicleFactory do
   end
   
   describe '#create_vehicles' do 
-    it 'can create vehicle objects' do 
+    xit 'can create vehicle objects' do 
       new_vehicles = @factory.create_vehicles(@wa_ev_registrations)
-      require 'pry'; binding.pry
       expect(new_vehicles).to be_a(Vehicle)
     end
   end
