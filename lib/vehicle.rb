@@ -26,12 +26,4 @@ class Vehicle
   def electric_vehicle?
     @engine == :ev
   end
-
-  # def registration_date
-  #   @registration_date
-  # end
-
-  # def plate_type
-  #   @plate_type
-  # end
 end
