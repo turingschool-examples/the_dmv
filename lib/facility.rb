@@ -13,5 +13,14 @@ class Facility
   def add_service(service)
     @services << service
   end
+
+  def register_vehicle(vehicle)
+    vehicle.registration_date = Date.today
+    @registered_vehicles << vehicle
+    if @plate_type == :ev
+      @collected_fees += 25
+
+    end
+  end
   
 end
