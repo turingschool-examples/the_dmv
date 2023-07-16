@@ -48,4 +48,11 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#register_vehicle' do
+    it "adds a vehicle to the facility's registered vehicles" do
+      @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice}) 
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.registered_vehicles).not_to eq([])
+    end
+  end
 end
