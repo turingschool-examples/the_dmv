@@ -71,20 +71,23 @@ class Facility
     end
   end
 
-  def 
+  def address_finder(facility_details)
+    if facility_details[:address]
+      facility_details[:address]
+    end
+  end
 
+  def phone_finder(facility_details)
+    if facility_details[:phone]
+      facility_details[:phone]
+    end
+  end
 
-
-    @name = facility_details[:name]
-    @address = facility_details[:address]
-    @phone = facility_details[:phone]
-    @services = []
-    @registered_vehicles = []
-    @collected_fees = 0
-
-
-
-
-
-
+  def services_finder(facility_details)
+    if facility_details[:services]
+      facility_details[:services]
+    else
+      []
+    end
+  end
 end
