@@ -41,4 +41,10 @@ RSpec.describe Vehicle do
       expect(@camaro.plate_type).to eq(:antique)
     end
   end
+
+  describe '#registration_date' do
+    it 'can determine registration date of a vehicle' do
+      expect(@cruz.registration_date).to eq(Date.today.year)
+    end
+  end
 end
