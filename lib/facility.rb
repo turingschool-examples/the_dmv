@@ -1,5 +1,10 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :r_vehicles, :total
+  attr_reader :name,
+              :address,
+              :phone,
+              :services,
+              :r_vehicles,
+              :total
 
   def initialize (information)
     @name = information[:name]
@@ -26,15 +31,15 @@ class Facility
     if @services.include?('Vehicle Registration')
       vehicle.registration_date = Date.today
       r_vehicles << vehicle
-        if Date.today.year - vehicle.year > 25
-          vehicle.plate_type = :antique 
+        if vehicle.vehicle_type == :antique
           @total += 25
-        elsif vehicle.engine == :ev
-          vehicle.plate_type = :ev
+          @r_vehicles
+        elsif vehicle.vehicle_type == :ev
           @total += 200
-        else
+          @r_vehicles
+        elsif vehicle.vehicle_type == :regular 
           @total += 100
-          vehicle.plate_type = :regular
+          @r_vehicles
         end
     else
       nil
@@ -50,7 +55,6 @@ class Facility
       end
     else
       false
-      # registrant.license_data[:license] = false
     end
   end
 
@@ -77,9 +81,4 @@ class Facility
       false
     end
   end
-
-
-  
-
-
 end
