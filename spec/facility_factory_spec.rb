@@ -28,6 +28,7 @@ RSpec.describe FacilityFactory do
       expect(@new_york.facilities_created).to eq([])
       @new_york.create_facilities(@new_york_facilities_data)
         # require 'pry';binding.pry
+      expect(@new_york.facilities_created.size).to eq(@new_york_facilities_data.size)
       expect(@new_york.facilities_created).to all be_a Facility
     end
   end
