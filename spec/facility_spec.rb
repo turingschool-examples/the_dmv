@@ -58,7 +58,9 @@ RSpec.describe Facility do
     it "adds a vehicle to the facility's registered vehicles" do
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.registered_vehicles).not_to eq([])
+      @facility_1.register_vehicle(@camaro)
+      expect(@facility_1.registered_vehicles).to eq([@cruz,@camaro])
     end
   end
-  
+
 end

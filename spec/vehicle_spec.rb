@@ -42,6 +42,10 @@ RSpec.describe Vehicle do
         expect(@cruz.registration_date).to eq(nil)
         @facility_1.register_vehicle(@cruz)
         expect(@cruz.registration_date).not_to eq(nil)
+
+        expect(@camaro.registration_date).to eq(nil)
+        @facility_1.register_vehicle(@camaro)
+        expect(@camaro.registration_date).not_to eq(nil)
     end
   end
 
