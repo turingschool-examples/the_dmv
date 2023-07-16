@@ -4,45 +4,38 @@ class Facility
   :phone,
   :services,
   :registered_vehicles,
-  :collected_fees,
-  :registration_date
+  :collected_fees
 
   def initialize(info = {})
     @name = info[:name]
     @address = info[:address]
     @phone = info[:phone]
     @services = []
+    @registered_vehicles = []
+    @collected_fees = 0
   end
 
-  # can probably refactor this in to the initialization
   def add_service(services)
     @services << services
   end
 
-  def registered_vehicles
-    @registered_vehicles = []
-  end
-
-  def collected_fees
-    @collected_fees = 0
-  end
-
   def register_vehicle(vehicle)
-    @registered_vehicles << (vehicle)
-    @registration_date = Date.today
+    vehicle.registration_date = Date.today
+    @registered_vehicles << vehicle
 
-    if electric_vehicle?
+    if vehicle.electric_vehicle?
       plate_type = :ev
       collected_fees = 200
-    elsif antique?
+    elsif vehicle.antique?
       plate_type = :antique
       collected_fees = 25
-    elsif regular
+    else
       plate_type = :regular
       collected_fees = 100
     end
-    
+
     @collected_fees += collected_fees
     @registered_vehicles
+    @registration_date
   end
 end
