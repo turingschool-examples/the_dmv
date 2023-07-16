@@ -67,4 +67,8 @@ class Facility
       :regular
     end
   end
+
+  def administer_written_test(registrant)
+    registrant.permit? && registrant.age >= 16
+  end
 end
