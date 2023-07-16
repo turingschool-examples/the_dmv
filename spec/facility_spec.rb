@@ -60,6 +60,8 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).not_to eq([])
       @facility_1.register_vehicle(@camaro)
       expect(@facility_1.registered_vehicles).to eq([@cruz,@camaro])
+      expect(@facility_1.register_vehicle(@bolt)).to eq([@cruz,@camaro,@bolt])
+
     end
   end
 
