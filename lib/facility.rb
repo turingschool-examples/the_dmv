@@ -16,6 +16,7 @@ class Facility
 
   def register_vehicle(vehicle)
     @registered_vehicles << vehicle
+    @registration_date = Date.today.year
   end
 
   def collected_fees

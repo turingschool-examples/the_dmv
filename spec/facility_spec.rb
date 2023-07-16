@@ -52,7 +52,7 @@ RSpec.describe Facility do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       @facility.register_vehicle(cruz)
 
-      expect(@facility.collected_fees).to eq(100])
+      expect(@facility.collected_fees).to eq(100)
     end
   end
 end
