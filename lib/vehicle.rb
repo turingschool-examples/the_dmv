@@ -32,7 +32,9 @@ class Vehicle
   end
 
   def set_plate_type
-    if year <= 1970
+    if engine == :ev
+      @plate_type = :ev
+    elsif year <= 1998
       @plate_type = :antique
     else 
       @plate_type = :regular
