@@ -24,24 +24,23 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    @registered_vehicles << (vehicle)
-    vehicle.registration_date = Date.today
-
-    if vehicle.electric_vehicle?
-      vehicle.plate_type = :ev
-      vehicle.collected_fees = 200
-    elsif vehicle.antique?
-      vehicle.plate_type = :antique 
-      vehicle.collected_fees = 25
-    else
-      vehicle.plate_type = :regular 
-      vehicle.collected_fees = 100
+    if @services.include?('Vehicle Registration')
+    
+      vehicle.registration_date = Date.today
+      
+      if vehicle.electric_vehicle?
+        vehicle.plate_type = :ev
+        @collected_fees += 200
+      elsif vehicle.antique?
+        vehicle.plate_type = :antique 
+        @collected_fees += 25
+      else
+        vehicle.plate_type = :regular 
+        @collected_fees += 100
+      end
+      @registered_vehicles << (vehicle)
     end
-
-    @registered_vehicles
   end 
-
-)
 
   #administer_written
   ## Only if age >= 16 && have @permit
@@ -55,11 +54,4 @@ class Facility
   ## Can be renewed if the registrain has already passed the road test and earned a license
   ## if passed_road_test && earned_license
 
-
-    # @plate_type = {:regular, :antique, :ev}
-      # cost $25 to register an antique
-    # cost $200 to register
-    #  all_other_vehicles cost $100 to register
-
-    #collected_fees equal to fees collected for registration?
 end
