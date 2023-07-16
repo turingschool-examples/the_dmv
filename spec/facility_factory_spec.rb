@@ -24,12 +24,12 @@ RSpec.describe FacilityFactory do
       expect(@colorado.facilities_created).to all be_a Facility
     end
       
-  #   it "can create new york facilities" do
-  #     expect(@new_york.facilities_created).to eq([])
-  #     @new_york.create_facilities(@new_york_facilities_data)
-  #      #  require 'pry';binding.pry
-  #     expect(@new_york.facilities_created).to all be_a Facility
-  #   end
+    it "can create new york facilities" do
+      expect(@new_york.facilities_created).to eq([])
+      @new_york.create_facilities(@new_york_facilities_data)
+        require 'pry';binding.pry
+      expect(@new_york.facilities_created).to all be_a Facility
+    end
   end
 
   describe "#format_facility_name" do 
@@ -55,47 +55,65 @@ RSpec.describe FacilityFactory do
   end
   
   describe "#format_facility_address" do 
-  it "formats CO facilities addresses" do 
-    random_co_facility_sample = @colorado_facilities_data.sample
-    expect(@colorado.format_facility_address(random_co_facility_sample)).to be_a String
+    it "formats CO facilities addresses" do 
+      random_co_facility_sample = @colorado_facilities_data.sample
+      expect(@colorado.format_facility_address(random_co_facility_sample)).to be_a String
+      
+      co_facility_sample_1 = @colorado_facilities_data[1]
+      expect(@colorado.format_facility_address(co_facility_sample_1)).to eq("4685 Peoria Street Suite 101 Denver CO 80239")
+      
+      co_facility_sample_2 = @colorado_facilities_data[2]
+      expect(@colorado.format_facility_address(co_facility_sample_2)).to eq("3698 W. 44th Avenue Denver CO 80211")
+    end
     
-    co_facility_sample_1 = @colorado_facilities_data[1]
-    expect(@colorado.format_facility_address(co_facility_sample_1)).to eq("4685 Peoria Street Suite 101 Denver CO 80239")
-    
-    co_facility_sample_2 = @colorado_facilities_data[2]
-    expect(@colorado.format_facility_address(co_facility_sample_2)).to eq("3698 W. 44th Avenue Denver CO 80211")
-  end
-  
-  it "formats NY facility addresses" do 
-    random_ny_facility_sample = @new_york_facilities_data.sample
-    expect(@new_york.format_facility_address(random_ny_facility_sample)).to be_a String
-    
-    
-    ny_facility_sample_1 = @new_york_facilities_data[0]
-    expect(@new_york.format_facility_address(ny_facility_sample_1)).to eq("168-46 91st Ave., 2nd Flr Jamaica NY 11432")
+    it "formats NY facility addresses" do 
+      random_ny_facility_sample = @new_york_facilities_data.sample
+      expect(@new_york.format_facility_address(random_ny_facility_sample)).to be_a String
+      
+      
+      ny_facility_sample_1 = @new_york_facilities_data[0]
+      expect(@new_york.format_facility_address(ny_facility_sample_1)).to eq("168-46 91st Ave., 2nd Flr Jamaica NY 11432")
     end
   end 
-    
+  
   describe "#format_facility_phone" do 
-    it "formats CO facilities phone number" do 
-      random_co_facility_sample = @colorado_facilities_data.sample
-      expect(@colorado.format_facility_phone(random_co_facility_sample)).to be_a String
-        
-      co_facility_sample_1 = @colorado_facilities_data[1]
-      expect(@colorado.format_facility_phone(co_facility_sample_1)).to eq("(720) 865-4600")
+  it "formats CO facilities phone number" do 
+    random_co_facility_sample = @colorado_facilities_data.sample
+    expect(@colorado.format_facility_phone(random_co_facility_sample)).to be_a String
+    
+    co_facility_sample_1 = @colorado_facilities_data[1]
+    expect(@colorado.format_facility_phone(co_facility_sample_1)).to eq("(720) 865-4600")
+    
+    co_facility_sample_2 = @colorado_facilities_data[2]
+    expect(@colorado.format_facility_phone(co_facility_sample_2)).to eq("(720) 865-4600")
+  end
+  
+  it "formats NY facilities phone number" do 
+    random_ny_facility_sample = @new_york_facilities_data.sample
+    expect(@new_york.format_facility_phone(random_ny_facility_sample)).to be_a String
 
-      co_facility_sample_2 = @colorado_facilities_data[2]
-      expect(@colorado.format_facility_phone(co_facility_sample_2)).to eq("(720) 865-4600")
     end
   end
 
-  describe "capitalize string" do 
+  describe "#capitalize_string" do 
     it "capitalizes every word in a string other than state abbreviations" do 
-      string = "JAMAICA DISTRICT OFFICE"
+      string_1 = "JAMAICA DISTRICT OFFICE"
       string_2 = "168-46 91ST AVE., 2ND FLR JAMAICA NY 11432"
 
-      expect(@new_york.capitalize_string(string)).to eq("Jamaica District Office")
+      expect(@new_york.capitalize_string(string_1)).to eq("Jamaica District Office")
       expect(@new_york.capitalize_string(string_2)).to eq("168-46 91st Ave., 2nd Flr Jamaica NY 11432")
+    end
+  end
+
+  describe "#format_digits" do 
+    it "formats phone numbers to similar format as other states" do 
+      number_string_1 = "5184869786"
+      number_string_2 = "7189666155"
+      nil_digits = nil
+
+      expect(@new_york.format_digits(number_string_1)).to eq("(518) 486-9786")
+      expect(@new_york.format_digits(number_string_2)).to eq("(718) 966-6155")
+      expect(@new_york.format_digits(nil_digits)).to eq("No phone number listed")
     end
   end
 end
