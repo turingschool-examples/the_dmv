@@ -64,6 +64,24 @@ class Facility
     end
   end
 
+  #multiple data adjustments
+  def name_finder(facility_details)
+    if facility_details[:name]
+      facility_details[:name]
+    end
+  end
+
+  def 
+
+
+
+    @name = facility_details[:name]
+    @address = facility_details[:address]
+    @phone = facility_details[:phone]
+    @services = []
+    @registered_vehicles = []
+    @collected_fees = 0
+
 
 
 
