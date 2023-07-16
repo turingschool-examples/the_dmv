@@ -14,6 +14,7 @@ class Facility
     @services = []
     @registered_vehicles = []
     @registration_date = nil
+    @collected_fees = 0
   end
 
   def add_services(service)

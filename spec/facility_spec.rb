@@ -46,6 +46,7 @@ RSpec.describe Facility do
 
   describe '#shows collected fees' do 
     it '#shows collected fees' do
+      # require 'pry' ; binding.pry
       expect(@facility_1.collected_fees).to eq(0)
     end
   end
@@ -62,7 +63,7 @@ RSpec.describe Facility do
   end
 
   describe "#show registered vehicles" do
-    it "#shows regitered vehicles" do
+    it "#shows registered vehicles" do
       @facility_1.add_services('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       # require 'pry' ; binding.pry
@@ -71,14 +72,49 @@ RSpec.describe Facility do
     end
   end
 
-  describe "#register camaro, show reg date and plate type" do # test passes
+  describe "#register camaro, show reg date and plate type" do # 8 test passes 0 failures
     it "#register camaro, show reg date and plate type" do
       @facility_1.add_services('Vehicle Registration')
       @facility_1.register_vehicle(@camaro)
-      require 'pry' ; binding.pry
+      # require 'pry' ; binding.pry
       expect(@facility_1.register_vehicle(@camaro)).to include(@camaro)
       expect(@camaro.registration_date).to eq(Date.today)
       expect(@facility_1.plate_type(@camaro)).to eq(:antique)
+    end
+  end
+
+  describe "#register bolt, show reg date and plate type" do # 8 test passes 0 failures
+    it "#register camaro, show reg date and plate type" do
+      @facility_1.add_services('Vehicle Registration')
+      @facility_1.register_vehicle(@bolt)
+      # require 'pry' ; binding.pry
+      expect(@facility_1.register_vehicle(@bolt)).to include(@bolt)
+      expect(@bolt.registration_date).to eq(Date.today)
+      expect(@facility_1.plate_type(@bolt)).to eq(:ev)
+    end
+  end
+
+  describe "#Shows facility 1 collected fees" do
+    it "#Shows facility 1 collected fees" do
+      @facility_1.add_services('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+      # require 'pry' ; binding.pry
+      expect(@facility_1.collected_fees).to eq(325)
+    end
+  end
+
+  describe "#Shows facility 2 registered vehicles" do
+    it "#Shows facility 2 registered vehicles" do
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.services).to eq([])
+
+      @facility_2.register_vehicle(@bolt)
+      # require 'pry' ; binding.pry
+      expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
     end
   end
 end
