@@ -1,6 +1,7 @@
 class VehicleFactory
   attr_reader :created_vehicles
 
+  #not all classes need an initialize - State vs. behavior
   def initialize
     @created_vehicles = []
   end
