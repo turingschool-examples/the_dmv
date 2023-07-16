@@ -1,9 +1,4 @@
 class VehicleFactory
-  attr_reader
-
-  def initialize
-
-  end
 
   def create_vehicles(registration_location)
     new_vehicles = []
