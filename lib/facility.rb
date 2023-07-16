@@ -4,10 +4,10 @@ class Facility
               :phone, 
               :services
 
-  def initialize(details = {})
-    @name = details[:name]
-    @address = details[:address]
-    @phone = details[:phone]
+  def initialize(facility_details = {})
+    @name = facility_details[:name]
+    @address = facility_details[:address]
+    @phone = facility_details[:phone]
     @services = []
   end
 
@@ -18,8 +18,6 @@ class Facility
   def offers_service?(service)
     @service.include?(service)
   end
-
-  def 
 
   #administer_written
   ## Only if age >= 16 && have @permit
