@@ -81,10 +81,12 @@ RSpec.describe FacilityFactory do
   end
 
   describe "capitalize string" do 
-    it "capitalizes every word in a string" do 
+    it "capitalizes every word in a string other than state abbreviations" do 
       string = "JAMAICA DISTRICT OFFICE"
+      string_2 = "168-46 91ST AVE., 2ND FLR JAMAICA NY 11432"
 
       expect(@new_york.capitalize_string(string)).to eq("Jamaica District Office")
+      expect(@new_york.capitalize_string(string_2)).to eq("168-46 91st Ave., 2nd Flr Jamaica NY 11432")
     end
   end
 end
