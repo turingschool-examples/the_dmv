@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Dmv do
-  before(:each) do
+  before do
     @dmv = Dmv.new
     @facility_1 = Facility.new({name: 'DMV Tremont Branch',
       address: '2855 Tremont Place Suite 118 Denver CO 80205',
@@ -21,7 +21,7 @@ RSpec.describe Dmv do
     end
   end
 
-  describe '#add facilities' do
+  describe '#add_facilities' do
     it 'can add available facilities' do
       expect(@dmv.facilities).to eq([])
       @dmv.add_facility(@facility_1)

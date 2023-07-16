@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Facility do
-  before(:each) do
+  before do
     @facility_1 = Facility.new({name: 'DMV Tremont Branch', 
     address: '2855 Tremont Place Suite 118 Denver CO 80205', 
     phone: '(720) 865-4600'
@@ -33,7 +33,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#add service' do
+  describe '#add_service' do
     it 'can add available services' do
       expect(@facility_1.services).to eq([])
       
@@ -41,6 +41,15 @@ RSpec.describe Facility do
       @facility_1.add_service('Renew Drivers License')
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+    end
+  end
+
+  describe '#registered_vehicles' do
+    xit 'can register vehicles' do
+      excpect(facility_1.register_vehicle(cruz)).to eq
+    
+
+      require 'pry';binding.pry
     end
   end
 end
