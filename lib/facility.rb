@@ -8,7 +8,6 @@ class Facility
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
-    @registration_date = registration_date
   end
 
   def registration_date
