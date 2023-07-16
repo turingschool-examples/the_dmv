@@ -7,7 +7,8 @@ class Vehicle
                 :model,
                 :engine,
                 :registration_date,
-                :plate_type
+                :plate_type,
+                :collected_fees
 
   def initialize(vehicle_details)
     @vin = vehicle_details[:vin]
@@ -17,6 +18,7 @@ class Vehicle
     @engine = vehicle_details[:engine]
     @plate_type = vehicle_details[:plate_type]
     @registration_date = nil
+    @collected_fees = 0
   end
 
   def antique?

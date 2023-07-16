@@ -29,15 +29,19 @@ class Facility
 
     if vehicle.electric_vehicle?
       vehicle.plate_type = :ev
+      vehicle.collected_fees = 200
     elsif vehicle.antique?
-      vehicle.plate_type = :antique
+      vehicle.plate_type = :antique 
+      vehicle.collected_fees = 25
     else
-      vehicle.plate_type = :regular
+      vehicle.plate_type = :regular 
+      vehicle.collected_fees = 100
     end
-  
+
     @registered_vehicles
   end 
-    
+
+)
 
   #administer_written
   ## Only if age >= 16 && have @permit
