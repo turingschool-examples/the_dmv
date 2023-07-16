@@ -76,72 +76,72 @@ RSpec.describe FacilityFactory do
   end
   
   describe "#format_facility_address" do 
-  it "formats CO facilities addresses" do 
-    random_co_facility_sample = @colorado_facilities_data.sample
-    expect(@colorado.format_facility_address(random_co_facility_sample)).to be_a String
+    it "formats CO facilities addresses" do 
+      random_co_facility_sample = @colorado_facilities_data.sample
+      expect(@colorado.format_facility_address(random_co_facility_sample)).to be_a String
+      
+      co_facility_sample_1 = @colorado_facilities_data[1]
+      expect(@colorado.format_facility_address(co_facility_sample_1)).to eq("4685 Peoria Street Suite 101 Denver CO 80239")
+      
+      co_facility_sample_2 = @colorado_facilities_data[2]
+      expect(@colorado.format_facility_address(co_facility_sample_2)).to eq("3698 W. 44th Avenue Denver CO 80211")
+    end
     
-    co_facility_sample_1 = @colorado_facilities_data[1]
-    expect(@colorado.format_facility_address(co_facility_sample_1)).to eq("4685 Peoria Street Suite 101 Denver CO 80239")
+    it "formats NY facility addresses" do 
+      random_ny_facility_sample = @new_york_facilities_data.sample
+      expect(@new_york.format_facility_address(random_ny_facility_sample)).to be_a String
+      
+      
+      ny_facility_sample_1 = @new_york_facilities_data[0]
+      expect(@new_york.format_facility_address(ny_facility_sample_1)).to eq("168-46 91st Ave., 2nd Flr Jamaica NY 11432")
+    end
     
-    co_facility_sample_2 = @colorado_facilities_data[2]
-    expect(@colorado.format_facility_address(co_facility_sample_2)).to eq("3698 W. 44th Avenue Denver CO 80211")
-  end
-  
-  it "formats NY facility addresses" do 
-    random_ny_facility_sample = @new_york_facilities_data.sample
-    expect(@new_york.format_facility_address(random_ny_facility_sample)).to be_a String
+    it "formats MO facility addresses" do 
+      random_mo_facility_sample = @missouri_facilities_data.sample
+      expect(@missouri.format_facility_address(random_mo_facility_sample)).to be_a String
     
-    
-    ny_facility_sample_1 = @new_york_facilities_data[0]
-    expect(@new_york.format_facility_address(ny_facility_sample_1)).to eq("168-46 91st Ave., 2nd Flr Jamaica NY 11432")
-  end
-  
-  it "formats MO facility addresses" do 
-    random_mo_facility_sample = @missouri_facilities_data.sample
-    expect(@missouri.format_facility_address(random_mo_facility_sample)).to be_a String
-  
-    mo_facility_sample_1 = @missouri_facilities_data[0]
-    expect(@missouri.format_facility_address(mo_facility_sample_1)).to eq("3164 Telegraph Road St Louis MO 63125")
-    
-    mo_facility_sample_2 = @missouri_facilities_data[1]
-    expect(@missouri.format_facility_address(mo_facility_sample_2)).to eq("141 N Meramec Ave, Ste 201 Clayton MO 63105")
-  end
-end 
+      mo_facility_sample_1 = @missouri_facilities_data[0]
+      expect(@missouri.format_facility_address(mo_facility_sample_1)).to eq("3164 Telegraph Road St Louis MO 63125")
+      
+      mo_facility_sample_2 = @missouri_facilities_data[1]
+      expect(@missouri.format_facility_address(mo_facility_sample_2)).to eq("141 N Meramec Ave, Ste 201 Clayton MO 63105")
+    end
+  end 
 
-describe "#format_facility_phone" do 
-  it "formats CO facilities phone number" do 
-    random_co_facility_sample = @colorado_facilities_data.sample
-    expect(@colorado.format_facility_phone(random_co_facility_sample)).to be_a String
-    
-    co_facility_sample_1 = @colorado_facilities_data[1]
-    expect(@colorado.format_facility_phone(co_facility_sample_1)).to eq("(720) 865-4600")
-    
-    co_facility_sample_2 = @colorado_facilities_data[2]
-    expect(@colorado.format_facility_phone(co_facility_sample_2)).to eq("(720) 865-4600")
-  end
+  describe "#format_facility_phone" do 
+    it "formats CO facilities phone number" do 
+      random_co_facility_sample = @colorado_facilities_data.sample
+      expect(@colorado.format_facility_phone(random_co_facility_sample)).to be_a String
+      
+      co_facility_sample_1 = @colorado_facilities_data[1]
+      expect(@colorado.format_facility_phone(co_facility_sample_1)).to eq("(720) 865-4600")
+      
+      co_facility_sample_2 = @colorado_facilities_data[2]
+      expect(@colorado.format_facility_phone(co_facility_sample_2)).to eq("(720) 865-4600")
+    end
 
-  it "formats NY facilities phone number" do 
-    random_ny_facility_sample = @new_york_facilities_data.sample
-    expect(@new_york.format_facility_phone(random_ny_facility_sample)).to be_a String
-    
-    ny_facility_sample_1 = @new_york_facilities_data[0]
-    expect(@new_york.format_facility_phone(ny_facility_sample_1)).to eq("(718) 966-6155")
-    
-    ny_facility_sample_2 = @new_york_facilities_data[1]
-    expect(@new_york.format_facility_phone(ny_facility_sample_2)).to eq("No phone number listed")
-  end
+    it "formats NY facilities phone number" do 
+      random_ny_facility_sample = @new_york_facilities_data.sample
+      expect(@new_york.format_facility_phone(random_ny_facility_sample)).to be_a String
+      
+      ny_facility_sample_1 = @new_york_facilities_data[0]
+      expect(@new_york.format_facility_phone(ny_facility_sample_1)).to eq("(718) 966-6155")
+      
+      ny_facility_sample_2 = @new_york_facilities_data[1]
+      expect(@new_york.format_facility_phone(ny_facility_sample_2)).to eq("No phone number listed")
+    end
 
-  it "formats MO facilities phone number" do 
-    random_mo_facility_sample = @missouri_facilities_data.sample
-    expect(@missouri.format_facility_phone(random_mo_facility_sample)).to be_a String
+    it "formats MO facilities phone number" do 
+      random_mo_facility_sample = @missouri_facilities_data.sample
+      expect(@missouri.format_facility_phone(random_mo_facility_sample)).to be_a String
 
-    mo_facility_sample_1 = @missouri_facilities_data[0]
-    expect(@missouri.format_facility_phone(mo_facility_sample_1)).to eq("(314) 887-1050")
+      mo_facility_sample_1 = @missouri_facilities_data[0]
+      expect(@missouri.format_facility_phone(mo_facility_sample_1)).to eq("(314) 887-1050")
 
-    mo_facility_sample_2 = @missouri_facilities_data[1]
-    expect(@missouri.format_facility_phone(mo_facility_sample_2)).to eq("(314) 499-7223")
-  end
-end 
+      mo_facility_sample_2 = @missouri_facilities_data[1]
+      expect(@missouri.format_facility_phone(mo_facility_sample_2)).to eq("(314) 499-7223")
+    end
+  end 
 
   describe "#capitalize_string" do 
     it "capitalizes every word in a string other than state abbreviations" do 
