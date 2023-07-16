@@ -36,16 +36,12 @@ class Facility
       @registered_vehicles
     end
   end
-  # def collected_fees
-  #   fees = 0
-  #   years_old = 2023 - @year
-  #   if years_old >= 25
-  #     fees += 25
-  #   elsif @engine == :ev
-  #     fees += 200
-  #   else
-  #     fees += 100
-  #   end
-  #   fees
-  # end
+
+  def administer_written_test(registrant)
+    if registrant.permit? && @services.include?("Written Test") && registrant.age >= 16
+      registrant.license_data[:written] = true
+    else
+      registrant.license_data[:written]
+    end
+  end
 end
