@@ -20,4 +20,15 @@ describe "initialize" do
 
     expect(registrant_2.permit?).to eq(true)
   end
+
+  it "administers a written test" do
+  end
+
+  it "administers a road test" do
+  end
+
+  it "renews drivers license" do
+  end
+  
+
 end

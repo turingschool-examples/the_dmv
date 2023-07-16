@@ -3,8 +3,8 @@ class Dmv
 
   def initialize(details = {})
     @name = details[:name]
-   @address = details[:address]
-   @phone = details[:phone]
+    @address = details[:address]
+    @phone = details[:phone]
     @facilities = []
   end
 
