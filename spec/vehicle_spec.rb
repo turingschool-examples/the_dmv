@@ -44,4 +44,12 @@ RSpec.describe Vehicle do
         expect(@cruz.registration_date).not_to eq(nil)
     end
   end
+
+  describe "#plate_type" do
+    it 'can add a plate type when registering a vehicle' do
+      expect(@cruz.plate_type).to eq(nil)
+      @facility_1.register_vehicle(@cruz)
+      expect(@cruz.plate_type).to eq(:regular)
+    end
+  end
 end
