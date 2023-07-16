@@ -55,15 +55,24 @@ RSpec.describe FacilityFactory do
   end
   
   describe "#format_facility_address" do 
-    it "formats CO facilities addresses" do 
-      random_co_facility_sample = @colorado_facilities_data.sample
-      expect(@colorado.format_facility_address(random_co_facility_sample)).to be_a String
-      
-      co_facility_sample_1 = @colorado_facilities_data[1]
-      expect(@colorado.format_facility_address(co_facility_sample_1)).to eq("4685 Peoria Street Suite 101 Denver CO 80239")
-      
-      co_facility_sample_2 = @colorado_facilities_data[2]
-      expect(@colorado.format_facility_address(co_facility_sample_2)).to eq("3698 W. 44th Avenue Denver CO 80211")
+  it "formats CO facilities addresses" do 
+    random_co_facility_sample = @colorado_facilities_data.sample
+    expect(@colorado.format_facility_address(random_co_facility_sample)).to be_a String
+    
+    co_facility_sample_1 = @colorado_facilities_data[1]
+    expect(@colorado.format_facility_address(co_facility_sample_1)).to eq("4685 Peoria Street Suite 101 Denver CO 80239")
+    
+    co_facility_sample_2 = @colorado_facilities_data[2]
+    expect(@colorado.format_facility_address(co_facility_sample_2)).to eq("3698 W. 44th Avenue Denver CO 80211")
+  end
+  
+  it "formats NY facility addresses" do 
+    random_ny_facility_sample = @new_york_facilities_data.sample
+    expect(@new_york.format_facility_address(random_ny_facility_sample)).to be_a String
+    
+    
+    ny_facility_sample_1 = @new_york_facilities_data[0]
+    expect(@new_york.format_facility_address(ny_facility_sample_1)).to eq("168-46 91st Ave., 2nd Flr Jamaica NY 11432")
     end
   end 
     
