@@ -25,5 +25,8 @@ class Vehicle
     @engine == :ev
   end
 
+  def set_registration_date(time)
+    @registration_date = time
+  end
   
 end
