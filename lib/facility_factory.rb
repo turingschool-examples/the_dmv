@@ -1,11 +1,6 @@
 class FacilityFactory
-  attr_reader :co_location
   def initialize
-
   end
-  
-
-
 
   def create_factory(office_locations)
      office_locations.map do |office_data|
@@ -20,8 +15,6 @@ class FacilityFactory
         },
         phone: office_data[:phone] || office_data [:public_phone_number]
         })
-    
-      
     end
   end
 end
