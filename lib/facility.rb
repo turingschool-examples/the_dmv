@@ -1,3 +1,5 @@
+require './lib/vehicle.rb'
+
 class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
@@ -18,12 +20,15 @@ class Facility
     if @services.include?('Vehicle Registration')    
       if vehicle.antique? == true
         @collected_fees =+ 25
+        vehicle.registration_date = Date.today
         @registered_vehicles << vehicle
       elsif vehicle.engine == :ev
         @collected_fees =+ 200
+        vehicle.registration_date = Date.today
         @registered_vehicles << vehicle
       else
         @collected_fees =+ 100
+        vehicle.registration_date = Date.today
         @registered_vehicles << vehicle
       end
     else
