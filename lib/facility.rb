@@ -22,6 +22,7 @@ class Facility
   def register_vehicle(vehicle)
     vehicle.set_registration_date(Time.now)
     vehicle.set_plate_type
+    @collected_fees += 100
     @registered_vehicles << vehicle
   end
 end
