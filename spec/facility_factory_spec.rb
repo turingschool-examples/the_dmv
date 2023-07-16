@@ -18,11 +18,18 @@ RSpec.describe FacilityFactory do
 
   describe "#create_facilities" do
     it "can create new colorado facilities" do
-       expect(@colorado.facilities_created).to eq([])
-       @colorado.create_facilities(@colorado_facilities_data)
+      expect(@colorado.facilities_created).to eq([])
+      @colorado.create_facilities(@colorado_facilities_data)
       #  require 'pry';binding.pry
-       expect(@colorado.facilities_created).to all be_a Facility
+      expect(@colorado.facilities_created).to all be_a Facility
     end
+      
+  #   it "can create new york facilities" do
+  #     expect(@new_york.facilities_created).to eq([])
+  #     @new_york.create_facilities(@new_york_facilities_data)
+  #      #  require 'pry';binding.pry
+  #     expect(@new_york.facilities_created).to all be_a Facility
+  #   end
   end
 
   describe "#format_facility_name" do 
@@ -33,6 +40,14 @@ RSpec.describe FacilityFactory do
       # specific_co_facility_sample = {"the_geom":{"type":"Point","coordinates":[-104.97443112500002,39.75525297420336]},"dmv_id":"1","dmv_office":"DMV Tremont Branch","address_li":"2855 Tremont Place","address__1":"Suite 118","city":"Denver","state":"CO","zip":"80205","phone":"(720) 865-4600","hours":"Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.","services_p":"vehicle titles, registration, renewals;  VIN inspections","parking_no":"parking available in the lot at the back of the bldg (Glenarm Street)","photo":"images/Tremont.jpg","address_id":"175164",":@computed_region_nku6_53ud":"1444"}
       co_facility_sample_1 = @colorado_facilities_data[0]
       expect(@colorado.format_facility_name(co_facility_sample_1)).to eq("DMV Tremont Branch")
+    end
+    
+    it "formats NY facilities names" do 
+      random_ny_facility_sample = @new_york_facilities_data.sample
+      expect(@new_york.format_facility_name(random_ny_facility_sample)).to be_a String
+
+      ny_facility_sample_1 = @new_york_facilities_data[0]
+      expect(@new_york.format_facility_name(ny_facility_sample_1)).to eq("Jamaica District Office")
     end
   end
   
@@ -59,6 +74,14 @@ RSpec.describe FacilityFactory do
 
       co_facility_sample_2 = @colorado_facilities_data[2]
       expect(@colorado.format_facility_phone(co_facility_sample_2)).to eq("(720) 865-4600")
+    end
+  end
+
+  describe "capitalize string" do 
+    it "capitalizes every word in a string" do 
+      string = "JAMAICA DISTRICT OFFICE"
+
+      expect(@new_york.capitalize_string(string)).to eq("Jamaica District Office")
     end
   end
 end
