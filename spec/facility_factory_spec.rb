@@ -32,6 +32,14 @@ RSpec.describe FacilityFactory do
       expect(@new_york.facilities_created.size).to eq(@new_york_facilities_data.size)
       expect(@new_york.facilities_created).to all be_a Facility
     end
+    
+    it "can create Missouri facilities" do 
+      expect(@missouri.facilities_created).to eq([])
+      @missouri.create_facilities(@missouri_facilities_data)
+        # require 'pry';binding.pry
+      expect(@missouri.facilities_created.size).to eq(@missouri_facilities_data.size)
+      expect(@missouri.facilities_created).to all be_a Facility
+    end 
   end
 
   describe "#format_facility_name" do 
@@ -132,7 +140,8 @@ describe "#format_facility_phone" do
 
     mo_facility_sample_2 = @missouri_facilities_data[1]
     expect(@missouri.format_facility_phone(mo_facility_sample_2)).to eq("(314) 499-7223")
-end
+  end
+end 
 
   describe "#capitalize_string" do 
     it "capitalizes every word in a string other than state abbreviations" do 
