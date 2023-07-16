@@ -55,7 +55,6 @@ class Facility
       end
     else
       false
-      # registrant.license_data[:license] = false
     end
   end
 
@@ -82,9 +81,4 @@ class Facility
       false
     end
   end
-
-
-  
-
-
 end
