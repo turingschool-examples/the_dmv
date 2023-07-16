@@ -5,13 +5,13 @@ class VehicleFactory
   end
   
   def create_vehicles(database)
-    database.each { |data| 
+    database.each { |vehicle| 
       @vehicles << Vehicle.new({
       engine: :ev,
-      make: data[:make],
-      model: data[:model],
-      vin: data[:vin_1_10],
-      year: data[:model_year]
+      make: vehicle[:make],
+      model: vehicle[:model],
+      vin: vehicle[:vin_1_10],
+      year: vehicle[:model_year]
       })
     } 
   end
