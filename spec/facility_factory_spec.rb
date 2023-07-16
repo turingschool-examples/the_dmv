@@ -21,6 +21,7 @@ RSpec.describe FacilityFactory do
       expect(@colorado.facilities_created).to eq([])
       @colorado.create_facilities(@colorado_facilities_data)
       #  require 'pry';binding.pry
+      expect(@colorado.facilities_created.size).to eq(@colorado_facilities_data.size)
       expect(@colorado.facilities_created).to all be_a Facility
     end
       
@@ -52,6 +53,17 @@ RSpec.describe FacilityFactory do
       
       ny_facility_sample_2 = @new_york_facilities_data[1]
       expect(@new_york.format_facility_name(ny_facility_sample_2)).to eq("Riverhead Kiosk District Office")
+    end
+    
+    it "formats MO facilities names" do 
+      random_mo_facility_sample = @missouri_facilities_data.sample
+      expect(@missouri.format_facility_name(random_mo_facility_sample)).to be_a String
+  
+      mo_facility_sample_1 = @missouri_facilities_data[0]
+      expect(@missouri.format_facility_name(mo_facility_sample_1)).to eq("Oakville")
+      
+      mo_facility_sample_2 = @missouri_facilities_data[1]
+      expect(@missouri.format_facility_name(mo_facility_sample_2)).to eq("Clayton")
     end
   end
   
