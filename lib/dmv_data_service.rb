@@ -13,14 +13,14 @@ class DmvDataService
   
   def co_dmv_office_locations
     @co_dmv_office_locations ||= load_data('https://data.colorado.gov/resource/dsw3-mrn4.json')
-    # require 'pry';binding.pry
   end
   
   def ny_dmv_office_locations
     @ny_dmv_office_locations ||= load_data('https://data.ny.gov/resource/9upz-c7xg.json')
   end
-
+  
   def mo_dmv_office_locations
     @mo_dmv_office_locations ||= load_data('https://data.mo.gov/resource/835g-7keg.json')
+    # require 'pry';binding.pry
   end
 end
