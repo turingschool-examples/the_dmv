@@ -20,21 +20,22 @@ class Facility
   end
 
   def register_vehicle(new_vehicle)
-    @registered_vehicles << new_vehicle
-    new_vehicle.registration_date = Date.today
-    if new_vehicle.antique?
-      @collected_fees += 25
-      new_vehicle.plate_type = :antique
-    elsif new_vehicle.electric_vehicle?
-      @collected_fees += 200
-      new_vehicle.plate_type = :ev
-    else
-      @collected_fees += 100
-      new_vehicle.plate_type = :regular
+    if @services.include?("Vehicle Registration")
+      @registered_vehicles << new_vehicle
+      new_vehicle.registration_date = Date.today
+      if new_vehicle.antique?
+        @collected_fees += 25
+        new_vehicle.plate_type = :antique
+      elsif new_vehicle.electric_vehicle?
+        @collected_fees += 200
+        new_vehicle.plate_type = :ev
+      else
+        @collected_fees += 100
+        new_vehicle.plate_type = :regular
+      end
+      @registered_vehicles
     end
-    @registered_vehicles
   end
-
   # def collected_fees
   #   fees = 0
   #   years_old = 2023 - @year
