@@ -97,11 +97,10 @@ RSpec.describe FacilityFactory do
     
     mo_facility_sample_2 = @missouri_facilities_data[1]
     expect(@missouri.format_facility_address(mo_facility_sample_2)).to eq("141 N Meramec Ave, Ste 201 Clayton MO 63105")
+  end
+end 
 
-    end
-  end 
-  
-  describe "#format_facility_phone" do 
+describe "#format_facility_phone" do 
   it "formats CO facilities phone number" do 
     random_co_facility_sample = @colorado_facilities_data.sample
     expect(@colorado.format_facility_phone(random_co_facility_sample)).to be_a String
@@ -112,7 +111,7 @@ RSpec.describe FacilityFactory do
     co_facility_sample_2 = @colorado_facilities_data[2]
     expect(@colorado.format_facility_phone(co_facility_sample_2)).to eq("(720) 865-4600")
   end
-  
+
   it "formats NY facilities phone number" do 
     random_ny_facility_sample = @new_york_facilities_data.sample
     expect(@new_york.format_facility_phone(random_ny_facility_sample)).to be_a String
@@ -122,8 +121,18 @@ RSpec.describe FacilityFactory do
     
     ny_facility_sample_2 = @new_york_facilities_data[1]
     expect(@new_york.format_facility_phone(ny_facility_sample_2)).to eq("No phone number listed")
-    end
   end
+
+  it "formats MO facilities phone number" do 
+    random_mo_facility_sample = @missouri_facilities_data.sample
+    expect(@missouri.format_facility_phone(random_mo_facility_sample)).to be_a String
+
+    mo_facility_sample_1 = @missouri_facilities_data[0]
+    expect(@missouri.format_facility_phone(mo_facility_sample_1)).to eq("(314) 887-1050")
+
+    mo_facility_sample_2 = @missouri_facilities_data[1]
+    expect(@missouri.format_facility_phone(mo_facility_sample_2)).to eq("(314) 499-7223")
+end
 
   describe "#capitalize_string" do 
     it "capitalizes every word in a string other than state abbreviations" do 
