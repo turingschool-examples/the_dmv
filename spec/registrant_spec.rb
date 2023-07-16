@@ -78,9 +78,15 @@ RSpec.describe Registrant do
       registrant_1 = Registrant.new('Bruce', 18, true )
       registrant_2 = Registrant.new('Penny', 16 )
       registrant_3 = Registrant.new('Tucker', 15 )
+      
       facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
       facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
       
+      facility_1.add_service('Written Test')
+      registrant_2.earn_permit
+      facility_1.administer_written_test(registrant_1)
+      facility_1.administer_written_test(registrant_2)
+
       expect(facility_1.administer_road_test(registrant_3)).to eq(false)
       
       registrant_3.earn_permit
