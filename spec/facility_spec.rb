@@ -34,13 +34,12 @@ RSpec.describe Facility do
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.services).to eq(['Vehicle Registration'])
     end
-    
-    # describe ''
-    # describe '#registration_date' do
-    #   'it can add the registration date of a vehicle' do
+  end
 
-
-
+  describe '#registered_vehicles' do
+    it 'returns an empty array when an instance is created' do
+      expect(@facility_1.registered_vehicles).to eq([])
+    end
   end
 
 end
