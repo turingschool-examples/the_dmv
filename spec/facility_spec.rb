@@ -50,12 +50,35 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#registers vehicle(cruz)' do 
+  describe '#registers vehicle(cruz)' do # pass...facility_1 MUST be in test expect since its orignally passed into that facility to begin with for "Vehicle Registration"
     it '#registers vehicle(cruz)' do
       @facility_1.add_services('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
 
       expect(@facility_1.register_vehicle(@cruz)).to include(@cruz)
+      expect(@cruz.registration_date).to eq(Date.today)
+      expect(@facility_1.plate_type(@cruz)).to eq(:regular)
+    end
+  end
+
+  describe "#show registered vehicles" do
+    it "#shows regitered vehicles" do
+      @facility_1.add_services('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      # require 'pry' ; binding.pry
+      expect(@facility_1.registered_vehicles). to include(@cruz)
+      expect(@facility_1.collected_fees).to eq(100)
+    end
+  end
+
+  describe "#register camaro, show reg date and plate type" do # test passes
+    it "#register camaro, show reg date and plate type" do
+      @facility_1.add_services('Vehicle Registration')
+      @facility_1.register_vehicle(@camaro)
+      require 'pry' ; binding.pry
+      expect(@facility_1.register_vehicle(@camaro)).to include(@camaro)
+      expect(@camaro.registration_date).to eq(Date.today)
+      expect(@facility_1.plate_type(@camaro)).to eq(:antique)
     end
   end
 end
