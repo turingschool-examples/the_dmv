@@ -36,4 +36,10 @@ class Vehicle
       @plate_type = :ev
     end
   end
+
+  def registration_date
+    if @plate_type != nil
+      Date.today.year
+    end
+  end
 end
