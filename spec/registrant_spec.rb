@@ -34,6 +34,7 @@ RSpec.describe Registrant do
       expect(registrant_2.permit?).to eq(true)
     end
   end
+
   describe "#administer_written_test" do
     it "can return a value of true when registrant passes written test" do
       registrant_1 = Registrant.new('Bruce', 18, true )
