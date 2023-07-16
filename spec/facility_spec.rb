@@ -42,4 +42,10 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#collected_fees' do
+    it "returns a 0 value when instance is initiated" do
+      expect(@facility_1.collected_fees).to eq(0)
+    end
+  end
+
 end
