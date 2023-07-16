@@ -39,7 +39,7 @@ class Vehicle
 
   def registration_date
     if @plate_type != nil
-      Date.today.year
+      @registration_date = Date.today
     else
       nil
     end
