@@ -46,6 +46,12 @@ RSpec.describe Facility do
     it "returns a 0 value when instance is initiated" do
       expect(@facility_1.collected_fees).to eq(0)
     end
+
+    it "can add fees after registering vehicles" do
+      expect(@facility_1.collected_fees).to eq(0)
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.collected_fees).to eq(100)
+    end
   end
 
   describe '#register_vehicle' do
@@ -54,4 +60,5 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).not_to eq([])
     end
   end
+  
 end
