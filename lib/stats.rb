@@ -24,5 +24,14 @@ def vehicles_registered_by_year(vehicles)
   year_hash
 end
 
+def most_registrations_by_county(vehicles)
+  county_hash = Hash.new(0)
+  vehicles.each do |vehicle|
+    county_hash[vehicle.county] += 1
+  end
+  county_hash.max_by {|k,v| v}
+end
+
 p most_popular_make_model(vehicles_array)
 p vehicles_registered_by_year(vehicles_array)
+p most_registrations_by_county(vehicles_array)

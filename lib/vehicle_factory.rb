@@ -9,6 +9,7 @@ class VehicleFactory
                   year: car[:model_year],
                   make: car[:make],
                   model: car[:model],
+                  county: car[:county],
                   engine: :ev
                 }
       vehicles_array << Vehicle.new(car_info)
