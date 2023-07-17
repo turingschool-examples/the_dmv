@@ -87,5 +87,4 @@ RSpec.describe Facility do
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
     end
   end
-
 end
