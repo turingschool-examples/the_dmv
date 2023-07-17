@@ -16,7 +16,6 @@ RSpec.describe FacilityFactory do
   describe '#create facilities' do 
     it 'can create facility objects' do 
       ny_facilities = @facility_factory.create_facilities(@new_york_facilities)
-      # require 'pry'; binding.pry
       expect(ny_facilities).to be_a(Facility)
     end
   end
