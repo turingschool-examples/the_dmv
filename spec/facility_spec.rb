@@ -156,10 +156,10 @@ RSpec.describe Facility do
       it "shows details for registrant #2(age, permit?, administer written test)" do
         expect(@registrant_2.age).to eq(16)
         expect(@registrant_2.permit?).to be false
-        expect(@facility_1.administer_written_test(@registrant_2)).to be false
+        expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
 
         @registrant_2.earn_permit
-        expect(@facility_1.administer_written_test(@registrant_2)).to be true
+        expect(@facility_1.administer_written_test(@registrant_2)).to eq(true)
         expect(@registrant_2.license_data).to include({
           written: true,
           license: false,
@@ -171,14 +171,110 @@ RSpec.describe Facility do
       it "shows details for registrant #3(age, permit?, administer written test)" do
         expect(@registrant_3.age).to eq(15)
         expect(@registrant_3.permit?).to be false
-        expect(@facility_1.administer_written_test(@registrant_3)).to be false
+        expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
 
         @registrant_3.earn_permit
-        expect(@facility_1.administer_written_test(@registrant_3)).to be false
+        expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
         expect(@registrant_3.license_data).to include({
           written: false,
           license: false,
           renewed: false})
+      end
+    end
+
+    # Road Test Iteration 2 Portion
+
+    describe 'facility 1 road test registrant 3 shows false' do
+      it 'facility 1 road test registrant 3 shows false' do
+        @registrant_3.license_data[:written] = false
+      # require 'pry' ; binding.pry
+        expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
+        expect(@registrant_3.license_data).to include({
+          written: false,
+          license: false,
+          renewed: false})
+      end
+    end
+
+    describe 'facility 1 road test registrant 1 shows false' do
+      it 'facility 1 road test registrant 1 shows false' do
+        expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
+      end
+    end
+
+    describe '#facility 1 administers road test for registrant 1' do 
+      it '#facility 1 administers road test for registrant 1' do
+        @facility_1.add_services('Written Test')
+        @facility_1.add_services('Road Test')
+        # require 'pry' ; binding.pry
+          expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
+          expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
+          expect(@registrant_1.license_data).to include({
+            written: true,
+            license: true,
+            renewed: false})
+      end
+    end
+
+    describe '#facility 1 administers road test for registrant 2' do 
+      it '#facility 1 administers road test for registrant 2' do
+        @facility_1.add_services('Written Test')
+        @facility_1.add_services('Road Test')
+        @registrant_2.earn_permit
+        # require 'pry' ; binding.pry
+        expect(@facility_1.administer_written_test(@registrant_2)).to eq(true)
+        expect(@facility_1.administer_road_test(@registrant_2)).to eq(true)
+        expect(@registrant_2.license_data).to include({
+          written: true,
+          license: true,
+          renewed: false})
+      end
+    end
+
+    # Renew License Iteration 2
+
+    describe '#facility 1 renews license' do 
+      it '#facility 1 renews license' do
+        expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
+
+        @facility_1.add_services('Written Test')
+        @facility_1.add_services('Road Test')
+        @facility_1.add_services('Renew License')
+        @registrant_1.license_data[:license] = true
+        @facility_1.renew_drivers_license(@registrant_1)
+
+        expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
+        expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(true)
+        expect(@registrant_1.license_data).to include({
+          written: true,
+          license: true,
+          renewed: true})
+      end
+    end
+
+    describe '#facility 1 renews license for registrant 3' do 
+      it '#facility 1 renews license for registrant 3' do
+        expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
+        expect(@registrant_1.license_data).to include({
+          written: false,
+          license: false,
+          renewed: false})
+      end
+    end
+
+    describe '#facility 1 renews license for registrant 2' do 
+      it '#facility 1 renews license for registrant 2' do
+        expect(@facility_1.renew_drivers_license(@registrant_2)).to eq(false)
+        @registrant_2.earn_permit
+        @registrant_2.license_data[:license] = true
+        @facility_1.renew_drivers_license(@registrant_2)
+
+        expect(@facility_1.administer_written_test(@registrant_2)).to eq(true)
+        expect(@facility_1.renew_drivers_license(@registrant_2)).to eq(true)
+        expect(@registrant_2.license_data).to include({
+          written: true,
+          license: true,
+          renewed: true})
       end
     end
 end
