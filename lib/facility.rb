@@ -2,9 +2,9 @@ class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
   def initialize(facility_details)
-    @name = facility_details[:name]
-    @address = facility_details[:address]
-    @phone = facility_details[:phone]
+    @name = name_finder(facility_details)
+    @address = address_finder(facility_details)
+    @phone = phone_finder(facility_details)
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
@@ -64,9 +64,90 @@ class Facility
     end
   end
 
+  #multiple data adjustments
+  def name_finder(facility_details)
+    if facility_details[:name]
+      facility_details[:name]
+    elsif facility_details[:dmv_office]
+      facility_details[:dmv_office]
+    elsif facility_details[:office_name]
+      facility_details[:office_name]
+    end
+  end
 
+  def address_finder(facility_details)
+    if facility_details[:address]
+      facility_details[:address]
+    elsif facility_details[:address_li]
+      co_address_formatter(facility_details)
+    elsif facility_details[:street_address_line_1]
+      ny_address_formatter(facility_details)
+    elsif facility_details[:address1]
+      mo_address_formatter(facility_details)
+    end
+  end
 
+  def phone_finder(facility_details)
+    if facility_details[:phone]
+      facility_details[:phone]
+    elsif facility_details[:public_phone_number]
+      ny_number_formatter(facility_details)
+    end
+  end
 
+  # def services_finder(facility_details)
+  #   if facility_details[:services]
+  #     facility_details[:services]
+  #   elsif facility_details[:services]
+  #     "ahhhhhhh!"
 
+  #   else
+  #     []
+  #   end
+  # end
 
+  def co_address_formatter(facility_details)
+    string = ""
+    if facility_details[:address__1]
+      string << facility_details[:address_li] << " " 
+      string << facility_details[:address__1] << " " 
+      string << facility_details[:city] << " " 
+      string << facility_details[:state] << " "               
+      string << facility_details[:zip]
+    else
+      string << facility_details[:address_li] << " "
+      string << facility_details[:city] << " " 
+      string << facility_details[:state] << " "               
+      string << facility_details[:zip]
+    end
+  end
+
+  def ny_address_formatter(facility_details)
+    string = ""
+    if facility_details[:street_address_line_2]
+      string << facility_details[:street_address_line_1] << " " 
+      string << facility_details[:street_address_line_2] << " " 
+      string << facility_details[:city] << " " 
+      string << facility_details[:state] << " "               
+      string << facility_details[:zip_code]
+    else
+      string << facility_details[:street_address_line_1] << " " 
+      string << facility_details[:city] << " " 
+      string << facility_details[:state] << " "               
+      string << facility_details[:zip_code]
+    end
+  end
+
+  def mo_address_formatter(facility_details)
+    string = ""
+    string << facility_details[:address1] << " " 
+    string << facility_details[:city] << " " 
+    string << facility_details[:state] << " "               
+    string << facility_details[:zipcode]
+  end
+
+  def ny_number_formatter(facility_details)
+    facility_details[:public_phone_number].insert(6, "-").insert(3, ") ").insert(0, "(")
+  end
+    
 end

@@ -33,7 +33,14 @@ class Vehicle
   end
 
   def issue_plate(plate_type)
-    @plate_type = plate_type
+    case plate_type
+    when :antique
+      @plate_type = :antique
+    when :ev
+      @plate_type = :ev
+    when :regular
+      @plate_type = :regular
+    end
   end
 
 
