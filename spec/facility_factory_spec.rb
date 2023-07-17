@@ -26,6 +26,10 @@ RSpec.describe FacilityFactory do
 
       # co_facilities = @facility_factory.create_co_facilities(@co_facilities)
       # expect(co_facilities).to be_a(Facility)
+
+      wa_ev_facilities = @facility_factory.create_wa_ev_facilities(@wa_ev_facilities)
+      # expect(wa_ev_facilities).to be_a(Facility)
+    require 'pry'; binding.pry
     end
   end
 end
