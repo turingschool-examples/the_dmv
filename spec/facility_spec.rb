@@ -25,7 +25,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe'#register_vehicle' do
+  describe '#register_vehicle' do
     it 'can register a vehicle' do
       @facility.add_service('New Drivers License')
       @facility.add_service('Renew Drivers License')
@@ -34,6 +34,36 @@ RSpec.describe Facility do
       expect(camaro.plate_type).to eq(nil)
       @facility.register_vehicle(camaro)
       expect(camaro.plate_type).to eq(:antique)
+
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+      expect(bolt.plate_type).to eq(nil)
+      @facility.register_vehicle(bolt)
+      expect(bolt.plate_type).to eq(:ev)
+    end
+  end
+
+  describe "#administer_written_test" do
+    it "can administer a written test to registrants with a permit and who are at least 16 years of age" do
+      registrant_1 = Registrant.new("Bruce", 18, true)
+      expect(@facility.administer_written_test(registrant_1)).to be(false)
+      @facility.add_service("Written Test")
+      expect(@facility.administer_written_test(registrant_1)).to be(true)
+      @facility.administer_written_test(registrant_1)
+
+      expect(registrant_1.license_data[:written]).to be(true)
+    end
+  end
+
+  describe "#administer_road_test" do
+    it "can administer a road test can only be administered to registrants who have passed the written test" do
+      registrant_1 = Registrant.new("Bruce", 18, true)
+      @facility.add_service("Written Test")
+      @facility.administer_written_test(registrant_1)
+      expect(@facility.administer_road_test(registrant_1)).to be(false)
+      @facility.add_service("Road Test")
+      @facility.administer_road_test(registrant_1)
+
+      expect(registrant_1.license_data[:license]).to be(true)
     end
   end
 
