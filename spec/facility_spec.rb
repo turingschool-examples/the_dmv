@@ -227,6 +227,12 @@ RSpec.describe Facility do
       expect(@facility_1.address_finder(new_york_datapoint)).to eq("168-46 91ST AVE., 2ND FLR JAMAICA NY 11432")
       expect(@facility_1.address_finder(missouri_datapoint)).to eq("119 VINE ST DEXTER MO 63841")
     end
+    
+    it "#phone_finder can finds phone numbers from different APIs" do
+      expect(@facility_1.phone_finder(colorado_datapoint)).to eq("(720) 865-4600")
+      expect(@facility_1.phone_finder(new_york_datapoint)).to eq("(718) 966-6155")
+      expect(@facility_1.phone_finder(missouri_datapoint)).to eq("(573) 624-8808")
+    end
 
 
 
