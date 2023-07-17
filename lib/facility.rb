@@ -1,5 +1,5 @@
 class Facility
-  attr_accessor :name, :address, :phone, :services, :registration_date, :registered_vehicles
+  attr_accessor :name, :address, :phone, :services, :registration_date, :registered_vehicles, :collected_fees, :plate_type
 
   def initialize(info)
     @name = info[:name]
@@ -7,6 +7,7 @@ class Facility
     @phone = info[:phone]
     @services = []
     @registered_vehicles = []
+    @collected_fees = 0
   end
 
   def registration_date
@@ -23,16 +24,15 @@ class Facility
   end
 
   def collected_fees
-    collected_fees = 0
     @registered_vehicles.each do |vehicle|
       if @plate_type == :ev
-        collected_fees += 200
+        @collected_fees += 200
       elsif @plate_type == :antique
-        collected_fees += 25
+        @collected_fees += 25
       else
-        collected_fees += 100
+        @collected_fees += 100
       end
     end
-    collected_fees
+    @collected_fees
   end
 end
