@@ -6,8 +6,6 @@ RSpec.describe FacilityFactory do
     @new_york_facilities = DmvDataService.new.ny_dmv_office_locations
     @missouri_facilities = DmvDataService.new.mo_dmv_office_locations
     @co_facilities = DmvDataService.new.co_dmv_office_locations
-    @wa_ev_facilities = DmvDataService.new.wa_ev_registrations
-
   end
 
   describe '#initialize' do 
@@ -26,10 +24,6 @@ RSpec.describe FacilityFactory do
 
       # co_facilities = @facility_factory.create_co_facilities(@co_facilities)
       # expect(co_facilities).to be_a(Facility)
-
-      wa_ev_facilities = @facility_factory.create_wa_ev_facilities(@wa_ev_facilities)
-      # expect(wa_ev_facilities).to be_a(Facility)
-    require 'pry'; binding.pry
     end
   end
 end
