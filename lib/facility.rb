@@ -70,5 +70,6 @@ class Facility
 
   def administer_written_test(registrant)
     registrant.permit? && registrant.age >= 16
+    registrant.license_data[:written] = true
   end
 end
