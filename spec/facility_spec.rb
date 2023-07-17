@@ -11,6 +11,7 @@ RSpec.describe Facility do
     @registrant_2 = Registrant.new('Penny', 16)
     @registrant_3 = Registrant.new('Tucker', 15)
   end
+  
   describe '#initialize' do
     it 'can initialize' do
       expect(@facility_1).to be_an_instance_of(Facility)
