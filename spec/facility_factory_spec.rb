@@ -147,22 +147,29 @@ RSpec.describe FacilityFactory do
 
   describe "#capitalize_string" do 
     it "capitalizes every word in a string other than state abbreviations" do 
-      string_1 = "JAMAICA DISTRICT OFFICE"
-      string_2 = "168-46 91ST AVE., 2ND FLR JAMAICA NY 11432"
+      office_string_1 = "JAMAICA DISTRICT OFFICE"
+      expect(@new_york.capitalize_string(office_string_1)).to eq("Jamaica District Office")
 
-      expect(@new_york.capitalize_string(string_1)).to eq("Jamaica District Office")
-      expect(@new_york.capitalize_string(string_2)).to eq("168-46 91st Ave., 2nd Flr Jamaica NY 11432")
+      office_string_2 = "CLAYTON"
+      expect(@missouri.capitalize_string(office_string_2)).to eq("Clayton")
+
+      address_string_1 = "168-46 91ST AVE., 2ND FLR JAMAICA NY 11432"
+      expect(@new_york.capitalize_string(address_string_1)).to eq("168-46 91st Ave., 2nd Flr Jamaica NY 11432")
+
+      address_string_2 = "11977 ST. CHARLES ROCK ROAD SUITE 111 BRIDGETON MO 63044"
+      expect(@missouri.capitalize_string(address_string_2)).to eq("11977 St. Charles Rock Road Suite 111 Bridgeton MO 63044")
     end
   end
 
   describe "#format_digits" do 
     it "formats phone numbers to similar format as other states" do 
       number_string_1 = "5184869786"
-      number_string_2 = "7189666155"
-      nil_digits = nil
-
       expect(@new_york.format_digits(number_string_1)).to eq("(518) 486-9786")
+      
+      number_string_2 = "7189666155"
       expect(@new_york.format_digits(number_string_2)).to eq("(718) 966-6155")
+      
+      nil_digits = nil
       expect(@new_york.format_digits(nil_digits)).to eq("No phone number listed")
     end
   end
