@@ -42,4 +42,16 @@ RSpec.describe FacilityFactory do
       expect(factory.dmv_list.length).to be_an(Integer)
     end
   end
+
+  describe '#Unit test' do
+    it 'Address formatting check' do
+      factory = FacilityFactory.new
+      expect(factory).to be_an_instance_of(FacilityFactory)
+
+      expect(factory.format_co_address("address", nil, "city", "state", "zip")).to eq("address city state zip")
+      expect(factory.format_co_address("address1", "address2", "city", "state", "zip")).to eq("address1 address2 city state zip")
+
+      expect(factory.format_address("address", "city", "state", "zip")).to eq("address city state zip")
+    end
+  end
 end

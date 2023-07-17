@@ -6,8 +6,7 @@ class FacilityFactory
   end
 
   def find_facilities(data)
-    #require 'pry';binding.pry
-    check_state(data.first[:state])
+    @current_state = data.first[:state]
     data.each do |dmv|
       @dmv_list << Facility.new(
       if @current_state == "CO"
@@ -27,13 +26,6 @@ class FacilityFactory
       end
     )
     end
-        #require 'pry';binding.pry
-
-    #puts @vehicle_list.first.model
-  end
-
-  def check_state(state)
-    @current_state = state
   end
 
   def format_co_address(address1, address2, city, state, zip)
