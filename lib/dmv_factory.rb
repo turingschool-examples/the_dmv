@@ -54,7 +54,6 @@ class DmvFactory
       }
       facilities_array << Facility.new(facility_details)
     end
-    require 'pry';binding.pry
     facilities_array
   end
 
@@ -64,7 +63,9 @@ class DmvFactory
       facility_details = {
         name: facility[:name],
         address: [facility[:address1], facility[:city], facility[:state], facility[:zipcode]].join(' '), 
-        phone: facility[:phone]
+        phone: facility[:phone],
+        hours: facility[:daysopen],
+        closed_holidays: facility[:holidaysclosed]
       }
       facilities_array << Facility.new(facility_details)
     end

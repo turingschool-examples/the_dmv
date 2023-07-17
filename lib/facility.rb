@@ -11,6 +11,7 @@ class Facility
     @address = facility_details[:address]
     @phone = facility_details[:phone]
     @hours = facility_details[:hours]
+    @closed_holidays = facility_details[:closed_holidays]
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
