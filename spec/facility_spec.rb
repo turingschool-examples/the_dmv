@@ -198,24 +198,16 @@ RSpec.describe Facility do
     end
   end
 
-  xdescribe "helper tests" do
+  describe "helper tests" do
     it "ht1 #issue_plate_fees can issue new place and add to collected fees" do
       @facility_1.issue_plate_fees(@cruz)
       @facility_1.issue_plate_fees(@bolt)
       @facility_1.issue_plate_fees(@camaro)
 
-      expect(@facility_1).to eq(325)
+      expect(@facility_1.collected_fees).to eq(325)
       expect(@cruz.plate_type).to eq(:regular)
-      expect(@cruz.plate_type).to eq(:regular)
-      expect(@cruz.plate_type).to eq(:regular)
-
-
-
-
-
-
-
-
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@camaro.plate_type).to eq(:antique)
     end
   end
 end
