@@ -40,7 +40,7 @@ class FacilityFactory
 
   def name_formatter(string)
     if !string.nil?
-      string_array = string.downcase.split.map do |word|
+      string.downcase.split.map do |word|
         if word == "dmv"
           word.upcase
         elsif word == "co"
@@ -52,8 +52,7 @@ class FacilityFactory
         else
           word.capitalize
         end
-      end
-      string_array.join(" ").sub(" ,", ",")
+      end.join(" ").sub(" ,", ",")
     else
       "Not listed"
     end

@@ -14,4 +14,16 @@ class Dmv
       facility.services.include?(service)
     end
   end
+
+  # def top_make
+  #   registered_vehicles = []
+  #   registered_vehicles << @facilities.map do |facility|
+  #     facility.registered_vehicles
+  #   end
+
+  #   makes = []
+  #   makes << registered_vehicles.map do |vehicle|
+  #     vehicle.make
+  #   end
+  # end
 end
