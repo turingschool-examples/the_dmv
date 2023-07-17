@@ -1,5 +1,5 @@
 class Facility
-  attr_accessor :name, :address, :phone, :services, :registered_vehicles, :registration_date
+  attr_accessor :name, :address, :phone, :services, :registration_date, :registered_vehicles
 
   def initialize(info)
     @name = info[:name]
