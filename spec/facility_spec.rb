@@ -120,6 +120,15 @@ RSpec.describe Facility do
       @facility_1.administer_road_test(@registrant_3)
       expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
+
+    it "returns a false when all conditions are not met" do
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+    end
   end
 
 
