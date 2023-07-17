@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe FacilityFactory do
-  it "exists" do
+  it "CO" do
     factory = FacilityFactory.new
     co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
     factory.create_facilities(co_dmv_office_locations)
