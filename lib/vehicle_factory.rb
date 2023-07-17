@@ -21,11 +21,19 @@ class VehicleFactory
   def format_engine(data)
     if data[:state_of_residence] == "WA" && data[:electric_vehicle_type] != nil
       :ev
+    elsif data[:state] == "NY"
+      if data[:fuel_type] == "GAS"
+        :ice
+      elsif data[:fuel_type] == "ELECTRIC"
+        :ev
+      end
     end
   end
 
   def format_make(data)
     if data[:state_of_residence] == "WA" && data[:electric_vehicle_type] != nil
+      data[:make]
+    elsif data[:state] == "NY"
       data[:make]
     end
   end
@@ -33,17 +41,23 @@ class VehicleFactory
   def format_model(data)
     if data[:state_of_residence] == "WA" && data[:electric_vehicle_type] != nil
       data[:model]
+    elsif data[:state] == "NY"
+      data[:body_type]
     end
   end
 
   def format_vin(data)
     if data[:state_of_residence] == "WA" && data[:electric_vehicle_type] != nil
       data[:vin_1_10]
+    elsif data[:state] == "NY"
+      data[:vin]
     end
   end
 
   def format_year(data)
     if data[:state_of_residence] == "WA" && data[:electric_vehicle_type] != nil
+      data[:model_year]
+    elsif data[:state] == "NY"
       data[:model_year]
     end
   end

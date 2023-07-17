@@ -24,7 +24,20 @@ RSpec.describe VehicleFactory do
   end
 
   it "NY" do
-    
+    factory = VehicleFactory.new
+    ny_registrations = DmvDataService.new.ny_registrations
+    factory.create_vehicles(ny_registrations)
+    expect(factory.vehicles).to all be_a Vehicle
+    expect(factory.vehicles).to be_an Array
+
+    #dependent upon when api is taken
+    expect(factory.vehicles.first.engine).to eq(:ice)
+    expect(factory.vehicles.first.make).to eq("STARC")
+    expect(factory.vehicles.first.model).to eq("BOAT")
+    expect(factory.vehicles.first.vin).to eq("999999999999")
+    expect(factory.vehicles.first.year).to eq("1975")
+    expect(factory.vehicles.first.plate_type).to be nil
+    expect(factory.vehicles.first.registration_date).to be nil
   end
 
 end
