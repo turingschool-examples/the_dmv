@@ -62,4 +62,16 @@ class Facility
       false
     end
   end
+
+  def most_popular_registered_make
+    make_count = Hash.new(0)
+    @registered_vehicles.each {|car| make_count[car.make] += 1}
+    make_count.sort_by { |make,number| number}.last[0]
+  end
+
+  def most_popular_registered_model
+    model_count = Hash.new(0)
+    @registered_vehicles.each {|car| model_count[car.model] += 1}
+    model_count.sort_by { |model,number| number}.last[0]
+  end
 end
