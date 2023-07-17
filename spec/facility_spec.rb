@@ -216,10 +216,16 @@ RSpec.describe Facility do
     let (:new_york_datapoint) {{:office_name=>"JAMAICA", :office_type=>"DISTRICT OFFICE", :public_phone_number=>"7189666155", :street_address_line_1=>"168-46 91ST AVE., 2ND FLR", :city=>"JAMAICA", :state=>"NY", :zip_code=>"11432", :monday_beginning_hours=>"7:30 AM", :monday_ending_hours=>"5:00 PM", :tuesday_beginning_hours=>"7:30 AM", :tuesday_ending_hours=>"5:00 PM", :wednesday_beginning_hours=>"7:30 AM", :wednesday_ending_hours=>"5:00 PM", :thursday_beginning_hours=>"7:30 AM", :thursday_ending_hours=>"5:00 PM", :friday_beginning_hours=>"7:30 AM", :friday_ending_hours=>"5:00 PM", :georeference=>{:type=>"Point", :coordinates=>[-73.79144381399993, 40.70757552100008]}, :":@computed_region_yamh_8v7k"=>"196", :":@computed_region_wbg7_3whc"=>"1216", :":@computed_region_kjdx_g34t"=>"2137"}}
     let (:missouri_datapoint) {{:number=>"086", :dorregionnumber=>"14", :type=>"1MV", :name=>"DEXTER", :address1=>"119 VINE ST", :city=>"DEXTER", :state=>"MO", :zipcode=>"63841", :county=>"Stoddard", :phone=>"(573) 624-8808", :fax=>"(573) 624-8724", :size=>"2", :email=>"DEXTERAGENTOFFICE@DOR.MO.GOV", :agent=>"STODDARD COUNTY LICENSE OFFICE", :officemanager=>"RAY ROWLAND", :daysopen=>"Monday - Friday - 8:30 to 4:30", :holidaysclosed=>"Independence Day (07/04/22), Labor Day (09/05/22), Columbus Day (10/10/22), Veterans Day (11/11/22), Thanksgiving (11/24/22), Christmas Day Observed (12/26/22), New Year's Day Observed (01/02/23), Martin Luther King Day (01/16/23), Lincoln’s Birthday (02/13/23), President’s Day (02/20/23), Truman’s Birthday (05/08/23), Memorial Day (05/29/23), Juneteenth (06/19/2023), Independence Day (07/04/23), Labor Day (09/04/23), Columbus Day (10/09/23), Veterans Day (11/10/23), Thanksgiving (11/23/23), Christmas Day Observed (12/25/23)", :additionaldaysclosed=>"10/4/2022 (at 2:00 PM),   11/25/22,   12/22/2022 (at 3:00 PM ),   12/23/22,  12/24/22,  12/26/22,   12/27/2022 (open at 8:30 AM ),  1/31/2023,   4/7/23,   7/3/23,   11/24/23,   12/22/23", :latlng=>{:latitude=>"36.791655", :longitude=>"-89.955942"}, :additional_license_office_info=>"Services for the Elderly or Disabled: Curbside Service, Special Appointments, Assist with changing or replacing plates/tabs, Process Transactions in the customer waiting area, Direct customers to front of the line, Wheelchair availability. MOTOR VEHICLE PHONE IN RENEWAL - (573) 624-8808Other Services: Motor Vehicle transaction drop-off service.", :":@computed_region_ny2h_ckbz"=>"452", :":@computed_region_c8ar_jsdj"=>"98", :":@computed_region_ikxf_gfzr"=>"2215"}}
     
-    it "#name_finder can finds names in colorado" do
+    it "#name_finder can finds names from different APIs" do
       expect(@facility_1.name_finder(colorado_datapoint)).to eq("DMV Tremont Branch")
       expect(@facility_1.name_finder(new_york_datapoint)).to eq("JAMAICA")
       expect(@facility_1.name_finder(missouri_datapoint)).to eq("DEXTER")
+    end
+    
+    it "#address_finder can finds addresses from different APIs" do
+      expect(@facility_1.address_finder(colorado_datapoint)).to eq("2855 Tremont Place Suite 118 Denver CO 80205")
+      expect(@facility_1.address_finder(new_york_datapoint)).to eq("168-46 91ST AVE., 2ND FLR JAMAICA NY 11432")
+      expect(@facility_1.address_finder(missouri_datapoint)).to eq("119 VINE ST DEXTER MO 63841")
     end
 
 
