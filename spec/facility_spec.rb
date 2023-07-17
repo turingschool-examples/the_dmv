@@ -132,7 +132,7 @@ RSpec.describe Facility do
       end
     end
   
-    # LOOK INTO WHY THIS IS STILL BOOLEAN TRUE EXPECTING FALSE
+    # # LOOK INTO WHY THIS IS STILL BOOLEAN TRUE EXPECTING FALSE
     # describe '#facility 1 administers written test 1' do # test is showing true which is should be...skip for now
     #   it '#facility 1 administers written test 1' do
     #     # require 'pry' ; binding.pry
@@ -145,7 +145,38 @@ RSpec.describe Facility do
         @facility_1.add_services('Written Test')
                 # require 'pry' ; binding.pry
         expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
-        expect(@registrant_1.license_data).to include({written: true,
+        expect(@registrant_1.license_data).to include({
+          written: true,
+          license: false,
+          renewed: false})
+      end
+    end
+
+    describe '#Registrant 2' do
+      it "shows details for registrant #2(age, permit?, administer written test)" do
+        expect(@registrant_2.age).to eq(16)
+        expect(@registrant_2.permit?).to be false
+        expect(@facility_1.administer_written_test(@registrant_2)).to be false
+
+        @registrant_2.earn_permit
+        expect(@facility_1.administer_written_test(@registrant_2)).to be true
+        expect(@registrant_2.license_data).to include({
+          written: true,
+          license: false,
+          renewed: false})
+      end
+    end
+
+    describe '#Registrant 3' do
+      it "shows details for registrant #3(age, permit?, administer written test)" do
+        expect(@registrant_3.age).to eq(15)
+        expect(@registrant_3.permit?).to be false
+        expect(@facility_1.administer_written_test(@registrant_3)).to be false
+
+        @registrant_3.earn_permit
+        expect(@facility_1.administer_written_test(@registrant_3)).to be false
+        expect(@registrant_3.license_data).to include({
+          written: false,
           license: false,
           renewed: false})
       end
