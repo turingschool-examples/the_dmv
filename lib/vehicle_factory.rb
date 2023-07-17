@@ -5,9 +5,7 @@ class VehicleFactory
   def create_vehicles(registrations)
     vehicles = []
     registrations.each do |registration|
-      # require 'pry';binding.pry
       registration[:engine] = :ev
-      #need to refactor below; throwing syntax error
       new_vehicle = Vehicle.new({
         engine: registration[:engine],
         make: registration[:make],
