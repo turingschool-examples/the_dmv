@@ -4,6 +4,7 @@ RSpec.describe Registrant do
   before(:each) do
     @registrant_1 = Registrant.new('Bruce', 18, true )
     @registrant_2 = Registrant.new('Penny', 15 )
+    @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
   end
 
   describe '#initialize' do
@@ -32,6 +33,16 @@ RSpec.describe Registrant do
       @registrant_2.earn_permit
 
       expect(@registrant_2.permit?).to be(true)
+    end
+  end
+
+  describe "#administer_written_test" do
+    it "gives a written test to the registrant" do
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@facility_1.administer_written_test(@registrant_1)).to be(false)
+
+      @facility_1.add_service("Written Test")
+      expect(@facility_1.administer_written_test(@registrant_1)).to be(true)
     end
   end
 end

@@ -1,5 +1,5 @@
 class Facility
-  attr_accessor :name, :address, :phone, :services, :registration_date, :registered_vehicles, :collected_fees, :plate_type
+  attr_accessor :name, :address, :phone, :services, :registration_date, :registered_vehicles, :collected_fees, :plate_type, :license_data
 
   def initialize(info)
     @name = info[:name]
@@ -28,7 +28,6 @@ class Facility
   end
 
   def collected_fees
-
     total_fees = 0
     @registered_vehicles.each do |vehicle|
       case vehicle.plate_type
@@ -41,5 +40,13 @@ class Facility
       end
     end
     total_fees
+  end
+
+  def administer_written_test(registrant)
+    if @services.include?("Written Test")
+      @license_data[:written] = true
+    else 
+      false
+    end
   end
 end
