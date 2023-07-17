@@ -52,4 +52,8 @@ class Facility
     registrant.license_data[:renewed] = true
   end
 
+  def facility_info
+    ["Location: #{@name}", "Adress: #{@address}", "Phone: #{@phone}", "Hours: #{@hours}"]
+  end
+
 end
