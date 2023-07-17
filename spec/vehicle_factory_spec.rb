@@ -12,15 +12,19 @@ RSpec.describe VehicleFactory do
     factory.create_vehicles(wa_ev_registrations)
     expect(factory.vehicles).to all be_a Vehicle
     expect(factory.vehicles).to be_an Array
-    # require 'pry';binding.pry
-    
+
     #dependent upon when api is taken
     expect(factory.vehicles.first.make).to eq("CHEVROLET")
     expect(factory.vehicles.first.model).to eq("Volt")
-    expect(factory.vehicles.first.vin).to eq("WA1VABGE6K")
+    expect(factory.vehicles.first.vin).to eq("1G1RC6S55J")
     expect(factory.vehicles.first.year).to eq("2018")
     expect(factory.vehicles.first.engine).to eq(:ev)
     expect(factory.vehicles.first.plate_type).to be nil
-    expect(factory.vehicles.first.registration_date).to be nil  
+    expect(factory.vehicles.first.registration_date).to be nil
   end
+
+  it "NY" do
+    
+  end
+
 end
