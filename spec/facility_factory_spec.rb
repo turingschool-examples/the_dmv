@@ -20,7 +20,7 @@ RSpec.describe FacilityFactory do
       expect(factory.create_facilities(co_dmv_office_locations)[0].name).to eq("DMV Tremont Branch")
       expect(factory.create_facilities(co_dmv_office_locations)[0].address).to eq("2855 Tremont Place Suite 118 Denver, CO 80205")
       expect(factory.create_facilities(co_dmv_office_locations)[0].phone).to eq("(720) 865-4600")
-      expect(factory.create_facilities(co_dmv_office_locations)[0].services).to eq("vehicle titles, registration, renewals;  VIN inspections")
+      expect(factory.create_facilities(co_dmv_office_locations)[0].services).to eq(["vehicle titles, registration, renewals;  VIN inspections"])
     end
   end
 end
