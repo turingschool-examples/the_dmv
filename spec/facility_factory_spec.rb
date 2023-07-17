@@ -5,6 +5,9 @@ RSpec.describe FacilityFactory do
     @facility_factory = FacilityFactory.new
     @new_york_facilities = DmvDataService.new.ny_dmv_office_locations
     @missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+    @co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+    @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+
   end
 
   describe '#initialize' do 
