@@ -27,7 +27,7 @@ class Vehicle
     @engine == :ev
   end
 
-  #facility helper methods UNTESTED
+  #tested
   def register_now
     @registration_date = Date.today
   end
