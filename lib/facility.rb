@@ -24,15 +24,9 @@ class Facility
   end
 
   def collected_fees
+
+    fees = 0
     @registered_vehicles.each do |vehicle|
-      if @plate_type == :ev
-        @collected_fees += 200
-      elsif @plate_type == :antique
-        @collected_fees += 25
-      else
-        @collected_fees += 100
+      case vehicle.plate_type
+      when :antique
       end
-    end
-    @collected_fees
-  end
-end
