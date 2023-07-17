@@ -26,8 +26,9 @@ class DmvFactory
     data.each do |facility|
       facility_details = {
         name: facility[:dmv_office],
-        address: [facility[:address_li], facility[:address__1], facility[:city], facility[:state], facility[:zip]].join(' '), 
-        phone: facility[:phone]
+        address: [facility[:address_li], facility[:address__1], facility[:city], facility[:state], facility[:zip]].join(' '),
+        phone: facility[:phone],
+        hours: facility[:hours]
       }
       facilities_array << Facility.new(facility_details)
     end
@@ -37,10 +38,19 @@ class DmvFactory
   def scrape_ny_data(data)
     facilities_array = []
     data.each do |facility|
+      facility_hours = {
+        "Monday:" => "#{facility[:monday_beginning_hours]} - #{facility[:monday_ending_hours]}",
+        "Tuesday:" => "#{facility[:tuesday_beginning_hours]} - #{facility[:tuesday_ending_hours]}",
+        "Wednesday:" => "#{facility[:wednesday_beginning_hours]} - #{facility[:wednesday_ending_hours]}",
+        "Thursday:" => "#{facility[:thursday_beginning_hours]} - #{facility[:thursday_ending_hours]}",
+        "Friday:" => "#{facility[:friday_beginning_hours]} - #{facility[:friday_ending_hours]}"
+        
+      }
       facility_details = {
         name: facility[:office_name],
-        address: [facility[:street_address_line_1], facility[:city], facility[:state], facility[:zip_code]].join(' '), 
-        phone: facility[:phone]
+        address: [facility[:street_address_line_1], facility[:city], facility[:state], facility[:zip_code]].join(' '),
+        phone: facility[:phone],
+        hours: facility_hours
       }
       facilities_array << Facility.new(facility_details)
     end
@@ -52,8 +62,10 @@ class DmvFactory
     data.each do |facility|
       facility_details = {
         name: facility[:name],
-        address: [facility[:address1], facility[:city], facility[:state], facility[:zipcode]].join(' '), 
-        phone: facility[:phone]
+        address: [facility[:address1], facility[:city], facility[:state], facility[:zipcode]].join(' '),
+        phone: facility[:phone],
+        hours: facility[:daysopen],
+        closed_holidays: facility[:holidaysclosed]
       }
       facilities_array << Facility.new(facility_details)
     end
