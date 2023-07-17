@@ -67,4 +67,20 @@ RSpec.describe Facility do
     end
   end
 
+  describe "#renew_drivers_license" do
+    it "can renew a license of a registrant" do
+      registrant_1 = Registrant.new("Bruce", 18, true)
+      @facility.add_service("Written Test")
+      @facility.add_service("Road Test")
+      @facility.administer_written_test(registrant_1)
+      @facility.administer_road_test(registrant_1)
+      expect(registrant_1.license_data[:renewed]).to be(false)
+      expect(@facility.renew_drivers_license(registrant_1)).to be(false)
+      @facility.add_service("Renew License")
+      @facility.renew_drivers_license(registrant_1)
+
+      expect(registrant_1.license_data[:renewed]).to be(true)
+    end
+  end
+
 end
