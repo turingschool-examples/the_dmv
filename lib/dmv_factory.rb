@@ -26,7 +26,7 @@ class DmvFactory
     data.each do |facility|
       facility_details = {
         name: facility[:dmv_office],
-        address: [facility[:address_li], facility[:address__1], facility[:city], facility[:state], facility[:zip]].join(' '), 
+        address: [facility[:address_li], facility[:address__1], facility[:city], facility[:state], facility[:zip]].join(' '),
         phone: facility[:phone],
         hours: facility[:hours]
       }
@@ -48,7 +48,7 @@ class DmvFactory
       }
       facility_details = {
         name: facility[:office_name],
-        address: [facility[:street_address_line_1], facility[:city], facility[:state], facility[:zip_code]].join(' '), 
+        address: [facility[:street_address_line_1], facility[:city], facility[:state], facility[:zip_code]].join(' '),
         phone: facility[:phone],
         hours: facility_hours
       }
@@ -62,7 +62,7 @@ class DmvFactory
     data.each do |facility|
       facility_details = {
         name: facility[:name],
-        address: [facility[:address1], facility[:city], facility[:state], facility[:zipcode]].join(' '), 
+        address: [facility[:address1], facility[:city], facility[:state], facility[:zipcode]].join(' '),
         phone: facility[:phone],
         hours: facility[:daysopen],
         closed_holidays: facility[:holidaysclosed]
