@@ -7,12 +7,12 @@ class FacilityFactory
 
   def create_facilities(locations)
     locations.each do |site|
-    details = {
-      name: format_name(site),
-      address: format_address(site),
-      phone: format_phone(site)
-    }
-    @facilities << Facility.new(details)
+      details = {
+        name: format_name(site),
+        address: format_address(site),
+        phone: format_phone(site)
+      }
+      @facilities << Facility.new(details)
     end
   end
 
@@ -25,7 +25,6 @@ class FacilityFactory
     elsif data[:state] == "MO"
       data[:name]
     end
-    
   end
 
   def format_address(data)
@@ -55,5 +54,4 @@ class FacilityFactory
       data[:phone]
     end
   end
-
 end

@@ -27,12 +27,14 @@ class Vehicle
   end
 
   def plate_type
-    if electric_vehicle?
-      :ev 
-    elsif antique?
-      :antique
-    else
-      :regular
+    if registration_date != nil
+      if electric_vehicle?
+        :ev 
+      elsif antique?
+        :antique
+      else
+        :regular
+      end
     end
   end
 end
