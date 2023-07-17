@@ -25,4 +25,17 @@ class FacilityFactory
     end
     new_facilities
   end 
+
+  def create_co_facilities(co_facility_location)
+    new_facilities = []
+    co_facility_location.each do |facility|
+      facility_details = ({
+        name: facility[:dmv_office],
+        address: facility[:address_li],
+        phone: facility[:phone]
+      })
+      new_facilities << Facility.new(facility_details)
+    end
+    new_facilities
+  end
 end

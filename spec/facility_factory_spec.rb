@@ -5,8 +5,8 @@ RSpec.describe FacilityFactory do
     @facility_factory = FacilityFactory.new
     @new_york_facilities = DmvDataService.new.ny_dmv_office_locations
     @missouri_facilities = DmvDataService.new.mo_dmv_office_locations
-    @co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
-    @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+    @co_facilities = DmvDataService.new.co_dmv_office_locations
+    @wa_ev_facilities = DmvDataService.new.wa_ev_registrations
 
   end
 
@@ -23,6 +23,9 @@ RSpec.describe FacilityFactory do
 
       # mo_facilities = @facility_factory.create_mo_facilities(@missouri_facilities)
       # expect(mo_facilities).to be_a(Facility)
+
+      # co_facilities = @facility_factory.create_co_facilities(@co_facilities)
+      # expect(co_facilities).to be_a(Facility)
     end
   end
 end
