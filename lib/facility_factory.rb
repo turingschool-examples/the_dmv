@@ -38,8 +38,4 @@ class FacilityFactory
     end
     new_facilities
   end
-
-  def create_wa_ev_facilities(wa_ev_facility_location)
-    
-  end
 end
