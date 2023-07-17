@@ -19,5 +19,6 @@ class VehicleFactory
         engine: :ev
        })
     end
+    # @created_vehicles
   end
 end
