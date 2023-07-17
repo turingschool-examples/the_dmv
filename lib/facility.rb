@@ -20,8 +20,6 @@ class Facility
       info[:dmv_office]
     elsif info[:office_name] != nil
       info.values_at(:office_name, :office_type).join(" ")
-    # elsif caller.join.include?("mo_dmv_office_locations")
-    #   # info[:]
     else
       info[:name]
     end
@@ -65,8 +63,6 @@ class Facility
       end
       vehicle.registration_date = Date.today
       @registered_vehicles << vehicle
-    else
-      nil
     end
   end
 
