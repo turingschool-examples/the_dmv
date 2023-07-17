@@ -4,7 +4,8 @@ class Facility
               :phone,
               :services,
               :registered_vehicles,
-              :collected_fees
+              :collected_fees,
+              :open_hours
 
   def initialize(facility_details)
     @name = facility_details[:name]
@@ -13,6 +14,7 @@ class Facility
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
+    @open_hours = facility_details[:open_hours]
   end
 
   def add_service(service)

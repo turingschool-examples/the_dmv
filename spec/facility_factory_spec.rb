@@ -54,4 +54,33 @@ RSpec.describe FacilityFactory do
       expect(factory.format_address("address", "city", "state", "zip")).to eq("address city state zip")
     end
   end
+
+  describe '#Hours' do
+    it 'open hours for each facility' do
+      factory = FacilityFactory.new
+      expect(factory).to be_an_instance_of(FacilityFactory)
+
+      co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+      new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+      missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+
+      expect(factory.find_facilities(co_dmv_office_locations)).to be_an(Array)
+      expect(factory.dmv_list.first).to be_an_instance_of(Facility) 
+      expect(factory.dmv_list.last).to be_an_instance_of(Facility)
+      expect(factory.dmv_list.length).to be_an(Integer)
+      expect(factory.dmv_list.last.open_hours).to be_an(String)
+      
+      expect(factory.find_facilities(new_york_facilities)).to be_an(Array)
+      expect(factory.dmv_list.first).to be_an_instance_of(Facility) 
+      expect(factory.dmv_list.last).to be_an_instance_of(Facility)
+      expect(factory.dmv_list.length).to be_an(Integer)
+      expect(factory.dmv_list.last.open_hours).to be_an(String)
+
+      expect(factory.find_facilities(missouri_facilities)).to be_an(Array)
+      expect(factory.dmv_list.first).to be_an_instance_of(Facility) 
+      expect(factory.dmv_list.last).to be_an_instance_of(Facility)
+      expect(factory.dmv_list.length).to be_an(Integer)
+      expect(factory.dmv_list.last.open_hours).to be_an(String)
+    end
+  end
 end
