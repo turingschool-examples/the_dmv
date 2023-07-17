@@ -13,7 +13,7 @@ RSpec.describe FacilityFactory do
     end
   end
 
-  describe '#create_facilities' do 
+  describe '#create facilities' do 
     it 'can create facility objects' do 
       
     end
