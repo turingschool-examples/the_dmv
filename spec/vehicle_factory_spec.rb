@@ -57,4 +57,17 @@ describe VehicleFactory do
       expect(@factory.model_year_count(2021)).to eq(3)
     end
   end
+
+  describe "#top_county" do
+    it "can find the county with the most registrations" do
+      @my_ev_registrations = [{"vin_1_10":"fakevin","model_year":"2020","make":"Chevrolet","model":"Bolt","county":"Clark"},
+      {"vin_1_10":"fakevin","model_year":"2021","make":"Chevrolet","model":"Bolt","county":"Clark"},
+      {"vin_1_10":"fakevin","model_year":"2021","make":"Chevrolet","model":"Bolt","county":"King"},
+      {"vin_1_10":"fakevin","model_year":"2020","make":"Tesla","model":"Model Y","county":"King"},
+      {"vin_1_10":"fakevin","model_year":"2021","make":"Tesla","model":"Model Y","county":"King"}]
+      @factory.create_vehicles(@my_ev_registrations)
+
+      expect(@factory.top_county).to eq("King")
+    end
+  end
 end
