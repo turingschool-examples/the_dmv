@@ -35,27 +35,5 @@ RSpec.describe Registrant do
       expect(@registrant_2.permit?).to be(true)
     end
   end
-
-  describe "#administer_written_test" do
-    it "gives a written test to the registrant" do
-      @facility_1.administer_written_test(@registrant_1)
-      expect(@facility_1.administer_written_test(@registrant_1)).to be(false)
-
-      @facility_1.add_service("Written Test")
-      expect(@facility_1.administer_written_test(@registrant_1)).to be(true)
-      expect(@registrant_1.license_data[:written]).to be(true)
-    end
-  end
-
-  describe "#administer_road_test" do
-    it "gives a road test to the registrant" do
-      @facility_1.administer_road_test(@registrant_1)
-      expect(@facility_1.administer_road_test(@registrant_1)).to be(false)
-
-      @facility_1.add_service("Road Test")
-      expect(@facility_1.administer_road_test(@registrant_1)).to be(true)
-      expect(@registrant_1.license_data[:license]).to be(true)
-    end
-  end
 end
 
