@@ -91,9 +91,11 @@ RSpec.describe FacilityFactory do
       random_ny_facility_sample = @new_york_facilities_data.sample
       expect(@new_york.format_facility_address(random_ny_facility_sample)).to be_a String
       
-      
       ny_facility_sample_1 = @new_york_facilities_data[0]
       expect(@new_york.format_facility_address(ny_facility_sample_1)).to eq("168-46 91st Ave., 2nd Flr Jamaica NY 11432")
+
+      ny_facility_sample_2 = @new_york_facilities_data[1]
+      expect(@new_york.format_facility_address(ny_facility_sample_2)).to eq("200 Old Country Road Riverhead NY 11901")
     end
     
     it "formats MO facility addresses" do 
