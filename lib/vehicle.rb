@@ -27,9 +27,9 @@ class Vehicle
   end
 
   def plate_type
-    if @engine == :ev
+    if electric_vehicle?
       :ev 
-    elsif Date.today.year - @year >= 25
+    elsif antique?
       :antique
     else
       :regular

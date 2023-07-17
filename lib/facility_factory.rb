@@ -46,10 +46,14 @@ class FacilityFactory
     if data[:state] == "CO"
       data[:phone]
     elsif data[:state] == "NY"
-      number = data[:public_phone_number]
-      #no () space or -
+      if data[:public_phone_number] != nil
+      data[:public_phone_number].insert(6, "-").insert(3, ") ").insert(0, "(")
+      else
+        data[:public_phone_number]  
+      end
     elsif data[:state] == "MO"
       data[:phone]
     end
   end
+
 end
