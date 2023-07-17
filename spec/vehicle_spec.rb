@@ -45,6 +45,7 @@ RSpec.describe Vehicle do
 
   describe '#registration_date' do
     it 'can determine registration date of a vehicle' do
+      @facility.add_service("Vehicle Registration")
       @facility.register_vehicle(@cruz)
       
       expect(@facility.registered_vehicles).to eq([@cruz])
