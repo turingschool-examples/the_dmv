@@ -40,4 +40,22 @@ RSpec.describe Dmv do
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
+
+  let (@car1) {Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )}
+  let (@car2) {Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )}
+  let (@car3) {Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )}
+  let (@car4) {Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Subaru', model: 'Outback', engine: :ice} )}
+  let (@car5) {Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )}
+
+  @facility_1.registered_vehicles = [@car1, @car2, @car3, @car4, @car5]
+
+  @dmv.add_facility(@facility_1)
+  @dmv.add_facility(@facility_2)
+  @dmv.add_facility(@facility_3)
+
+  describe "#top_make" do
+    it "can return the most popular make registered" do
+      expect(@dmv.top_make).to eq("Chevrolet")
+    end
+  end
 end
