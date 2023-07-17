@@ -16,6 +16,7 @@ class Vehicle
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
     @registration_date = nil
+    @plate_type = nil
   end
 
   def antique?
@@ -28,11 +29,14 @@ class Vehicle
 
   def plate_type
     if Date.today.year - @year > 25
-      :antique
+      @plate_type = :antique
+      @plate_type
     elsif @engine == :ev
-      :ev
+      @plate_type = :ev
+      @plate_type
     else 
-      :regular
+      @plate_type = :regular
+      @plate_type
     end
   end
 end
