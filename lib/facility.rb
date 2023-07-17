@@ -6,11 +6,11 @@ class Facility
               :r_vehicles,
               :total
 
-  def initialize (information)
+  def initialize (information, services = [])
     @name = information[:name]
     @address = information[:address]
     @phone = information[:phone]
-    @services = []
+    @services = services
     @r_vehicles = []
     @total = 0
   end

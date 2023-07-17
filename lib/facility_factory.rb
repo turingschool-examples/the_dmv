@@ -14,8 +14,11 @@ class FacilityFactory
           zip: office_data[:zip] || office_data[:zip_code] || office_data[:zipcode]
         },
         phone: office_data[:phone] || office_data [:public_phone_number]
-        })
+        },
+        office_data[:services_p] || []
+        )
     end
+
   end
 end
 
