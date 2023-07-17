@@ -10,6 +10,7 @@ class Facility
     @name = facility_details[:name]
     @address = facility_details[:address]
     @phone = facility_details[:phone]
+    @hours = facility_details[:hours]
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
