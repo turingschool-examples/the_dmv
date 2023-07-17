@@ -1,9 +1,9 @@
 class FacilityFactory
   def initialize
-    @facilities = []
   end
 
   def create_facilities(locations)
+    facilities = []
     locations.each do |location|
       new_facility = Facility.new({
         name: location[:dmv_office],
@@ -11,8 +11,8 @@ class FacilityFactory
         phone: location[:phone]
       })
       new_facility.add_service(location[:services_p])
-      @facilities << new_facility
+      facilities << new_facility
     end
-    @facilities
+    facilities
   end
 end
