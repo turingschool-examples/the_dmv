@@ -6,7 +6,7 @@ RSpec.describe FacilityFactory do
     co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
     factory.create_facilities(co_dmv_office_locations)
     expect(factory.facilities).to all be_a Facility
-    expect(factory.facilities).to be_an Arraygit
+    expect(factory.facilities).to be_an Array
 
     #dependent upon when api is taken
     # expect(factory.facilities.first.name).to eq("DMV Tremont Branch")
