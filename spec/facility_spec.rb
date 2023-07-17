@@ -15,7 +15,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#add service' do
+  describe '#add_service' do
     it 'can add available services' do
       expect(@facility.services).to eq([])
       @facility.add_service('New Drivers License')
@@ -24,4 +24,17 @@ RSpec.describe Facility do
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
+
+  describe'#register_vehicle' do
+    it 'can register a vehicle' do
+      @facility.add_service('New Drivers License')
+      @facility.add_service('Renew Drivers License')
+      @facility.add_service('Vehicle Registration')
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+      expect(camaro.plate_type).to eq(nil)
+      @facility.register_vehicle(camaro)
+      expect(camaro.plate_type).to eq([:antique])
+    end
+  end
+
 end
