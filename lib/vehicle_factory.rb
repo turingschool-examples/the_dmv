@@ -13,7 +13,19 @@ class VehicleFactory
         model: vehicle[:model],
         county: vehicle[:county],
         engine: :ev
-        
+      })
+    end
+  end
+
+  def add_other_vehicles(data)
+    data.each do |vehicle|
+      @vehicle_list << Vehicle.new({
+        vin: vehicle[:vin],
+        year: vehicle[:model_year],
+        make: vehicle[:make],
+        model: vehicle[:record_type],
+        county: vehicle[:county],
+        engine: :ev
       })
     end
   end
@@ -40,5 +52,12 @@ class VehicleFactory
     county_count = Hash.new(0)
     @vehicle_list.each {|car| county_count[car.county] += 1}
     county_count.sort_by { |county,number| number}.last[0]
+  end
+
+  def model_count(selected_year)
+    car_year = @vehicle_list.find_all do |vehicle|
+      vehicle.year == selected_year
+    end
+    car_year.length
   end
 end

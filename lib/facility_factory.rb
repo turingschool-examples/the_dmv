@@ -40,7 +40,6 @@ class FacilityFactory
       end
     )
     end
-    require 'pry';binding.pry
   end
 
   def format_co_address(address1, address2, city, state, zip)
