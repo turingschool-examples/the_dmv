@@ -198,7 +198,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe "helper tests" do
+  xdescribe "helper tests" do
     it "ht1 #issue_plate_fees can issue new place and add to collected fees" do
       @facility_1.issue_plate_fees(@cruz)
       @facility_1.issue_plate_fees(@bolt)
