@@ -17,20 +17,15 @@ class Facility
   def register_vehicle(vehicle)
     if vehicle.antique? == true
       registration_fee = 25
-      @plate_type = [:antique] #how to add this to the hash?
-      require 'pry';binding.pry
+      vehicle.plate_type = :antique 
     elsif vehicle.electric_vehicle? == true
       registration_fee = 200
-      @plate_type = [:ev]
+      vehicle.plate_type = :ev
     else 
       registration_fee = 100
-      @plate_type = [:regular]
+      vehicle.plate_type = :regular
     end
   end
-    # vehicles 25+ are antique and cost 25$ to register
-    # electric vehicles (EV) cost 200 to register
-    # all others cost 100
-    # a vehicle's plate_type should be set to :regular, :antique, or :ev upon successful registration
 
     # will likely need to add a value to change the @registration_date later
 
