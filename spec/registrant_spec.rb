@@ -61,6 +61,6 @@ describe Registrant do
       registrant_1.pass_test(:renewed)
       
       expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
-  end
+    end
   end
 end
