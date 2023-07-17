@@ -40,13 +40,17 @@ RSpec.describe VehicleFactory do
     # expect(factory.vehicles.first.registration_date).to be nil
   end
 
-  it "WA analyze" do
+  it ".model_count" do
     factory = VehicleFactory.new
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     factory.create_vehicles(wa_ev_registrations)
     expect(factory.model_count.first[1]).to eq(202)
-
   end
 
-
+  it ".make_count" do
+    factory = VehicleFactory.new
+    wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+    factory.create_vehicles(wa_ev_registrations)
+    expect(factory.make_count.first[1]).to eq(358)
+  end
 end

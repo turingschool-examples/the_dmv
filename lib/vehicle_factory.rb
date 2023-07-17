@@ -66,4 +66,9 @@ class VehicleFactory
     grouped_list = vehicles.group_by { |vehicle| vehicle.model }.transform_values { |car| car.count }
     grouped_list.sort_by { |model, count| -count }
   end
+
+  def make_count
+    grouped_list = vehicles.group_by { |vehicle| vehicle.make }.transform_values { |car| car.count }
+    grouped_list.sort_by { |make, count| -count }
+  end
 end
