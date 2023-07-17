@@ -33,4 +33,9 @@ class VehicleFactory
     years_count = @vehicles.map {|vehicle| vehicle.year}.tally
     years_count[year.to_s]
   end
+
+  def top_county
+    counties_count = @vehicles.map {|vehicle| vehicle.county}.tally
+    counties_count.key(counties_count.values.max)
+  end
 end
