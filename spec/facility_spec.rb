@@ -102,6 +102,14 @@ RSpec.describe Facility do
       @facility_1.administer_written_test(@registrant_2)
       expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
+
+    it "returns another true statement when all conditions are met" do
+      expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
+      @facility_1.add_service('Written Test')
+      @registrant_3.earn_permit
+      @facility_1.administer_written_test(@registrant_3)
+      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
   end
 
 
