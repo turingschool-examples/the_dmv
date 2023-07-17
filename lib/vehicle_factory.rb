@@ -71,4 +71,9 @@ class VehicleFactory
     grouped_list = vehicles.group_by { |vehicle| vehicle.make }.transform_values { |car| car.count }
     grouped_list.sort_by { |make, count| -count }
   end
+
+  def model_year_count(year)
+    list = vehicles.find_all { |vehicle| vehicle.year == year }
+    list.count
+  end
 end

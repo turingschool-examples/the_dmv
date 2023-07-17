@@ -53,4 +53,12 @@ RSpec.describe VehicleFactory do
     factory.create_vehicles(wa_ev_registrations)
     expect(factory.make_count.first[1]).to eq(358)
   end
+  
+  it ".model_year_count" do
+    factory = VehicleFactory.new
+    wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+    factory.create_vehicles(wa_ev_registrations)
+    expect(factory.model_year_count("2019")).to eq(87)
+  end
+
 end
