@@ -15,7 +15,7 @@ RSpec.describe FacilityFactory do
 
   describe '#create facilities' do 
     it 'can create facility objects' do 
-      # ny_facilities = @facility_factory.create_facilities(@new_york_facilities)
+      # ny_facilities = @facility_factory.create_ny_facilities(@new_york_facilities)
       # expect(ny_facilities).to be_a(Facility)
 
       # mo_facilities = @facility_factory.create_mo_facilities(@missouri_facilities)
