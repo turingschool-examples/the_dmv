@@ -11,7 +11,7 @@ RSpec.describe Facility do
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
     @registrant_1 = Registrant.new('Bruce', 18, true )
-    @registrant_2 = Registrant.new('Penny', 15 )
+    @registrant_2 = Registrant.new('Penny', 16 )
     @registrant_3 = Registrant.new('Tucker', 15 )
   end
 
@@ -86,5 +86,24 @@ RSpec.describe Facility do
     it "returns the current_data when service has not been activated" do
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
     end
+
+    it "returns true when using the method if service is activated" do
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
+
+    it "only gives a written test when all conditions are met" do
+      expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
+      @facility_1.add_service('Written Test')
+      @registrant_2.earn_permit
+      @facility_1.administer_written_test(@registrant_2)
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
   end
+
+
+
 end
