@@ -28,9 +28,8 @@ RSpec.describe Facility do
       expect(@facility_2.address).to eq('4685 Peoria Street Suite 101 Denver CO 80239')
       expect(@facility_2.phone).to eq('(720) 865-4600')
       expect(@facility_2.services).to eq([])
-    end 
-end   
-
+    end    
+  end
   describe "#method add_service" do
     it "can add service to facility" do
       expect(@facility_1.add_service('Vehicle Registration')).to eq(['Vehicle Registration'])
@@ -53,12 +52,33 @@ end
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
-end
 
-describe "# registration date" do 
-  xit " creates a method registration date" do
-    expect(@cruz.registration_date).to eq(nil)
+
+
+describe "#registered_vehicles" do 
+  xit  "registers vehicle" do 
+    expect(facility_1.registered_vehicles).to eq([])
   end 
 end 
 
-# descrice "# registered"
+describe "#collected fees" do 
+  xit "collects fees" do 
+    expect(facility_1.collected_fees).to eq(0)
+  end 
+end 
+describe "#register_vehicle" do 
+  it "registers a vehicle" do
+    # setup 
+    expect(@cruz.registration_date).to eq(nil)
+    expect(@facility_1.collected_fees).to eq(0)
+    expect(@facility_1.registered_vehicles).to eq([])
+    #action
+    @facility_1.register_vehicle(@cruz)
+    #result
+    expect(@cruz.registration_date).to be_a(Date)
+    expect(@facility_1.collected_fees).to eq(100)
+    expect(@facility_1.registered_vehicles).to eq([@cruz])
+  end 
+end 
+
+end
