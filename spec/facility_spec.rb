@@ -89,7 +89,17 @@ RSpec.describe Facility do
       co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
       new_co_facilities = @facility.create_facility(co_dmv_office_locations) 
 
-      expect(new_facilities).to eq([co_dmv_office_locations])
+      expect(new_co_facilities).to eq(new_co_facilities)
+
+      ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
+      new_ny_facilities = @facility.create_facility(ny_dmv_office_locations)
+      
+      expect(new_ny_facilities).to eq(new_ny_facilities)
+
+      mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
+      new_mo_facilities = @facility.create_facility(mo_dmv_office_locations)
+
+      expect(new_mo_facilities).to eq(new_mo_facilities)
     end
   end
 end
