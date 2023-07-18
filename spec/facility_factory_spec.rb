@@ -23,6 +23,7 @@ RSpec.describe FacilityFactory do
         expect(@facility.facility_list.first.address).to eq("2855 Tremont Place, Suite 118, Denver, CO, 80205")
         expect(@facility.facility_list.first.phone).to eq("(720) 865-4600")
         expect(@facility.facility_list.first.hours).to eq("Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.")
+        expect(@facility.facility_list.first.holidays).to eq("Not Available")
       end
 
       it 'can create new_york_facilities' do
@@ -35,6 +36,7 @@ RSpec.describe FacilityFactory do
         expect(@facility.facility_list.first.address).to eq("168-46 91ST AVE., 2ND FLR")
         expect(@facility.facility_list.first.phone).to eq("7189666155")
         expect(@facility.facility_list.first.hours).to eq("Monday-Friday 7:30 AM to 5:00 PM")
+        expect(@facility.facility_list.first.holidays).to eq("Not Available")
       end
 
       it 'can create missouri_facilities' do
@@ -47,6 +49,8 @@ RSpec.describe FacilityFactory do
         expect(@facility.facility_list.first.address).to eq("119 VINE ST")
         expect(@facility.facility_list.first.phone).to eq("(573) 624-8808")
         expect(@facility.facility_list.first.hours).to eq("Monday - Friday - 8:30 to 4:30")
+        expect(@facility.facility_list.first.holidays).to eq("Independence Day (07/04/22), Labor Day (09/05/22), Columbus Day (10/10/22), Veterans Day (11/11/22), 
+        Thanksgiving (11/24/22), Christmas Day Observed (12/26/22), New Year's Day Observed (01/02/23), Martin Luther King Day (01/16/23)")
       end
     end
 end

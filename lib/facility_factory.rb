@@ -11,7 +11,8 @@ class FacilityFactory
             name: format_name(facility),
             address: format_address(facility),
             phone: format_phone(facility),
-            hours: format_hours(facility)
+            hours: format_hours(facility),
+            holidays: format_holidays(facility)
           }
           @facility_list << Facility.new(details)
         end
@@ -55,6 +56,14 @@ class FacilityFactory
             "Monday-Friday #{data[:monday_beginning_hours]} to #{data[:friday_ending_hours]}" 
         elsif data[:state] == 'MO'
             data[:daysopen]
+        end
+    end
+
+    def format_holidays(data)
+        if data[:state] == 'MO'
+            data[:holidaysclosed]
+        else
+            "Not Available"
         end
     end
 end
