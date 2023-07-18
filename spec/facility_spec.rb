@@ -125,7 +125,8 @@ RSpec.describe Facility do
     describe '#registrant 1 license data returns all false' do
       it '#registrant 1 license data returns all false' do
         # require 'pry' ; binding.pry
-        expect(@registrant_1.license_data).to include({written: false,
+        expect(@registrant_1.license_data).to include({
+          written: false,
           license: false,
           renewed: false})
         expect(@registrant_1.permit?).to eq(true)
@@ -242,7 +243,7 @@ RSpec.describe Facility do
         @facility_1.add_services('Renew License')
         @registrant_1.license_data[:license] = true
         @facility_1.renew_drivers_license(@registrant_1)
-
+        # require 'pry' ; binding.pry
         expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
         expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(true)
         expect(@registrant_1.license_data).to include({
@@ -268,7 +269,7 @@ RSpec.describe Facility do
         @registrant_2.earn_permit
         @registrant_2.license_data[:license] = true
         @facility_1.renew_drivers_license(@registrant_2)
-
+        # require 'pry' ; binding.pry
         expect(@facility_1.administer_written_test(@registrant_2)).to eq(true)
         expect(@facility_1.renew_drivers_license(@registrant_2)).to eq(true)
         expect(@registrant_2.license_data).to include({

@@ -30,12 +30,12 @@ RSpec.describe Dmv do
       @facility_2.add_services('New Drivers License')
       @facility_2.add_services('Road Test')
       @facility_2.add_services('Written Test')
-      # @facility_3.add_services('New Drivers License')
-      # @facility_3.add_services('Road Test')
+      @facility_3.add_services('New Drivers License')
+      @facility_3.add_services('Road Test')
 
       @dmv.add_facility(@facility_1)
       @dmv.add_facility(@facility_2)
-      # @dmv.add_facility(@facility_3)
+      @dmv.add_facility(@facility_3)
 
       expect(@dmv.facilities_offering_service('Road Test')).to eq(@facility_2)
       # expect(@dmv.facilities_offering_service('Road Test')).to eq(@facility_3) 
