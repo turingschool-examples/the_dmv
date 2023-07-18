@@ -1,4 +1,5 @@
 require './lib/registrant'
+require './lib/facility'
 
 RSpec.describe Registrant do
   before do
@@ -34,4 +35,6 @@ RSpec.describe Registrant do
       expect(@registrant_2.permit?).to eq(true)
     end
   end
+
+  
 end
