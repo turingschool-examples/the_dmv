@@ -4,6 +4,7 @@ RSpec.describe Registrant do
   before(:each) do
     @registrant_1 = Registrant.new('Bruce', 18, true )
     @registrant_2 = Registrant.new('Penny', 15 )
+    @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
   end
 
   describe '#initialize' do
