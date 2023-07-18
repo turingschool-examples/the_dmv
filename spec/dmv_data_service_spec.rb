@@ -27,7 +27,10 @@ RSpec.describe DmvDataService do
 
   describe '#co_dmv_office_locations' do
     it 'can load colorado dmv office locations' do
+      co_dmv_office_locations = @dds.co_dmv_office_locations
       expect(@dds.co_dmv_office_locations.size).to be_an(Integer)
+
+      colorado = co_dmv_office_locations.first
     end
   end
 
