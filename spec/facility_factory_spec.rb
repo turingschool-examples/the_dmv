@@ -10,7 +10,7 @@ RSpec.describe FacilityFactory do
   end
 
   describe "#create_facilities_co" do
-    xit "can create facilities for Colorado DMV locations" do
+    it "can create facilities for Colorado DMV locations" do
       factory = FacilityFactory.new
       co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
       factory.create_facilities(co_dmv_office_locations)
@@ -29,9 +29,9 @@ RSpec.describe FacilityFactory do
       factory.create_facilities(ny_dmv_office_locations)
 
       expect(factory.create_facilities(ny_dmv_office_locations)[0]).to be_a(Facility)
-      expect(factory.create_facilities(ny_dmv_office_locations)[0].name).to eq("DMV Jamaica Branch")
-      expect(factory.create_facilities(ny_dmv_office_locations)[0].address).to eq("168-46 91st Ave., 2nd Flr Jamaica, NY 11432")
-      expect(factory.create_facilities(ny_dmv_office_locations)[0].phone).to eq("(718) 966-6155")
+      expect(factory.create_facilities(ny_dmv_office_locations)[0].name).to eq("JAMAICA")
+      expect(factory.create_facilities(ny_dmv_office_locations)[0].address).to eq("168-46 91ST AVE., 2ND FLR JAMAICA, NY 11432")
+      expect(factory.create_facilities(ny_dmv_office_locations)[0].phone).to eq("7189666155")
     end
   end
 end
