@@ -33,7 +33,7 @@ class FacilityFactory
         @state = details[:state]
         @zip = details[:zip]
         @phone = details[:phone]
-      else 
+      elsif details[:office_name] && details[:office_type] && details[:public_phone_number] && details[:street_address_line_1] && details[:city] && details[:state] && details[:zip_code]
         # New York Reference
         @dmv_office = details[:office_name]
         @address_li = details[:office_type]
@@ -42,6 +42,15 @@ class FacilityFactory
         @city = details[:city]
         @state = details[:state]
         @zip = details[:zip_code]
+      else
+        # Missouri Reference
+        @dmv_office = details[:type]
+        @address_li = details[:county]
+        @phone = details[:phone]
+        @address__1 = details[:address1]
+        @city = details[:city]
+        @state = details[:state]
+        @zip = details[:zipcode]
       end
     end
   end
@@ -61,3 +70,38 @@ end
   # :city=>"JAMAICA",
   # :state=>"NY",
   # :zip_code=>"11432"
+
+  # For reference from Missouri Data Set
+
+  # Dexter
+
+  # :number=>"086",
+  # :dorregionnumber=>"14",
+  # :type=>"1MV",
+  # :name=>"DEXTER",
+  # :address1=>"119 VINE ST",
+  # :city=>"DEXTER",
+  # :state=>"MO",
+  # :zipcode=>"63841",
+  # :county=>"Stoddard",
+  # :phone=>"(573) 624-8808",
+  # :fax=>"(573) 624-8724",
+  # :size=>"2",
+  # :email=>"DEXTERAGENTOFFICE@DOR.MO.GOV",
+  # :agent=>"STODDARD COUNTY LICENSE OFFICE",
+  # :officemanager=>"RAY ROWLAND",
+  # :daysopen=>"Monday - Friday - 8:30 to 4:30",
+  # :holidaysclosed=> Skip
+
+  # Princeton
+  # :number=>"090",
+  # :dorregionnumber=>"2",
+  # :type=>"1MV",
+  # :name=>"PRINCETON",
+  # :address1=>"703 HICKLAND SUITE B",
+  # :city=>"PRINCETON",
+  # :state=>"MO",
+  # :zipcode=>"64673",
+  # :located_in=>"THE FAMOUS BUILDING",
+  # :county=>"Mercer",
+  # :phone=>"(660) 748-4445"

@@ -5,6 +5,7 @@ RSpec.describe FacilityFactory do
     @facility = FacilityFactory.new
     @co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
     @new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+    @missouri_facilities = DmvDataService.new.mo_dmv_office_locations
   end
 
   describe '#initialize' do
@@ -55,8 +56,8 @@ RSpec.describe FacilityFactory do
     end
   end
 
-  describe '#new_york_dmv_locations and fails' do
-    it 'checks hashes to match office but the test is intended to pass ONLY because of the to_not' do
+  describe '#new_york_dmv_locations and passes with intent to fail to_not' do
+    it 'checks mismatched hashes to PURPOSELY Mismatch JAMAICA office and passes with intended to_not fail' do
       # require 'pry' ; binding.pry
       # Purposely wrote test as a failure but didnt want it to show on
       # RSpec fails for rubric purposes so to_not is being used to pass the intended fail
@@ -84,4 +85,53 @@ RSpec.describe FacilityFactory do
         zip: "11432"))
     end
   end
+
+  describe 'Missouri Facilities Data pull check' do
+    it 'simple test to show pulled data from Missouri_facilities for further object tests' do
+      # require 'pry' ; binding.pry
+      expect(@missouri_facilities).to include()
+    end
+  end
+
+  describe '#References Dexter,MO Hash and passes' do
+    it 'checks hashes to match Missouri Dexter office and passes' do
+      # require 'pry' ; binding.pry
+      expect(@facility.create_facilities(@missouri_facilities)).to include(having_attributes(
+        dmv_office: "1MV",
+        address_li: "Stoddard",
+        phone: "(573) 624-8808",
+        address__1: "119 VINE ST",
+        city: "DEXTER",
+        state: "MO",
+        zip: "63841"))
+    end
+  end
+
+  describe '#References Princeton,MO Hash and passes' do
+    it 'checks hashes to match Missouri Princeton office and passes' do
+      # require 'pry' ; binding.pry
+      expect(@facility.create_facilities(@missouri_facilities)).to include(having_attributes(
+        dmv_office: "1MV",
+        address_li: "Mercer",
+        phone: "(660) 748-4445",
+        address__1: "703 HICKLAND SUITE B",
+        city: "PRINCETON",
+        state: "MO",
+        zip: "64673"))
+    end
+  end  
+
+  describe '#References Princeton,MO Hash and passes' do
+    it 'checks hashes to PURPOSELY Mismatch Missouri Princeton office and passes with intended to_not fail' do
+      # require 'pry' ; binding.pry
+      expect(@facility.create_facilities(@missouri_facilities)).to_not include(having_attributes(
+        dmv_office: "1MV",
+        address_li: "MercEr",
+        phone: "(660) 748-4445",
+        address__1: "703 HICKLAND SUITE B",
+        city: "PRINCETON",
+        state: "MO",
+        zip: "64673"))
+    end
+  end  
 end
