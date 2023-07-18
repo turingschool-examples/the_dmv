@@ -61,23 +61,4 @@ class VehicleFactory
       data[:model_year]
     end
   end
-
-  def model_count
-    grouped_list = vehicles.group_by { |vehicle| vehicle.model }
-    counted_list = grouped_list.transform_values { |car| car.count }
-    ordered_list = counted_list.sort_by { |make, count| -count }
-    # ordered_list[0][0]
-  end
-
-  def make_count
-    grouped_list = vehicles.group_by { |vehicle| vehicle.make }
-    counted_list = grouped_list.transform_values { |vehicle| vehicle.count }
-    ordered_list = counted_list.sort_by { |make, count| -count }
-    # ordered_list[0][0]
-  end
-
-  def model_year_count(year)
-    list = vehicles.find_all { |vehicle| vehicle.year == year }
-    list.count
-  end
 end
