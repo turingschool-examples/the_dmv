@@ -69,4 +69,15 @@ class FacilityFactory
     units_of_data = data.split
     units_of_data.map {|unit| unit.capitalize}.join(" ")
   end
+
+  def phone_filter(data)
+    if data.length < 14 && !data.include?("(") && !data.include?(")") && !data.include?(" ") && !data.include?("-")
+      data.insert(0, "(")
+      data.insert(4, ")")
+      data.insert(5, " ")
+      data.insert(9, "-")
+    else
+      data = data
+    end
+  end
 end
