@@ -45,7 +45,6 @@ RSpec.describe Facility do
 
     it ".registration_date" do
       @facility_1.register_vehicle(@cruz)
-      #is the eq test good?
       expect(@cruz.registration_date).to eq(Date.today.inspect)
     end
     
@@ -53,7 +52,6 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.collected_fees).to eq(100)
       @facility_1.register_vehicle(@camaro)
-      #do i need to test each time?
       expect(@camaro.registration_date).to eq(Date.today.inspect)
       expect(@camaro.plate_type).to eq(:antique)
       @facility_1.register_vehicle(@bolt)
@@ -74,7 +72,6 @@ RSpec.describe Facility do
       @registrant_1 = Registrant.new('Bruce', 18, true )
       @registrant_2 = Registrant.new('Penny', 16 )
       @registrant_3 = Registrant.new('Tucker', 15 )
-      #is there a quick way to use entered code accross spec files
       @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
       @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
     end
