@@ -1,5 +1,6 @@
 class ExistingFacility  
     attr_reader :facility_info
+
     def initialize
         @facility_info = []
     end
@@ -24,14 +25,14 @@ class ExistingFacility
                 services: services
             }
         
-        facility = Facility.new(facility_info)
-        services.each do |service|
-            facility.add_service(service)
+            facility = Facility.new(facility_info)
+            services.each do |service|
+                facility.add_service(service)
+            end
+
+            @facility_info << facility
         end
-        @facility_info << facility
-    end
 
-    @facility_info.inspect
+        @facility_info.inspect
     end
-
 end

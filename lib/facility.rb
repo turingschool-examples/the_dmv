@@ -23,15 +23,18 @@ class Facility
     if @services.include?('Vehicle Registration')
       vehicle.set_registration_date(Time.now)
       vehicle.set_plate_type
-        if vehicle.plate_type == :antique
+
+      if vehicle.plate_type == :antique
         @collected_fees += 25
-        elsif vehicle.plate_type == :ev
+      elsif vehicle.plate_type == :ev
         @collected_fees += 200
-        else
+      else
         @collected_fees += 100
-        end
+      end
+        
       @registered_vehicles << vehicle
-    else nil
+    else 
+      nil
     end
   end
 
@@ -39,7 +42,7 @@ class Facility
     if @services.include?('Written Test') && applicant.age >= 16 && applicant.permit == true
       applicant.license_data[:written] = true
     else 
-      applicant.license_data[:written]
+      applicant.license_data[:written] 
     end
   end
 
@@ -55,9 +58,7 @@ class Facility
     if @services.include?('Renew License') && applicant.license_data[:license] == true
       applicant.license_data[:renewed] = true
     else 
-      applicant.license_data[:renewed]
+      applicant.license_data[:renewed] 
     end
   end
-
-  
 end

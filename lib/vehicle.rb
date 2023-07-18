@@ -39,19 +39,5 @@ class Vehicle
     else 
       @plate_type = :regular
     end
-  end
-
-  def keep_as_hash
-    {
-      engine: @engine,
-      make: @make, 
-      model: @model, 
-      plate_type: @plate_type, 
-      registration_date: @registration_date, 
-      vin: @vin, 
-      year: @year
-    }
-  end
-      
-  
+  end 
 end
