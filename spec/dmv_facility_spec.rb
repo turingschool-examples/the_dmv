@@ -22,5 +22,6 @@ RSpec.describe DmvFacility do
 
   it "creates facility objects from all data" do
     data_service = instance_double("DmvDataService")
+    allow(data_service).to receive(:co_dmv_office_locations).and_return(co_dmv_office_locations)
   end
 end
