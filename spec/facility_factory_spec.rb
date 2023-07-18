@@ -6,7 +6,6 @@ describe FacilityFactory do
     @co_facilities = DmvDataService.new.co_dmv_office_locations
     @ny_facilities = DmvDataService.new.ny_dmv_office_locations
     @mo_facilities = DmvDataService.new.mo_dmv_office_locations
-    # require 'pry';binding.pry
   end
 
   describe "#initialize" do

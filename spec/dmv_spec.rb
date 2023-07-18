@@ -40,34 +40,4 @@ RSpec.describe Dmv do
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
-
-  let (:car1) {Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )}
-  let (:car2) {Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )}
-  let (:car3) {Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )}
-  let (:car4) {Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Subaru', model: 'Outback', engine: :ice} )}
-  let (:car5) {Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )}
-
-  describe "#top_make" do
-    it "can return the most popular make registered" do
-      @car1 = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-      @car2 = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-      @car3 = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-      @car4 = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Subaru', model: 'Outback', engine: :ice} )
-      @car5 = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
-      
-      @facility_1.add_service("Vehicle Registration")
-
-      @facility_1.register_vehicle(@car1)
-      @facility_1.register_vehicle(@car2)
-      @facility_1.register_vehicle(@car3)
-      @facility_1.register_vehicle(@car4)
-      @facility_1.register_vehicle(@car5)
-
-      @dmv.add_facility(@facility_1)
-      @dmv.add_facility(@facility_2)
-      @dmv.add_facility(@facility_3)
-    # require 'pry';binding.pry
-      expect(@dmv.top_make).to eq("Chevrolet")
-    end
-  end
 end

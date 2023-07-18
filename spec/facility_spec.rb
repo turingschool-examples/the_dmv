@@ -13,6 +13,7 @@ RSpec.describe Facility do
     @registrant_2 = Registrant.new('Penny', 16 )
     @registrant_3 = Registrant.new('Tucker', 15 )
   end
+  
   describe '#initialize' do
     it 'can initialize' do
       # require 'pry';binding.pry
