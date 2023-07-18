@@ -235,6 +235,19 @@ RSpec.describe Facility do
       #four line address
       expect(@facility_1.co_address_formatter(four_line_co_address)).to eq("3698 W. 44th Avenue Denver CO 80211")
     end
+    
+    it "ut5 #ny_address_formatter can format new york addresses with five and four lines" do
+      five_line_ny_address = {:office_name=>"MALONE", :office_type=>"COUNTY OFFICE", :public_phone_number=>"5184811606", :street_address_line_1=>"355 WEST MAIN STREET", :street_address_line_2=>"ROOM 107", :city=>"MALONE", :state=>"NY", :zip_code=>"12953", :monday_beginning_hours=>"8:00 AM", :monday_ending_hours=>"3:30 PM", :tuesday_beginning_hours=>"8:00 AM", :tuesday_ending_hours=>"3:30 PM", :wednesday_beginning_hours=>"8:00 AM", :wednesday_ending_hours=>"3:30 PM", :thursday_beginning_hours=>"8:00 AM", :thursday_ending_hours=>"3:30 PM", :friday_beginning_hours=>"8:00 AM", :friday_ending_hours=>"3:30 PM", :georeference=>{:type=>"Point", :coordinates=>[-74.295308429, 44.849171487]}, :":@computed_region_yamh_8v7k"=>"182", :":@computed_region_wbg7_3whc"=>"278", :":@computed_region_kjdx_g34t"=>"621"}
+      #five line address
+      expect(@facility_1.ny_address_formatter(five_line_ny_address)).to eq("355 WEST MAIN STREET ROOM 107 MALONE NY 12953")
+      #four line address
+      expect(@facility_1.ny_address_formatter(new_york_datapoint)).to eq("168-46 91ST AVE., 2ND FLR JAMAICA NY 11432")
+    end
+    
+    it "ut5 #mo_address_formatter can format missouri addresses with five and four lines" do
+      #four line address
+      expect(@facility_1.mo_address_formatter(missouri_datapoint)).to eq("168-46 91ST AVE., 2ND FLR JAMAICA NY 11432")
+    end
 
 
 
