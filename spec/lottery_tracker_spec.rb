@@ -41,11 +41,27 @@ RSpec.describe LotteryTracker do
   describe "#most_likely_number" do
     it "returns a string of the most likely number based on recent drawings" do
       tracker = LotteryTracker.new(LotteryDataService.new.ny_lottery_data)
-      wins_by_column = tracker.winning_numbers_by_column(tracker.get_all_numbers)
-
+      
       expect(tracker.most_likely_number).to be_a String
       expect(tracker.most_likely_number.size).to eq(17)
       # require 'pry';binding.pry
+    end
+  end
+  
+  describe "#most_likely_with_percent" do
+    it "returns each most likely number per column with the percent of the time its drawn" do
+      tracker = LotteryTracker.new(LotteryDataService.new.ny_lottery_data)
+      
+      expect(tracker.most_likely_with_percent).to be_an Array
+      expect(tracker.most_likely_with_percent.first.size).to eq(2)
+    end
+  end
+  
+  describe "#get_likely_pairs" do
+    it "returns an array of each pair of likely numbers per column" do
+      tracker = LotteryTracker.new(LotteryDataService.new.ny_lottery_data)
+      
+      expect(tracker.get_likely_pairs).to be_an Array
     end
   end
 end

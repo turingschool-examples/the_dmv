@@ -33,4 +33,8 @@ class LotteryTracker
     end
     most_likely_values.map {|value| value[0]}.join(" ")
   end
+
+  def most_likely_with_percent
+    
+  end
 end
