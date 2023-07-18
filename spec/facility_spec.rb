@@ -244,16 +244,14 @@ RSpec.describe Facility do
       expect(@facility_1.ny_address_formatter(new_york_datapoint)).to eq("168-46 91ST AVE., 2ND FLR JAMAICA NY 11432")
     end
     
-    it "ut5 #mo_address_formatter can format missouri addresses with five and four lines" do
+    it "ut6 #mo_address_formatter can format missouri addresses with five and four lines" do
       #four line address
-      expect(@facility_1.mo_address_formatter(missouri_datapoint)).to eq("168-46 91ST AVE., 2ND FLR JAMAICA NY 11432")
+      expect(@facility_1.mo_address_formatter(missouri_datapoint)).to eq("119 VINE ST DEXTER MO 63841")
     end
-
-
-
+    
+    it "ut7 #ny_number_formatter can format new york phone numbers to a common format" do
+      hashstring_unformatted_number = {public_phone_number: "7188675309"}
+      expect(@facility_1.ny_number_formatter(hashstring_unformatted_number)).to eq("(718) 867-5309")
+    end
   end
-
-
-
-
 end

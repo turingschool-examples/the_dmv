@@ -49,8 +49,7 @@ class Facility
     end
   end
       
-
-  #helper UNTESTED
+  #tested
   def issue_plate_fees(vehicle)
     if vehicle.antique?
       vehicle.issue_plate(:antique)
@@ -64,7 +63,6 @@ class Facility
     end
   end
 
-  #multiple data adjustments
   def name_finder(facility_details)
     if facility_details[:name]
       facility_details[:name]
@@ -94,17 +92,6 @@ class Facility
       ny_number_formatter(facility_details)
     end
   end
-
-  # def services_finder(facility_details)
-  #   if facility_details[:services]
-  #     facility_details[:services]
-  #   elsif facility_details[:services]
-  #     "ahhhhhhh!"
-
-  #   else
-  #     []
-  #   end
-  # end
 
   def co_address_formatter(facility_details)
     string = ""
@@ -149,5 +136,4 @@ class Facility
   def ny_number_formatter(facility_details)
     facility_details[:public_phone_number].insert(6, "-").insert(3, ") ").insert(0, "(")
   end
-    
 end
