@@ -1,5 +1,6 @@
 class VehicleFactory
     attr_reader :vehicles
+
     def initialize
         @vehicles = []
     end
@@ -21,11 +22,10 @@ class VehicleFactory
                 year: year, 
             }
         
-        vehicle = Vehicle.new(vehicle_details)
-        @vehicles << vehicle
-    end
+            vehicle = Vehicle.new(vehicle_details)
+            @vehicles << vehicle
+        end
 
-    vehicles.inspect
+        vehicles.inspect
     end
-
 end

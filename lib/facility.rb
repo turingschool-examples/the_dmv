@@ -23,13 +23,15 @@ class Facility
     if @services.include?('Vehicle Registration')
       vehicle.set_registration_date(Time.now)
       vehicle.set_plate_type
-        if vehicle.plate_type == :antique
+
+      if vehicle.plate_type == :antique
         @collected_fees += 25
-        elsif vehicle.plate_type == :ev
+      elsif vehicle.plate_type == :ev
         @collected_fees += 200
-        else
+      else
         @collected_fees += 100
-        end
+      end
+        
       @registered_vehicles << vehicle
     else nil
     end
@@ -58,6 +60,4 @@ class Facility
       applicant.license_data[:renewed]
     end
   end
-
-  
 end
