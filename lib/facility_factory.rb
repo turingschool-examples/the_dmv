@@ -44,22 +44,28 @@ class FacilityFactory
 
   def format_co_address(address1, address2, city, state, zip)
     if address2 == nil
-      "#{address1} #{city} #{state} #{zip}"
+      "#{address1}, #{city}, #{state} #{zip}"
     else
-      "#{address1} #{address2} #{city} #{state} #{zip}"
+      "#{address1} #{address2}, #{city}, #{state} #{zip}"
     end
   end
 
   def format_address(address, city, state, zip)
-      "#{address} #{city} #{state} #{zip}"
+      "#{address}, #{city}, #{state} #{zip}"
   end
 
-  def format_ny_open_hours(mon_start, mon_end,
+  def format_ny_open_hours(
+    mon_start, mon_end,
      tues_start, tues_end,
       wed_start, wed_end,
        thurs_start, thurs_end,
         fri_start, fri_end)
-    "Monday: #{mon_start} to #{mon_end}, Tuesday: #{tues_start} to #{tues_end}, Wednesday: #{wed_start} to #{wed_end}, Thursday: #{thurs_start} to #{thurs_end}, Friday: #{fri_start} to #{fri_end}"
+    schedule_string = "Monday: #{mon_start} to #{mon_end},
+     Tuesday: #{tues_start} to #{tues_end},
+      Wednesday: #{wed_start} to #{wed_end},
+       Thursday: #{thurs_start} to #{thurs_end},
+        Friday: #{fri_start} to #{fri_end}"
+    schedule_string.delete!("\n")
   end
 
   def format_mo_open_hours(open_hours, holidays)

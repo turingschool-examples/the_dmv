@@ -47,11 +47,11 @@ RSpec.describe FacilityFactory do
     it 'Address formatting check' do
       factory = FacilityFactory.new
       expect(factory).to be_an_instance_of(FacilityFactory)
+      expect(factory.format_co_address(nil, nil, nil, nil, nil)).to eq(", ,  ")
+      expect(factory.format_co_address("address", nil, "city", "state", "zip")).to eq("address, city, state zip")
+      expect(factory.format_co_address("address1", "address2", "city", "state", "zip")).to eq("address1 address2, city, state zip")
 
-      expect(factory.format_co_address("address", nil, "city", "state", "zip")).to eq("address city state zip")
-      expect(factory.format_co_address("address1", "address2", "city", "state", "zip")).to eq("address1 address2 city state zip")
-
-      expect(factory.format_address("address", "city", "state", "zip")).to eq("address city state zip")
+      expect(factory.format_address("address", "city", "state", "zip")).to eq("address, city, state zip")
     end
   end
 
