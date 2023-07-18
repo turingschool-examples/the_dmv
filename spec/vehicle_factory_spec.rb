@@ -12,7 +12,6 @@ RSpec.describe VehicleFactory do
   describe "#create_vehicles" do
     it "can create vehicles" do
       factory = VehicleFactory.new
-      vehicle_1 = Vehicle.new({vin: 'JTDKN3DP8D', year: 2013, make: 'TOYOTA', model: 'Prius Plug-in', engine: :ev} )
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
       factory.create_vehicles(wa_ev_registrations)
 
