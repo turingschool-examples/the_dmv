@@ -32,7 +32,16 @@ class DmvDataService
         dmv_id: data[:dmv_id],
         dmv_office: data[:dmv_office],
         address_li: data[:address_li],
-        address__1: data[:address__1]
+        address__1: data[:address__1],
+        city: data[:city],
+        stae: data[:state],
+        zip: data[:zip],
+        phone: data[:phone],
+        hours: data[:hours],
+        services_p: data[:services_p],
+        photo: data[:photo],
+        address_id: data[:address_id]
+        
       }
     end
   end
