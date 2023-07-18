@@ -34,7 +34,7 @@ class DmvDataService
         address_li: data[:address_li],
         address__1: data[:address__1],
         city: data[:city],
-        stae: data[:state],
+        state: data[:state],
         zip: data[:zip],
         phone: data[:phone],
         hours: data[:hours],
@@ -44,5 +44,6 @@ class DmvDataService
         
       }
     end
+    facilities
   end
 end
