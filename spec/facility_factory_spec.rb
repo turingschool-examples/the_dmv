@@ -14,7 +14,6 @@ RSpec.describe FacilityFactory do
       ff = FacilityFactory.new
 
       co_dmv_offices = DmvDataService.new.co_dmv_office_locations
-      # require 'pry';binding.pry
 
       expect(ff.create_facilities(co_dmv_offices)).to_not be_empty
       expect(ff.create_facilities(co_dmv_offices).first).to be_a Facility
@@ -24,7 +23,6 @@ RSpec.describe FacilityFactory do
       ff = FacilityFactory.new
   
       ny_dmv_offices = DmvDataService.new.ny_dmv_office_locations
-      # require 'pry';binding.pry
   
       expect(ff.create_facilities(ny_dmv_offices)).to_not be_empty
       expect(ff.create_facilities(ny_dmv_offices).first).to be_a Facility
@@ -34,7 +32,6 @@ RSpec.describe FacilityFactory do
       ff = FacilityFactory.new
   
       mo_dmv_offices = DmvDataService.new.mo_dmv_office_locations
-      # require 'pry';binding.pry
   
       expect(ff.create_facilities(mo_dmv_offices)).to_not be_empty
       expect(ff.create_facilities(mo_dmv_offices).first).to be_a Facility
@@ -49,6 +46,20 @@ RSpec.describe FacilityFactory do
 
       expect(ff.addr_builder(co_dmv_offices.first)).to be_a String
     end
+
+    it "works with co, ny and mo data" do
+      ff = FacilityFactory.new
+      co_dmv_offices = DmvDataService.new.co_dmv_office_locations
+      ny_dmv_offices = DmvDataService.new.ny_dmv_office_locations
+      mo_dmv_offices = DmvDataService.new.mo_dmv_office_locations
+
+      expect(ff.addr_builder(co_dmv_offices.first)).to be_a String
+      expect(ff.addr_builder(co_dmv_offices.first)).to_not be_empty
+      expect(ff.addr_builder(ny_dmv_offices.first)).to be_a String
+      expect(ff.addr_builder(ny_dmv_offices.first)).to_not be_empty
+      expect(ff.addr_builder(mo_dmv_offices.first)).to be_a String
+      expect(ff.addr_builder(mo_dmv_offices.first)).to_not be_empty
+    end
   end
 
   describe "#detail_builder" do
@@ -62,6 +73,24 @@ RSpec.describe FacilityFactory do
       expect(details.key?(:name)).to be true
       expect(details.key?(:address)).to be true
       expect(details.key?(:phone)).to be true
+    end
+
+    it "works with co, ny and mo data" do
+      ff = FacilityFactory.new
+      co_dmv_offices = DmvDataService.new.co_dmv_office_locations
+      ny_dmv_offices = DmvDataService.new.ny_dmv_office_locations
+      mo_dmv_offices = DmvDataService.new.mo_dmv_office_locations
+
+      co_details = ff.detail_builder(co_dmv_offices.first)
+      ny_details = ff.detail_builder(ny_dmv_offices.first)
+      mo_details = ff.detail_builder(mo_dmv_offices.first)
+
+      expect(co_details).to be_a Hash
+      expect(co_details.key?(:name)).to be true
+      expect(ny_details).to be_a Hash
+      expect(ny_details.key?(:name)).to be true
+      expect(mo_details).to be_a Hash
+      expect(mo_details.key?(:name)).to be true
     end
   end
 

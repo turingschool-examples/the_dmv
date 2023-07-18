@@ -30,7 +30,7 @@ RSpec.describe LotteryTracker do
   describe "#winning_numbers_by_column" do
     it "returns a hash of each columns winning numbers tallied" do
       tracker = LotteryTracker.new(LotteryDataService.new.ny_lottery_data)
-      wins_by_column = tracker.winning_numbers_by_column(tracker.get_all_numbers)
+      wins_by_column = tracker.winning_numbers_by_column
       
       expect(wins_by_column).to be_a Hash
       expect(wins_by_column.key?(:column_1)).to be true
@@ -44,7 +44,6 @@ RSpec.describe LotteryTracker do
       
       expect(tracker.most_likely_number).to be_a String
       expect(tracker.most_likely_number.size).to eq(17)
-      # require 'pry';binding.pry
     end
   end
   
