@@ -15,6 +15,16 @@ describe Registrant do
     end
   end
 
+  describe "#permit?" do
+    it "returns true if registrant has permit or false if not" do
+      registrant_3 = Registrant.new("Bob", 25)
+
+      expect(registrant_3.permit?).to eq(false)
+      registrant_3.earn_permit
+      expect(registrant_3.permit?).to eq(true)
+    end
+  end
+
   describe "#earn_permit" do
     it "earns permit for registrant, setting permit? to true" do
       registrant_2 = Registrant.new('Penny', 15 )
