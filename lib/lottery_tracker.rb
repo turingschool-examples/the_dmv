@@ -23,6 +23,15 @@ class LotteryTracker
     }
   end
 
+  def get_likely_pairs
+    most_likely_values = []
+    numbers_by_column = winning_numbers_by_column
+    numbers_by_column.each do |column|
+      most_likely_values << column[1].max_by {|key, value| value}
+    end
+    most_likely_values
+  end
+
   def most_likely_number
     get_likely_pairs.map {|value| value[0]}.join(" ")
   end
@@ -32,15 +41,6 @@ class LotteryTracker
       draw_percent = "#{(pair[1] / 10.0)}%"
       [pair[0], draw_percent]
     end
-  end
-
-  def get_likely_pairs
-    most_likely_values = []
-    numbers_by_column = winning_numbers_by_column
-    numbers_by_column.each do |column|
-      most_likely_values << column[1].max_by {|key, value| value}
-    end
-    most_likely_values
   end
 
   def get_total_chance
