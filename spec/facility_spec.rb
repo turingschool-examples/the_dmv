@@ -258,7 +258,6 @@ RSpec.describe Facility do
       facility_1.renew_drivers_license(registrant_2)
 
       expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
-      require 'pry';binding.pry
     end
   end
 end
