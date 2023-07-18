@@ -104,7 +104,11 @@ RSpec.describe FacilityFactory do
     it "can format phone numbers passed through to follow the pattern (xxx) xxx-xxxx" do
       factory = FacilityFactory.new
       co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+      ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
+      mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
       factory.create_facilities(co_dmv_office_locations)
+      factory.create_facilities(ny_dmv_office_locations)
+      factory.create_facilities(mo_dmv_office_locations)
 
       expect(factory.phone_filter(factory.create_facilities(co_dmv_office_locations)[0].phone)).to eq("(720) 865-4600")
       expect(factory.phone_filter(factory.create_facilities(ny_dmv_office_locations)[0].phone)).to eq("(718) 966-6155")
