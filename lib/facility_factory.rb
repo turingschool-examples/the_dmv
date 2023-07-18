@@ -8,34 +8,34 @@ class FacilityFactory
     locations.each do |location|
       if valid_co_address(location)
         new_facility = Facility.new({
-          name: location[:dmv_office],
+          name: name_and_address_filter(location[:dmv_office]),
           address: 
-          "#{location[:address_li]} "\
-          "#{location[:address__1]} "\
-          "#{location[:city]}, "\
+          "#{name_and_address_filter(location[:address_li])} "\
+          "#{name_and_address_filter(location[:address__1])} "\
+          "#{name_and_address_filter(location[:city])}, "\
           "#{location[:state]} "\
           "#{location[:zip]}",
-          phone: location[:phone]
+          phone: phone_filter(location[:phone])
         })
       elsif valid_ny_address(location)
         new_facility = Facility.new({
-          name: location[:office_name],
+          name: name_and_address_filter(location[:office_name]),
           address: 
-          "#{location[:street_address_line_1]} "\
-          "#{location[:city]}, "\
+          "#{name_and_address_filter(location[:street_address_line_1])} "\
+          "#{name_and_address_filter(location[:city])}, "\
           "#{location[:state]} "\
           "#{location[:zip_code]}",
-          phone: location[:public_phone_number]
+          phone: phone_filter(location[:public_phone_number])
         })
       elsif valid_mo_address(location)
         new_facility = Facility.new({
-          name: location[:name],
+          name: name_and_address_filter(location[:name]),
           address: 
-          "#{location[:address1]} "\
-          "#{location[:city]}, "\
+          "#{name_and_address_filter(location[:address1])} "\
+          "#{name_and_address_filter(location[:city])}, "\
           "#{location[:state]} "\
           "#{location[:zipcode]}",
-          phone: location[:phone]
+          phone: phone_filter(location[:phone])
         })
       end
       facilities << new_facility
@@ -71,13 +71,15 @@ class FacilityFactory
   end
 
   def phone_filter(data)
-    if data.length < 14 && !data.include?("(") && !data.include?(")") && !data.include?(" ") && !data.include?("-")
+    if data.nil?
+      "not listed"
+    elsif data.length < 14 && !data.include?("(") && !data.include?(")") && !data.include?(" ") && !data.include?("-")
       data.insert(0, "(")
       data.insert(4, ")")
       data.insert(5, " ")
       data.insert(9, "-")
     else
-      data = data
+      data
     end
   end
 end
