@@ -24,7 +24,7 @@ RSpec.describe FacilityFactory do
       ff = FacilityFactory.new
   
       ny_dmv_offices = DmvDataService.new.ny_dmv_office_locations
-      require 'pry';binding.pry
+      # require 'pry';binding.pry
   
       expect(ff.create_facilities(ny_dmv_offices)).to_not be_empty
       expect(ff.create_facilities(ny_dmv_offices).first).to be_a Facility
@@ -38,6 +38,20 @@ RSpec.describe FacilityFactory do
       co_dmv_offices = DmvDataService.new.co_dmv_office_locations
 
       expect(ff.addr_builder(co_dmv_offices.first)).to be_a String
+    end
+  end
+
+  describe "#detail_builder" do
+    it "returns a hash of name, address and phone for a facility" do
+      ff = FacilityFactory.new
+
+      co_dmv_offices = DmvDataService.new.co_dmv_office_locations
+      details = ff.detail_builder(co_dmv_offices.first)
+
+      expect(details).to be_a Hash
+      expect(details.key?(:name)).to be true
+      expect(details.key?(:address)).to be true
+      expect(details.key?(:phone)).to be true
     end
   end
 end
