@@ -26,12 +26,7 @@ class LotteryTracker
   end
 
   def most_likely_number
-    most_likely_values = []
-    numbers_by_column = winning_numbers_by_column(get_all_numbers)
-    numbers_by_column.each do |column|
-      most_likely_values << column[1].max_by {|key, value| value}
-    end
-    most_likely_values.map {|value| value[0]}.join(" ")
+    get_likely_pairs.map {|value| value[0]}.join(" ")
   end
 
   def most_likely_with_percent
