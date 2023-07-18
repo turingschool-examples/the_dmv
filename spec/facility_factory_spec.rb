@@ -34,4 +34,17 @@ RSpec.describe FacilityFactory do
       expect(factory.create_facilities(ny_dmv_office_locations)[0].phone).to eq("7189666155")
     end
   end
+
+  describe "#create_facilities_mo" do
+    it "can create facilities for Missouri DMV locations" do
+      factory = FacilityFactory.new
+      mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
+      factory.create_facilities(mo_dmv_office_locations)
+
+      expect(factory.create_facilities(mo_dmv_office_locations)[0]).to be_a(Facility)
+      expect(factory.create_facilities(mo_dmv_office_locations)[0].name).to eq("DEXTER")
+      expect(factory.create_facilities(mo_dmv_office_locations)[0].address).to eq("119 VINE ST DEXTER, MO 63841")
+      expect(factory.create_facilities(mo_dmv_office_locations)[0].phone).to eq("(573) 624-8808")
+    end
+  end
 end
