@@ -19,4 +19,8 @@ RSpec.describe DmvFacility do
     :":@computed_region_nku6_53ud"=>"1444"}
     ]
   end
+
+  it "creates facility objects from all data" do
+    data_service = instance_double("DmvDataService")
+  end
 end
