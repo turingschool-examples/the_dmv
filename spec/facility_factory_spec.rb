@@ -20,7 +20,7 @@ RSpec.describe FacilityFactory do
     it "can create new colorado facilities" do
       expect(@colorado.facilities_created).to eq([])
       @colorado.create_facilities(@colorado_facilities_data)
-      #  require 'pry';binding.pry
+      
       expect(@colorado.facilities_created.size).to eq(@colorado_facilities_data.size)
       expect(@colorado.facilities_created).to all be_a Facility
     end
@@ -28,7 +28,7 @@ RSpec.describe FacilityFactory do
     it "can create new york facilities" do
       expect(@new_york.facilities_created).to eq([])
       @new_york.create_facilities(@new_york_facilities_data)
-        # require 'pry';binding.pry
+  
       expect(@new_york.facilities_created.size).to eq(@new_york_facilities_data.size)
       expect(@new_york.facilities_created).to all be_a Facility
     end
@@ -36,7 +36,7 @@ RSpec.describe FacilityFactory do
     it "can create Missouri facilities" do 
       expect(@missouri.facilities_created).to eq([])
       @missouri.create_facilities(@missouri_facilities_data)
-        # require 'pry';binding.pry
+      
       expect(@missouri.facilities_created.size).to eq(@missouri_facilities_data.size)
       expect(@missouri.facilities_created).to all be_a Facility
     end 

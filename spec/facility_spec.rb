@@ -69,13 +69,13 @@ RSpec.describe Facility do
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@bolt.registration_date).to eq(nil)
     end
-    
+    #defined unit testing added after review by my rock
     it "has set_plate_type method" do 
       @facility_1.set_plate_type(@cruz)
       
       expect(@cruz.plate_type).to eq(:regular)
     end
-    
+    #defined unit testing added after review by my rock
     it "has collect_fees method" do 
       @facility.collect_fees(@cruz)
       
@@ -151,6 +151,7 @@ RSpec.describe Facility do
       @facility_1.add_service('Written Test')
       
       expect(@registrant_3.age).to eq(15)
+
       @facility_1.administer_written_test(@registrant_3)
       expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
@@ -159,6 +160,7 @@ RSpec.describe Facility do
   describe "#administer_road_test" do 
     it "can only administer if Road test provided by facility" do 
       @facility_1.add_service('Written Test')
+
       @facility_1.administer_written_test(@registrant_1)
       expect(@registrant_1.license_data[:written]).to eq(true)
       
@@ -175,6 +177,7 @@ RSpec.describe Facility do
       @facility_1.add_service('Road Test')
       
       expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+
       @facility_1.administer_road_test(@registrant_2)
       expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       
@@ -201,8 +204,8 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data[:renewed]).to eq(false)
       
       @facility_1.add_service('Renew License')
+
       @facility_1.renew_drivers_license(@registrant_1)
-      
       expect(@registrant_1.license_data[:renewed]).to eq(true)
     end
     
