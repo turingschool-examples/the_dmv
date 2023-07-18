@@ -10,13 +10,13 @@ class Vehicle
               :plate_type
 
   def initialize(vehicle_details)
-    @vin = vehicle_details[:vin]
-    @year = vehicle_details[:year]
+    @engine = vehicle_details[:engine]
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
-    @engine = vehicle_details[:engine]
-    @registration_date = vehicle_details[:registration_date]
     @plate_type = vehicle_details[:plate_type]
+    @registration_date = vehicle_details[:registration_date]
+    @vin = vehicle_details[:vin]
+    @year = vehicle_details[:year]
   end
 
   def antique?
@@ -39,6 +39,18 @@ class Vehicle
     else 
       @plate_type = :regular
     end
+  end
+
+  def keep_as_hash
+    {
+      engine: @engine,
+      make: @make, 
+      model: @model, 
+      plate_type: @plate_type, 
+      registration_date: @registration_date, 
+      vin: @vin, 
+      year: @year
+    }
   end
       
   

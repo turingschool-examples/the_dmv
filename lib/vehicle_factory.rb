@@ -12,20 +12,20 @@ class VehicleFactory
             model = registration[:model]
 
             vehicle_details = {
-                vin: vin,
-                year: year,
+                engine: :ev,
                 make: make,
                 model: model,
-                engine: :ev,
+                plate_type: nil,
                 registration_date: nil,
-                plate_type: nil
+                vin: vin,
+                year: year, 
             }
         
         vehicle = Vehicle.new(vehicle_details)
         @vehicles << vehicle
     end
 
-    vehicles 
+    vehicles.inspect
     end
 
 end
