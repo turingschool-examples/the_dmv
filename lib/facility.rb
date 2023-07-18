@@ -50,14 +50,19 @@ class Facility
     end
   end
 
-  def administer_road_test
-    ## To registrants who have passed the written
-    ## Registrants automatically get license when qualify for road test
-    ## if passed_written_test, earned_license == true
+  def administer_road_test(registrant)
+    if @services.include?("Road Test") && registrant.license_data[:written]
+      registrant.license_data[:license] = true
+    else
+      false
+    end
   end
 
-  def renew_drivers_license
-    ## Can be renewed if the registrain has already passed the road test and earned a license
-    ## if passed_road_test && earned_license
+  def renew_drivers_license(registrant)
+    if services.include?("Renew License") && registrant.license_data[:license]
+      registrant.license_data[:renewed] = true
+    else
+      false
+    end
   end
 end
