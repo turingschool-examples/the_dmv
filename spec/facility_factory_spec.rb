@@ -47,4 +47,37 @@ RSpec.describe FacilityFactory do
       expect(factory.create_facilities(mo_dmv_office_locations)[0].phone).to eq("(573) 624-8808")
     end
   end
+
+  describe "#valid_co_address" do
+    it "matches keys from the Colorado dataset to ensure creation of new facility with correct key:value pairs" do
+      factory = FacilityFactory.new
+      co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+      factory.create_facilities(co_dmv_office_locations)
+
+      expect(factory.valid_co_address(co_dmv_office_locations[0])).to eq(true)
+      expect(factory.valid_co_address(co_dmv_office_locations[1])).to eq(true)
+    end
+  end
+
+  describe "#valid_ny_address" do
+    it "matches keys from the New York dataset to ensure creation of new facility with correct key:value pairs" do
+      factory = FacilityFactory.new
+      ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
+      factory.create_facilities(ny_dmv_office_locations)
+
+      expect(factory.valid_ny_address(ny_dmv_office_locations[0])).to eq(true)
+      expect(factory.valid_ny_address(ny_dmv_office_locations[1])).to eq(true)
+    end
+  end
+
+  describe "#valid_mo_address" do
+    it "matches keys from the Missouri dataset to ensure creation of new facility with correct key:value pairs" do
+      factory = FacilityFactory.new
+      mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
+      factory.create_facilities(mo_dmv_office_locations)
+
+      expect(factory.valid_mo_address(mo_dmv_office_locations[0])).to eq(true)
+      expect(factory.valid_mo_address(mo_dmv_office_locations[1])).to eq(true)
+    end
+  end
 end
