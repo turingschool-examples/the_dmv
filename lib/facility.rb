@@ -1,5 +1,6 @@
 require "./lib/vehicle.rb"
 require "./lib/registrant.rb"
+require "./lib/dmv_data_service"
 
 class Facility
   attr_reader :name, :address, :phone, :services
