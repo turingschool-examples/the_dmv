@@ -6,10 +6,10 @@ class ExistingFacility
 
     def read_information(data)
         data.each do |detail|
-            name = detail[:dmv_office]
-            address = "#{detail[:address_li]}, #{detail[:address__1]} #{detail[:city]}, #{detail[:state]}, #{detail[:zip]}"
-            phone = detail[:phone]
-            services = detail[:services_p].split(';').map(&:strip)
+            name = detail[:dmv_office] || detail[:office_name]
+            address = "#{detail[:address_li] || detail[:street_address_line_1]}, #{detail[:address__1]}, #{detail[:city]}, #{detail[:state]}, #{detail[:zip] || detail[:zip_code]}"
+            phone = detail[:phone] || detail[:public_phone_number]
+            services = detail[:services_p]&.split(';')&.map(&:strip) || []
 
             facility_info = {
                 name: name,
