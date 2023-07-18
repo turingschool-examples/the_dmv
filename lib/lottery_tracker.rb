@@ -27,13 +27,13 @@ class LotteryTracker
     most_likely_values = []
     numbers_by_column = winning_numbers_by_column
     numbers_by_column.each do |column|
-      most_likely_values << column[1].max_by {|key, value| value}
+      most_likely_values << column[1].max_by { |key, value| value }
     end
     most_likely_values
   end
 
   def most_likely_number
-    get_likely_pairs.map {|value| value[0]}.join(" ")
+    get_likely_pairs.map { |value| value[0] }.join(" ")
   end
 
   def most_likely_with_percent
@@ -44,9 +44,9 @@ class LotteryTracker
   end
 
   def get_total_chance
-    percentages = get_likely_pairs.map {|column| column[1]}
+    percentages = get_likely_pairs.map { |column| column[1] }
     total_chance = 1.0
-    percentages.each {|percent| total_chance = total_chance * (percent / 1000.0)}
+    percentages.each { |percent| total_chance = total_chance * (percent / 1000.0) }
     (total_chance * 100.0).round(10)
   end
 end
