@@ -14,6 +14,7 @@ class Facility
     @services = []
     @registered_vehicles = []
     @registration_date = nil
+    @collected_fees = 0
   end
 
   def add_services(service)
@@ -23,10 +24,21 @@ class Facility
   def collected_fees
     total_fees = 0
     registered_vehicles.each do |vehicle|
-      registration_fee = registration_fee(vehicle)
+      registration_fee = calc_registration_fee(vehicle)
       total_fees += registration_fee
     end
     total_fees
+  end
+
+  def calc_registration_fee(vehicle)
+    case plate_type(vehicle)
+    when :antique
+      25
+    when :ev
+      200
+    else 
+      100
+    end
   end
 
   # def collected_fees
@@ -44,5 +56,45 @@ class Facility
     registration_date = Date.today
     vehicle.registration_date = registration_date
     @registered_vehicles << vehicle
+  end
+
+  def plate_type(vehicle)
+    if vehicle.year <= (Date.today.year - 25)
+      :antique
+    elsif vehicle.engine == :ev
+      :ev
+    else
+      :regular
+    end
+  end
+
+  def administer_written_test(registrant)
+    if registrant.permit? && registrant.age >= 16
+    registrant.license_data[:written] = true
+      true
+    else 
+      false
+    end
+  end
+
+  # == true must be used as opposed to the above written = true
+  # this is because the below wil always trigger truth unless == is used as operator
+  # research later...maybe because the if statement above includes && pre license.data section
+  def administer_road_test(registrant)
+    if registrant.license_data[:written] == true && registrant.age >= 16
+      registrant.license_data[:license] = true
+      true
+    else
+      false
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    if registrant.license_data[:license] == true
+      registrant.license_data[:renewed] = true
+      true
+    else 
+      false
+    end
   end
 end

@@ -21,6 +21,10 @@ class Registrant
   def earn_permit
     @permit = true
   end
+
+  def administer_written_test(registrant)
+    registrant.permit? && registrant.age >= 16
+  end
 end
 
 # pull test
