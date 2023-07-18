@@ -29,4 +29,15 @@ class DataAnalyzer
     list = data.find_all { |vehicle| vehicle[:model_year] == year }
     list.count
   end
+
+  def descending_county_list
+    grouped_list = data.group_by { |vehicle| vehicle[:county] }
+    counted_list = grouped_list.transform_values { |type| type.count }
+    ordered_list = counted_list.sort_by { |make, count| -count }
+  end
+
+  def most_registered_county
+    descending_county_list[0][0]
+  end
+
 end
