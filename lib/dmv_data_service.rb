@@ -13,6 +13,7 @@ class DmvDataService
 
   def co_dmv_office_locations
     @co_dmv_office_locations ||= load_data('https://data.colorado.gov/resource/dsw3-mrn4.json')
+    require 'pry';binding.pry
   end
 
   def ny_dmv_office_locations
