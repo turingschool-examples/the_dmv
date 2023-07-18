@@ -5,7 +5,17 @@ require "./lib/dmv_facility"
 
 describe "#initialize" do
   it "creates a dmv factory" do
-    expect(DmvDataService.new.co_dmv_office_locations).to eq({})
+    dmv_facilities_data = DmvDataService.new.co_dmv_office_locations
+
+    expect(DmvDataService.new.co_dmv_office_locations).to eq(dmv_facilities_data)
+
+    new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+
+    expect(DmvDataService.new.ny_dmv_office_locations).to eq(dmv_facilities_data)
+
+    missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+
+    expect(DmvDataService.new.mo_dmv_office_locations).to eq(dmv_facilities_data)
 
     # colorado_facilities = DmvDataService.new.co_dmv_office_locations
     # expect(colorado_facilities).to be_an_instance_of(DmvFacility)
