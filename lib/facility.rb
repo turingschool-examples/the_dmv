@@ -44,4 +44,14 @@ class Facility
     @registered_vehicles
     @registration_date
   end
+
+  def administer_written_test(registrant)
+    # require 'pry';binding.pry
+    if @services.include?('Written Test') && registrant.permit
+     
+      registrant.license_data[:written] = true
+    else 
+      false
+    end
+  end
 end
