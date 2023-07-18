@@ -41,6 +41,7 @@ class Facility
     end
   end
 
+  # method fails later down test tree...reinspect
   # def collected_fees
   #   if vehicle.electric_vehicle?
   #     @collected_fees += 200
