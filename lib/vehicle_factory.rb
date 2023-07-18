@@ -8,7 +8,11 @@ class VehicleFactory
   def create_vehicles(vehicles)
     @vehicles = vehicles
     vehicles.map do |vehicle|
-      name = vehicle[:model].downcase
+      if vehicle[:model] != nil
+        name = vehicle[:model].downcase
+      else
+        name = vehicle[:body_type].downcase
+      end
       name = Vehicle.new(vehicle)
     end
   end
@@ -16,7 +20,11 @@ class VehicleFactory
   def most_popular
     amounts = Hash.new(0)
     @vehicles.each do |vehicle|
-      amounts["#{vehicle[:make]} #{vehicle[:model]}"] += 1
+      if vehicle[:model] != nil
+        amounts["#{vehicle[:make]} #{vehicle[:model]}"] += 1
+      else
+        amounts["#{vehicle[:make]} #{vehicle[:body_type]}"] += 1
+      end
     end
     amounts.sort_by do |vehicle, number|
       number
@@ -31,6 +39,14 @@ class VehicleFactory
     amounts.sort_by do |vehicle, number|
       number
     end.sort.reverse
+  end
+
+  def amount_for_year(year)
+    amounts = Hash.new(0)
+    @vehicles.each do |vehicle|
+      amounts[vehicle[:model_year]] += 1
+    end
+    amounts[year]
   end
 
   def county_with_the_most_vehicles

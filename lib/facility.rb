@@ -2,16 +2,18 @@ class Facility
   attr_reader :name,
               :address, 
               :phone, 
+              :daily_hours,
+              :holidays_closed,
               :services,
               :registered_vehicles,
-              :collected_fees,
-              :daily_hours
+              :collected_fees
 
   def initialize(info)
     @name = name?(info)
     @address = address?(info)
     @phone = phone?(info)
     @daily_hours = daily_hours?(info)
+    @holidays_closed = info[:holidaysclosed] || nil
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
