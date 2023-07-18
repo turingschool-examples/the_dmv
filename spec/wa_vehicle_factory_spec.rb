@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Registrant do
+RSpec.describe VehicleFactory do
   before(:each) do
     @factory = VehicleFactory.new
     @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
@@ -14,7 +14,7 @@ RSpec.describe Registrant do
 
   describe '#wa_ev_registrations' do
     it 'shows pulled data from wa_ev_registrations' do
-      expect(@wa_ev_registrations = DmvDataService.new.wa_ev_registrations).to include()
+      expect(@wa_ev_registrations).to include()
     end
   end
 
