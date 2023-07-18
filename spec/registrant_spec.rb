@@ -1,5 +1,4 @@
 require './lib/registrant'
-require './lib/facility'
 
 RSpec.describe Registrant do
     before(:each) do

@@ -1,8 +1,4 @@
 require 'spec_helper'
-require 'rspec'
-require './lib/dmv_data_service'
-require './lib/vehicle'
-require './lib/vehicle_factory'
 
 RSpec.describe VehicleFactory do
     before(:each) do
