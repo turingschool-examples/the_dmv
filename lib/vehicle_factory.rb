@@ -1,7 +1,11 @@
 class VehicleFactory
-
+  attr_reader :created_vehicles
+  
+  def initialize
+    @created_vehicles = []
+  end
   def create_vehicles(data)
-      created_vehicles = data.map do |vehicle_data|
+      @created_vehicles = data.map do |vehicle_data|
         Vehicle.new(
           {
             vin: vehicle_data[:vin_1_10], 
