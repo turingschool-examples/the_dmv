@@ -12,9 +12,30 @@ class VehicleFactory
         year: vehicle[:model_year],
         make: vehicle[:make],
         model: vehicle[:model],
+        county: vehicle[:county],
         engine: :ev
       })
     end
     @vehicles
+  end
+
+  def top_make
+    makes_count = @vehicles.map {|vehicle| vehicle.make}.tally
+    makes_count.key(makes_count.values.max)
+  end
+
+  def top_model
+    models_count = @vehicles.map {|vehicle| vehicle.model}.tally
+    models_count.key(models_count.values.max)
+  end
+
+  def model_year_count(year)
+    years_count = @vehicles.map {|vehicle| vehicle.year}.tally
+    years_count[year.to_s]
+  end
+
+  def top_county
+    counties_count = @vehicles.map {|vehicle| vehicle.county}.tally
+    counties_count.key(counties_count.values.max)
   end
 end
