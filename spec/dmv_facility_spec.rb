@@ -1,10 +1,8 @@
 require 'spec_helper'
 
-Rspec.describe DmvFacility do 
-  let(:co_dmv_office_locations) do 
-    [
-      {
-    :the_geom=>{:type=>"Point", :coordinates=>[-104.97443112500002, 39.75525297420336]},
+RSpec.describe DmvFacility do 
+  let(:co_dmv_office_locations) do [
+    {:the_geom=>{:type=>"Point", :coordinates=>[-104.97443112500002, 39.75525297420336]},
     :dmv_id=>"1",
     :dmv_office=>"DMV Tremont Branch",
     :address_li=>"2855 Tremont Place",
