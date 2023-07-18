@@ -73,7 +73,11 @@ class FacilityFactory
   def phone_filter(data)
     if data.nil?
       "not listed"
-    elsif data.length < 14 && !data.include?("(") && !data.include?(")") && !data.include?(" ") && !data.include?("-")
+    elsif data.length < 14 &&
+    !data.include?("(") &&
+    !data.include?(")") &&
+    !data.include?(" ") &&
+    !data.include?("-")
       data.insert(0, "(")
       data.insert(4, ")")
       data.insert(5, " ")

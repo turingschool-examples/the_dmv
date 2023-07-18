@@ -84,9 +84,11 @@ RSpec.describe FacilityFactory do
   describe "#name_and_address_filter" do
     it "can capitalize each word in the name or address value passed through it" do
       factory = FacilityFactory.new
+
       co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
       ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
       mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
+
       factory.create_facilities(co_dmv_office_locations)
       factory.create_facilities(ny_dmv_office_locations)
       factory.create_facilities(mo_dmv_office_locations)
@@ -103,9 +105,11 @@ RSpec.describe FacilityFactory do
   describe "#phone_filter" do
     it "can format phone numbers passed through to follow the pattern (xxx) xxx-xxxx" do
       factory = FacilityFactory.new
+
       co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
       ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
       mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
+      
       factory.create_facilities(co_dmv_office_locations)
       factory.create_facilities(ny_dmv_office_locations)
       factory.create_facilities(mo_dmv_office_locations)
