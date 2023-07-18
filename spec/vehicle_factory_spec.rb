@@ -26,8 +26,8 @@ RSpec.describe VehicleFactory do
             model: wa_ev_registrations.first[:model],
             engine: :ev)
 
-        expect(factory.vehicle_list).to all be_a Vehicle
-        expect(factory.vehicle_list).to be_an Array
+        expect(@factory.vehicle_list).to all be_a Vehicle
+        expect(@factory.vehicle_list).to be_an Array
         
         expect(@factory.vehicle_list.first.vin).to eq(expected.vin) #CHEVROLET
         expect(@factory.vehicle_list.first.year).to eq(expected.year) #Volt

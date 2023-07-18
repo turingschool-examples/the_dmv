@@ -3,7 +3,7 @@ require 'rspec'
 require './lib/facility'
 require './lib/vehicle'
 require './lib/registrant'
-require './lib/dmv'
+
 
 RSpec.describe Facility do
   before(:each) do
@@ -18,14 +18,7 @@ RSpec.describe Facility do
     @registrant1 = Registrant.new('Bruce', 18, true)
     @registrant2 = Registrant.new('Penny', 16)
     @registrant3 = Registrant.new('Tucker', 15 )
-
-    @dmv = Dmv.new
-    co_facilities = DmvDataService.new.co_dmv_office_locations
   end
-
-  describe '#create_facilities' do
-    it 'can create facilities' do
-      @dmv.
 
   describe '#initialize' do
     it 'can initialize' do
