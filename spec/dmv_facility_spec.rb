@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DmvFacility do 
+Rspec.describe DmvFacility do 
   let(:co_dmv_office_locations) do 
     [
       {
