@@ -41,8 +41,8 @@ RSpec.describe DataAnalyzer do
       @ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
       @mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
       @co_data = DataAnalyzer.new(@co_dmv_office_locations)
-      @ny_data = DataAnalyzer.new(@co_dmv_office_locations)
-      @mo_data = DataAnalyzer.new(@co_dmv_office_locations)
+      @ny_data = DataAnalyzer.new(@ny_dmv_office_locations)
+      @mo_data = DataAnalyzer.new(@mo_dmv_office_locations)
     end
 
     it 'exists' do
@@ -51,6 +51,10 @@ RSpec.describe DataAnalyzer do
       expect(@mo_data).to be_a(DataAnalyzer)
     end
 
+    it '.daily_hours' do
+      expect(@co_data.daily_hours).to be_a Hash
+      # require 'pry';binding.pry
+    end
   end
 
 end

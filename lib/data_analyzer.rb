@@ -40,4 +40,17 @@ class DataAnalyzer
     descending_county_list[0][0]
   end
 
+  def daily_hours
+    if data.any? { |location| location[:state] == "CO" }
+      list = {}
+      data.each { |location| list[location[:dmv_office]] = location[:hours] }
+      list
+    # elsif data.any? { |location| location[:state] == "NY" }
+    #   list = {}
+    #   data.each { |location| list[location[:office_name]] = location[:hours] }
+    #   list
+    end
+
+  end
+
 end
