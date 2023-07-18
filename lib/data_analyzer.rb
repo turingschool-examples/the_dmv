@@ -41,14 +41,60 @@ class DataAnalyzer
   end
 
   def daily_hours
-    if data.any? { |location| location[:state] == "CO" }
-      list = {}
-      data.each { |location| list[location[:dmv_office]] = location[:hours] }
-      list
-    # elsif data.any? { |location| location[:state] == "NY" }
-    #   list = {}
-    #   data.each { |location| list[location[:office_name]] = location[:hours] }
-    #   list
+    if data[0][:state] == "CO"
+      data.map do |site|
+        details = {
+          name: site[:dmv_office],
+          address: site[:address_li],
+          hours: site[:hours]
+        }
+        end
+    elsif data[0][:state] == "NY"
+      data.map do |site|
+        details = {
+          name: site[:office_name].split.map(&:capitalize).join(" "),
+          address: site[:street_address_line_1].split.map(&:capitalize).join(" "),
+          hours: {
+            Monday: {
+              open: site[:monday_beginning_hours],
+              close: site[:monday_ending_hours]
+            },
+            Tuesday: {
+              open: site[:tuesday_beginning_hours],
+              close: site[:tuesday_ending_hours]
+            },
+            Wednesday: {
+              open: site[:wednesday_beginning_hours],
+              close: site[:wednesday_ending_hours]
+            },
+            Thursday: {
+              open: site[:thursday_beginning_hours],
+              close: site[:thursday_ending_hours]
+            },
+            Friday: {
+              open: site[:friday_beginning_hours],
+              close: site[:friday_ending_hours]
+            },
+            Saturday: {
+              open: site[:saturday_beginning_hours],
+              close: site[:saturday_ending_hours]
+            },
+            Sunday: {
+              open: site[:sunday_beginning_hours],
+              close: site[:sunday_ending_hours]
+            }
+          }
+        }
+      end
+    elsif data[0][:state] == "MO"
+      data.map do |site|
+        details = {
+          name: site[:name].split.map(&:capitalize).join(" "),
+          address: site[:address1].split.map(&:capitalize).join(" "),
+          hours: site[:daysopen],
+          holidaysclosed: site[:holidaysclosed]
+        }
+      end
     end
   end
 end

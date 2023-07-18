@@ -53,8 +53,9 @@ RSpec.describe DataAnalyzer do
     end
 
     it '.daily_hours' do
-      expect(@co_data.daily_hours).to be_a Hash
-    #   require 'pry';binding.pry
+      expect(@co_data.daily_hours).to be_an Array
+      expect(@ny_data.daily_hours).to be_an Array
+      expect(@co_data.daily_hours).to be_an Array
     end
   end
 end
