@@ -21,6 +21,17 @@ RSpec.describe VehicleFactory do
       }
 
       ])
+
+      factory = VehicleFactory.new
+
+      vehicles = factory.create_vehicles(dmv_data_service.wa_ev_registrations
+      
+      expect(vehicles[0]).to be_an_instance_of(Vehicle)
+      expect(vehicles[0].make).to eq("TOYOTA")
+      expect(vehicles[0].model).to eq("Prius Plug-in")
+      expect(vehicles[0].vin).to eq(JTDKN3DP8D)
+      expect(vehicles[0].year).to eq(2013)
+      expect(vehicles[0].engine).to eq(:ev)
     end
   end
 end
