@@ -244,7 +244,7 @@ RSpec.describe Facility do
       expect(@facility_1.ny_address_formatter(new_york_datapoint)).to eq("168-46 91ST AVE., 2ND FLR JAMAICA NY 11432")
     end
     
-    it "ut6 #mo_address_formatter can format missouri addresses with five and four lines" do
+    it "ut6 #mo_address_formatter can format missouri addresses with four lines" do
       #four line address
       expect(@facility_1.mo_address_formatter(missouri_datapoint)).to eq("119 VINE ST DEXTER MO 63841")
     end
