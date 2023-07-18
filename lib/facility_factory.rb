@@ -21,7 +21,6 @@ class FacilityFactory
       data[:dmv_office]
     elsif data[:state] == "NY"
       data[:office_name]
-      #all caps, do I need DMV in front?
     elsif data[:state] == "MO"
       data[:name]
     end
@@ -34,7 +33,6 @@ class FacilityFactory
     elsif data[:state] == "NY"
       address_parts = [data[:street_address_line_1], data[:street_address_line_2], data[:city], data[:state], data[:zip_code]]
       address_parts.compact.join(" ")
-      #all caps
     elsif data[:state] == "MO"
       address_parts = [data[:address1], data[:city], data[:state], data[:zipcode]]
       address_parts.compact.join(" ")
