@@ -9,6 +9,7 @@ RSpec.describe ExistingFacility do
         colorado_facilities = DmvDataService.new.co_dmv_office_locations
         existing_facility.read_information(colorado_facilities)
     end
+
     it "can initialize other facilities" do
         existing_facility_2 = ExistingFacility.new
         new_york_facilities = DmvDataService.new.ny_dmv_office_locations
@@ -18,8 +19,6 @@ RSpec.describe ExistingFacility do
         existing_facility_3 = ExistingFacility.new
         missouri_facilities = DmvDataService.new.mo_dmv_office_locations
         existing_facility_3.read_information(missouri_facilities)
-        #Note: I decided against adding the "services" of Missouri DMVs into the array.  Their "services" are better accessibility features, not actual services the facility can do on a registrant.
+        #I decided against adding the "services" of Missouri DMVs into the array.  Their "services" are better accessibility features, not actual services the facility can do on a registrant.
     end
-
-
 end

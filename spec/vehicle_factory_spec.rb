@@ -17,5 +17,4 @@ RSpec.describe VehicleFactory do
             factory.create_vehicles(wa_ev_registrations)
         end
     end
-
 end

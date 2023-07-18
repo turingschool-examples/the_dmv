@@ -52,8 +52,6 @@ RSpec.describe Vehicle do
         expect(@bolt.registration_date).to eq(nil)
         @facility_1.register_vehicle(@bolt)
         expect(@bolt.registration_date).not_to eq(nil)
-
-
     end
   end
 
