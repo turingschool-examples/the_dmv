@@ -14,8 +14,9 @@ RSpec.describe FacilityFactory do
       ff = FacilityFactory.new
 
       co_dmv_offices = DmvDataService.new.co_dmv_office_locations
+      require 'pry';binding.pry
 
-      expect(ff.create_facilities(co_dmv_offices)).to not be_empty
+      expect(ff.create_facilities(co_dmv_offices)).to_not be_empty
       expect(ff.create_facilities(co_dmv_offices).first).to be_a Facility
     end
   end
