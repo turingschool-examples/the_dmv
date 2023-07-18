@@ -4,12 +4,14 @@ class Facility
               :phone, 
               :services,
               :registered_vehicles,
-              :collected_fees
+              :collected_fees,
+              :daily_hours
 
   def initialize(info)
     @name = name?(info)
     @address = address?(info)
     @phone = phone?(info)
+    @daily_hours = daily_hours?(info)
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
@@ -44,6 +46,30 @@ class Facility
       info[:phone]
     end
   end
+
+  def daily_hours?(info)
+    if info[:hours] != nil
+    info[:hours]
+    elsif info[:daysopen] != nil
+    info[:daysopen]
+    else
+      days = info.values_at(:monday_beginning_hours, :tuesday_beginning_hours, :wednesday_beginning_hours, :thursday_beginning_hours,  :friday_beginning_hours, :monday_ending_hours, :tuesday_ending_hours, :wednesday_ending_hours, :thursday_ending_hours, :friday_ending_hours)
+      weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      string = []
+      count = 0
+      loop do
+        if days[count] != nil
+        string << "#{weekdays[count]} #{days[count]} to #{days[count + 5]}"
+        end
+        count += 1
+        if count > 4
+          break
+        end
+      end
+      string.join(", ")
+    end
+  end
+
 
   def add_service(service)
     @services << service

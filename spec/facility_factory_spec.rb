@@ -26,7 +26,7 @@ RSpec.describe FacilityFactory do
 
     it 'can pull data from missouri data source' do
 
-      expect(@factory.create_facilities(@ny_dmv_office_locations)).to all be_a(Facility)
+      expect(@factory.create_facilities(@mo_dmv_office_locations)).to all be_a(Facility)
     end
 
     it 'returns similarly formatted information' do
@@ -37,6 +37,11 @@ RSpec.describe FacilityFactory do
       expect(@factory.create_facilities(@co_dmv_office_locations)[0].phone).to eq("(720) 865-4600")
       expect(@factory.create_facilities(@ny_dmv_office_locations)[3].phone).to eq("(518) 486-9786")
       expect(@factory.create_facilities(@ny_dmv_office_locations)[4].phone).to eq("(518) 481-1606")
+    end
+
+   it 'returns daily hours' do
+
+      expect(@factory.create_facilities(@ny_dmv_office_locations)[0].daily_hours).to eq("Monday 7:30 AM to 5:00 PM, Tuesday 7:30 AM to 5:00 PM, Wednesday 7:30 AM to 5:00 PM, Thursday 7:30 AM to 5:00 PM, Friday 7:30 AM to 5:00 PM")
     end
   end
 end
