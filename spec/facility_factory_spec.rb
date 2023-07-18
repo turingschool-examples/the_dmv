@@ -63,6 +63,24 @@ RSpec.describe FacilityFactory do
       expect(details.key?(:address)).to be true
       expect(details.key?(:phone)).to be true
     end
+
+    it "works with co, ny and mo data" do
+      ff = FacilityFactory.new
+      co_dmv_offices = DmvDataService.new.co_dmv_office_locations
+      ny_dmv_offices = DmvDataService.new.ny_dmv_office_locations
+      mo_dmv_offices = DmvDataService.new.mo_dmv_office_locations
+
+      co_details = ff.detail_builder(co_dmv_offices.first)
+      ny_details = ff.detail_builder(ny_dmv_offices.first)
+      mo_details = ff.detail_builder(mo_dmv_offices.first)
+
+      expect(co_details).to be_a Hash
+      expect(co_details.key?(:name)).to be true
+      expect(ny_details).to be_a Hash
+      expect(ny_details.key?(:name)).to be true
+      expect(mo_details).to be_a Hash
+      expect(mo_details.key?(:name)).to be true
+    end
   end
 
   describe "#number_to_phone" do
