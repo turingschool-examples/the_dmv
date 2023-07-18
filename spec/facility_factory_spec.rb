@@ -115,43 +115,43 @@ RSpec.describe FacilityFactory do
       random_co_facility_sample = @colorado_facilities_data.sample
       expect(@colorado.format_facility_phone(random_co_facility_sample)).to be_a String
       
-      # co_facility_sample_1 = @colorado_facilities_data[1]
-      # expect(@colorado.format_facility_phone(co_facility_sample_1)).to eq("(720) 865-4600")
+      co_phone_number_1 = {:state=>"CO",:phone =>"720-865-4600"}
+      expect(@colorado.format_facility_phone(co_phone_number_1)).to eq("(720) 865-4600")
       
-      # co_facility_sample_2 = @colorado_facilities_data[2]
-      # expect(@colorado.format_facility_phone(co_facility_sample_2)).to eq("(720) 865-4600")
+      co_phone_number_2 = {:state=> "CO", :phone=> "7208654600"}
+      expect(@colorado.format_facility_phone(co_phone_number_2)).to eq("(720) 865-4600")
     end
 
     it "formats NY facilities phone number" do 
       random_ny_facility_sample = @new_york_facilities_data.sample
       expect(@new_york.format_facility_phone(random_ny_facility_sample)).to be_a String
       
-      # ny_facility_sample_1 = @new_york_facilities_data[0]
-      # expect(@new_york.format_facility_phone(ny_facility_sample_1)).to eq("(718) 966-6155")
+      ny_phone_number_1 = {:state=> "NY", :public_phone_number=>"7189666155"}
+      expect(@new_york.format_facility_phone(ny_phone_number_1)).to eq("(718) 966-6155")
       
-      # ny_facility_sample_2 = @new_york_facilities_data[1]
-      # expect(@new_york.format_facility_phone(ny_facility_sample_2)).to eq("No phone number listed")
+      ny_phone_number_2 = {:state=> "NY"}
+      expect(@new_york.format_facility_phone(ny_phone_number_2)).to eq("No phone number listed")
     end
 
     it "formats MO facilities phone number" do 
       random_mo_facility_sample = @missouri_facilities_data.sample
       expect(@missouri.format_facility_phone(random_mo_facility_sample)).to be_a String
 
-      # mo_facility_sample_1 = @missouri_facilities_data[0]
-      # expect(@missouri.format_facility_phone(mo_facility_sample_1)).to eq("(573) 624-8808")
+      mo_phone_number_1 = {:state=> "MO", :phone=>"5736248808"}
+      expect(@missouri.format_facility_phone(mo_phone_number_1)).to eq("(573) 624-8808")
 
-      # mo_facility_sample_2 = @missouri_facilities_data[1]
-      # expect(@missouri.format_facility_phone(mo_facility_sample_2)).to eq("(314) 499-7223")
+      mo_phone_number_2 = {:state=> "MO", :phone=>"3144997223"}
+      expect(@missouri.format_facility_phone(mo_phone_number_2)).to eq("(314) 499-7223")
     end
   end 
 
   describe "#capitalize_string" do 
     it "capitalizes every word in a string other than state abbreviations" do 
-      office_string_1 = "JAMAICA DISTRICT OFFICE"
-      expect(@new_york.capitalize_string(office_string_1)).to eq("Jamaica District Office")
+      office_string_1 = "DMV JAMAICA DISTRICT OFFICE"
+      expect(@new_york.capitalize_string(office_string_1)).to eq("DMV Jamaica District Office")
 
-      office_string_2 = "CLAYTON"
-      expect(@missouri.capitalize_string(office_string_2)).to eq("Clayton")
+      office_string_2 = "DMV CLAYTON"
+      expect(@missouri.capitalize_string(office_string_2)).to eq("DMV Clayton")
 
       address_string_1 = "168-46 91ST AVE., 2ND FLR JAMAICA NY 11432"
       expect(@new_york.capitalize_string(address_string_1)).to eq("168-46 91st Ave., 2nd Flr Jamaica NY 11432")
@@ -163,12 +163,16 @@ RSpec.describe FacilityFactory do
 
   describe "#format_digits" do 
     it "formats phone numbers to similar format as other states" do 
-      number_string_1 = "5184869786"
-      expect(@new_york.format_digits(number_string_1)).to eq("(518) 486-9786")
+      phone_number_1 = "5184869786"
+      expect(@new_york.format_digits(phone_number_1)).to eq("(518) 486-9786")
       
-      number_string_2 = "7189666155"
-      expect(@new_york.format_digits(number_string_2)).to eq("(718) 966-6155")
-      
+      phone_number_2 = "7189666155"
+      expect(@new_york.format_digits(phone_number_2)).to eq("(718) 966-6155")
+      #testing for potential other phone number formats coming in from data as suggested by my rock
+      #learned a tiny bit about regular expressions in the process!
+      phone_number_3 = "802-359-3536"
+      expect(@new_york.format_digits(phone_number_3)).to eq("(802) 359-3536")
+
       nil_digits = nil
       expect(@new_york.format_digits(nil_digits)).to eq("No phone number listed")
     end
