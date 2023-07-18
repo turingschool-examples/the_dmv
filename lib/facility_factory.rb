@@ -17,13 +17,17 @@ class FacilityFactory
     if facility[:state] == "CO"
       {name: facility[:dmv_office], address: addr_builder(facility), phone: facility[:phone]}
     elsif facility[:state] == "NY"
-      {name: facility[:office_name], address: addr_builder(facility), phone: facility[:public_phone_number]}
+      {name: facility[:office_name], address: addr_builder(facility), phone: number_to_phone(facility[:public_phone_number])}
     elsif facility[:state] == "MO"
       {name: facility[:name], address: addr_builder(facility), phone: facility[:phone]}
     end
   end
 
   def number_to_phone(number)
-    number.insert(0, "(").insert(4, ")").insert(5, " ").insert(9, "-")
+    if number
+      number_string = ""
+      number_string << number
+      number_string.insert(0, "(").insert(4, ")").insert(5, " ").insert(9, "-")
+    end
   end
 end
