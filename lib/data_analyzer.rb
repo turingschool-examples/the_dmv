@@ -52,7 +52,7 @@ class DataAnalyzer
     elsif data[0][:state] == "NY"
       data.map do |site|
         details = {
-          name: site[:office_name].split.map(&:capitalize).join(" "),
+          name: "DMV " + site[:office_name].split.map(&:capitalize).join(" "),
           address: site[:street_address_line_1].split.map(&:capitalize).join(" "),
           hours: {
             Monday: {
@@ -89,7 +89,7 @@ class DataAnalyzer
     elsif data[0][:state] == "MO"
       data.map do |site|
         details = {
-          name: site[:name].split.map(&:capitalize).join(" "),
+          name: "DMV " + site[:name].split.map(&:capitalize).join(" "),
           address: site[:address1].split.map(&:capitalize).join(" "),
           hours: site[:daysopen],
           holidaysclosed: site[:holidaysclosed]

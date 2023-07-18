@@ -20,9 +20,9 @@ class FacilityFactory
     if data[:state] == "CO"
       data[:dmv_office]
     elsif data[:state] == "NY"
-      data[:office_name].split.map(&:capitalize).join(" ")
+      "DMV " + data[:office_name].split.map(&:capitalize).join(" ")
     elsif data[:state] == "MO"
-      data[:name].split.map(&:capitalize).join(" ")
+      "DMV " + data[:name].split.map(&:capitalize).join(" ")
     end
   end
 

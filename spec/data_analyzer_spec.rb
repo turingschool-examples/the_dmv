@@ -55,7 +55,7 @@ RSpec.describe DataAnalyzer do
     it '.daily_hours' do
       expect(@co_data.daily_hours).to be_an Array
       expect(@ny_data.daily_hours).to be_an Array
-      expect(@co_data.daily_hours).to be_an Array
+      expect(@mo_data.daily_hours).to be_an Array
     end
   end
 end
