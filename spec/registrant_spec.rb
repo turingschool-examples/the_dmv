@@ -41,4 +41,26 @@ describe Registrant do
       expect(registrant_2.permit?).to be(true)
     end
   end
+
+  describe "unit tests" do
+    it "ut1 #pass_test can change attributes in license_data to true" do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      
+      expect(registrant_1.license_data[:written]).to be false
+      expect(registrant_1.license_data[:license]).to be false
+      expect(registrant_1.license_data[:renewed]).to be false
+
+      registrant_1.pass_test(:written)
+      
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+      
+      registrant_1.pass_test(:license)
+      
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+      
+      registrant_1.pass_test(:renewed)
+      
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+    end
+  end
 end

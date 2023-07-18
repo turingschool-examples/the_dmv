@@ -15,19 +15,8 @@ class Registrant
     @permit = true
   end
 
-  #helper UNTESTED
+  #tested
   def pass_test(test_type)
     @license_data[test_type] = true
   end
-
-
-
-
-
-
-
-
-
-
-
 end

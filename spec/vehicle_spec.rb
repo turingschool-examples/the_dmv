@@ -33,4 +33,26 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe "use methods" do
+    it "ut1 #register_now can change registration_date attribute to todays date" do
+      @bolt.register_now
+
+      expect(@bolt.registration_date).to eq(Date.today)
+    end
+ 
+    it "ut2 #issue_plate can change a vehicles plate type attribute" do
+      @cruz.issue_plate(:ev)
+
+      expect(@cruz.plate_type).to eq(:ev)
+
+      @cruz.issue_plate(:antique)
+
+      expect(@cruz.plate_type).to eq(:antique)
+
+      @cruz.issue_plate(:regular)
+
+      expect(@cruz.plate_type).to eq(:regular)
+    end
+  end
 end

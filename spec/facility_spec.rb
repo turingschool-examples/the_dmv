@@ -198,24 +198,60 @@ RSpec.describe Facility do
     end
   end
 
-  xdescribe "helper tests" do
+  describe "use tests" do
     it "ht1 #issue_plate_fees can issue new place and add to collected fees" do
       @facility_1.issue_plate_fees(@cruz)
       @facility_1.issue_plate_fees(@bolt)
       @facility_1.issue_plate_fees(@camaro)
 
-      expect(@facility_1).to eq(325)
+      expect(@facility_1.collected_fees).to eq(325)
       expect(@cruz.plate_type).to eq(:regular)
-      expect(@cruz.plate_type).to eq(:regular)
-      expect(@cruz.plate_type).to eq(:regular)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@camaro.plate_type).to eq(:antique)
+    end
+  end
 
-
-
-
-
-
-
-
+  describe "API use tests" do
+    let (:colorado_datapoint) {{:the_geom=>{:type=>"Point", :coordinates=>[-104.97443112500002, 39.75525297420336]}, :dmv_id=>"1", :dmv_office=>"DMV Tremont Branch", :address_li=>"2855 Tremont Place", :address__1=>"Suite 118", :city=>"Denver", :state=>"CO", :zip=>"80205", :phone=>"(720) 865-4600", :hours=>"Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.", :services_p=>"vehicle titles, registration, renewals;  VIN inspections", :parking_no=>"parking available in the lot at the back of the bldg (Glenarm Street)", :photo=>"images/Tremont.jpg", :address_id=>"175164", :":@computed_region_nku6_53ud"=>"1444"}}
+    let (:new_york_datapoint) {{:office_name=>"JAMAICA", :office_type=>"DISTRICT OFFICE", :public_phone_number=>"7189666155", :street_address_line_1=>"168-46 91ST AVE., 2ND FLR", :city=>"JAMAICA", :state=>"NY", :zip_code=>"11432", :monday_beginning_hours=>"7:30 AM", :monday_ending_hours=>"5:00 PM", :tuesday_beginning_hours=>"7:30 AM", :tuesday_ending_hours=>"5:00 PM", :wednesday_beginning_hours=>"7:30 AM", :wednesday_ending_hours=>"5:00 PM", :thursday_beginning_hours=>"7:30 AM", :thursday_ending_hours=>"5:00 PM", :friday_beginning_hours=>"7:30 AM", :friday_ending_hours=>"5:00 PM", :georeference=>{:type=>"Point", :coordinates=>[-73.79144381399993, 40.70757552100008]}, :":@computed_region_yamh_8v7k"=>"196", :":@computed_region_wbg7_3whc"=>"1216", :":@computed_region_kjdx_g34t"=>"2137"}}
+    let (:missouri_datapoint) {{:number=>"086", :dorregionnumber=>"14", :type=>"1MV", :name=>"DEXTER", :address1=>"119 VINE ST", :city=>"DEXTER", :state=>"MO", :zipcode=>"63841", :county=>"Stoddard", :phone=>"(573) 624-8808", :fax=>"(573) 624-8724", :size=>"2", :email=>"DEXTERAGENTOFFICE@DOR.MO.GOV", :agent=>"STODDARD COUNTY LICENSE OFFICE", :officemanager=>"RAY ROWLAND", :daysopen=>"Monday - Friday - 8:30 to 4:30", :holidaysclosed=>"Independence Day (07/04/22), Labor Day (09/05/22), Columbus Day (10/10/22), Veterans Day (11/11/22), Thanksgiving (11/24/22), Christmas Day Observed (12/26/22), New Year's Day Observed (01/02/23), Martin Luther King Day (01/16/23), Lincoln’s Birthday (02/13/23), President’s Day (02/20/23), Truman’s Birthday (05/08/23), Memorial Day (05/29/23), Juneteenth (06/19/2023), Independence Day (07/04/23), Labor Day (09/04/23), Columbus Day (10/09/23), Veterans Day (11/10/23), Thanksgiving (11/23/23), Christmas Day Observed (12/25/23)", :additionaldaysclosed=>"10/4/2022 (at 2:00 PM),   11/25/22,   12/22/2022 (at 3:00 PM ),   12/23/22,  12/24/22,  12/26/22,   12/27/2022 (open at 8:30 AM ),  1/31/2023,   4/7/23,   7/3/23,   11/24/23,   12/22/23", :latlng=>{:latitude=>"36.791655", :longitude=>"-89.955942"}, :additional_license_office_info=>"Services for the Elderly or Disabled: Curbside Service, Special Appointments, Assist with changing or replacing plates/tabs, Process Transactions in the customer waiting area, Direct customers to front of the line, Wheelchair availability. MOTOR VEHICLE PHONE IN RENEWAL - (573) 624-8808Other Services: Motor Vehicle transaction drop-off service.", :":@computed_region_ny2h_ckbz"=>"452", :":@computed_region_c8ar_jsdj"=>"98", :":@computed_region_ikxf_gfzr"=>"2215"}}
+    
+    it "ut2 #name_finder can finds names from different APIs" do
+      expect(@facility_1.name_finder(colorado_datapoint)).to eq("DMV Tremont Branch")
+      expect(@facility_1.name_finder(new_york_datapoint)).to eq("JAMAICA")
+      expect(@facility_1.name_finder(missouri_datapoint)).to eq("DEXTER")
+    end
+    
+    it "ut3 #address_finder can finds addresses from different APIs" do
+      expect(@facility_1.address_finder(colorado_datapoint)).to eq("2855 Tremont Place Suite 118 Denver CO 80205")
+      expect(@facility_1.address_finder(new_york_datapoint)).to eq("168-46 91ST AVE., 2ND FLR JAMAICA NY 11432")
+      expect(@facility_1.address_finder(missouri_datapoint)).to eq("119 VINE ST DEXTER MO 63841")
+    end
+    
+    it "ut4 #co_address_formatter can format colorado addresses with five and four lines" do
+      four_line_co_address = {:the_geom=>{:type=>"Point", :coordinates=>[-105.03590369947995, 39.77608961495372]}, :dmv_id=>"3", :dmv_office=>"DMV Northwest Branch", :address_li=>"3698 W. 44th Avenue", :location=>"Safeway Plaza", :city=>"Denver", :state=>"CO", :zip=>"80211", :phone=>"(720) 865-4600", :hours=>"Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.", :services_p=>"vehicle titles, registration, renewals;  VIN inspections", :parking_no=>"parking in the lot in front of the building", :photo=>"images/44thAve.jpg", :address_id=>"29409", :":@computed_region_nku6_53ud"=>"1444"}
+      #five line address
+      expect(@facility_1.co_address_formatter(colorado_datapoint)).to eq("2855 Tremont Place Suite 118 Denver CO 80205")
+      #four line address
+      expect(@facility_1.co_address_formatter(four_line_co_address)).to eq("3698 W. 44th Avenue Denver CO 80211")
+    end
+    
+    it "ut5 #ny_address_formatter can format new york addresses with five and four lines" do
+      five_line_ny_address = {:office_name=>"MALONE", :office_type=>"COUNTY OFFICE", :public_phone_number=>"5184811606", :street_address_line_1=>"355 WEST MAIN STREET", :street_address_line_2=>"ROOM 107", :city=>"MALONE", :state=>"NY", :zip_code=>"12953", :monday_beginning_hours=>"8:00 AM", :monday_ending_hours=>"3:30 PM", :tuesday_beginning_hours=>"8:00 AM", :tuesday_ending_hours=>"3:30 PM", :wednesday_beginning_hours=>"8:00 AM", :wednesday_ending_hours=>"3:30 PM", :thursday_beginning_hours=>"8:00 AM", :thursday_ending_hours=>"3:30 PM", :friday_beginning_hours=>"8:00 AM", :friday_ending_hours=>"3:30 PM", :georeference=>{:type=>"Point", :coordinates=>[-74.295308429, 44.849171487]}, :":@computed_region_yamh_8v7k"=>"182", :":@computed_region_wbg7_3whc"=>"278", :":@computed_region_kjdx_g34t"=>"621"}
+      #five line address
+      expect(@facility_1.ny_address_formatter(five_line_ny_address)).to eq("355 WEST MAIN STREET ROOM 107 MALONE NY 12953")
+      #four line address
+      expect(@facility_1.ny_address_formatter(new_york_datapoint)).to eq("168-46 91ST AVE., 2ND FLR JAMAICA NY 11432")
+    end
+    
+    it "ut6 #mo_address_formatter can format missouri addresses with four lines" do
+      #four line address
+      expect(@facility_1.mo_address_formatter(missouri_datapoint)).to eq("119 VINE ST DEXTER MO 63841")
+    end
+    
+    it "ut7 #ny_number_formatter can format new york phone numbers to a common format" do
+      hashstring_unformatted_number = {public_phone_number: "7188675309"}
+      expect(@facility_1.ny_number_formatter(hashstring_unformatted_number)).to eq("(718) 867-5309")
     end
   end
 end
