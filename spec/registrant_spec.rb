@@ -14,8 +14,8 @@ RSpec.describe Registrant do
 
   describe "#name" do
     it "has a name" do
-      expect(@registrant_1).to eq("Bruce")
-      expect(@registrant_2).to eq("Penny")
+      expect(@registrant_1.name).to eq("Bruce")
+      expect(@registrant_2.name).to eq("Penny")
     end
   end
 
@@ -35,7 +35,8 @@ RSpec.describe Registrant do
 
   describe "#license_data" do
     it "has data" do
-      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})   
+      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
 
