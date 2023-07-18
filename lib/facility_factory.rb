@@ -5,9 +5,9 @@ class FacilityFactory
 
   def addr_builder(facility)
     if facility[:state] == "CO"
-      "#{facility[:address_li]} #{facility[:address__1]} #{facility[:city]} #{facility[:state]} #{facility[:zip]}"
+      "#{facility[:address_li]}#{" " + "#{facility[:address__1]}" if facility[:address__1]} #{facility[:city]} #{facility[:state]} #{facility[:zip]}"
     elsif facility[:state] == "NY"
-      "#{facility[:street_address_line_1]} #{facility[:street_address_line_2]} #{facility[:city]} #{facility[:state]} #{facility[:zip_code]}"
+      "#{facility[:street_address_line_1]}#{" " + "#{facility[:street_address_line_2]}" if facility[:street_address_line_2]} #{facility[:city]} #{facility[:state]} #{facility[:zip_code]}"
     elsif facility[:state] == "MO"
       "#{facility[:address1]} #{facility[:city]} #{facility[:state]} #{facility[:zipcode]}"
     end
