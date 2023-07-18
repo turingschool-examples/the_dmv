@@ -30,7 +30,7 @@ RSpec.describe "#dmv_factory" do
     expect(factory.create_facilities(new_york_facilities)[0].phone).to eq("7189666155")
   end
 
-  xit "creates a missouri_facility" do
+  it "creates a missouri_facility" do
     factory = DmvFactory.new
 
     missouri_facilities = DmvDataService.new.mo_dmv_office_locations
