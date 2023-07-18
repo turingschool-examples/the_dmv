@@ -24,7 +24,7 @@ class VehicleFactory
       vehicle = Vehicle.new(vehicle_details) 
 
 
-      @vehicles << vehicle
+      @vehicles << car
     end
     vehicles.inspect
   end
