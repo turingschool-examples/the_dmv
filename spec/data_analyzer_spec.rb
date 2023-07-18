@@ -34,6 +34,7 @@ RSpec.describe DataAnalyzer do
       # expect(@data.descending_county_list.first).to eq(["King", 799])
       # expect(@data.most_registered_county).to eq("King")
     end
+  end
 
   describe 'facility analytics' do
     before(:each) do
@@ -51,9 +52,9 @@ RSpec.describe DataAnalyzer do
       expect(@mo_data).to be_a(DataAnalyzer)
     end
 
-    # it '.daily_hours' do
-    #   expect(@co_data.daily_hours).to be_a Hash
+    it '.daily_hours' do
+      expect(@co_data.daily_hours).to be_a Hash
     #   require 'pry';binding.pry
-    # end
+    end
   end
 end

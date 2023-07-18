@@ -50,7 +50,5 @@ class DataAnalyzer
     #   data.each { |location| list[location[:office_name]] = location[:hours] }
     #   list
     end
-
   end
-
 end
