@@ -16,8 +16,10 @@ RSpec.describe FacilityFactory do
 
       colorado_facilities = DmvDataService.new.co_dmv_office_locations
       
-      expect(factory.create_facilities(colorado_facilities)).to be_a(Array)
-      expect(factory.facilities.first.name).to eq("DMV Tremont Branch")
+      factory.create_facilities(colorado_facilities)
+      expect(factory.facilities).to be_a(Array)
+      expect(factory.facilities.first.phone).to eq("(720) 865-4600")
+      expect(factory.facilities[1].address).to eq("4685 Peoria Street Suite 101 Denver CO 80239")
     end
 
     it "creates facilities with NY data" do
