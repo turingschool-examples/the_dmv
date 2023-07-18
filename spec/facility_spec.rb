@@ -66,7 +66,7 @@ RSpec.describe Facility do
   end
 
   describe "#administer_written_test" do
-    it "gives a written test to the registrant(if they have a permit)" do
+    it "gives a written test to the registrant(if they have a permit and are at least 16)" do
       @facility_1.administer_written_test(@registrant_1)
       expect(@facility_1.administer_written_test(@registrant_1)).to be(false)
 
@@ -77,6 +77,14 @@ RSpec.describe Facility do
 
       @facility_1.add_service("Written Test")
       expect(@registrant_2.permit).to be(false)
+      expect(@facility_1.administer_written_test(@registrant_2)).to be(false)
+      expect(@registrant_2.license_data[:written]).to be(false)
+
+      @facility_1.add_service("Written Test")
+      @registrant_2.earn_permit
+
+      expect(@registrant_2.age).to eq(15)
+      expect(@registrant_2.permit).to be(true)
       expect(@facility_1.administer_written_test(@registrant_2)).to be(false)
       expect(@registrant_2.license_data[:written]).to be(false)
     end
