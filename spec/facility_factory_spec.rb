@@ -34,7 +34,7 @@ RSpec.describe FacilityFactory do
       ff = FacilityFactory.new
   
       mo_dmv_offices = DmvDataService.new.mo_dmv_office_locations
-      require 'pry';binding.pry
+      # require 'pry';binding.pry
   
       expect(ff.create_facilities(mo_dmv_offices)).to_not be_empty
       expect(ff.create_facilities(mo_dmv_offices).first).to be_a Facility
@@ -62,6 +62,14 @@ RSpec.describe FacilityFactory do
       expect(details.key?(:name)).to be true
       expect(details.key?(:address)).to be true
       expect(details.key?(:phone)).to be true
+    end
+  end
+
+  describe "#number_to_phone" do
+    it "converts a string to a phone format" do
+      ff = FacilityFactory.new
+
+      expect(ff.number_to_phone("1112223333")).to eq("(111) 222-3333")
     end
   end
 end

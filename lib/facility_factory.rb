@@ -22,4 +22,8 @@ class FacilityFactory
       {name: facility[:name], address: addr_builder(facility), phone: facility[:phone]}
     end
   end
+
+  def number_to_phone(number)
+    number.insert(0, "(").insert(4, ")").insert(5, " ").insert(9, "-")
+  end
 end
