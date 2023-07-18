@@ -12,33 +12,32 @@ class FacilityFactory
       if @current_state == "CO"
         {
           name: dmv[:dmv_office],
-        address: format_co_address(dmv[:address_li], dmv[:address__1], dmv[:city], dmv[:state], dmv[:zip]),
-        phone: dmv[:phone],
-        open_hours: dmv[:hours]
-      }
+          address: format_co_address(dmv[:address_li], dmv[:address__1], dmv[:city], dmv[:state], dmv[:zip]),
+          phone: dmv[:phone],
+          open_hours: dmv[:hours]
+        }
       elsif @current_state == "NY"
         {
           name: dmv[:office_name],
-        address: format_address(dmv[:street_address_line_1], dmv[:city], dmv[:state], dmv[:zip_code]),
-        phone: dmv[:public_phone_number],
-        open_hours: format_ny_open_hours(
+          address: format_address(dmv[:street_address_line_1], dmv[:city], dmv[:state], dmv[:zip_code]),
+          phone: dmv[:public_phone_number],
+          open_hours: format_ny_open_hours(
           dmv[:monday_beginning_hours], dmv[:monday_ending_hours],
            dmv[:tuesday_beginning_hours], dmv[:tuesday_ending_hours],
             dmv[:wednesday_beginning_hours], dmv[:wednesday_ending_hours],
              dmv[:thursday_beginning_hours], dmv[:monday_ending_hours],
               dmv[:friday_beginning_hours], dmv[:friday_ending_hours])
-            }
+        }
       elsif @current_state == "MO"
         {
           name: dmv[:name],
-        address: format_address(dmv[:address1], dmv[:city], dmv[:state], dmv[:zipcode]),
-        phone: dmv[:phone],
-        open_hours: format_mo_open_hours(dmv[:daysopen], dmv[:holidaysclosed])
-      }
+          address: format_address(dmv[:address1], dmv[:city], dmv[:state], dmv[:zipcode]),
+          phone: dmv[:phone],
+          open_hours: format_mo_open_hours(dmv[:daysopen], dmv[:holidaysclosed])
+        }
       else
         #default values to check for
-      end
-    )
+      end)
     end
   end
 
