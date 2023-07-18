@@ -1,9 +1,6 @@
 class LotteryTracker
   attr_reader :dataset
 
-  #get_all_numbers => array of arrays
-  #winning_numbers_by_column => hash of hashes
-  #most_likely_number => string
   def initialize(dataset)
     @dataset = dataset
   end
@@ -30,7 +27,10 @@ class LotteryTracker
   end
 
   def most_likely_with_percent
-
+    get_likely_pairs.map do |pair|
+      draw_percent = "#{(pair[1] / 10).to_f}%"
+      [pair[0], draw_percent]
+    end
   end
 
   def get_likely_pairs

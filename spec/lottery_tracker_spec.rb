@@ -49,7 +49,7 @@ RSpec.describe LotteryTracker do
   end
   
   describe "#most_likely_with_percent" do
-    xit "returns each most likely number per column with the percent of the time its drawn" do
+    it "returns each most likely number per column with the percent of the time its drawn" do
       tracker = LotteryTracker.new(LotteryDataService.new.ny_lottery_data)
       
       expect(tracker.most_likely_with_percent).to be_an Array
