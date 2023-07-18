@@ -3,8 +3,8 @@ class FacilityFactory
   end
 
   def create_factory(office_locations)
-     office_locations.map do |office_data|
-       Facility.new({
+    office_locations.map do |office_data|
+      Facility.new({
         name: office_data[:dmv_office] || office_data[:office_name] || office_data[:name],
         address: {
           street_add: office_data[:address_li] || office_data[:street_address_line_1] || office_data[:address1], 
@@ -18,7 +18,6 @@ class FacilityFactory
         office_data[:services_p] || []
         )
     end
-
   end
 end
 
