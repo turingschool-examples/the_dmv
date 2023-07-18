@@ -80,4 +80,35 @@ RSpec.describe FacilityFactory do
       expect(factory.valid_mo_address(mo_dmv_office_locations[1])).to eq(true)
     end
   end
+
+  describe "#name_and_address_filter" do
+    it "can capitalize each word in the name or address value passed through it" do
+      factory = FacilityFactory.new
+      co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+      ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
+      mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
+      factory.create_facilities(co_dmv_office_locations)
+      factory.create_facilities(ny_dmv_office_locations)
+      factory.create_facilities(mo_dmv_office_locations)
+      
+      expect(factory.name_and_address_filter(factory.create_facilities(co_dmv_office_locations)[0].name)).to eq("Dmv Tremont Branch")
+      expect(factory.name_and_address_filter(factory.create_facilities(co_dmv_office_locations)[0].address)).to eq("2855 Tremont Place Suite 118 Denver, Co 80205")
+      expect(factory.name_and_address_filter(factory.create_facilities(ny_dmv_office_locations)[0].name)).to eq("Jamaica")
+      expect(factory.name_and_address_filter(factory.create_facilities(ny_dmv_office_locations)[0].address)).to eq("168-46 91st Ave., 2nd Flr Jamaica, Ny 11432")
+      expect(factory.name_and_address_filter(factory.create_facilities(mo_dmv_office_locations)[0].name)).to eq("Dexter")
+      expect(factory.name_and_address_filter(factory.create_facilities(mo_dmv_office_locations)[0].address)).to eq("119 Vine St Dexter, Mo 63841")
+    end
+  end
+
+  describe "#phone_filter" do
+    it "can format phone numbers passed through to follow the pattern (xxx) xxx-xxxx" do
+      factory = FacilityFactory.new
+      co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+      factory.create_facilities(co_dmv_office_locations)
+
+      expect(factory.phone_filter(factory.create_facilities(co_dmv_office_locations)[0].phone)).to eq("(720) 865-4600")
+      expect(factory.phone_filter(factory.create_facilities(ny_dmv_office_locations)[0].phone)).to eq("(718) 966-6155")
+      expect(factory.phone_filter(factory.create_facilities(mo_dmv_office_locations)[0].phone)).to eq("(573) 624-8808")
+    end
+  end
 end
