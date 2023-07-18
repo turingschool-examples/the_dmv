@@ -43,7 +43,7 @@ RSpec.describe FacilityFactory do
     end
   end
 
-  describe '#Unit test' do
+  describe '#Unit test for address' do
     it 'Address formatting check for nil' do
       factory = FacilityFactory.new
       expect(factory).to be_an_instance_of(FacilityFactory)
@@ -56,7 +56,7 @@ RSpec.describe FacilityFactory do
     end
   end
 
-  describe '#Unit test' do
+  describe '#Unit test for hours' do
     it 'Hours formatting check for nil' do
       factory = FacilityFactory.new
       expect(factory).to be_an_instance_of(FacilityFactory)
@@ -65,7 +65,7 @@ RSpec.describe FacilityFactory do
     end
   end
 
-  describe '#Hours' do
+  describe '#Work hours' do
     it 'open hours for each facility' do
       factory = FacilityFactory.new
       expect(factory).to be_an_instance_of(FacilityFactory)
