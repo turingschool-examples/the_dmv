@@ -23,6 +23,17 @@ RSpec.describe FacilityFactory do
       expect(facility_1.address).to be_a(String)
       expect(facility_1.phone).to be_a(String)
       expect(array_of_facilities.length).to eq(co_dmv_office_locations.length)
+
+      new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+      array_of_ny_facilities = facility.create_facilities(new_york_facilities)
+
+      facility_2 = array_of_ny_facilities.sample
+
+      expect(array_of_ny_facilities).to all be_a(Facility)
+      expect(facility_2.name).to be_a(String)
+      expect(facility_2.address).to be_a(String)
+      expect(facility_2.phone).to be_a(String)
+      expect(array_of_ny_facilities.length).to eq(new_york_facilities.length)
     end
   end
 end
