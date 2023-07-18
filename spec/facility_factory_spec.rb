@@ -22,7 +22,6 @@ RSpec.describe FacilityFactory do
     factory.create_facilities(ny_dmv_office_locations)
     expect(factory.facilities).to all be_a Facility
     expect(factory.facilities).to be_an Array
-    require 'pry';binding.pry
 
     #dependent upon when api is taken
     # expect(factory.facilities.first.name).to eq("Jamaica")
