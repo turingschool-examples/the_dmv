@@ -17,8 +17,6 @@ RSpec.describe VehicleFactory do
       vehicles_in_array = factory.create_vehicles(wa_ev_registrations)
 
       expect(factory.vehicles).to be_an Array
-      
-      require 'pry';binding.pry
     end
   end
 end
