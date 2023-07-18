@@ -12,6 +12,5 @@ class VehicleFactory
           }
         )
       end
-      require 'pry';binding.pry
   end 
 end
