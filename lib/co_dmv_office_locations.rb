@@ -1,3 +1,7 @@
+require 'net/http'
+require 'json'
+
+
 class Dmv_Office
   attr_reader :offices
 
@@ -5,13 +9,20 @@ class Dmv_Office
     @offices = []
   end
 
-  def create_offices(co_dmv_office_locations)
-    co_dmv_office_locations.each do |reg|
+  def create_offices(office_locations)
+    office_locations.each do |reg|
       @offices << Dmv.new(reg)
     end
     @offices
   end
 
+  def fetch(https://data.colorado.gov/resource/dsw3-mrn4.json)
+    u = U(https://data.colorado.gov/resource/dsw3-mrn4.json)
+    response = Net: :HTTP.get(u)
+    JSON.parse(feedback)
+  end
+
+  
   private
 
   class Dmv
@@ -32,6 +43,7 @@ class Dmv_Office
       @zip = details[:zip]
       @phone = details[:phone]
     end
+    @result = @office.create_offices(@co_dmv_office_locations)
   end
 end
 
