@@ -14,7 +14,7 @@ RSpec.describe VehicleFactory do
         it 'can create new vehicles within the factory' do
             factory = VehicleFactory.new
             wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-            puts factory.create_vehicles(wa_ev_registrations)
+            factory.create_vehicles(wa_ev_registrations)
         end
     end
 
