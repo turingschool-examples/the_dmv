@@ -1,5 +1,5 @@
 class Facility
-  attr_reader :name, :address, :phone
+  attr_reader :name, :address, :phone, :hours, :holidays
 
   attr_accessor :services, :registered_vehicles, :collected_fees
 
@@ -7,6 +7,8 @@ class Facility
     @name = attributes[:name]
     @address = attributes[:address]
     @phone = attributes[:phone]
+    @hours = attributes[:hours]
+    @holidays = attributes[:holidays]
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
