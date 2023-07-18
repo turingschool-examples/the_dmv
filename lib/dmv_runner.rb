@@ -1,10 +1,4 @@
-require_relative 'stats'
-require_relative 'dmv_data_service'
-require_relative 'dmv'
-require_relative 'facility'
-require_relative 'vehicle'
-require_relative 'vehicle_factory'
-require_relative 'dmv_factory'
+require_relative 'require_helper'
 
 on = true
 
