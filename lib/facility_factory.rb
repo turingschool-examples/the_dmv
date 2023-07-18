@@ -27,6 +27,16 @@ class FacilityFactory
           "#{location[:zip_code]}",
           phone: location[:public_phone_number]
         })
+      elsif valid_mo_address(location)
+        new_facility = Facility.new({
+          name: location[:name],
+          address: 
+          "#{location[:address1]} "\
+          "#{location[:city]}, "\
+          "#{location[:state]} "\
+          "#{location[:zipcode]}",
+          phone: location[:phone]
+        })
       end
       facilities << new_facility
     end
@@ -46,5 +56,12 @@ class FacilityFactory
     location.keys.include?(:city) &&
     location.keys.include?(:state) &&
     location.keys.include?(:zip_code)
+  end
+
+  def valid_mo_address(location)
+    location.keys.include?(:address1) &&
+    location.keys.include?(:city) &&
+    location.keys.include?(:state) &&
+    location.keys.include?(:zipcode)
   end
 end
