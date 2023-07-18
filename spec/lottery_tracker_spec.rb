@@ -11,9 +11,19 @@ RSpec.describe LotteryTracker do
 
     it "has a dataset on initialize" do
       tracker = LotteryTracker.new(LotteryDataService.new.ny_lottery_data)
-
+      
       expect(tracker.dataset).to be_an Array
       expect(tracker.dataset).to_not be_empty
+    end
+  end
+  
+  describe "#get_all_numbers" do
+    it "returns an array of all winning numbers formatted in arrays" do
+      tracker = LotteryTracker.new(LotteryDataService.new.ny_lottery_data)
+      
+      expect(tracker.get_all_numbers).to be_an Array
+      expect(tracker.get_all_numbers.size).to be_an Integer
+      expect(tracker.get_all_numbers.first).to be_an Array
     end
   end
 end
