@@ -26,6 +26,32 @@ RSpec.describe Facility do
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
+
+  describe "#collected_fees" do
+    it "can charge 25 for antique plates" do
+      @facility_1.add_service("Vehicle Registration")
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+      @facility_1.register_vehicle(camaro)
+
+      expect(@facility_1.collected_fees).to eq(25)
+    end
+
+    it "can charge 100 for a regular plate" do
+      @facility_1.add_service("Vehicle Registration")
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+      @facility_1.register_vehicle(cruz)
+      
+      expect(@facility_1.collected_fees).to eq(100)
+    end
+
+    it "can charge 200 for EV vehicles" do
+      @facility_1.add_service("Vehicle Registration")
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
+      @facility_1.register_vehicle(bolt)
+
+      expect(@facility_1.collected_fees).to eq(200)
+    end
+  end
   
   describe "#register_vehicle" do
     it "can't register if facility doesn't have 'Vehicle Registration' service" do
