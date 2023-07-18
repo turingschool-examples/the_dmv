@@ -64,4 +64,9 @@ class FacilityFactory
     location.keys.include?(:state) &&
     location.keys.include?(:zipcode)
   end
+
+  def name_and_address_filter(data)
+    units_of_data = data.split
+    units_of_data.map {|unit| unit.capitalize}.join(" ")
+  end
 end
