@@ -64,4 +64,12 @@ RSpec.describe LotteryTracker do
       expect(tracker.get_likely_pairs).to be_an Array
     end
   end
+  
+  describe "#get_total_chance" do
+    it "finds the likelihood of the most likely full number being drawn" do
+      tracker = LotteryTracker.new(LotteryDataService.new.ny_lottery_data)
+      
+      expect(tracker.get_total_chance).to be_a Float
+    end
+  end
 end

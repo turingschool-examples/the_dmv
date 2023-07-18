@@ -41,4 +41,11 @@ class LotteryTracker
     end
     most_likely_values
   end
+
+  def get_total_chance
+    percentages = get_likely_pairs.map {|column| column[1]}
+    total_chance = 1.0
+    percentages.each {|percent| total_chance = total_chance * (percent / 1000.0)}
+    (total_chance * 100.0).round(10)
+  end
 end
