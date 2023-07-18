@@ -1,6 +1,6 @@
 require './lib/dmv'
 require './lib/facility'
-require './lib/facilty_factory'
+require './lib/facility_factory'
 require './lib/dmv_data_service'
 
 RSpec.describe FacilityFactory do 
@@ -12,15 +12,17 @@ RSpec.describe FacilityFactory do
 
   describe '#create_facility' do 
     it 'exists' do 
-      facility = Facility.new
-        co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
-        
-        
+      facility = FacilityFactory.new
+      co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+      array_of_facilities = facility.create_facilities(co_dmv_office_locations)
+
+      facility_1 = array_of_facilities.sample
   
-        expect(factory.vehicles).to be_an Array
-  
-  
-      end
+      expect(array_of_facilities).to all be_a(Facility)
+      expect(facility_1.name).to be_a(String)
+      expect(facility_1.address).to be_a(String)
+      expect(facility_1.phone).to be_a(String)
+      expect(array_of_facilities.length).to eq(co_dmv_office_locations.length)
     end
   end
 end

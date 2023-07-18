@@ -8,8 +8,8 @@ class FacilityFactory
 
     api_database.each do |location|
       new_facility = Facility.new({
-        name: location[:dmv_office]
-        address: location[:address_li]
+        name: location[:dmv_office],
+        address: "#{location[:address_li]}, #{location[:address__1]}, #{location[:city]}, #{location[:state]}, #{location[:zip]} ",
         phone: location[:phone]
       })
       facilities << new_facility
