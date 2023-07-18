@@ -20,9 +20,9 @@ class FacilityFactory
     if data[:state] == "CO"
       data[:dmv_office]
     elsif data[:state] == "NY"
-      data[:office_name]
+      data[:office_name].split.map(&:capitalize).join(" ")
     elsif data[:state] == "MO"
-      data[:name]
+      data[:name].split.map(&:capitalize).join(" ")
     end
   end
 
@@ -31,11 +31,11 @@ class FacilityFactory
       address_parts = [data[:address_li], data[:address__1], data[:city], data[:state], data[:zip]]
       address_parts.compact.join(" ")
     elsif data[:state] == "NY"
-      address_parts = [data[:street_address_line_1], data[:street_address_line_2], data[:city], data[:state], data[:zip_code]]
-      address_parts.compact.join(" ")
+      address_parts = [data[:street_address_line_1], data[:street_address_line_2], data[:city], data[:state], data[:zip_code]].compact
+      capitalized_array = address_parts.map { |part| part.split.map(&:capitalize) }.join(" ")
     elsif data[:state] == "MO"
-      address_parts = [data[:address1], data[:city], data[:state], data[:zipcode]]
-      address_parts.compact.join(" ")
+      address_parts = [data[:address1], data[:city], data[:state], data[:zipcode]].compact
+      capitalized_array = address_parts.map { |part| part.split.map(&:capitalize) }.join(" ")
     end
   end
 
