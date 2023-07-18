@@ -10,9 +10,6 @@ RSpec.describe VehicleFactory do
     end
   end
 
-  # write tests that test the whole of the array for vins, then a test for all of the vehicles, etc.
-  # expect(....).to all be_a(vehicle)
-
   describe "#create_vehicles" do
     it "can create vehicles" do
       factory = VehicleFactory.new
