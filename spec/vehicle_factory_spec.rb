@@ -1,6 +1,4 @@
-require "./lib/vehicle"
-require "./lib/vehicle_factory"
-require "./lib/dmv_data_service"
+require "spec_helper"
 
 describe "#initialize" do
   it "creates a vehicle factory" do
