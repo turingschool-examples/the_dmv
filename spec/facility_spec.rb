@@ -66,13 +66,22 @@ RSpec.describe Facility do
   end
 
   describe "#administer_written_test" do
-    it "gives a written test to the registrant" do
+    it "gives a written test to the registrant(if they have a permit)" do
       @facility_1.administer_written_test(@registrant_1)
       expect(@facility_1.administer_written_test(@registrant_1)).to be(false)
 
       @facility_1.add_service("Written Test")
+      expect(@registrant_1.permit).to be(true)
       expect(@facility_1.administer_written_test(@registrant_1)).to be(true)
       expect(@registrant_1.license_data[:written]).to be(true)
+
+      # @facility_1.administer_written_test(@registrant_2)
+      # expect(@facility_1.administer_written_test(@registrant_2)).to be(false)
+
+      @facility_1.add_service("Written Test")
+      expect(@registrant_2.permit).to be(false)
+      expect(@facility_1.administer_written_test(@registrant_2)).to be(false)
+      expect(@registrant_2.license_data[:written]).to be(false)
     end
   end
 
