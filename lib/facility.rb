@@ -4,7 +4,8 @@ class Facility
               :phone,
               :services,
               :registered_vehicles,
-              :collected_fees
+              :collected_fees,
+              :open_hours
 
   def initialize(facility_details)
     @name = facility_details[:name]
@@ -13,6 +14,7 @@ class Facility
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
+    @open_hours = facility_details[:open_hours]
   end
 
   def add_service(service)
@@ -61,5 +63,25 @@ class Facility
     else
       false
     end
+  end
+
+  def most_popular_registered_make
+    make_count = Hash.new(0)
+    @registered_vehicles.each do |car| 
+      make_count[car.make] += 1
+    end
+    make_count.sort_by do |make,number| 
+      number
+    end.last[0]
+  end
+
+  def most_popular_registered_model
+    model_count = Hash.new(0)
+    @registered_vehicles.each do |car| 
+      model_count[car.model] += 1
+    end
+    model_count.sort_by do |model,number| 
+      number
+    end.last[0]
   end
 end
