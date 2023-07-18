@@ -40,7 +40,14 @@ RSpec.describe DmvDataService do
 
   describe '#ny_dmv_office_locations' do
     it 'can load new york dmv office locations' do
+      ny_dmv_office_locations = @dds.ny_dmv_office_locations
       expect(@dds.ny_dmv_office_locations.size).to be_an(Integer)
+
+      new_york = ny_dmv_office_locations.first
+      expect(new_york).to include(
+        :the_geom, :dmv_id, :dmv_office, :address_li, :address__1, :city,
+        :state, :zip, :phone, :hours, :services_p, :photo, :address_id
+      )
     end
   end
 
