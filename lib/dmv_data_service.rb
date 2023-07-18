@@ -23,15 +23,37 @@ class DmvDataService
     @mo_dmv_office_locations ||= load_data('https://data.mo.gov/resource/835g-7keg.json')
   end
 
+  # def create_facility_objects(data)
+  #   facilities = []
+
+  #   data.map do |facility|
+  #     facility_details = {
+  #       the_geom: data[:the_geom],
+  #       dmv_id: data[:dmv_id],
+  #       dmv_office: data[:dmv_office],
+  #       address_li: data[:address_li],
+  #       address__1: data[:address__1],
+  #       city: data[:city],
+  #       state: data[:state],
+  #       zip: data[:zip],
+  #       phone: data[:phone],
+  #       hours: data[:hours],
+  #       services_p: data[:services_p],
+  #       photo: data[:photo],
+  #       address_id: data[:address_id]
+        
+  #   }
+  #   end
+  # end
   def create_facility_objects(data)
     facilities = []
 
-    data.each do |data|
-      facility_details = {
+    data.map do |facility|
+      facility_details = (
         the_geom: data[:the_geom],
         dmv_id: data[:dmv_id],
         dmv_office: data[:dmv_office],
-        address_li: data[:address_li],
+        address: data[:address],
         address__1: data[:address__1],
         city: data[:city],
         state: data[:state],
@@ -42,8 +64,7 @@ class DmvDataService
         photo: data[:photo],
         address_id: data[:address_id]
         
-      }
+      )
     end
-    facilities
   end
 end
