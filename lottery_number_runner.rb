@@ -14,8 +14,4 @@ puts "Column 6's most frequent number: #{numbers_by_column[5][0]}, drawn #{numbe
 
 puts "\nOverall most 'likely' number: #{tracker.most_likely_number}"
 puts "\nSo just how likely is that number? Based on the last 1,000 draws, we might expect it to show up a whopping... "
-percentages = tracker.get_likely_pairs.map {|column| column[1]}
-# require 'pry';binding.pry
-total_chance = 1.0
-percentages.each {|percent| total_chance = total_chance * (percent / 1000.0)}
-puts "#{(total_chance * 100.0).round(10)}% of the time!"
+puts "#{tracker.get_total_chance}% of the time!"
