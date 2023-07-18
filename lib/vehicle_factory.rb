@@ -1,8 +1,4 @@
 class VehicleFactory
-  def initialize
-
-  end
-
   def create_vehicles(data)
     data.map do |api_data|
       Vehicle.new(detail_builder(api_data))
