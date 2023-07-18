@@ -61,6 +61,8 @@ RSpec.describe Facility do
       expect(facility_1.registered_vehicles).to eq([cruz])
       expect(facility_1.collected_fees).to eq(100)
 
+      require 'pry';binding.pry
+
       facility_1.register_vehicle(camaro)
 
       expect(camaro.registration_date).to eq(Date.today)
