@@ -10,7 +10,8 @@ class FacilityFactory
           details = {
             name: format_name(facility),
             address: format_address(facility),
-            phone: format_phone(facility)
+            phone: format_phone(facility),
+            hours: format_hours(facility)
           }
           @facility_list << Facility.new(details)
         end
@@ -47,4 +48,13 @@ class FacilityFactory
         end
     end
 
+    def format_hours(data)
+        if data[:state] == 'CO'
+            data[:hours]
+        elsif data[:state] == 'NY'
+            "Monday-Friday #{data[:monday_beginning_hours]} to #{data[:friday_ending_hours]}" 
+        elsif data[:state] == 'MO'
+            data[:daysopen]
+        end
+    end
 end
