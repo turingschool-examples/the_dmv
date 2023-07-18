@@ -29,6 +29,16 @@ RSpec.describe FacilityFactory do
       expect(ff.create_facilities(ny_dmv_offices)).to_not be_empty
       expect(ff.create_facilities(ny_dmv_offices).first).to be_a Facility
     end
+    
+    it "works with missouri data" do
+      ff = FacilityFactory.new
+  
+      mo_dmv_offices = DmvDataService.new.mo_dmv_office_locations
+      require 'pry';binding.pry
+  
+      expect(ff.create_facilities(mo_dmv_offices)).to_not be_empty
+      expect(ff.create_facilities(mo_dmv_offices).first).to be_a Facility
+    end
   end
 
   describe "#addr_builder" do
