@@ -6,6 +6,13 @@ RSpec.describe Vehicle do
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
     @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+    @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+    [{:electric_vehicle_type=>"Plug-in Hybrid Electric Vehicle (PHEV)",
+    :vin_1_10=>"JTDKN3DP8D",
+   :dol_vehicle_id=>"229686908",
+   :model_year=>"2013",
+   :make=>"TOYOTA",
+   :model=>"Prius Plug-in"}]
   end
   describe '#initialize' do
     it 'can initialize' do
