@@ -52,7 +52,6 @@ RSpec.describe Facility do
       expect(facility_1.register_vehicle(cruz)).to eq([cruz])
 
       expect(cruz.registration_date).to be_a(Date)
-      #=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
 
       expect(cruz.plate_type).to eq(:regular)
 
@@ -63,14 +62,12 @@ RSpec.describe Facility do
       expect(facility_1.register_vehicle(camaro)).to eq([cruz, camaro])
 
       expect(camaro.registration_date).to be_a(Date)
-      #=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
 
       expect(camaro.plate_type).to eq(:antique)
 
       expect(facility_1.register_vehicle(bolt)).to eq([cruz, camaro, bolt])
 
       expect(bolt.registration_date).to be_a(Date)
-      #=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
 
       expect(bolt.plate_type).to eq(:ev)
 

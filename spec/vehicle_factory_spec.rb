@@ -18,6 +18,8 @@ RSpec.describe VehicleFactory do
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
 
       expect(factory.create_vehicles(wa_ev_registrations)).to be_a(Array)
+      expect(factory.created_vehicles.first.make).to eq("CHEVROLET")
+      expect(factory.created_vehicles[1].model).to eq("Volt")
     end
   end
 end
