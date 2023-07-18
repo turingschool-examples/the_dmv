@@ -13,12 +13,20 @@ RSpec.describe FacilityFactory do
     it "can create facility" do
       factory = FacilityFactory.new
       co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
-      array_of_facility_data = factory.create_facility(co_dmv_office_locations)
-      facility_1 = array_of_facility_data.sample
+      co_dmv_facilities = factory.create_facility(co_dmv_office_locations)
+      co_facility_1 = co_dmv_facilities.sample
 
-      expect(facility_1.name).to be_a(String)
-      expect(facility_1.address).to be_a(String)
-      expect(facility_1.phone).to be_a(String)
+      expect(co_facility_1.name).to be_a(String)
+      expect(co_facility_1.address).to be_a(String)
+      expect(co_facility_1.phone).to be_a(String)
+
+      ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
+      new_york_facilities = factory.create_facility(ny_dmv_office_locations)
+      ny_facility_1 = new_york_facilities.sample
+
+      expect(ny_facility_1.name).to be_a(String)
+      expect(ny_facility_1.address).to be_a(String)
+      expect(ny_facility_1.phone).to be_a(String)
     end
   end
 
