@@ -33,7 +33,8 @@ class Facility
       end
         
       @registered_vehicles << vehicle
-    else nil
+    else 
+      nil
     end
   end
 
@@ -41,7 +42,7 @@ class Facility
     if @services.include?('Written Test') && applicant.age >= 16 && applicant.permit == true
       applicant.license_data[:written] = true
     else 
-      applicant.license_data[:written]
+      applicant.license_data[:written] 
     end
   end
 
@@ -57,7 +58,7 @@ class Facility
     if @services.include?('Renew License') && applicant.license_data[:license] == true
       applicant.license_data[:renewed] = true
     else 
-      applicant.license_data[:renewed]
+      applicant.license_data[:renewed] 
     end
   end
 end
