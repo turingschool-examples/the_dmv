@@ -6,8 +6,7 @@ require './lib/vehicle_factory'
 
 RSpec.describe VehicleFactory do
     before(:each) do
-        @factory = VehicleFactory.new
-        wa_ev_registrations = DmvDataService.new.wa_ev_registrations 
+        @factory = VehicleFactory.new 
     end
     
     describe '#initialize' do
@@ -18,7 +17,9 @@ RSpec.describe VehicleFactory do
 
     describe '#create_vehicles' do
       it 'can create vehicles' do
+        wa_ev_registrations = DmvDataService.new.wa_ev_registrations
         @factory.create_vehicles(wa_ev_registrations)
+        
         expected = Vehicle.new(
             vin: wa_ev_registrations.first[:vin_1_10],
             year: wa_ev_registrations.first[:model_year],
