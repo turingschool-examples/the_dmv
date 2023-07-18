@@ -4,6 +4,7 @@ require './lib/facility'
 require './lib/vehicle'
 require './lib/registrant'
 
+
 RSpec.describe Facility do
   before(:each) do
     @facility = Facility.new({name: 'Albany DMV Office', address: '2242 Santiam Hwy SE Albany OR 97321', phone: '541-967-2014' })
