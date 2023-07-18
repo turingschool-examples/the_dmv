@@ -83,4 +83,13 @@ RSpec.describe Facility do
       expect(reg_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
     end
   end
+
+  describe '#create_facility' do
+    it "creats new facility from API data" do
+      co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+      new_co_facilities = @facility.create_facility(co_dmv_office_locations) 
+
+      expect(new_facilities).to eq([co_dmv_office_locations])
+    end
+  end
 end

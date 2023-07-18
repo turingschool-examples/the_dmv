@@ -75,5 +75,14 @@ class Facility
       false
     end
   end
+
+  def create_facility(register) 
+    facilities = []
+    register.each do |data|
+       facility_data = {:name => data[:dmv_office], :address => data[:address_li], :phone => data[:phone], :services => data[:services_p]}
+        facilities << Facility.new(facility_data)  
+    end
+    facilities
+  end
 end
 
