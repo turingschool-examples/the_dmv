@@ -29,6 +29,7 @@ class Facility
         vehicle.plate_type = :regular
         @collected_fees += 100
       end
+      vehicle
     end
   end
 
