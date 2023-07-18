@@ -31,8 +31,10 @@ class VehicleFactory
   end
 
   def most_popular_registered_make
+    #Note to help with confusion
     #Last is the highest incremented in the returned array,
     #0 is the key,in this case make of car
+    #This note applies to all most_popular methods
     make_count = Hash.new(0)
     @vehicle_list.each do |car|
        make_count[car.make] += 1
@@ -70,10 +72,6 @@ class VehicleFactory
     county_count.sort_by do |county,number| 
       number
     end.last[0]
-  end
-
-  def most_popular(attribute)
-    #send to pass in attribute
   end
 
   def model_count(selected_year)
