@@ -13,6 +13,5 @@ class VehicleFactory
         engine: data[:engine]
       }
     end
-    vehicles
   end
 end
