@@ -31,6 +31,10 @@ RSpec.describe DmvDataService do
       expect(@dds.co_dmv_office_locations.size).to be_an(Integer)
 
       colorado = co_dmv_office_locations.first
+      expect(colorado).to include(
+        :the_geom, :dmv_id, :dmv_office, :address_li, :address__1, :city,
+        :state, :zip, :phone, :hours, :services_p, :photo, :address_id
+      )
     end
   end
 
