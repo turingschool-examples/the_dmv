@@ -19,8 +19,18 @@ RSpec.describe "#dmv_factory" do
   end
 
   it "creates a new_york_facility" do
+    factory = DmvFactory.new
+
+    new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+
+    factory.create_facilities(new_york_facilities)
   end
 
   it "creates a missouri_facility" do
+    factory = DmvFactory.new
+
+    missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+
+    factory.create_facilities(missouri_facilities)
   end
 end
