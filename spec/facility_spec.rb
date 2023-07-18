@@ -159,9 +159,7 @@ RSpec.describe Facility do
       expect(facility_1.administer_road_test(registrant_3)).to eq(false)
       
       facility_1.add_service("Written Test")
-      # facility_1.add_service("Road Test")
-      # how do i get this to return an array with both services? 
-      #why does this pass like this but without the line above uncommented??
+      
       expect(facility_1.add_service("Road Test")).to eq(["Written Test", "Road Test"])
 
       facility_1.administer_written_test(registrant_1)
