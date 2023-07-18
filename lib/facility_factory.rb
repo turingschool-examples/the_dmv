@@ -18,9 +18,17 @@ class FacilityFactory
       elsif facility_data[:state] == "NY"
         Facility.new(
           {
-            name: "#{facility_data[:office_name]} #{facility_data[:office_type]}",
+            name: facility_data[:office_name],
             address: "#{facility_data[:street_address_line_1]} #{facility_data[:city]} #{facility_data[:state]} #{facility_data[:zip_code]}",
             phone: facility_data[:public_phone_number]
+          }
+        )
+      elsif facility_data[:state] == "MO"
+        Facility.new(
+          {
+            name: facility_data[:name],
+            address: "#{facility_data[:address1]} #{facility_data[:city]} #{facility_data[:state]} #{facility_data[:zipcode]}",
+            phone: facility_data[:phone]
           }
         )
       end

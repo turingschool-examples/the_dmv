@@ -24,12 +24,23 @@ RSpec.describe FacilityFactory do
       factory = FacilityFactory.new
 
       new_york_facilities = DmvDataService.new.ny_dmv_office_locations
-      require 'pry';binding.pry
 
       factory.create_facilities(new_york_facilities)
       expect(factory.facilities).to be_a(Array)
       expect(factory.facilities.first.phone).to eq("7189666155")
       expect(factory.facilities[1].address).to eq("200 OLD COUNTRY ROAD RIVERHEAD NY 11901")
+    end
+
+    it "creates facilities with MO data" do
+      factory = FacilityFactory.new
+
+      missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+      
+      factory.create_facilities(missouri_facilities)
+
+      expect(factory.facilities).to be_a(Array)
+      expect(factory.facilities.first.phone).to eq("(573) 624-8808")
+      expect(factory.facilities[2].address).to eq("141 N Meramec Ave, Ste 201 CLAYTON MO 63105")
     end
   end
 end
