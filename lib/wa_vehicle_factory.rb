@@ -1,12 +1,5 @@
-# require './lib/vehicle'
-
 class VehicleFactory
-  attr_reader :vehicles,
-              :vin,
-              :year,
-              :make,
-              :model,
-              :engine
+  attr_reader :vehicles
 
   def initialize
     @vehicles = []
