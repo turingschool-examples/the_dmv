@@ -7,14 +7,23 @@ class VehicleFactory
   :model,
   :engine
 
-  def initialize(vehicle_details)
-    @vin = vehicle_details[:vin]
-    @year = vehicle_details[:year]
-    @make = vehicle_details[:make]
-    @model = vehicle_details[:model]
-    @engine = vehicle_details[:engine] = :ev
-    @registration_date = nil
-    @plate_type = nil
+  def initialize
   end
 
+  def create_vehicles(wa_data)
+    storage_facility = []
+    wa_data.each do |wa_car|
+      data = {
+        vin: wa_car[:vin_1_10],
+        year: wa_car[:model_year],
+        make: wa_car[:make],
+        model: wa_car[:model],
+        engine: :ev
+      }
+      vehicle = Vehicle.new(data)
+      storage_facility << vehicle
+    end
+
+    storage_facility
+  end
 end
