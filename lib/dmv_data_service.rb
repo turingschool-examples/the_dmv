@@ -49,22 +49,18 @@ class DmvDataService
     facilities = []
 
     data.map do |facility|
-      facility_details = (
-        the_geom: data[:the_geom],
-        dmv_id: data[:dmv_id],
-        dmv_office: data[:dmv_office],
-        address: data[:address],
-        address__1: data[:address__1],
-        city: data[:city],
-        state: data[:state],
-        zip: data[:zip],
-        phone: data[:phone],
-        hours: data[:hours],
-        services_p: data[:services_p],
-        photo: data[:photo],
-        address_id: data[:address_id]
-        
-      )
+      facility_details = {
+
+        name: facility[:name],
+        address: facility[:address],
+        city: facility[:city],
+        state: facility[:state],
+        zip: facility[:zip],
+        phone: facility[:phone],
+        hours: facility[:hours],
+        services: facility[:services]
+
+    }
     end
   end
 end
