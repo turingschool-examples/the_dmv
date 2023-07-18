@@ -22,7 +22,7 @@ RSpec.describe LotteryDataService do
   describe "#ny_Lottery_data" do
     it "can load ny lottery data" do
       lds = LotteryDataService.new
-      require 'pry';binding.pry
+      
       expect(lds.ny_lottery_data).to be_an Array
     end
   end
