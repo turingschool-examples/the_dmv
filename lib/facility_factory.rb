@@ -15,11 +15,23 @@ class FacilityFactory
 
   def detail_builder(facility)
     if facility[:state] == "CO"
-      {name: facility[:dmv_office], address: addr_builder(facility), phone: facility[:phone]}
+      {
+        name: facility[:dmv_office],
+        address: addr_builder(facility),
+        phone: facility[:phone]
+      }
     elsif facility[:state] == "NY"
-      {name: facility[:office_name], address: addr_builder(facility), phone: number_to_phone(facility[:public_phone_number])}
+      {
+        name: facility[:office_name],
+        address: addr_builder(facility),
+        phone: number_to_phone(facility[:public_phone_number])
+      }
     elsif facility[:state] == "MO"
-      {name: facility[:name], address: addr_builder(facility), phone: facility[:phone]}
+      {
+        name: facility[:name],
+        address: addr_builder(facility),
+        phone: facility[:phone]
+      }
     end
   end
 
