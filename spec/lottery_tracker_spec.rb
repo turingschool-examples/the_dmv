@@ -44,7 +44,6 @@ RSpec.describe LotteryTracker do
       
       expect(tracker.most_likely_number).to be_a String
       expect(tracker.most_likely_number.size).to eq(17)
-      # require 'pry';binding.pry
     end
   end
   
