@@ -16,20 +16,28 @@ class VehicleFactory
 
   class Vehicle
     attr_accessor :registration_date
-    attr_reader :vin_1_10,
-                :dol_vehicle_id,
-                :model_year,
+    attr_reader :engine,
                 :make,
                 :model,
-                :engine
+                :plate_type,
+                :vin,
+                :year,
+                :electric_vehicle_type,
+                :vin_1_10,
+                :dol_vehicle_id,
+                :model_year
     
     def initialize(details)
+      @engine = :ev
+      @make = details[:make]
+      @model = details[:model]
+      @plate_type = details[:plate_type]
+      @registration_date = details[:registration_date]
+      @vin = details[:vin]
+      @electric_vehicle_type = details[:electric_vehicle_type]
       @vin_1_10 = details[:vin_1_10]
       @dol_vehicle_id = details[:dol_vehicle_id]
       @model_year = details[:model_year]
-      @make = details[:make]
-      @model = details[:model]
-      @engine = :ev
     end
   end
 end
