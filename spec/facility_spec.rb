@@ -143,7 +143,8 @@ RSpec.describe Facility do
     end
   end
 
-  it "can administer road test" do
+  describe '#road_test' do
+    it "can administer road test" do
       registrant_1 = Registrant.new('Bruce', 18, true )
       registrant_2 = Registrant.new('Penny', 16 )
       registrant_3 = Registrant.new('Tucker', 15 )
@@ -161,7 +162,7 @@ RSpec.describe Facility do
       # facility_1.add_service("Road Test")
       # how do i get this to return an array with both services? 
       #why does this pass like this but without the line above uncommented??
-      expect(facility_1.add_service('Road Test')).to eq(["Written Test", "Road Test"])
+      expect(facility_1.add_service("Road Test")).to eq(["Written Test", "Road Test"])
 
       facility_1.administer_written_test(registrant_1)
       facility_1.administer_road_test(registrant_1)
@@ -169,10 +170,44 @@ RSpec.describe Facility do
       expect(facility_1.administer_road_test(registrant_1)).to eq(true)
       expect(registrant_1.license_data).to eq({:written=>true, 
         :license=>true, :renewed=>false})
+    end
   end
 
-  it "can renew license" do
+  describe '#renew_license' do
+    it "can renew license" do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Penny', 16 )
+      registrant_3 = Registrant.new('Tucker', 15 )
 
+      facility_1 = Facility.new({name: 'DMV Tremont Branch',
+        address: '2855 Tremont Place Suite 118 Denver CO 80205',
+        phone: '(720) 865-4600'})
+      facility_2 = Facility.new({name: 'DMV Northeast Branch',
+        address: '4685 Peoria Street Suite 101 Denver CO 80239',
+        phone: '(720) 865-4600'})
 
+      facility_1.add_service("Written Test")
+      facility_1.add_service("Road Test")
+      facility_1.add_service("Renew License")
+      facility_1.administer_written_test(registrant_1)
+      facility_1.administer_road_test(registrant_1)
+      facility_1.renew_drivers_license(registrant_1)
+
+      expect(facility_1.renew_drivers_license(registrant_1)).to eq(true)
+      expect(registrant_1.license_data).to eq({:written=>true, 
+        :license=>true, :renewed=>true})
+      
+      facility_1.renew_drivers_license(registrant_3)
+
+      expect(facility_1.renew_drivers_license(registrant_3)).to eq(false)
+      
+      registrant_2.earn_permit
+      facility_1.administer_written_test(registrant_2)
+      facility_1.administer_road_test(registrant_2)
+      facility_1.renew_drivers_license(registrant_2)
+
+      expect(registrant_2.license_data).to eq({:written=>true, 
+        :license=>true, :renewed=>true})
+    end
   end
 end
