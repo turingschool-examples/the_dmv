@@ -28,7 +28,7 @@ class LotteryTracker
 
   def most_likely_with_percent
     get_likely_pairs.map do |pair|
-      draw_percent = "#{(pair[1] / 10).to_f}%"
+      draw_percent = "#{(pair[1] / 10.0)}%"
       [pair[0], draw_percent]
     end
   end
@@ -40,5 +40,12 @@ class LotteryTracker
       most_likely_values << column[1].max_by {|key, value| value}
     end
     most_likely_values
+  end
+
+  def get_total_chance
+    percentages = get_likely_pairs.map {|column| column[1]}
+    total_chance = 1.0
+    percentages.each {|percent| total_chance = total_chance * (percent / 1000.0)}
+    (total_chance * 100.0).round(10)
   end
 end
