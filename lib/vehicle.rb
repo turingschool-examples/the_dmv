@@ -36,5 +36,4 @@ class Vehicle
       @plate_type = :ev
     end
   end
-
 end
