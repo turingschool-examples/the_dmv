@@ -24,4 +24,13 @@ class LotteryTracker
       column_6: number_array.map { |winning_numbers| winning_numbers[5] }.sort.tally
     }
   end
+
+  def most_likely_number
+    most_likely_values = []
+    numbers_by_column = winning_numbers_by_column(get_all_numbers)
+    numbers_by_column.each do |column|
+      most_likely_values << column[1].max_by {|key, value| value}
+    end
+    most_likely_values.map {|value| value[0]}.join(" ")
+  end
 end
