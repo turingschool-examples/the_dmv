@@ -1,5 +1,3 @@
-require 'date'
-
 class Vehicle
   attr_accessor :registration_date
   attr_reader :vin,
