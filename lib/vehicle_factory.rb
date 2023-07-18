@@ -17,7 +17,7 @@ class VehicleFactory
     end
   end
 
-  def add_other_vehicles(data)
+  def create_other_vehicles(data)
     data.each do |vehicle|
       @vehicle_list << Vehicle.new({
         vin: vehicle[:vin],
@@ -31,27 +31,49 @@ class VehicleFactory
   end
 
   def most_popular_registered_make
+    #Last is the highest incremented in the returned array,
+    #0 is the key,in this case make of car
     make_count = Hash.new(0)
-    @vehicle_list.each {|car| make_count[car.make] += 1}
-    make_count.sort_by { |make,number| number}.last[0]
+    @vehicle_list.each do |car|
+       make_count[car.make] += 1
+    end
+    make_count.sort_by do |make,number| 
+      number
+    end.last[0]
   end
 
   def most_popular_registered_model
     model_count = Hash.new(0)
-    @vehicle_list.each {|car| model_count[car.model] += 1}
-    model_count.sort_by { |model,number| number}.last[0]
+    @vehicle_list.each do |car| 
+      model_count[car.model] += 1
+    end
+    model_count.sort_by do |model,number|
+      number
+    end.last[0]
   end
 
   def most_popular_registered_year
     year_count = Hash.new(0)
-    @vehicle_list.each {|car| year_count[car.year] += 1}
-    year_count.sort_by { |year,number| number}.last[0]
+    @vehicle_list.each do |car| 
+      year_count[car.year] += 1
+    end
+    year_count.sort_by do |year,number|
+       number
+    end.last[0]
   end
 
   def most_popular_registered_county
     county_count = Hash.new(0)
-    @vehicle_list.each {|car| county_count[car.county] += 1}
-    county_count.sort_by { |county,number| number}.last[0]
+    @vehicle_list.each do |car|
+      county_count[car.county] += 1
+    end
+    county_count.sort_by do |county,number| 
+      number
+    end.last[0]
+  end
+
+  def most_popular(attribute)
+    #send to pass in attribute
   end
 
   def model_count(selected_year)

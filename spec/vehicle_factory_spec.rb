@@ -43,7 +43,7 @@ RSpec.describe VehicleFactory do
       
       ny_other_registrations = DmvDataService.new.ny_other_registrations
       
-      expect(factory.add_other_vehicles(ny_other_registrations)).to be_an(Array)
+      expect(factory.create_other_vehicles(ny_other_registrations)).to be_an(Array)
       expect(factory.vehicle_list.first).to be_an_instance_of(Vehicle) 
       expect(factory.vehicle_list.last).to be_an_instance_of(Vehicle)
       expect(factory.vehicle_list.length).to be_an(Integer)
