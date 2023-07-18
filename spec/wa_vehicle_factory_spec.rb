@@ -20,6 +20,7 @@ RSpec.describe VehicleFactory do
 
   describe '#create WA vehicles' do
     it 'creates WA vehicles' do
+      require 'pry' ; binding.pry
       expect(@factory.create_vehicles(@wa_ev_registrations)).to include()
     end
   end
