@@ -2,6 +2,8 @@ class Facility
   attr_reader :name,
               :address, 
               :phone, 
+              :daily_hours,
+              :holidays_closed,
               :services,
               :registered_vehicles,
               :collected_fees
@@ -10,6 +12,8 @@ class Facility
     @name = name?(info)
     @address = address?(info)
     @phone = phone?(info)
+    @daily_hours = daily_hours?(info)
+    @holidays_closed = info[:holidaysclosed] || nil
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
@@ -20,8 +24,6 @@ class Facility
       info[:dmv_office]
     elsif info[:office_name] != nil
       info.values_at(:office_name, :office_type).join(" ")
-    # elsif caller.join.include?("mo_dmv_office_locations")
-    #   # info[:]
     else
       info[:name]
     end
@@ -47,6 +49,30 @@ class Facility
     end
   end
 
+  def daily_hours?(info)
+    if info[:hours] != nil
+    info[:hours]
+    elsif info[:daysopen] != nil
+    info[:daysopen]
+    else
+      days = info.values_at(:monday_beginning_hours, :tuesday_beginning_hours, :wednesday_beginning_hours, :thursday_beginning_hours,  :friday_beginning_hours, :monday_ending_hours, :tuesday_ending_hours, :wednesday_ending_hours, :thursday_ending_hours, :friday_ending_hours)
+      weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      string = []
+      count = 0
+      loop do
+        if days[count] != nil
+        string << "#{weekdays[count]} #{days[count]} to #{days[count + 5]}"
+        end
+        count += 1
+        if count > 4
+          break
+        end
+      end
+      string.join(", ")
+    end
+  end
+
+
   def add_service(service)
     @services << service
   end
@@ -65,8 +91,6 @@ class Facility
       end
       vehicle.registration_date = Date.today
       @registered_vehicles << vehicle
-    else
-      nil
     end
   end
 
