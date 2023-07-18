@@ -1,3 +1,4 @@
+require 'spec_helper'
 class Facility
   attr_reader :name, :address, :phone, :services
 
@@ -8,7 +9,14 @@ class Facility
     @services = []
   end
 
-  def add_service(services)
-    @services << services
+  def add_service(service)
+     service_list =[]
+     service_list << service
+     service_list
   end
-end
+
+def registration_date 
+  nil 
+end 
+
+end 

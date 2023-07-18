@@ -11,6 +11,6 @@ class Registrant
       @permit
     end 
     def earn_permit
-      @permit
+      @permit=true
     end 
   end 
