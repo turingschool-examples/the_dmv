@@ -61,6 +61,7 @@ class DmvDataService
         services: facility[:services]
 
     }
+    DmvDataService.new(facility_details)
     end
   end
 end
