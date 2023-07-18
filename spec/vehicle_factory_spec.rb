@@ -19,6 +19,5 @@ RSpec.describe VehicleFactory do
       expect(@factory.create_vehicles(@wa_ev_registrations).first.vin).to eq("1G1RC6S55J")
       expect(@factory.create_vehicles(@wa_ev_registrations).first.year).to eq("2018")
     end
-    
   end
 end

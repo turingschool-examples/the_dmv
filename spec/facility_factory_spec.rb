@@ -45,5 +45,4 @@ RSpec.describe FacilityFactory do
       expect(@factory_1.create_factory(@missouri_facilities).first.services).to eq([])
     end
   end
-
 end
