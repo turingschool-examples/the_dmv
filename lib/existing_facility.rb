@@ -1,15 +1,15 @@
-class VehicleFactory
+class ExistingFacility  
     attr_reader :vehicles
     def initialize
-        @vehicles = []
+        @facility_info = []
     end
 
-    def create_vehicles(registrations)
-        registrations.each do |registration|
-            vin = registration[:vin_1_10]
-            year = registration[:model_year]
-            make = registration[:make]
-            model = registration[:model]
+    def read_information(data)
+        data.each do |detail|
+            name = detail[:dmv_office]
+            address = "#{detail[:model_year]
+            phone = detail[:make]
+            services = detail[:model]
 
             vehicle_details = {
                 engine: :ev,
