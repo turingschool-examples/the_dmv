@@ -49,6 +49,20 @@ RSpec.describe FacilityFactory do
 
       expect(ff.addr_builder(co_dmv_offices.first)).to be_a String
     end
+
+    it "works with co, ny and mo data" do
+      ff = FacilityFactory.new
+      co_dmv_offices = DmvDataService.new.co_dmv_office_locations
+      ny_dmv_offices = DmvDataService.new.ny_dmv_office_locations
+      mo_dmv_offices = DmvDataService.new.mo_dmv_office_locations
+
+      expect(ff.addr_builder(co_dmv_offices.first)).to be_a String
+      expect(ff.addr_builder(co_dmv_offices.first)).to_not be_empty
+      expect(ff.addr_builder(ny_dmv_offices.first)).to be_a String
+      expect(ff.addr_builder(ny_dmv_offices.first)).to_not be_empty
+      expect(ff.addr_builder(mo_dmv_offices.first)).to be_a String
+      expect(ff.addr_builder(mo_dmv_offices.first)).to_not be_empty
+    end
   end
 
   describe "#detail_builder" do
