@@ -33,9 +33,11 @@ class FacilityFactory
     elsif data[:state] == "NY"
       address_parts = [data[:street_address_line_1], data[:street_address_line_2], data[:city], data[:state], data[:zip_code]].compact
       capitalized_array = address_parts.map { |part| part.split.map(&:capitalize) }.join(" ")
+      capitalized_array.gsub!("Ny", "NY")
     elsif data[:state] == "MO"
       address_parts = [data[:address1], data[:city], data[:state], data[:zipcode]].compact
       capitalized_array = address_parts.map { |part| part.split.map(&:capitalize) }.join(" ")
+      capitalized_array.gsub!("Mo", "MO")
     end
   end
 

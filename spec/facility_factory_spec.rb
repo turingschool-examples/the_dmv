@@ -22,10 +22,11 @@ RSpec.describe FacilityFactory do
     factory.create_facilities(ny_dmv_office_locations)
     expect(factory.facilities).to all be_a Facility
     expect(factory.facilities).to be_an Array
+    require 'pry';binding.pry
 
     #dependent upon when api is taken
     # expect(factory.facilities.first.name).to eq("Jamaica")
-    # expect(factory.facilities.first.address).to eq("168-46 91st Ave., 2nd Flr Jamaica Ny 11432")
+    # expect(factory.facilities.first.address).to eq("168-46 91st Ave., 2nd Flr Jamaica NY 11432")
     # expect(factory.facilities.first.phone).to eq("(718) 966-6155")
     # expect(factory.facilities.first.services).to eq([])
     # expect(factory.facilities.first.registered_vehicles).to eq([])
@@ -40,7 +41,7 @@ RSpec.describe FacilityFactory do
 
     #dependent upon when api is taken
     # expect(factory.facilities.first.name).to eq("Dexter")
-    # expect(factory.facilities.first.address).to eq("119 Vine St Dexter Mo 63841")
+    # expect(factory.facilities.first.address).to eq("119 Vine St Dexter MO 63841")
     # expect(factory.facilities.first.phone).to eq("(573) 624-8808")
     # expect(factory.facilities.first.services).to eq([])
     # expect(factory.facilities.first.registered_vehicles).to eq([])
