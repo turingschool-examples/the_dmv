@@ -1,15 +1,6 @@
 class FacilityFactory
   def create_facilities(data)
-    facilities = []
-    data.each do |facility| #refactor to map
-      details = {
-        name: facility[:dmv_office],
-        address: addr_builder(facility),
-        phone: facility[:phone]
-      }
-      facilities << Facility.new(details)
-    end
-    facilities
+    data.map { |facility| Facility.new(detail_builder(facility)) }
   end
 
   def addr_builder(facility)
