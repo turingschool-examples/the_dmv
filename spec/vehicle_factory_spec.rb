@@ -22,4 +22,19 @@ RSpec.describe VehicleFactory do
       expect(factory.create_vehicles(wa_ev_registrations).first).to be_a Vehicle
     end
   end
+
+  describe "#detail_builder" do
+    it "builds a hash of vehicle details" do
+      factory = VehicleFactory.new
+      first_wa_ev_registrations = DmvDataService.new.wa_ev_registrations.first
+
+      details = factory.detail_builder(first_wa_ev_registrations)
+      expect(details).to be_a Hash
+      expect(details.key?(:vin)).to be true
+      expect(details.key?(:year)).to be true
+      expect(details.key?(:make)).to be true
+      expect(details.key?(:model)).to be true
+      expect(details.key?(:engine)).to be true
+    end
+  end
 end

@@ -16,4 +16,14 @@ class VehicleFactory
     end
     vehicles
   end
+
+  def detail_builder(vehicle_data)
+    {
+      vin: vehicle_data[:vin_1_10],
+      year: vehicle_data[:model_year],
+      make: vehicle_data[:make],
+      model: vehicle_data[:model],
+      engine: :ev
+    }
+  end
 end
