@@ -9,6 +9,11 @@ RSpec.describe VehicleFactory do
   describe '#initialize' do
     it 'can initialize' do
       expect(@factory).to be_an_instance_of(VehicleFactory)
+    end
+  end
+
+  describe "#create_vehicle" do
+    it "can creawte vehicles from external data" do
       @factory.create_vehicles(@wa_ev_registrations)
       expect(@factory.create_vehicles(@wa_ev_registrations)).to be_an Array
       expect(@factory.create_vehicles(@wa_ev_registrations)).to all be_a Vehicle
