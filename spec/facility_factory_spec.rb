@@ -44,14 +44,24 @@ RSpec.describe FacilityFactory do
   end
 
   describe '#Unit test' do
-    it 'Address formatting check' do
+    it 'Address formatting check for nil' do
       factory = FacilityFactory.new
       expect(factory).to be_an_instance_of(FacilityFactory)
       expect(factory.format_co_address(nil, nil, nil, nil, nil)).to eq(", ,  ")
       expect(factory.format_co_address("address", nil, "city", "state", "zip")).to eq("address, city, state zip")
       expect(factory.format_co_address("address1", "address2", "city", "state", "zip")).to eq("address1 address2, city, state zip")
 
+      expect(factory.format_address(nil, nil, nil, nil)).to eq(", ,  ")
       expect(factory.format_address("address", "city", "state", "zip")).to eq("address, city, state zip")
+    end
+  end
+
+  describe '#Unit test' do
+    it 'Hours formatting check for nil' do
+      factory = FacilityFactory.new
+      expect(factory).to be_an_instance_of(FacilityFactory)
+      expect(factory.format_ny_open_hours(nil, nil, nil, nil, nil, nil, nil, nil, nil, nil)).to eq("Monday:  to ,     Tuesday:  to ,      Wednesday:  to ,       Thursday:  to ,        Friday:  to ")
+      expect(factory.format_mo_open_hours(nil, nil)).to eq("Open: , Closed: ")
     end
   end
 
