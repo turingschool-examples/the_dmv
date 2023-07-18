@@ -51,7 +51,7 @@ class Facility
   end
 
   def administer_road_test(registrant)
-    if @services.include?("Road Test")
+    if @services.include?("Road Test") && registrant.permit == true
       registrant.license_data[:license] = true
     else 
       false
