@@ -28,7 +28,7 @@ class LotteryTracker
 
   def most_likely_with_percent
     get_likely_pairs.map do |pair|
-      draw_percent = "#{(pair[1] / 10).to_f}%"
+      draw_percent = "#{(pair[1] / 10.0)}%"
       [pair[0], draw_percent]
     end
   end
