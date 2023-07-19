@@ -1,4 +1,3 @@
-
 class Facility
   attr_reader :name, 
               :address, 
@@ -18,26 +17,28 @@ class Facility
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
-
   end
 
   def add_service(service)
     @services << service
   end
 
+
   def register_vehicle(vehicle)
     if can_perform?('Vehicle Registration')
       if vehicle.antique? 
         @collected_fees += 25 
-        vehicle.change_plate_type(:antique)
+        vehicle.plate_type(:antique)
       elsif vehicle.electric_vehicle? 
         @collected_fees += 200 
-        vehicle.change_plate_type(:ev)
+        vehicle.plate_type(:ev)
       else
         @collected_fees += 100 
-        vehicle.change_plate_type(:regular)
+        vehicle.plate_type(:regular)
       end
-      vehicle.change_registration_date
+      date=Date.today
+      registration_date=date
+      vehicle.date_update(registration_date)
       @registered_vehicles << vehicle 
     end
   end

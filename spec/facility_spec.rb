@@ -41,69 +41,72 @@ RSpec.describe Facility do
     end
   end
   
-end
 
-describe 'registration' do 
-  it 'registers vehicles' do 
-    @facility_1.add_service('Vehicle Registration')
-    expect(@cruz.registration_date).to be nil
-    expect(@facility_1.registered_vehicles).to eq([])
-    expect(@facility_1.collected_fees).to eq(0)
-    #cruz
-    @facility_1.register_vehicle(@cruz)
-    expect(@cruz.registration_date).to be_a Date
-    expect(@cruz.plate_type).to eq(:regular)
-    expect(@facility_1.registered_vehicles).to eq([@cruz])
-    expect(@facility_1.collected_fees).to eq(100)
-    #camaro
-    @facility_1.register_vehicle(@camaro)
-    expect(@camaro.registration_date).to be_a Date
-    expect(@camaro.plate_type).to eq(:antique)
-    #bolt
-    @facility_1.register_vehicle(@bolt)
-    expect(@bolt.registration_date).to be_a Date
-    expect(@bolt.plate_type).to eq(:ev)
-    expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
-    expect(@facility_1.collected_fees).to eq(325)
-  end
 
-  xit 'no register if no can register' do 
-    expect(@facility_2.registered_vehicles).to eq([])
-    expect(@facility_2.services).to eq([])
-    expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
-    expect(@facility_2.registered_vehicles).to eq([])
-    expect(@facility_2.collected_fees).to eq(0)
-  end
-end
+    describe 'registration' do 
+    it 'registers vehicles' do 
+        @facility_1.add_service('Vehicle Registration')
+        expect(@cruz.registration_date).to be nil
+        expect(@facility_1.registered_vehicles).to eq([])
+        expect(@facility_1.collected_fees).to eq(0)
+        #cruz
+        @facility_1.register_vehicle(@cruz)
+        #binding.pry
+        expect(@cruz.registration_date).to be_a Date
+        expect(@cruz.plate_type).to eq(:regular)
+        expect(@facility_1.registered_vehicles).to eq([@cruz])
+        expect(@facility_1.collected_fees).to eq(100)
+        #camaro
+        @facility_1.register_vehicle(@camaro)
+        expect(@camaro.registration_date).to be_a Date
+        expect(@camaro.plate_type).to eq(:antique)
+        #bolt
+        @facility_1.register_vehicle(@bolt)
+        expect(@bolt.registration_date).to be_a Date
+        expect(@bolt.plate_type).to eq(:ev)
+        expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+        expect(@facility_1.collected_fees).to eq(325)
+    end
 
-describe '#administer_written_test' do 
-  xit 'written test only if facility_1 able' do 
-    expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-    expect(@registrant_1.permit?).to be true
-    expect(@facility_1.administer_written_test(@registrant_1)).to be false
-    expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-    @facility_1.add_service('Written Test')
-    expect(@facility_1.administer_written_test(@registrant_1)).to be true
-    expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
-  end
+    xit 'no register if no can register' do 
+        expect(@facility_2.registered_vehicles).to eq([])
+        expect(@facility_2.services).to eq([])
+        expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
+        expect(@facility_2.registered_vehicles).to eq([])
+        expect(@facility_2.collected_fees).to eq(0)
+    end
+    end
 
-  xit 'written test only for permit holders' do
-    @facility_1.add_service('Written Test')
-    expect(@registrant_2.age).to eq(16)
-    expect(@registrant_2.permit?).to be false
-    expect(@facility_1.administer_written_test(@registrant_2)).to be false
-    @registrant_2.earn_permit
-    expect(@facility_1.administer_written_test(@registrant_2)).to be true
-    expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
-  end
-  
-  xit 'no written tests for the very young' do 
-    @facility_1.add_service('Written Test')
-    expect(@registrant_3.age).to eq(15)
-    expect(@registrant_3.permit?).to be false
-    expect(@facility_1.administer_written_test(@registrant_3)).to be false
-    @registrant_3.earn_permit
-    expect(@facility_1.administer_written_test(@registrant_3)).to be false
-    expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-  end
-end
+    describe '#administer_written_test' do 
+    xit 'written test only if facility_1 able' do 
+        expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+        expect(@registrant_1.permit?).to be true
+        expect(@facility_1.administer_written_test(@registrant_1)).to be false
+        expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+        @facility_1.add_service('Written Test')
+        expect(@facility_1.administer_written_test(@registrant_1)).to be true
+        expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
+
+    xit 'written test only for permit holders' do
+        @facility_1.add_service('Written Test')
+        expect(@registrant_2.age).to eq(16)
+        expect(@registrant_2.permit?).to be false
+        expect(@facility_1.administer_written_test(@registrant_2)).to be false
+        @registrant_2.earn_permit
+        expect(@facility_1.administer_written_test(@registrant_2)).to be true
+        expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
+    
+    xit 'no written tests for the very young' do 
+        @facility_1.add_service('Written Test')
+        expect(@registrant_3.age).to eq(15)
+        expect(@registrant_3.permit?).to be false
+        expect(@facility_1.administer_written_test(@registrant_3)).to be false
+        @registrant_3.earn_permit
+        expect(@facility_1.administer_written_test(@registrant_3)).to be false
+        expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+    end
+
+end 
