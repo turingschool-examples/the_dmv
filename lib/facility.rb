@@ -68,4 +68,20 @@ class Facility
       false
     end
   end
+
+  def create_facilities(co_dmv_office_locations)
+    co_dmvs = []
+    co_dmv_office_locations.each do |office|
+     
+      data = {
+      name: office[:dmv_office],
+      address: office[:address__1],
+      phone: office[:phone],
+      services: office[:servicees_p]
+      }
+      facility = Facility.new(data)
+      co_dmvs << facility
+    end
+    co_dmvs
+  end
 end

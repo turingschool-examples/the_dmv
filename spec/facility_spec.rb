@@ -208,4 +208,24 @@ RSpec.describe Facility do
         :license=>true, :renewed=>true})
     end
   end
+
+  describe '#co_dmv_facilities' do
+    it 'can initialize co data' do
+    co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+    co_dmv_facility = Facility.new
+
+    expect(co_dmv_facility).to be_a(Facility)
+  end
+
+    it 'can recieve data from CO' do
+      co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+      co_dmv_facility = Facility.new
+
+      result = co_dmv_facility.create_facilities(co_dmv_office_locations)
+
+      expect(result).to be_a(Array)
+      expect(result[0]).to be_a(Facility)
+      expect(result[0].name).to eq("DMV Tremont Branch")
+    end
+  end
 end
