@@ -12,7 +12,7 @@ RSpec.describe VehicleFactory do
     end
 
     describe '#create_vehicles' do
-      xit 'can create vehicles' do
+      it 'can create vehicles' do
         wa_ev_registrations = DmvDataService.new.wa_ev_registrations
         @factory.create_vehicles(wa_ev_registrations)
       
@@ -36,14 +36,14 @@ RSpec.describe VehicleFactory do
     end
 
     describe 'EV Registrations' do
-      xit 'can find the most popular make/model registered' do
+      it 'can find the most popular make/model registered' do
         wa_ev_registrations = DmvDataService.new.wa_ev_registrations
         @factory.create_vehicles(wa_ev_registrations)
 
         expect(@factory.most_popular_vehicle).to eq("NISSAN Leaf")
       end
 
-      xit 'can count the number of registered vehicles each model year' do
+      it 'can count the number of registered vehicles each model year' do
         wa_ev_registrations = DmvDataService.new.wa_ev_registrations
         @factory.create_vehicles(wa_ev_registrations)
 
