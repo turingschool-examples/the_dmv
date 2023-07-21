@@ -8,7 +8,7 @@ class Facility
     @address = attributes[:address]
     @phone = attributes[:phone]
     @hours = attributes[:hours]
-    @holidays = attributes[:holidays]
+    @holidays = attributes[:holidays] || nil
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
@@ -21,19 +21,21 @@ class Facility
   def register_vehicle(car)
     car.registration_date = Date.today.year
 
-    @collected_fees += case
-    when car.antique?
-      car.plate_type = :antique
-      25
-    when car.electric_vehicle?
-      car.plate_type = :ev
-      200
-    else
-      car.plate_type = :regular
-      100
-    end
+    if @services.include?("Vehicle Registration")
+      @collected_fees += case
+      when car.antique?
+        car.plate_type = :antique
+        25
+      when car.electric_vehicle?
+        car.plate_type = :ev
+        200
+      else
+        car.plate_type = :regular
+        100
+      end
 
-    @registered_vehicles << car
+      @registered_vehicles << car
+    end
   end
 
   def administer_written_test(registrant)

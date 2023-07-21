@@ -19,9 +19,9 @@ RSpec.describe Facility do
   describe '#initialize' do
     it 'can initialize' do
       expect(@facility).to be_an_instance_of(Facility)
-      expect(@facility.name).to eq('DMV Tremont Branch')
-      expect(@facility.address).to eq('2855 Tremont Place Suite 118 Denver CO 80205')
-      expect(@facility.phone).to eq('(720) 865-4600')
+      expect(@facility.name).to eq('Albany DMV Office')
+      expect(@facility.address).to eq('2242 Santiam Hwy SE Albany OR 97321')
+      expect(@facility.phone).to eq('541-967-2014')
       expect(@facility.services).to eq([])
 
       expect(@cruz).to be_an_instance_of(Vehicle)
@@ -53,6 +53,7 @@ RSpec.describe Facility do
     end
 
     it 'can register multiple vehicles and calculate fees' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@bolt)
       @facility_1.register_vehicle(@camaro)
