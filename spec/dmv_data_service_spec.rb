@@ -42,4 +42,10 @@ RSpec.describe DmvDataService do
       expect(@dds.mo_dmv_office_locations.size).to be_an(Integer)
     end
   end
+
+  describe '#ny_state_registration' do
+    it 'can load ny state registration' do
+      expect(@dds.ny_state_registration.size).to be_an(Integer)
+    end
+  end
 end

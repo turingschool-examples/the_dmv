@@ -22,4 +22,8 @@ class DmvDataService
   def mo_dmv_office_locations
     @mo_dmv_office_locations ||= load_data('https://data.mo.gov/resource/835g-7keg.json')
   end
+
+  def ny_state_registration
+    @ny_state_registration ||= load_data('https://data.ny.gov/resource/w4pv-hbkt.json')
+  end
 end
