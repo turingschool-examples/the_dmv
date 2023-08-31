@@ -14,7 +14,7 @@ RSpec.describe 'Registrant' do
   end
 
   describe 'Name' do
-    it 'checks registrants name' do
+    it 'checks registrant has a name' do
       expect(@registrant_1.name).to eq('Bruce')
       expect(@registrant_2.name).to eq('Penny')
     end
