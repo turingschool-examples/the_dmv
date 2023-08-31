@@ -23,6 +23,8 @@ RSpec.describe Registrant do
       expect(@registrant_1.permit).to eq(true)
       expect(@registrant_2.permit).to eq(false)
     end
+  end
+  describe '#earn_permit' do  
     it '#earn_permit changes permit status to true' do
       @registrant_2.earn_permit
       expect(@registrant_2.permit).to eq(true)
