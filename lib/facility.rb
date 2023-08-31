@@ -4,9 +4,10 @@ class Facility
     args.each do |k, v|
     instance_variable_set("@#{k}", v) unless v.nil?
     end
+    @services = []
   end
 
-  def add_services(service)
+  def add_service(service)
     @services << service
   end
 end
