@@ -25,7 +25,8 @@ RSpec.describe Registrant do
         it 'chnages the permit status to false'do 
           registrant = Registrant.new('Penny',15)
           expect(registrant.permit?).to be(false)
-          
+          registrant.earn_permit
+         
           
 
         end 
