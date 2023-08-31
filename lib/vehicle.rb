@@ -31,5 +31,7 @@ class Vehicle
     @registration_date = Date.today
     self.antique? ? @plate_type = :antique : @plate_type = :regular
     @plate_type = :ev if self.electric_vehicle?
+
+    return @plate_type
   end
 end
