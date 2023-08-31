@@ -8,6 +8,7 @@ class DmvDataService
   end
 
   def wa_ev_registrations
+    # ||= replaces variable if variable is not truthy
     @wa_ev_registrations ||= load_data('https://data.wa.gov/resource/rpr4-cgyd.json')
   end
 
