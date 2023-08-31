@@ -18,4 +18,8 @@ class Registrant
   def earn_permit
     @permit = true
   end
+
+  def pass_written_test
+    @license_data[:written] = true
+  end
 end
