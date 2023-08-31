@@ -1,4 +1,5 @@
-require 'spec_helper'
+require './spec/spec_helper'
+require './lib/facility'
 
 RSpec.describe Dmv do
   before(:each) do
