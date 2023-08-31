@@ -24,7 +24,7 @@ RSpec.describe Registrant do
   describe "#permit?" do
 
     it "has a permit if defined in #initialize" do
-    
+
       expect(@registrant_1.permit?).to be_truthy
     end
 
@@ -37,9 +37,10 @@ RSpec.describe Registrant do
   describe "#license_data" do
 
     it "stores license data values as false by default" do
-
+      #require "pry"; binding.pry
       expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      #require "pry"; binding.pry
     end
   end
 
