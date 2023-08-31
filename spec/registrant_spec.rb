@@ -26,7 +26,7 @@ RSpec.describe Registrant do
           registrant = Registrant.new('Penny',15)
           expect(registrant.permit?).to be(false)
           registrant.earn_permit
-          expect (registrant.permit?).to (true)
+          expect(registrant.permit?).to be(true)
           
 
         end 
