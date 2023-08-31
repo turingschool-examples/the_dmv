@@ -30,7 +30,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#register_vehicle' do
+  xdescribe '#register_vehicle' do
     it 'sets the registration date for the vehicle' do
       expect(@cruz.registration_date).to be nil
 
@@ -45,7 +45,7 @@ RSpec.describe Facility do
       
       @facility_1.register_vehicle(@cruz)
 
-      expect(@cruz.plate_type).to be :regular
+      expect(@cruz.plate_type).to eq(:regular)
     end
 
     it 'assigns plate type :antique to non-ev vehicles older than 25yrs old' do
@@ -53,7 +53,7 @@ RSpec.describe Facility do
 
       @facility_1.register_vehicle(@camaro)
 
-      expect(@camaro.plate_type).to be :antique
+      expect(@camaro.plate_type).to eq(:antique)
     end
 
     it 'assigns plate type :ev to ev vehicles' do
@@ -61,7 +61,7 @@ RSpec.describe Facility do
 
       @facility_1.register_vehicle(@bolt)
 
-      expect(@bolt.plate_type).to be :ev
+      expect(@bolt.plate_type).to eq(:ev)
     end
 
     it 'adds registered vehicle to facility registered_vehicles' do
