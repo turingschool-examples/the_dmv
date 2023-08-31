@@ -16,7 +16,6 @@ class Facility
   end
 
   def add_service(service)
-  def add_service(service)
     @services << service
   end
 
@@ -26,14 +25,14 @@ class Facility
       vehicle.plate_type = :ev
       @registered_vehicles << vehicle
       @collected_fees += 200
-    elsif vehicle.registration_date.year - vehicle.year < 25
-      vehicle.plate_type = :regular
-      @registered_vehicles << vehicle
-      @collected_fees += 100
-    else
+    elsif vehicle.antique?
       vehicle.plate_type = :antique
       @registered_vehicles << vehicle
       @collected_fees += 25
+    else
+      vehicle.plate_type = :regular
+      @registered_vehicles << vehicle
+      @collected_fees += 100
     end
   end
 end
