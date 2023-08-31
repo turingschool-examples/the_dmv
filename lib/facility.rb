@@ -55,4 +55,13 @@ class Facility
       return false
     end
   end
+
+  def renew_drivers_license(registrant)
+    if @services.include?("Renew License") && registrant.license?
+      registrant.renew_license
+      return true
+    else
+      return false
+    end
+  end
 end
