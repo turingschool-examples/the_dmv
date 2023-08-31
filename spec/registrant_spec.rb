@@ -34,13 +34,11 @@ RSpec.describe Registrant do
     expect(registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
   end
 
-  xit 'can earn a permit' do
+  it 'can earn a permit' do
     registrant_1 = Registrant.new('Bruce', 18, true )
     registrant_2 = Registrant.new('Penny', 15 )
     expect(registrant_1.earn_permit).to eq(false)
     #registrant_1 already has a permit so it should return false for being able to earn a permit
     expect(registrant_2.earn_permit).to eq(true)
   end
-
-
-  end
+end
