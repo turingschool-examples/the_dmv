@@ -1,10 +1,7 @@
 class Dmv
-  attr_reader :name, :address, :phone
-  def initialize(name, address, phone)
+  attr_reader :facilities
+  def initialize
     @facilities = []
-    @name = :name
-    @address = :address
-    @phone = :phone
   end
 
   def add_facility(facility)
@@ -12,7 +9,7 @@ class Dmv
   end
 
   def facilities_offering_service(service)
-    @facilities.find do |facility|
+    @facilities.find_all do |facility|
       facility.services.include?(service)
     end
   end
