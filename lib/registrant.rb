@@ -15,5 +15,8 @@ class Registrant
     def earn_permit
         @permit = true 
     end
- 
+    
+    def unearn_permit
+        @permit = false
+    end 
 end 
