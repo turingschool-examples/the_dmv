@@ -21,7 +21,7 @@ RSpec.describe 'Registrant' do
   end
 
   describe 'Age' do
-    it 'Checks registrants age' do
+    it 'Checks registrant has an age' do
       expect(@registrant_1.age).to eq(18)
       expect(@registrant_2.age).to eq(15)
     end
