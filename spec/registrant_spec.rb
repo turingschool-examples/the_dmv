@@ -34,42 +34,4 @@ RSpec.describe Registrant do
       expect(@registrant_2.permit?).to be true
     end
   end
-
-  describe '#administer_written_test' do
-    it 'completes :written portion of license_data if service is available' do
-      @facility_1.add_service('Written Test')
-      @facility_1.administer_written_test(@registrant_1)
-
-      expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
-    end
-
-    it 'will do nothing if service is not available' do 
-      @facility_1.administer_written_test(@registrant_1)
-
-      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-    end
-
-    it 'will do nothing if registrant is less than 16 years old' do
-      @facility_1.add_service('Written Test')
-      @registrant_3.earn_permit
-      @facility_1.administer_written_test(@registrant_3)
-
-      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-    end
-
-    it 'will still function if the registrant is exactly 16 years old' do
-      @facility_1.add_service('Written Test')
-      @registrant_2.earn_permit
-      @facility_1.administer_written_test(@registrant_2)
-
-      expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
-    end
-
-    it 'will only function if registrant has a permit' do
-      @facility_1.add_service('Written Test')
-      @facility_1.administer_written_test(@registrant_2)
-
-      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-    end
-  end
 end
