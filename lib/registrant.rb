@@ -30,4 +30,12 @@ class Registrant
   def pass_road_test
     @license_data[:license] = true
   end
+
+  def license?
+    @license_data[:license] == true
+  end
+
+  def renew_license
+    @license_data[:renewed] = true
+  end
 end
