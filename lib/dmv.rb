@@ -1,4 +1,4 @@
-require './lib/facility'
+# require './lib/facility'
 # require 'pry'
 
 class Dmv
