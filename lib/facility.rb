@@ -16,7 +16,7 @@ class Facility
 
   def register_vehicle(vehicle)
     if !@services.include?("Vehicle Registration")
-      break
+      return
     end
 
     @registered_vehicles << vehicle
@@ -32,6 +32,9 @@ class Facility
       vehicle.plate_type = :regular
       @collected_fees += 100
     end
+    
+    
+    
     # require'pry';binding.pry
   end
 end
