@@ -24,5 +24,12 @@ class Facility
   def register_vehicle(car_type)
     @registered_vehicles << car_type
     car_type.registration_date = Date.today
+      if car_type.antique? == true
+        car_type.plate_type = :antique
+      elsif car_type.engine == :ev
+        car_type.plate_type = :ev
+      else
+        car_type.plate_type = :regular
+      end
   end
 end
