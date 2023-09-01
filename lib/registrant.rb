@@ -7,7 +7,8 @@ class Registrant
   end
 
   def permit?
-    @permit
+    return true if @earn_permit == true || @permit == true
+    false
   end
 
   def license_data
@@ -15,5 +16,9 @@ class Registrant
       :written=>false, 
       :license=>false, 
       :renewed=>false}
+  end
+
+  def earn_permit
+    true
   end
 end
