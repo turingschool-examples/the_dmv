@@ -33,4 +33,14 @@ class Facility
       @collected_fees += 100
     end
   end
+
+  def administer_written_test(person)
+    if !@services.include?("Written Test")
+      return false
+    elsif person.age < 16 and person.permit? != true
+    else
+      person.license_data[:written] = true
+      return true
+    end
+  end
 end
