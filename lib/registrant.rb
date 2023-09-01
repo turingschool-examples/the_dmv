@@ -14,11 +14,7 @@ class Registrant
     @permit
   end
 
-  def earned_permit
+  def earn_permit
     @permit = true
   end
 end
-
-r1 = Registrant.new('Bruce', 18, true )
-r2 = Registrant.new('Penny', 15 )
-pry.binding

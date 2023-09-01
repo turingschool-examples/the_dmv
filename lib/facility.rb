@@ -10,6 +10,7 @@ class Facility
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
+    @plate_type = nil
   end
 
   def add_service(service)
@@ -17,7 +18,19 @@ class Facility
   end
 
   def register_vehicle(make)
-    @registration_date
     Date.today
+    # Set @plate_type!!
+  end
+
+  def administer_written_test(registrant)
+    if @services.include?('Written Test') && registrant.permit? && registrant.age >= 16
+      registrant.license_data[:written] = true
+    end
+  end
+
+  def administer_road_test(registrant)
+    return false if !administer_written_test(registrant)
+    registrant.license_data[:license] = true
+    return true
   end
 end
