@@ -44,7 +44,7 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles.count).to eq(3)
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.services).to eq([])
-      @facility_2.register_vehicle(bolt)
+      @facility_2.register_vehicle(@bolt)
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.services).to eq([])
       expect(@facility_2.collected_fees).to eq(0)
