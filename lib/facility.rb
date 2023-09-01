@@ -25,7 +25,7 @@ class Facility
     if Date.today.year - vehicle.year >= 25
       vehicle.plate_type = :antique
       @collected_fees += 25
-    elsif vehicle.electric_vehicle? == true
+    elsif vehicle.electric_vehicle?
       vehicle.plate_type = :ev
       @collected_fees += 200
     else
