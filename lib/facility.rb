@@ -55,11 +55,28 @@ class Facility
   end
 # Administer a written test
   # A written test can only be administered to registrants with a permit and who are at least 16 years of age
-  def administer_road_test
+  def administer_road_test(registrant)
+    if @services.include?('Road Test') == false
+      return false
+    elsif 
+      registrant.license_data[:written] == true
+      registrant.license_data[:license] = true
+      return true
+    else
+      false
+    end
   end
   # Administer a road test
   # A road test can only be administered to registrants who have passed the written test
   # For simplicity’s sake, Registrants who qualify for the road test automatically earn a license
+ 
+  def renew_drivers_license
+    if registrant.license_data[:license] == true
+      registrant.license_data[:renewed] = true
+    else
+      false
+    end
+  end
   # Renew a driver’s license
   # A license can only be renewed if the registrant has already passed the road test and earned a license
 end
