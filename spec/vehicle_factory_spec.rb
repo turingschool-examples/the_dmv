@@ -16,7 +16,8 @@ RSpec.describe VehicleFactory do
     
 
     factory.create_vehicles(wa_ev_registrations)
-    require'pry';binding.pry
-    # expect(factory.create_vehicles(wa_ev_registrations)).to eq(factory.off_the_lot)
+    # require'pry';binding.pry
+    expect(factory.off_the_lot[0]).to be_an_instance_of Vehicle
+
   end
 end
