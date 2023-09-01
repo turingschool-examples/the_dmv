@@ -37,8 +37,8 @@ RSpec.describe Facility do
   describe '#register_vehicle' do
     it 'sets the registration date for the vehicle if service is available' do
       expect(@cruz.registration_date).to be nil
+      
       @facility_1.add_service('Vehicle Registration')
-
       @facility_1.register_vehicle(@cruz)
 
       expect(@cruz.registration_date).to be_an_instance_of(Date)
@@ -55,7 +55,8 @@ RSpec.describe Facility do
 
     it 'assigns plate type :regular to non-ev cars that are less than 25yrs old' do
       expect(@cruz.plate_type).to be nil
-      
+
+      @facility_1.add_service('Vehicle Registration')      
       @facility_1.register_vehicle(@cruz)
 
       expect(@cruz.plate_type).to eq(:regular)
@@ -64,6 +65,7 @@ RSpec.describe Facility do
     it 'assigns plate type :antique to non-ev vehicles older than 25yrs old' do
       expect(@camaro.plate_type).to be nil
 
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@camaro)
 
       expect(@camaro.plate_type).to eq(:antique)
@@ -71,6 +73,7 @@ RSpec.describe Facility do
 
     it 'assigns plate type :ev to ev vehicles' do
       expect(@bolt.plate_type).to be nil
+      @facility_1.add_service('Vehicle Registration')
 
       @facility_1.register_vehicle(@bolt)
 
@@ -80,6 +83,7 @@ RSpec.describe Facility do
     it 'adds registered vehicle to facility registered_vehicles' do
       expect(@facility_1.registered_vehicles).to eq([])
 
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
 
       expect(@facility_1.registered_vehicles).to eq([@cruz])
@@ -88,7 +92,8 @@ RSpec.describe Facility do
 
     it 'collects $100 in fees for registration with :regular plates' do
       expect(@facility_1.collected_fees).to eq(0)
-
+      
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
 
       expect(@facility_1.collected_fees).to eq(100)
@@ -98,6 +103,7 @@ RSpec.describe Facility do
     it 'collects $25 in fees for registration with :antique plates' do
       expect(@facility_1.collected_fees).to eq(0)
 
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@camaro)
 
       expect(@facility_1.collected_fees).to eq(25)
@@ -107,6 +113,7 @@ RSpec.describe Facility do
     it 'collects $200 in fees for registration with :ev plates' do
       expect(@facility_1.collected_fees).to eq(0)
 
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@bolt)
 
       expect(@facility_1.collected_fees).to eq(200)
