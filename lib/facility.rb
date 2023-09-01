@@ -22,11 +22,12 @@ class Facility
   end
 
   def administer_road_test(registrant)
-    if @services.include?('Road Test')
+    if @services.include?('Road Test') && registrant.license_data[:written] = true
       registrant.license_data[:license] = true
     else
     end
   end
+
   def register_vehicle(vehicle)
     if @services.include?('Vehicle Registration')
       add_registration(vehicle)
@@ -35,12 +36,12 @@ class Facility
   end
 
   def renew_drivers_license(registrant)
-    if @services.include?('Renew License')
+    if @services.include?('Renew License') && registrant.license_data[:license] = true
       registrant.license_data[:renewed] = true
     else
     end
   end
-  
+
   def add_registration(vehicle)
     @registered_vehicles << vehicle
     if vehicle.antique?
