@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative 'spec_helper'
 
 RSpec.describe Dmv do
   before(:each) do
@@ -38,6 +38,25 @@ RSpec.describe Dmv do
       @dmv.add_facility(@facility_3)
 
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
+    end
+  end
+
+  describe '#parse_facilities' do
+    it 'should create Facility objects and add them to its @facilities' do
+      dds = DmvDataService.new
+      dmv_co = Dmv.new
+      dmv_ny = Dmv.new
+      dmv_mo = Dmv.new
+      co_data = dds.co_dmv_office_locations
+      ny_data = dds.ny_dmv_office_locations
+      mo_data = dds.mo_dmv_office_locations
+
+      dmv_co.parse_facilities(co_data)
+      expect(dmv_co.facilities[0].name).to eq "DMV Tremont Branch"
+      dmv_ny.parse_facilities(ny_data)
+      expect(dmv_ny.facilities[0].name).to eq "EVANS"
+      dmv_mo.parse_facilities(mo_data)
+      expect(dmv_mo.facilities[0].name).to eq "OAKVILLE"
     end
   end
 end
