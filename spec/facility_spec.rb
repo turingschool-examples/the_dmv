@@ -51,17 +51,17 @@ RSpec.describe Facility do
 
     end
 
-    xit 'tracks collected fees' do
-      @facility.add_service('Vehicle Registration')
-      @facility.register_vehicle(@cruz)
-      expect(@facility.collected_fees).to eq(100)
+    it 'tracks collected fees' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.collected_fees).to eq(100)
       @facility_1.register_vehicle(@camaro)
-      expect(@facility.collected_fees).to eq(125)
-      @facility.register_vehicle(@bolt)
-      expect(@facility.collected_fees).to eq(325)
+      expect(@facility_1.collected_fees).to eq(125)
+      @facility_1.register_vehicle(@bolt)
+      expect(@facility_1.collected_fees).to eq(325)
     end
 
-    xit 'stores registered vehicles' do
+    it 'stores registered vehicles' do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
@@ -70,12 +70,12 @@ RSpec.describe Facility do
       expect(@facility_1.instance_variable_get(:@registered_vehicles)).to all be_a(Vehicle)
     end
 #upon successful registration
-    xit 'assigns plate_type to vehicles' do
+    it 'assigns plate_type to vehicles' do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
-      expect(@cruz.plate_type).to eq(:ice)
+      expect(@cruz.plate_type).to eq(:regular)
       expect(@camaro.plate_type).to eq(:antique)
       expect(@bolt.plate_type).to eq(:ev)
     end
