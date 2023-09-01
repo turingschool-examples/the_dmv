@@ -26,12 +26,21 @@ RSpec.describe Facility do
   end
 
   describe '#register_vehicle' do
-    it can 'track fees'
-    @facility_1.register_vehicle(cruz)
-    expect(@facility_1.collected_fees).to eq(100)
-    @facility_1.register_vehicle(camaro)
-    expect(@facility_1.collected_fees).to eq(125)
-    @facility_1.register_vehicle(bolt)
-    expect(@facility_1.collected_fees).to eq(325)
+    it can 'track fees' do
+      @facility_1.register_vehicle(cruz)
+      expect(@facility_1.collected_fees).to eq(100)
+      @facility_1.register_vehicle(camaro)
+      expect(@facility_1.collected_fees).to eq(125)
+      @facility_1.register_vehicle(bolt)
+      expect(@facility_1.collected_fees).to eq(325)
+    end
+
+    it can 'store registered vehicles' do
+      @facility_1.register_vehicle(cruz)
+      @facility_1.register_vehicle(camaro)
+      @facility_1.register_vehicle(bolt)
+      expect(@facility_1.instance_variable_get(:@registered_vehicles).length).to eq(3)
+      expect(@facility_1.instance_variable_get(:@registered_vehicles)).to all be_a(Vehicle)
+    end
   end
 end
