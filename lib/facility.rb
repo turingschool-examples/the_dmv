@@ -14,6 +14,8 @@ class Facility
   end
 
   def register_vehicle(make)
-    if @facility.
+    if @facility.services == true
+      @registered_vehicles << vehicle_details
+    end
   end
 end

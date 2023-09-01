@@ -26,7 +26,13 @@ RSpec.describe Facility do
   end
 
     describe '#Register Vehicle' do
-      it 'starts with no vehicles' do
+      before(:each) do 
+        @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+        @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+        @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+      end
+      
+        it 'starts with no vehicles' do
         expect(@facility_1.registered_vehicles).to eq([])
       end
 
@@ -56,24 +62,24 @@ RSpec.describe Facility do
         expect(@bolt.plate_type).to eq(:ev)
       end
 
-        it 'collects a fee' do
-          expect(@facility_1.collected_fees).to eq(0)
-          @facility_1.register_vehicle(@cruz)
-          expect(@facility_1.collected_fees).to eq(100)
-          @facility_1.register_vehicle(@camaro)
-          expect(@facility_1.collected_fees).to eq(125)
-          @facility_1.register_vehicle(@bolt)
-          expect(@facility_1.collected_fees).to eq(325)
-        end
-
-        it 'Check facility_2' do
-          facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
-          expect(facility_2.registered_vehicles).to eq([])
-          expect(facility_2.services).to eq([])
-          expect(facility_2.register_vehicle(bolt)).to eq(nil)
-          expect(facility_2.registered_vehicles).to eq([])
-          expect(facility_2.collected_fees).to eq(0)
-        end
+      it 'collects a fee' do
+        expect(@facility_1.collected_fees).to eq(0)
+        @facility_1.register_vehicle(@cruz)
+        expect(@facility_1.collected_fees).to eq(100)
+        @facility_1.register_vehicle(@camaro)
+        expect(@facility_1.collected_fees).to eq(125)
+        @facility_1.register_vehicle(@bolt)
+        expect(@facility_1.collected_fees).to eq(325)
       end
+
+      it 'Check facility_2' do
+        facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
+        expect(facility_2.registered_vehicles).to eq([])
+        expect(facility_2.services).to eq([])
+        expect(facility_2.register_vehicle(bolt)).to eq(nil)
+        expect(facility_2.registered_vehicles).to eq([])
+        expect(facility_2.collected_fees).to eq(0)
+      end
+    end
 end
 
