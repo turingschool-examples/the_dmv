@@ -26,11 +26,12 @@ class DataQuery
     return self.quit if input == "q:"
 
     args = input.split(' ').map(&:downcase)
-    return false unless args[0].match?(/[1-3]/)
-    return false unless args[1].match?(/wa|ny/i)
+    return bad_input(args[0]) unless args[0].match?(/[1-3]/)
+    return bad_input(args[1].upcase) unless args[1].match?(/wa|ny/i)
 
     case args[0].to_i
     when 1
+      self.query_summary(arg[1])
       return true
     when 2
       return true
@@ -41,11 +42,22 @@ class DataQuery
     end
   end
 
+  def bad_input(input)
+    puts "#{input} is not a valid option; please try again"
+    false
+  end
+
+  def query_summary(state)
+
+  end
+
   def quit
     @live = false
     puts "Goodbye"
     nil
   end
+
+
 
   PROMPT = "
   Query WA or NY vehicle registrations: \n

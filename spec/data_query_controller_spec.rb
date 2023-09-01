@@ -36,6 +36,15 @@ RSpec.describe DataQuery do
     end
   end
 
+  describe '#bad_input' do
+    it 'prompts with bad input feedback' do
+      allow($stdin).to receive(:gets) { "4 NY gas" }
+      expect(@dq.parse_input).to eq false
+      allow($stdin).to receive(:gets) { "3 AZ gas" }
+      expect(@dq.parse_input).to eq false
+    end
+  end
+
   describe '#query_handler' do
     it 'prompts & parses' do
       allow($stdin).to receive(:gets) { "1 NY" }
@@ -49,7 +58,7 @@ RSpec.describe DataQuery do
 
   describe '#query_summary' do
     it 'provided summary data for given state' do
-      
+
     end
   end
 end
