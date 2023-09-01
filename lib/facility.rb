@@ -37,7 +37,8 @@ class Facility
   def administer_written_test(person)
     if !@services.include?("Written Test")
       return false
-    elsif person.age < 16 and person.permit? != true
+    elsif person.age <= 15 and person.permit? == false # double negative blew my mind
+      return false
     else
       person.license_data[:written] = true
       return true
