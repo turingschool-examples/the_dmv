@@ -30,7 +30,7 @@ RSpec.describe Facility do
 
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       @facility.register_vehicle(cruz)
-      expect(@facility.registered_vehicles).to_not be nil
+      expect(@facility.registered_vehicles).to eq([cruz])
     end
   end
 
@@ -56,7 +56,7 @@ RSpec.describe Facility do
 
       bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
       
-      expect(facility_2.register_vehicle(bolt)).to eq(nil)
+      expect(facility_2.register_vehicle(bolt)).to eq([])
       expect(facility_2.registered_vehicles).to eq([])
       expect(facility_2.collected_fees).to eq(0)
     end
