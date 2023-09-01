@@ -1,4 +1,4 @@
-# require './lib/vehicle'
+require './lib/vehicle'
 require 'date'
 
 class Facility
@@ -21,10 +21,23 @@ class Facility
 
    def register_vehicle(vehicle)
     if @services.include?("Vehicle Registration")
-      @registered_vehicles << vehicle
-      vehicle.registration_date = Date.today
+      if vehicle.registration_date == nil
+        @registered_vehicles << vehicle
+        vehicle.registration_date = Date.today
+        if (vehicle.registration_date.year - vehicle.year) >= 25
+          vehicle.plate_type = :antique
+        elsif vehicle.engine == :ev
+          vehicle.plate_type = :ev
+        else
+          vehicle.plate_type = :regular
+        end
+        vehicle.registration_date
+      else
+        "Oops! Looks like this vehicle has already been registered on #{vehicle.registration_date}."
+      end
+    else
+    "Sorry, this location does not service vehicle registrations."
     end
-      # self.registered_vehicles[0].registration_date = Times.now
    end
 
 
@@ -32,4 +45,4 @@ class Facility
 
 end
 
-# require 'pry'; binding.pry
+require 'pry'; binding.pry
