@@ -35,13 +35,22 @@ RSpec.describe Facility do
   end
 
   describe '#register_vehicle' do
-    it 'sets the registration date for the vehicle' do
+    it 'sets the registration date for the vehicle if service is available' do
       expect(@cruz.registration_date).to be nil
+      @facility_1.add_service('Vehicle Registration')
 
       @facility_1.register_vehicle(@cruz)
 
       expect(@cruz.registration_date).to be_an_instance_of(Date)
       expect(@cruz.registration_date).to eq(Date.today)
+    end
+
+    it 'will not register if service is not available' do
+      expect(@cruz.registration_date).to be nil
+
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@cruz.registration_date).to be nil
     end
 
     it 'assigns plate type :regular to non-ev cars that are less than 25yrs old' do
