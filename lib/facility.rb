@@ -10,16 +10,19 @@ class Facility
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
-    @plate_type = nil
   end
 
   def add_service(service)
     @services << service
   end
 
-  def register_vehicle(make)
-    Date.today
-    # Set @plate_type!!
+  def register_vehicle(vehicle)
+    vehicle.registration_date = Date.today
+    if vehicle.antique? 
+      collected_fees += 25
+      vehicle.plate_type = :ev
+    elsif vehicle.ev
+    end
   end
 
   def administer_written_test(registrant)
