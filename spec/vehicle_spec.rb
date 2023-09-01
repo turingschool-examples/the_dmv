@@ -37,8 +37,9 @@ RSpec.describe Vehicle do
   describe '#registration date' do
     it 'can add a registration date' do
       expect(@cruz.registration_date).to be nil
-
+      
       facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      facility_1.add_service("Vehicle Registration")
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       facility_1.register_vehicle(cruz)
       expect(cruz.registration_date).to_not be nil

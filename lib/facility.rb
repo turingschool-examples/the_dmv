@@ -1,7 +1,7 @@
 require 'date'
 
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
+  attr_accessor :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
   def initialize(facility_info)
     @name = facility_info[:name]
@@ -18,8 +18,8 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-   
-    return if @services.include?(["Vehicle Registration"])
+    return nil if !@services.include?("Vehicle Registration")
+    if @services.include?("Vehicle Registration")
       @registered_vehicles << vehicle
       vehicle.registration_date = Date.today
       if vehicle.plate_type == :antique
@@ -29,7 +29,7 @@ class Facility
         elsif vehicle.plate_type == :regular
         @collected_fees += 100
       end
-    
+    end
     @registered_vehicles
   end
 
@@ -37,5 +37,13 @@ class Facility
     @collected_fees
   end
 
+  def administer_written_test(registrant)
+    if @services.include?("Written Test") && registrant.permit? == true && registrant.age >= 16
+      registrant.license_data[:written] = true
+      true
+    else
+      false
+    end
+  end
   
 end

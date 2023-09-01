@@ -26,18 +26,24 @@ RSpec.describe Facility do
 
   describe '#register vehicle' do
     it 'can register a vehicle' do
+      @facility.add_service("Vehicle Registration")
+
       expect(@facility.registered_vehicles).to eq([])
 
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       @facility.register_vehicle(cruz)
+      
       expect(@facility.registered_vehicles).to eq([cruz])
     end
   end
 
   describe '#collected fees' do
     it 'can collect fees after registering' do
+      @facility.add_service("Vehicle Registration")
+
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       @facility.register_vehicle(cruz)
+      
       expect(@facility.collected_fees).to eq(100)
 
       bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
@@ -56,20 +62,21 @@ RSpec.describe Facility do
 
       bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
       
-      expect(facility_2.register_vehicle(bolt)).to eq([])
+      expect(facility_2.register_vehicle(bolt)).to be nil
       expect(facility_2.registered_vehicles).to eq([])
       expect(facility_2.collected_fees).to eq(0)
     end
   end
 
   describe '#administer_written_test' do
-    xit 'can administer a written test' do
+    it 'can administer a written test' do
       registrant_1 = Registrant.new('Bruce', 18, true )
       facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
       expect(facility_1.administer_written_test(registrant_1)).to be false
 
       facility_1.add_service("Written Test")
-      expect(facility_1)
+      expect(facility_1.administer_written_test(registrant_1)).to be true
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
   end
 end
