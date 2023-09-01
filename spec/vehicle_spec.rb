@@ -34,16 +34,16 @@ RSpec.describe Vehicle do
     end
   end
 
-  # describe '#registration date' do
-  #   it 'can add a registration date' do
-  #     expect(@cruz.registration_date).to be nil
+  describe '#registration date' do
+    it 'can add a registration date' do
+      expect(@cruz.registration_date).to be nil
 
-  #     @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
-  #     cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-  #     @facility.register_vehicle(cruz)
-  #     expect(@cruz.registration_date).to be nil
-  #   end
-  # end
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      facility_1.register_vehicle(cruz)
+      expect(cruz.registration_date).to_not be nil
+    end
+  end
 
   describe '#plate type' do
     it 'can distinguish plate type' do
