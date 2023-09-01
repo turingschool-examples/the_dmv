@@ -71,12 +71,45 @@ RSpec.describe Facility do
   describe '#administer_written_test' do
     it 'can administer a written test' do
       registrant_1 = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Penny', 16 )
+      registrant_3 = Registrant.new('Tucker', 15 )
       facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
       expect(facility_1.administer_written_test(registrant_1)).to be false
 
       facility_1.add_service("Written Test")
       expect(facility_1.administer_written_test(registrant_1)).to be true
       expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+      expect(facility_1.administer_written_test(registrant_2)).to be false
+      registrant_2.earn_permit
+      expect(facility_1.administer_written_test(registrant_2)).to be true
+      expect(facility_1.administer_written_test(registrant_3)).to be false
+      registrant_3.earn_permit
+      expect(facility_1.administer_written_test(registrant_3)).to be false
+    end
+  end
+
+  describe '#administer_road_test' do
+    it 'can administer a road test' do
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Penny', 16 )
+      registrant_3 = Registrant.new('Tucker', 15 )
+      registrant_2.earn_permit
+      registrant_3.earn_permit
+      
+      expect(facility_1.administer_road_test(registrant_3)).to be false
+      expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(facility_1.administer_road_test(registrant_1)).to be false
+
+      facility_1.add_service("Written Test")
+      facility_1.add_service("Road Test")
+      
+      facility_1.administer_written_test(registrant_1)
+      expect(facility_1.administer_road_test(registrant_1)).to be true
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+      facility_1.administer_written_test(registrant_2)
+      expect(facility_1.administer_road_test(registrant_2)).to be true
+      expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
     end
   end
 end
