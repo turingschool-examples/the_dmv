@@ -30,9 +30,14 @@ RSpec.describe Facility do
   end
 
   describe '#register_vehicle' do
-    it 'regects registration if service is not offered' do
-      expect(@facility_1.register_vehicle).to eq(nil)
-
+    it 'registers vehicles if capable' do
+      expect(@facility_1.register_vehicle(@bolt)).to eq(nil)
+      @facility_1.add_service("Vehicle Registration")
+      @facility_1.register_vehicle(@bolt)
+      expect(@facility_1.collected_fees).to eq(200)
+      expect(@facility_1.registered_vehicles(model)).to include("Bolt")
+      expect(@bolt.plate_type).to eq('ev')
+      expect(@bolt.registration_date).to eq(Date.today)
     end
 
     xit 'tracks collected fees' do

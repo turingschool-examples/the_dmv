@@ -14,19 +14,27 @@ class Facility
     @services << service
   end
 
-  def register_vehicle
+  def register_vehicle(vehicle)
    if @services.include?('Vehicle Registration')
-    #set veh registration
-    #then, check engine type
+      vehicle.registration_date = Date.today
+      if vehicle.electric_vehicle? == true
+        @plate_type = :ev
+        @collected_fees += 200
+      elsif vehicle.antique? == true
+        @plate_type = "antique"
+        @collected_fees += 25
+      else
+        @plate_type = "regular"
+        @collected_fees += 100
+      end
+    @registered_vehicles << vehicle
+    end
+
+    #set veh registration date
+      #then, check engine type
       #set plate
       #set fee
       #add to registered vehicles
-
-
-    # if !@services.include(register_vehicle)
-    #   return nil
-    # else "okay"
-    # end
   end
 end
-end
+
