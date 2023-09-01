@@ -1,3 +1,4 @@
+require './lib/facility'
 require 'spec_helper'
 
 RSpec.describe Facility do

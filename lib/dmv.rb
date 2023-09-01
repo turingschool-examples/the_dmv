@@ -1,3 +1,6 @@
+require './lib/facility'
+require './lib/vehicle'
+
 class Dmv
 
 attr_reader :facilities
