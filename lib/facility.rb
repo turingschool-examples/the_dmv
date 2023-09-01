@@ -33,4 +33,28 @@ class Facility
       @collected_fees += 100
     end
   end
+
+  def administer_written_test(person)
+    if person.age >= 16 && person.permit? && @services.include?("Written Test")
+      person.license_data[:written] = true
+    else
+      false
+    end
+  end
+
+  def administer_road_rest(person)
+    if person.license_data[:written] == true && @services.include?("Road Test")
+      person.license_data[:license] = true
+    else
+      false
+    end
+  end
+
+  def renew_drivers_license(person)
+    if person.license_data[:license] == true && @services.include?("Renew License")
+      person.license_data[:renewed] = true
+    else
+      false
+    end
+  end
 end
