@@ -7,10 +7,10 @@ RSpec.describe Facility do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    @facility_1.add_service('Vehicle Registration')
   end
   
   it 'can add service' do
-    @facility_1.add_service('Vehicle Registration')
     expect(@facility_1.services).to eq(['Vehicle Registration'])
    end
 
@@ -24,15 +24,20 @@ RSpec.describe Facility do
 
   it 'can register a cruz' do
     @facility_1.register_vehicle(@cruz)
-    expect(@registered_vehicles).to eq([@cruz])
-    expect(@cruz.registration_date).to eq(Time.now)
+    #require 'pry';binding.pry
+    expect(@facility_1.registered_vehicles).to eq([@cruz])
+    expect(@cruz.registration_date).to eq(2023)
     expect(@cruz.plate_type).to eq(:regular)
-    expect(@facility_1.registered_vehicles).to eq(@cruz)
     expect(@facility_1.collected_fees).to eq(100)
   end
 
   xit 'can register a Camaro' do
-
+    @facility_1.register_vehicle(@camaro)
+    #require 'pry';binding.pry
+    expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro])
+    expect(@camaro.registration_date).to eq(2023)
+    expect(@camaro.plate_type).to eq(:antique)
+    expect(@facility_1.collected_fees).to eq(125)
   end
 end
 #require 'pry';binding.pry
