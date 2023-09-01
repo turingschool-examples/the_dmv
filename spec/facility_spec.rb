@@ -37,7 +37,7 @@ RSpec.describe Facility do
   describe '#register_vehicle' do
     it 'sets the registration date for the vehicle if service is available' do
       expect(@cruz.registration_date).to be nil
-      
+
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
 
@@ -73,8 +73,8 @@ RSpec.describe Facility do
 
     it 'assigns plate type :ev to ev vehicles' do
       expect(@bolt.plate_type).to be nil
+      
       @facility_1.add_service('Vehicle Registration')
-
       @facility_1.register_vehicle(@bolt)
 
       expect(@bolt.plate_type).to eq(:ev)
