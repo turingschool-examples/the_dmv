@@ -1,9 +1,12 @@
 require 'spec_helper'
+require './lib/facility'
+require './lib/vehicle'
 
 RSpec.describe Facility do
   before(:each) do
     @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
   end
+
   describe '#initialize' do
     it 'can initialize' do
       expect(@facility).to be_an_instance_of(Facility)
@@ -21,6 +24,18 @@ RSpec.describe Facility do
       @facility.add_service('Renew Drivers License')
       @facility.add_service('Vehicle Registration')
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+    end
+  end
+
+  describe '#check F1 vehicles' do
+    it 'checks registered_vehicles for facility_1' do
+      expect(@facility.registered_vehicles).to eq([])
+    end
+  end
+
+  describe '#check F1 collected fees' do
+    it 'checks collected fees for facility_1' do
+      expect(@facility.collected_fees).to eq(0)
     end
   end
 end
