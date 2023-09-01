@@ -72,6 +72,23 @@ end
       expect(@facility_1.collected_fees).to eq(100)
     end
   end
+
+  describe '#register camaro and check info' do
+    it 'registers camaro and checks info' do
+      expect(@camaro).to be_an_instance_of(Vehicle)
+      @facility_1.register_vehicle(@camaro)
+      expect(@camaro.registration_date).to eq(Date.today)
+      expect(@camaro.plate_type).to eq(:antique)
+      #require the facility to have the service you're performing
+    end
+  end
+
+  describe '#F1 collected fees for camaro' do
+    it 'checks collected fees in facility_1' do
+      @facility_1.register_vehicle(@camaro)
+      expect(@facility_1.collected_fees).to eq(100)
+    end
+  end
 end
 
 #use today and year methods???
