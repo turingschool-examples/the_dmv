@@ -18,13 +18,13 @@ class Facility
    if @services.include?('Vehicle Registration')
       vehicle.registration_date = Date.today
       if vehicle.electric_vehicle? == true
-        @plate_type = :ev
+        vehicle.plate_type = :ev
         @collected_fees += 200
       elsif vehicle.antique? == true
-        @plate_type = "antique"
+        vehicle.plate_type = :antique
         @collected_fees += 25
       else
-        @plate_type = "regular"
+        vehicle.plate_type = :regular
         @collected_fees += 100
       end
     @registered_vehicles << vehicle

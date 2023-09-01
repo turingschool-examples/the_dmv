@@ -33,11 +33,22 @@ RSpec.describe Facility do
     it 'registers vehicles if capable' do
       expect(@facility_1.register_vehicle(@bolt)).to eq(nil)
       @facility_1.add_service("Vehicle Registration")
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.collected_fees).to eq(100)
+      expect(@facility_1.instance_variable_get(:@registered_vehicles).length).to eq(1)
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@cruz.registration_date).to eq(Date.today)
+      @facility_1.register_vehicle(@camaro)
+      expect(@facility_1.collected_fees).to eq(125)
+      expect(@facility_1.instance_variable_get(:@registered_vehicles).length).to eq(2)
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@camaro.registration_date).to eq(Date.today)
       @facility_1.register_vehicle(@bolt)
-      expect(@facility_1.collected_fees).to eq(200)
-      expect(@facility_1.registered_vehicles(model)).to include("Bolt")
-      expect(@bolt.plate_type).to eq('ev')
+      expect(@facility_1.collected_fees).to eq(325)
+      expect(@facility_1.instance_variable_get(:@registered_vehicles).length).to eq(3)
+      expect(@bolt.plate_type).to eq(:ev)
       expect(@bolt.registration_date).to eq(Date.today)
+
     end
 
     xit 'tracks collected fees' do
@@ -60,13 +71,13 @@ RSpec.describe Facility do
     end
 #upon successful registration
     xit 'assigns plate_type to vehicles' do
-      @facility.add_service('Vehicle Registration')
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
-      expect(@cruz.plate_type).to eq('ice')
-      expect(@camaro.plate_type).to eq('antique')
-      expect(@bolt.plate_type).to eq('ev')
+      expect(@cruz.plate_type).to eq(:ice)
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@bolt.plate_type).to eq(:ev)
     end
   end
 end
