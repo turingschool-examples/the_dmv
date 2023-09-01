@@ -1,4 +1,4 @@
-req 'spec_helper'
+require 'spec_helper'
 
 RSpec.describe Registrant do
   let(:registrant_1) { Registrant.new('Bruce', 18, true)}
@@ -9,7 +9,7 @@ RSpec.describe Registrant do
       expect(registrant_1).to be_instance_of(Registrant)
       expect(registrant_1.name).to eq('Bruce')
       expect(registrant_1.age).to eq(18)
-      expect(registrant_1.permit).to eq(true)
+      expect(registrant_1.permit?).to eq(true)
       expect(registrant_1.license_data).to be_instance_of(Hash)
     end
   end
@@ -30,6 +30,11 @@ RSpec.describe Registrant do
       registrant_2.earn_permit
       expect(registrant_2.permit?).to eq(true)
     end
-  end
 
+    it 'will not change the value of permit to false' do
+      expect(registrant_1.permit?).to eq(true)
+      registrant_1.earn_permit
+      expect(registrant_1.permit?).to eq(true)
+    end
+  end
 end
