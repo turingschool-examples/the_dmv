@@ -1,3 +1,4 @@
+require 'rspec'
 require 'pry'
 require './lib/dmv'
 require './lib/facility'
