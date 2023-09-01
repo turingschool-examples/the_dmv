@@ -119,7 +119,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#getting a drivers license' do
+  describe '#starting written tests' do
     it 'reg_1 data prep' do
       registrant_1 = Registrant.new('Bruce', 18, true )
       registrant_2 = Registrant.new('Penny', 16 )
@@ -185,7 +185,31 @@ RSpec.describe Facility do
 
   describe '#registrant_3 license data' do
     it 'written test' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Penny', 16 )
+      registrant_3 = Registrant.new('Tucker', 15 )
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
       
+      facility_1.add_service("Written Test")
+
+      expect(registrant_3.age).to eq(15)
+      expect(registrant_3.permit?).to be false
+      expect(facility_1.administer_written_test(registrant_3)).to be false
+    end
+
+    it 'too young with permit' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Penny', 16 )
+      registrant_3 = Registrant.new('Tucker', 15 )
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
+      
+      facility_1.add_service("Written Test")
+      registrant_3.earn_permit
+
+      expect(facility_1.administer_written_test(registrant_3)).to be false
+      expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
 end
