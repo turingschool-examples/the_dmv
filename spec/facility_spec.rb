@@ -33,14 +33,54 @@ RSpec.describe Facility do
       @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )  
     end
 
-    describe '#add_service' do
-      it 'adds a service provided' do
-        require "pry"; binding.pry
+    describe '#register_vehicle' do
+      before(:each) do
         @facility_1.add_service('Vehicle Registration')
-
-        expect(@facility_1.services).to eq(['Vehicle Registration']) 
       end
 
+      it 'registers vehicle' do
+
+        expect(@cruz.registration_date).to eq(nil)
+        expect(@facility_1.registered_vehicles).to eq([])
+        expect(@facility_1.collected_fees).to eq(0)
+       
+        @facility_1.register_vehicle(@cruz)
+
+        expect(@cruz.registration_date).to eq('date')
+        expect(@cruz.plate_type).to eq(:regular)
+        expect(@facility_1.registered_vehicles).to eq(@cruz)
+        expect(@facility_1.collected_fees).to eq(100)
+      end
+
+      it 'registers more vehicles' do
+        @facility_1.register_vehicle(@cruz)
+        @facility_1.register_vehicle(@camaro)
+
+        expect(camaro.registration_date).to eq('date')
+        expect(camaro.plate_type).to eq(:antique)
+
+        @facility_1.register_vehicle(@bolt)
+
+        expect(@bolt.registration_date).to eq('date')
+        expect(@bolt.plate_type).to eq(:ev)
+        expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+      end
+
+      it 'collects fees for each registered vehicle' do
+        @facility_1.register_vehicle(@cruz)
+        @facility_1.register_vehicle(@camaro)
+        @facility_1.register_vehicle(@bolt)
+
+        expect(@facility_1.collected_fees).to eq(325)
+      end
+
+      it 'will not register vehicle if no services offered' do
+        expect(@facility_2.registered_vehicles).to eq([])
+        expect(@facility_2.services).to eq([])
+        expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
+        expect(@facility_2.registered_vehicles).to eq([])
+        expect(@facility_2.collected_fees).to eq(0)
+      end
     end
 
 
