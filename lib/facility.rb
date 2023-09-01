@@ -1,4 +1,5 @@
 require './lib/vehicle'
+require 'date'
 
 class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
