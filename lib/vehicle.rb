@@ -1,3 +1,4 @@
+require './spec/spec_helper'
 require 'date'
 
 class Vehicle
@@ -5,7 +6,7 @@ class Vehicle
               :year,
               :make,
               :model,
-              :engine,
+              :engine
         
   attr_accessor :registration_date, :plate_type
 
@@ -16,11 +17,12 @@ class Vehicle
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
     @registration_date = nil
-    @plate_type = antique ? :antique : electric_vehicle ? :ev : :regular
+    @plate_type = nil
   end
 
   def antique?
-    @registration_date.year - @year > 25
+    Date.today.year - @year > 25
+    # @registration_date.year - @year > 25
   end
 
   def electric_vehicle?
