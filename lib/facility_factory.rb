@@ -9,9 +9,10 @@ class FacilityFactory
       address = "#{location[:address_li]} #{location[:address__1]} #{location[:city]} #{location[:state]} #{location[:zip]}"
       phone = location[:phone]
       # service descriptions do not match method terms, normalize this
-      services = location[:services_p].split
+      # just do services manually with in-house method
+      # services = location[:services_p].split
 
-      Facility.new(name: name, address: address, phone: phone, services: services)
+      Facility.new(name: name, address: address, phone: phone)
     end
   end
 end
