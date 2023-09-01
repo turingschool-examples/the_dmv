@@ -1,4 +1,5 @@
-require 'spec_helper'
+require './spec/spec_helper'
+require './lib/facility'
 
 RSpec.describe Dmv do
   before(:each) do
@@ -29,10 +30,11 @@ RSpec.describe Dmv do
       @facility_1.add_service('Renew Drivers License')
       @facility_2.add_service('New Drivers License')
       @facility_2.add_service('Road Test')
+      # binding.pry
       @facility_2.add_service('Written Test')
       @facility_3.add_service('New Drivers License')
       @facility_3.add_service('Road Test')
-
+      # binding.pry
       @dmv.add_facility(@facility_1)
       @dmv.add_facility(@facility_2)
       @dmv.add_facility(@facility_3)
