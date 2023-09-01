@@ -13,11 +13,16 @@ RSpec.describe Facility do
   it 'can obtain license data' do
     expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     expect(@registrant_1.permit?).to eq(true)
-   end
+  end
 
-   it 'can administer a written test for registrant 1' do
+  it 'cannot administer a written test for registrant 1' do
     expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
   end
-
-
+  
+  it 'can administer a written test for registrant 1' do
+    @facility_1.add_service('Written Test')
+    #require 'pry';binding.pry
+    expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
+    expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
   end
+end

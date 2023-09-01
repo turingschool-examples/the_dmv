@@ -47,6 +47,7 @@ class Facility
       return false
     elsif
       registrant.age >= 16 && registrant.permit? == true
+      registrant.license_data[:written] = true
       return true
     else
       false
