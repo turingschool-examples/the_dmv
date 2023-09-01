@@ -1,5 +1,5 @@
 # require './lib/facility'
-# require 'pry'
+
 
 class Dmv
   attr_reader :facilities
@@ -19,4 +19,4 @@ class Dmv
   end
 end
 
-# binding.pry
+# require 'pry'; binding.pry

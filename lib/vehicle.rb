@@ -29,4 +29,4 @@ class Vehicle
   end
 end
 
-# binding.pry
+# require 'pry'; binding.pry
