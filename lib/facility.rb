@@ -18,5 +18,6 @@ class Facility
 
   def register_vehicle(make)
     @registration_date
+    Date.today
   end
 end
