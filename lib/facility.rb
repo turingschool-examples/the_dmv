@@ -15,10 +15,11 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    #if facility services include register vehicle,
     @registered_vehicles << vehicle
     vehicle.registration_date = Date.today.year
-    if vehicle.antique? == true
+    if @services.include?('Vehicle Registration') == false
+      return nil
+    elsif vehicle.antique? == true
       @collected_fees += 25
       vehicle.plate_type = :antique
      elsif
@@ -30,7 +31,7 @@ class Facility
       vehicle.plate_type = :regular
     end
   end
-    
+
   # Register a vehicle
   # Vehicles have the following rules:
   # Vehicles 25 years old or older are considered antique and cost $25 to register

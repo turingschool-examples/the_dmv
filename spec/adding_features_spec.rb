@@ -51,5 +51,12 @@ RSpec.describe Facility do
     expect(@bolt.plate_type).to eq(:ev)
     expect(@facility_1.collected_fees).to eq(325)
   end
+
+  it 'has no registered cars at facility_2' do
+    expect(@facility_2.registered_vehicles).to eq([])
+    expect(@facility_2.services).to eq([])
+    expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
+    expect(@facility_2.collected_fees).to eq(0)
+  end
 end
 #require 'pry';binding.pry
