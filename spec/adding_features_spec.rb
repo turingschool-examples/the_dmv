@@ -31,7 +31,8 @@ RSpec.describe Facility do
     expect(@facility_1.collected_fees).to eq(100)
   end
 
-  xit 'can register a Camaro' do
+  it 'can register a Camaro' do
+    @facility_1.register_vehicle(@cruz)
     @facility_1.register_vehicle(@camaro)
     #require 'pry';binding.pry
     expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro])
@@ -39,5 +40,6 @@ RSpec.describe Facility do
     expect(@camaro.plate_type).to eq(:antique)
     expect(@facility_1.collected_fees).to eq(125)
   end
+  
 end
 #require 'pry';binding.pry
