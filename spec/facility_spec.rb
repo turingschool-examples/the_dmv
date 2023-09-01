@@ -212,4 +212,10 @@ RSpec.describe Facility do
       expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
+
+  describe '#road test' do
+    it 'do' do
+      
+    end
+  end
 end
