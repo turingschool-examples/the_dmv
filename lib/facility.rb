@@ -1,4 +1,5 @@
 require './lib/vehicle'
+require './lib/registrant'
 require 'date'
 
 class Facility
@@ -43,6 +44,19 @@ class Facility
     end
    end
 
+   def administer_written_test(registrant)
+      if registrant.age >= 16 && registrant.permit == true
+        registrant.license_data[:written]=true
+        true
+      else
+        false
+      end
+   end
+
+   
+
 end
 
 # binding.pry
+
+# facility_1.administer_written_test(registrant_3)

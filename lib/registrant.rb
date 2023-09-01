@@ -1,7 +1,8 @@
 # require 'pry'
 class Registrant
 
-    attr_reader :name, :age, :license_data, :permit
+    attr_reader :name, :age, :permit
+    attr_accessor :license_data
 
     def initialize(name, age, permit = false)
         @name = name

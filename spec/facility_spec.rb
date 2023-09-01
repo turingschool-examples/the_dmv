@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 RSpec.describe Facility do
+  
+  describe '#Vehicle Registration' do
   before(:each) do
     @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
     @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
@@ -8,7 +10,7 @@ RSpec.describe Facility do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
-  end
+  end 
 
   describe '#initialize' do
     it 'can initialize' do
@@ -78,20 +80,61 @@ RSpec.describe Facility do
     expect(@facility_2.registered_vehicles).to eq([])
     expect(@facility_2.collected_fees).to eq(0)
   end
+  end
 
+  describe '#Written Test' do
+    before(:each) do
+      @registrant_1 = Registrant.new('Bruce', 18, true)
+      @registrant_2 = Registrant.new('Penny', 16)
+      @registrant_3 = Registrant.new('Tucker', 15)
+      @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
+    end 
+  
+    it 'collects license data of registrant 1' do
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
 
+    it 'verifying that the written test has not yet been administered' do
+      expect(@registrant_1.permit?).to eq(true)
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
+    end
+  
+    it 'returns a hash that contains the proper license data' do
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+  
+    it 'administers a written test after the service is added to the facility and changes the status of written test per registrant' do
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
 
+    it 'returns current status of no permit for registrant 2' do
+      expect(@registrant_2.age).to eq(16)
+      expect(@registrant_2.permit?).to eq(false)
+    end
 
+    it 'returns current status of no permit for registrant 2' do
+      @facility_1.administer_written_test(@registrant_2)
+      @registrant_2.earn_permit
+      @facility_1.administer_written_test(@registrant_2)
+      expect(@registrant_2.age).to eq(16)
+      expect(@registrant_2.permit?).to eq(true)
+    end
 
+    it 'checks the age of registrant 3 and their permit status of false' do
+      expect(@registrant_3.age).to eq(15)
+      expect(@registrant_3.permit?).to eq(false)
+    end
+
+    it 'will not give registrant 3 their permit due to their age' do
+      @registrant_3.earn_permit
+      @facility_1.administer_written_test(@registrant_3)
+      expect(@registrant_3.permit?).to eq(false)
+      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+
+    end
 end
-
-
-
-# @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
-# @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
-# @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
-# @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-# @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
-# @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
-# @facility_1.add_service('Vehicle Registration')
-# @facility_1.register_vehicle(@cruz)
