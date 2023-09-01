@@ -6,14 +6,12 @@ class FacilityFactory
   def create_facilities(locations)
     facilities = locations.map do |location|
       name = location[:dmv_office]
-      # pry into this, this likely isn't giving spaces between components
-      address = concat(:address_li, :address__1, :city, :state, :zip)
-      phone = :phone
+      address = "#{location[:address_li]} #{location[:address__1]} #{location[:city]} #{location[:state]} #{location[:zip]}"
+      phone = location[:phone]
       # service descriptions do not match method terms, normalize this
-      services = :services_p.split
+      services = location[:services_p].split
+
+      Facility.new(name: name, address: address, phone: phone, services: services)
     end
   end
 end
-
-
-
