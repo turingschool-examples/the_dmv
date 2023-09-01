@@ -38,7 +38,7 @@ class Facility
   end
 
   def assign_registration(vehicle)
-    @registration_date = Date.today
+    vehicle.registration_date = Date.today
   end
 
   def collect_fees(vehicle)
