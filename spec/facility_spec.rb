@@ -58,6 +58,9 @@ end
     end
   end
 
+  #decided not to make a test for my helper method `set_plate_type` 
+  #because those tests are relevant and included in my other tests
+
   describe '#F1 registered vehicles' do
     it 'checks registered vehicles in facility_1' do
       @facility_1.register_vehicle(@cruz)
@@ -102,6 +105,12 @@ end
       expect(@facility_1.collected_fees).to eq(325)
     end
   end
-end
 
-#use today and year methods???
+  describe '#check facility_2 details' do
+    it 'checks the vehicles, services and fees of facility_2' do
+      @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.services).to eq([])
+    end
+  end
+end
