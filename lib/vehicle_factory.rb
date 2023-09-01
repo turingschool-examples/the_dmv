@@ -3,6 +3,7 @@ require 'json'
 class VehicleFactory
   def create_vehicles(data)
     vehicles = []
+
     data.each do |d|
       d.transform_keys!(vin_1_10: :vin, model_year: :year)
 
