@@ -53,31 +53,31 @@ RSpec.describe Facility do
     expect(@camaro.plate_type).to be(:antique)
   end
 
-  # it 'can register a third vehicle of bolt and due to its year date return an ev' do
-  #   facility_1.add_service('Vehicle Registration')
-  #   facility_1.register_vehicle(bolt)
-  #   expect(bolt.plate_type).to be(:ev)
-  # end
+  it 'can register a third vehicle of bolt and due to its year date return an ev' do
+    @facility_1.add_service('Vehicle Registration')
+    @facility_1.register_vehicle(@bolt)
+    expect(@bolt.plate_type).to be(:ev)
+  end
 
-  # it 'updates list of facility registered vehicles and updates collected fees' do
-  #   facility_1.add_service('Vehicle Registration')
-  #   facility_1.register_vehicle(cruz)
-  #   facility_1.register_vehicle(camaro)
-  #   facility_1.register_vehicle(bolt)
-  #   expect(facility_1.registered_vehicles.count).to eq(3)
-  #   expect(facility_1.collected_fees).to be(325)
-  # end
+  it 'updates list of facility registered vehicles and updates collected fees' do
+    @facility_1.add_service('Vehicle Registration')
+    @facility_1.register_vehicle(@cruz)
+    @facility_1.register_vehicle(@camaro)
+    @facility_1.register_vehicle(@bolt)
+    expect(@facility_1.registered_vehicles.count).to eq(3)
+    expect(@facility_1.collected_fees).to be(325)
+  end
 
-  # it 'checks that facility 2 has no registered vehicles or services' do
-  #   expect(facility_2.registered_vehicles).to eq([])
-  #   expect(facility_2.services).to eq([])
-  # end
+  it 'checks that facility 2 has no registered vehicles or services' do
+    expect(@facility_2.registered_vehicles).to eq([])
+    expect(@facility_2.services).to eq([])
+  end
 
-  # it 'makes sure that vehicle cannot be re-registered after initial registration in vehicle 1' do
-  #   facility_2.register_vehicle(bolt)
-  #   expect(facility_2.registered_vehicles).to eq([])
-  #   expect(facility_2.collected_fees).to eq(0)
-  # end
+  it 'makes sure that vehicle cannot be re-registered after initial registration in vehicle 1' do
+    @facility_2.register_vehicle(@bolt)
+    expect(@facility_2.registered_vehicles).to eq([])
+    expect(@facility_2.collected_fees).to eq(0)
+  end
 
 
 
