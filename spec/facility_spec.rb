@@ -27,18 +27,19 @@ RSpec.describe Facility do
 
     describe '#Register Vehicle' do
     it 'starts with no vehicles' do
-      expect(facility_1.registered_vehicles).to eq([])
-      expect(cruz.registration_date).to eq(nil)
-      expect(cruz.plate_type).to eq(:regular)
-      expect(cruz.registration_date).to eq(Date)
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@cruz.registration_date).to eq(nil)
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@cruz.registration_date).to eq(Date)
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
 
 
     end
 
       it 'collects a fee when service is used' do
-        expect(facility_1.collected_fees).to eq(0)
-        facility_1.register_vehicle(cruz)
-        expect(facility_1.collected_fees).to eq(100)
+        expect(@facility_1.collected_fees).to eq(0)
+        @facility_1.register_vehicle(cruz)
+        expect(@facility_1.collected_fees).to eq(100)
       end
 end
 facility_1.registered_vehicles
