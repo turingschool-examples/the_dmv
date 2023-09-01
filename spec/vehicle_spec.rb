@@ -8,6 +8,7 @@ RSpec.describe Vehicle do
   end
   describe '#initialize' do
     it 'can initialize' do
+      require 'pry'; binding.pry
       expect(@cruz).to be_an_instance_of(Vehicle)
       expect(@cruz.vin).to eq('123456789abcdefgh')
       expect(@cruz.year).to eq(2012)
