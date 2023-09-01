@@ -83,10 +83,13 @@ end
     end
   end
 
-  describe '#F1 collected fees for camaro' do
-    it 'checks collected fees in facility_1' do
-      @facility_1.register_vehicle(@camaro)
-      expect(@facility_1.collected_fees).to eq(100)
+  describe '#register bolt and check info' do
+    it 'registers bolt and checks info' do
+      expect(@bolt).to be_an_instance_of(Vehicle)
+      @facility_1.register_vehicle(@bolt)
+      expect(@bolt.registration_date).to eq(Date.today)
+      expect(@bolt.plate_type).to eq(:ev)
+      #require the facility to have the service you're performing
     end
   end
 end
