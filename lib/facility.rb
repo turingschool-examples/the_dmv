@@ -12,4 +12,8 @@ class Facility
   def add_service(service)
     @services << service
   end
+
+  def register_vehicle(make)
+    if @facility.
+  end
 end
