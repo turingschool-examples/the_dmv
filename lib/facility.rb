@@ -35,22 +35,26 @@ class Facility
   end
 
   def administer_written_test(person)
-    if !@services.include?("Written Test")
-      return false
-    elsif person.age <= 15 || person.permit? == false # double negative blew my mind
-      return false
-    else
+    if person.age >= 16 && person.permit? && @services.include?("Written Test")
       person.license_data[:written] = true
-      return true
+    else
+      false
     end
   end
 
   def administer_road_rest(person)
-    if person.license_data[:written] == true
+    if person.license_data[:written] == true && @services.include?("Road Test")
       person.license_data[:license] = true
-      return true
     else
-      return false
+      false
+    end
+  end
+
+  def renew_drivers_license(person)
+    if person.license_data[:license] == true && @services.include?("Renew License")
+      person.license_data[:renewed] = true
+    else
+      false
     end
   end
 end
