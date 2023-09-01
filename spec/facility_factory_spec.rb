@@ -8,8 +8,9 @@ RSpec.describe FacilityFactory do
 
   describe '#create_facilities' do
     it 'will create Facility objects using a location dataset' do
-      expect(@factory.create_facilities(@co_dmv_office_locations)[0]).to be_an_instance_of(Facility)
-      # should add additional testing here
+      @factory.create_facilities(@co_dmv_office_locations).each do |location|
+        expect(location).to be_an_instance_of(Facility)
+      end
     end
   end
 end
