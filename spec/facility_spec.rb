@@ -157,11 +157,21 @@ RSpec.describe Facility do
     end
 
     it 'will do nothing if service is not available at the facility' do
-      
+      @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
 
     it 'will do nothing if registrant has not passed written test' do
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      @facility_1.administer_road_test(@registrant_1)
 
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
 end
