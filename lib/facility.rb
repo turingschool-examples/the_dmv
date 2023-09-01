@@ -13,4 +13,21 @@ class Facility
   def add_service(service)
     @services << service
   end
+
+  def register_vehicle(vehicle)
+    @registered_vehicles << vehicle
+    vehicle.register_vehicle
+
+    if Date.today.year - vehicle.year >= 25
+      vehicle.plate_type = :antique
+      @collected_fees += 25
+    elsif vehicle.electric_vehicle? == true
+      vehicle.plate_type = :ev
+      @collected_fees += 200
+    else
+      vehicle.plate_type = :regular
+      @collected_fees += 100
+    end
+    # require'pry';binding.pry
+  end
 end

@@ -47,5 +47,19 @@ RSpec.describe Facility do
       expect(facility_1.registered_vehicles).to eq([])
       expect(facility_1.collected_fees).to eq(0)
     end
+
+    # Check how to test facility_1.register_vehicle(cruz) ---- I know I can, but how do I test?
+
+    it 'can register a vehicle' do
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+
+      
+      facility_1.register_vehicle(cruz)
+      # require'pry';binding.pry
+      expect(facility_1.registered_vehicles).to eq([cruz])
+      expect(cruz.registration_date).to eq(Date.today.year)
+      expect(cruz.plate_type).to eq(:regular)
+    end
   end
 end
