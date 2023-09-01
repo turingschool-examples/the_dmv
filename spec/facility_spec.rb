@@ -21,8 +21,7 @@ RSpec.describe Facility do
   end
 
   describe '#add service' do
-    it 'can add available services' do
-      expect(@facility.services).to eq([])
+    it 'can add more than one available service' do
       @facility.add_service('New Drivers License')
       @facility.add_service('Renew Drivers License')
       @facility.add_service('Vehicle Registration')
@@ -48,11 +47,11 @@ RSpec.describe Facility do
     expect(@facility_1.collected_fees).to be(100)
   end
 
-  # it 'can register a second vehicle of camaro and due to its year date return an antique' do
-  #   facility_1.add_service('Vehicle Registration')
-  #   facility_1.register_vehicle(camaro)
-  #   expect(camaro.plate_type).to be(:antique)
-  # end
+  it 'can register a second vehicle of camaro and due to its year date return an antique' do
+    @facility_1.add_service('Vehicle Registration')
+    @facility_1.register_vehicle(@camaro)
+    expect(@camaro.plate_type).to be(:antique)
+  end
 
   # it 'can register a third vehicle of bolt and due to its year date return an ev' do
   #   facility_1.add_service('Vehicle Registration')

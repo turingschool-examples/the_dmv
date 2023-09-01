@@ -2,7 +2,8 @@ require './lib/vehicle'
 require 'date'
 
 class Facility
-  attr_reader :name, :address, :phone, :services, :collected_fees, :registered_vehicles
+  attr_reader :name, :address, :phone, :collected_fees, :registered_vehicles
+  attr_accessor :services
 
   def initialize(hash, collected_fees = 0)
     @name = hash[:name]
@@ -14,9 +15,8 @@ class Facility
   end
 
   def add_service(service)
-    unique_services = []
-    unique_services << service
-    @services = unique_services.uniq
+    @services << service
+    @services = @services.uniq
   end
 
    def register_vehicle(vehicle)
@@ -45,4 +45,4 @@ class Facility
 
 end
 
-# require 'pry'; binding.pry
+binding.pry
