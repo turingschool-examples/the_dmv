@@ -112,6 +112,25 @@ RSpec.describe Facility do
         expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
 
       end
+
+      it 'will not administer written test if registrant does not have permit' do
+        @facility_1.add_service('Written Test')
+        expect(@registrant_2.age).to eq(16)
+        expect(@registrant_2.permit?).to eq(false)
+        
+        @facility_1.administer_written_test(@registrant_2)
+        expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+        expect(@registrant_2.permit?).to eq(false)
+      end
+
+      it 'administers written test once registrant receives permit' do
+        @facility_1.add_service('Written Test')
+        @registrant_2.earn_permit
+        @facility_1.administer_written_test(@registrant_2)
+        expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+      end
+
+
     end
   end
 
