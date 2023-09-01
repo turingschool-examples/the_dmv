@@ -136,7 +136,38 @@ RSpec.describe Facility do
     end
 
     describe '#administer_road_test' do
+      it 'cannot administer road test if service is not offered' do
+        @facility_1.add_service('Written Test')
+        @facility_1.administer_written_test(@registrant_1)
+        expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+        expect(@registrant_1.permit?).to be true
+        expect(@facility_1.administer_road_test(@registrant_1)).to be false
+        expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+      end
 
+      it 'can administer road test if service is offered' do
+        @facility_1.add_service('Written Test')
+        @facility_1.administer_written_test(@registrant_1)
+        expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+        expect(@registrant_1.permit?).to be true
+        @facility_1.add_service('Road Test')
+        expect(@facility_1.administer_road_test(@registrant_1)).to be true
+        expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+      end
+
+      it 'will not administer a road test if written test has not been taken' do
+        @facility_1.add_service('Written Test')
+        @facility_1.add_service('Road Test')
+        @registrant_2.earn_permit
+        expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+        expect(@registrant_2.permit?).to be true
+        expect(@facility_1.administer_road_test(@registrant_2)).to be false
+        expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+        @facility_1.administer_written_test(@registrant_2)
+        expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+        expect(@facility_1.administer_road_test(@registrant_2)).to be true
+        expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+      end
     end
 
     describe '#renew_drivers_license' do
