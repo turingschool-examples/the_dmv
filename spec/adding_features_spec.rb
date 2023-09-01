@@ -40,6 +40,16 @@ RSpec.describe Facility do
     expect(@camaro.plate_type).to eq(:antique)
     expect(@facility_1.collected_fees).to eq(125)
   end
-  
+
+  it 'can register a Bolt' do
+    @facility_1.register_vehicle(@cruz)
+    @facility_1.register_vehicle(@camaro)
+    @facility_1.register_vehicle(@bolt)
+    #require 'pry';binding.pry
+    expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+    expect(@bolt.registration_date).to eq(2023)
+    expect(@bolt.plate_type).to eq(:ev)
+    expect(@facility_1.collected_fees).to eq(325)
+  end
 end
 #require 'pry';binding.pry
