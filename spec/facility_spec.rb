@@ -93,12 +93,13 @@ end
     end
   end
 
-  describe '#check F1 registered vehicles again' do
+  describe '#check F1 registered vehicles and fees again' do
     it 'checks the registered vehicles after all three are added' do
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+      expect(@facility_1.collected_fees).to eq(325)
     end
   end
 end
