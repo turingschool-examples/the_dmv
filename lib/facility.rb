@@ -26,12 +26,15 @@ class Facility
         vehicle.registration_date = Date.today
         if (vehicle.registration_date.year - vehicle.year) >= 25
           vehicle.plate_type = :antique
+          @collected_fees+=25
         elsif vehicle.engine == :ev
           vehicle.plate_type = :ev
+          @collected_fees+=200
         else
           vehicle.plate_type = :regular
+          @collected_fees+=100
         end
-        vehicle.registration_date
+        vehicle
       else
         "Oops! Looks like this vehicle has already been registered on #{vehicle.registration_date}."
       end
@@ -40,9 +43,6 @@ class Facility
     end
    end
 
-
-
-
 end
 
-require 'pry'; binding.pry
+# require 'pry'; binding.pry
