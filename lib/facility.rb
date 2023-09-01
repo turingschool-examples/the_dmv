@@ -32,9 +32,5 @@ class Facility
       vehicle.plate_type = :regular
       @collected_fees += 100
     end
-    
-    
-    
-    # require'pry';binding.pry
   end
 end
