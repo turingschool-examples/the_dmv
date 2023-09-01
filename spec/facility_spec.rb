@@ -70,8 +70,16 @@ RSpec.describe Facility do
     expect(facility_1.collected_fees).to be(325)
   end
 
-  
+  it 'checks that facility 2 has no registered vehicles or services' do
+    expect(facility_2.registered_vehicles).to eq([])
+    expect(facility_2.services).to eq([])
+  end
 
+  it 'makes sure that vehicle cannot be re-registered after initial registration in vehicle 1' do
+    facility_2.register_vehicle(bolt)
+    expect(facility_2.registered_vehicles).to eq([])
+    expect(facility_2.collected_fees).to eq(0)
+  end
 
 
 
