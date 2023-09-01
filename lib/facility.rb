@@ -44,4 +44,13 @@ class Facility
       return true
     end
   end
+
+  def administer_road_rest(person)
+    if person.license_data[:written] == true
+      person.license_data[:license] = true
+      return true
+    else
+      return false
+    end
+  end
 end
