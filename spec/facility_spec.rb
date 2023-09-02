@@ -25,6 +25,16 @@ RSpec.describe Facility do
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'] )
     end
+
+    it 'runs the collected fees helper' do
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.collected_fees).to eq(0)
+    end
+      
+    it 'runs the helper method for the service added' do
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.registered_vehicles).to eq([])
+    end
   end
 
   describe '#register vehicle helper' do
@@ -57,12 +67,6 @@ RSpec.describe Facility do
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
   end
     context 'adding vehicles to the registered vehicle array' do
-      it 'will create an empty array if one does not exist' do
-        expect(@facility_1.registered_vehicles).to eq(nil)
-        @facility_1.register_vehicle(@cruz)
-        expect(@facility_1.registered_vehicles).to be_an_instance_of(Array)
-      end  
-
       it 'will add registered Vehicles to the array' do
         @facility_1.register_vehicle(@cruz)
         expect(@facility_1.registered_vehicles).to eq([@cruz])
@@ -70,7 +74,21 @@ RSpec.describe Facility do
         expect(@facility_1.registered_vehicles).to eq([@cruz, @bolt])
       end
 
-      xit 'will collect a fee when registering vehicles' do 
+      it 'will collect a fee when registering vehicles' do
+        @facility_1.register_vehicle(@cruz)
+        expect(@facility_1.collected_fees).to eq(100)
+      end
+      it 'will collect a fee of $100 if the plate type is :regular' do
+        @facility_1.register_vehicle(@cruz)
+        expect(@facility_1.collected_fees).to eq(100)
+      end
+      it 'will collect a feee of $200 if the plate type is :ev' do
+        @facility_1.register_vehicle(@bolt)
+        expect(@facility_1.collected_fees).to eq(200)
+      end
+      it 'will collect a feee of $25 if the plate type is :antique' do
+        @facility_1.register_vehicle(@camaro)
+        expect(@facility_1.collected_fees).to eq(25)
       end
     end
 
@@ -83,10 +101,10 @@ RSpec.describe Facility do
       end
       it 'assigns the current date as a vehicles registration date' do
         expect(@cruz.registration_date).to be_an_instance_of(Date)
-        expect(@ruz.registration_date).to eq(Date.today)
+        expect(@cruz.registration_date).to eq(Date.today)
       end
       it 'assigns a plate type based' do
-        expect(@crus.plate_type).to eq(:regular)
+        expect(@cruz.plate_type).to eq(:regular)
       end
       it 'assigns an antique plate if a vehicle is more than 25 years old' do
         expect(@camaro.plate_type).to eq(:antique)
