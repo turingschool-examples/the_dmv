@@ -77,6 +77,10 @@ class DataQuery
     oldest_car = registrations.min_by { |v| v.year }
     puts "\t- The oldest car is a #{oldest_car.make}: #{oldest_car.year}"
     # county with most veh
+    most_county = registrations.map { |v| v.county }
+                               .reduce(Hash.new(0)) { |h, cnty| h[cnty] += 1; h }
+                               .max_by { |cnty, count| count}
+    puts "\t- The county with the most registered vehicles is #{most_county[0].capitalize} @ #{most_county[1]}"
     return true
   end
 
