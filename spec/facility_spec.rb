@@ -7,6 +7,9 @@ RSpec.describe Facility do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+    @registrant_1 = Registrant.new('Penny', 16)
+    @registrant_2 = Registrant.new('Bruce', 18, true)
+    @registrant_3 = Registrant.new('Tucker', 15)
   end
   describe '#initialize' do
     it 'can initialize' do
@@ -89,6 +92,14 @@ RSpec.describe Facility do
       expect(@cruz.plate_type).to eq(:regular)
       expect(@facility_2.registered_vehicles).to eq([@cruz, @camaro])
       expect(@facility_2.collected_fees).to be 125
+    end
+  end
+
+  describe '#administer_written_test' do
+    it 'sets license data to true once written test administered' do
+      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      registrant_2.administer_written_test
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
   end
 end
