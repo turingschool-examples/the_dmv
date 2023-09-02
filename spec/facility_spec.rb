@@ -166,5 +166,17 @@ RSpec.describe Facility do
       expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
     end
 
+    it 'Can only administer road test at facility that offers service, can use multiple facilities' do
+      @facility_1.add_service('Road Test')
+      @facility_2.add_service('Written Test')
+      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      @facility_2.administer_written_test(@registrant_2)
+      @facility_2.administer_road_test(@registrant_2)
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+
+      @facility_1.administer_road_test(@registrant_2)
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+    end
+
   end
 end
