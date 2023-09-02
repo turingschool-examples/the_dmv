@@ -93,6 +93,16 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(25)
     end
 
+    it 'adds registered vehicle to registered_vehicles array' do
+      expect(@facility_1.registered_vehicles).to eq([])
+
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@camaro)
+
+      expect(@facility_1.registered_vehicles).to eq([@camaro])
+      expect(@facility_2.registered_vehicles).to eq([])
+    end
+
     it 'will not function if service is unavailable' do
       expect(@camaro.plate_type).to be nil
       expect(@facility_1.collected_fees).to eq(0)
@@ -121,6 +131,16 @@ RSpec.describe Facility do
       @facility_1.register_reg(@cruz)
 
       expect(@facility_1.collected_fees).to eq(100)
+    end
+
+    it 'adds registered vehicle to registered_vehicles array' do
+      expect(@facility_1.registered_vehicles).to eq([])
+
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+      expect(@facility_2.registered_vehicles).to eq([])
     end
 
     it 'will not function if service is unavailable' do
