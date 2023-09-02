@@ -47,4 +47,11 @@ RSpec.describe Registrant do
       expect(registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
+
+  describe '#earn_permit method' do
+    it 'returns true for permit?' do
+    registrant_2 = Registrant.new('Penny', 15 )
+    expect(registrant_2.earn_permit).to be(true)
+    end
+  end
 end
