@@ -68,8 +68,19 @@ class Facility
   end
  end
 
+ def renew_drivers_license(registrant)
+  if @services.include?("Renew License")
+    if registrant.license_data[:license] == true
+      registrant.license_data[:renewed]=true
+      true
+    else
+      false
+    end
+  else
+    "Sorry, this location does not service License Renewals."
+  end
+ end
+
 end
 
 # binding.pry
-
-# facility_1.administer_written_test(registrant_3)
