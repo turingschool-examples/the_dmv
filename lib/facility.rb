@@ -1,6 +1,6 @@
 class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
-
+  attr_writer :services
   def initialize(branch_info)
     @name = branch_info[:name]
     @address = branch_info[:address]
