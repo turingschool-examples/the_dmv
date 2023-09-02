@@ -48,10 +48,10 @@ RSpec.describe Facility do
     it 'Assigns plate type and collects corresponding fees' do
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.services).to eq(['Vehicle Registration'])
-      expect(@facility_1.collected_fees).to 0
+      expect(@facility_1.collected_fees).to be 0
       @facility_1.register_vehicle(@cruz)
       expect(@cruz.plate_type).to eq(:regular)
-      expect(@facility_1.collected_fees).to 100
+      expect(@facility_1.collected_fees).to be 100
     end
   end
 end
