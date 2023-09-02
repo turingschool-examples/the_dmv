@@ -30,8 +30,7 @@ class Facility
     vehicle.registration_date = Date.today
     @registered_vehicles << vehicle
     if vehicle.electric_vehicle?
-      vehicle.plate_type = :ev
-      @collected_fees += 200
+      register_ev(vehicle)
     elsif vehicle.antique?
       vehicle.plate_type = :antique
       @collected_fees += 25
