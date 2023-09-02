@@ -15,7 +15,6 @@ class Facility
     @services << service
   end
 
-  #make sure I test this and write a test
   def set_plate_type(car)
     if car.antique? == true
       :antique
@@ -26,22 +25,46 @@ class Facility
     end
   end
 
+  #helper method
+  def check_for_service(service)
+    @services.include?(service)
+  end
+
   def register_vehicle(car)
-    @registered_vehicles << car
-    car.registration_date = Date.today
-    car.plate_type = set_plate_type(car)
-    if car.antique?
-      @collected_fees += 25
-    elsif car.electric_vehicle?
-      @collected_fees += 325
-    else 
-      @collected_fees += 100
+    if check_for_service('Vehicle Registration') == true
+      @registered_vehicles << car
+      car.registration_date = Date.today
+      car.plate_type = set_plate_type(car)
+      if car.antique?
+        @collected_fees += 25
+      elsif car.electric_vehicle?
+        @collected_fees += 200
+      else 
+        @collected_fees += 100
+      end
+    else
+      nil
     end
   end
 end
+# def register_vehicle(car)
+#   @registered_vehicles << car
+#   car.registration_date = Date.today
+#   car.plate_type = set_plate_type(car)
+#     if car.antique?
+#       @collected_fees += 25
+#   elsif car.electric_vehicle?
+#   @collected_fees += 200
+#   else 
+#   @collected_fees += 100
+#   end
+# end
+# end
 
 #services:
   # register a vehicle
   # administer a written test
   # administer a road test
   # renew a driver's license
+
+  # if @services.include?('Vehicle Registration')

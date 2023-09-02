@@ -5,6 +5,7 @@ require './lib/vehicle'
 RSpec.describe Facility do
   before(:each) do
     @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+    @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
@@ -36,7 +37,7 @@ describe '#check cruz.registration_date' do
   end
 end
 
-  describe '#check F1 vehicles' do
+  describe '#check facility_1(F1) vehicles' do
     it 'checks registered_vehicles for facility_1' do
       expect(@facility_1.registered_vehicles).to eq([])
     end
@@ -51,6 +52,7 @@ end
   describe '#register cruz and check info' do
     it 'registers cruz and checks info' do
       expect(@cruz).to be_an_instance_of(Vehicle)
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       expect(@cruz.registration_date).to eq(Date.today)
       expect(@cruz.plate_type).to eq(:regular)
@@ -63,6 +65,7 @@ end
 
   describe '#F1 registered vehicles' do
     it 'checks registered vehicles in facility_1' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.registered_vehicles).to eq([@cruz])
       #require the facility to have the service you're performing
@@ -71,6 +74,7 @@ end
 
   describe '#F1 collected fees' do
     it 'checks collected fees in facility_1' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.collected_fees).to eq(100)
     end
@@ -79,6 +83,7 @@ end
   describe '#register camaro and check info' do
     it 'registers camaro and checks info' do
       expect(@camaro).to be_an_instance_of(Vehicle)
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@camaro)
       expect(@camaro.registration_date).to eq(Date.today)
       expect(@camaro.plate_type).to eq(:antique)
@@ -88,6 +93,7 @@ end
 
   describe '#register bolt and check info' do
     it 'registers bolt and checks info' do
+      @facility_1.add_service('Vehicle Registration')
       expect(@bolt).to be_an_instance_of(Vehicle)
       @facility_1.register_vehicle(@bolt)
       expect(@bolt.registration_date).to eq(Date.today)
@@ -98,6 +104,7 @@ end
 
   describe '#check F1 registered vehicles and fees again' do
     it 'checks the registered vehicles after all three are added' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
@@ -106,11 +113,25 @@ end
     end
   end
 
-  describe '#check facility_2 details' do
+  describe '#check facility_2(F2) details' do
     it 'checks the vehicles, services and fees of facility_2' do
-      @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.services).to eq([])
     end
   end
+
+  describe '#add bolt and check F2 details again' do 
+    it 'registers bolt and checks F2 details again' do 
+      @facility_2.register_vehicle(@bolt)
+      expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
+      # expect(facility_2.registered_vehicles).to eq([])
+      # expect(facility_2.collected_fees).to eq(0)
+    end
+  end
 end
+
+#nextsteps: 
+#write something that iterates through the services to check if the service is provided
+#commit the last test
