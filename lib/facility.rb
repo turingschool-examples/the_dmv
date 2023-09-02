@@ -25,10 +25,10 @@ class Facility
       if vehicle.registration_date == nil
         @registered_vehicles << vehicle
         vehicle.registration_date = Date.today
-        if (vehicle.registration_date.year - vehicle.year) >= 25
+        if vehicle.antique?
           vehicle.plate_type = :antique
           @collected_fees+=25
-        elsif vehicle.engine == :ev
+        elsif vehicle.electric_vehicle?
           vehicle.plate_type = :ev
           @collected_fees+=200
         else
@@ -39,21 +39,34 @@ class Facility
       else
         "Oops! Looks like this vehicle has already been registered on #{vehicle.registration_date}."
       end
-    else
-    "Sorry, this location does not service vehicle registrations."
-    end
+     end
    end
 
    def administer_written_test(registrant)
+    if @services.include?("Written Test")
       if registrant.age >= 16 && registrant.permit == true
         registrant.license_data[:written]=true
         true
       else
         false
       end
+    else
+      "Sorry, this location does not service written tests."
    end
+  end
 
-   
+  def administer_road_test(registrant)
+  if @services.include?("Road Test")
+    if registrant.permit == true
+      registrant.license_data[:license]=true
+      true
+    else
+      false
+    end
+  else
+    "Sorry, this location does not service road tests."
+  end
+ end
 
 end
 
