@@ -61,10 +61,34 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@bolt)
       @facility_1.register_vehicle(@camaro)
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @bolt, @camaro])
       expect(@cruz.plate_type).to eq(:regular)
       expect(@bolt.plate_type).to eq(:ev)
       expect(@camaro.plate_type).to eq(:antique)
       expect(@facility_1.collected_fees).to be 325
+    end
+
+    it 'Can only register vehicles at a facility that offers the service' do
+      expect(@facility_1.services).to eq([])
+      @facility_1.register_vehicle(@cruz)
+      expect(@cruz.plate_type).to be_nil
+      expect(@facility_1.registered_vehicles).to eq([])
+
+      @facility_1.add_service('New Drivers License')
+      @facility_1.add_service('Renew Drivers License')
+      expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License'])
+      @facility_1.register_vehicle(@cruz)
+      expect(@cruz.plate_type).to be_nil
+      expect(@facility_1.registered_vehicles).to eq([])
+
+      @facility_2.add_service('New Drivers License')
+      @facility_2.add_service('Vehicle Registration')
+      expect(@facility_2.services).to eq(['New Drivers License', 'Vehicle Registration'])
+      @facility_2.register_vehicle(@cruz)
+      @facility_2.register_vehicle(@camaro)
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@facility_2.registered_vehicles).to eq([@cruz, @camaro])
+      expect(@facility_2.collected_fees).to be 125
     end
   end
 end
