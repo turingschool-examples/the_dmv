@@ -1,6 +1,7 @@
 class Facility
   attr_reader :name, :address, :phone, :services, :collected_fees, :registered_vehicles 
 
+
   def initialize(facility_info)
     @name = facility_info.fetch(:name)
     @address = facility_info.fetch(:address)
