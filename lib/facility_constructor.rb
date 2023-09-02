@@ -9,7 +9,9 @@ class FacilityConstructor
     new_facilities
   end
 
-  def parse(facility_data)
-    facility_data
+  def parse(api_hash)
+    api_hash[:name] = api_hash[:dmv_office]
+    api_hash[:address] = "#{api_hash[:address_li]} #{api_hash[:address__1]} #{api_hash[:city]} #{api_hash[:state]} #{api_hash[:zip]}"
+    api_hash
   end
 end
