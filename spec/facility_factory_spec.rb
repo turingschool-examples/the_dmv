@@ -36,10 +36,18 @@ RSpec.describe do
       factory = FacilityFactory.new
       ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
       factory.create_facilities(ny_dmv_office_locations)
-      require "pry"; binding.pry
+      #require "pry"; binding.pry
 
       expect(factory.facilities.count).to eq(172)
     end
 
+    it "creates facilities from MO database" do
+      factory = FacilityFactory.new
+      mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
+      factory.create_facilities(mo_dmv_office_locations)
+      #require "pry"; binding.pry
+
+      expect(factory.facilities.count).to eq(178)
+    end
   end
 end
