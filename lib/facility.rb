@@ -1,5 +1,6 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :collected_fees, :registered_vehicles 
+  attr_reader :name, :address, :phone, :services, :collected_fees, :registered_vehicles
+  attr_writer :collected_fees
 
 
   def initialize(facility_info)
@@ -18,23 +19,23 @@ class Facility
   def register_vehicle(vehicle)
     if @services.include?('Vehicle Registration') == true
       vehicle.registration_date = Date.today
-
       @registered_vehicles << vehicle
     end
   end
-end
 
-  # def plate_type
-  #   if @registration_date != nil && antique? == true
-  #     return :antique
-  #   elsif @registration_date != nil && electric_vehicle? == true
-  #     return :ev
-  #   elsif @registration_date != nil
-  #     :regular
-  #   else
-  #     nil
-  #   end
-  # end
+  def accept_fees(int)
+    @collected_fees += (int)
+  end
+
+  def administer_written_test(registrant)
+    
+  end
+
+
+
+
+
+end
 
 
 # def pay_fee
@@ -46,4 +47,28 @@ end
 #     @collected_fees +=100
 #   end
 # end
+  # def plate_type
+  #   if self.registration_date != nil && Date.today.year - self.year > 25
+  #     return self.plate_type == :antique
+  #   elsif self.registration_date != nil && self.engine == :ev
+  #     return self.plate_type == :ev
+  #   elsif self.registration_date != nil
+  #     return self.plate_type == :regular
+  #   else
+  #     nil
+  #   end
+  # end
+  # def plate_type
+  #   if vehicle.registration_date != nil && Date.today.year - vehicle.year > 25
+  #     return vehicle.plate_type == :antique
+  #   elsif vehicle.registration_date != nil && vehicle.engine == :ev
+  #     return vehicle.plate_type == :ev
+  #   elsif vehicle.registration_date != nil
+  #     return vehicle.plate_type == :regular
+  #   else
+  #     nil
+  #   end
+  # end
+
+
 # end
