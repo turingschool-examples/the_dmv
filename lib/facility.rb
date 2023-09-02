@@ -19,6 +19,7 @@ class Facility
       registrant.license_data[:written] = true
     else
     end
+
   end
 
   def administer_road_test(registrant)
@@ -26,6 +27,7 @@ class Facility
       registrant.license_data[:license] = true
     else
     end
+
   end
 
   def register_vehicle(vehicle)
@@ -33,6 +35,7 @@ class Facility
       add_registration(vehicle)
     else
     end
+
   end
 
   def renew_drivers_license(registrant)
@@ -40,6 +43,7 @@ class Facility
       registrant.license_data[:renewed] = true
     else
     end
+
   end
 
   def add_registration(vehicle)
@@ -57,6 +61,7 @@ class Facility
       vehicle.registration_date = Date.today.year
       vehicle.plate_type = :regular
     end
+    
   end
 
 end

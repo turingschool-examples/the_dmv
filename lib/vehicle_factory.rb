@@ -14,5 +14,7 @@ class VehicleFactory
       engine: :ev})
         vehicles << new_vehicle
     end
+
   end
+  
 end
