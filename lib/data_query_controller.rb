@@ -1,5 +1,5 @@
-require 'dmv_data_service'
-require 'vehicle_factory'
+require_relative 'dmv_data_service'
+require_relative 'vehicle_factory'
 
 class DataQuery
   attr_reader :prompt, :live
@@ -25,6 +25,8 @@ class DataQuery
 
     return self.quit if input == "q:"
 
+    self.print_query_header
+
     args = input.split(' ').map(&:downcase)
     return bad_input(args[0]) unless args[0].match?(/[1-3]/)
     return bad_input(args[1].upcase) unless args[1].match?(/wa|ny/i)
@@ -44,7 +46,12 @@ class DataQuery
 
   def bad_input(input)
     puts "#{input} is not a valid option; please try again"
+    self.print_query_header
     return false
+  end
+
+  def print_query_header
+    puts "*" * 16, "Query Results".center(16), "*" * 16
   end
 
   def query_engine(state, engine)
@@ -52,6 +59,7 @@ class DataQuery
 
     filtered = registrations.filter { |v| v.engine == engine.to_sym}
     puts "\t- There are #{filtered.count} registered cars with a #{engine} engine in #{state.upcase}"
+    self.print_query_header
     return true
   end
 
@@ -60,6 +68,7 @@ class DataQuery
 
     filtered = registrations.filter { |v| v.year == year}
     puts "\t- There are #{filtered.count} registered cars for the year #{year} in #{state.upcase}"
+    self.print_query_header
     return true
   end
 
@@ -81,6 +90,7 @@ class DataQuery
                                .reduce(Hash.new(0)) { |h, cnty| h[cnty] += 1; h }
                                .max_by { |cnty, count| count}
     puts "\t- The county with the most registered vehicles is #{most_county[0].capitalize} @ #{most_county[1]}"
+    self.print_query_header
     return true
   end
 
@@ -107,5 +117,6 @@ class DataQuery
 
 end
 
+# Uncomment following lines to run via ruby command
 # dq = DataQuery.new
-# dq.parse_input
+# dq.query_handler
