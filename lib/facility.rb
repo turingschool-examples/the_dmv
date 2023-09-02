@@ -32,10 +32,8 @@ class Facility
   end
 
   def register_vehicle(car)
-    if @services.each do |service|
-      service.include?('Vehicle Registration')
+    if @services.include?('Vehicle Registration')
       @registered_vehicles << car
-      end
     end
     car.registration_date = Date.today
       if car.antique? == true
@@ -55,4 +53,6 @@ class Facility
     end 
     registrant.license_data[:written]
   end
+
+
 end
