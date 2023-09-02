@@ -20,7 +20,17 @@ RSpec.describe Factory do
       end
     end
 
-    # it 'creates vehicles with all data' do
+    it 'creates vehicles with all data' do
+      creation_log = @factory.create_vehicles(@wa_ev_registrations)
+      expect(creation_log).to be_an_instance_of(Array)
+      creation_log.each do |vehicle|
+        expect(vehicle.vin).not_to eq(nil)
+        expect(vehicle.year).not_to eq(nil)
+        expect(vehicle.make).not_to eq(nil)
+        expect(vehicle.model).not_to eq(nil)
+        expect(vehicle.engine).not_to eq(nil)
+      end
+    end
   end
 end
         
