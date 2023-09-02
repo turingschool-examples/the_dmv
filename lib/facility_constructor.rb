@@ -15,6 +15,8 @@ class FacilityConstructor
       parsed_hash = co_parse(api_hash)
     elsif api_hash[:state] == "NY"
       parsed_hash = ny_parse(api_hash)
+    elsif api_hash[:state] == "MO"
+      parsed_hash = mo_parse(api_hash)
     else
       parsed_hash = api_hash
     end
@@ -34,6 +36,15 @@ class FacilityConstructor
       api_hash[:phone] = api_hash[:public_phone_number]
     else
       api_hash[:phone] = "(800) 698-2931"
+    end
+    api_hash
+  end
+
+  def mo_parse(api_hash)
+    api_hash[:name] = "#{api_hash[:name]} DMV Office"
+    api_hash[:address] = "#{api_hash[:address1]} #{api_hash[:city]} #{api_hash[:state]} #{api_hash[:zipcode]}"
+    if api_hash[:phone] == nil
+      api_hash[:phone] = "N/A"
     end
     api_hash
   end
