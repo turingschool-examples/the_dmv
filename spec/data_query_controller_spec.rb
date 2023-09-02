@@ -87,4 +87,10 @@ RSpec.describe DataQuery do
       expect(@dq.parse_input).to eq true
     end
   end
+
+  describe '#print_query_header' do
+    it 'formats the prompt more clearly' do
+      expect(@dq.print_query_header).to eq nil
+    end
+  end
 end
