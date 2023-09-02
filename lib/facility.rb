@@ -32,6 +32,8 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    registrant.license_data[:written] = true
+    if @services.include?('Written Test')
+      registrant.license_data[:written] = true
+    end
   end
 end
