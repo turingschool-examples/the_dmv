@@ -19,6 +19,12 @@ class Facility
     @services << service
   end
 
+  def register_ev(vehicle)
+    vehicle.plate_type = :ev
+    @collected_fees += 200
+  end
+
+  # add bridge methods for each of these plate assignment conditions
   def register_vehicle(vehicle)
     return if !@services.include?('Vehicle Registration')
     vehicle.registration_date = Date.today
