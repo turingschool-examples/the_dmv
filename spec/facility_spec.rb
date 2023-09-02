@@ -134,6 +134,7 @@ RSpec.describe Facility do
       expect(@registrant_1.permit?).to be true
       @facility_1.administer_written_test(@registrant_1)
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
     
     it 'Will not adminster written test to someone under 16 years, even with a permit' do
       @facility_1.add_service('Written Test')
