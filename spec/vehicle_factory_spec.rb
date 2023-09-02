@@ -13,6 +13,7 @@ RSpec.describe VehicleFactory do
       end
       
       expect(@factory.create_vehicles(@wa_ev_registrations)[0].engine).to eq(:ev) 
+      expect(@factory.create_vehicles(@wa_ev_registrations)[5].engine).to eq(:ev) 
     end
   end
 end
