@@ -9,9 +9,14 @@ The specifications give you some classes to help you start breaking this problem
 ## Tools Used
 
 - TDD
+- RubyMine
+- IDE Debugger
 
 
 ## Programming Paradigms
 
-- Ext. Data
+- Ext. Data API
 - Existing Codebase
+- Object instantiation with Hash
+- Case/When Statements
+- RSpec STDIN testing
