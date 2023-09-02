@@ -48,12 +48,11 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    if @services.each do |service|
-      service.include?('Written Test')
-        if registrant.age >= 16
-          registrant.license_data[:written] = true
-        end
+    if @services.include?('Written Test') 
+      if registrant.age >= 16 && registrant.permit? 
+        registrant.license_data[:written] = true
       end
-    end
+    end 
+    registrant.license_data[:written]
   end
 end
