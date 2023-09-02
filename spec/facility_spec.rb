@@ -1,4 +1,5 @@
 require 'spec_helper'
+require './lib/registrant'
 
 RSpec.describe Facility do
   
@@ -137,33 +138,45 @@ RSpec.describe Facility do
 
     end
 
-#   describe '#Road Test' do
-#     before(:each) do
-#       @registrant_1 = Registrant.new('Bruce', 18, true)
-#       @registrant_2 = Registrant.new('Penny', 16)
-#       @registrant_3 = Registrant.new('Tucker', 15)
-#       @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
-#       @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
-#     end  
-#   end
+  describe '#Road Test' do
+    before(:each) do
+      @registrant_1 = Registrant.new('Bruce', 18, true)
+      @registrant_2 = Registrant.new('Penny', 16)
+      @registrant_3 = Registrant.new('Tucker', 15)
+      @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
+    end
 
-#   it 'verifies that registrant 3 cannot have a permit due to age and the 16 year old requirement for written test' do
-#     @registrant_3.earn_permit
-#     @facility_1.add_service('Road Test')
-#     @facility_1.administer_road_test(@registrant_3)
-#     expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-#   end
+  it 'verifies that registrant 3 can receive a permit but cannot have road test due to 16 year old requirement and written test' do
+    @registrant_3.earn_permit
+    @facility_1.add_service('Road Test')
+    @facility_1.add_service('Written Test')
+    @facility_1.administer_road_test(@registrant_3)
+    expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+  end
 
-#   it 'after adminstering the road test, registrant 1 has a license' do
-#     @facility_1.add_service('Road Test')
-#     @facility_1.administer_road_test(@registrant_1)
-#     expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
-#   end
+  it 'adds multiple services to facility 1' do
+    @facility_1.add_service('Written Test')
+    @facility_1.add_service('Road Test')
+    expect(@facility_1.services).to eq(["Written Test", "Road Test"])
+  end
 
-#   it 'checking that Registrant 2 can also get a license' do
-#     @facility_1.administer_written_test(@registrant_1)
-#     @facility_1.add_service('Road Test')
-#     @facility_1.administer_road_test(@registrant_2)
-#     expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
-#   end
+  it 'after administering the road test, registrant 1 has a license' do
+    @facility_1.add_service('Road Test')
+    @facility_1.administer_road_test(@registrant_1)
+    expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+  end
+
+  it 'checking that Registrant 2 can also get a license' do
+    @facility_1.add_service('Written Test')
+    @facility_1.add_service('Road Test')
+    @registrant_2.earn_permit
+    expect(@registrant2.permit?).to eq(true)
+    @facility_1.administer_written_test(@registrant_2)
+    @facility_1.administer_road_test(@registrant_2)
+    expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+  end
 end
+
+end
+

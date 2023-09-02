@@ -57,7 +57,7 @@ class Facility
 
   def administer_road_test(registrant)
   if @services.include?("Road Test")
-    if registrant.permit == true
+    if registrant.permit == true && registrant.age >=16
       registrant.license_data[:license]=true
       true
     else
