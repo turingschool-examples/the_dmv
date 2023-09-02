@@ -1,3 +1,5 @@
+require_relative 'vehicle'
+
 class VehicleFactory
   def create_vehicles(data)
     vehicles = []
