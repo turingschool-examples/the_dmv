@@ -1,4 +1,6 @@
 require 'spec_helper'
+require './lib/facility'
+require './lib/vehicle'
 
 RSpec.describe Facility do
   before(:each) do
@@ -22,6 +24,24 @@ RSpec.describe Facility do
       @facility.add_service('Renew Drivers License')
       @facility.add_service('Vehicle Registration')
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+    end
+  end
+
+  describe '#add facility' do
+    it 'can add facilities' do
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
+      expect(facility_1).to be_a Facility
+      expect(facility_2).to be_a Facility
+    end
+  end
+
+  describe '#plate type' do
+    it 'returns plate type nil' do
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+      expect(cruz.plate_type).to eq(nil)
+      expect(camaro.plate_type).to eq(nil)
     end
   end
 end
