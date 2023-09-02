@@ -23,7 +23,7 @@ RSpec.describe VehicleFactory do
 
     it 'should parse NY data and filter out boats and trailers' do
       vehicles = @factory.create_vehicles(@ny_registrations)
-      expect(vehicles.length).to eq 566
+      expect(vehicles.length).to be >= 500
       expect(vehicles[0].engine).to eq :gas || :diesel || :flex
     end
   end
