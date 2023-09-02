@@ -33,5 +33,15 @@ RSpec.describe Registrant do
 
       expect(@registrant_2.permit?).to be true
     end
+
+    it 'functions if a registrant already has a permit' do
+      @registrant_2.earn_permit
+
+      expect(@registrant_2.permit?).to be true
+
+      @registrant_2.earn_permit
+
+      expect(@registrant_2.permit?).to be true
+    end
   end
 end

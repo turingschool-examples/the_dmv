@@ -19,19 +19,37 @@ class Facility
     @services << service
   end
 
-  def register_vehicle(vehicle)
+  def register_ev(vehicle)
     return if !@services.include?('Vehicle Registration')
     vehicle.registration_date = Date.today
+    vehicle.plate_type = :ev
+    @collected_fees += 200
     @registered_vehicles << vehicle
+  end
+
+  def register_antique(vehicle)
+    return if !@services.include?('Vehicle Registration')
+    vehicle.registration_date = Date.today
+    vehicle.plate_type = :antique
+    @collected_fees += 25
+    @registered_vehicles << vehicle
+  end
+
+  def register_reg(vehicle)
+    return if !@services.include?('Vehicle Registration')
+    vehicle.registration_date = Date.today
+    vehicle.plate_type = :regular
+    @collected_fees += 100
+    @registered_vehicles << vehicle
+  end
+
+  def register_vehicle(vehicle)
     if vehicle.electric_vehicle?
-      vehicle.plate_type = :ev
-      @collected_fees += 200
+      register_ev(vehicle)
     elsif vehicle.antique?
-      vehicle.plate_type = :antique
-      @collected_fees += 25
+      register_antique(vehicle)
     else
-      vehicle.plate_type = :regular
-      @collected_fees += 100
+      register_reg(vehicle)
     end
   end
 

@@ -10,7 +10,8 @@ class VehicleFactory
       make = registration[:make]
       model = registration[:model]
 
-      vehicle = Vehicle.new(vin: vin, year: year, make: make, model: model, engine: :ev)
+      vehicle = Vehicle.new(vin: vin, year: year, make: make, 
+      model: model, engine: :ev)
     end
   end
 end

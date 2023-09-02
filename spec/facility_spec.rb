@@ -34,6 +34,126 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#register_ev' do
+    it 'can assign plate type to :ev' do
+      expect(@bolt.plate_type).to be nil
+      
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_ev(@bolt)
+
+      expect(@bolt.plate_type).to eq(:ev)
+    end
+
+    it 'can collect $200 in registration fees' do
+      expect(@facility_1.collected_fees).to eq(0)
+
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_ev(@bolt)
+
+      expect(@facility_1.collected_fees).to eq(200)
+    end
+
+    it 'adds registered vehicle to registered_vehicles array' do
+      expect(@facility_1.registered_vehicles).to eq([])
+
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@bolt)
+
+      expect(@facility_1.registered_vehicles).to eq([@bolt])
+      expect(@facility_2.registered_vehicles).to eq([])
+    end
+
+    it 'will not function if service is unavailable' do
+      expect(@bolt.plate_type).to be nil
+      expect(@facility_1.collected_fees).to eq(0)
+
+      @facility_1.register_ev(@bolt)
+
+      expect(@bolt.plate_type).to be nil
+      expect(@facility_1.collected_fees).to eq(0)
+    end
+  end
+
+  describe '#register_antique' do
+    it 'can assign plate type to :antique' do
+      expect(@camaro.plate_type).to be nil
+
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_antique(@camaro)
+
+      expect(@camaro.plate_type).to eq(:antique)
+    end
+
+    it 'can collect $25 in registration fees' do
+      expect(@facility_1.collected_fees).to eq(0)
+
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_antique(@camaro)
+
+      expect(@facility_1.collected_fees).to eq(25)
+    end
+
+    it 'adds registered vehicle to registered_vehicles array' do
+      expect(@facility_1.registered_vehicles).to eq([])
+
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@camaro)
+
+      expect(@facility_1.registered_vehicles).to eq([@camaro])
+      expect(@facility_2.registered_vehicles).to eq([])
+    end
+
+    it 'will not function if service is unavailable' do
+      expect(@camaro.plate_type).to be nil
+      expect(@facility_1.collected_fees).to eq(0)
+
+      @facility_1.register_antique(@camaro)
+
+      expect(@camaro.plate_type).to be nil
+      expect(@facility_1.collected_fees).to eq(0)
+    end
+  end
+
+  describe '#register_reg' do
+    it 'can assign plate type to :regular' do
+      expect(@cruz.plate_type).to be nil
+
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_reg(@cruz)
+
+      expect(@cruz.plate_type).to eq(:regular)
+    end
+
+    it 'can collect $100 in registration fees' do
+      expect(@facility_1.collected_fees).to eq(0)
+      
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_reg(@cruz)
+
+      expect(@facility_1.collected_fees).to eq(100)
+    end
+
+    it 'adds registered vehicle to registered_vehicles array' do
+      expect(@facility_1.registered_vehicles).to eq([])
+
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+      expect(@facility_2.registered_vehicles).to eq([])
+    end
+
+    it 'will not function if service is unavailable' do
+      expect(@cruz.plate_type).to be nil
+      expect(@facility_1.collected_fees).to eq(0)
+
+      @facility_1.register_reg(@cruz)
+
+      expect(@cruz.plate_type).to be nil
+      expect(@facility_1.collected_fees).to eq(0)
+    end
+  end
+
   describe '#register_vehicle' do
     it 'sets the registration date for the vehicle if service is available' do
       expect(@cruz.registration_date).to be nil
@@ -45,7 +165,7 @@ RSpec.describe Facility do
       expect(@cruz.registration_date).to eq(Date.today)
     end
 
-    it 'will not register if service is not available' do
+    it 'will not register if service is unavailable' do
       expect(@cruz.registration_date).to be nil
 
       @facility_1.register_vehicle(@cruz)
@@ -80,7 +200,7 @@ RSpec.describe Facility do
       expect(@bolt.plate_type).to eq(:ev)
     end
 
-    it 'adds registered vehicle to facility registered_vehicles' do
+    it 'adds registered vehicle to registered_vehicles array' do
       expect(@facility_1.registered_vehicles).to eq([])
 
       @facility_1.add_service('Vehicle Registration')
@@ -90,7 +210,7 @@ RSpec.describe Facility do
       expect(@facility_2.registered_vehicles).to eq([])
     end
 
-    it 'collects $100 in fees for registration with :regular plates' do
+    it 'collects $100 in fees for :regular plates' do
       expect(@facility_1.collected_fees).to eq(0)
       
       @facility_1.add_service('Vehicle Registration')
@@ -100,7 +220,7 @@ RSpec.describe Facility do
       expect(@facility_2.collected_fees).to eq(0)
     end
 
-    it 'collects $25 in fees for registration with :antique plates' do
+    it 'collects $25 in fees for :antique plates' do
       expect(@facility_1.collected_fees).to eq(0)
 
       @facility_1.add_service('Vehicle Registration')
@@ -110,7 +230,7 @@ RSpec.describe Facility do
       expect(@facility_2.collected_fees).to eq(0)
     end
 
-    it 'collects $200 in fees for registration with :ev plates' do
+    it 'collects $200 in fees for :ev plates' do
       expect(@facility_1.collected_fees).to eq(0)
 
       @facility_1.add_service('Vehicle Registration')
@@ -130,7 +250,7 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
 
-    it 'will do nothing if service is not available at the facility' do 
+    it 'will do nothing if service is unavailable' do 
       @facility_1.administer_written_test(@registrant_1)
 
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
@@ -162,7 +282,7 @@ RSpec.describe Facility do
   end
 
   describe '#administer_road_test' do
-    it 'gives registrant a license if service is available and registrant passed written test' do
+    it 'gives registrant license if service is available and registrant passed written test' do
       @facility_1.add_service('Written Test')
       @facility_1.add_service('Road Test')
       @facility_1.administer_written_test(@registrant_1)
@@ -172,7 +292,7 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
     end
 
-    it 'will do nothing if service is not available at the facility' do
+    it 'will do nothing if service is unavailable at the facility' do
       @facility_1.add_service('Written Test')
       @facility_1.administer_written_test(@registrant_1)
       @facility_1.administer_road_test(@registrant_1)
@@ -192,7 +312,7 @@ RSpec.describe Facility do
   end
 
   describe '#renew_drivers_license' do
-    it 'renews a drivers license if registrant has already earned one' do
+    it 'renews drivers license if registrant has already earned one' do
       @facility_1.add_service('Written Test')
       @facility_1.add_service('Road Test')
       @facility_1.add_service('Renew License')
@@ -204,7 +324,7 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
     end
 
-    it 'will do nothing if service is not available at the facility' do
+    it 'will do nothing if service is unavailable' do
       @facility_1.add_service('Written Test')
       @facility_1.add_service('Road Test')
       @facility_1.administer_written_test(@registrant_1)
@@ -215,7 +335,7 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
     end
 
-    it 'will do nothing if registrant has not passed road test and earned their license' do
+    it 'will do nothing if registrant has not earned their license' do
       @facility_1.add_service('Written Test')
       @facility_1.add_service('Renew License')
       @facility_1.administer_written_test(@registrant_1)
