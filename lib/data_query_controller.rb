@@ -31,12 +31,12 @@ class DataQuery
 
     case args[0].to_i
     when 1
-      self.query_summary(args[1])
-      return true
+      return self.query_summary(args[1])
     when 2
-      return true
+      return self.query_year(args[1], args[2])
     when 3
-      return true
+      return bad_input(args[1].downcase) unless args[2].match?(/gas|diesel|ev|flex/i)
+      return self.query_engine(args[1], args[2])
     else
       return false
     end
@@ -44,23 +44,40 @@ class DataQuery
 
   def bad_input(input)
     puts "#{input} is not a valid option; please try again"
-    false
+    return false
+  end
+
+  def query_engine(state, engine)
+    registrations = state_helper(state)
+
+    filtered = registrations.filter { |v| v.engine == engine.to_sym}
+    puts "\t- There are #{filtered.count} registered cars with a #{engine} engine in #{state.upcase}"
+    return true
+  end
+
+  def query_year(state, year)
+    registrations = state_helper(state)
+
+    filtered = registrations.filter { |v| v.year == year}
+    puts "\t- There are #{filtered.count} registered cars for the year #{year} in #{state.upcase}"
+    return true
   end
 
   def query_summary(state)
-    registrations =
-      state == 'wa' ? @wa_veh : @ny_veh
+    registrations = state_helper(state)
+
 
     puts "Here's a short summary of vehicle registration data for #{state.upcase}"
     # most popular
-    max_make_model = registrations.map { |v| "#{v.make} #{v.model}" }
-                                  .reduce(Hash.new(0)) { |h, mm| h[mm] += 1; h }
-                                  .max_by { |mm, count| count }
+    max_make_model = registrations.map { |v| "#{v.make} #{v.model}" } # => array of make+model
+                                  .reduce(Hash.new(0)) { |h, mm| h[mm] += 1; h } # => hash of make+model, values
+                                  .max_by { |mm, count| count } # => array of key, value
     puts "\t- The most popular car is the #{max_make_model[0].rstrip} @ #{max_make_model[1]} registrations"
     # oldest car
     oldest_car = registrations.min_by { |v| v.year }
     puts "\t- The oldest car is a #{oldest_car.make}: #{oldest_car.year}"
     # county with most veh
+    return true
   end
 
   def quit
@@ -69,7 +86,9 @@ class DataQuery
     nil
   end
 
-
+  def state_helper(state)
+    state == 'wa' ? @wa_veh : @ny_veh
+  end
 
   PROMPT = "
   Query WA or NY vehicle registrations: \n

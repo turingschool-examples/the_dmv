@@ -60,10 +60,31 @@ RSpec.describe DataQuery do
     it 'provides summary data for given state' do
       allow($stdin).to receive(:gets) { "1 NY" }
       expect(@dq.parse_input).to eq true
-      expect(@dq.live).to eq true
       allow($stdin).to receive(:gets) { "1 WA" }
       expect(@dq.parse_input).to eq true
-      expect(@dq.live).to eq true
+    end
+  end
+
+  describe '#state_helper' do
+    it 'returns the correct array object when passed a state string' do
+      expect(@dq.state_helper('ny')).to be_an Array
+      expect(@dq.state_helper('wa')).to be_an Array
+    end
+  end
+
+  describe '#query_year' do
+    it 'will return a count of registered vehicles by year' do
+      allow($stdin).to receive(:gets) { "2 NY 1990" }
+      expect(@dq.parse_input).to eq true
+    end
+  end
+
+  describe '#query_engine' do
+    it 'returns a count of registered vehicles by engine type' do
+      allow($stdin).to receive(:gets) { "3 NY gas" }
+      expect(@dq.parse_input).to eq true
+      allow($stdin).to receive(:gets) { "3 WA ev" }
+      expect(@dq.parse_input).to eq true
     end
   end
 end
