@@ -1,5 +1,4 @@
 require './spec/spec_helper'
-# require './lib/vehicle'
 require 'date'
 
 class Facility
@@ -21,9 +20,9 @@ class Facility
   def register_vehicle(vehicle)
     if @services.include?('Vehicle Registration')
       vehicle.registration_date = Date.today
-      if vehicle.antique? 
-        @collected_fees += 25
+      if vehicle.antique?
         vehicle.plate_type = :antique
+        @collected_fees += 25
         @registered_vehicles << vehicle
       elsif vehicle.electric_vehicle?
         vehicle.registration_date = Date.today
@@ -36,28 +35,42 @@ class Facility
         @collected_fees += 100
         @registered_vehicles << vehicle
       end
-    else
-      return
     end
   end
 
   def administer_written_test(registrant)
     if @services.include?('Written Test') && registrant.permit? && registrant.age >= 16
       registrant.license_data[:written] = true
+      return true
+    else
+      return false
     end
   end
 
   def administer_road_test(registrant)
-    return false if !administer_written_test(registrant)
-    registrant.license_data[:license] = true
-    return true
+    if @services.include?('Road Test') && registrant.license_data[:written]
+      registrant.license_data[:license] = true
+      return true
+    end
+    return false
+  end
+
+  def renew_drivers_license(registrant)
+    if @services.include?('Renew License') && 
+      registrant.license_data[:written] && 
+      registrant.license_data[:license]
+        registrant.license_data[:renewed] = true
+        return true
+    end
+    return false
   end
 end
 
-facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
-facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
+# facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+# facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
 
-cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
-bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
-camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
-binding.pry
+# cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+# bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
+# camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+
+# binding.pry
