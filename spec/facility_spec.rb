@@ -150,4 +150,21 @@ RSpec.describe Facility do
       expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
+
+  describe '#administer_road_test' do
+    it 'Set license data to true once road test administered, only if passed written test' do
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Written Test')
+      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      @facility_1.administer_road_test(@registrant_2)
+      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+
+      @facility_1.administer_road_test(@registrant_2)
+      @facility_1.administer_written_test(@registrant_2)
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+      @facility_1.administer_road_test(@registrant_2)
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+    end
+
+  end
 end
