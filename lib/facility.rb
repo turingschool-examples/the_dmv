@@ -1,3 +1,4 @@
+require 'date'
 class Facility
   attr_reader :name,
               :address,
@@ -16,6 +17,10 @@ class Facility
   
   def add_service(service)
     @services << service
+    self.collected_fees_helper
+    if service == 'Vehicle Registration'
+      self.register_vehicle_helper
+    end
   end
   
   # write test for helper method
@@ -46,7 +51,11 @@ class Facility
   # end
 
   def register_vehicle(vehicle)
-    register_vehicle_helper
+    if @services.include?('Vehicle Registration')
+      register_vehicle_helper
+    end
+
+    
   end
 
     
