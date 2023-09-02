@@ -13,4 +13,8 @@ class Facility
   def add_service(service)
     @services << service
   end
+
+  def register_vehicle(new_vehicle)
+    @registered_vehicles << new_vehicle
+  end
 end
