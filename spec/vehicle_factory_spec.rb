@@ -4,20 +4,20 @@ require './lib/dmv_data_service'
 
 RSpec.describe VehicleFactory do
   it 'exists' do
-    factory = VehicleFactory.new
+    vfactory = VehicleFactory.new
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
 
-    expect(factory).to be_an_instance_of VehicleFactory
+    expect(vfactory).to be_an_instance_of VehicleFactory
   end
 
   it 'can produce vehicles' do
-    factory = VehicleFactory.new
+    vfactory = VehicleFactory.new
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     
 
-    factory.create_vehicles(wa_ev_registrations)
+    vfactory.create_vehicles(wa_ev_registrations)
     # require'pry';binding.pry
-    expect(factory.off_the_lot[0]).to be_an_instance_of Vehicle
+    expect(vfactory.off_the_lot[0]).to be_an_instance_of Vehicle
 
   end
 end
