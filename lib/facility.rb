@@ -26,6 +26,13 @@ class Facility
     @collected_fees += 200
   end
 
+  def register_antique(vehicle)
+    return if !@services.include?('Vehicle Registration')
+    vehicle.registration_date = Date.today
+    vehicle.plate_type = :antique
+    @collected_fees += 25
+  end
+
   def register_reg(vehicle)
     return if !@services.include?('Vehicle Registration')
     vehicle.registration_date = Date.today
@@ -37,8 +44,7 @@ class Facility
     if vehicle.electric_vehicle?
       register_ev(vehicle)
     elsif vehicle.antique?
-      vehicle.plate_type = :antique
-      @collected_fees += 25
+      register_antique(vehicle)
     else
       register_reg(vehicle)
     end
