@@ -16,5 +16,6 @@ class Facility
 
   def register_vehicle(new_vehicle)
     @registered_vehicles << new_vehicle
+    new_vehicle.registration_date = Date.today
   end
 end
