@@ -8,8 +8,5 @@ class Registrant
     license: false,
   renewed: false}
   end
-  def permit
-    @permit
-  end
   
 end

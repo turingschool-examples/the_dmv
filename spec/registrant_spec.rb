@@ -12,6 +12,10 @@ RSpec.describe Vehicle do
       expect(@registrant_1.age).to eq(18)
     end
   end
-  
+  describe '#permit?' do 
+   it 'will say if there is a permit' do
+     expect(@registrant_1.permit?).to eq(true)
+   end
+  end
 end
 
