@@ -20,15 +20,14 @@ class Facility
   end
 
   def register_ev(vehicle)
+    return if !@services.include?('Vehicle Registration')
+    vehicle.registration_date = Date.today
     vehicle.plate_type = :ev
     @collected_fees += 200
   end
 
   # add bridge methods for each of these plate assignment conditions
   def register_vehicle(vehicle)
-    return if !@services.include?('Vehicle Registration')
-    vehicle.registration_date = Date.today
-    @registered_vehicles << vehicle
     if vehicle.electric_vehicle?
       register_ev(vehicle)
     elsif vehicle.antique?
@@ -38,6 +37,7 @@ class Facility
       vehicle.plate_type = :regular
       @collected_fees += 100
     end
+    @registered_vehicles << vehicle
   end
 
   def administer_written_test(registrant)

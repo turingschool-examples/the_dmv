@@ -24,3 +24,17 @@ class DmvDataService
     @mo_dmv_office_locations ||= load_data('https://data.mo.gov/resource/835g-7keg.json')
   end
 end
+
+# describe '#register_antique' do
+# it 'can assign plate type to :antique' do
+#   expect(@camaro.plate_type).to be nil
+
+#   @facility_1.register_ev(@camaro)
+
+  
+# end
+
+# it 'can collect $25 in registration fees' do
+
+# end
+# end
