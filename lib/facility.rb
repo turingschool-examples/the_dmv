@@ -24,6 +24,7 @@ class Facility
     vehicle.registration_date = Date.today
     vehicle.plate_type = :ev
     @collected_fees += 200
+    @registered_vehicles << vehicle
   end
 
   def register_antique(vehicle)
@@ -31,6 +32,7 @@ class Facility
     vehicle.registration_date = Date.today
     vehicle.plate_type = :antique
     @collected_fees += 25
+    @registered_vehicles << vehicle
   end
 
   def register_reg(vehicle)
@@ -38,6 +40,7 @@ class Facility
     vehicle.registration_date = Date.today
     vehicle.plate_type = :regular
     @collected_fees += 100
+    @registered_vehicles << vehicle
   end
 
   def register_vehicle(vehicle)
@@ -48,7 +51,6 @@ class Facility
     else
       register_reg(vehicle)
     end
-    @registered_vehicles << vehicle
   end
 
   def administer_written_test(registrant)
