@@ -1,4 +1,5 @@
 require 'spec_helper'
+require './lib/registrant'
 
 RSpec.describe Facility do
   before(:each) do
@@ -98,7 +99,7 @@ RSpec.describe Facility do
   describe '#administer_written_test' do
     it 'sets license data to true once written test administered' do
       expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-      registrant_2.administer_written_test
+      @facility_1.administer_written_test(@registrant_2)
       expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
   end
