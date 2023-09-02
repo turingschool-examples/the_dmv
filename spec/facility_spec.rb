@@ -34,6 +34,24 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#register_ev' do
+    it 'can assign plate type to :ev' do
+      expect(@bolt.plate_type).to be nil
+      
+      @facility_1.register_ev(@bolt)
+
+      expect(@bolt.plate_type).to eq(:ev)
+    end
+
+    it 'can collect $200 in registration fees' do
+      expect(@facility_1.collected_fees).to eq(0)
+
+      @facility_1.register_ev(@bolt)
+
+      expect(@facility_1.collected_fees).to eq(200)
+    end
+  end
+
   describe '#register_vehicle' do
     it 'sets the registration date for the vehicle if service is available' do
       expect(@cruz.registration_date).to be nil
