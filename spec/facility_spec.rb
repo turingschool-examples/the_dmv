@@ -64,6 +64,36 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#register_antique' do
+    it 'can assign plate type to :antique' do
+      expect(@camaro.plate_type).to be nil
+
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_antique(@camaro)
+
+      expect(@camaro.plate_type).to eq(:antique)
+    end
+
+    it 'can collect $25 in registration fees' do
+      expect(@facility_1.collected_fees).to eq(0)
+
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_antique(@camaro)
+
+      expect(@facility_1.collected_fees).to eq(25)
+    end
+
+    it 'will not function if service is unavailable' do
+      expect(@camaro.plate_type).to be nil
+      expect(@facility_1.collected_fees).to eq(0)
+
+      @facility_1.register_antique(@camaro)
+
+      expect(@camaro.plate_type).to be nil
+      expect(@facility_1.collected_fees).to eq(0)
+    end
+  end
+
   describe '#register_reg' do
     it 'can assign plate type to :regular' do
       expect(@cruz.plate_type).to be nil
