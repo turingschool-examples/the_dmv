@@ -1,5 +1,4 @@
-require './lib/facility'
-require 'spec_helper'
+require './spec/spec_helper'
 
 RSpec.describe Facility do
   before(:each) do
