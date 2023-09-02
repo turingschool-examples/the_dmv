@@ -19,18 +19,27 @@ RSpec.describe do
       # require "pry"; binding.pry
 
       expect(factory.facilities.count).to be(5)
-      #services stored as one item, need to iterate through services
     end
 
     it "adds services to facilities from CO database" do
       factory = FacilityFactory.new
       co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
       factory.create_facilities(co_dmv_office_locations)
-      require "pry"; binding.pry
-      expect(factory.facilities[0].services.count).to eq(6)
+      #require "pry"; binding.pry
+      expect(factory.facilities[0].services.count).to eq(4)
       expect(factory.facilities[1].services.count).to eq(4)
       expect(factory.facilities[2].services.count).to eq(4)
       expect(factory.facilities[3].services.count).to eq(4)
     end
+
+    it "creates facilities from NY database" do
+      factory = FacilityFactory.new
+      ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
+      factory.create_facilities(ny_dmv_office_locations)
+      require "pry"; binding.pry
+
+      expect(factory.facilities.count).to eq(172)
+    end
+
   end
 end
