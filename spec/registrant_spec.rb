@@ -20,7 +20,7 @@ RSpec.describe Registrant do
     end
     it 'can store an age' do
       expect(@registrant_1.age).to eq(18)
-      expect(@registrant_2.age).to eq(15)
+      expect(@registrant_2.age).to eq(16)
     end
     it 'can store permit status but is false by default' do
       expect(@registrant_1.permit).to eq(true)
@@ -36,20 +36,20 @@ RSpec.describe Registrant do
 
   describe '#administer written test' do
     it '#accesses registrant license data' do
-      expect(registrant_1.instance_variable_get(:@license_data).length).to eq(3)
-      expect(registrant_1.permit?).to eq(false)
+      expect(@registrant_1.instance_variable_get(:@license_data).length).to eq(3)
+      expect(@registrant_1.permit?).to eq(false)
     end
 
     it '#does not administer without offering' do
-      expect(facility_1.administer_written_test(registrant_1)).to eq(false)
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
       facility_1.add_service('Written Test')
-      expect(facility_1.administer_written_test(registrant_1)).to eq(true)
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
     end
 
     it '#changes hash to true after administering' do
-      facility_1.add_service('Written Test')
-      facility_1.administer_written_test(registrant_1)
-      expect(registrant_1.license_data(:license)).to eq(true)
+      @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@registrant_1.license_data(:license)).to eq(true)
     end
   end
 end
