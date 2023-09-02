@@ -13,6 +13,11 @@ RSpec.describe Vehicle do
       expect(@registrant_1.license_data[:written]).to eq(false)
       expect(@registrant_1.license_data[:license]).to eq(false)
       expect(@registrant_1.license_data[:renewed]).to eq(false)
+      expect(@registrant_2.name).to eq('Penny')
+      expect(@registrant_2.age).to eq(15)
+      expect(@registrant_2.license_data[:written]).to eq(false)
+      expect(@registrant_2.license_data[:license]).to eq(false)
+      expect(@registrant_2.license_data[:renewed]).to eq(false)
     end
   end
   describe '#permit?' do 
