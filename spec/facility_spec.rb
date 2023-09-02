@@ -46,15 +46,23 @@ RSpec.describe Facility do
     it 'creates an array to store registered vehicles' do
       expect(@facility_1.registered_vehicles).to eq([])
     end
+  end
 
-    it 'will only add an array if the facility offers vehicle registration' do
-      expect(@facility_2.registered_vehicles).to eq(nil)
+  describe '#collected fees helper' do
+    it 'creates a variable to store collected fees' do
+      @facility_1.collected_fees_helper
+      expect(@facility_1.collected_fees).to eq(0)
     end
   end
 
-  describe '#collected_fees_helper' do
-    it 'creates a variable to store collected fees' do
-      @facility_1.collected_fees_helper
+  describe '#registered vehicles' do
+    it 'will return the value of the registered vehicles array' do
+      expect(@facility_1.registered_vehicles).to eq([])
+    end
+  end
+
+  describe '#collected fees' do
+    it 'will return the value of collected fees' do
       expect(@facility_1.collected_fees).to eq(0)
     end
   end

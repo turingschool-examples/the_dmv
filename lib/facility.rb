@@ -13,42 +13,36 @@ class Facility
     @phone = facility_details[:phone]
     @services = []
   end
-
   
   def add_service(service)
-    @services << service
     self.collected_fees_helper
     if service == 'Vehicle Registration'
       self.register_vehicle_helper
     end
+    @services << service
   end
-  
-  # write test for helper method
+
+  def registered_vehicles
+    self.register_vehicle_helper
+    @registered_vehicles
+  end
+
+  def collected_fees
+    self.collected_fees_helper
+    @collected_fees
+  end
+
   def register_vehicle_helper
-    if @registered_vehicles.nil? && @services.include?('Vehicle Registration')
+    if @registered_vehicles.nil?
       @registered_vehicles = []
     end
   end
-  # write test for helper method
+  
   def collected_fees_helper
     if @collected_fees.nil?
       @collected_fees = 0
     end
   end
-
-  # def registered_vehicles
-  #   if @services.includes?('Vehicle Registration')
-  #     register_vehicle_helper
-  #     @registered_vehicles
-  #   else
-  #     "This service is not offered at this location"
-  #   end
-  # end
-
-  # def collected_fees
-  #   collected_fees_helper
-  #   @collected_fees
-  # end
 
   def register_vehicle(vehicle)
     if @services.include?('Vehicle Registration')
