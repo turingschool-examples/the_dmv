@@ -149,6 +149,10 @@ RSpec.describe Facility do
       @facility_1.administer_written_test(@registrant_3)
       expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
+
+    it 'returns false, if written test cannot be administered' do
+      expect(@facility_1.administer_written_test(@registrant_1)). to be false
+    end
   end
 
   describe '#administer_road_test' do
@@ -191,5 +195,8 @@ RSpec.describe Facility do
       expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
 
+    it 'returns false, if road test cannot be administered' do
+      expect(@facility_1.administer_road_test(@registrant_1)). to be false
+    end
   end
 end
