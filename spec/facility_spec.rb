@@ -53,5 +53,18 @@ RSpec.describe Facility do
       expect(@cruz.plate_type).to eq(:regular)
       expect(@facility_1.collected_fees).to be 100
     end
+
+    it 'Assigns multiple plates and collects fees for each' do
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.services).to eq(['Vehicle Registration'])
+      expect(@facility_1.collected_fees).to be 0
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@camaro)
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@facility_1.collected_fees).to be 325
+    end
   end
 end
