@@ -41,6 +41,13 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#collected_fees_helper' do
+    it 'creates a variable to store collected fees' do
+      @facility_1.collected_fees_helper
+      expect(@facility_1.collected_fees).to eq(0)
+    end
+  end
+
   xdescribe '#register vehicle' do
     context 'before vehicles have been registered' do
       before(:each) do 
