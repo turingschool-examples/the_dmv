@@ -117,4 +117,29 @@ RSpec.describe Facility do
       expect(@registrant_2.license_data[:written]).to eq(true)
     end
   end
+
+  describe '#administer_road_test' do
+    it 'only performs if offered and if written test is passed' do
+      expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
+      @facility_1.add_service('Road Test')
+      expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
+      @registrant_3.earn_permit
+      expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
+      @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
+    end
+  end
+
+  describe '#renew_drivers_license' do
+    it 'only performs if offered and #registrant has license' do
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
+      @facility_1.add_service('Renew License')
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
+      @facility_1.administer_road_test(registrant_1)
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(true)
+    end
+  end
 end
