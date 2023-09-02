@@ -19,28 +19,33 @@ class Facility
     @services << service
   end
 
-  def register_ev(vehicle)
+  # could put a service_test method here to expedite all methods
+
+  def registration_helper(vehicle)
     return if !@services.include?('Vehicle Registration')
     vehicle.registration_date = Date.today
+    @registered_vehicles << vehicle
+  end
+
+  def register_ev(vehicle)
+    return if !@services.include?('Vehicle Registration')
     vehicle.plate_type = :ev
     @collected_fees += 200
-    @registered_vehicles << vehicle
+    registration_helper(vehicle)
   end
 
   def register_antique(vehicle)
     return if !@services.include?('Vehicle Registration')
-    vehicle.registration_date = Date.today
     vehicle.plate_type = :antique
     @collected_fees += 25
-    @registered_vehicles << vehicle
+    registration_helper(vehicle)
   end
 
   def register_reg(vehicle)
     return if !@services.include?('Vehicle Registration')
-    vehicle.registration_date = Date.today
     vehicle.plate_type = :regular
     @collected_fees += 100
-    @registered_vehicles << vehicle
+    registration_helper(vehicle)
   end
 
   def register_vehicle(vehicle)

@@ -34,6 +34,37 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#registration_helper' do
+    it 'can assign registration date for the vehicle if service is available' do
+      expect(@cruz.registration_date).to be nil
+
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.registration_helper(@cruz)
+
+      expect(@cruz.registration_date).to eq(Date.today)
+    end
+
+    it 'adds registered vehicle to registered_vehicles array' do
+      expect(@facility_1.registered_vehicles).to eq([])
+
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.registration_helper(@cruz)
+
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+      expect(@facility_2.registered_vehicles).to eq([])
+    end
+
+    it 'will not function if service is unavailable' do
+      expect(@cruz.registration_date).to be nil
+      expect(@facility_1.registered_vehicles).to eq([])
+
+      @facility_1.registration_helper(@cruz)
+
+      expect(@cruz.registration_date).to be nil
+      expect(@facility_1.registered_vehicles).to eq([])
+    end
+  end
+
   describe '#register_ev' do
     it 'can assign plate type to :ev' do
       expect(@bolt.plate_type).to be nil
@@ -57,7 +88,7 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([])
 
       @facility_1.add_service('Vehicle Registration')
-      @facility_1.register_vehicle(@bolt)
+      @facility_1.register_ev(@bolt)
 
       expect(@facility_1.registered_vehicles).to eq([@bolt])
       expect(@facility_2.registered_vehicles).to eq([])
@@ -97,7 +128,7 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([])
 
       @facility_1.add_service('Vehicle Registration')
-      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_antique(@camaro)
 
       expect(@facility_1.registered_vehicles).to eq([@camaro])
       expect(@facility_2.registered_vehicles).to eq([])
@@ -106,11 +137,13 @@ RSpec.describe Facility do
     it 'will not function if service is unavailable' do
       expect(@camaro.plate_type).to be nil
       expect(@facility_1.collected_fees).to eq(0)
+      expect(@facility_1.registered_vehicles).to eq([])
 
       @facility_1.register_antique(@camaro)
 
       expect(@camaro.plate_type).to be nil
       expect(@facility_1.collected_fees).to eq(0)
+      expect(@facility_1.registered_vehicles).to eq([])
     end
   end
 
@@ -137,7 +170,7 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([])
 
       @facility_1.add_service('Vehicle Registration')
-      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_reg(@cruz)
 
       expect(@facility_1.registered_vehicles).to eq([@cruz])
       expect(@facility_2.registered_vehicles).to eq([])
@@ -146,31 +179,24 @@ RSpec.describe Facility do
     it 'will not function if service is unavailable' do
       expect(@cruz.plate_type).to be nil
       expect(@facility_1.collected_fees).to eq(0)
+      expect(@facility_1.registered_vehicles).to eq([])
 
       @facility_1.register_reg(@cruz)
 
       expect(@cruz.plate_type).to be nil
       expect(@facility_1.collected_fees).to eq(0)
+      expect(@facility_1.registered_vehicles).to eq([])
     end
   end
 
   describe '#register_vehicle' do
-    it 'sets the registration date for the vehicle if service is available' do
+    it 'can assign registration date for the vehicle if service is available' do
       expect(@cruz.registration_date).to be nil
 
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
 
-      expect(@cruz.registration_date).to be_an_instance_of(Date)
       expect(@cruz.registration_date).to eq(Date.today)
-    end
-
-    it 'will not register if service is unavailable' do
-      expect(@cruz.registration_date).to be nil
-
-      @facility_1.register_vehicle(@cruz)
-
-      expect(@cruz.registration_date).to be nil
     end
 
     it 'assigns plate type :regular to non-ev cars that are less than 25yrs old' do
@@ -238,6 +264,19 @@ RSpec.describe Facility do
 
       expect(@facility_1.collected_fees).to eq(200)
       expect(@facility_2.collected_fees).to eq(0)
+    end
+    
+    it 'will not register if service is unavailable' do
+      expect(@cruz.registration_date).to be nil
+      expect(@facility_1.collected_fees).to eq(0)
+      expect(@facility_1.registered_vehicles).to eq([])
+      
+
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@cruz.registration_date).to be nil
+      expect(@facility_1.collected_fees).to eq(0)
+      expect(@facility_1.registered_vehicles).to eq([])
     end
   end
 
