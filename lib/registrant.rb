@@ -8,5 +8,12 @@ class Registrant
     license: false,
   renewed: false}
   end
-  
+  def permit?
+    if @permit = true
+      true
+    else
+      false
+    end
+
+  end
 end

@@ -10,6 +10,9 @@ RSpec.describe Vehicle do
     it 'will initialize' do
       expect(@registrant_1.name).to eq('Bruce')
       expect(@registrant_1.age).to eq(18)
+      expect(@registrant_1.license_data[:written]).to eq(false)
+      expect(@registrant_1.license_data[:license]).to eq(false)
+      expect(@registrant_1.license_data[:renewed]).to eq(false)
     end
   end
   describe '#permit?' do 
