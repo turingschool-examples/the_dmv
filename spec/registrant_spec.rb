@@ -23,6 +23,7 @@ RSpec.describe Vehicle do
   describe '#permit?' do 
    it 'will say if there is a permit' do
      expect(@registrant_1.permit?).to eq(true)
+     expect(@registrant_2.permit?).to eq(false)
    end
   end
 end
