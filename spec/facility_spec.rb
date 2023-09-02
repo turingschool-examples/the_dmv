@@ -127,7 +127,8 @@ RSpec.describe Facility do
       expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
       @facility_1.add_service('Written Test')
       @facility_1.administer_written_test(@registrant_1)
-      expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
+      @facility_1.administer_road_test(@registrant_1)
+      expect(@registrant_1.license_data[:license]).to eq(true)
     end
   end
 
@@ -135,11 +136,14 @@ RSpec.describe Facility do
     it 'only performs if offered and #registrant has license' do
       expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
       @facility_1.add_service('Renew License')
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
       expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
       @facility_1.administer_written_test(@registrant_1)
       expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
-      @facility_1.administer_road_test(registrant_1)
-      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(true)
+      @facility_1.administer_road_test(@registrant_1)
+      @facility_1.renew_drivers_license(@registrant_1)
+      expect(@registrant_1.license_data[:renewed]).to eq(true)
     end
   end
 end
