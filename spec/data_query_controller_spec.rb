@@ -57,8 +57,13 @@ RSpec.describe DataQuery do
   end
 
   describe '#query_summary' do
-    it 'provided summary data for given state' do
-
+    it 'provides summary data for given state' do
+      allow($stdin).to receive(:gets) { "1 NY" }
+      expect(@dq.parse_input).to eq true
+      expect(@dq.live).to eq true
+      allow($stdin).to receive(:gets) { "1 WA" }
+      expect(@dq.parse_input).to eq true
+      expect(@dq.live).to eq true
     end
   end
 end

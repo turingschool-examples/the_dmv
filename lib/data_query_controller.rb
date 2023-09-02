@@ -31,7 +31,7 @@ class DataQuery
 
     case args[0].to_i
     when 1
-      self.query_summary(arg[1])
+      self.query_summary(args[1])
       return true
     when 2
       return true
@@ -48,7 +48,19 @@ class DataQuery
   end
 
   def query_summary(state)
+    registrations =
+      state == 'wa' ? @wa_veh : @ny_veh
 
+    puts "Here's a short summary of vehicle registration data for #{state.upcase}"
+    # most popular
+    max_make_model = registrations.map { |v| "#{v.make} #{v.model}" }
+                                  .reduce(Hash.new(0)) { |h, mm| h[mm] += 1; h }
+                                  .max_by { |mm, count| count }
+    puts "\t- The most popular car is the #{max_make_model[0].rstrip} @ #{max_make_model[1]} registrations"
+    # oldest car
+    oldest_car = registrations.min_by { |v| v.year }
+    puts "\t- The oldest car is a #{oldest_car.make}: #{oldest_car.year}"
+    # county with most veh
   end
 
   def quit
