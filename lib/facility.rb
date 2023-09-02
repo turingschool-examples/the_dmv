@@ -19,6 +19,11 @@ class Facility
     @services << service
   end
 
+  def registration_helper(vehicle)
+    vehicle.registration_date = Date.today
+    @registered_vehicles << vehicle
+  end
+
   def register_ev(vehicle)
     return if !@services.include?('Vehicle Registration')
     vehicle.registration_date = Date.today
