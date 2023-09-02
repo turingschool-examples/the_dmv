@@ -69,7 +69,7 @@ RSpec.describe Facility do
       expect(@cruz.plate_type).to be nil
 
       @facility_1.add_service('Vehicle Registration')
-      @facility_1.register_ev(@cruz)
+      @facility_1.register_reg(@cruz)
 
       expect(@cruz.plate_type).to eq(:regular)
     end
@@ -78,7 +78,7 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(0)
       
       @facility_1.add_service('Vehicle Registration')
-      @facility_1.register_ev(@cruz)
+      @facility_1.register_reg(@cruz)
 
       expect(@facility_1.collected_fees).to eq(100)
     end
@@ -87,7 +87,7 @@ RSpec.describe Facility do
       expect(@cruz.plate_type).to be nil
       expect(@facility_1.collected_fees).to eq(0)
 
-      @facility_1.register_ev(@cruz)
+      @facility_1.register_reg(@cruz)
 
       expect(@cruz.plate_type).to be nil
       expect(@facility_1.collected_fees).to eq(0)
