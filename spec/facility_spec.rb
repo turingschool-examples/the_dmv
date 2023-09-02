@@ -29,24 +29,27 @@ RSpec.describe Facility do
       expect(@facility_2.services).to eq([])
     end
   end
-
+  
   describe '#registered_vehicles' do
     it 'adds vehicles registered' do
       expect(@facility_1.registered_vehicles).to eq([])
     end
     
     it 'adds one vehicle' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.registered_vehicles).to eq([@cruz])
     end
     
     it 'adds two vehicles' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro])
     end
     
     it 'adds three vehicles' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
@@ -66,11 +69,13 @@ RSpec.describe Facility do
     end
     
     it 'collect fees for regular car' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.collected_fees).to eq(100)
     end
     
     it 'collect fees for all type cars' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
