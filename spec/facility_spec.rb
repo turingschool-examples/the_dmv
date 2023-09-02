@@ -53,6 +53,16 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(200)
     end
 
+    it 'adds registered vehicle to registered_vehicles array' do
+      expect(@facility_1.registered_vehicles).to eq([])
+
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@bolt)
+
+      expect(@facility_1.registered_vehicles).to eq([@bolt])
+      expect(@facility_2.registered_vehicles).to eq([])
+    end
+
     it 'will not function if service is unavailable' do
       expect(@bolt.plate_type).to be nil
       expect(@facility_1.collected_fees).to eq(0)
@@ -170,7 +180,7 @@ RSpec.describe Facility do
       expect(@bolt.plate_type).to eq(:ev)
     end
 
-    it 'adds registered vehicle to facility registered_vehicles' do
+    it 'adds registered vehicle to registered_vehicles array' do
       expect(@facility_1.registered_vehicles).to eq([])
 
       @facility_1.add_service('Vehicle Registration')
