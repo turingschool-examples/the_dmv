@@ -19,6 +19,8 @@ RSpec.describe Factory do
         expect(vehicle).to be_an_instance_of(Vehicle)
       end
     end
+
+    # it 'creates vehicles with all data' do
   end
 end
         
