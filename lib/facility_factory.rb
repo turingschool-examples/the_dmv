@@ -11,7 +11,7 @@ class FacilityFactory
       address: "#{item[:address_li]} #{item[:address__1]} #{item[:city]} #{item[:state]} #{item[:zip]}", 
       phone: item[:phone]})
       new_facility.add_service(item[:services_p])
-      @services.each
+      new_facility.services = new_facility.services[0].to_s.gsub(',' , "").gsub(';' , "").split
         facilities << new_facility
     end
   end
