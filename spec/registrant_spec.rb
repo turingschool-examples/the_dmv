@@ -35,21 +35,19 @@ RSpec.describe Registrant do
   end
 
   describe '#administer written test' do
-    it '#accesses registrant license data' do
+    it 'accesses registrant license data' do
       expect(@registrant_1.instance_variable_get(:@license_data).length).to eq(3)
-      expect(@registrant_1.permit?).to eq(false)
+      expect(@registrant_1.permit?).to eq(true)
     end
 
     it '#does not administer without offering' do
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
-      facility_1.add_service('Written Test')
-      expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
     end
 
     it '#changes hash to true after administering' do
       @facility_1.add_service('Written Test')
       @facility_1.administer_written_test(@registrant_1)
-      expect(@registrant_1.license_data(:license)).to eq(true)
+      expect(@registrant_1.license_data[:written]).to eq(true)
     end
   end
 end

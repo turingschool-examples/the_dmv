@@ -29,12 +29,16 @@ class Facility
       end
     @registered_vehicles << vehicle
     end
-
-    #set veh registration date
-      #then, check engine type
-      #set plate
-      #set fee
-      #add to registered vehicles
   end
+
+  def administer_written_test(registrant)
+    if @services.include?('Written Test') && registrant.permit? && registrant.age >= 16
+       registrant.license_data[:written] = true
+      else
+      return false
+    end
+  end
+
+
 end
 
