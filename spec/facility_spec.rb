@@ -25,12 +25,10 @@ RSpec.describe Facility do
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'] )
     end
-
     it 'runs the collected fees helper' do
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.collected_fees).to eq(0)
-    end
-      
+    end      
     it 'runs the helper method for the service added' do
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.registered_vehicles).to eq([])
@@ -81,7 +79,6 @@ RSpec.describe Facility do
         @facility_1.register_vehicle(@bolt)
         expect(@facility_1.registered_vehicles).to eq([@cruz, @bolt])
       end
-
       it 'will collect a fee when registering vehicles' do
         @facility_1.register_vehicle(@cruz)
         expect(@facility_1.collected_fees).to eq(100)
@@ -121,22 +118,5 @@ RSpec.describe Facility do
         expect(@bolt.plate_type).to eq(:ev)
       end
     end
-
-      
-  end
-      
-      
+  end       
 end
-
-    # it 'will give the Vehicle a registration date' do
-    #   @facility_1.register_vehicle(cruz)
-    #   expect(cruz.registration_date).to be_an_instance_of(Date)
-    # end
-
-    # it 'assigns plates by type' do
-    #   @facility_1.register_vehicle(cruz)
-    #   @facility_1.register_vehicle(bolt)
-    #   @facility_
-    #   expect(cruz.plate_type).to eq(:regular)
-    #   expect(bolt.plate_type).to eq(:ev)
-    # end
