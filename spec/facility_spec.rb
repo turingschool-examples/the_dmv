@@ -64,6 +64,36 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#register_reg' do
+    it 'can assign plate type to :regular' do
+      expect(@cruz.plate_type).to be nil
+
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_ev(@cruz)
+
+      expect(@cruz.plate_type).to eq(:regular)
+    end
+
+    it 'can collect $100 in registration fees' do
+      expect(@facility_1.collected_fees).to eq(0)
+      
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_ev(@cruz)
+
+      expect(@facility_1.collected_fees).to eq(100)
+    end
+
+    it 'will not function if service is unavailable' do
+      expect(@cruz.plate_type).to be nil
+      expect(@facility_1.collected_fees).to eq(0)
+
+      @facility_1.register_ev(@cruz)
+
+      expect(@cruz.plate_type).to be nil
+      expect(@facility_1.collected_fees).to eq(0)
+    end
+  end
+
   describe '#register_vehicle' do
     it 'sets the registration date for the vehicle if service is available' do
       expect(@cruz.registration_date).to be nil
