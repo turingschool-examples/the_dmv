@@ -7,6 +7,9 @@ RSpec.describe Facility do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    @registrant_1 = Registrant.new('Bruce', 18, true )
+    @registrant_2 = Registrant.new('Penny', 16 )
+    @registrant_3 = Registrant.new('Tucker', 15 )
   end
 
   describe '#initialize' do
@@ -116,4 +119,28 @@ RSpec.describe Facility do
       expect(@bolt.plate_type).to eq(:ev)
     end
   end
+
+  describe '#administer_written_test' do
+    it 'administer written test' do
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false}) 
+      expect(@registrant_1.permit?).to be true
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false}) 
+    end
+
+    it 'administer written test if service is offered' do
+      @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
+    
+    it 'administer written test to others' do
+      expect(@registrant_2.age).to eq(16)
+      expect(@registrant_2.permit?).to eq(false)
+      @facility_1.administer_written_test(@registrant_2)
+      expect(@registrant_2.)
+    end
+
+  end
+
 end

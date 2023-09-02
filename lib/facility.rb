@@ -35,7 +35,7 @@ class Facility
     if @services.each do |service|
       service.include?('Vehicle Registration')
       @registered_vehicles << car
-    end
+      end
     end
     car.registration_date = Date.today
       if car.antique? == true
@@ -45,5 +45,13 @@ class Facility
       else
         car.plate_type = :regular
       end
+  end
+
+  def administer_written_test(registrant)
+    if @services.each do |service|
+      service.include?('Written Test')
+      registrant.license_data[:written] = true
+      end
+    end
   end
 end
