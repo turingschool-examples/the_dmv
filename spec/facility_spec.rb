@@ -178,5 +178,18 @@ RSpec.describe Facility do
       expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
     end
 
+    it 'Can not administer a license to someone too young, under 15' do
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Written Test')
+      expect(@registrant_3.age).to be 15
+      expect(@registrant_3.permit?).to be false
+      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+
+      @registrant_3.earn_permit
+      @facility_1.administer_written_test(@registrant_3)
+      @facility_1.administer_road_test(@registrant_3)
+      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+
   end
 end
