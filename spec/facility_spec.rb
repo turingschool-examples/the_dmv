@@ -38,6 +38,7 @@ RSpec.describe Facility do
     it 'can assign plate type to :ev' do
       expect(@bolt.plate_type).to be nil
       
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_ev(@bolt)
 
       expect(@bolt.plate_type).to eq(:ev)
@@ -46,9 +47,20 @@ RSpec.describe Facility do
     it 'can collect $200 in registration fees' do
       expect(@facility_1.collected_fees).to eq(0)
 
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_ev(@bolt)
 
       expect(@facility_1.collected_fees).to eq(200)
+    end
+
+    it 'will not function if service is unavailable' do
+      expect(@bolt.plate_type).to be nil
+      expect(@facility_1.collected_fees).to eq(0)
+
+      @facility_1.register_ev(@bolt)
+
+      expect(@bolt.plate_type).to be nil
+      expect(@facility_1.collected_fees).to eq(0)
     end
   end
 
@@ -63,7 +75,7 @@ RSpec.describe Facility do
       expect(@cruz.registration_date).to eq(Date.today)
     end
 
-    it 'will not register if service is not available' do
+    it 'will not register if service is unavailable' do
       expect(@cruz.registration_date).to be nil
 
       @facility_1.register_vehicle(@cruz)
@@ -148,7 +160,7 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
 
-    it 'will do nothing if service is not available' do 
+    it 'will do nothing if service is unavailable' do 
       @facility_1.administer_written_test(@registrant_1)
 
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
@@ -190,7 +202,7 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
     end
 
-    it 'will do nothing if service is not available at the facility' do
+    it 'will do nothing if service is unavailable at the facility' do
       @facility_1.add_service('Written Test')
       @facility_1.administer_written_test(@registrant_1)
       @facility_1.administer_road_test(@registrant_1)
@@ -222,7 +234,7 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
     end
 
-    it 'will do nothing if service is not available' do
+    it 'will do nothing if service is unavailable' do
       @facility_1.add_service('Written Test')
       @facility_1.add_service('Road Test')
       @facility_1.administer_written_test(@registrant_1)
