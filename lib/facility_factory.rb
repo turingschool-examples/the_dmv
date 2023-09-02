@@ -4,14 +4,16 @@ class FacilityFactory
     @facilities = []
   end
 
-  def create_facilities(facilities)
-    facilities.map do |facility|
+  def create_facilities(items)
+    items.map do |item|
       new_facility = Facility.new({
-      name: facility[:dmv_office], 
-      address: "#{facility[:address_li]} #{facility[:address__1]} #{facility[:city]} #{facility[:state]} #{facility[:zip]}", 
-      phone: facility[:phone], services: facility[:services_p]})
+      name: item[:dmv_office], 
+      address: "#{item[:address_li]} #{item[:address__1]} #{item[:city]} #{item[:state]} #{item[:zip]}", 
+      phone: item[:phone]})
+      new_facility.add_service(item[:services_p])
+      @services.each
         facilities << new_facility
     end
   end
-  
+
 end

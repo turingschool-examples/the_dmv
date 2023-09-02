@@ -16,8 +16,10 @@ RSpec.describe do
       factory = FacilityFactory.new
       co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
       factory.create_facilities(co_dmv_office_locations)
+      require "pry"; binding.pry
 
-      
+      expect(factory.facilities.count).to be(5)
+      #services stored as one item, need to iterate through services
     end
   end
 end
