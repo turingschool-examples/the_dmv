@@ -43,5 +43,19 @@ RSpec.describe FacilityConstructor do
         # expect(facility.services).not_to eq([])
       end
     end
+
+    it 'can create facilities with a third data set' do
+      mo_dmv_offices = DmvDataService.new.mo_dmv_office_locations
+      require 'pry'; binding.pry
+      creation_log = @constructor.create_facilities(mo_dmv_offices)
+      expect(creation_log).to be_an_instance_of(Array)
+      creation_log.each do |facility|
+        expect(facility).to be_an_instance_of(Facility)
+        expect(facility.name).not_to eq(nil)
+        expect(facility.address).not_to eq(nil)
+        expect(facility.phone).not_to eq(nil)
+        # expect(facility.services).not_to eq([])
+      end
+    end
   end
 end
