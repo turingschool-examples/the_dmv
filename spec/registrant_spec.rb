@@ -1,6 +1,5 @@
 require 'spec_helper'
 require './lib/registrant'
-require 'pry'
 
 RSpec.describe Registrant do
 
