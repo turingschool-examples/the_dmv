@@ -18,11 +18,14 @@ class FacilityFactory
         new_facility.services << facility_data[:services_p]
         @locations_co << new_facility
       elsif facility_data[:state] == "NY"
+        address = "#{facility_data[:street_address_line_1]}, "
+        address += "#{facility_data[:street_address_line_2]} #{facility_data[:city]}, #{facility_data[:state]}, #{facility_data[:zip_code]}".strip
         ny_facility = Facility.new(
           name: facility_data[:office_name],
-          address: "#{facility_data[:street_address_line_1]}, #{facility_data[:city]}, #{facility_data[:state]}, #{facility_data[:zip_code]}",
+          address: address,
           phone: facility_data[:public_phone_number]
         )
+        
         @locations_ny << ny_facility
       elsif facility_data[:state] == "MO"
         mo_facility = Facility.new(
@@ -41,3 +44,11 @@ class FacilityFactory
     phone.insert(0, "(").insert(4, ")").insert(5, " ").insert(9,"-")
   end
 end
+
+
+# tried to impliment this way for NY phones
+# if facility_data[:phone] == nil
+#   next
+# else
+#   ny_facility[:phone] = ny_phone_number(facility_data[:phone])
+# end

@@ -39,7 +39,8 @@ RSpec.describe FacilityFactory do
       expect(@facility_factory.locations_ny[0]).to be_an_instance_of Facility
       expect(@facility_factory.locations_ny.first.name).to eq("EVANS")
       expect(@facility_factory.locations_ny.first.address).to eq("6853 ERIE RD, DERBY, NY, 14006")
-      expect(@facility_factory.locations_ny.first.phone).to eq("7168587450")
+      expect(@facility_factory.locations_ny.first.phone).to eq("7168587450")  
+      # "(716) 858-7450"
 
       @facility_factory.locations_ny.each do |location|
         expect(location).to be_an_instance_of(Facility)
