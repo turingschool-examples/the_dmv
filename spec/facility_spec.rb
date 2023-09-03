@@ -199,4 +199,29 @@ RSpec.describe Facility do
       expect(@facility_1.administer_road_test(@registrant_1)). to be false
     end
   end
+
+  describe '#renew_drivers_license' do
+  it 'Set renewed to true only if has passed license before' do
+    @facility_1.add_service('Road Test')
+    @facility_1.add_service('Written Test')
+    @facility_1.add_service('Renew License')
+    @facility_1.renew_drivers_license(@registrant_2)
+    expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+
+    @facility_1.administer_written_test(@registrant_2)
+    @facility_1.renew_drivers_license(@registrant_2)
+    expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+
+    @facility_1.administer_road_test(@registrant_2)
+    @facility_1.renew_drivers_license(@registrant_2)
+    expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+
+    @facility_1.renew_drivers_license(@registrant_2)
+    expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+  end
+
+    it 'returns false, if road test cannot be administered, true if can be' do
+      expect(@facility_1.renew_drivers_license(@registrant_1)). to be false
+    end
+  end
 end
