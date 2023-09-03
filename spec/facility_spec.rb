@@ -163,23 +163,23 @@ RSpec.describe Facility do
     end
   end
 
-  xdescribe '#administer road test' do
+  describe '#administer road test' do
     before(:each) do
       @facility_1.add_service('Written Test')
       @registrant_1 = Registrant.new('Bruce', 18, true )
-      @registrant_1.administer_written_test
+      @facility_1.administer_written_test(@registrant_1)
       @registrant_2 = Registrant.new('Penny', 16 )
       @registrant_3 = Registrant.new('Tucker', 15 )
     end
-    context 'when adminstering written tests to qualified registrants' do
+    context 'when adminstering road tests to qualified registrants' do
       it 'will grant a license to the registrant' do
         @facility_1.add_service('Road Test')
-        expect(@registrant_1.administer_road_test).to eq(true)
-        expect(@registrant.license_data[:license]).to eq(true)
+        expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
+        expect(@registrant_1.license_data[:license]).to eq(true)
       end
     end
     
-    context 'when administering written tests to unqualified registrants' do
+    context 'when administering road tests to unqualified registrants' do
       it 'will not administer a test if the service is not offered' do
         expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
         expect(@registrant_1.license_data[:license]).to eq(false)
@@ -188,9 +188,9 @@ RSpec.describe Facility do
       it 'will not administer the test if the registrant has not had a written test' do
         @facility_1.add_service('Road Test')
         @registrant_2.earn_permit
-        expect(@registrant_2.license_data[:written].to eq(false))
-        expect(@registrant_2.administer_road_test).to eq(false)
-        expect(@registrant_2.license_data[:license].to eq(false))
+        expect(@registrant_2.license_data[:written]).to eq(false)
+        expect(@facility_1.administer_road_test(@registrant_2)).to eq(false)
+        expect(@registrant_2.license_data[:license]).to eq(false)
       end
     end
   end
