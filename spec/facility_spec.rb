@@ -33,8 +33,7 @@ RSpec.describe Facility do
   #     @facility_1.add_service('Vehicle Registration')
   #     expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
   #   end
-  # end
-
+  # e
 
   describe "vehicle registration" do
     it '#registers vehicles' do
