@@ -5,7 +5,8 @@ class AnalyticsDept
   end
 
   def get_data
-    @current_data = DmvDataService.new.wa_ev_registrations
+    factory = Factory.new
+    @current_data = factory.create_vehicles(DmvDataService.new.wa_ev_registrations)
   end
 
   def find_popular(symbol)
