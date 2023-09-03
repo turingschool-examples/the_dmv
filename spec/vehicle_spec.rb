@@ -33,4 +33,14 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe '#DMV data services' do
+    before(:each) do
+      factory = VehicleFactory.new
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+    end
+    it 'creates vehicles' do
+      expect(factory.create_vehicles(wa_ev_registrations)).to eq([DmvDataService.new.wa_ev_registrations])
+    end
+  end
 end
