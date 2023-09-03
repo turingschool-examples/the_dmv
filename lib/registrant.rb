@@ -13,6 +13,6 @@ attr_reader :name,
   end
 
   def permit?
-    @permit=true
+    @permit
   end
 end 
