@@ -31,9 +31,10 @@ RSpec.describe Facility do
       @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
       @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
-      @facility_1.add_service('Vehicle Registration')
     end
+
     it 'can register vehicles if service is offered' do
+      @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.registered_vehicles).to eq([])
       expect(@facility_1.collected_fees).to eq(0)
       @facility_1.register_vehicle(@cruz)
@@ -48,10 +49,22 @@ RSpec.describe Facility do
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.services).to eq([])
       expect(@facility_2.collected_fees).to eq(0)
+    end
 
+    it 'will not register vehicle if service is not offered' do
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_1.collected_fees).to eq(0)
+      expect(@facility_1.register_vehicle(@cruz)).to be false
+      expect(@facility_1.registered_vehicles.count).to eq(0)
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_1.collected_fees).to eq(0)
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.registered_vehicles.count).to eq(1)
     end
 
     it 'can collect fees' do
+      @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.collected_fees).to eq(0)
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.collected_fees).to eq(100)
@@ -62,6 +75,7 @@ RSpec.describe Facility do
     end
 
     it 'can assign plate types' do
+      @facility_1.add_service('Vehicle Registration')
       expect(@cruz.plate_type).to eq(nil)
       expect(@camaro.plate_type).to eq(nil)
       expect(@bolt.plate_type).to eq(nil)
@@ -74,6 +88,7 @@ RSpec.describe Facility do
     end
 
     it 'can assign registration date' do
+      @facility_1.add_service('Vehicle Registration')
       expect(@cruz.registration_date).to eq(nil)
       expect(@camaro.registration_date).to eq(nil)
       expect(@bolt.registration_date).to eq(nil)
