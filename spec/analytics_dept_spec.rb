@@ -36,8 +36,8 @@ RSpec.describe AnalyticsDept do
     end
 
     it 'will not run if there is no data' do
-      expect(@analytics_dept.find_popular(:make)).to be False
-      expect(@analytics_dept.find_popular(:model)).to be False
+      expect(@analytics_dept.find_popular(:make)).to be false
+      expect(@analytics_dept.find_popular(:model)).to be false
     end
   end
 
@@ -49,7 +49,7 @@ RSpec.describe AnalyticsDept do
     end
 
     it 'will not run if there is no data' do
-      expect(@analytics_dept.model_year_count).to be False
+      expect(@analytics_dept.model_year_count).to be false
     end
   end
 
@@ -60,7 +60,7 @@ RSpec.describe AnalyticsDept do
     end
 
     it 'will not run if there is no data' do
-      expect(@analytics_dept.county_with_most_registered_vehicles).to be False
+      expect(@analytics_dept.county_with_most_registered_vehicles).to be false
     end
   end
 end
