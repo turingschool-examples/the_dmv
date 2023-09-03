@@ -14,6 +14,12 @@ RSpec.describe FacilityFactory do
       
       expect(@factory.normalize_phone(number)).to eq('(123) 456-7890')
     end
+
+    it 'will not change an already normalized number' do
+      number = '(123) 456-7890'
+
+      expect(@factory.normalize_phone(number)).to eq('(123) 456-7890')
+    end
   end
 
   # describe '#filter_co' do
@@ -21,7 +27,7 @@ RSpec.describe FacilityFactory do
   #     expect(@factory.filter_co(@co_dmv_office_locations)).to eq()
   #   end
   # end
-
+  
   describe '#create_facilities' do
     it 'will create Facility objects from a location dataset (CO)' do
       @factory.create_facilities(@co_dmv_office_locations).each do |location|

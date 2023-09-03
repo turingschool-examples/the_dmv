@@ -4,7 +4,10 @@ class FacilityFactory
   end
 
   def normalize_phone(phone_string)
-    phone_string.insert(0, '(').insert(4, ')').insert(5, ' ').insert(9, '-')
+    if phone_string != nil && !phone_string.start_with?('(')
+      phone_string.insert(0, '(').insert(4, ')').insert(5, ' ').insert(9, '-')
+    else return phone_string
+    end
   end
 
   def create_facilities(locations)
