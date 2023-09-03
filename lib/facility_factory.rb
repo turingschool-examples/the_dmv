@@ -12,20 +12,19 @@ class FacilityFactory
       # CO
       if location[:dmv_office] != nil
         name = location[:dmv_office]
-        address = "#{location[:address_li]} #{location[:address__1]} #{location[:city]} 
-        #{location[:state]} #{location[:zip]}"
+        address = "#{location[:address_li]} #{location[:address__1]} #{location[:city]} #{location[:state]} #{location[:zip]}"
         phone = location[:phone]
       # NY
       elsif location[:office_name] != nil
         name = location[:office_name]
-        address = "#{location[:street_address_line_1]} #{location[:street_address_line_2]} 
-        #{location[:city]} #{location[:state]} #{location[:zip_code]}"
-        # normalize this phone number (5555555555)
+        address = "#{location[:street_address_line_1]} "
+        address += "#{location[:street_address_line_2]} #{location[:city]} #{location[:state]} #{location[:zip_code]}".strip
+        # phone input very inconsistent, some normalized some uninterrupted
         phone = location[:public_phone_number]
       # MO
       else
         name = location[:name]
-        address = "#{location[:address1]} #{location[:city]} #{location[:state]} #{:zipcode}"
+        address = "#{location[:address1]} #{location[:city]} #{location[:state]} #{location[:zipcode]}"
         phone = location[:phone]
       end
 

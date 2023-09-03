@@ -6,15 +6,6 @@ RSpec.describe FacilityFactory do
     @co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
     @ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
     @mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
-    # co_data_sample = location = {
-    #   dmv_office: 'DMV Tremont Branch',
-    #   address_li: '2855 Tremont Place',
-    #   address__1: 'Suite 118',
-    #   city: 'Denver',
-    #   state: 'CO',
-    #   zip: '80205',
-    #   phone: '(720) 865-4600'
-    # }
   end
 
   describe '#normalize_phone' do
@@ -27,9 +18,7 @@ RSpec.describe FacilityFactory do
 
   # describe '#filter_co' do
   #   it 'can parse data from CO state source' do
-  #     @factory.filter_co(@co_data_sample)
-
-  #     expect(@factory.filter_co(@co_data_sample).stored_data[:name]).to eq('DMV Tremont Branch')
+  #     expect(@factory.filter_co(@co_dmv_office_locations)).to eq()
   #   end
   # end
 
@@ -40,6 +29,7 @@ RSpec.describe FacilityFactory do
       end
 
       expect(@factory.create_facilities(@co_dmv_office_locations)[0].name).to eq('DMV Tremont Branch')
+      expect(@factory.create_facilities(@co_dmv_office_locations)[0].address).to eq('2855 Tremont Place Suite 118 Denver CO 80205')
       expect(@factory.create_facilities(@co_dmv_office_locations)[0].phone).to eq('(720) 865-4600')
     end
 
@@ -48,6 +38,7 @@ RSpec.describe FacilityFactory do
         expect(location).to be_an_instance_of(Facility)
 
         expect(@factory.create_facilities(@ny_dmv_office_locations)[0].name).to eq('EVANS')
+        expect(@factory.create_facilities(@ny_dmv_office_locations)[0].address).to eq('6853 ERIE RD DERBY NY 14006')
         expect(@factory.create_facilities(@ny_dmv_office_locations)[0].phone).to eq('7168587450')
       end
     end
@@ -58,6 +49,7 @@ RSpec.describe FacilityFactory do
       end
 
       expect(@factory.create_facilities(@mo_dmv_office_locations)[0].name).to eq('OAKVILLE')
+      expect(@factory.create_facilities(@mo_dmv_office_locations)[0].address).to eq('3164 TELEGRAPH ROAD ST LOUIS MO 63125')
       expect(@factory.create_facilities(@mo_dmv_office_locations)[0].phone).to eq('(314) 887-1050')
     end
   end
