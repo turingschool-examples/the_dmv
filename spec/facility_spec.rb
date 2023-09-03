@@ -195,21 +195,21 @@ RSpec.describe Facility do
     end
   end
 
-  xdescribe '#renew license' do
+  describe '#renew license' do
     before(:each) do
       @facility_1.add_service('Written Test')
       @facility_1.add_service('Road Test')
       @registrant_1 = Registrant.new('Bruce', 18, true )
-      @registrant_1.administer_written_test
-      @registrant_1.administer_road_test
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
       @registrant_2 = Registrant.new('Penny', 16, true )
-      @registrant_2.administer_written_test
+      @facility_1.administer_written_test(@registrant_2)
     end
     context 'when renewing license for qualified registrant' do
       it 'will renew the license of the registrant' do
         @facility_1.add_service('Renew License')
-        expect(@registrant_1.administer_road_test).to eq(true)
-        expect(@registrant.license_data[:license]).to eq(true)
+        expect(@facility_1.renew_license(@registrant_1)).to eq(true)
+        expect(@registrant_1.license_data[:license]).to eq(true)
       end
     end
 
@@ -221,9 +221,9 @@ RSpec.describe Facility do
 
       it 'will not renew a license registrant does not have a license' do
         @facility_1.add_service('Renew license')
-        expect(@registrant_2.license_data[:license].to eq(false))
-        expect(@registrant_2.renew_license).to eq(false)
-        expect(@registrant_2.license_data[:renewed].to eq(false))
+        expect(@registrant_2.license_data[:license]).to eq(false)
+        expect(@facility_1.renew_license(@registrant_2)).to eq(false)
+        expect(@registrant_2.license_data[:renewed]).to eq(false)
       end
     end
   end
