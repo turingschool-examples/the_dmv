@@ -23,3 +23,4 @@ attr_reader :facilities, :services
     end
   end
 end
+

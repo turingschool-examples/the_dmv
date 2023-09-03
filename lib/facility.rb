@@ -15,26 +15,33 @@ class Facility
   def parse_name(data)
     if data[:name]
       data[:name]
-    else data[:dmv_office]
+    elsif data[:dmv_office]
       data[:dmv_office]
+    else data[:office_name] && data[:office_type]
+      "#{data[:office_name]}, #{data[:office_type]}"
     end
   end
   
   def parse_address(data)
     if data[:address]
       data[:address]
-    elsif data[:address_li] && data[:address__1]
-      "#{data[:address_li]}, #{data[:address__1] }"
-    else data[:address_li]
-      data[:address_li]
+    elsif data[:address_li] && data[:address__1] && data[:city] && data[:state] && data[:zip]
+      "#{data[:address_li]}, #{data[:address__1]}, #{data[:city]}, #{data[:state]} #{data[:zip]}"
+    elsif data[:address_li] && data[:city] && data[:state] && data[:zip]
+      "#{data[:address_li]}, #{data[:city]}, #{data[:state]} #{data[:zip]}"
+    elsif data[:street_address_line_1] && data[:city] && data[:state] && data[:zip_code]
+      "#{data[:street_address_line_1]}, #{data[:city]}, #{data[:state]} #{data[:zip_code]}"
+    else data[:address1] && data[:city] && data[:state] && data[:zipcode]
+      "#{data[:address1]}, #{data[:city]}, #{data[:state]} #{data[:zipcode]}"
+
     end
   end
     
   def parse_phone(data)
     if data[:phone]
       data[:phone]
-    else data[:phone]
-      data[:phone]
+    else data[:public_phone_number]
+      data[:public_phone_number]
     end
   end
   

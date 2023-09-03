@@ -42,12 +42,34 @@ RSpec.describe Dmv do
   describe "facilities from other states" do
     it 'can pull API information from CO' do
       colorado_locations = DmvDataService.new.co_dmv_office_locations
-      other_facilities = Dmv.new
-      other_facilities.import_facility(colorado_locations)
+      co_facilities = Dmv.new
+      co_facilities.import_facility(colorado_locations)
 
-      expect(other_facilities).to be_an_instance_of(Dmv)
-      expect(other_facilities.facilities).to be_an_instance_of(Array)
-      expect(other_facilities.facilities.first).to be_an_instance_of(Facility)
+      expect(co_facilities).to be_an_instance_of(Dmv)
+      expect(co_facilities.facilities).to be_an_instance_of(Array)
+      expect(co_facilities.facilities.first).to be_an_instance_of(Facility)
+    end
+    
+    it 'can pull API information from NY' do
+      new_york_locations = DmvDataService.new.ny_dmv_office_locations
+      ny_facilities = Dmv.new
+      ny_facilities.import_facility(new_york_locations)
+      
+      expect(ny_facilities).to be_an_instance_of(Dmv)
+      expect(ny_facilities.facilities).to be_an_instance_of(Array)
+
+      expect(ny_facilities.facilities.first).to be_an_instance_of(Facility)
+    end
+    
+    it 'can pull API information from MO' do
+      missouri_locations = DmvDataService.new.mo_dmv_office_locations
+
+      mo_facilities = Dmv.new
+      mo_facilities.import_facility(missouri_locations)
+      expect(mo_facilities).to be_an_instance_of(Dmv)
+      expect(mo_facilities.facilities).to be_an_instance_of(Array)
+      expect(mo_facilities.facilities.first).to be_an_instance_of(Facility)
     end
   end
 end
+
