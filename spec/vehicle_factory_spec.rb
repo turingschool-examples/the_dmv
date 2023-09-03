@@ -9,6 +9,15 @@ RSpec.describe VehicleFactory do
     end
   end
 
+  describe '#create vehicles helper' do
+    before(:each) { @wa_ev_registrations = DmvDataService.new.wa_ev_registrations }
+    it 'extracts needed elements from each object in the given registration data' do
+      data = factory.create_vehicles_helper(@wa_ev_registrations)
+      expect(data).to be_an_instance_of(Array)
+      expect(data.first).to eq({:vin=>"1N4AZ0CPXF", :year=>2015, :make=>"NISSAN", :model=>"Leaf", :engine=>:ev})
+      expect(data.length).to eq(@wa_ev_registrations.length)
+    end
+  end
 
   describe '#create vehicles' do
     before(:each) { @wa_ev_registrations = DmvDataService.new.wa_ev_registrations }
