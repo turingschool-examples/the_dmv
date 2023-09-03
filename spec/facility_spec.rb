@@ -202,6 +202,16 @@ end
     @facility_1.administer_written_test(@registrant_1)
     expect(@facility_1.administer_road_test(@registrant_1)).to be true
     expect(@facility_1.services).to eq(["Written Test", "Road Test"])
+    expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+    end
+
+    it 'adminsters road test to reg_2' do
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      @registrant_2.earn_permit
+      @facility_1.administer_written_test(@registrant_2)
+      expect(@facility_1.administer_road_test(@registrant_2)).to be true
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
     end
   end
 end
