@@ -22,9 +22,9 @@ RSpec.describe FacilityFactory do
     expect(facility_factory.locations_co.first.phone).to eq("(720) 865-4600")
     expect(facility_factory.locations_co.first.services).to eq(["vehicle titles, registration, renewals;  VIN inspections"])
 
-    # facility_factory.create_locations(co_dmv_office_locations).each do |location|
-    #   expect(location).to be_an_instance_of(Facility)
-    # end
+    facility_factory.locations_co.each do |location|
+      expect(location).to be_an_instance_of(Facility)
+    end
   end
 
   it 'creates NY locations' do
@@ -33,13 +33,15 @@ RSpec.describe FacilityFactory do
 
     facility_factory.create_locations(new_york_facilities)
 
-    # require'pry';binding.pry
+    require'pry';binding.pry
     expect(facility_factory.locations_ny[0]).to be_an_instance_of Facility
     expect(facility_factory.locations_ny.first.name).to eq("EVANS")
     expect(facility_factory.locations_ny.first.address).to eq("6853 ERIE RD, DERBY, NY, 14006")
     expect(facility_factory.locations_ny.first.phone).to eq("7168587450")
 
-
+    facility_factory.locations_ny.each do |location|
+      expect(location).to be_an_instance_of(Facility)
+    end
   end
 
   it 'creates MO locations' do
@@ -54,5 +56,8 @@ RSpec.describe FacilityFactory do
     expect(facility_factory.locations_mo.first.address).to eq("3164 TELEGRAPH ROAD, ST LOUIS, MO, 63125")
     expect(facility_factory.locations_mo.first.phone).to eq("(314) 887-1050")
 
+    facility_factory.locations_mo.each do |location|
+      expect(location).to be_an_instance_of(Facility)
+    end
   end
 end
