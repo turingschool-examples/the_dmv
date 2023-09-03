@@ -60,4 +60,32 @@ class Facility
       @registered_vehicles << vehicle
     end
   end
+
+  def administer_written_test(registrant)
+    if @services.include?('Written Test')
+      if registrant.permit? && registrant.age > 15
+        registrant.license_data[:written] = true
+      else
+        false
+      end
+    else
+      false
+    end
+  end
+
+  def administer_road_test(registrant)
+    if @services.include?('Road Test') && registrant.license_data[:written] == true
+      registrant.license_data[:license] = true
+    else
+      false
+    end 
+  end
+
+  def renew_license(registrant)
+    if @services.include?('Renew License') && registrant.license_data[:license] == true
+      registrant.license_data[:renewed] = true
+    else
+      false
+    end
+  end
 end
