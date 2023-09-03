@@ -1,5 +1,6 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :collected_fees, :registered_vehicles 
+  attr_reader :name, :address, :phone, :services, :collected_fees, :registered_vehicles
+  attr_writer :collected_fees
 
 
   def initialize(facility_info)
@@ -16,34 +17,58 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    if @services.include?('Vehicle Registration') == true
+    if @services.include?('Vehicle Registration') == true && vehicle.antique? == true
       vehicle.registration_date = Date.today
-
+      @collected_fees += 25
       @registered_vehicles << vehicle
+      vehicle.plate_type = :antique
+    elsif @services.include?('Vehicle Registration') == true && vehicle.electric_vehicle? == true
+      vehicle.registration_date = Date.today
+      @collected_fees += 200
+      @registered_vehicles << vehicle
+      vehicle.plate_type = :ev
+    elsif @services.include?('Vehicle Registration') == true
+      vehicle.registration_date = Date.today
+      @collected_fees += 100
+      @registered_vehicles << vehicle
+      vehicle.plate_type = :regular
+    else @services.include?('Vehicle Registration') == false
+    end
+  end
+
+  def accept_fees(int)
+    @collected_fees += (int)
+  end
+
+  def administer_written_test(registrant)
+    if @services.include?('Written Test') == true && registrant.permit == true && registrant.age >= 16
+      return registrant.license_data[:written] = true
+    else
+      false
+    end
+  end
+
+  def administer_road_test(registrant)
+    if @services.include?('Road Test') == true && registrant.license_data[:written] = true
+      return registrant.license_data[:license] = true
+    else
+      false
+    end
+  end
+    
+  def renew_drivers_license(registrant)
+    if @services.include?('Renew License') == true && registrant.license_data[:license] == true
+      return registrant.license_data[:renewed] = true
+    else
+      false
     end
   end
 end
 
-  # def plate_type
-  #   if @registration_date != nil && antique? == true
-  #     return :antique
-  #   elsif @registration_date != nil && electric_vehicle? == true
-  #     return :ev
-  #   elsif @registration_date != nil
-  #     :regular
-  #   else
-  #     nil
-  #   end
-  # end
 
 
-# def pay_fee
-#   if vehicle.vehicle_details[:year] == Date.today.year - @year > 25
-#     @collected_fees += 25
-#   elsif vehicle.vehicle_details[:engine] == :ev
-#     @collected_fees += 200
-#   else 
-#     @collected_fees +=100
-#   end
-# end
-# end
+
+
+
+
+

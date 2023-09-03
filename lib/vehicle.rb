@@ -6,20 +6,20 @@ class Vehicle
               :make,
               :model,
               :engine, 
-              :registration_date
-
-  attr_writer :registration_date
+              :registration_date, 
+              :plate_type
+  attr_writer :registration_date, 
+              :plate_type
 
 
   def initialize(vehicle_details)
-    @vin = vehicle_details[:vin]
-    @year = vehicle_details[:year]
+    @vin = parse_vin(vehicle_details)
+    @year = parse_year(vehicle_details)
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
-    @engine = vehicle_details[:engine]
+    @engine = parse_engine(vehicle_details)
     @registration_date = nil
-
-    @plates = nil
+    @plate_type = nil
   end
 
   def antique?
@@ -30,17 +30,26 @@ class Vehicle
     @engine == :ev
   end
 
-
-  # def plate_type
-  #   if @registration_date != nil && antique? == true
-  #     return :antique
-  #   elsif @registration_date != nil && electric_vehicle? == true
-  #     return :ev
-  #   elsif @registration_date != nil
-  #     :regular
-  #   else
-  #     nil
-  #   end
-  # end
+  def parse_vin(data)
+    if data[:vin]
+      data[:vin]
+    elsif data[:vin_1_10]
+      data[:vin_1_10]
+    end
+  end
+  def parse_year(data)
+    if data[:year]
+      data[:year]
+    elsif data[:model_year]
+      data[:model_year]
+    end
+  end
+  def parse_engine(data)
+    if data[:engine]
+      data[:engine]
+    else
+    :ev
+  end
+end
   
 end
