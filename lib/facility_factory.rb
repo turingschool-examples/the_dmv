@@ -37,7 +37,7 @@ class FacilityFactory
     end
   end
 
-  def create_phone_number(phone)
-    phone.insert(0, "(").insert(4, ")").insert(5, "-").insert(9,"-")
+  def ny_phone_number(phone)
+    phone.insert(0, "(").insert(4, ")").insert(5, " ").insert(9,"-")
   end
 end
