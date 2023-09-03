@@ -6,5 +6,4 @@ class VehicleFactory
       Vehicle.new(ev_data)
     end
   end
-  pry.binding
 end

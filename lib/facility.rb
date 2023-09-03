@@ -5,8 +5,11 @@ class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
   def initialize(contact_info)
-    @name = contact_info[:name]
-    @address = contact_info[:address]
+    # Colorado Info
+    # DmvDataService (5 x instance[idx]): name => :dmv_office, address => (:address_li,:address__1,:city,:state,:zip),
+    # phone => :phone
+    @name = contact_info[:dmv_office]
+    @address = "#{contact_info[:address_li]}, #{contact_info[:address__1]}, #{contact_info[:city]}, #{contact_info[:state]}, #{contact_info[:zip]}"
     @phone = contact_info[:phone]
     @services = []
     @registered_vehicles = []
@@ -65,3 +68,10 @@ class Facility
     return false
   end
 end
+
+# Create CO facilities
+# facilities = DmvDataService.new.co_dmv_office_locations
+#   .map do |office|
+#     Facility.new(office)
+#   end
+
