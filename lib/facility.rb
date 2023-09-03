@@ -46,25 +46,18 @@ class Facility
       nil
     end
   end
+
+  def administer_written_test(registrant)
+    if check_for_service('Written Test') == true && registrant.permit? == true && registrant.age >= 16 
+      registrant.license_data[:written] = true
+    else
+      false
+    end
+  end
 end
-# def register_vehicle(car)
-#   @registered_vehicles << car
-#   car.registration_date = Date.today
-#   car.plate_type = set_plate_type(car)
-#     if car.antique?
-#       @collected_fees += 25
-#   elsif car.electric_vehicle?
-#   @collected_fees += 200
-#   else 
-#   @collected_fees += 100
-#   end
-# end
-# end
 
 #services:
   # register a vehicle
   # administer a written test
   # administer a road test
   # renew a driver's license
-
-  # if @services.include?('Vehicle Registration')
