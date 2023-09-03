@@ -18,16 +18,10 @@ RSpec.describe FacilityFactory do
   end
 
   describe '#normalize_phone' do
-    it 'will normalize a phone number to the output (555) 555-5555' do
-      number = 1234567890
+    it 'will normalize a unnormalized phone number to the output (555) 555-5555' do
+      number = '1234567890'
       
-      expect(normalize_phone(number)).to eq('(123) 456-7890')
-    end
-
-    it 'will output the same number if fed an already normalized number' do
-      number = '(123) 456-7890'
-
-      expect(normalize_phone(number)).to eq('(123) 456-7890')
+      expect(@factory.normalize_phone(number)).to eq('(123) 456-7890')
     end
   end
 

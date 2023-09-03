@@ -3,6 +3,10 @@ class FacilityFactory
   def initialize
   end
 
+  def normalize_phone(phone_string)
+    phone_string.insert(0, '(').insert(4, ')').insert(5, ' ').insert(9, '-')
+  end
+
   def create_facilities(locations)
     facilities = locations.map do |location|
       # CO
