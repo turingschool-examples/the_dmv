@@ -53,13 +53,24 @@ RSpec.describe Facility do
 
     it 'will not register vehicle if service is not offered' do
       expect(@facility_1.registered_vehicles).to eq([])
-      expect(@facility_1.collected_fees).to eq(0)
       expect(@facility_1.register_vehicle(@cruz)).to be false
       expect(@facility_1.registered_vehicles.count).to eq(0)
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.registered_vehicles).to eq([])
       expect(@facility_1.collected_fees).to eq(0)
       @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.registered_vehicles.count).to eq(1)
+    end
+
+    it ' will not register vehicle if vehicle is already registered' do
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_1.collected_fees).to eq(0)
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.collected_fees).to eq(100)
+      expect(@facility_1.registered_vehicles.count).to eq(1)
+      expect(@facility_1.register_vehicle(@cruz)).to be false
+      expect(@facility_1.collected_fees).to eq(100)
       expect(@facility_1.registered_vehicles.count).to eq(1)
     end
 
