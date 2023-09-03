@@ -61,7 +61,6 @@ class Facility
       return registrant.license_data[:renewed] = true
     else
       false
-      # registrant.license_data[:renewed] = false
     end
   end
 end

@@ -74,9 +74,7 @@ RSpec.describe Facility do
       facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
       expect(facility_1.collected_fees).to eq(0)
     end
-  end
 
-  describe '#register_vehicle' do
     it 'has a registration date' do
       facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
       facility_1.add_service('Vehicle Registration')
@@ -118,7 +116,6 @@ RSpec.describe Facility do
       facility_1.add_service('Vehicle Registration')
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       facility_1.register_vehicle(cruz)
-      # cruz.pay_fee
 
       expect(facility_1.collected_fees).to eq(100)
     end
@@ -218,6 +215,7 @@ RSpec.describe Facility do
       expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})      
     end
   end
+
   describe '#add license renewal' do
     it "can renew a license" do
       facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
@@ -241,10 +239,6 @@ RSpec.describe Facility do
       facility_1.renew_drivers_license(registrant_2)
       expect(facility_1.renew_drivers_license(registrant_2)).to eq (true)
       expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
-
-
-
-
     end
   end
 end
