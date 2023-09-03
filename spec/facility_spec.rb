@@ -66,12 +66,12 @@ RSpec.describe Facility do
   end
 
   describe '#register vehicle' do
-  before(:each) do 
-    @facility_1.add_service('Vehicle Registration')
-    @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-    @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
-    @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
-  end
+    before(:each) do 
+      @facility_1.add_service('Vehicle Registration')
+      @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+      @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    end
     context 'adding vehicles to the registered vehicle array' do
       it 'will add registered Vehicles to the array' do
         @facility_1.register_vehicle(@cruz)
@@ -118,5 +118,113 @@ RSpec.describe Facility do
         expect(@bolt.plate_type).to eq(:ev)
       end
     end
-  end       
+  end 
+  
+  describe '#administer written test' do
+    before(:each) do
+      @registrant_1 = Registrant.new('Bruce', 18, true )
+      @registrant_2 = Registrant.new('Penny', 16 )
+      @registrant_3 = Registrant.new('Tucker', 15 )
+    end
+    context 'when adminstering written tests to qualified registrants' do
+      before(:each) { @facility_1.add_service('Written Test')}
+      it 'Will change a registrants license data to show written as true' do
+        expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
+        expect(@registrant_1.license_data[:written]).to eq(true)
+      end
+    end
+    context 'when administering written tests to unqualified registrants' do
+      it 'will not administer a test if the service is not offered' do
+        expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
+        expect(@registrant_1.license_data[:written]).to eq(false)
+      end
+
+      it 'will not administer a test if the registrant does not have a permit' do
+        @facility_1.add_service('Written Test')
+        expect(@registrant_2.permit?).to eq(false)
+        expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
+        expect(@registrant_2.license_data[:written]).to eq(false)
+      end
+
+      it 'will not administer a test if the registrant is not 16 or older' do
+        @facility_1.add_service('Written Test')
+        expect(@registrant_3.age).to eq(15)
+        expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
+        expect(@registrant_3.license_data[:written]).to eq(false)
+      end
+
+      it 'will not administer a test if the registrant is not 16 or older, even if the registrant has a permit' do
+        @facility_1.add_service('Written Test')
+        expect(@registrant_3.age).to eq(15)
+        @registrant_3.earn_permit
+        expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
+        expect(@registrant_3.license_data[:written]).to eq(false)
+      end
+    end
+  end
+
+  xdescribe '#administer road test' do
+    before(:each) do
+      @facility_1.add_service('Written Test')
+      @registrant_1 = Registrant.new('Bruce', 18, true )
+      @registrant_1.administer_written_test
+      @registrant_2 = Registrant.new('Penny', 16 )
+      @registrant_3 = Registrant.new('Tucker', 15 )
+    end
+    context 'when adminstering written tests to qualified registrants' do
+      it 'will grant a license to the registrant' do
+        @facility_1.add_service('Road Test')
+        expect(@registrant_1.administer_road_test).to eq(true)
+        expect(@registrant.license_data[:license]).to eq(true)
+      end
+    end
+    
+    context 'when administering written tests to unqualified registrants' do
+      it 'will not administer a test if the service is not offered' do
+        expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
+        expect(@registrant_1.license_data[:license]).to eq(false)
+      end
+      
+      it 'will not administer the test if the registrant has not had a written test' do
+        @facility_1.add_service('Road Test')
+        @registrant_2.earn_permit
+        expect(@registrant_2.license_data[:written].to eq(false))
+        expect(@registrant_2.administer_road_test).to eq(false)
+        expect(@registrant_2.license_data[:license].to eq(false))
+      end
+    end
+  end
+
+  xdescribe '#renew license' do
+    before(:each) do
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      @registrant_1 = Registrant.new('Bruce', 18, true )
+      @registrant_1.administer_written_test
+      @registrant_1.administer_road_test
+      @registrant_2 = Registrant.new('Penny', 16, true )
+      @registrant_2.administer_written_test
+    end
+    context 'when renewing license for qualified registrant' do
+      it 'will renew the license of the registrant' do
+        @facility_1.add_service('Renew License')
+        expect(@registrant_1.administer_road_test).to eq(true)
+        expect(@registrant.license_data[:license]).to eq(true)
+      end
+    end
+
+    context 'when renewing a license for unqualified registrant' do
+      it 'will not renew a license if the service is not offered' do
+        expect(@facility_1.renew_license(@registrant_1)).to eq(false)
+        expect(@registrant_1.license_data[:renewed]).to eq(false)
+      end
+
+      it 'will not renew a license registrant does not have a license' do
+        @facility_1.add_service('Renew license')
+        expect(@registrant_2.license_data[:license].to eq(false))
+        expect(@registrant_2.renew_license).to eq(false)
+        expect(@registrant_2.license_data[:renewed].to eq(false))
+      end
+    end
+  end
 end

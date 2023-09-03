@@ -60,4 +60,5 @@ class Facility
       @registered_vehicles << vehicle
     end
   end
+
 end
