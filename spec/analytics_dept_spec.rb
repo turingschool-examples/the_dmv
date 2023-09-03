@@ -14,4 +14,32 @@ RSpec.describe AnalyticsDept do
     end
   end
 
-  # describe '#get_data' do
+  describe '#get_data' do
+    it 'can get data and assign it as current data' do
+
+    end
+  end
+
+  describe '#find_popular' do
+    it 'can find the most popular make' do
+
+    end
+
+    it 'can find the most popular model' do
+
+    end
+  end
+
+  describe '#model_year_count' do
+    it 'can return the amount of vehicles measured for any model year' do
+
+    end
+  end
+
+  describe '#county_with_most_registered_vehicles' do
+    it 'will return the county with the most registerd vehicles for a data set' do
+
+    end
+  end
+end
+
