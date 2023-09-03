@@ -13,11 +13,11 @@ class Vehicle
 
 
   def initialize(vehicle_details)
-    @vin = vehicle_details[:vin]
-    @year = vehicle_details[:year]
+    @vin = parse_vin(vehicle_details)
+    @year = parse_year(vehicle_details)
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
-    @engine = vehicle_details[:engine]
+    @engine = parse_engine(vehicle_details)
     @registration_date = nil
     @plate_type = nil
   end
@@ -30,5 +30,26 @@ class Vehicle
     @engine == :ev
   end
 
+  def parse_vin(data)
+    if data[:vin]
+      data[:vin]
+    elsif data[:vin_1_10]
+      data[:vin_1_10]
+    end
+  end
+  def parse_year(data)
+    if data[:year]
+      data[:year]
+    elsif data[:model_year]
+      data[:model_year]
+    end
+  end
+  def parse_engine(data)
+    if data[:engine]
+      data[:engine]
+    else
+    :ev
+  end
+end
   
 end

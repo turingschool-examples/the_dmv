@@ -11,14 +11,12 @@ RSpec.describe VehicleFactory do
     it 'can access WA EV registrations and create a vehicle' do
       factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-      factory.create_vehicles(wa_ev_registrations)
-    end
-    
-    xit "can create vehicles" do
-      factory = VehicleFactory.new
-      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-      factory.create_vehicles(wa_ev_registrations)
-      require 'pry'; binding.pry
+
+      factory_vehicles = factory.create_vehicles(wa_ev_registrations)
+      expect(factory_vehicles).to be_an_instance_of(Array)
+      expect(factory_vehicles.first).to be_an_instance_of(Vehicle)
+
+
     end
 
 
