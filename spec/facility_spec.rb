@@ -151,5 +151,25 @@ end
       @facility_1.add_service('Written Test')
       expect(@facility_1.check_for_service('Written Test')).to be true
     end
+
+    it 'administers written test to reg_1' do
+      @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@facility_1.administer_written_test(@registrant_1)).to be true
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
+
+    it 'checks reg_2 information and tries to administer a written test' do
+      expect(@registrant_2.age).to eq(16)
+      expect(@registrant_2.permit?).to be false
+      expect(@facility_1.administer_written_test(@registrant_2)).to be false
+    end
+
+    it 'reg_2 earns permit' do
+      @facility_1.add_service('Written Test')
+      @registrant_2.earn_permit
+      expect(@facility_1.administer_written_test(@registrant_2)).to be true
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
   end
 end
