@@ -17,7 +17,7 @@ RSpec.describe AnalyticsDept do
   describe '#get_data' do
     it 'can get data and assign it as current data' do
       @analytics_dept.get_data
-      expect(analytics_dept.current_data).to be_an_instance_of(Array)
+      expect(@analytics_dept.current_data).to be_an_instance_of(Array)
       @analytics_dept.current_data.each do |vehicle|
         expect(vehicle).to be_an_instance_of(Vehicle)
       end
@@ -49,7 +49,7 @@ RSpec.describe AnalyticsDept do
     end
 
     it 'will not run if there is no data' do
-      expect(@analytics_dept.model_year_count).to be false
+      expect(@analytics_dept.model_year_count(year)).to be false
     end
   end
 
