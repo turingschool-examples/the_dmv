@@ -1,6 +1,7 @@
 require 'spec_helper'
 require './lib/facility'
 require './lib/vehicle'
+require './lib/registrant'
 
 RSpec.describe Facility do
   before(:each) do
@@ -130,8 +131,25 @@ end
       # expect(facility_2.collected_fees).to eq(0)
     end
   end
-end
 
-#nextsteps: 
-#write something that iterates through the services to check if the service is provided
-#commit the last test
+  describe '#written test' do
+    before(:each) do
+      @registrant_1 = Registrant.new('Bruce', 18, true)
+      @registrant_2 = Registrant.new('Penny', 16)
+      @registrant_3 = Registrant.new('Tucker', 15)
+    end
+
+
+    it 'facility needs the service to administer a written test' do
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@registrant_1.permit?).to be true
+      expect(@facility_1.administer_written_test(@registrant_1)).to be false
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+
+    it 'adds written test to facility_1' do
+      @facility_1.add_service('Written Test')
+      expect(@facility_1.check_for_service('Written Test')).to be true
+    end
+  end
+end
