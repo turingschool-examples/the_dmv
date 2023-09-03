@@ -123,7 +123,7 @@ RSpec.describe Facility do
       expect(facility_1.collected_fees).to eq(100)
     end
 
-    xit 'register them all' do
+    it 'register them all' do
       facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
       facility_1.add_service('Vehicle Registration')
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
