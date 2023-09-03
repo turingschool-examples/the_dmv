@@ -27,13 +27,18 @@ RSpec.describe FacilityFactory do
     # end
   end
 
-  xit 'creates NY locations' do
+  it 'creates NY locations' do
     facility_factory = FacilityFactory.new
     new_york_facilities = DmvDataService.new.ny_dmv_office_locations
-    co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
 
+    facility_factory.create_locations(new_york_facilities)
 
     # require'pry';binding.pry
+    expect(facility_factory.locations_ny[0]).to be_an_instance_of Facility
+    expect(facility_factory.locations_ny.first.name).to eq("EVANS")
+    expect(facility_factory.locations_ny.first.address).to eq("6853 ERIE RD, DERBY, NY, 14006")
+    expect(facility_factory.locations_ny.first.phone).to eq("7168587450")
+
 
   end
 
