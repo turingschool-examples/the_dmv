@@ -10,6 +10,7 @@ class FacilityFactory
     end
   end
 
+  # need to output helper method data to be used by object creation (store as hash?)
   def create_facilities(locations)
     facilities = locations.map do |location|
       # CO
@@ -22,7 +23,6 @@ class FacilityFactory
         name = location[:office_name]
         address = "#{location[:street_address_line_1]} "
         address += "#{location[:street_address_line_2]} #{location[:city]} #{location[:state]} #{location[:zip_code]}".strip
-        # phone input very inconsistent, some normalized some uninterrupted
         phone = normalize_phone(location[:public_phone_number])
       # MO
       else
