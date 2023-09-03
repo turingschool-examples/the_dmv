@@ -18,8 +18,8 @@ RSpec.describe AnalyticsDept do
     it 'can get data and assign it as current data' do
       @analytics_dept.get_data
       expect(analytics_dept.current_data).to be_an_instance_of(Array)
-      @analytics_dept.current_data.each do |vehicle_hash|
-        expect(vehicle_hash).to be_an_instance_of(Hash)
+      @analytics_dept.current_data.each do |vehicle|
+        expect(vehicle).to be_an_instance_of(Vehicle)
       end
     end
   end
