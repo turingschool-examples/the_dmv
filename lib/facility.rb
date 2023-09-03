@@ -21,7 +21,11 @@ class Facility
       assign_registration(vehicle)
       collect_fees(vehicle)
       @registered_vehicles << vehicle
+      else
+        false
       end
+    else
+      false
     end
   end
 
