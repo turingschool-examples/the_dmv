@@ -6,28 +6,36 @@ RSpec.describe FacilityFactory do
     @co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
     @ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
     @mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
+    # co_data_sample = location = {
+    #   dmv_office: 'DMV Tremont Branch',
+    #   address_li: '2855 Tremont Place',
+    #   address__1: 'Suite 118',
+    #   city: 'Denver',
+    #   state: 'CO',
+    #   zip: '80205',
+    #   phone: '(720) 865-4600'
+    # }
   end
 
-  # describe '#normalize_phone' do
-  #   it 'will normalize a phone number to the output (555) 555-5555' do
-  #     number = 1234567890
+  describe '#normalize_phone' do
+    it 'will normalize a phone number to the output (555) 555-5555' do
+      number = 1234567890
       
-  #     expect(normalize_phone(number)).to eq("(123) 456-7890")
-  #   end
+      expect(normalize_phone(number)).to eq('(123) 456-7890')
+    end
 
-  #   # if this method is used, may have to make all other phone numbers into strings
-  #   it 'will output the same number if fed an already normalized number' do
-  #     number = "(123) 456-7890"
+    it 'will output the same number if fed an already normalized number' do
+      number = '(123) 456-7890'
 
-  #     expect(normalize_phone(number)).to eq("(123) 456-7890")
-  #   end
-  # end
+      expect(normalize_phone(number)).to eq('(123) 456-7890')
+    end
+  end
 
   # describe '#filter_co' do
   #   it 'can parse data from CO state source' do
-  #     location = @factory.filter_co(@co_data_sample)
+  #     @factory.filter_co(@co_data_sample)
 
-  #     expect(location[:name]).to eq('DMV Tremont Branch')
+  #     expect(@factory.filter_co(@co_data_sample).stored_data[:name]).to eq('DMV Tremont Branch')
   #   end
   # end
 
