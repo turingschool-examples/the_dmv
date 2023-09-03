@@ -6,7 +6,8 @@ class VehicleFactory
   end
 
   def create_vehicles(api_data)
-    
-    end
+    vehicle = Vehicle.new(api_data)
+    @factory_vehicles << vehicle
+    vehicle.vin = api_data[:vin]
   end
 end

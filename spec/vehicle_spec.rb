@@ -35,11 +35,10 @@ RSpec.describe Vehicle do
   end
 
   describe '#DMV data services' do
-    before(:each) do
+    it 'creates vehicles' do
       factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-    end
-    it 'creates vehicles' do
+    
       expect(factory.create_vehicles(wa_ev_registrations)).to eq([DmvDataService.new.wa_ev_registrations])
     end
   end
