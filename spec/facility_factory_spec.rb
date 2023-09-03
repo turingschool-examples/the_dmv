@@ -27,7 +27,7 @@ RSpec.describe FacilityFactory do
   #     expect(@factory.filter_co(@co_dmv_office_locations)).to eq()
   #   end
   # end
-  
+
   describe '#create_facilities' do
     it 'will create Facility objects from a location dataset (CO)' do
       @factory.create_facilities(@co_dmv_office_locations).each do |location|
@@ -45,7 +45,7 @@ RSpec.describe FacilityFactory do
 
         expect(@factory.create_facilities(@ny_dmv_office_locations)[0].name).to eq('EVANS')
         expect(@factory.create_facilities(@ny_dmv_office_locations)[0].address).to eq('6853 ERIE RD DERBY NY 14006')
-        expect(@factory.create_facilities(@ny_dmv_office_locations)[0].phone).to eq('7168587450')
+        expect(@factory.create_facilities(@ny_dmv_office_locations)[0].phone).to eq('(716) 858-7450')
       end
     end
 

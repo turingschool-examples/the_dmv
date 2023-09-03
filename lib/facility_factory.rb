@@ -23,7 +23,7 @@ class FacilityFactory
         address = "#{location[:street_address_line_1]} "
         address += "#{location[:street_address_line_2]} #{location[:city]} #{location[:state]} #{location[:zip_code]}".strip
         # phone input very inconsistent, some normalized some uninterrupted
-        phone = location[:public_phone_number]
+        phone = normalize_phone(location[:public_phone_number])
       # MO
       else
         name = location[:name]
