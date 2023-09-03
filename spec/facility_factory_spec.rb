@@ -24,8 +24,10 @@ RSpec.describe FacilityFactory do
   # end
 
   # describe '#filter_co' do
-  #   it 'can create Facility objects from CO state data' do
-      
+  #   it 'can parse data from CO state source' do
+  #     location = @factory.filter_co(@co_data_sample)
+
+  #     expect(location[:name]).to eq('DMV Tremont Branch')
   #   end
   # end
 
@@ -34,11 +36,17 @@ RSpec.describe FacilityFactory do
       @factory.create_facilities(@co_dmv_office_locations).each do |location|
         expect(location).to be_an_instance_of(Facility)
       end
+
+      expect(@factory.create_facilities(@co_dmv_office_locations)[0].name).to eq('DMV Tremont Branch')
+      expect(@factory.create_facilities(@co_dmv_office_locations)[0].phone).to eq('(720) 865-4600')
     end
 
     it 'will create Facility objects from a different location datase (NY)' do
       @factory.create_facilities(@ny_dmv_office_locations).each do |location|
         expect(location).to be_an_instance_of(Facility)
+
+        expect(@factory.create_facilities(@ny_dmv_office_locations)[0].name).to eq('EVANS')
+        expect(@factory.create_facilities(@ny_dmv_office_locations)[0].phone).to eq('7168587450')
       end
     end
 
@@ -46,6 +54,9 @@ RSpec.describe FacilityFactory do
       @factory.create_facilities(@mo_dmv_office_locations).each do |location|
         expect(location).to be_an_instance_of(Facility)
       end
+
+      expect(@factory.create_facilities(@mo_dmv_office_locations)[0].name).to eq('OAKVILLE')
+      expect(@factory.create_facilities(@mo_dmv_office_locations)[0].phone).to eq('(314) 887-1050')
     end
   end
 end
