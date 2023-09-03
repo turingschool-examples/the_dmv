@@ -44,4 +44,15 @@ RSpec.describe Dmv do
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
+
+  describe '#create_facility' do
+    it 'converts co facility information from API' do
+      co_facility_info = @facility.create_facility(@co_dmv_office_locations)
+      expect(co_facility_info.count).to eq(5)
+      expect(co_facility_info.class).to eq(Array)
+      expect(co_facility_info.first.class).to eq(Facility)
+      expect(co_facility_info.first.name).to eq("DMV Tremont Branch")
+      expect(co_facility_info.first.phone).to eq("(720) 865-4600")
+    end
+  end
 end
