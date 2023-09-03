@@ -33,7 +33,7 @@ RSpec.describe FacilityFactory do
 
     facility_factory.create_locations(new_york_facilities)
 
-    require'pry';binding.pry
+    # require'pry';binding.pry
     expect(facility_factory.locations_ny[0]).to be_an_instance_of Facility
     expect(facility_factory.locations_ny.first.name).to eq("EVANS")
     expect(facility_factory.locations_ny.first.address).to eq("6853 ERIE RD, DERBY, NY, 14006")
@@ -58,6 +58,17 @@ RSpec.describe FacilityFactory do
 
     facility_factory.locations_mo.each do |location|
       expect(location).to be_an_instance_of(Facility)
+    end
+  end
+
+  describe '#standardizing phone numbers' do
+    it 'creates CO phone numbers' do
+      co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+
+      facility_factory.create_locations(co_dmv_office_locations)
+      require'pry';binding.pry
+
+      expect(facility_factory.locations_co[0]).to eq()
     end
   end
 end
