@@ -45,11 +45,11 @@ class Vehicle
 
   def pay_fee
     if antique? == true
-      facility.accept_fees(25)
+      facility.collected_fees(25)
     elsif electric_vehicle? == true
-      facility.accept_fees(200)
+      facility.collected_fees(200)
     else 
-      facility.accept_fees(100)
+      facility.collected_fees << 100
     end
   end
   
