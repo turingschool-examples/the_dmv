@@ -4,12 +4,46 @@ class Facility
 
 
   def initialize(facility_info)
-    @name = facility_info.fetch(:name)
-    @address = facility_info.fetch(:address)
-    @phone = facility_info.fetch(:phone)
-    @services = []
+    @name = parse_name(facility_info)
+    @address = parse_address(facility_info)
+    @phone = parse_phone(facility_info)
+    @services = parse_services(facility_info)
     @registered_vehicles = []
     @collected_fees = 0
+  end
+
+  def parse_name(data)
+    if data[:name]
+      data[:name]
+    else data[:dmv_office]
+      data[:dmv_office]
+    end
+  end
+  
+  def parse_address(data)
+    if data[:address]
+      data[:address]
+    elsif data[:address_li] && data[:address__1]
+      "#{data[:address_li]}, #{data[:address__1] }"
+    else data[:address_li]
+      data[:address_li]
+    end
+  end
+    
+  def parse_phone(data)
+    if data[:phone]
+      data[:phone]
+    else data[:phone]
+      data[:phone]
+    end
+  end
+  
+  def parse_services(data)
+    if data[:services_p]
+      data[:services_p]
+    else
+      []
+    end
   end
 
   def add_service(service)

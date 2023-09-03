@@ -39,4 +39,15 @@ RSpec.describe Dmv do
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
+  describe "facilities from other states" do
+    it 'can pull API information from CO' do
+      colorado_locations = DmvDataService.new.co_dmv_office_locations
+      other_facilities = Dmv.new
+      other_facilities.import_facility(colorado_locations)
+
+      expect(other_facilities).to be_an_instance_of(Dmv)
+      expect(other_facilities.facilities).to be_an_instance_of(Array)
+      expect(other_facilities.facilities.first).to be_an_instance_of(Facility)
+    end
+  end
 end

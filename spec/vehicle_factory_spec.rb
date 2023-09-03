@@ -15,10 +15,6 @@ RSpec.describe VehicleFactory do
       factory_vehicles = factory.create_vehicles(wa_ev_registrations)
       expect(factory_vehicles).to be_an_instance_of(Array)
       expect(factory_vehicles.first).to be_an_instance_of(Vehicle)
-
-
     end
-
-
   end
 end
