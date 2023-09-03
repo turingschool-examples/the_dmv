@@ -181,7 +181,7 @@ end
     end
   end
 
-  describe "road test" do
+  describe '#road test' do
     before(:each) do
       @registrant_1 = Registrant.new('Bruce', 18, true)
       @registrant_2 = Registrant.new('Penny', 16)
@@ -205,7 +205,7 @@ end
     expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
     end
 
-    it 'adminsters road test to reg_2' do
+    it 'administers road test to reg_2' do
       @facility_1.add_service('Written Test')
       @facility_1.add_service('Road Test')
       @registrant_2.earn_permit
@@ -213,5 +213,13 @@ end
       expect(@facility_1.administer_road_test(@registrant_2)).to be true
       expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
     end
+  end
+
+  describe '#renew license' do
+    expect(@facility_1.renew_drivers_license(@registrant_1)).to be false
+    @facility_1.add_service('Written Test')
+    @facility_1.add_service('Road Test')
+    @facility_1.add_service('Renew License')
+    expect(@facility_1.services).to eq(["Written Test", "Road Test", "Renew License"])
   end
 end
