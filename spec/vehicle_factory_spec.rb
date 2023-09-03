@@ -2,6 +2,7 @@ require 'spec_helper'
 require './lib/vehicle'
 require './lib/vehicle_factory'
 require './lib/dmv_data_service'
+require './lib/facility_creator'
 
 RSpec.describe Facility do
   it 'can create a new class of Vehicle Factory' do
