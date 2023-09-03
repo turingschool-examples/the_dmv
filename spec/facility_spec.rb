@@ -70,6 +70,7 @@ RSpec.describe Facility do
       registrant_1 = Registrant.new('Bruce', 18, true )
       registrant_2 = Registrant.new('Penny', 16 )
       registrant_3 = Registrant.new('Tucker', 15 )
+      expect(@facility_1.administer_written_test(registrant_2)).to be false
       registrant_2.earn_permit
       expect(@facility_1.administer_written_test(registrant_2)).to be true
       expect(registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
