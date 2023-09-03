@@ -22,7 +22,7 @@ class Facility
       @collected_fees += 25
       @registered_vehicles << vehicle
       vehicle.plate_type = :antique
-    elsif @services.include?('Vehicle Registration') == true && vehicle.engine == :ev
+    elsif @services.include?('Vehicle Registration') == true && vehicle.electric_vehicle? == true
       vehicle.registration_date = Date.today
       @collected_fees += 200
       @registered_vehicles << vehicle
@@ -46,47 +46,30 @@ class Facility
     else
       false
     end
-    
   end
 
-
-
-
-
+  def administer_road_test(registrant)
+    if @services.include?('Road Test') == true && registrant.license_data[:written] = true
+      return registrant.license_data[:license] = true
+    else
+      false
+    end
+  end
+    
+  def renew_drivers_license(registrant)
+    if @services.include?('Renew License') == true && registrant.license_data[:license] == true
+      return registrant.license_data[:renewed] = true
+    else
+      false
+      # registrant.license_data[:renewed] = false
+    end
+  end
 end
 
 
-# def pay_fee
-#   if vehicle.vehicle_details[:year] == Date.today.year - @year > 25
-#     @collected_fees += 25
-#   elsif vehicle.vehicle_details[:engine] == :ev
-#     @collected_fees += 200
-#   else 
-#     @collected_fees +=100
-#   end
-# end
-  # def plate_type
-  #   if self.registration_date != nil && Date.today.year - self.year > 25
-  #     return self.plate_type == :antique
-  #   elsif self.registration_date != nil && self.engine == :ev
-  #     return self.plate_type == :ev
-  #   elsif self.registration_date != nil
-  #     return self.plate_type == :regular
-  #   else
-  #     nil
-  #   end
-  # end
-  # def plate_type
-  #   if vehicle.registration_date != nil && Date.today.year - vehicle.year > 25
-  #     return vehicle.plate_type == :antique
-  #   elsif vehicle.registration_date != nil && vehicle.engine == :ev
-  #     return vehicle.plate_type == :ev
-  #   elsif vehicle.registration_date != nil
-  #     return vehicle.plate_type == :regular
-  #   else
-  #     nil
-  #   end
-  # end
 
 
-# end
+
+
+
+

@@ -25,7 +25,7 @@ RSpec.describe Facility do
     end
   end
   
-  describe '#vehicle registration' do
+  describe 'add vehicle registration' do
     it 'facility_1 exists' do 
       facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
       expect(facility_1).to be_an_instance_of(Facility)
@@ -51,7 +51,7 @@ RSpec.describe Facility do
     end
   end
   
-  describe 'register vehicles' do
+  describe 'register the vehicles' do
     it 'can add services' do
       facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
       facility_1.add_service('Vehicle Registration')
@@ -186,7 +186,65 @@ RSpec.describe Facility do
     end
   end
   describe '#add road tests' do
-    it 'can administer road test' do
+    it 'can administer road test registrant 3' do 
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      registrant_3 = Registrant.new('Tucker', 15 )
+      expect(facility_1.administer_road_test(registrant_3)).to eq(false)
+      registrant_3.earn_permit
+      expect(facility_1.administer_road_test(registrant_3)).to eq(false)
+      expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+      
+    it 'can administer road test to registrant 1' do
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      facility_1.add_service('Written Test')
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      expect(facility_1.administer_road_test(registrant_1)).to eq(false)
+      facility_1.administer_road_test(registrant_1)
+      facility_1.add_service('Road Test')
+      facility_1.administer_road_test(registrant_1)
+      expect(facility_1.administer_road_test(registrant_1)).to eq(true)
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+    end 
+    
+    it 'can administer road test to registrant 2' do
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      registrant_2 = Registrant.new('Penny', 16 )
+      facility_1.add_service('Written Test')
+      facility_1.add_service('Road Test')
+      facility_1.administer_written_test(registrant_2)
+      facility_1.administer_road_test(registrant_2)
+      expect(facility_1.administer_road_test(registrant_2)).to eq(true)
+      expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})      
+    end
+  end
+  describe '#add license renewal' do
+    it "can renew a license" do
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      facility_1.add_service('Written Test')
+      facility_1.add_service('Road Test')
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      facility_1.administer_road_test(registrant_1)
+      expect(facility_1.renew_drivers_license(registrant_1)).to eq(false)
+      facility_1.add_service('Renew License')
+      facility_1.administer_road_test(registrant_1)
+      expect(facility_1.renew_drivers_license(registrant_1)).to eq(true)
+      
+      registrant_3 = Registrant.new('Tucker', 15 )
+      facility_1.renew_drivers_license(registrant_3)
+      expect(facility_1.renew_drivers_license(registrant_3)).to eq(false)
+      expect(registrant_3.license_data). to eq({:written=>false, :license=>false, :renewed=>false})
+
+      registrant_2 = Registrant.new('Penny', 16 )
+      facility_1.administer_written_test(registrant_2)
+      facility_1.administer_road_test(registrant_2)
+      facility_1.renew_drivers_license(registrant_2)
+      expect(facility_1.renew_drivers_license(registrant_2)).to eq (true)
+      expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+
+
+
+
     end
   end
 end

@@ -31,28 +31,4 @@ class Vehicle
   end
 
   
-
-
-  # def plate_type
-  #   if @registration_date != nil && antique? == true
-  #     return :antique
-  #   elsif @registration_date != nil && electric_vehicle? == true
-  #     return :ev
-  #   elsif @registration_date != nil
-  #     :regular
-  #   else
-  #     nil
-  #   end
-  # end
-
-  # def pay_fee
-  #   if antique? == true
-  #     facility.collected_fees(25)
-  #   elsif electric_vehicle? == true
-  #     facility.collected_fees(200)
-  #   else 
-  #     facility.collected_fees << 100
-  #   end
-  # end
-  
 end
