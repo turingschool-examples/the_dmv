@@ -221,7 +221,24 @@ RSpec.describe Facility do
     expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
   end
 
-    it 'returns false, if road test cannot be administered, true if can be' do
+  it 'Can only renewal at facility that offers service, can use multiple facilities' do
+    @facility_1.add_service('Road Test')
+    @facility_1.add_service('Written Test')
+    @facility_2.add_service('Renew License')
+    expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    
+    @registrant_1.earn_permit
+    @facility_1.administer_written_test(@registrant_1)
+    @facility_1.administer_road_test(@registrant_1)
+    expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+
+    @facility_1.renew_drivers_license(@registrant_1)
+    expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+    @facility_2.renew_drivers_license(@registrant_1)
+    expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+  end
+
+    it 'returns false, if road test cannot be administered' do
       expect(@facility_1.renew_drivers_license(@registrant_1)). to be false
     end
   end
