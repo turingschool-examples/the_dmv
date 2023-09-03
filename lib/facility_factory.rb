@@ -1,5 +1,5 @@
 class FacilityFactory
-  attr_reader :locations_co, :locations_mo, :lcoations_ny
+  attr_reader :locations_co, :locations_mo, :locations_ny
 
   def initialize
     @locations_co = []
@@ -19,9 +19,9 @@ class FacilityFactory
         @locations_co << new_facility
       elsif facility_data[:state] == "NY"
         ny_facility = Facility.new(
-          name: facility_data[:dmv_office],
-          address: "#{facility_data[:address_li]} #{facility_data[:address__1]}, #{facility_data[:city]}, #{facility_data[:state]}, #{facility_data[:zip]}",
-          phone: facility_data[:phone]
+          name: facility_data[:office_name],
+          address: "#{facility_data[:street_address_line_1]}, #{facility_data[:city]}, #{facility_data[:state]}, #{facility_data[:zip_code]}",
+          phone: facility_data[:public_phone_number]
         )
         @locations_ny << ny_facility
       elsif facility_data[:state] == "MO"
