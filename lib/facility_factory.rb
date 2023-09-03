@@ -21,7 +21,7 @@ class FacilityFactory
         ny_facility = Facility.new(
           name: facility_data[:office_name],
           address: "#{facility_data[:street_address_line_1]}, #{facility_data[:city]}, #{facility_data[:state]}, #{facility_data[:zip_code]}",
-          phone: facility_data[:public_phone_number]
+          phone: number_to_phone(facility_data[:public_phone_number])
         )
         @locations_ny << ny_facility
       elsif facility_data[:state] == "MO"
