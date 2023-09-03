@@ -6,6 +6,10 @@ RSpec.describe Dmv do
     @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
     @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
     @facility_3 = Facility.new({name: 'DMV Northwest Branch', address: '3698 W. 44th Avenue Denver CO 80211', phone: '(720) 865-4600'})
+    @facility = Facility.new
+    @co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+    @ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
+    @mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
   end
 
   describe '#initialize' do
