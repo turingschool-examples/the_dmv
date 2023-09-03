@@ -1,7 +1,7 @@
 require './spec/spec_helper'
+require './lib/dmv_data_service'
 require './lib/vehicle'
 require './lib/vehicle_factory'
-require './lib/vehicle'
 require 'date'
 
 class Facility
@@ -15,16 +15,6 @@ class Facility
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
-
-    # Colorado Info
-    # DmvDataService (5 x instance[idx]): name => :dmv_office, address => (:address_li,:address__1,:city,:state,:zip),
-    # phone => :phone
-    # @name = contact_info[:dmv_office]
-    # @address = "#{contact_info[:address_li]}, #{contact_info[:address__1]}, #{contact_info[:city]}, #{contact_info[:state]}, #{contact_info[:zip]}"
-    # @phone = contact_info[:phone]
-    # @services = []
-    # @registered_vehicles = []
-    # @collected_fees = 0
   end
 
   def parse_data(facility_data)
@@ -36,7 +26,16 @@ class Facility
       @name = facility_data[:office_name]
       @address = "#{facility_data[:street_address_line_1]}, #{facility_data[:city]}, #{facility_data[:state]}, #{facility_data[:zip_code]}"
       @phone = facility_data[:public_phone_number]
+    elsif facility_data[:state] == "MO"
+      @name = facility_data[:name]
+      @address = "#{facility_data[:address1]}, #{facility_data[:city]}, #{facility_data[:state]}, #{facility_data[:zipcode]}"
+      @phone = facility_data[:phone]
+    else
+      @name = facility_data[:name]
+      @address = facility_data[:address]
+      @phone = facility_data[:phone]
     end
+
   end
 
   def add_service(service)
@@ -93,24 +92,42 @@ class Facility
 end
 
 # dds_co = DmvDataService.new.co_dmv_office_locations
+# co_facility = Facility.new(dds_co[0])
+# p co_facility.name
 # dds_ny = DmvDataService.new.ny_dmv_office_locations
 # dds_mo = DmvDataService.new.mo_dmv_office_locations
 # dds_wa = DmvDataService.new.wa_ev_registrations
-
+# facility_co = Facility.new(dds_co[0])
 # facilities_co = dds_co.map do |facility|
 #   Facility.new(facility)
 # end
 # facilities_ny = dds_ny.map do |facility|
 #   Facility.new(facility)
 # end
+# facilities_mo = dds_mo.map do |facility|
+#   Facility.new(facility)
+# end
+# facilities_co.each do |facility|
+#   facility.add_service('Vehicle_Registration')
+# end
 # facilities_ny.each do |facility|
 #   facility.add_service('Vehicle_Registration')
 # end
+# facilities_mo.each do |facility|
+#   facility.add_service('Vehicle_Registration')
+# end
 # vehicles = VehicleFactory.new.create_vehicles(dds_wa)
-1000.times do 
-  facilities_co.sample.register_vehicle(vehicles.sample)
-end
-binding.pry
+# facilities_ny.each do |facility|
+#   facility.services << 'Vehicle Registration'
+# end
+# register = facilities_ny[0].register_vehicle(vehicles[0])
+# p facilities_ny[0]
+# puts facilities_ny[0].registered_vehicles.count
+# 1000.times do 
+#   facilities_co.sample.register_vehicle(vehicles.sample)
+#   facilities_ny.sample.register_vehicle(vehicles.sample)
+#   facilities_mo.sample.register_vehicle(vehicles.sample)
+# end
 # Create CO facilities
 # facilities = DmvDataService.new.co_dmv_office_locations
 #   .map do |office|
@@ -118,7 +135,6 @@ binding.pry
 #   end
 
 # CO Info
-# DmvDataService (5 x instance[idx])
 # name => :dmv_office
 # address => (:address_li, :address__1, :city, :state, :zip)
 # phone => :phone
@@ -135,3 +151,4 @@ binding.pry
 # address => :address1, :city, :state, :zipcode
 # phone => :phone
 # services => n/a??
+# binding.pry

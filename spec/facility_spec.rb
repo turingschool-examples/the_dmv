@@ -9,6 +9,7 @@ RSpec.describe Facility do
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
     @registrant_1 = Registrant.new('Matt', 18)
     @registrant_2 = Registrant.new('Kristen', 16, true)
+    @co_facilities = DmvDataService.new.co_dmv_office_locations
   end
   describe '#initialize' do
     it 'can initialize' do
@@ -115,4 +116,9 @@ RSpec.describe Facility do
       expect(@registrant_2.license_data[:renewed]).to be true
     end
   end
+    # it 'can be instantiated with external data from an api' do
+    #   colorado_facility = Facility.new(@co_facilities[0])
+    #   p colorado_facility
+    #   # expect(colorado_facility)[0].name.to eq('DMV Tremont Branch')
+    # end
 end

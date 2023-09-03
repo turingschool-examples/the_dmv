@@ -11,11 +11,13 @@ class Vehicle
   attr_accessor :registration_date, :plate_type
 
   def initialize(vehicle_details)
-    @vin = vehicle_details[:vin_1_10]
-    @year = vehicle_details[:model_year]
-    @make = vehicle_details[:make]
-    @model = vehicle_details[:model]
-    @engine = :ev
+    @vin = vehicle_details[:vin]
+    @year = vehicle_details[:year]
+    # @vin = vehicle_details[:vin_1_10]
+    # @year = vehicle_details[:model_year]
+    # @make = vehicle_details[:make]
+    # @model = vehicle_details[:model]
+    @engine = nil
     @registration_date = nil
     @plate_type = nil
   end
