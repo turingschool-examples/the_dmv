@@ -6,8 +6,14 @@ class VehicleFactory
   end
 
   def create_vehicles(api_data)
-    vehicle = Vehicle.new(api_data)
+    api_data.each do |data|
+    vehicle = Vehicle.new(
+      :vin data[:vin_1_10], 
+      :make data[:make], 
+      :model data[:model], 
+      :year data[:year], 
+      :engin data[:engine])
     @factory_vehicles << vehicle
-    vehicle.vin = api_data[:vin]
+    end
   end
 end
