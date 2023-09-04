@@ -14,6 +14,7 @@ class Registrant
 
   def earn_permit
     if @permit == false
+      @permit = true
       true
     else
       false
