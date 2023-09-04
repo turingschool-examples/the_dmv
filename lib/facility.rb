@@ -60,25 +60,30 @@ def register_vehicle(vehicle)
       false
     end
   end
-end 
-# # == true must be used as opposed to the above written = true
-# # this is because the below wil always trigger truth unless == is used as operator
-# # research later...maybe because the if statement above includes && pre license.data section
-# def administer_road_test(registrant)
-#   if registrant.license_data[:written] == true && registrant.age >= 16
-#     registrant.license_data[:license] = true
-#     true
-#   else
-#     false
-#   end
-# end
 
-# def renew_drivers_license(registrant)
-#   if registrant.license_data[:license] == true
-#     registrant.license_data[:renewed] = true
-#     true
-#   else 
-#     false
-#   end
-# end
-# end
+  def administer_road_test(registrant)
+    if @services.include?('Road Test') 
+      if registrant.license_data[:written] == true
+        registrant.license_data[:license] = true
+      else
+        false
+      end
+    else
+      false
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    if @services.include?('Renew License')
+      if registrant.license_data[:license] == true
+        registrant.license_data[:renewed] = true
+      else
+        false
+      end
+    else
+      false
+    end
+  end
+end
+
+  
