@@ -1,5 +1,9 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
+  attr_reader :name, 
+              :address, 
+              :phone, 
+              :services,
+              :registered_vehicles, :collected_fees
 
   def initialize(info, collected_fees = 0)
     @name = info[:name]
@@ -35,4 +39,22 @@ class Facility
   def available_service?(service)
    @services.include?(service)
   end
+
+  def administer_written_test(registrant)
+    if available_service?("Written Test")
+      if registrant.permit? && registrant.age >= 16
+        registrant.license_data[:written] = true
+      else
+        registrant.license_data[:written] = false
+      end
+    else
+      registrant.license_data[:written] = false 
+      puts "This facility does not offer vehicle registration services."
+      return false
+    end
+  end
+
+
+
+
 end
