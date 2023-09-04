@@ -12,8 +12,12 @@ RSpec.describe VehicleFactory do
     it 'extracts needed elements from each object in the given registration data' do
       data = factory.create_vehicles_helper(@wa_ev_registrations)
       expect(data).to be_an_instance_of(Array)
-      expect(data.first).to eq({:vin=>"1N4AZ0CPXF", :year=>2015, :make=>"NISSAN", :model=>"Leaf", :engine=>:ev})
       expect(data.length).to eq(@wa_ev_registrations.length)
+    end
+
+    it 'formats data to be used by Vehicle class' do
+      data = factory.create_vehicles_helper(@wa_ev_registrations)
+      expect(data.first).to eq({:vin=>"1N4AZ0CPXF", :year=>2015, :make=>"NISSAN", :model=>"Leaf", :engine=>:ev})
     end
   end
 
