@@ -54,6 +54,22 @@ RSpec.describe Facility do
       @facility_1.add_service("Vehicle Registration")
       @facility_1.register_vehicle(@cruz)
       expect(@cruz.registration_date).to eq(Date.today)
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@facility_1.registered_vehicles).to include(@cruz)
+      expect(@facility_1.collected_fees).to eq(100)
+     end
+
+     it 'can register multiple vehicles' do
+      @facility_1.add_service("Vehicle Registration")
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+      expect(@camaro.registration_date).to eq(Date.today)
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@bolt.registration_date).to eq(Date.today)
+      expect(@bolt.plate_type).to eq(:ev)
+      p @facility_1.registered_vehicles
+      expect(@facility_1.collected_fees).to eq(325)
      end
 
 
