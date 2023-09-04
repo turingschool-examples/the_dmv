@@ -8,8 +8,9 @@ RSpec.describe VehicleFactory do
 
   describe "create_vehicles" do 
     it "will create vehicle  objects with registration " do 
-    @factory.create_vehicles(wa_ev_registrations).each do |registration|
-      expect(@registration).to be_an_instance_of(vehicle)
-    end 
-    
-    
+      @factory.create_vehicles(@wa_ev_registrations).each do |registration|
+      expect(registration).to be_an_instance_of(Vehicle)
+    end
+  end
+ end 
+end   
