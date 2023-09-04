@@ -7,17 +7,17 @@ class VehicleFactory
   def create_vehicles
     vehicle_data = DmvDataService.new.wa_ev_registrations
     vehicles = []
-    vehicle_data.each do |element|
-      vehicles << Vehicle.new(element)
-        # element[:engine],
-        # element[:make],
-        # element[:model],
-        # element[:plate_type],
-        # element[:registration_date],
-        # element[:vin],
-        # element[:year])
+    vehicle_data.each do |vehicle|
+      washed_vehicle = {
+        vin:vehicle[:vin_1_10],
+        year:vehicle[:model_year],
+        make:vehicle[:make],
+        model:vehicle[:model],
+        engine:[:ev],
+        registration_date:[:nil],
+        plate_type:[:nil]}
+      vehicles << Vehicle.new(washed_vehicle)
     end
     vehicles
   end
-
 end
