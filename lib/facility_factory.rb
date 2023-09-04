@@ -5,12 +5,12 @@ class FacilityFactory
       name = data[:dmv_office]
       address = "#{:address_li} #{:address__1} #{:city} #{:state} #{:zip}"
       phone = data[:phone]
-      hours = data[:hours]
-      model_year = data[:model_year]
+     
+    
 
-      facility = FacilityVehicle.new(name : engine, make: make, model: model, vin: vin, model_year: model_year)
+      facility = Facility.new(name:, address:, phone:)
       facilities << facility
     end 
-    vehicles
+    facilities
   end 
 end              
