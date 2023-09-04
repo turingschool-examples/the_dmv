@@ -8,9 +8,9 @@ class VehicleFactory
       vin = registration[:vin_1_10]
       model_year = registration[:model_year]
 
-      vehicle = Vehicle.new(engine: engine, make: make, model: model, vin: vin, model_year: model_year)
+      vehicle = Vehicle.new(engine: , make: , model:, vin: , model_year: )
       vehicles << vehicle
     end 
     vehicles
   end 
-end 
+end              
