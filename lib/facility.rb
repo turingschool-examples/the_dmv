@@ -24,7 +24,7 @@ class Facility
       vehicle.plate_type = :antique
       vehicle.registration_date = Date.today
       @collected_fees += 25
-    elsif vehicle.electric_vehicle?
+    elsif vehicle.electric_vehicle? 
       vehicle.plate_type = :ev
       vehicle.registration_date = Date.today
       @collected_fees += 200
