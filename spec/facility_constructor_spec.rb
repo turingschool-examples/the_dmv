@@ -27,6 +27,8 @@ RSpec.describe FacilityConstructor do
         expect(facility.name).not_to eq(nil)
         expect(facility.address).not_to eq(nil)
         expect(facility.phone).not_to eq(nil)
+        expect(facility.hours).not_to eq(nil)
+        expect(facility.holidays).to eq(nil)
         expect(facility.services).not_to eq([])
       end
     end
@@ -40,6 +42,8 @@ RSpec.describe FacilityConstructor do
         expect(facility.name).not_to eq(nil)
         expect(facility.address).not_to eq(nil)
         expect(facility.phone).not_to eq(nil)
+        expect(facility.hours).not_to eq(nil)
+        expect(facility.holidays).to eq(nil)
         # expect(facility.services).not_to eq([])
       end
     end
@@ -53,6 +57,8 @@ RSpec.describe FacilityConstructor do
         expect(facility.name).not_to eq(nil)
         expect(facility.address).not_to eq(nil)
         expect(facility.phone).not_to eq(nil)
+        expect(facility.hours).not_to eq(nil)
+        expect(facility.holidays).not_to eq(nil)
         # expect(facility.services).not_to eq([])
       end
     end
