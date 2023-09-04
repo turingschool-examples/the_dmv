@@ -8,7 +8,7 @@ class Vehicle
               :engine
   attr_accessor :registration_date,
                 :plate_type
-              
+                
 
 
   def initialize(vehicle_details)
