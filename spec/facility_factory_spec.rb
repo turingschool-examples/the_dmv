@@ -4,10 +4,10 @@ RSpec.describe FacilityFactory do
   describe '#DMV facility data' do
     it 'creates facilities' do
       facility = FacilityFactory.new
-      colorado_faciliies = DmvDataService.new.co_dmv_office_locations
+      colorado_facilities = DmvDataService.new.co_dmv_office_locations
 
-      expect(facility.create_facility(colorado_faciliies)[0]).to be_instance_of Facility
-      facility.create_facility(colorado_faciliies).each do |data|
+      expect(facility.create_facility(colorado_facilities)[0]).to be_instance_of Facility
+      facility.create_facility(colorado_facilities).each do |data|
       expect(data).to be_instance_of Facility
       end
     end
