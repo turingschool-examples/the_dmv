@@ -1,9 +1,10 @@
 require 'rspec'
+require 'pry'
 
 class Registrant 
   attr_reader :age, 
               :license_data, 
-              :name
+              :name,
               :permit
 
   def initialize(name, age, permit = false)
@@ -11,7 +12,8 @@ class Registrant
     @license_data = {
       written: false,
       license: false,
-      renewed: false}
+      renewed: false
+    }
     @name = name
     @permit = permit
   end
