@@ -18,6 +18,7 @@ RSpec.describe FacilityFactory do
       new_york_facilities = DmvDataService.new.ny_dmv_office_locations
 
       expect(facility.create_facility(new_york_facilities)[0]).to be_instance_of Facility
+      expect(facility.create_facility(new_york_facilities)[3]).to be_instance_of Facility
       facility.create_facility(new_york_facilities).each do |data|
       expect(data).to be_instance_of Facility
       end
@@ -28,6 +29,7 @@ RSpec.describe FacilityFactory do
       missouri_facilities = DmvDataService.new.mo_dmv_office_locations
 
       expect(facility.create_facility(missouri_facilities)[0]).to be_instance_of Facility
+      expect(facility.create_facility(missouri_facilities)[3]).to be_instance_of Facility
       facility.create_facility(missouri_facilities).each do |data|
       expect(data).to be_instance_of Facility
       end
