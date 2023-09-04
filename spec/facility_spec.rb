@@ -142,7 +142,7 @@ RSpec.describe Facility do
       expect(@facility_1.administer_road_test(@registrant_3)).to be(false)
       
       @registrant_3.earn_permit
-      
+
       expect(@facility_1.administer_road_test(@registrant_3)).to be(false)
       expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
@@ -161,7 +161,7 @@ RSpec.describe Facility do
     it 'registrant_2 road test' do
       @registrant_2.earn_permit
       @facility_1.add_service('Written Test')
-      expect(@facility_1.add_service('Road Test')).to eq(["Written Test", "Road Test"]))
+      expect(@facility_1.add_service('Road Test')).to eq(["Written Test", "Road Test"])
       @facility_1.administer_written_test(@registrant_2)
 
       expect(@facility_1.administer_road_test(@registrant_2)).to be(true)
@@ -205,6 +205,18 @@ RSpec.describe Facility do
       @facility_1.administer_road_test(@registrant_2)
       expect(@facility_1.renew_drivers_license(@registrant_2)).to eq(true)
       expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+    end
+  end
+
+  describe '#DMV data services' do
+    it 'creates facilities' do
+      facility = Facility.new(@facility_details)
+      coloratdo_faciliies = DmvDataService.new.co_dmv_office_locations
+    
+      expect(facility.create_facility(coloratdo_faciliies)[0]).to be_instance_of Facility
+      facility.create_facility(coloratdo_faciliies).each do |data|
+      expect(data).to be_instance_of Facility
+      end
     end
   end
 end
