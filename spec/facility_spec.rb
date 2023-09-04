@@ -73,4 +73,23 @@ RSpec.describe Facility do
       expect(registrant_1.license_data[:written]).to be false
     end
   end
+  describe '#administer_road_test' do
+   it 'can administer the road test' do
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      registrant_1 = Registrant.new('Bruce', 18, true)
+
+      facility_1.add_service('Road Test')
+
+      expect(facility_1.administer_road_test(registrant_1)).to be true
+      expect(registrant_1.license_data[:license]).to be true
+    end
+
+    it 'fails road test if no service is available' do
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      registrant_1 = Registrant.new('Bruce', 18, true)
+
+      expect(facility_1.administer_road_test(registrant_1)).to be false
+      expect(registrant_1.license_data[:license]).to be false
+    end
+  end
 end
