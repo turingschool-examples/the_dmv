@@ -7,6 +7,8 @@ RSpec.describe Dmv do
     @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
     @facility_3 = Facility.new({name: 'DMV Northwest Branch', address: '3698 W. 44th Avenue Denver CO 80211', phone: '(720) 865-4600'})
     @co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+    @ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
+    @mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
 
   end
   
@@ -49,6 +51,12 @@ RSpec.describe Dmv do
       expect(co_facility_info.class).to eq(Array)
       expect(co_facility_info.first).to eq({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
     end
+    
+    it 'converts ny facility information from API correct format' do
+      ny_facility_info = @dmv.create_facility_helper(@ny_dmv_office_locations)
+      expect(ny_facility_info.class).to eq(Array)
+      expect(ny_facility_info.first).to eq({name: 'EVANS COUNTY OFFICE', address: '6853 ERIE RD DERBY NY 14006', phone: '(716) 858-7450'})
+    end
   end
 
   describe '#create_facility' do
@@ -61,9 +69,17 @@ RSpec.describe Dmv do
       expect(@dmv.create_facility.first.phone).to eq('(720) 865-4600')
       expect(@dmv.create_facility.first.address).to eq('2855 Tremont Place Suite 118 Denver CO 80205')
     end
+
+    it 'converts ny facility information from API' do
+      @dmv.create_facility_helper(@ny_dmv_office_locations)
+      expect(@dmv.create_facility.count).to eq(172)
+      expect(@dmv.create_facility.class).to eq(Array)
+      expect(@dmv.create_facility.first.class).to eq(Facility)
+      expect(@dmv.create_facility.first.name).to eq('EVANS COUNTY OFFICE')
+      expect(@dmv.create_facility.first.phone).to eq('(716) 858-7450')
+      expect(@dmv.create_facility.first.address).to eq('6853 ERIE RD DERBY NY 14006')
+    end
   end
   
-  # ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
-  # mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
   
 end
