@@ -11,7 +11,10 @@ class AnalyticsDept
 
   def find_popular(symbol)
     if @current_data !=nil
-
+      symbol_array = @current_data.map { |vehicle| vehicle.send(symbol)}
+      frequency_hash = Hash.new(0)
+      symbol_array.each { |vehicle_symbol| frequency_hash[vehicle_symbol] += 1 }
+      frequency_hash.sort_by { |vehicle_symbol, number| number}.last[0]
     else
       false
     end
