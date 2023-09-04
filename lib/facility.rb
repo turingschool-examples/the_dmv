@@ -49,12 +49,24 @@ class Facility
       end
     else
       registrant.license_data[:written] = false 
-      puts "This facility does not offer vehicle registration services."
+      puts "This facility does not offer written test services."
       return false
     end
   end
 
-
-
+  def administer_road_test(registrant)
+    if available_service?("Road Test")
+      if registrant.license_data[:written] == true
+        
+        registrant.license_data[:license] = true
+      else 
+        registrant.license_data[:license] = false
+      end
+    else
+      registrant.license_data[:license] = false
+      puts "This facility does not offer road test services."
+      return false
+    end
+  end
 
 end
