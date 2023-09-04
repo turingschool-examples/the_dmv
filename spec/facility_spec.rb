@@ -87,9 +87,7 @@ RSpec.describe Facility do
       
     end 
   end 
-
-  #end 
-
+  
   describe 'Getting Driver license'do 
    before(:each) do
    @registrant_1 = Registrant.new('Bruce', 18, true)
@@ -99,8 +97,6 @@ RSpec.describe Facility do
    @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
    end 
  
-
-  
     describe 'written test' do 
       it 'registrant 1 ' do 
         expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
