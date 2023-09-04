@@ -1,7 +1,7 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees, :plate_type
+  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
-  def initialize(info, collected_fees = 0, plate_type = :regular)
+  def initialize(info, collected_fees = 0)
     @name = info[:name]
     @address = info[:address]
     @phone = info[:phone]
@@ -18,10 +18,10 @@ class Facility
     if available_service?("Vehicle Registration")
     @registered_vehicles << vehicle
       if vehicle.antique?
-        plate_type = :antique
+        vehicle.plate_type = :antique
         @collected_fees += 25
       elsif vehicle.electric_vehicle?
-        plate_type = :ev
+        vehicle.plate_type = :ev
         @collected_fees += 200
       else
         @collected_fees += 100
