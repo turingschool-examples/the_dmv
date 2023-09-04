@@ -13,13 +13,12 @@ RSpec.describe Facility do
   it 'can find vehicle data using washington dmv api' do
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     @factory = VehicleFactory.new
-    murphy = @factory.create_vehicles(wa_ev_registrations)
-    murphy.each do |murph|
-    expect(murph).to be_a(Vehicle)
-    expect(murph.vin).not_to eq(nil)
+    car_wash = @factory.create_vehicles(wa_ev_registrations)
+    car_wash.each do |car|
+    expect(car).to be_a(Vehicle)
+    expect(car.vin).not_to eq(nil)
     end
     #require 'pry';binding.pry
-    #expect(@factory.create_vehicles(wa_ev_registrations).first).to eq(Vehicle:0x000000012d3812f0 @engine=:ev, @make="TOYOTA", @model="Prius Plug-in", @plate_type=nil, @registration_date=nil, @vin="JTDKN3DP8D", @year="2013")
   end
 
 end
