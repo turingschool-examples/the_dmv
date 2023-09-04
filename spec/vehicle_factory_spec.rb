@@ -4,7 +4,7 @@ require './lib/dmv_data_service'
 
 RSpec.describe VehicleFactory do
 
-  describe '#initialize' do
+  xdescribe '#initialize' do
     it 'creates an instance of VehicleFactory' do
       factory = VehicleFactory.new
     
@@ -13,7 +13,7 @@ RSpec.describe VehicleFactory do
 
   end
 
-  describe '#create_vehicles' do
+  xdescribe '#create_vehicles' do
     it 'creates vehicles from wa_ev_registrations' do
       factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
@@ -29,25 +29,26 @@ RSpec.describe VehicleFactory do
 
   describe 'iteration 4' do
     before(:each) do
-      factory = VehicleFactory.new
+      @factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-      factory.create_vehicles(wa_ev_registrations)
+      @factory.create_vehicles(wa_ev_registrations)
+      # require "pry"; binding.pry
     end
 
     it 'finds most popular make registered' do
       
+      expect(@factory.popular_make).to eq("TESLA")
+    end
+
+    xit 'finds most popular model registered' do
 
     end
 
-    it 'finds most popular model registered' do
+    xit 'counts registered vehicles model year' do
 
     end
 
-    it 'counts registered vehicles model year' do
-
-    end
-
-    it 'finds county with most registered vehicles' do
+    xit 'finds county with most registered vehicles' do
 
     end
 

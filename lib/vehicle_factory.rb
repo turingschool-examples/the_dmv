@@ -16,5 +16,16 @@ class VehicleFactory
     end
 
   end
+
+  def popular_make
+    make_list = vehicles.map do |vehicle|
+      vehicle.make
+      end
+
+    make_list.max_by do |make|
+      make_list.count(make)
+    end
+    
+  end
   
 end
