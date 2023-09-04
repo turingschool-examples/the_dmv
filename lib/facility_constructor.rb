@@ -32,6 +32,7 @@ class FacilityConstructor
   def ny_parse(api_hash)
     api_hash[:name] = "#{api_hash[:office_name]} #{:office_type}"
     api_hash[:address] = "#{api_hash[:street_address_line_1]} #{api_hash[:street_address_line_2]} #{api_hash[:city]} #{api_hash[:state]} #{api_hash[:zip_code]}"
+    api_hash[:hours] = ny_hours(api_hash)
     if api_hash[:public_phone_number] != nil
       api_hash[:phone] = api_hash[:public_phone_number]
     else
@@ -40,11 +41,42 @@ class FacilityConstructor
     api_hash
   end
 
+  def ny_hours(api_hash)
+    hours_string = ""
+    if api_hash[:monday_beginning_hours] != nil
+      hours_string += "Monday - #{api_hash[:monday_beginning_hours]}-#{api_hash[:monday_ending_hours]}"
+    end
+    if api_hash[:tuesday_beginning_hours] != nil
+      hours_string += ", Tuesday - #{api_hash[:tuesday_beginning_hours]}-#{api_hash[:tuesday_ending_hours]}"
+    end
+    if api_hash[:wednesday_beginning_hours] != nil
+      hours_string += ", Wednesday - #{api_hash[:wednesday_beginning_hours]}-#{api_hash[:wednesday_ending_hours]}"
+    end
+    if api_hash[:thursday_beginning_hours] != nil
+      hours_string += ", Thursday - #{api_hash[:thursday_beginning_hours]}-#{api_hash[:thursday_ending_hours]}"
+    end
+    if api_hash[:friday_beginning_hours] != nil
+      hours_string += ", Friday - #{api_hash[:friday_beginning_hours]}-#{api_hash[:friday_ending_hours]}"
+    end
+    hours_string
+  end
+
+
   def mo_parse(api_hash)
     api_hash[:name] = "#{api_hash[:name]} DMV Office"
     api_hash[:address] = "#{api_hash[:address1]} #{api_hash[:city]} #{api_hash[:state]} #{api_hash[:zipcode]}"
     if api_hash[:phone] == nil
       api_hash[:phone] = "N/A"
+    end
+    if api_hash[:hours] == nil
+      api_hash[:hours] = "N/A"
+    else
+      api_hash[:hours] = api_hash[:daysopen]
+    end
+    if api_hash[:holidaysclosed] == nil
+      api_hash[:holidays] = "N/A"
+    else
+      api_hash[:holidays] = api_hash[:holidaysclosed]
     end
     api_hash
   end

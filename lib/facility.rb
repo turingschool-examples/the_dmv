@@ -1,10 +1,12 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
+  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees, :hours, :holidays
   attr_writer :services
   def initialize(branch_info)
     @name = branch_info[:name]
     @address = branch_info[:address]
     @phone = branch_info[:phone]
+    @hours = branch_info[:hours]
+    @holidays = branch_info[:holidays]
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
