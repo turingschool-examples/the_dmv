@@ -16,7 +16,19 @@ class FacilityObjects
     end
     @facilities_list
   end
+
+  def dmv_state_check
+  end
+
+  def dmv_co_state_nomenclature
+  end
+
+  def dmv_ny_state_nomenclature
+  end
+
+  def dmv_mo_state_nomenclature
+  end
   
-  require 'pry';binding.pry
+  #require 'pry';binding.pry
   
   end
