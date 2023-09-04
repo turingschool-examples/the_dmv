@@ -133,6 +133,7 @@ RSpec.describe Facility do
       expect(facility_1.collected_fees).to eq(325)    
     end
   end
+  
   describe '#administer written test' do
     it 'can not administer a test' do
       registrant_1 = Registrant.new('Bruce', 18, true )
@@ -182,6 +183,7 @@ RSpec.describe Facility do
       expect(facility_1.administer_written_test(registrant_3)).to eq(false)
     end
   end
+  
   describe '#add road tests' do
     it 'can administer road test registrant 3' do 
       facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
@@ -241,5 +243,7 @@ RSpec.describe Facility do
       expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
     end
   end
+
+  
 end
 
