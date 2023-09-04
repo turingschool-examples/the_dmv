@@ -19,4 +19,11 @@ class FacilityBuilder
     end
     @facility_list
   end
+
+  def build_facility(data)
+    self.build_facility_helper(data)
+    facilities = @facility_list.map do |facility|
+      Facility.new(facility)
+    end
+  end
 end

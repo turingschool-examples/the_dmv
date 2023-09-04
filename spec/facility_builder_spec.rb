@@ -34,7 +34,7 @@ RSpec.describe FacilityBuilder do
     it 'Will create an array of facilities using a provided data set' do
       @facilities = @builder.build_facility(@data)
       expect(@facilities).to be_an_instance_of(Array)
-      expect(@facilities.lenght).to eq(@data.length)
+      expect(@facilities.length).to eq(@data.length)
     end
     
     it 'Will create an instance of Facility class for each element from given data set' do

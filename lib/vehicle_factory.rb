@@ -1,6 +1,5 @@
 class VehicleFactory 
-  attr_reader :cars,
-              :production_list,
+  attr_reader :production_list,
               :vehicle_details
 
   def create_vehicles_helper(data)
@@ -22,7 +21,7 @@ class VehicleFactory
 
   def create_vehicles(data)
     self.create_vehicles_helper(data)
-    @cars = @production_list.map do |car|
+    cars = @production_list.map do |car|
       Vehicle.new(car)
     end
   end
