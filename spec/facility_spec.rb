@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Facility do
   before(:each) do
-    @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+    @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600', hours: 'Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.'})
   end
   describe '#initialize' do
     it 'can initialize' do
@@ -10,7 +10,14 @@ RSpec.describe Facility do
       expect(@facility.name).to eq('DMV Tremont Branch')
       expect(@facility.address).to eq('2855 Tremont Place Suite 118 Denver CO 80205')
       expect(@facility.phone).to eq('(720) 865-4600')
+      expect(@facility.hours).to eq("Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.")
       expect(@facility.services).to eq([])
+    end
+
+    it 'can also display holidays if given' do
+      facility = Facility.new({name: 'Oakville', address: '3164 TELEGRAPH ROAD ST LOUIS MO 63125', phone: '(314) 887-1050', hours: 'Monday-Friday - 9:00 to 5:00, Last Saturday  - 9:00 to 12:00', holidays: "Thanksgiving (11/24/22), Christmas Day Observed (12/26/22), New Year's Day Observed (01/02/23), Martin Luther King Day (01/16/23), President’s Day (02/20/23), Memorial Day (05/29/23), Juneteenth (06/19/2023), Independence Day (07/04/23), Labor Day (09/04/23), Veterans Day (11/10/23),Thanksgiving (11/23/23), Christmas Day Observed (12/25/23)"})
+      expect(@facility.holidays).to eq(nil)
+      expect(facility.holidays).to eq("Thanksgiving (11/24/22), Christmas Day Observed (12/26/22), New Year's Day Observed (01/02/23), Martin Luther King Day (01/16/23), President’s Day (02/20/23), Memorial Day (05/29/23), Juneteenth (06/19/2023), Independence Day (07/04/23), Labor Day (09/04/23), Veterans Day (11/10/23),Thanksgiving (11/23/23), Christmas Day Observed (12/25/23)")
     end
   end
 
