@@ -9,16 +9,16 @@ RSpec.describe Facility do
   it 'can initialize' do
     expect(@facility).to be_an_instance_of(FacilityObjects)
   end
-
-  # it 'can find vehicle data using washington dmv api' do
-  #   wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-  #   @factory = VehicleFactory.new
-  #   car_wash = @factory.create_vehicles(wa_ev_registrations)
-  #   car_wash.each do |car|
-  #   expect(car).to be_a(Vehicle)
-  #   expect(car.vin).not_to eq(nil)
-  #   end
-  #   #require 'pry';binding.pry
-  # end
+  #require 'pry';binding.pry
+   it 'can find dmv data using co dmv api' do
+    co_dmv = DmvDataService.new.co_dmv_office_locations
+    @facility = FacilityObjects.new
+    fac_co = @facility.create_facilities(co_dmv)
+    fac_co.each do |fac|
+     expect(fac).to be_a(Facility)
+     #expect(fac.phone).to be_a(?)
+    end
+     #require 'pry';binding.pry
+   end
 
 end

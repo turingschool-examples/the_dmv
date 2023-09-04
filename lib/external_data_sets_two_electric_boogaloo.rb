@@ -6,11 +6,10 @@ class FacilityObjects
   def create_facilities(api_data)
     api_data.each do |facility_data|
       fac_data = {
-      vin: vehicle_data[:vin_1_10],
-      make: vehicle_data[:make],
-      model: vehicle_data[:model],
-      year: vehicle_data[:model_year],
-      engine: :ev,  
+      name: facility_data[:dmv_office],
+      address: "#{facility_data[:address_li]}, #{facility_data[:address__1]}",
+      phone: facility_data[:phone]
+      #services: facility_data[:services_p], 
       }
       facility = Facility.new(fac_data)
       @facilities_list << facility
@@ -18,6 +17,6 @@ class FacilityObjects
     @facilities_list
   end
   
-  #require 'pry';binding.pry
+  require 'pry';binding.pry
   
   end
