@@ -1,6 +1,6 @@
 require './spec/spec_helper'
-require './lib/facility_factory'
 require './lib/dmv_data_service'
+require './lib/facility_factory'
 require './lib/vehicle'
 require './lib/vehicle_factory'
 require 'date'
@@ -117,6 +117,7 @@ vehicles.each do |vehicle|
   mo_facilities.sample.register_vehicle(vehicle)
 end
 require 'pry'; binding.pry
+# require 'pry'; binding.pry
 # CO Info
 # name => :dmv_office
 # address => (:address_li, :address__1, :city, :state, :zip)
