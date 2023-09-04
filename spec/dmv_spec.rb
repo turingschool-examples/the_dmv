@@ -57,6 +57,12 @@ RSpec.describe Dmv do
       expect(ny_facility_info.class).to eq(Array)
       expect(ny_facility_info.first).to eq({name: 'EVANS COUNTY OFFICE', address: '6853 ERIE RD DERBY NY 14006', phone: '(716) 858-7450'})
     end
+
+    it 'converts MO facility information from API correct format' do
+      mo_facility_info = @dmv.create_facility_helper(@mo_dmv_office_locations)
+      expect(mo_facility_info.class).to eq(Array)
+      expect(mo_facility_info.first).to eq({name: 'OAKVILLE', address: '3164 TELEGRAPH ROAD ST LOUIS MO 63125', phone: '(314) 887-1050'})
+    end
   end
 
   describe '#create_facility' do
@@ -78,6 +84,16 @@ RSpec.describe Dmv do
       expect(@dmv.create_facility.first.name).to eq('EVANS COUNTY OFFICE')
       expect(@dmv.create_facility.first.phone).to eq('(716) 858-7450')
       expect(@dmv.create_facility.first.address).to eq('6853 ERIE RD DERBY NY 14006')
+    end
+    
+    it 'converts mo facility information from API' do
+      @dmv.create_facility_helper(@mo_dmv_office_locations)
+      expect(@dmv.create_facility.count).to eq(178)
+      expect(@dmv.create_facility.class).to eq(Array)
+      expect(@dmv.create_facility.first.class).to eq(Facility)
+      expect(@dmv.create_facility.first.name).to eq('OAKVILLE')
+      expect(@dmv.create_facility.first.phone).to eq('(314) 887-1050')
+      expect(@dmv.create_facility.first.address).to eq('3164 TELEGRAPH ROAD ST LOUIS MO 63125')
     end
   end
   

@@ -34,7 +34,11 @@ class Dmv
           if phone_data != nil  
             update_phone = phone_data.insert(0, "(").insert(4, ")").insert(5, ' ').insert(-5, '-')
           end
-        facility_details = { name: office_name, address: full_address, phone: update_phone}
+        facility_details = { name: office_name, address: full_address, phone: update_phone }
+      else
+        address_data = office[:address1], office[:city], office[:state], office[:zipcode]
+        full_address = address_data.join(' ')
+        facility_details = { name: office[:name], address: full_address, phone: office[:phone] }
       end
     end
   end
