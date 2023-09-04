@@ -27,4 +27,34 @@ RSpec.describe VehicleFactory do
 
   end
 
+  describe 'iteration 4' do
+    before(:each) do
+      factory = VehicleFactory.new
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      factory.create_vehicles(wa_ev_registrations)
+    end
+
+    it 'finds most popular make registered' do
+      
+
+    end
+
+    it 'finds most popular model registered' do
+
+    end
+
+    it 'counts registered vehicles model year' do
+
+    end
+
+    it 'finds county with most registered vehicles' do
+
+    end
+
+  end
+
+# EV Registrations:
+# Find the most popular make/model registered
+# Count of registered vehicle for a model year
+# County with most registered vehicles
 end
