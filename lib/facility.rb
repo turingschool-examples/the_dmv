@@ -6,9 +6,11 @@ class Facility
     @address = options[:address]
     @phone = options[:phone]
     @services = []
+
   end
 
   def add_service(service)
     @services << service
   end
+
 end
