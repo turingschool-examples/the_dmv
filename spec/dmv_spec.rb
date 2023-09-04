@@ -46,21 +46,20 @@ RSpec.describe Dmv do
   describe '#create_facility_helper' do
     it 'converts co facility information from API correct format' do
       co_facility_info = @dmv.create_facility_helper(@co_dmv_office_locations)
-      expect(@dmv.create_facility_helper(@co_dmv_office_locations).class).to eq(Array)
+      expect(co_facility_info.class).to eq(Array)
       expect(co_facility_info.first).to eq({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
     end
   end
 
   describe '#create_facility' do
-    xit 'converts co facility information from API' do
-      
-      co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
-      co_facility_info = @dmv.create_facility(co_dmv_office_locations)
-      expect(co_facility_info.count).to eq(5)
-      expect(co_facility_info.class).to eq(Array)
-      expect(co_facility_info.first.class).to eq(Facility)
-      expect(co_facility_info.first.name).to eq("DMV Tremont Branch")
-      expect(co_facility_info.first.phone).to eq("(720) 865-4600")
+    it 'converts co facility information from API' do
+      @dmv.create_facility_helper(@co_dmv_office_locations)
+      expect(@dmv.create_facility.count).to eq(5)
+      expect(@dmv.create_facility.class).to eq(Array)
+      expect(@dmv.create_facility.first.class).to eq(Facility)
+      expect(@dmv.create_facility.first.name).to eq('DMV Tremont Branch')
+      expect(@dmv.create_facility.first.phone).to eq('(720) 865-4600')
+      expect(@dmv.create_facility.first.address).to eq('2855 Tremont Place Suite 118 Denver CO 80205')
     end
   end
   
