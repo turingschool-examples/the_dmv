@@ -1,6 +1,7 @@
 require 'spec_helper'
 
-describe '#DMV data services' do
+RSpec.describe VehicleFactory do
+  describe '#DMV data services' do
     it 'creates vehicles' do
       factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
@@ -11,3 +12,4 @@ describe '#DMV data services' do
       end
     end
   end
+end

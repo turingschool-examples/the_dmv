@@ -210,7 +210,7 @@ RSpec.describe Facility do
 
   describe '#DMV data services' do
     it 'creates facilities' do
-      facility = Facility.new(@facility_details)
+      facility = Facility.new(facility_details)
       coloratdo_faciliies = DmvDataService.new.co_dmv_office_locations
     
       expect(facility.create_facility(coloratdo_faciliies)[0]).to be_instance_of Facility
