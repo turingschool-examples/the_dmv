@@ -22,7 +22,8 @@ class AnalyticsDept
 
   def model_year_count(year)
     if @current_data !=nil
-
+      year_array = @current_data.map { |vehicle| vehicle.year}
+      year_array.count(year)
     else
       false
     end
