@@ -12,6 +12,8 @@ RSpec.describe Facility do
   #require 'pry';binding.pry
    it 'can find dmv data using co dmv api' do
     co_dmv = DmvDataService.new.co_dmv_office_locations
+    new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+    missouri_facilities = DmvDataService.new.mo_dmv_office_locations
     @facility = FacilityObjects.new
     fac_co = @facility.create_facilities(co_dmv)
     fac_co.each do |fac|
