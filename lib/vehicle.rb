@@ -21,7 +21,10 @@ class Vehicle
     @registration_date = nil
     @plate_type = nil
   end
-
+  
+  def parse_data(vehicle_details)
+    if vehicle_details[0].
+  end
   def antique?
     Date.today.year - @year.to_i > 25
   end

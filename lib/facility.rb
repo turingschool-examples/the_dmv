@@ -1,4 +1,5 @@
 require './spec/spec_helper'
+require './lib/facility_factory'
 require './lib/dmv_data_service'
 require './lib/vehicle'
 require './lib/vehicle_factory'
@@ -8,7 +9,6 @@ class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
   def initialize(facility_data)
-    # New York
     @name = parse_data(facility_data)
     @address = parse_data(facility_data)
     @phone = parse_data(facility_data)
@@ -91,49 +91,32 @@ class Facility
   end
 end
 
-# dds_co = DmvDataService.new.co_dmv_office_locations
-# co_facility = Facility.new(dds_co[0])
-# p co_facility.name
-# dds_ny = DmvDataService.new.ny_dmv_office_locations
-# dds_mo = DmvDataService.new.mo_dmv_office_locations
-# dds_wa = DmvDataService.new.wa_ev_registrations
-# facility_co = Facility.new(dds_co[0])
-# facilities_co = dds_co.map do |facility|
-#   Facility.new(facility)
-# end
-# facilities_ny = dds_ny.map do |facility|
-#   Facility.new(facility)
-# end
-# facilities_mo = dds_mo.map do |facility|
-#   Facility.new(facility)
-# end
-# facilities_co.each do |facility|
-#   facility.add_service('Vehicle_Registration')
-# end
-# facilities_ny.each do |facility|
-#   facility.add_service('Vehicle_Registration')
-# end
-# facilities_mo.each do |facility|
-#   facility.add_service('Vehicle_Registration')
-# end
-# vehicles = VehicleFactory.new.create_vehicles(dds_wa)
-# facilities_ny.each do |facility|
-#   facility.services << 'Vehicle Registration'
-# end
-# register = facilities_ny[0].register_vehicle(vehicles[0])
-# p facilities_ny[0]
-# puts facilities_ny[0].registered_vehicles.count
-# 1000.times do 
-#   facilities_co.sample.register_vehicle(vehicles.sample)
-#   facilities_ny.sample.register_vehicle(vehicles.sample)
-#   facilities_mo.sample.register_vehicle(vehicles.sample)
-# end
-# Create CO facilities
-# facilities = DmvDataService.new.co_dmv_office_locations
-#   .map do |office|
-#     Facility.new(office)
-#   end
+# create all Colorado facilities
 
+co_facilities = FacilityFactory.new.create_facilities(DmvDataService.new.co_dmv_office_locations)
+mo_facilities = FacilityFactory.new.create_facilities(DmvDataService.new.mo_dmv_office_locations)
+ny_facilities = FacilityFactory.new.create_facilities(DmvDataService.new.ny_dmv_office_locations)
+
+co_facilities.each do |facility|
+  facility.add_service('Vehicle Registration')
+end
+
+ny_facilities.each do |facility|
+  facility.add_service('Vehicle Registration')
+end
+
+mo_facilities.each do |facility|
+  facility.add_service('Vehicle Registration')
+end
+
+vehicles = VehicleFactory.new.create_vehicles(DmvDataService.new.wa_ev_registrations)
+
+vehicles.each do |vehicle|
+  co_facilities.sample.register_vehicle(vehicle)
+  ny_facilities.sample.register_vehicle(vehicle)
+  mo_facilities.sample.register_vehicle(vehicle)
+end
+require 'pry'; binding.pry
 # CO Info
 # name => :dmv_office
 # address => (:address_li, :address__1, :city, :state, :zip)
