@@ -54,7 +54,6 @@ class FacilityFactory
         phone: facility_data[:phone]})
       end 
     end 
-    
   end
 end
 
