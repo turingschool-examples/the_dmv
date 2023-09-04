@@ -49,7 +49,7 @@ RSpec.describe AnalyticsDept do
     end
 
     it 'will not run if there is no data' do
-      expect(@analytics_dept.model_year_count(year)).to be false
+      expect(@analytics_dept.model_year_count("2015")).to be false
     end
   end
 
