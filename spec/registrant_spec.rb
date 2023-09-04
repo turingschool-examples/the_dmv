@@ -1,8 +1,8 @@
-require 'pry'
+require 'spec_helper'
 require './lib/registrant'
-require 'rspec'
 
-describe Registrant do
+
+RSpec.describe Registrant do
   before :each do
     @registrant = Registrant.new(@name, @age)
     @registrant_1 = Registrant.new('Bruce', 18, true )
