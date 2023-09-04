@@ -37,5 +37,4 @@ RSpec.describe Vehicle do
       pry.binding
     end
   end
-  
 end

@@ -17,7 +17,8 @@ class Vehicle
     @model = vehicle_details[:model]
     @engine = parse_engine(vehicle_details)
     @registration_date = nil
-    @plate_type = nil
+    @plate_type = parse_plate
+    # @plate_type = antique? ? :antique : electric_vehicle? ? :ev : :regular
   end
   
   def parse_vin(vehicle_details)
@@ -32,8 +33,12 @@ class Vehicle
     if vehicle_details[:state_of_residence] == "WA"
       @engine = :ev
     else
-      @engine == antique? ? :antique : electric_vehicle? ? :ev : :regular
+      @engine = vehicle_details[:engine]
     end
+  end
+
+  def parse_plate
+    @plate_type = antique? ? :antique : electric_vehicle? ? :ev : :regular
   end
 
   def antique?

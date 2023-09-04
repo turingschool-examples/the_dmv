@@ -8,7 +8,7 @@ require 'date'
 class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
-  def initialize(facility_data)
+  def initialize(facility_data=nil)
     @name = parse_data(facility_data)
     @address = parse_data(facility_data)
     @phone = parse_data(facility_data)
@@ -18,24 +18,29 @@ class Facility
   end
 
   def parse_data(facility_data)
-    if facility_data[:state] == "CO"
-      @name = facility_data[:dmv_office]
-      @address = "#{facility_data[:address_li]}, #{facility_data[:address__1]}, #{facility_data[:city]}, #{facility_data[:state]}, #{facility_data[:zip]}"
-      @phone = facility_data[:phone]
-    elsif facility_data[:state] == "NY"
-      @name = facility_data[:office_name]
-      @address = "#{facility_data[:street_address_line_1]}, #{facility_data[:city]}, #{facility_data[:state]}, #{facility_data[:zip_code]}"
-      @phone = facility_data[:public_phone_number]
-    elsif facility_data[:state] == "MO"
-      @name = facility_data[:name]
-      @address = "#{facility_data[:address1]}, #{facility_data[:city]}, #{facility_data[:state]}, #{facility_data[:zipcode]}"
-      @phone = facility_data[:phone]
+    if facility_data
+      if facility_data[:state] == "CO"
+        @name = facility_data[:dmv_office]
+        @address = "#{facility_data[:address_li]}, #{facility_data[:address__1]}, #{facility_data[:city]}, #{facility_data[:state]}, #{facility_data[:zip]}"
+        @phone = facility_data[:phone]
+      elsif facility_data[:state] == "NY"
+        @name = facility_data[:office_name]
+        @address = "#{facility_data[:street_address_line_1]}, #{facility_data[:city]}, #{facility_data[:state]}, #{facility_data[:zip_code]}"
+        @phone = facility_data[:public_phone_number]
+      elsif facility_data[:state] == "MO"
+        @name = facility_data[:name]
+        @address = "#{facility_data[:address1]}, #{facility_data[:city]}, #{facility_data[:state]}, #{facility_data[:zipcode]}"
+        @phone = facility_data[:phone]
+      else
+        @name = facility_data[:name]
+        @address = facility_data[:address]
+        @phone = facility_data[:phone]
+      end
     else
-      @name = facility_data[:name]
-      @address = facility_data[:address]
-      @phone = facility_data[:phone]
+      @name = nil
+      @address = nil
+      @phone = nil
     end
-
   end
 
   def add_service(service)
@@ -93,30 +98,30 @@ end
 
 # create all Colorado facilities
 
-co_facilities = FacilityFactory.new.create_facilities(DmvDataService.new.co_dmv_office_locations)
-mo_facilities = FacilityFactory.new.create_facilities(DmvDataService.new.mo_dmv_office_locations)
-ny_facilities = FacilityFactory.new.create_facilities(DmvDataService.new.ny_dmv_office_locations)
+# co_facilities = FacilityFactory.new.create_facilities(DmvDataService.new.co_dmv_office_locations)
+# mo_facilities = FacilityFactory.new.create_facilities(DmvDataService.new.mo_dmv_office_locations)
+# ny_facilities = FacilityFactory.new.create_facilities(DmvDataService.new.ny_dmv_office_locations)
+# require 'pry'; binding.pry
+# co_facilities.each do |facility|
+#   facility.add_service('Vehicle Registration')
+# end
 
-co_facilities.each do |facility|
-  facility.add_service('Vehicle Registration')
-end
+# ny_facilities.each do |facility|
+#   facility.add_service('Vehicle Registration')
+# end
 
-ny_facilities.each do |facility|
-  facility.add_service('Vehicle Registration')
-end
+# mo_facilities.each do |facility|
+#   facility.add_service('Vehicle Registration')
+# end
 
-mo_facilities.each do |facility|
-  facility.add_service('Vehicle Registration')
-end
+# vehicles = VehicleFactory.new.create_vehicles(DmvDataService.new.wa_ev_registrations)
 
-vehicles = VehicleFactory.new.create_vehicles(DmvDataService.new.wa_ev_registrations)
-
-vehicles.each do |vehicle|
-  co_facilities.sample.register_vehicle(vehicle)
-  ny_facilities.sample.register_vehicle(vehicle)
-  mo_facilities.sample.register_vehicle(vehicle)
-end
-require 'pry'; binding.pry
+# vehicles.each do |vehicle|
+#   co_facilities.sample.register_vehicle(vehicle)
+#   ny_facilities.sample.register_vehicle(vehicle)
+#   mo_facilities.sample.register_vehicle(vehicle)
+# end
+# require 'pry'; binding.pry
 # require 'pry'; binding.pry
 # CO Info
 # name => :dmv_office
