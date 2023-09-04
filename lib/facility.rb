@@ -64,14 +64,10 @@ class Facility
   end
 
   def renew_drivers_license(registrant)
-    if check_for_service('Renew License') == true && registrant.license_data[:written] == true && registrant.license[:license] == true
-    registrant.license_date[:renewed] = true
+    if check_for_service('Renew License') && registrant.license_data[:written] && registrant.license_data[:license]
+      registrant.license_data[:renewed] = true
+    else
+      false
     end
   end
 end
-
-#services:
-  # register a vehicle
-  # administer a written test
-  # administer a road test
-  # renew a driver's license
