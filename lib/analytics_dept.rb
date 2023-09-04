@@ -31,7 +31,10 @@ class AnalyticsDept
 
   def county_with_most_registered_vehicles
     if @current_data !=nil
-
+      county_array = @current_data.map { |vehicle| vehicle.county}
+      frequency_hash = Hash.new(0)
+      county_array.each { |vehicle_county| frequency_hash[vehicle_county] += 1 }
+      frequency_hash.sort_by { |vehicle_county, number| number}.last[0]
     else
       false
     end
