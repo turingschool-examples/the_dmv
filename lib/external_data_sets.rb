@@ -5,18 +5,21 @@ def initialize
 end
 
 def create_vehicles(api_data)
-  api_data.each do |data|
-    vehicle = Vehicle.new(data)
+  api_data.each do |vehicle_data|
+    car_data = {
+    vin: vehicle_data[:vin_1_10],
+    make: vehicle_data[:make],
+    model: vehicle_data[:model],
+    year: vehicle_data[:model_year],
+    engine: :ev,  
+    }
+    vehicle = Vehicle.new(car_data)
     @factory_vehicles << vehicle
-    vehicle.vin = [:vin_1_10]
-    vehicle.engine = :ev
-    vehicle.year = [:model_year]
   end
   @factory_vehicles
 end
 
-require 'pry';binding.pry
-
+#require 'pry';binding.pry
 
 end
 
