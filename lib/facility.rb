@@ -5,7 +5,6 @@ class Facility
               :services,
               :registered_vehicles,
               :collected_fees
-  
 
   def initialize(facility_details)
     @name = facility_details[:name]
@@ -55,17 +54,6 @@ class Facility
     if services.include?("Renew License") && registrant.license_data[:license] == true
       registrant.license_data[:renewed] = true
     else false
-    end
-  end
-
-  def create_facility(api_data)
-    facilities = api_data.map do |data|
-    Facility.new(
-    name: data[:dmv_office], 
-    address: "#{data[:address_li]} #{data[:address__l]}
-              #{data[:city]} #{data[:state]} #{data[:zip]}",
-    phone: data[:phone] 
-    )
     end
   end
 end

@@ -3,9 +3,8 @@ require 'spec_helper'
 RSpec.describe Facility do
   before(:each) do
     @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
-    
-
   end
+
   describe '#initialize' do
     it 'can initialize' do
       expect(@facility_1.name).to eq('DMV Tremont Branch')
@@ -205,18 +204,6 @@ RSpec.describe Facility do
       @facility_1.administer_road_test(@registrant_2)
       expect(@facility_1.renew_drivers_license(@registrant_2)).to eq(true)
       expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
-    end
-  end
-
-  describe '#DMV data services' do
-    it 'creates facilities' do
-      facility = Facility.new(facility_details)
-      coloratdo_faciliies = DmvDataService.new.co_dmv_office_locations
-    
-      expect(facility.create_facility(coloratdo_faciliies)[0]).to be_instance_of Facility
-      facility.create_facility(coloratdo_faciliies).each do |data|
-      expect(data).to be_instance_of Facility
-      end
     end
   end
 end

@@ -5,7 +5,6 @@ RSpec.describe FacilityFactory do
     it 'creates facilities' do
       facility = FacilityFactory.new
       coloratdo_faciliies = DmvDataService.new.co_dmv_office_locations
-      new_york_facilities = DmvDataService.new.ny_dmv_office_locations
 
       expect(facility.create_facility(coloratdo_faciliies)[0]).to be_instance_of Facility
       facility.create_facility(coloratdo_faciliies).each do |data|
