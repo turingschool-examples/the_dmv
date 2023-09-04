@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe VehicleFactory do
-  lbefore(:factory) { VehicleFactory.new}
+  let(:factory) { VehicleFactory.new}
   
   it 'exists' do
     expect(factory).to be_an_instance_of(VehicleFactory)
