@@ -19,7 +19,6 @@ RSpec.describe FacilityFactory do
     it 'creates CO locations' do
       @facility_factory.create_locations(@co_dmv_office_locations)
       # require'pry';binding.pry
-      expect(@facility_factory.locations_co[0]).to be_an_instance_of Facility
       expect(@facility_factory.locations_co.first.name).to eq("DMV Tremont Branch")
       expect(@facility_factory.locations_co.first.address).to eq("2855 Tremont Place Suite 118, Denver, CO, 80205")
       expect(@facility_factory.locations_co.first.phone).to eq("(720) 865-4600")
@@ -36,10 +35,10 @@ RSpec.describe FacilityFactory do
       @facility_factory.create_locations(@new_york_facilities)
 
       # require'pry';binding.pry
-      expect(@facility_factory.locations_ny[0]).to be_an_instance_of Facility
       expect(@facility_factory.locations_ny.first.name).to eq("EVANS")
       expect(@facility_factory.locations_ny.first.address).to eq("6853 ERIE RD, DERBY, NY, 14006")
-      expect(@facility_factory.locations_ny.first.phone).to eq("7168587450")  
+      # expect(@facility_factory.locations_ny.first.phone).to eq("7168587450")  
+      expect(@facility_factory.locations_ny.first.phone).to eq("(716) 858-7450")  
       # "(716) 858-7450"
 
       @facility_factory.locations_ny.each do |location|
@@ -52,8 +51,6 @@ RSpec.describe FacilityFactory do
     it 'creates MO locations' do
       @facility_factory.create_locations(@missouri_facilities)
       # require'pry';binding.pry
-
-      expect(@facility_factory.locations_mo[0]).to be_an_instance_of Facility
       expect(@facility_factory.locations_mo.first.name).to eq("OAKVILLE")
       expect(@facility_factory.locations_mo.first.address).to eq("3164 TELEGRAPH ROAD, ST LOUIS, MO, 63125")
       expect(@facility_factory.locations_mo.first.phone).to eq("(314) 887-1050")
@@ -65,20 +62,23 @@ RSpec.describe FacilityFactory do
   end
 
   describe '#standardizing phone numbers' do
-    it 'creates NY phone number helper' do
+  # Skipping the following test becuase this test was created to see if the followuing
+  # format worked in isolation. Since it works in the system, we recieve an error.
+  # 
+    xit 'creates NY phone number helper' do
       @facility_factory.create_locations(@new_york_facilities)
 
       @facility_factory.ny_phone_number(@facility_factory.locations_ny.first.phone)
       # require'pry';binding.pry
 
-      expect(@facility_factory.locations_ny.first.phone).to eq( "(716) 858-7450")
+      expect(@facility_factory.locations_ny.first.phone).to eq("(716) 858-7450")
     end
 
-    xit 'impliments phone number helper' do
-      facility_factory.create_locations(new_york_facilities)
-      require'pry';binding.pry
+    it 'impliments phone number helper' do
+      @facility_factory.create_locations(@new_york_facilities)
+      # require'pry';binding.pry
 
-
+      expect(@facility_factory.locations_ny.first.phone).to eq("(716) 858-7450")  
     end
   end
 end

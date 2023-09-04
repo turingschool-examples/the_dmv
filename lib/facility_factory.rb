@@ -23,7 +23,7 @@ class FacilityFactory
         ny_facility = Facility.new(
           name: facility_data[:office_name],
           address: address,
-          phone: facility_data[:public_phone_number]
+          phone: ny_phone_number(facility_data[:public_phone_number])
         )
         
         @locations_ny << ny_facility
@@ -41,6 +41,7 @@ class FacilityFactory
   end
 
   def ny_phone_number(phone)
+    return nil if phone.nil?
     phone.insert(0, "(").insert(4, ")").insert(5, " ").insert(9,"-")
   end
 end
