@@ -95,4 +95,34 @@ RSpec.describe Facility do
       expect(registrant_1.license_data[:license]).to be false
     end
   end
+  describe '#renew_drivers_license' do
+    it 'can renew a driver\'s license' do
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      registrant_1 = Registrant.new('Bruce', 18, true)
+
+      facility_1.add_service('Written Test')
+      facility_1.add_service('Road Test')
+      facility_1.add_service('Renew License')
+
+      expect(facility_1.administer_written_test(registrant_1)).to be true
+      expect(facility_1.administer_road_test(registrant_1)).to be true
+
+      expect(facility_1.renew_drivers_license(registrant_1)).to be true
+      expect(registrant_1.license_data[:renewed]).to be true
+    end
+
+    it 'fails to renew if no service is available' do
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      registrant_1 = Registrant.new('Bruce', 18, true)
+
+      facility_1.add_service('Written Test')
+      facility_1.add_service('Road Test')
+
+      expect(facility_1.administer_written_test(registrant_1)).to be true
+      expect(facility_1.administer_road_test(registrant_1)).to be true
+
+      expect(facility_1.renew_drivers_license(registrant_1)).to be false
+      expect(registrant_1.license_data[:renewed]).to be false
+    end
+  end
 end
