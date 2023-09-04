@@ -43,6 +43,13 @@ RSpec.describe FacilityCreator do
     expect(@check_results[3].class).to be(Array)
   end
 
+  it 'can reformat New York phone number entry to match (123) 456-7890 convention' do
+    new_york_facilities = []
+    new_york_facilities << DmvDataService.new.ny_dmv_office_locations[0]
+    @check_results << @creator.create_facility(new_york_facilities)
+    expect(@check_results[3].to_s).to include("(716) 858-7450")
+  end
+
   it 'can accept information from Missouri submissions' do
     missouri_facilities = []
     missouri_facilities <<  DmvDataService.new.mo_dmv_office_locations[0]

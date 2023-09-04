@@ -7,7 +7,7 @@ class FacilityCreator
       facilities << Facility.new({
       name: facility[:office_name] + " " + facility[:office_type], 
       address: facility[:street_address_line_1] + " " + facility[:city] + " " + facility[:state]+ " " + facility[:zip_code], 
-      phone: facility[:public_phone_number]}) #REFORMAT PHONE NUMBER!!
+      phone: facility[:public_phone_number].insert(0,"(").insert(4,") ").insert(9,"-")})
     elsif facility.keys.include?(:dorregionnumber)
       facilities << Facility.new({
         name: facility[:name] + " LICENSE OFFICE", 
