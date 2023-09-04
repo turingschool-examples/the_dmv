@@ -40,7 +40,18 @@ class Facility
       registrant.license_data[:written] = true
       return true
     else
+       false
+    end
+  end
+  def administer_road_test(registrant)
+  
+  
+    if @services.include?('Road Test') && registrant.permit? && registrant.license_data[:written] && !registrant.license_data[:license]
+      registrant.license_data[:license] = true
+      return true
+    else
       return false
     end
   end
+  
 end
