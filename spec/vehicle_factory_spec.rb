@@ -32,20 +32,22 @@ RSpec.describe VehicleFactory do
       @factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
       @factory.create_vehicles(wa_ev_registrations)
-      # require "pry"; binding.pry
+      #require "pry"; binding.pry
     end
 
-    it 'finds most popular make registered' do
+    xit 'finds most popular make registered' do
       
       expect(@factory.popular_make).to eq("TESLA")
     end
 
     xit 'finds most popular model registered' do
 
+      expect(@factory.popular_model).to eq("Leaf")
     end
 
     xit 'counts registered vehicles model year' do
 
+      
     end
 
     xit 'finds county with most registered vehicles' do

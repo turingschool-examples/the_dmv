@@ -25,7 +25,17 @@ class VehicleFactory
     make_list.max_by do |make|
       make_list.count(make)
     end
-    
+
+  end
+
+  def popular_model
+    model_list = vehicles.map do |vehicle|
+      vehicle.model
+      end
+
+    model_list.max_by do |model|
+      model_list.count(model)
+    end
   end
   
 end
