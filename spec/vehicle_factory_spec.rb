@@ -2,6 +2,7 @@ require 'spec_helper'
 require './lib/vehicle'
 require './lib/vehicle_factory'
 require './lib/dmv_data_service'
+require './lib/facility_creator'
 
 RSpec.describe Facility do
   it 'can create a new class of Vehicle Factory' do
@@ -27,6 +28,7 @@ RSpec.describe Facility do
     check_results = []
     check_results = factory.create_vehicles(wa_ev_registrations)
     expect(check_results.count).to eq(3)
+    expect(check_results.class).to eq(Array)
     expect(check_results[0]).to be_a(Vehicle)
   end
 
