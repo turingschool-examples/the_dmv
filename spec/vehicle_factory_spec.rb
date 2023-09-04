@@ -3,10 +3,8 @@ require 'spec_helper'
 RSpec.describe VehicleFactory do
   let(:factory) { VehicleFactory.new}
   
-  describe '#initialize' do
-    it 'can initialize' do
-      expect(factory).to be_an_instance_of(VehicleFactory)
-    end
+  it 'exists' do
+    expect(factory).to be_an_instance_of(VehicleFactory)
   end
 
   describe '#create vehicles helper' do
