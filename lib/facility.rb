@@ -22,7 +22,7 @@ class Facility
 
    def register_vehicle(vehicle)
     if @services.include?("Vehicle Registration")
-      if vehicle.registration_date == nil
+      if vehicle.registration_date.nil?
         @registered_vehicles << vehicle
         vehicle.registration_date = Date.today
         if vehicle.antique?
@@ -58,7 +58,7 @@ class Facility
   def administer_road_test(registrant)
   if @services.include?("Road Test")
     if registrant.permit == true && registrant.age >=16
-      registrant.license_data[:license]=true
+      registrant.license_data[:license] = true
       true
     else
       false
@@ -71,7 +71,7 @@ class Facility
  def renew_drivers_license(registrant)
   if @services.include?("Renew License")
     if registrant.license_data[:license] == true
-      registrant.license_data[:renewed]=true
+      registrant.license_data[:renewed] = true
       true
     else
       false
@@ -82,5 +82,3 @@ class Facility
  end
 
 end
-
-# binding.pry
