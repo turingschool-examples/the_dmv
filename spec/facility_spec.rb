@@ -11,6 +11,7 @@ RSpec.describe Facility do
     @registrant_2 = Registrant.new('Penny', 16 ) #was age 15 before, changed following interaction pattern
     @registrant_3 = Registrant.new('Tucker', 15 )
   end
+
   describe '#initialize' do
     it 'can initialize' do
       expect(@facility_1).to be_an_instance_of(Facility)
@@ -83,6 +84,7 @@ RSpec.describe Facility do
     end
   end
 
+#license services
   describe '#administer written test' do
     it 'accesses registrant license data' do
       expect(@registrant_1.instance_variable_get(:@license_data).length).to eq(3)
