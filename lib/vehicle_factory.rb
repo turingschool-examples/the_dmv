@@ -38,4 +38,12 @@ class VehicleFactory
     end
   end
   
+  def vehicles_in_year(requested_year)
+    year_list = vehicles.map do |vehicle|
+      vehicle.year
+    end
+    year_list.count do |year|
+      year == requested_year
+    end
+  end
 end
