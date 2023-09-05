@@ -12,8 +12,8 @@ RSpec.describe Registrant do
     end
   end 
 
-  describe '#add registrant information' do
-    it 'can add registrant information' do
+  describe '#add registrant information and earn permit' do
+    it 'can add registrant information and earn permit' do
       expect(@registrant_1.name).to eq("Bruce")
       expect(@registrant_1.age).to eq(18)
       expect(@registrant_1.permit?).to be true
@@ -28,4 +28,12 @@ RSpec.describe Registrant do
       expect(@registrant_2.permit?).to be true
     end
   end 
+
+  describe '#permit? and #earn_permit' do
+    it 'can check if they have a permit and earn a permit' do
+      expect(@registrant_2.permit?).to be false
+      @registrant_2.earn_permit
+      expect(@registrant_2.permit?).to be true
+    end
+  end
 end
