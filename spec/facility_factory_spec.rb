@@ -57,7 +57,6 @@ RSpec.describe FacilityFactory do
     end
   end
 
-
   describe '#References Dexter,MO Hash and passes' do
     it 'checks hashes to match Missouri Dexter office and passes' do
       # require 'pry' ; binding.pry
