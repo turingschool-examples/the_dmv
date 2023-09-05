@@ -18,7 +18,7 @@ RSpec.describe FacilityFactory do
     it "New York data " do 
      facility = FacilityFactory.new
      newyork_facilities = DmvDataService.new.ny_dmv_office_locations
-
+     require 'pry';binding.pry 
      expect(facility.create_facility(newyork_facilities)[0]).to be_an_instance_of Facility
      expect(facility.create_facility(newyork_facilities)[3]).to be_an_instance_of Facility
      
