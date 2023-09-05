@@ -7,7 +7,6 @@ class VehicleFactory
 
   def create_vehicles(data)
     data.each do |vehicle_data|
-      # Create a new Vehicle instance and pass in the relevant attributes
       new_vehicle = Vehicle.new(
         vin: vehicle_data[:vin_1_10],
         year: vehicle_data[:model_year],
