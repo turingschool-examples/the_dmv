@@ -33,7 +33,6 @@ RSpec.describe FacilityFactory do
       expect(ny_result.first.class).to eq(Facility)
       expect(mo_result.class).to eq(Array)
       expect(mo_result.first.class).to eq(Facility)
-      #did not know how to write what to expect for the output.
     end
   end
 end 
