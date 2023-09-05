@@ -64,7 +64,7 @@ RSpec.describe VehicleFactory do
       before(:each) do
         @factory = VehicleFactory.new
         ny_boat_registrations = DmvDataService.new.ny_boat_registrations
-        @factory.create_vehicles(ny_boat_registrations)
+        @factory.create_boats(ny_boat_registrations)
         require "pry"; binding.pry
       end
       it 'creates vehicles from ny_boat_registrations' do
