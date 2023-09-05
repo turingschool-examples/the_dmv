@@ -164,7 +164,6 @@ RSpec.describe Facility do
   end
 
   describe '#written test' do
-
     it 'returns false for written test' do
       facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
       registrant_1 = Registrant.new('Bruce', 18, true )
@@ -173,11 +172,65 @@ RSpec.describe Facility do
 
     it 'adds svc - written test + returns true' do
       facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
-      registrant_1 = Registrant.new('Bruce', 18, true )
       facility_1.add_service('Written Test')
+      registrant_1 = Registrant.new('Bruce', 18, true )
       expect(facility_1.administer_written_test(registrant_1)).to eq(true)
       # require 'pry'; binding.pry
       expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
+
+    it 'no written test w/o permit' do
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      facility_1.add_service('Written Test')
+      registrant_2 = Registrant.new('Penny', 16 )
+      expect(registrant_2.age).to eq(16)
+      expect(registrant_2.permit?).to eq(false)
+      expect(facility_1.administer_written_test(registrant_2)).to eq(false)
+    end
+
+    it 'written test method works as expected' do
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      facility_1.add_service('Written Test')
+      registrant_2 = Registrant.new('Penny', 16 )
+      registrant_3 = Registrant.new('Tucker', 15 )
+      registrant_2.earn_permit
+      registrant_3.earn_permit
+      expect(facility_1.administer_written_test(registrant_2)).to eq(true)
+      expect(registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+      expect(facility_1.administer_written_test(registrant_3)).to eq(false)
+      expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+  end
+
+  describe '#road test' do
+    it 'does not administer to 15yo' do
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      facility_1.add_service('Road Test')
+      registrant_3 = Registrant.new('Tucker', 15 )
+      registrant_3.earn_permit
+      expect(facility_1.administer_road_test(registrant_3)).to eq(false)
+      expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+
+    it 'shows services' do
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      facility_1.add_service('Written Test')
+      facility_1.add_service('Road Test')
+      expect(facility_1.services).to eq(["Written Test", "Road Test"])
+    end
+
+    it 'updates road test in license data' do
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      facility_1.add_service('Written Test')
+      facility_1.add_service('Road Test')
+      facility_1.administer_written_test(registrant_1)      
+      expect(facility_1.administer_road_test(registrant_1)).to eq(true)
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
+    end
+  end
+
+  describe '#renew license' do
+    
   end
 end
