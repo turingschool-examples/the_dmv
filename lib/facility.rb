@@ -1,10 +1,10 @@
 class Facility
-  attr_reader :name, 
-              :address, 
-              :phone, 
-              :services,
-              :registered_vehicles,
-              :collected_fees
+  attr_accessor :name, 
+                :address, 
+                :phone, 
+                :services,
+                :registered_vehicles,
+                :collected_fees
 
   def initialize(options)
     @name = options[:name]
