@@ -27,7 +27,8 @@ class FacilityFactory
         name: item[:name], 
         address: "#{item[:address1]}, #{item[:city]}, #{item[:state]} #{item[:zipcode]}", 
         phone: item[:phone],
-        hours: item[:daysopen]})
+        hours: item[:daysopen],
+        closed: item[:holidaysclosed]})
           facilities << new_facility
       end
     end

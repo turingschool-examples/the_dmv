@@ -4,13 +4,13 @@ require './lib/dmv_data_service'
 
 RSpec.describe do
 
-  xit "creates instances of FacilityFactory" do
+  it "creates instances of FacilityFactory" do
     factory = FacilityFactory.new
 
     expect(factory).to be_an_instance_of FacilityFactory
   end
 
-  xdescribe '#create_facilities' do
+  describe '#create_facilities' do
 
     it "creates facilities from CO database" do
       factory = FacilityFactory.new
@@ -51,7 +51,7 @@ RSpec.describe do
 
   describe 'iteration 4' do 
 
-    xit "finds daily hours of Colorado facility" do
+    it "finds daily hours of Colorado facility" do
       factory = FacilityFactory.new
       co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
       factory.create_facilities(co_dmv_office_locations)
@@ -75,8 +75,11 @@ RSpec.describe do
       expect(factory.facilities[0].hours).to eq("Monday-Friday - 9:00 to 5:00, Last Saturday  - 9:00 to 12:00")
     end
 
-    xit "finds which holidays the MO facility is closed" do
-
+    it "finds which holidays the MO facility is closed" do
+      factory = FacilityFactory.new
+      mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
+      factory.create_facilities(mo_dmv_office_locations)
+      expect(factory.facilities[0].closed).to eq("Thanksgiving (11/24/22), Christmas Day Observed (12/26/22), New Year's Day Observed (01/02/23), Martin Luther King Day (01/16/23), President’s Day (02/20/23), Memorial Day (05/29/23), Juneteenth (06/19/2023), Independence Day (07/04/23), Labor Day (09/04/23), Veterans Day (11/10/23), Thanksgiving (11/23/23), Christmas Day Observed (12/25/23)")
     end
 
   end
