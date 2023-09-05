@@ -1,6 +1,4 @@
 require 'spec_helper'
-require './lib/facility'
-require './lib/vehicle'
 require './lib/registrant'
 
 RSpec.describe Facility do
