@@ -4,12 +4,12 @@ class WaveFactory
   end
   
   def create_waves(api_data)
-    api_data[:daily].each_with_index do |(k, wave_data), i|
+    api_data[:daily][:time].each_with_index do |time, i|
       data = {
-      time: api_data[:daily][:time][i],
-      wave_height_max: api_data[:daily][:wave_height_max][i],
-      wave_direction_dominant: api_data[:daily][:wave_direction_dominant][i],
-      wave_period_max: api_data[:daily][:wave_period_max][i]
+        time: time,
+        wave_height_max: api_data[:daily][:wave_height_max][i],
+        wave_direction_dominant: api_data[:daily][:wave_direction_dominant][i],
+        wave_period_max: api_data[:daily][:wave_period_max][i]
       }
       wave = IndividualWave.new(data)
       @wave_repository << wave
