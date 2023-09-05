@@ -1,6 +1,7 @@
 require 'spec_helper'
 require './lib/facility'
 require './lib/vehicle'
+require './lib/registrant'
 
 RSpec.describe Facility do
   before(:each) do
@@ -61,7 +62,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#facility registration tests' do
+  describe '#facility_1 registration tests' do
     it 'recognizes vehicles or nil' do
       facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
       expect(facility_1.registered_vehicles).to eq([])
@@ -128,8 +129,55 @@ RSpec.describe Facility do
       expect(cruz.registration_date).to eq(Date.today)
       expect(camaro.registration_date).to eq(Date.today)
       expect(bolt.registration_date).to eq(Date.today)
+      expect(facility_1.registered_vehicles).to eq([cruz, camaro, bolt])
       expect(facility_1.collected_fees).to eq(325)
     end
   end
 
+  describe '#facility_2 registration tests' do
+    it 'facility_2 exists as empty' do
+      facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+      expect(facility_2.registered_vehicles).to eq([])
+      expect(facility_2.services).to eq([])
+      expect(facility_2.register_vehicle(bolt)).to eq(nil)
+      expect(facility_2.collected_fees).to eq(0)
+    end
+  end
+
+  describe '#Getting License' do
+    it 'returns license data false' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Penny', 16 )
+      registrant_3 = Registrant.new('Tucker', 15 )
+      expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+
+    it 'returns registrant data' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Penny', 16 )
+      registrant_3 = Registrant.new('Tucker', 15 )
+      expect(registrant_1).to be_a(Registrant)
+      expect(registrant_2).to be_a(Registrant)
+      expect(registrant_3).to be_a(Registrant)
+    end
+  end
+
+  describe '#written test' do
+
+    it 'returns false for written test' do
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      expect(facility_1.administer_written_test(registrant_1)).to eq(false)
+    end
+
+    it 'adds svc - written test + returns true' do
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      facility_1.add_service('Written Test')
+      expect(facility_1.administer_written_test(registrant_1)).to eq(true)
+      # require 'pry'; binding.pry
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+    end
+  end
 end
