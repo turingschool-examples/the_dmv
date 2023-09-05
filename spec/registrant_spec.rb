@@ -33,5 +33,14 @@ RSpec.describe Registrant do
       expect(@registrant_2.permit).to eq(true)
     end
   end
-  
+
+  describe '#unearn_permit' do
+    it 'changes permit status from true to false' do
+      @registrant_2.earn_permit
+      expect(@registrant_2.permit).to eq(true)
+      @registrant_2.unearn_permit
+      expect(@registrant_2.unearn_permit).to eq(false)
+    end
+  end
+
 end
