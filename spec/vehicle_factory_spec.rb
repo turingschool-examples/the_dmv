@@ -1,5 +1,4 @@
 require 'spec_helper'
-require './lib/vehicle_factory'
 
 RSpec.describe VehicleFactory do
   describe '#initialize' do
@@ -20,7 +19,6 @@ RSpec.describe VehicleFactory do
       factory = VehicleFactory.new
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
       new_vehicles = factory.create_vehicles(wa_ev_registrations)
-      require 'pry'; binding.pry
       expect(new_vehicles).to be_a(Array)
       expect(new_vehicles).to all be_a(Vehicle)
     end
