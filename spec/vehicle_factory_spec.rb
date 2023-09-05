@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe VehicleFactory do
   before(:each) do
     @factory = VehicleFactory.new
-    wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+    @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
   end
 
   describe '#initialize' do
@@ -14,19 +14,11 @@ RSpec.describe VehicleFactory do
 
   describe '#create_vehicles' do
     it 'creates Vehicle objects with given attributes' do
-      # wa_ev_registrations = [ { :vin_1_10 => 'JTDKN3DP8D', :make => 'TOYOTA', 
-      #   :model => 'Prius Plug-in', :model_year => '2013', :engine => 'ev' }, 
-      #   { :vin_1_10 => '1G1RD6E47D', :make => 'CHEVROLET', :model => 'Volt', 
-      #   :model_year => '2013', :engine => 'ev' } ]
-        wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-        vehicles = @factory.create_vehicles(wa_ev_registrations)
-        vehicles.each do |car|
-          require 'pry'; binding.pry
-          expect(car).to be_a(Vehicle)
-          expect(car.vin).to_not eq(nil)
-          
-        end
-      
+     
+      @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      @factory_vehicles = @factory.create_vehicles(@wa_ev_registrations)
+      expect(@factory_vehicles.length).to eq(@wa_ev_registrations.length)
+      expect(@factory_vehicles.first).to be_a(Vehicle)
       
     end
   end
