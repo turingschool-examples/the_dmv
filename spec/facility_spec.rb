@@ -1,5 +1,4 @@
 require 'spec_helper'
-require './lib/registrant'
 
 RSpec.describe Facility do
   before(:each) do
