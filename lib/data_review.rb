@@ -40,7 +40,7 @@ class DataReview
         model_years.merge!({vehicle.year => 1})
       end
     end
-    model_years[year.to_s].to_s + " registered vehicle per the model year of #{year.to_s} at the #{@facility.name}"
+    model_years[year].to_s + " registered vehicle per the model year of #{year.to_s} at the #{@facility.name}"
   end
 end
 
