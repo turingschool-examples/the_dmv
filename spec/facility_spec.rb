@@ -25,7 +25,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#vehicle registration' do # I would like to see if I could make a before each method here in order to clean up my it block tests.
+  describe '#vehicle registration' do 
     it 'can exist' do
       facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
       facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
@@ -59,8 +59,6 @@ RSpec.describe Facility do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
 
       facility_1.add_service("Vehicle Registration")
-      # facility_1.register_vehicle(cruz)
-      # require'pry';binding.pry
 
       expect(facility_1.register_vehicle(cruz)).to eq(facility_1.collected_fees)
       expect(facility_1.registered_vehicles).to eq([cruz])
@@ -253,7 +251,7 @@ RSpec.describe Facility do
       facility_1.add_service("Road Test")
 
       facility_1.administer_written_test(registrant_1)
-      # require'pry';binding.pry
+ 
       expect(facility_1.services).to eq(["Written Test", "Road Test"])
       expect(facility_1.administer_road_rest(registrant_1)).to be true
       expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
@@ -278,13 +276,11 @@ RSpec.describe Facility do
       facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
       facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
      
-      # require'pry';binding.pry
       facility_1.add_service("Written Test")
       facility_1.add_service("Road Test")
 
       facility_1.administer_written_test(registrant_1)
       facility_1.administer_road_rest(registrant_1)
-
 
       expect(facility_1.add_service("Renew License")).to eq(["Written Test", "Road Test", "Renew License"])
       expect(facility_1.renew_drivers_license(registrant_1)).to be true
@@ -309,7 +305,6 @@ RSpec.describe Facility do
       facility_1.administer_written_test(registrant_2)
       facility_1.administer_road_rest(registrant_2)
 
-      # require'pry';binding.pry
       expect(facility_1.renew_drivers_license(registrant_2)).to be true
       expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
     end

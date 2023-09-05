@@ -28,6 +28,5 @@ class Vehicle
 
   def register_vehicle
     @registration_date = Date.today.year
-    
   end
 end
