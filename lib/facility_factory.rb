@@ -10,7 +10,6 @@ class FacilityFactory
     end
   end
 
-  # need to output helper method data to be used by object creation (store as hash?)
   def create_facilities(locations)
     facilities = locations.map do |location|
       # CO

@@ -19,8 +19,6 @@ class Facility
     @services << service
   end
 
-  # could put a service_test method here to expedite all methods
-
   def registration_helper(vehicle)
     return if !@services.include?('Vehicle Registration')
     vehicle.registration_date = Date.today
