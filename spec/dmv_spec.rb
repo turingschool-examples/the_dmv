@@ -42,29 +42,28 @@ RSpec.describe Dmv do
       expect(@dmv.facilities[0].registered_vehicles).to eq([])
       expect(@dmv.facilities[0].collected_fees).to eq(0)
     end
+
+    it 'can add NY facilities' do
+      new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+      expect(@dmv.facilities).to eq([])
+
+      @dmv.add_multiple_facilities(new_york_facilities)
+      expect(@dmv.instance_variable_get(:@facilities).length).to eq(172)
+      expect(@dmv.instance_variable_get(:@facilities)).to all be_a Facility
+
+      expect(@dmv.facilities_offering_service('Vehicle Registration').length).to be 0
+      expect(@dmv.facilities_offering_service('Written Test').length).to be 0
+      expect(@dmv.facilities_offering_service('Road Test').length).to be 0
+      expect(@dmv.facilities_offering_service('Renew License').length).to be 0
+
+      expect(@dmv.facilities[0].name).to eq('EVANS')
+      expect(@dmv.facilities[0].address).to eq('6853 ERIE RD DERBY NY 14006')
+      expect(@dmv.facilities[0].phone).to eq('(716) 858-7450')
+      expect(@dmv.facilities[0].services).to eq([])
+      expect(@dmv.facilities[0].registered_vehicles).to eq([])
+      expect(@dmv.facilities[0].collected_fees).to eq(0)
+    end
   end
-
-  it 'can add NY facilities' do
-    new_york_facilities = DmvDataService.new.ny_dmv_office_locations
-    expect(@dmv.facilities).to eq([])
-
-    @dmv.add_multiple_facilities(new_york_facilities)
-    expect(@dmv.instance_variable_get(:@facilities).length).to eq(172)
-    expect(@dmv.instance_variable_get(:@facilities)).to all be_a Facility
-
-    expect(@dmv.facilities_offering_service('Vehicle Registration').length).to be 0
-    expect(@dmv.facilities_offering_service('Written Test').length).to be 0
-    expect(@dmv.facilities_offering_service('Road Test').length).to be 0
-    expect(@dmv.facilities_offering_service('Renew License').length).to be 0
-
-    expect(@dmv.facilities[0].name).to eq('EVANS')
-    expect(@dmv.facilities[0].address).to eq('6853 ERIE RD DERBY NY 14006')
-    expect(@dmv.facilities[0].phone).to eq('(715) 858-7450')
-    expect(@dmv.facilities[0].services).to eq([])
-    expect(@dmv.facilities[0].registered_vehicles).to eq([])
-    expect(@dmv.facilities[0].collected_fees).to eq(0)
-  end
-end
 
   describe '#facilities_offering_service' do
     it 'can return list of facilities offering a specified Service' do
