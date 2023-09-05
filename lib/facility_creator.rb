@@ -10,9 +10,9 @@ class FacilityCreator
       phone: facility[:public_phone_number].insert(0,"(").insert(4,") ").insert(9,"-")})
     elsif facility.keys.include?(:dorregionnumber)
       facilities << Facility.new({
-        name: facility[:name] + " LICENSE OFFICE", 
-        address: facility[:address1] + " " + facility[:city] + " " + facility[:state]+ " " + facility[:zipcode], 
-        phone: facility[:phone]})
+      name: facility[:name] + " LICENSE OFFICE", 
+      address: facility[:address1] + " " + facility[:city] + " " + facility[:state]+ " " + facility[:zipcode], 
+      phone: facility[:phone]})
     elsif facility.keys.include?(:address__1)
       facilities << Facility.new({
       name: facility[:dmv_office], 
@@ -29,4 +29,3 @@ class FacilityCreator
   end
 end
 
-# binding.pry

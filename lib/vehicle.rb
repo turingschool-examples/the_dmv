@@ -1,4 +1,3 @@
-# require 'pry'
 require 'date'
 
 class Vehicle
@@ -29,5 +28,3 @@ class Vehicle
     @engine == :ev
   end
 end
-
-# require 'pry'; binding.pry

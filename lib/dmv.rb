@@ -1,9 +1,5 @@
-# require './lib/facility'
-
-
 class Dmv
   attr_reader :facilities
-
   def initialize
     @facilities = []
   end
@@ -18,5 +14,3 @@ class Dmv
     end
   end
 end
-
-# require 'pry'; binding.pry
