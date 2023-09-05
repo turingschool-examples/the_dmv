@@ -1,18 +1,14 @@
 class VehicleFactory
-  attr_reader :vin,
-              :year,
-              :make,
-              :model,
-              :engine,
-              
-
-  def initialize(vehicle_details)
-    @vin = vehicle_details[:vin]
-    @year = vehicle_details[:year]
-    @make = vehicle_details[:make]
-    @model = vehicle_details[:model]
-    @engine = :ev
+  def initialize
   end
 
-
+  def create_vehicles(api_data)
+    @factory_vehicles = []
+    api_data.select do |data|
+      vehicle_data = { vin: data[:vin_1_10], make: data[:make], model: data[:model], year: data[:year], engine: data[:ev]}
+      vehicle = Vehicle.new(vehicle_data)
+      @factory_vehicles << vehicle
+    end
+    @factory_vehicles
+  end
 end
