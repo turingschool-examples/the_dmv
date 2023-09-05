@@ -23,6 +23,17 @@ RSpec.describe Dmv do
     end
   end
 
+  describe '#add_multiple_facilities' do
+    it 'can add CO facilities' do
+      co_dmv_office_locations  = DmvDataService.new.co_dmv_office_locations
+      expect(@dmv.facilities).to eq([])
+
+      @dmv.add_multiple_facilities(co_dmv_office_locations)
+      expect(@dmv.instance_variable_get(:@facilities).length).to eq(5)
+      expect(@dmv.instance_variable_get(:@facilities)).to all be_a Facility
+    end
+  end
+
   describe '#facilities_offering_service' do
     it 'can return list of facilities offering a specified Service' do
       @facility_1.add_service('New Drivers License')
