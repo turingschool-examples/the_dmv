@@ -71,7 +71,6 @@ RSpec.describe do
       factory = FacilityFactory.new
       mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
       factory.create_facilities(mo_dmv_office_locations)
-      #require "pry"; binding.pry
       expect(factory.facilities[0].hours).to eq("Monday-Friday - 9:00 to 5:00, Last Saturday  - 9:00 to 12:00")
     end
 
