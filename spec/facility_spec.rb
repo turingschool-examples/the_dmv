@@ -196,16 +196,16 @@ RSpec.describe Facility do
     expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
   end
   
-  # it 'will renew Registrant 2 for a license' do
-  #   @facility_1.add_service('Written Test')
-  #   @facility_1.add_service('Road Test')
-  #   @facility_1.add_service('Renew License')
-  #   @registrant_2.earn_permit
-  #   @facility_1.administer_written_test(@registrant_2)
-  #   @facility_1.administer_road_test(@registrant_2)
-  #   @facility_1.renew_drivers_license(@registrant_2)
-  #   expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
-  # end
+  it 'will renew Registrant 2 for a license' do
+    @facility_1.add_service('Written Test')
+    @facility_1.add_service('Road Test')
+    @facility_1.add_service('Renew License')
+    @registrant_2.earn_permit
+    @facility_1.administer_written_test(@registrant_2)
+    @facility_1.administer_road_test(@registrant_2)
+    @facility_1.renew_drivers_license(@registrant_2)
+    expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+  end
 
   it 'will not renew Registrant 3 for a license since they have not received a license before' do
     @facility_1.add_service('Written Test')
