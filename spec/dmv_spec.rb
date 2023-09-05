@@ -63,6 +63,27 @@ RSpec.describe Dmv do
       expect(@dmv.facilities[0].registered_vehicles).to eq([])
       expect(@dmv.facilities[0].collected_fees).to eq(0)
     end
+
+    it 'can add MO facilities' do
+      missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+      expect(@dmv.facilities).to eq([])
+
+      @dmv.add_multiple_facilities(missouri_facilities)
+      expect(@dmv.instance_variable_get(:@facilities).length).to eq(178)
+      expect(@dmv.instance_variable_get(:@facilities)).to all be_a Facility
+
+      expect(@dmv.facilities_offering_service('Vehicle Registration').length).to be 0
+      expect(@dmv.facilities_offering_service('Written Test').length).to be 0
+      expect(@dmv.facilities_offering_service('Road Test').length).to be 0
+      expect(@dmv.facilities_offering_service('Renew License').length).to be 0
+
+      expect(@dmv.facilities[0].name).to eq('OAKVILLE')
+      expect(@dmv.facilities[0].address).to eq('3164 TELEGRAPH ROAD ST LOUIS MO 63125')
+      expect(@dmv.facilities[0].phone).to eq('(314) 887-1050')
+      expect(@dmv.facilities[0].services).to eq([])
+      expect(@dmv.facilities[0].registered_vehicles).to eq([])
+      expect(@dmv.facilities[0].collected_fees).to eq(0)
+    end
   end
 
   describe '#facilities_offering_service' do
