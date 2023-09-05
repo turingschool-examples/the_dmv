@@ -2,10 +2,10 @@ require './lib/registrant'
 require 'rspec'
 
 RSpec.describe Registrant do 
- before(:each) do 
+  before(:each) do 
   @registrant_1 = Registrant.new('Bruce', 18, true )
   @registrant_2 = Registrant.new('Penny', 15 )
- end 
+  end 
 
   it "has an attributes name" do 
     expect(@registrant_1.name).to eq("Bruce")
