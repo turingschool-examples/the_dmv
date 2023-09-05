@@ -14,7 +14,7 @@ class WaveFactory
       wave = IndividualWave.new(data)
       @wave_repository << wave
     end
-    require 'pry';binding.pry
+   #require 'pry';binding.pry
     @wave_repository
   end
   #require 'pry';binding.pry
