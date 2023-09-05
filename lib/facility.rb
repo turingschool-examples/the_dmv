@@ -1,9 +1,10 @@
 class Facility
-  attr_reader :name, 
+  attr_accessor :name, 
               :address, 
               :phone, 
-              :services
-  attr_accessor :registered_vehicles, :collected_fees
+              :services,
+              :registered_vehicles, 
+              :collected_fees
 
   def initialize(options = {})
     @name = options[:name]
@@ -30,7 +31,6 @@ class Facility
         vehicle.plate_type = :regular 
         @collected_fees += 100
       end
-
       vehicle.registration_date = Date.today
       @registered_vehicles << vehicle
     end
