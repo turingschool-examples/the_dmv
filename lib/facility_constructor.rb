@@ -1,5 +1,13 @@
 class FacilityConstructor
 
+  def initialize
+    @parse_hash = {
+      "CO" => :co_parse,
+      "NY" => :ny_parse,
+      "MO" => :mo_parse
+    }
+  end
+
   def create_facilities(api_hash_array)
     new_facilities = []
     api_hash_array.each do |facility_data|
@@ -11,16 +19,17 @@ class FacilityConstructor
   end
 
   def parse(api_hash)
-    if api_hash[:state] == "CO"
-      parsed_hash = co_parse(api_hash)
-    elsif api_hash[:state] == "NY"
-      parsed_hash = ny_parse(api_hash)
-    elsif api_hash[:state] == "MO"
-      parsed_hash = mo_parse(api_hash)
-    else
-      parsed_hash = api_hash
-    end
-    parsed_hash
+    self.send(@parse_hash[api_hash[:state]], api_hash)
+    # if api_hash[:state] == "CO"
+    #   parsed_hash = co_parse(api_hash)
+    # elsif api_hash[:state] == "NY"
+    #   parsed_hash = ny_parse(api_hash)
+    # elsif api_hash[:state] == "MO"
+    #   parsed_hash = mo_parse(api_hash)
+    # else
+    #   parsed_hash = api_hash
+    # end
+    # parsed_hash
   end
   
   def co_parse(api_hash)
