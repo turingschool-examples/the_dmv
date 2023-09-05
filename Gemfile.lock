@@ -20,6 +20,7 @@ GEM
       rspec-support (~> 3.12.0)
     rspec-support (3.12.0)
     ruby2_keywords (0.0.5)
+    writeexcel (1.0.5)
 
 PLATFORMS
   arm64-darwin-20
@@ -28,6 +29,7 @@ PLATFORMS
 DEPENDENCIES
   faraday
   rspec
+  writeexcel
 
 BUNDLED WITH
    2.2.27
