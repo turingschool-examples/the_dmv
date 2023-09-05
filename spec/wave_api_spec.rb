@@ -24,4 +24,17 @@ RSpec.describe Wave do
       expect(@wave.wave_api.size).to be_an(Integer)
     end
   end
+
+  describe '#extract wave_api data' do
+    it 'can create object-instances of wave_api data' do
+      wave = Wave.new.wave_api
+      @wave_factory = WaveFactory.new
+      vent_waves = @wave_factory.create_waves(wave)
+      vent_waves.each do |vw|
+      expect(vw).to be_a(IndividualWave)
+      expect(vw.wave_height_max).not_to eq(nil)
+      end
+    end
+  end
+
 end
