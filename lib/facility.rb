@@ -59,7 +59,7 @@ class Facility
       hour_arr = []
       facility.each do |key, val|
         if key.to_s.include?('hours')
-          hour_arr.push(facility[key])
+          hour_arr.push("#{key.to_s.gsub("_"," ")} - #{val}")
         end
       end
       @hours = hour_arr
