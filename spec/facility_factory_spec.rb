@@ -8,15 +8,15 @@ RSpec.describe FacilityFactory do
     @missouri_facilities = DmvDataService.new.mo_dmv_office_locations
   end
 
-  describe '#initialize' do
-    it 'can initialize' do
+  describe "#initialize" do
+    it "can initialize" do
       expect(@facility).to be_an_instance_of(FacilityFactory)
     end
   end
 
 
-  describe '#co_dmv_office_locations' do
-    it 'checks hashes for DMV Tremont Branch' do
+  describe "#co_dmv_office_locations" do
+    it "checks hashes for DMV Tremont Branch" do
       # require 'pry' ; binding.pry
       expect(@facility.create_facilities(@co_dmv_office_locations)).to include(having_attributes(
         address__1: "Suite 118",
@@ -29,9 +29,8 @@ RSpec.describe FacilityFactory do
     end
   end
 
-  describe '#co_dmv_office_locations' do
-    it 'checks hashes for DMV Northeast Branch' do
-      # require 'pry' ; binding.pry
+  describe "#co_dmv_office_locations" do
+    it "checks hashes for DMV Northeast Branch" do
       expect(@facility.create_facilities(@co_dmv_office_locations)).to include(having_attributes(
         address__1: "Suite 101",
         address_li: "4685 Peoria Street",
@@ -43,9 +42,8 @@ RSpec.describe FacilityFactory do
     end
   end
 
-  describe '#new_york_dmv_locations and passes' do
-    it 'checks hashes to match Jamaica office and passes' do
-      # require 'pry' ; binding.pry
+  describe "#new_york_dmv_locations" do
+    it "checks hashes to match Jamaica" do
       expect(@facility.create_facilities(@new_york_facilities)).to include(having_attributes(
         dmv_office: "JAMAICA",
         address_li: "DISTRICT OFFICE",
@@ -57,9 +55,8 @@ RSpec.describe FacilityFactory do
     end
   end
 
-  describe '#References Dexter,MO Hash and passes' do
-    it 'checks hashes to match Missouri Dexter office and passes' do
-      # require 'pry' ; binding.pry
+  describe "#References Dexter,MO Hash and passes" do
+    it "checks hashes to match Missouri Dexter office" do
       expect(@facility.create_facilities(@missouri_facilities)).to include(having_attributes(
         dmv_office: "1MV",
         address_li: "Stoddard",
@@ -71,9 +68,8 @@ RSpec.describe FacilityFactory do
     end
   end
 
-  describe '#References Princeton,MO Hash and passes' do
-    it 'checks hashes to match Missouri Princeton office and passes' do
-      # require 'pry' ; binding.pry
+  describe "#References Princeton,MO Hash" do
+    it "checks hashes to match Missouri Princeton office" do
       expect(@facility.create_facilities(@missouri_facilities)).to include(having_attributes(
         dmv_office: "1MV",
         address_li: "Mercer",

@@ -6,7 +6,6 @@ class FacilityFactory
   end
 
   def create_facilities(data_source) 
-    #change to source from office_locations to match paramter DMVDataService 
     data_source.each do |reg|
       @facilities << Dmv.new(reg)
     end
