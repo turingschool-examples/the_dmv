@@ -15,7 +15,6 @@ RSpec.describe FacilityFactory do
       result = factory.create_facilities(co_dmv_office_locations)
       expect(result.class).to eq(Array)
       expect(result.first.class).to eq(Facility)
-      #did not know how to write what to expect for the output.
     end
   end
 
