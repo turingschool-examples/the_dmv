@@ -56,6 +56,7 @@ class Dmv
         }
         # MO has no clearly specified services for facilities
         new_facility = Facility.new(facility_details)
+        new_facility.hours = facility[:daysopen]
         @facilities << new_facility
       else
         false
