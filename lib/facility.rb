@@ -22,12 +22,10 @@ class Facility
   end
   
   def parse_address(data)
-    co_address_input = data[:address_li] && data[:address__1] && data[:city] && data[:state] && data[:zip]
-    co_address_output = "#{data[:address_li]}, #{data[:address__1]}, #{data[:city]}, #{data[:state]} #{data[:zip]}"
     if data[:address]
-      data[:address]
-    elsif co_address_input
-      co_address_output
+      data[:address] 
+    elsif data[:address_li] && data[:address__1] && data[:city] && data[:state] && data[:zip]
+      "#{data[:address_li]}, #{data[:address__1]}, #{data[:city]}, #{data[:state]} #{data[:zip]}"
     elsif data[:address_li] && data[:city] && data[:state] && data[:zip]
       "#{data[:address_li]}, #{data[:city]}, #{data[:state]} #{data[:zip]}"
     elsif data[:street_address_line_1] && data[:city] && data[:state] && data[:zip_code]
