@@ -31,6 +31,16 @@ RSpec.describe Dmv do
       @dmv.add_multiple_facilities(co_dmv_office_locations)
       expect(@dmv.instance_variable_get(:@facilities).length).to eq(5)
       expect(@dmv.instance_variable_get(:@facilities)).to all be_a Facility
+
+      expect(@dmv.facilities_offering_service('Vehicle Registration').length).to be 5
+      expect(@dmv.facilities_offering_service('Renew License').length).to be 0
+
+      expect(@dmv.facilities[0].name).to eq('DMV Tremont Branch')
+      expect(@dmv.facilities[0].address).to eq('2855 Tremont Place Suite 118 Denver CO 80205')
+      expect(@dmv.facilities[0].phone).to eq('(720) 865-4600')
+      expect(@dmv.facilities[0].services).to eq(['Vehicle Registration'])
+      expect(@dmv.facilities[0].registered_vehicles).to eq([])
+      expect(@dmv.facilities[0].collected_fees).to eq(0)
     end
   end
 
