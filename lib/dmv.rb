@@ -21,11 +21,12 @@ class Dmv
         facility_details = {
           name: facility[:dmv_office],
           address: "#{facility[:address_li]} #{facility[:address__1]} #{facility[:city]} #{facility[:state]} #{facility[:zip]}",
-          phone: facility[:phone], 
+          phone: facility[:phone]
         }
         # CO specifies services provided, all only provide registration
         new_facility = Facility.new(facility_details)
-        new_facility.services << 'Vehicle Registration'
+        new_facility.services = ['Vehicle Registration']
+        new_facility.hours = facility[:hours]
         @facilities << new_facility
       # For NY facilities
       elsif facility[:state] == 'NY'
@@ -42,7 +43,8 @@ class Dmv
           phone: "(#{phone_extract[0..2]}) #{phone_extract[3..5]}-#{phone_extract[6..9]}"
         }
         # NY has no specified services for facilities
-        @facilities << Facility.new(facility_details)
+        new_facility = Facility.new(facility_details)
+        @facilities << new_facility
       # For MO facilities
       elsif facility[:state] == 'MO'
         facility_details = {
@@ -51,7 +53,8 @@ class Dmv
           phone: facility[:phone], 
         }
         # MO has no clearly specified services for facilities
-        @facilities << Facility.new(facility_details)
+        new_facility = Facility.new(facility_details)
+        @facilities << new_facility
       else
         false
       end

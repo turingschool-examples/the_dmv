@@ -38,9 +38,10 @@ RSpec.describe Dmv do
       expect(@dmv.facilities[0].name).to eq('DMV Tremont Branch')
       expect(@dmv.facilities[0].address).to eq('2855 Tremont Place Suite 118 Denver CO 80205')
       expect(@dmv.facilities[0].phone).to eq('(720) 865-4600')
-      expect(@dmv.facilities[0].services).to eq(['Vehicle Registration'])
+      expect(@dmv.facilities[4].services).to eq(['Vehicle Registration'])
       expect(@dmv.facilities[0].registered_vehicles).to eq([])
       expect(@dmv.facilities[0].collected_fees).to eq(0)
+      expect(@dmv.facilities[3].hours).to eq('Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.')
     end
 
     it 'can add NY facilities' do
@@ -61,6 +62,7 @@ RSpec.describe Dmv do
       expect(@dmv.facilities[0].phone).to eq('(716) 858-7450')
       expect(@dmv.facilities[0].services).to eq([])
       expect(@dmv.facilities[0].registered_vehicles).to eq([])
+      expect(@dmv.facilities[0].collected_fees).to eq(0)
       expect(@dmv.facilities[0].collected_fees).to eq(0)
     end
 
