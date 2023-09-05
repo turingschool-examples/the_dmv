@@ -8,6 +8,7 @@ RSpec.describe VehicleFactory do
     @factory = VehicleFactory.new
     @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
   end
+
   describe '#create_vehicles' do
     it 'creates Vehicle objects from API data' do
       @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
@@ -18,5 +19,4 @@ RSpec.describe VehicleFactory do
       
     end
   end
-
 end
