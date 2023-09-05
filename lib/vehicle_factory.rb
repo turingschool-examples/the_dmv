@@ -11,7 +11,7 @@ class VehicleFactory
       year: registration[:model_year],
       make: registration[:make],
       model: registration[:model],
-      engine: :ev})
+      engine: :ev, county: registration[:county]})
         vehicles << new_vehicle
     end
 
@@ -44,6 +44,15 @@ class VehicleFactory
     end
     year_list.count do |year|
       year == requested_year
+    end
+  end
+
+  def most_in_county
+    county_list = vehicles.map do |vehicle|
+      vehicle.county
+      end
+    county_list.max_by do |county|
+      county_list.count(county)
     end
   end
 end

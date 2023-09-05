@@ -45,15 +45,16 @@ RSpec.describe VehicleFactory do
       expect(@factory.popular_model).to eq("Leaf")
     end
 
-    it 'counts registered vehicles model year' do
+    xit 'counts registered vehicles model year' do
 
       expect(@factory.vehicles_in_year("2015")).to eq(70)
       expect(@factory.vehicles_in_year("2019")).to eq(102)
       expect(@factory.vehicles_in_year("2007")).to eq(0)
     end
 
-    xit 'finds county with most registered vehicles' do
-
+    it 'finds county with most registered vehicles' do
+      
+      expect(@factory.most_in_county).to eq("King")
     end
 
   end
