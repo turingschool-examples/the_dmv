@@ -33,13 +33,12 @@ RSpec.describe FacilityCreator do
       expect(new_facilities).to all be_a(Facility)
     end
     
-    # it 'returns MO facilities' do
-    #   creator = FacilityCreator.new
-    #   missouri_facilities = DmvDataService.new.mo_dmv_office_locations
-    #   new_facilities = creator.create_mo_facilities(missouri_facilities)
-    #   pry
-    #   expect(new_facilities).to be_a(Array)
-    #   expect(new_facilities).to all be_a(Facility)
-    # end
+    it 'returns MO facilities' do
+      creator = FacilityCreator.new
+      missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+      new_facilities = creator.create_mo_facilities(missouri_facilities)
+      expect(new_facilities).to be_a(Array)
+      expect(new_facilities).to all be_a(Facility)
+    end
   end
 end
