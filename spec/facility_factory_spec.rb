@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe FacilityFactory do
   
   describe "facility factory" do 
-    it "will create vehicle objects with registration " do 
+    it "Colorado Data " do 
      facility = FacilityFactory.new
      colorado_facilities = DmvDataService.new.co_dmv_office_locations
      expect(facility.create_facility(colorado_facilities)[0]).to be_an_instance_of Facility
