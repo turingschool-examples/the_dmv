@@ -21,13 +21,7 @@ RSpec.describe FacilityFactory do
       expect(@factory.normalize_phone(number)).to eq('(123) 456-7890')
     end
   end
-
-  # describe '#filter_co' do
-  #   it 'can parse data from CO state source' do
-  #     expect(@factory.filter_co(@co_dmv_office_locations)).to eq()
-  #   end
-  # end
-
+  
   describe '#create_facilities' do
     it 'will create Facility objects from a location dataset (CO)' do
       @factory.create_facilities(@co_dmv_office_locations).each do |location|
