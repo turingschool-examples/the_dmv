@@ -1,7 +1,6 @@
 require 'date'
 
 class Vehicle
-  
   attr_reader :vin, :year, :make, :model, :engine, :registration_date, :county
   attr_accessor :registration_date, :plate_type, :vin, :year, :make, :model, :engine, :county
 
@@ -23,5 +22,4 @@ class Vehicle
   def electric_vehicle?
     @engine == :ev
   end
-
 end
