@@ -28,7 +28,6 @@ RSpec.describe FacilityCreator do
 
   it 'can add a service and register a vehicle, changing the collected fees' do
     @check_results[0].add_service("Vehicle Registration")
-    @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @check_results[0].register_vehicle(@cruz)
     expect(@check_results[0].collected_fees).to eq(100)
     expect(@check_results[0].registered_vehicles.count).to be(1)
