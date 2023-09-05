@@ -33,6 +33,5 @@ class VehicleFactory
       counts[model] += 1
     end
     counts.max_by{ |model, value| value }
-    binding.pry
   end
 end
