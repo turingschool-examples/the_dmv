@@ -38,7 +38,15 @@ RSpec.describe DmvFacility do
     dmv_3 = dmvs[2]
     dmv_4 = dmvs[3]
     dmv_5 = dmvs[4]
-    binding.pry
+    
+    expect(dmv_2.address).to eq("4685 Peoria Street")
+    expect(dmv_3.address_suite).to be(nil)
+    expect(dmv_2.city).to eq("Denver")
+    expect(dmv_3.state).to eq("CO")
+    expect(dmv_4.dmv_office).to eq("DMV Southwest Branch")
+    expect(dmv_5.hours).to eq("Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.")
+    expect(dmv_4.phone).to eq("(720) 865-4600")
+    expect(dmv_5.services).to eq("vehicle titles, registration, renewals;  VIN inspections")
   end
 
 end
