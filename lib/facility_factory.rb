@@ -5,11 +5,11 @@ class FacilityFactory
 
   def create_facilities(state_abbv)
     if state_abbv == "CO"
-      do create_co_facilities
-        if state_abbv == "MO"
-          do create_mo_facilities
-            if state_abbv == "NY"
-              do create_ny_facilities
+      create_co_facilities
+      elsif state_abbv == "MO"
+        create_mo_facilities
+          elsif state_abbv == "NY"
+            create_ny_facilities
               else
                 "sorry, we don't yet serve #{state_abbv}"
               end
