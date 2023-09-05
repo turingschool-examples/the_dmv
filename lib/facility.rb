@@ -9,19 +9,33 @@ class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
   def initialize(facility_data=nil)
-    @name = parse_data(facility_data)
+    @name = parser = 
     @address = parse_data(facility_data)
     @phone = parse_data(facility_data)
+    @hours = parse_data(facility_data)
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
+  end
+
+  class Parser
+    def initialize(facility_data)
+      @facility_data = facility_data
+    end
+    def get_colo_bname
+      name = @facility
+    end 
   end
 
   def parse_data(facility_data)
     if facility_data
       if facility_data[:state] == "CO"
         @name = facility_data[:dmv_office]
-        @address = "#{facility_data[:address_li]}, #{facility_data[:address__1]}, #{facility_data[:city]}, #{facility_data[:state]}, #{facility_data[:zip]}"
+        if facility_data[:address__1]
+          @address = "#{facility_data[:address_li]}, #{facility_data[:address__1]}, #{facility_data[:city]}, #{facility_data[:state]}, #{facility_data[:zip]}"
+        else
+          @address = "#{facility_data[:address_li]}, #{facility_data[:city]}, #{facility_data[:state]}, #{facility_data[:zip]}"
+        end
         @phone = facility_data[:phone]
       elsif facility_data[:state] == "NY"
         @name = facility_data[:office_name]
