@@ -4,6 +4,8 @@ require './lib/vehicle_factory'
 RSpec.describe VehicleFactory do
   before :each do
     @factory = VehicleFactory.new
+    @dmv_data_service = DmvDataService.new
+    @api_data = @dmv_data_service.wa_ev_registrations
   end
 
   it 'is instance object of VehicleFactory' do
@@ -14,10 +16,7 @@ RSpec.describe VehicleFactory do
   end
 
   it 'creates vehicles' do
-    api_data = [
-      {vin: '12345', make: 'Toyota', model: 'Prius Plug-in', year: 2013},
-      {vin: '67890', make: 'Nissan', model: 'Leaf', year: 2018}
-    ]
+    @factory.create_vehicles(@api_data)
 
     @factory.create_vehicles(api_data)
 
