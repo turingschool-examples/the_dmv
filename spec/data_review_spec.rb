@@ -15,4 +15,7 @@
 @facility_1.first.register_vehicle(@vehicles[1])
 @facility_1.first.register_vehicle(@vehicles[2])
 
-research1 = DataReview.new(@facility_1[0])
+@research = DataReview.new(@facility_1[0])
+@research.find_popular_by_make
+@research.find_popular_by_model
+@research.registered_vehicle_count_by_model_year(2015)

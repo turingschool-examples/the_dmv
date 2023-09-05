@@ -22,7 +22,7 @@ class Facility
 
    def register_vehicle(vehicle)
     if @services.include?("Vehicle Registration")
-      if vehicle.registration_date == nil
+      if vehicle.registration_date.nil?
         @registered_vehicles << vehicle
         vehicle.registration_date = Date.today
         if vehicle.antique?
