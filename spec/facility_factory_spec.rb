@@ -15,6 +15,7 @@ RSpec.describe FacilityFactory do
       facilities.each do |facility|
       expect(facility).to be_an_instance_of(Facility)
       expect(facility.address).to include("CO")
+      expect(factory.create_facilities("HI")).to eq("sorry, we don't yet serve HI")
       end
     end
   end  
