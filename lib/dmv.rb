@@ -37,6 +37,7 @@ class Dmv
         end
         phone_extract = facility[:public_phone_number].to_s
 
+        all_hours = "Mon: #{facility[:monday_beginning_hours]}-#{facility[:monday_ending_hours]}, Tue: #{facility[:tuesday_beginning_hours]}-#{facility[:tuesday_ending_hours]}, Wed: #{facility[:wednesday_beginning_hours]}-#{facility[:wednesday_ending_hours]}, Thu: #{facility[:thursday_beginning_hours]}-#{facility[:thursday_ending_hours]}, Fri: #{facility[:friday_beginning_hours]}-#{facility[:friday_ending_hours]}"
         facility_details = {
           name: facility[:office_name],
           address: address_full,
@@ -44,6 +45,7 @@ class Dmv
         }
         # NY has no specified services for facilities
         new_facility = Facility.new(facility_details)
+        new_facility.hours = all_hours
         @facilities << new_facility
       # For MO facilities
       elsif facility[:state] == 'MO'

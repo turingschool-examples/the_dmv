@@ -64,6 +64,7 @@ RSpec.describe Dmv do
       expect(@dmv.facilities[0].registered_vehicles).to eq([])
       expect(@dmv.facilities[0].collected_fees).to eq(0)
       expect(@dmv.facilities[0].collected_fees).to eq(0)
+      expect(@dmv.facilities[0].hours).to eq('Mon: 9:00 AM-5:00 PM, Tue: 9:00 AM-5:00 PM, Wed: 9:00 AM-5:00 PM, Thu: 9:00 AM-5:00 PM, Fri: 9:00 AM-5:00 PM')
     end
 
     it 'can add MO facilities' do
