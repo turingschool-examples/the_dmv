@@ -23,6 +23,69 @@ RSpec.describe Dmv do
     end
   end
 
+  describe '#add_multiple_facilities' do
+    it 'can add CO facilities' do
+      co_dmv_facilities  = DmvDataService.new.co_dmv_office_locations
+      expect(@dmv.facilities).to eq([])
+
+      @dmv.add_multiple_facilities(co_dmv_facilities)
+      expect(@dmv.instance_variable_get(:@facilities).length).to eq(5)
+      expect(@dmv.instance_variable_get(:@facilities)).to all be_a Facility
+
+      expect(@dmv.facilities_offering_service('Vehicle Registration').length).to be 5
+      expect(@dmv.facilities_offering_service('Renew License').length).to be 0
+
+      expect(@dmv.facilities[0].name).to eq('DMV Tremont Branch')
+      expect(@dmv.facilities[0].address).to eq('2855 Tremont Place Suite 118 Denver CO 80205')
+      expect(@dmv.facilities[0].phone).to eq('(720) 865-4600')
+      expect(@dmv.facilities[0].services).to eq(['Vehicle Registration'])
+      expect(@dmv.facilities[0].registered_vehicles).to eq([])
+      expect(@dmv.facilities[0].collected_fees).to eq(0)
+    end
+
+    it 'can add NY facilities' do
+      new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+      expect(@dmv.facilities).to eq([])
+
+      @dmv.add_multiple_facilities(new_york_facilities)
+      expect(@dmv.instance_variable_get(:@facilities).length).to eq(172)
+      expect(@dmv.instance_variable_get(:@facilities)).to all be_a Facility
+
+      expect(@dmv.facilities_offering_service('Vehicle Registration').length).to be 0
+      expect(@dmv.facilities_offering_service('Written Test').length).to be 0
+      expect(@dmv.facilities_offering_service('Road Test').length).to be 0
+      expect(@dmv.facilities_offering_service('Renew License').length).to be 0
+
+      expect(@dmv.facilities[0].name).to eq('EVANS')
+      expect(@dmv.facilities[0].address).to eq('6853 ERIE RD DERBY NY 14006')
+      expect(@dmv.facilities[0].phone).to eq('(716) 858-7450')
+      expect(@dmv.facilities[0].services).to eq([])
+      expect(@dmv.facilities[0].registered_vehicles).to eq([])
+      expect(@dmv.facilities[0].collected_fees).to eq(0)
+    end
+
+    it 'can add MO facilities' do
+      missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+      expect(@dmv.facilities).to eq([])
+
+      @dmv.add_multiple_facilities(missouri_facilities)
+      expect(@dmv.instance_variable_get(:@facilities).length).to eq(178)
+      expect(@dmv.instance_variable_get(:@facilities)).to all be_a Facility
+
+      expect(@dmv.facilities_offering_service('Vehicle Registration').length).to be 0
+      expect(@dmv.facilities_offering_service('Written Test').length).to be 0
+      expect(@dmv.facilities_offering_service('Road Test').length).to be 0
+      expect(@dmv.facilities_offering_service('Renew License').length).to be 0
+
+      expect(@dmv.facilities[0].name).to eq('OAKVILLE')
+      expect(@dmv.facilities[0].address).to eq('3164 TELEGRAPH ROAD ST LOUIS MO 63125')
+      expect(@dmv.facilities[0].phone).to eq('(314) 887-1050')
+      expect(@dmv.facilities[0].services).to eq([])
+      expect(@dmv.facilities[0].registered_vehicles).to eq([])
+      expect(@dmv.facilities[0].collected_fees).to eq(0)
+    end
+  end
+
   describe '#facilities_offering_service' do
     it 'can return list of facilities offering a specified Service' do
       @facility_1.add_service('New Drivers License')

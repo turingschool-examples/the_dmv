@@ -5,10 +5,10 @@ class VehicleFactory
   end
 
   def create_vehicles(state_registrations_data)
-    # For now, since only washington, all are EV, so :ev is hard coded
     state_registrations_data.each do |vehicle|
+      # For now, since only washington, all are EV, so :ev is hard coded
       vehicle_details = {
-        vin: vehicle[:dol_vehicle_id], 
+        vin: vehicle[:vin_1_10], 
         year: vehicle[:model_year], 
         make: vehicle[:make], 
         model: vehicle[:model], 
