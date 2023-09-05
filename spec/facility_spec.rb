@@ -20,6 +20,7 @@ RSpec.describe Facility do
       expect(@facility_1.phone).to eq('(720) 865-4600')
       expect(@facility_1.services).to eq([])
       expect(@facility_1.hours).to be_nil
+      expect(@facility_1.closed).to be_nil
     end
 
     it 'has no registered vehicles as default' do

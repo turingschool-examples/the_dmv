@@ -87,6 +87,7 @@ RSpec.describe Dmv do
       expect(@dmv.facilities[0].registered_vehicles).to eq([])
       expect(@dmv.facilities[0].collected_fees).to eq(0)
       expect(@dmv.facilities[0].hours).to eq('Monday-Friday - 9:00 to 5:00, Last Saturday  - 9:00 to 12:00')
+      expect(@dmv.facilities[0].closed).to eq("Thanksgiving (11/24/22), Christmas Day Observed (12/26/22), New Year's Day Observed (01/02/23), Martin Luther King Day (01/16/23), President’s Day (02/20/23), Memorial Day (05/29/23), Juneteenth (06/19/2023), Independence Day (07/04/23), Labor Day (09/04/23), Veterans Day (11/10/23), Thanksgiving (11/23/23), Christmas Day Observed (12/25/23) 7/2/22,      9/3/22,      11/25/22,      11/26/22,      11/28/2022 (at 11:45 AM),      12/22/2022 (at 1:30 PM ),      12/31/22,     1/25/2023 (at 9:00 AM until 11:00 AM),  1/25/2023 (open at 11:00 AM),  1/30/2023 (at 9:00 AM until 10:00 AM),  1/30/2023 (open at 10:00 AM),  2/22/2023 (at 3:00 PM),  5/27/23,  07/03/2023,  7/31/2023 (at 12:45 PM ),  9/2/23,  11/24/23,  11/25/23,  12/30/23")
     end
   end
 
