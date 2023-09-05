@@ -21,11 +21,12 @@ class Dmv
         facility_details = {
           name: facility[:dmv_office],
           address: "#{facility[:address_li]} #{facility[:address__1]} #{facility[:city]} #{facility[:state]} #{facility[:zip]}",
-          phone: facility[:phone], 
+          phone: facility[:phone]
         }
         # CO specifies services provided, all only provide registration
         new_facility = Facility.new(facility_details)
-        new_facility.services << 'Vehicle Registration'
+        new_facility.services = ['Vehicle Registration']
+        new_facility.hours = facility[:hours]
         @facilities << new_facility
       # For NY facilities
       elsif facility[:state] == 'NY'
@@ -36,13 +37,16 @@ class Dmv
         end
         phone_extract = facility[:public_phone_number].to_s
 
+        all_hours = "Mon: #{facility[:monday_beginning_hours]}-#{facility[:monday_ending_hours]}, Tue: #{facility[:tuesday_beginning_hours]}-#{facility[:tuesday_ending_hours]}, Wed: #{facility[:wednesday_beginning_hours]}-#{facility[:wednesday_ending_hours]}, Thu: #{facility[:thursday_beginning_hours]}-#{facility[:thursday_ending_hours]}, Fri: #{facility[:friday_beginning_hours]}-#{facility[:friday_ending_hours]}"
         facility_details = {
           name: facility[:office_name],
           address: address_full,
           phone: "(#{phone_extract[0..2]}) #{phone_extract[3..5]}-#{phone_extract[6..9]}"
         }
         # NY has no specified services for facilities
-        @facilities << Facility.new(facility_details)
+        new_facility = Facility.new(facility_details)
+        new_facility.hours = all_hours
+        @facilities << new_facility
       # For MO facilities
       elsif facility[:state] == 'MO'
         facility_details = {
@@ -51,7 +55,10 @@ class Dmv
           phone: facility[:phone], 
         }
         # MO has no clearly specified services for facilities
-        @facilities << Facility.new(facility_details)
+        new_facility = Facility.new(facility_details)
+        new_facility.hours = facility[:daysopen]
+        new_facility.closed = "#{facility[:holidaysclosed]} #{facility[:additionaldaysclosed]}"
+        @facilities << new_facility
       else
         false
       end

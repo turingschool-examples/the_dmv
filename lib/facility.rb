@@ -1,6 +1,6 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
-
+  attr_reader :name, :address, :phone, :registered_vehicles, :collected_fees
+  attr_accessor :hours, :services, :closed
   def initialize(facility_details)
     @name = facility_details[:name]
     @address = facility_details[:address]
@@ -8,6 +8,8 @@ class Facility
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
+    @hours = nil
+    @closed = nil
   end
 
   def add_service(service)
