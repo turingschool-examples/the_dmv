@@ -1,7 +1,7 @@
 class VehicleFactory
   def initialize
   end
-
+  
   def create_vehicles(api_data)
     @factory_vehicles = []
     api_data.select do |data|
