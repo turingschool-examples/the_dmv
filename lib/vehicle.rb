@@ -37,6 +37,7 @@ class Vehicle
       data[:vin_1_10]
     end
   end
+
   def parse_year(data)
     if data[:year]
       data[:year]
@@ -44,12 +45,12 @@ class Vehicle
       data[:model_year]
     end
   end
+  
   def parse_engine(data)
     if data[:engine]
       data[:engine]
     else
-    :ev
+      :ev
+    end
   end
-end
-  
 end

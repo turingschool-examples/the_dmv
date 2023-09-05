@@ -5,7 +5,6 @@ class Registrant
               :license_data
   attr_writer :license_data
   
-
   def initialize(name, age, permit = false)
     @name = name
     @age = age
@@ -16,6 +15,4 @@ class Registrant
   def earn_permit
     @permit = true
   end
-
-
 end

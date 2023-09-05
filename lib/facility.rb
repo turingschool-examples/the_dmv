@@ -2,7 +2,6 @@ class Facility
   attr_reader :name, :address, :phone, :services, :collected_fees, :registered_vehicles
   attr_writer :collected_fees
 
-
   def initialize(facility_info)
     @name = parse_name(facility_info)
     @address = parse_address(facility_info)
@@ -23,17 +22,18 @@ class Facility
   end
   
   def parse_address(data)
+    co_address_input = data[:address_li] && data[:address__1] && data[:city] && data[:state] && data[:zip]
+    co_address_output = "#{data[:address_li]}, #{data[:address__1]}, #{data[:city]}, #{data[:state]} #{data[:zip]}"
     if data[:address]
       data[:address]
-    elsif data[:address_li] && data[:address__1] && data[:city] && data[:state] && data[:zip]
-      "#{data[:address_li]}, #{data[:address__1]}, #{data[:city]}, #{data[:state]} #{data[:zip]}"
+    elsif co_address_input
+      co_address_output
     elsif data[:address_li] && data[:city] && data[:state] && data[:zip]
       "#{data[:address_li]}, #{data[:city]}, #{data[:state]} #{data[:zip]}"
     elsif data[:street_address_line_1] && data[:city] && data[:state] && data[:zip_code]
       "#{data[:street_address_line_1]}, #{data[:city]}, #{data[:state]} #{data[:zip_code]}"
     else data[:address1] && data[:city] && data[:state] && data[:zipcode]
       "#{data[:address1]}, #{data[:city]}, #{data[:state]} #{data[:zipcode]}"
-
     end
   end
     
@@ -75,10 +75,6 @@ class Facility
       vehicle.plate_type = :regular
     else @services.include?('Vehicle Registration') == false
     end
-  end
-
-  def accept_fees(int)
-    @collected_fees += (int)
   end
 
   def administer_written_test(registrant)
