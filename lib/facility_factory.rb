@@ -3,6 +3,18 @@ class FacilityFactory
   def initialize
   end
 
+  def create_facilities(state_abbv)
+    if state_abbv == "CO"
+      do create_co_facilities
+        if state_abbv == "MO"
+          do create_mo_facilities
+            if state_abbv == "NY"
+              do create_ny_facilities
+              else
+                "sorry, we don't yet serve #{state_abbv}"
+              end
+  end
+
   def create_co_facilities
     facility_data = DmvDataService.new.co_dmv_office_locations
     facilities = []
