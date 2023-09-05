@@ -16,6 +16,7 @@ class Facility
 
   def add_service(service)
     @services << service
+    
   end
 
   def register_vehicle(vehicle)
@@ -57,14 +58,28 @@ class Facility
   def administer_road_test(registrant)
     if available_service?("Road Test")
       if registrant.license_data[:written] == true
-        
         registrant.license_data[:license] = true
+        registrant.road_test = true
       else 
         registrant.license_data[:license] = false
       end
     else
       registrant.license_data[:license] = false
       puts "This facility does not offer road test services."
+      return false
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    if available_service?("Renew License")
+      if registrant.road_test == true && registrant.license_data[:license] == true
+        registrant.license_data[:renewed] = true
+      else
+        registrant.license_data[:renewed] = false
+      end
+    else
+      registrant.license_data[:renewed] = false
+      puts "This facility does not offer license renewal services."
       return false
     end
   end
