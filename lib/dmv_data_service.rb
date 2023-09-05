@@ -1,5 +1,6 @@
 require 'faraday'
 require 'json'
+require './spec/spec_helper'
 
 class DmvDataService
   def load_data(source)
