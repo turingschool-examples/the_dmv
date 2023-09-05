@@ -6,13 +6,21 @@ class VehicleFactory
 
   def create_vehicles(registrations)
     registrations.map do |registration|
-      new_vehicle = Vehicle.new({
-      vin: registration[:vin_1_10],
-      year: registration[:model_year],
-      make: registration[:make],
-      model: registration[:model],
-      engine: :ev, county: registration[:county]})
-        vehicles << new_vehicle
+      if registration[:state_of_residence].include?("WA")
+        new_vehicle = Vehicle.new({
+        vin: registration[:vin_1_10],
+        year: registration[:model_year],
+        make: registration[:make],
+        model: registration[:model],
+        engine: :ev, county: registration[:county]})
+          vehicles << new_vehicle
+      else new_vehicle = Vehicle.new({
+        vin: registration[:vin],
+        year: registration[:model_year],
+        make: registration[:make],
+        model: "unknown",
+        engine: :BOAT, county: registration[:county]})
+      end
     end
 
   end
