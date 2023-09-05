@@ -17,6 +17,7 @@ class DmvDataService
 
   def ny_dmv_office_locations
     @ny_dmv_office_locations ||= load_data('https://data.ny.gov/resource/9upz-c7xg.json')
+
   end
 
   def mo_dmv_office_locations
