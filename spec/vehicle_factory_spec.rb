@@ -17,9 +17,7 @@ RSpec.describe VehicleFactory do
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
       factory.create_vehicles(wa_ev_registrations)
       expect(factory.vehicles.count).to be(1000)
-      # factory.create_vehicles(wa_ev_registrations).each do |registration|
-      #   expect(registration).to be_instance_of(Vehicle)
-      # end
+      expect(factory.vehicles.first).to be_instance_of(Vehicle)
     end
   end
 
@@ -51,14 +49,12 @@ RSpec.describe VehicleFactory do
     end
 
     describe 'Boats' do
-      before(:each) do
+      it 'creates vehicles from ny_boat_registrations' do
         @factory = VehicleFactory.new
         ny_boat_registrations = DmvDataService.new.ny_boat_registrations
         @factory.create_boats(ny_boat_registrations)
-      end
-
-      it 'creates vehicles from ny_boat_registrations' do
         expect(@factory.vehicles.count).to eq(1000)
+        expect(@factory.vehicles.first).to be_instance_of(Vehicle)
       end
     end
   end  

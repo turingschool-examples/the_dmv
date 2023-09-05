@@ -18,6 +18,7 @@ RSpec.describe do
       factory.create_facilities(co_dmv_office_locations)
 
       expect(factory.facilities.count).to be(5)
+      expect(factory.facilities.first).to be_an_instance_of(Facility)
     end
 
     it "adds services to facilities from CO database" do
@@ -37,6 +38,7 @@ RSpec.describe do
       factory.create_facilities(ny_dmv_office_locations)
 
       expect(factory.facilities.count).to eq(172)
+      expect(factory.facilities.first).to be_an_instance_of(Facility)
     end
 
     it "creates facilities from MO database" do
@@ -45,6 +47,7 @@ RSpec.describe do
       factory.create_facilities(mo_dmv_office_locations)
 
       expect(factory.facilities.count).to eq(178)
+      expect(factory.facilities.first).to be_an_instance_of(Facility)
     end
 
   end

@@ -15,7 +15,6 @@ class VehicleFactory
       engine: :ev, county: registration[:county]})
       vehicles << new_vehicle
     end
-
   end
   
   def create_boats(registrations)

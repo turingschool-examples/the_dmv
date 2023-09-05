@@ -62,5 +62,4 @@ class Facility
       vehicle.plate_type = :regular
     end  
   end
-
 end
