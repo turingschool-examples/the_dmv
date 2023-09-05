@@ -31,6 +31,19 @@ RSpec.describe Factory do
         expect(vehicle.engine).not_to eq(nil)
       end
     end
+
+    it 'can create vehicles with all data from a different data set' do
+      @ny_boat_registrations = DmvDataService.new.ny_boat_registrations
+      creation_log = @factory.create_vehicles(@ny_boat_registrations)
+      expect(creation_log).to be_an_instance_of(Array)
+      creation_log.each do |vehicle|
+        expect(vehicle.vin).not_to eq(nil)
+        expect(vehicle.year).not_to eq(nil)
+        expect(vehicle.make).not_to eq(nil)
+        expect(vehicle.model).not_to eq(nil)
+        expect(vehicle.engine).not_to eq(nil)
+      end
+    end
   end
 end
         
