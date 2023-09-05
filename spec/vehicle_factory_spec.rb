@@ -15,7 +15,6 @@ RSpec.describe VehicleFactory do
       wa_results = factory.create_vehicles(wa_ev_registrations)
       expect(wa_results.class).to eq(Array)
       expect(wa_results.first.class).to eq(Vehicle)
-      #did not know how to write what to expect for the output.
     end
   end
 end 
