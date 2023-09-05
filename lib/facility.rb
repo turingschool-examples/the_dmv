@@ -1,6 +1,7 @@
 class Facility
   attr_reader :name, :address, :phone, :services, :collected_fees, :registered_vehicles, :hours, :closed
   attr_accessor :name, :address, :phone, :services, :hours, :closed
+
   def initialize(facility)
     @name = facility[:name]
     @address = facility[:address]
@@ -21,7 +22,6 @@ class Facility
       registrant.license_data[:written] = true
     else
     end
-
   end
 
   def administer_road_test(registrant)
@@ -29,7 +29,6 @@ class Facility
       registrant.license_data[:license] = true
     else
     end
-
   end
 
   def register_vehicle(vehicle)
@@ -37,7 +36,6 @@ class Facility
       add_registration(vehicle)
     else
     end
-
   end
 
   def renew_drivers_license(registrant)
@@ -62,8 +60,7 @@ class Facility
       @collected_fees += 100
       vehicle.registration_date = Date.today.year
       vehicle.plate_type = :regular
-    end
-    
+    end  
   end
 
 end

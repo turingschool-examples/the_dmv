@@ -1,5 +1,6 @@
 class VehicleFactory
   attr_reader :vehicles
+
   def initialize
     @vehicles = []
   end
@@ -33,18 +34,15 @@ class VehicleFactory
     make_list = vehicles.map do |vehicle|
       vehicle.make
       end
-
     make_list.max_by do |make|
       make_list.count(make)
     end
-
   end
 
   def popular_model
     model_list = vehicles.map do |vehicle|
       vehicle.model
       end
-
     model_list.max_by do |model|
       model_list.count(model)
     end
@@ -62,7 +60,7 @@ class VehicleFactory
   def most_in_county
     county_list = vehicles.map do |vehicle|
       vehicle.county
-      end
+    end
     county_list.max_by do |county|
       county_list.count(county)
     end

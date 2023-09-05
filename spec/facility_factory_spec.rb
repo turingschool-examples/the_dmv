@@ -56,14 +56,12 @@ RSpec.describe do
       co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
       factory.create_facilities(co_dmv_office_locations)
       expect(factory.facilities[0].hours).to eq("Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.")
-      # require "pry"; binding.pry
     end
 
     it "finds daily hours of New York facility" do
       factory = FacilityFactory.new
       ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
       factory.create_facilities(ny_dmv_office_locations)
-      #require "pry"; binding.pry
       expect(factory.facilities[0].hours).to eq("Monday: 9:00 AM-5:00 PM; Tuesday: 9:00 AM-5:00 PM; Wednesday: 9:00 AM-5:00 PM; Thursday: 9:00 AM-5:00 PM; Friday: 9:00 AM-5:00 PM; Saturday: -")
     end
 
@@ -80,7 +78,5 @@ RSpec.describe do
       factory.create_facilities(mo_dmv_office_locations)
       expect(factory.facilities[0].closed).to eq("Thanksgiving (11/24/22), Christmas Day Observed (12/26/22), New Year's Day Observed (01/02/23), Martin Luther King Day (01/16/23), President’s Day (02/20/23), Memorial Day (05/29/23), Juneteenth (06/19/2023), Independence Day (07/04/23), Labor Day (09/04/23), Veterans Day (11/10/23), Thanksgiving (11/23/23), Christmas Day Observed (12/25/23)")
     end
-
   end
-
 end
