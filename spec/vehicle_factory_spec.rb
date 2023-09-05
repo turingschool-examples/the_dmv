@@ -13,9 +13,13 @@ RSpec.describe VehicleFactory do
 
   it 'can produce vehicles' do
     @vfactory.create_vehicles(@wa_ev_registrations)
-    
-    @vfactory.off_the_lot.each do |vehicle|
+
+      @vfactory.off_the_lot.each do |vehicle|
       expect(vehicle).to be_an_instance_of Vehicle
     end
+    @vfactory.off_the_lot.each do |vehicle|
+      expect(vehicle.engine).to eq(:ev)
+    end
   end
+  
 end
