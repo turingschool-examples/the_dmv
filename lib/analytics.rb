@@ -84,37 +84,34 @@ end.sort_by{|k,v| v}.reverse.to_h
 co_dds = DmvDataService.new.co_dmv_office_locations
 co_facilities = FacilityFactory.new.create_facilities(DmvDataService.new.co_dmv_office_locations)
 
-co_hours = co_facilities.map.with_index do |facility, idx|
-  { "#{facility.name}" => co_dds[idx][:hours] }
-end
+# co_hours = co_facilities.map.with_index do |facility, idx|
+#   { "#{facility.name}" => co_dds[idx][:hours] }
+# end
 
 mo_dds = DmvDataService.new.mo_dmv_office_locations
 mo_facilities = FacilityFactory.new.create_facilities(DmvDataService.new.mo_dmv_office_locations)
-mo_hours = mo_facilities.map.with_index do |facility, idx|
+# mo_hours = mo_facilities.map.with_index do |facility, idx|
   
-  { "#{facility.name}" => mo_dds[idx][:daysopen] }
-end
+#   { "#{facility.name}" => mo_dds[idx][:daysopen] }
+# end
 
 ny_dds = DmvDataService.new.ny_dmv_office_locations
 ny_facilities = FacilityFactory.new.create_facilities(DmvDataService.new.ny_dmv_office_locations)
 
-def get_branch_hours
-  branch_hours_all = []
-  ny_dds = DmvDataService.new.ny_dmv_office_locations
-  ny_dds.map do |facility|
-    branch_arr = []
-    facility.each do |key, val|
-      if key.to_s.include?('hours')
-        branch_arr.push(facility[key])
-      end
-    end
-    branch_hours_all << branch_arr
-  end
-  branch_hours_all
-end
-
-ny_facilities = ny_facilities.map.with_index do |facility, idx|
-  facility[:hours] = get_branch_hours[idx]
-end
-  
 require 'pry'; binding.pry
+
+# ny_hours = ny_facilities.map.with_index do |facility, idx|
+#   {hours: }
+# end
+# def get_branch_hours(facility, idx)
+#   branch_hours = []
+#   ny_dds = DmvDataService.new.ny_dmv_office_locations
+#   ny_dds[idx].each do |key, val|
+#     branch_hours << val if key.to_s.include?('hours')
+#   end
+#   branch_hours
+# end
+
+# ny_facilities.each.with_index do |facility, idx|
+#   ny_facilities[idx][:hours] = get_branch_hours(facility, idx)
+# end
