@@ -47,6 +47,10 @@ RSpec.describe Dmv do
       expect(co_facilities).to be_an_instance_of(Dmv)
       expect(co_facilities.facilities).to be_an_instance_of(Array)
       expect(co_facilities.facilities.first).to be_an_instance_of(Facility)
+      expect(co_facilities.facilities.first.name).to eq("DMV Tremont Branch")
+      expect(co_facilities.facilities.first.phone).to eq("(720) 865-4600")
+      expect(co_facilities.facilities.first.address).to eq("2855 Tremont Place, Suite 118, Denver, CO 80205")
+      
     end
     
     it 'can pull API information from NY' do
@@ -56,6 +60,9 @@ RSpec.describe Dmv do
       expect(ny_facilities).to be_an_instance_of(Dmv)
       expect(ny_facilities.facilities).to be_an_instance_of(Array)
       expect(ny_facilities.facilities.first).to be_an_instance_of(Facility)
+      expect(ny_facilities.facilities.first.name).to eq("EVANS, COUNTY OFFICE")
+      expect(ny_facilities.facilities.first.address).to eq("6853 ERIE RD, DERBY, NY 14006")
+      expect(ny_facilities.facilities.first.phone).to eq("7168587450")
     end
     
     it 'can pull API information from MO' do
@@ -65,6 +72,9 @@ RSpec.describe Dmv do
       expect(mo_facilities).to be_an_instance_of(Dmv)
       expect(mo_facilities.facilities).to be_an_instance_of(Array)
       expect(mo_facilities.facilities.first).to be_an_instance_of(Facility)
+      expect(mo_facilities.facilities.first.name).to eq("OAKVILLE")
+      expect(mo_facilities.facilities.first.phone).to eq("(314) 887-1050")
+      expect(mo_facilities.facilities.first.address).to eq("3164 TELEGRAPH ROAD, ST LOUIS, MO 63125")
     end
   end
 end

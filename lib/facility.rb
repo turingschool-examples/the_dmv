@@ -21,17 +21,49 @@ class Facility
     end
   end
   
+  def co_address_input?(data) 
+    data[:address_li] && data[:address__1] && data[:city] && data[:state] && data[:zip]
+  end
+
+  def co_address_output(data)
+    "#{data[:address_li]}, #{data[:address__1]}, #{data[:city]}, #{data[:state]} #{data[:zip]}"
+  end
+
+  def co_short_address_input?(data)
+    data[:address_li] && data[:city] && data[:state] && data[:zip]
+  end
+
+  def co_short_address_output(data)
+    "#{data[:address_li]}, #{data[:city]}, #{data[:state]} #{data[:zip]}"
+  end
+
+  def ny_address_input?(data)
+    data[:street_address_line_1] && data[:city] && data[:state] && data[:zip_code]
+  end
+
+  def ny_address_output(data)
+    "#{data[:street_address_line_1]}, #{data[:city]}, #{data[:state]} #{data[:zip_code]}"
+  end
+
+  def mo_address_input?(data)
+    data[:address1] && data[:city] && data[:state] && data[:zipcode]
+  end
+
+  def mo_address_output(data)
+    "#{data[:address1]}, #{data[:city]}, #{data[:state]} #{data[:zipcode]}"
+  end
+
   def parse_address(data)
     if data[:address]
       data[:address] 
-    elsif data[:address_li] && data[:address__1] && data[:city] && data[:state] && data[:zip]
-      "#{data[:address_li]}, #{data[:address__1]}, #{data[:city]}, #{data[:state]} #{data[:zip]}"
-    elsif data[:address_li] && data[:city] && data[:state] && data[:zip]
-      "#{data[:address_li]}, #{data[:city]}, #{data[:state]} #{data[:zip]}"
-    elsif data[:street_address_line_1] && data[:city] && data[:state] && data[:zip_code]
-      "#{data[:street_address_line_1]}, #{data[:city]}, #{data[:state]} #{data[:zip_code]}"
-    else data[:address1] && data[:city] && data[:state] && data[:zipcode]
-      "#{data[:address1]}, #{data[:city]}, #{data[:state]} #{data[:zipcode]}"
+    elsif co_address_input?(data)
+      co_address_output(data)
+    elsif co_short_address_input?(data)
+      co_short_address_output(data)
+    elsif ny_address_input?(data)
+      ny_address_output(data)
+    elsif mo_address_input?(data)
+      mo_address_output(data)
     end
   end
     
