@@ -7,3 +7,8 @@ class VehicleFactory
     end
   end
 end
+
+ny_dds = DmvDataService.new.ny_dmv_registrations
+ny_vehicles = VehicleFactory.new.create_vehicles(ny_dds)
+
+require 'pry'; binding.pry
