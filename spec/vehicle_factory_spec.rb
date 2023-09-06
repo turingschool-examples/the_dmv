@@ -1,5 +1,4 @@
 require 'spec_helper'
-require './lib/vehicle_factory.rb'
 
 RSpec.describe VehicleFactory do
   before(:each) do
