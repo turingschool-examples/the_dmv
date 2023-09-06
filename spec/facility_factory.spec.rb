@@ -8,7 +8,7 @@ RSpec.describe Facility_Factory do
 
       expect(facility.create_office_locations(colorado_facilities)[0]).to be_an_instance_of (Facility)
       facility.create_office_locations(colorado_facilities).each do |data|
-      expect(data).to be_instance_of (Facility)
+        expect(data).to be_instance_of (Facility)
       end
     end
   end
@@ -20,7 +20,7 @@ RSpec.describe Facility_Factory do
 
      expect(facility.create_office_locations(NY_facilities)[0]).to be_an_instance_of (Facility)
      facility.create_office_locations(NY_facilities).each do |data|
-     expect(data).to be_instance_of (Facility)
+      expect(data).to be_instance_of (Facility)
      end
     end
   end
@@ -32,7 +32,7 @@ RSpec.describe Facility_Factory do
 
      expect(facility.create_office_locations(MO_facilities)[0]).to be_an_instance_of (Facility)
      facility.create_office_locations(MO_facilities).each do |data|
-     expect(data).to be_instance_of (Facility)
+      expect(data).to be_instance_of (Facility)
      end
     end
   end
