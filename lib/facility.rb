@@ -1,8 +1,4 @@
-require './spec/spec_helper'
-require './lib/dmv_data_service'
-require './lib/facility_factory'
-require './lib/vehicle'
-require './lib/vehicle_factory'
+# require './spec/spec_helper'
 require 'date'
 
 class Facility

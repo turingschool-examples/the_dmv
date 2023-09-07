@@ -1,4 +1,5 @@
-require './lib/vehicle'
+# require './lib/vehicle'
+# require './lib/vehicle_factory'
 require 'spec_helper'
 
 RSpec.describe Vehicle do

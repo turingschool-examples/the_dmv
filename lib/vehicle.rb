@@ -27,7 +27,8 @@ class Vehicle
     elsif vehicle_details[:state] == "NY" || vehicle_details[:state] == "PA" ||
       vehicle_details[:state] == "MD"
         @body_type = vehicle_details[:body_type]
-        @model = "n/a"
+    elsif vehicle_details[:model]
+      @model = vehicle_details[:model]
     else
       @model = nil
     end
