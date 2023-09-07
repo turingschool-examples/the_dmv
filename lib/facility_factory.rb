@@ -12,10 +12,3 @@ class FacilityFactory
     facilities
   end
 end
-
-# co_dds = DmvDataService.new.co_dmv_office_locations
-# co_facilities = FacilityFactory.new.create_facilities(co_dds)
-# vehicle_dds = DmvDataService.new.wa_ev_registrations
-# co_facilities.each { |facility| facility.add_service('Vehicle Registration') }
-# cars = VehicleFactory.new.create_vehicles(vehicle_dds)
-# cars.each{ |car| co_facilities.sample.register_vehicle(car)}
