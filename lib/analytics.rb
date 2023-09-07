@@ -90,7 +90,7 @@ mo_facilities = FacilityFactory.new.create_facilities(DmvDataService.new.mo_dmv_
 ny_dds = DmvDataService.new.ny_dmv_office_locations
 ny_facilities = FacilityFactory.new.create_facilities(DmvDataService.new.ny_dmv_office_locations)
 
-def get_holidays(dds)
+def get_holidays_no_dates(dds)
   holiday_arr = []
   dds.map do |facility|
     facility.each do |key, val|
@@ -110,7 +110,18 @@ def get_holidays(dds)
   holiday_arr
 end
 
-def get_holidays_dates(dds)
+def uniq_holidays(arr)
+  uniq_arr = []
+  arr.each.with_index do |holiday, idx|
+    first_word = holiday.split(" ")[0]
+    if !uniq_arr.to_s.include?(first_word[0..first_word.length-3])
+      uniq_arr << holiday
+    end
+  end
+  uniq_arr
+end
+
+def get_holidays_not_cleaned(dds)
   holiday_arr = []
   dds.map do |facility|
     facility.each do |key, val|
@@ -129,9 +140,7 @@ def get_holidays_dates(dds)
   holiday_arr
 end
 
-# missouri_holidays WITHOUT dates has less duplication of same holiday with different name
-missouri_holidays = get_holidays(mo_dds)
+# missouri_holidays_unique removes duplicate holidays - a result of the same holiday having subtle name difference
+missouri_holidays_unique = uniq_holidays(get_holidays_no_dates(mo_dds))
 
-missouri_holidays_dates = get_holidays_dates(mo_dds)
-
-require 'pry'; binding.pry
+missouri_holidays_not_cleaned = get_holidays_not_cleaned(mo_dds)

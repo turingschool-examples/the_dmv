@@ -1,4 +1,5 @@
 require './spec/spec_helper'
+require './lib/vehicle_factory'
 # require './lib/dmv_data_service'
 # require './lib/facility'
 
@@ -12,10 +13,9 @@ class FacilityFactory
   end
 end
 
-co_dds = DmvDataService.new.co_dmv_office_locations
-co_facilities = FacilityFactory.new.create_facilities(co_dds)
-car_dds = DmvDataService.new.wa_ev_registrations
-co_facilities[0].add_service('Vehicle Registration')
-car = Vehicle.new(car_dds[0])
-co_facilities[0].register_vehicle(car)
-require 'pry'; binding.pry
+# co_dds = DmvDataService.new.co_dmv_office_locations
+# co_facilities = FacilityFactory.new.create_facilities(co_dds)
+# vehicle_dds = DmvDataService.new.wa_ev_registrations
+# co_facilities.each { |facility| facility.add_service('Vehicle Registration') }
+# cars = VehicleFactory.new.create_vehicles(vehicle_dds)
+# cars.each{ |car| co_facilities.sample.register_vehicle(car)}
