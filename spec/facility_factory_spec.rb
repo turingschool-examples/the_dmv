@@ -1,3 +1,4 @@
+require './spec/spec_helper'
 
 describe FacilityFactory do  
   it 'can batch #initialize Factory instances using external data from an api' do
@@ -13,7 +14,7 @@ describe FacilityFactory do
 
     expect(ny_facilities.count).to eq(172)
     expect(ny_facilities[0].name).to eq(DmvDataService.new.ny_dmv_office_locations[0][:office_name])
-    expect(ny_facilities[0].phone).to eq(DmvDataService.new.ny_dmv_office_locations[0][:public_phone_number])
+    expect(ny_facilities[0].phone).to eq('(716) 858-7450')
     expect(ny_facilities[0].name).to eq('EVANS')
     expect(ny_facilities.map{|facility| facility.collected_fees}.sum == 200000)
 

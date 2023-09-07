@@ -42,6 +42,14 @@ class Facility
     end
   end
 
+  def format_phone(public_phone_number, state)
+    if state == "NY"
+      char_arr = public_phone_number.split("")
+      phone_formatted = "(#{char_arr[0..2].join}) #{char_arr[3..5].join("")}-#{char_arr[6..9].join("")}"
+      phone_formatted
+    end
+  end
+
   def set_phone(facility, state)
     if state == "CO"
       @phone = facility[:phone]
@@ -53,8 +61,7 @@ class Facility
       end
     elsif state == "NY"
       if facility[:public_phone_number]
-        char_arr = facility[:public_phone_number].split("")
-        phone_formatted = "(#{char_arr[0..2].join}) #{char_arr[3..5].join("")}-#{char_arr[6..9].join("")}"
+        format_phone(facility[:public_phone_number], "NY")
       else
         'n/a'
       end
