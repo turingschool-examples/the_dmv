@@ -1,23 +1,23 @@
-# require './spec/spec_helper'
+require './spec/spec_helper'
 require 'date'
 
 class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
   def initialize(facility_data=nil)
-    @name = set_name(facility_data, facility_data[:state])
-    @address = set_address(facility_data, facility_data[:state])
-    @phone = set_phone(facility_data, facility_data[:state])
-    @hours = set_hours(facility_data, facility_data[:state])
+    @name = facility_data ? set_name(facility_data, facility_data[:state]) : nil
+    @address = facility_data ? set_address(facility_data, facility_data[:state]) : nil
+    @phone = facility_data ? set_phone(facility_data, facility_data[:state]) : nil
+    @hours = facility_data ? set_hours(facility_data, facility_data[:state]) : nil
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
   end
 
   def set_name(facility, state)
-    if state == "CO"
+    if facility[:state] == "CO"
       @name = facility[:dmv_office]
-    elsif state == "MO"
+    elsif state == "MO" || state == nil
       @name = facility[:name]
     else
       @name = facility[:office_name]
@@ -35,8 +35,18 @@ class Facility
       @address = "#{facility[:address1]}, #{facility[:city]}, #{facility[:state]}, #{facility[:zipcode]}"
     elsif state == "NY"
       @address = "#{facility[:street_address_line_1]}, #{facility[:city]}, #{facility[:state]}, #{facility[:zip_code]}"
+    elsif state == nil
+      @address = "#{facility[:address]}"
     else
-      @address = nil
+      @addres = nil
+    end
+  end
+
+  def format_phone(public_phone_number, state)
+    if state == "NY"
+      char_arr = public_phone_number.split("")
+      phone_formatted = "(#{char_arr[0..2].join}) #{char_arr[3..5].join("")}-#{char_arr[6..9].join("")}"
+      phone_formatted
     end
   end
 
@@ -51,12 +61,14 @@ class Facility
       end
     elsif state == "NY"
       if facility[:public_phone_number]
-        char_arr = facility[:public_phone_number].split("")
-        phone_formatted = "(#{char_arr[0..2].join}) #{char_arr[3..5].join("")}-#{char_arr[6..9].join("")}"
+        format_phone(facility[:public_phone_number], "NY")
       else
         'n/a'
       end
-      @phone = phone_formatted
+    elsif state == nil
+      @phone = facility[:phone]
+    else
+      @phone = 'n/a'
     end
   end
 

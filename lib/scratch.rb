@@ -1,27 +1,41 @@
-require './spec/spec_helper'
+holiday_arr = ["Thanksgiving",
+ "Christmas Day Observed",
+ "New Year's Day Observed",
+ "Martin Luther King Day",
+ "President’s Day",
+ "Memorial Day",
+ "Juneteenth",
+ "Independence Day",
+ "Labor Day",
+ "Veterans Day",
+ "Columbus Day",
+ "Lincoln’s Birthday",
+ "Truman’s Birthday",
+ "Christmas Day",
+ "Juneteenth Observed",
+ "Thanksgiving Day",
+ "Lincoln's Birthday",
+ "President's Day",
+ "Truman's Birthday",
+ "Veteran's Day",
+ "Truman Day",
+ "Juneteenth Day"]
 
-ny_dds = DmvDataService.new.ny_dmv_office_locations
-# ny_facilities = FacilityFactory.new.create_facilities(DmvDataService.new.ny_dmv_office_locations)
+def uniq_holidays(arr)
+  uniq_arr = []
+  arr.each.with_index do |holiday, idx|
+    first_word = holiday.split(" ")[0]
+    if !uniq_arr.to_s.include?(first_word[0..first_word.length-3])
+      uniq_arr << holiday
+    end
+  end
+  uniq_arr
+end
 
-# def get_branch_hours
-#   branch_hours_all = []
-#   ny_dds = DmvDataService.new.ny_dmv_office_locations
-#   ny_dds.map do |facility|
-#     branch_arr = []
-#     facility.each do |key, val|
-#       if key.to_s.include?('hours')
-#         branch_arr.push(facility[key])
-#       end
-#     end
-#     branch_hours_all << branch_arr
-#   end
-#   branch_hours_all
-# end
 
-state = ny_dds[0][:state]
+# p holiday_arr.slice(0, 4)
+p uniq_holidays(holiday_arr)
 
-require 'pry'; binding.pry
-  # if facility.keys.include?('hours')
-  #   facility[key]
-  # end
+# p holidays_uniq
 
+# p arr.to_s.include?("Truman's")
