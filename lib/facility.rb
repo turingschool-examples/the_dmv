@@ -1,7 +1,7 @@
 require './lib/vehicle'
 
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles
+  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
   def initialize(name, address, phone)
     @name = name
@@ -9,6 +9,7 @@ class Facility
     @phone = phone
     @services = []
     @registered_vehicles = []
+    @collected_fees = 0
   end
 
   def add_services(service)
