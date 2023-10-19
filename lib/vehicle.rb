@@ -1,3 +1,4 @@
+#fixed bugs
 require 'date'
 
 class Vehicle
@@ -19,7 +20,7 @@ class Vehicle
   def registration_date
     @registration_date
   end
-  
+
   def antique?
     Date.today.year - @year > 25
   end

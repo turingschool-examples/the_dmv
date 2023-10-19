@@ -1,3 +1,4 @@
+#fixed bugs
 class Dmv
 attr_reader :facility, :service
   
