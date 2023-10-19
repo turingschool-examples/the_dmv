@@ -1,4 +1,3 @@
-#fixed bugs
 require 'date'
 
 class Vehicle
