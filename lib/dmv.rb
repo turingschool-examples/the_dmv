@@ -1,5 +1,9 @@
-class Dmv
+require './lib/facility'
+require './lib/dmv'
 
+class Dmv
+attr_reader :facilities
+attr_accessor :facilities
   def initialize
     @facilities = []
   end
