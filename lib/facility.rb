@@ -13,4 +13,11 @@ class Facility
   def add_service(service)
     @services << service
   end
+
+  def register_vehicle(vehicle)
+    if services.include?('Vehicle Registration')
+      vehicle.registration_date = Date.today
+      @registered_vehicles << vehicle
+    end
+  end
 end
