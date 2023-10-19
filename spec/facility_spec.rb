@@ -82,11 +82,18 @@ RSpec.describe Facility do
   end
 
   describe '#written test' do
-    it 'Registrant_1' do
+    it 'Registrant_1 with out adding the service' do
       expect(@registrant_1.license_data).to eq({:written=>false, 
       :license=>false, :renewed=>false})
       expect(@registrant_1.permit?).to eq(true)
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+    
+    it 'Registrant_1 with adding the service' do
+      @facility_1.add_service('Written Test')
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
+      # expect().to eq()
     end
   end
   
