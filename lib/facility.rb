@@ -1,3 +1,4 @@
+#fixed bugs
 class Facility
   attr_reader :name, :address, :phone, :services
 
