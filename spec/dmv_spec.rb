@@ -1,4 +1,5 @@
 require 'spec_helper'
+require "pry"
 
 RSpec.describe Dmv do
   before(:each) do
@@ -36,7 +37,6 @@ RSpec.describe Dmv do
       @dmv.add_facility(@facility_1)
       @dmv.add_facility(@facility_2)
       @dmv.add_facility(@facility_3)
-
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
