@@ -22,5 +22,4 @@ class Facility
     else
     end
   end
-
 end
