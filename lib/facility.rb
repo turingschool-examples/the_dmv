@@ -3,7 +3,9 @@ class Facility
 
   def initialize(facility_hash)
     @name = facility_hash[:name]
+# require 'pry'; binding.pry if facility_hash[:address] == nil
     @address = facility_hash[:address]
+# require 'pry'; binding.pry if facility_hash[:phone] == nil
     @phone = facility_hash[:phone]
     @services = []
     @registered_vehicles = []
