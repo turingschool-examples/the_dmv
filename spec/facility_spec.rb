@@ -82,6 +82,11 @@ RSpec.describe Facility do
       @facility.administer_written_test(@registrant_1)
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
     end
+
+    it 'can check if the registrant has a permit or not' do
+      expect(@registrant_2.permit?).to eq(false)
+      expect(@facility.administer_written_test(@registrant_2)).to eq(false)
+    end
   end
 
 end
