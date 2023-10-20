@@ -60,5 +60,32 @@ class Facility
     end
   end
 
+  def administer_road_test(registrant)
+    if @services.include?('Road Test') == false
+      return false
+    elsif registrant.permit? == false
+      return false
+    elsif registrant.age < 16
+      return false
+    else @services.include?('Road Test') and registrant.license_data = { written: true, license: false, renewed: false }
+      registrant.license_data = { written: true, license: true, renewed: false }
+      return true
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    if @services.include?('Renew License') == false
+      return false
+    elsif registrant.permit? == false
+      return false
+    elsif registrant.age < 16
+      return false
+    else @services.include?('Renew License') and registrant.license_data = { written: true, license: true, renewed: false }
+      registrant.license_data = { written: true, license: true, renewed: true }
+      return true
+    end
+  end
+
+
 
 end
