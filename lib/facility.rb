@@ -17,6 +17,7 @@ class Facility
 
   def add_service(service)
     @services << service
+    @services
   end
 
   def register_vehicle(vehicle)
@@ -44,4 +45,13 @@ class Facility
           end
     registrant.license_data[:written]
   end
+
+  def administer_road_test(registrant)
+    if (@services.include?("Road Test")) && (registrant.license_data[:written] == true)
+      registrant.license_data[:license] = true
+    end
+    registrant.license_data[:license]
+  end
+
+
 end
