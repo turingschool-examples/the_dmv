@@ -1,6 +1,3 @@
-require_relative './vehicle'
-require_relative './dmv_data_service'
-
 class VehicleFactory
   attr_accessor :vehicle_instances
 
@@ -9,6 +6,7 @@ class VehicleFactory
   end
 
   def create_electric_vehicles(state_vehicle_registrations)
+    #for each hash, a new vehicle needs to be created (and stored into an array?)
     @vehicle_instances = state_vehicle_registrations.map do |vehicle|
       (Vehicle.new(
         vin: vehicle[:vin_1_10],

@@ -1,6 +1,4 @@
 require 'date'
-require_relative 'vehicle.rb'
-require_relative 'registrant.rb'
 
 class Facility
   attr_reader :name, :address, :phone, :services
