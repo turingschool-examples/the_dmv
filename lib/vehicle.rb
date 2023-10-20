@@ -1,11 +1,11 @@
 require 'date'
 
 class Vehicle
-  attr_reader :vin,
+  attr_accessor :vin,
               :year,
               :make,
               :model,
-              :engine
+              :engine,
               :registration_date
 
   def initialize(vehicle_details)
@@ -14,12 +14,12 @@ class Vehicle
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
-    # @registration_date = vehicle_details[:registration_date]
+    @registration_date = vehicle_details[:registration_date]
   end
 
-  def registration_date
-    nil
-  end
+  # def registration_date
+  #   @registration_date = nil
+  # end
   
   def antique?
     Date.today.year - @year > 25
@@ -28,4 +28,9 @@ class Vehicle
   def electric_vehicle?
     @engine == :ev
   end
+
+  def plate_type
+    :regular
+  end
+
 end

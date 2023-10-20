@@ -16,5 +16,8 @@ class Facility
 
   def register_vehicle(car)
     @registered_vehicles << car
+    @collected_fees += 100
+    car.registration_date = DateTime.now
   end
+
 end

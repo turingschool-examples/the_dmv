@@ -42,5 +42,16 @@ RSpec.describe Facility do
       @facility.register_vehicle(@cruz)
       expect(@facility.registered_vehicles.count).to eq(1)
     end
+
+    it 'can add a registration date to a vehicle' do
+      @facility.register_vehicle(@cruz)
+      expect(@cruz.registration_date).to be_an_instance_of(DateTime)
+    end
+
+    it 'adds 100 everytime a vehicle is registered' do
+      @facility.register_vehicle(@cruz)
+      expect(@facility.collected_fees).to eq(100)
+    end
+
   end
 end
