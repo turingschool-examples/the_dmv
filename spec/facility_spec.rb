@@ -1,6 +1,7 @@
 require 'spec_helper'
 require './lib/facility'
 require './lib/vehicle'
+require './lib/registrant'
 require 'date'
 require 'pry'
 
@@ -120,6 +121,35 @@ RSpec.describe Facility do
     expect(camaro.registration_date).to be_an_instance_of(DateTime)
   end
 
+  it 'can access registrants in spec file' do
+    facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+    facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
 
+    registrant_1 = Registrant.new('Bruce', 18, true )
+    registrant_2 = Registrant.new('Penny', 16 )
+    registrant_3 = Registrant.new('Tucker', 15 )
 
+    expect(registrant_1).to be_an_instance_of(Registrant)
+    expect(registrant_2).to be_an_instance_of(Registrant)
+    expect(registrant_3).to be_an_instance_of(Registrant)
+  end
+
+  it 'can administer written tests correctly' do
+    facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+    facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
+
+    registrant_1 = Registrant.new('Bruce', 18, true )
+    registrant_2 = Registrant.new('Penny', 16 )
+    registrant_3 = Registrant.new('Tucker', 15 )
+
+    facility_1.add_service('Written Test')
+    
+    registrant_3.earn_permit
+    
+    expect(facility_1.administer_written_test(registrant_1)).to eq(true)
+    expect(facility_1.administer_written_test(registrant_2)).to eq(false)
+    expect(facility_1.administer_written_test(registrant_3)).to eq(false)
+    expect(facility_2.administer_written_test(registrant_1)).to eq(false)
+    expect(facility_1.administer_written_test(registrant_3)).to eq(false)
+  end
 end
