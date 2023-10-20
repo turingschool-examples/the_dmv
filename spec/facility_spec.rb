@@ -73,10 +73,11 @@ RSpec.describe Facility do
       facility_1.add_service('Written Test')
       registrant_1 = Registrant.new('Bruce', 18, true)
       registrant_2 = Registrant.new('Penny', 16)
+      registrant_2.earn_permit
       registrant_3 = Registrant.new('Tucker', 15)
 
       facility_1.administer_written_test(registrant_1)
-      
+      binding.pry
       expect(facility_1.administer_written_test(registrant_1)).to be true
     end
   end

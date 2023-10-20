@@ -60,6 +60,9 @@ class Facility
       if name.permit == true && name.age >= 16
         name.license_data[:written] = true
         true
+      else
+        name.permit == false || name.age < 16
+        false
       end
     else
       false
