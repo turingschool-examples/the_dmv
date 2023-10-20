@@ -68,4 +68,27 @@ class Facility
       false
     end
   end
+
+  def administer_road_test(name)
+    if services.find {|service| service.include?('Road Test')}
+      if name.license_data[:written] == true
+        name.license_data[:license] = true
+        true
+      end
+    else
+      false
+    end
+  end
+
+  def renew_drivers_license(name)
+    if services.find {|service| service.include?('Renew License')}
+      if name.license_data[:written] == true && name.license_data[:license] == true
+        name.license_data[:renewed] = true
+      elsif name.license_data[:written] == false || name.license_data[:license] == false
+        name.license_data[:renewed] = false
+      end
+    else
+      false
+    end
+  end
 end
