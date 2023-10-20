@@ -93,4 +93,25 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#administer_road_test' do
+    it 'can tell if a facility offers the service or not' do
+      expect(@facility.administer_road_test(@registrant_1)).to eq(false)
+    end
+
+    it 'can check if the registrant took the written test or not' do
+      @facility.add_service('Road Test')
+
+      expect(@registrant_2.license_data[:written]).to eq(false)
+      expect(@facility.administer_road_test(@registrant_2)).to eq(false)
+
+      @facility.add_service('Written Test')
+      @registrant_2.earn_permit
+      @facility.administer_written_test(@registrant_2)
+
+      expect(@registrant_2.license_data[:written]).to eq(true)
+      expect(@facility.administer_road_test(@registrant_2)).to eq(true)
+      expect(@registrant_2.license_data[:license]).to eq(true)
+    end
+  end
+
 end
