@@ -6,7 +6,6 @@ class Facility
     @address = facility_hash[:address]
     @phone = facility_hash[:phone]
     @services = []
-    facility_hash = {name: name, address: address, phone: phone}
   end
 
   def add_service(service)
