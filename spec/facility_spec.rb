@@ -133,5 +133,4 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data[:renew]).to eq(true)
     end
   end
-
 end
