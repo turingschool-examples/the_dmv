@@ -2,7 +2,11 @@ class Registrant
   attr_accessor :age, :license_data, :name, :permit, :license_data
   
   def initialize(name, age, permit = false, 
-    license_data = { written: false, license: false, renewed: false })
+    license_data = { 
+      written: false, 
+      license: false, 
+      renewed: false 
+    })
     @age = age
     @name = name
     @permit = permit
