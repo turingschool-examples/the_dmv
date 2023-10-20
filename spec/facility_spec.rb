@@ -3,6 +3,7 @@ require 'spec_helper'
 RSpec.describe Facility do
   before(:each) do
     @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+    @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
   end
   describe '#initialize' do
     it 'can initialize' do
@@ -38,7 +39,7 @@ RSpec.describe Facility do
 
   describe '#register_vehicle' do
     it 'can register a vehicle' do
-      @facility.register_vehicle(cruz)
+      @facility.register_vehicle(@cruz)
       expect(@facility.registered_vehicles.count).to eq(1)
     end
   end
