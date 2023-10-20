@@ -5,20 +5,16 @@ require "pry"
 RSpec.describe Registrant do
   it "exists" do
     registrant_1 = Registrant.new("Bruce",18, true)
-
     expect(registrant_1).to be_a Registrant
   end
 
   it "has a name" do
     registrant_1 = Registrant.new("Bruce",18, true)
-
-  
     expect(registrant_1.name).to eq("Bruce")
   end
 
   it "has an age" do
     registrant_1 = Registrant.new("Bruce",18, true)
-
     expect(registrant_1.age).to eq(18)
   end
 
@@ -34,14 +30,13 @@ RSpec.describe Registrant do
     expect(registrant_2.permit).to eq(false)
   end
     
-  
-
   it "has a method to change permit value" do
     registrant_2 = Registrant.new('Penny', 15)
     expect(registrant_2.permit?).to eq false
     expect(registrant_2.earn_permit).to eq(true)
   end
 
+  
 
 
 

@@ -4,7 +4,7 @@ require "date"
 class Facility
   attr_accessor :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
-  CurrentDate = Date.new(2023,10,19)
+  # CurrentDate = Date.new(2023,10,19)
 
   def initialize(input)
     @name = input[:name]
@@ -20,7 +20,7 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    vehicle.registration_date = CurrentDate
+    vehicle.registration_date = Date.today
     if vehicle.registered == false
       if vehicle.engine == :ev
         @collected_fees += 200
@@ -36,5 +36,12 @@ class Facility
     vehicle.registered = true
     vehicle
     end
+  end
+
+  def administer_written_test(registrant)
+    if @services.include?("Written Test") && registrant.age >= 16
+      registrant.license_data[:written] = true
+    end
+    registrant.license_data[:written]
   end
 end
