@@ -7,9 +7,12 @@ class FacilityLocations
 
   def create_facilities(dmv_data)
       dmv_data.each do |facility|
-      old_name = facility.keys.select {|key| key.name.include?("name")}.join.to_sym
-      old_address = facility.keys.select {|key| key.name.include?("address")}.join.to_sym
-      old_phone = facility.keys.select {|key| key.name.include?("phone")}.join.to_sym
+      old_name = facility.keys.select {|key| key.name.include?("name")}[0]
+      if old_name == nil
+        old_name = facility.keys.select {|key| key.name.include?("office")}[0]
+      end
+      old_address = facility.keys.select {|key| key.name.include?("address")}[0]
+      old_phone = facility.keys.select {|key| key.name.include?("phone")}[0]
       if facility.has_key?(:address) == false
         facility[:address] = facility.delete old_address
       end

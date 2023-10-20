@@ -2,6 +2,7 @@ class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
   def initialize(facility_hash)
+    # require 'pry'; binding.pry if facility_hash[:name] == nil
     @name = facility_hash[:name]
     @address = facility_hash[:address]
     @phone = facility_hash[:phone]

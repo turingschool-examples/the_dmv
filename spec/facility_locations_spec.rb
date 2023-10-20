@@ -1,13 +1,11 @@
 require 'spec_helper'
 
 RSpec.describe FacilityLocations do
-  before(:each) do
-    @facility = FacilityLocations.new
-  end
   
   describe '#intialize' do
     it 'can intialize' do
-      expect(@facility).to be_an_instance_of(FacilityLocations)
+      facility = FacilityLocations.new
+      expect(facility).to be_an_instance_of(FacilityLocations)
     end
   end
 
@@ -17,8 +15,11 @@ RSpec.describe FacilityLocations do
       co_offices = FacilityLocations.new
       co_offices.create_facilities(colorado)
 
-      expect(co_offices.facilities).to include(Facility)
       expect(co_offices.facilities.length).to be > 1
+      co_offices.facilities.each do |facility|
+        expect(facility).to be_an_instance_of(Facility)
+        expect(facility.name.nil?).to eq(false)
+      end
     end
 
     it 'can create facilities from multiple data sources' do
