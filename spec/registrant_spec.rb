@@ -7,7 +7,7 @@ RSpec.describe Registrant do
     @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
     @facility_3 = Facility.new({name: 'DMV Northwest Branch', address: '3698 W. 44th Avenue Denver CO 80211', phone: '(720) 865-4600'})
     @registrant_1 = Registrant.new('Bruce', 18, true)
-    @registrant_2 = Registrant.new('Penny', 15)
+    @registrant_2 = Registrant.new('Penny', 16)
     @registrant_3 = Registrant.new('Tucker', 15 )
   end
 
@@ -33,5 +33,11 @@ RSpec.describe Registrant do
       @registrant_2.earn_permit
       expect(@registrant_2.permit?).to eq(true)
     end
+
+    it 'will make sure that the registrant is 16 or older to earn a permit' do
+      @registrant_3.earn_permit
+      expect(@registrant_3.permit?).to eq(false)
+    end
   end
+
 end
