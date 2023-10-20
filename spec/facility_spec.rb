@@ -158,6 +158,7 @@ RSpec.describe Facility do
 
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
       expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
+      # require 'pry'; binding.pry
       expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(true)
     end
   end
