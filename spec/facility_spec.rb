@@ -45,8 +45,35 @@ end
       facility_1.register_vehicle(cruz)
       expect(cruz.registration_date).to eq(CurrentDate)
       expect(cruz.plate_type).to eq(:regular)
+      expect(facility_1.collected_fees).to eq(100)
     end
-  end
 
+    it "can register another vehicle" do
+      CurrentDate = Date.new(2023,10,19)
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+      facility_1.register_vehicle(camaro)
+      expect(camaro.registration_date).to eq(CurrentDate)
+      expect(camaro.plate_type).to eq(:antique)
+      facility_1.register_vehicle(bolt)
+      expect(bolt.registration_date).to eq(CurrentDate)
+      expect(bolt.plate_type).to eq(:ev)
+      facility_1.register_vehicle(cruz)
+      expect(facility_1.registered_vehicles).to eq([camaro, bolt, cruz])
+      expect(facility_1.collected_fees).to eq(325)
+    end
+
+    it "had another facility that is empty" do
+      CurrentDate = Date.new(2023,10,19)
+      facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    end
+    end
 
 end

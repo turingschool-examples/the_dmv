@@ -31,5 +31,6 @@ class Facility
       @collected_fees += 100
       vehicle.plate_type = :regular
     end
+    @registered_vehicles << vehicle
   end
 end
