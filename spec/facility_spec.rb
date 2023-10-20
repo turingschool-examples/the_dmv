@@ -84,8 +84,12 @@ RSpec.describe Facility do
     end
 
     it 'can check if the registrant has a permit or not' do
+      @facility.add_service('Written Test')
       expect(@registrant_2.permit?).to eq(false)
       expect(@facility.administer_written_test(@registrant_2)).to eq(false)
+      @registrant_2.earn_permit
+      @facility.add_service('Written Test')
+      expect(@facility.administer_written_test(@registrant_2)).to eq(true)
     end
   end
 
