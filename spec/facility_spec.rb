@@ -5,6 +5,9 @@ RSpec.describe Facility do
     @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
     @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+    @registrant_1 = Registrant.new('Bruce', 18, true)
+    @registrant_2 = Registrant.new('Penny', 15)
+    @registrant_3 = Registrant.new('Tucker', 15 )
   end
 
   describe '#initialize' do
@@ -69,8 +72,9 @@ RSpec.describe Facility do
 
   describe '#administer_written_test' do
     it 'can tell if a facility offers the service or not' do
-      
-      expect(@facility.administer_written_test).to eq(false)
+      expect(@facility.administer_written_test(@registrant_1)).to eq(false)
+      @facility.add_service('Written Test')
+      expect(@facility.administer_written_test(@registrant_1)).to eq(true)
     end
   end
 

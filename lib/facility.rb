@@ -23,9 +23,10 @@ class Facility
     end
   end
 
-  def administer_written_test
-    if @services.include?("New Drivers License")
-      
+  def administer_written_test(registrant)
+    if @services.include?("Written Test")
+      registrant.license_data[:written] = true
+      true
     else
       false
     end
