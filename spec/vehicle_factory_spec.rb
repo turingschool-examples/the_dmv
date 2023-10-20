@@ -14,8 +14,11 @@ RSpec.describe VehicleFactory do
       expect(@factory).to be_a(VehicleFactory)
       vehicles = @factory.create_vehicles(@wa_ev_registrations)
       expect(vehicles).to be_a(Array)
-      expect(vehicles).to have_a(:ev)
-      
+      # require 'pry'; binding.pry
+      expect(vehicles[0]).to be_a(Vehicle)
+      expect(vehicles[0].make).to_not be_nil
+      expect(vehicles[0].model).to be_a(String)
+      expect(vehicles[0].vin).to be_a(String)
     end
   end
 end
