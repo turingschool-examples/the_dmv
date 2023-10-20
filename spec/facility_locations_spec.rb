@@ -1,13 +1,24 @@
-require './lib/spec_helper'
+require 'spec_helper'
 
 RSpec.describe FacilityLocations do
+  before(:each) do
+    @facility = FacilityLocations.new
+  end
+  
+  describe '#intialize' do
+    it 'can intialize' do
+      expect(@facility).to be_an_instance_of(FacilityLocations)
+    end
+  end
 
-  describe
   describe 'Creating Objects from Multiple Data Sets & Analyzing Data' do
     it 'can #create_facilies Objects from External Data Source' do
-      DmvDataService.new.co_dmv_office_locations
-      
-      expect()
+      colorado = DmvDataService.new.co_dmv_office_locations
+      co_offices = FacilityLocations.new
+      co_offices.create_facilities(colorado)
+
+      expect(co_offices.facilities).to include(Facility)
+      expect(co_offices.facilities.length).to be > 1
     end
   end
 

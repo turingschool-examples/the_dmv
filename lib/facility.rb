@@ -49,9 +49,4 @@ class Facility
       false
     end
   end
-
-  def create_facilities(dmv_data)
-    
-  end
-
 end
