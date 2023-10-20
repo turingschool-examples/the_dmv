@@ -34,8 +34,11 @@ RSpec.describe Registrant do
     expect(registrant_2.permit).to eq(false)
   end
     
+  
+
   it "has a method to change permit value" do
     registrant_2 = Registrant.new('Penny', 15)
+    expect(registrant_2.permit?).to eq false
     expect(registrant_2.earn_permit).to eq(true)
   end
 
