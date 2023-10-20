@@ -6,12 +6,16 @@ RSpec.describe VehicleFactory do
   before(:each) do
     @factory = VehicleFactory.new
     @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+    # require 'pry'; binding.pry
   end
 
   describe '#creates_a_vehicle ' do
     it 'will create vehicle objects with registration' do
-      @factory.creates_a_vehicle(@wa_ev_registrations).each do |registration|
-      expect(registration).to be_a(Vehicle)
+      expect(@factory).to be_a(VehicleFactory)
+      vehicles = @factory.create_vehicles(@wa_ev_registrations)
+      expect(vehicles).to be_a(Array)
+      expect(vehicles).to have_a(:ev)
+      
     end
   end
 end
