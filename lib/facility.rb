@@ -5,10 +5,10 @@ class Facility
   attr_reader :name, :address, :phone, :services
   attr_accessor :name, :address, :phone, :services
 
-  def initialize(hash)
-    @name = hash[:name]
-    @address = hash[:address]
-    @phone = hash[:phone]
+  def initialize(facil_hash)
+    @name = facil_hash[:name]
+    @address = facil_hash[:address]
+    @phone = facil_hash[:phone]
     @services = []
   end
 

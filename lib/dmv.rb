@@ -18,3 +18,4 @@ attr_accessor :facilities
     end
   end
 end
+
