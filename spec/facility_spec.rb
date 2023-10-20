@@ -3,6 +3,8 @@ require 'spec_helper'
 RSpec.describe Facility do
   before(:each) do
     @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+    @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
   end
   describe '#initialize' do
     it 'can initialize' do
@@ -21,6 +23,15 @@ RSpec.describe Facility do
       @facility.add_service('Renew Drivers License')
       @facility.add_service('Vehicle Registration')
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+    end
+  end
+
+  describe "#register_vehicle" do
+    it "adds a vehicle to the registered_vehicles array" do
+      @facility.register_vehicle(@cruz)
+      @facility.register_vehicle(@bolt)
+
+      expect(@facility.registered_vehicles).to include(@cruz, @bolt)
     end
   end
 end
