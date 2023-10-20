@@ -3,6 +3,7 @@ require 'date'
 require './lib/dmv'
 require './lib/vehicle'
 require './lib/facility'
+require './lib/registrant'
 
 class Facility
   attr_reader :name,
@@ -51,6 +52,17 @@ class Facility
       end
     else
       nil
+    end
+  end
+
+  def administer_written_test(name)
+    if services.find {|service| service.include?('Written Test')}
+      if name.permit == true && name.age >= 16
+        name.license_data[:written] = true
+        true
+      end
+    else
+      false
     end
   end
 end
