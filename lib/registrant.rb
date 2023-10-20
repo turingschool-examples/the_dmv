@@ -15,6 +15,4 @@ class Registrant
     def permit?
         @permit
     end
-
-
 end
