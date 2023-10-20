@@ -15,9 +15,12 @@ class Facility
   end
 
   def register_vehicle(car)
-    @registered_vehicles << car
-    @collected_fees += 100
-    car.registration_date = DateTime.now
+    if @services.include?("Vehicle Registration")
+      @registered_vehicles << car
+      @collected_fees += 100
+      car.registration_date = DateTime.now
+    else
+    end
   end
 
 end
