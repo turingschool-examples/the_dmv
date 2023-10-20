@@ -1,4 +1,5 @@
 require 'date'
+require_relative 'vehicle.rb'
 
 class Facility
   attr_reader :name, :address, :phone, :services
@@ -23,11 +24,18 @@ class Facility
     end
     if vehicle.antique?
       @collected_fees += 25
+      vehicle.plate_type = :antique
     elsif vehicle.electric_vehicle?
       @collected_fees += 200
+      vehicle.plate_type = :ev
     else
       @collected_fees += 100
+      vehicle.plate_type = :regular
     end
+  end
+
+  def plate_type_for_vehicle(vehicle)
+    return vehicle.plate_type
   end
 
   def registered_vehicles

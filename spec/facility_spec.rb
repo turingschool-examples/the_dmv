@@ -65,11 +65,42 @@ RSpec.describe Facility do
     cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
-    binding.pry
-    expect(facility_1.register_vehicle(cruz)).to include(Vehicle)
-    expect(facility_1.register_vehicle(bolt)).to include(Vehicle)
-    expect(facility_1.register_vehicle(camaro)).to include(Vehicle)
 
+    expect(facility_1.register_vehicle(cruz)).not_to eq([])
+    expect(facility_1.register_vehicle(bolt)).not_to eq([])
+    expect(facility_1.register_vehicle(camaro)).not_to eq([])
+  end
+
+  it 'can register vehicles and collect fees' do
+    facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+    facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
+
+    cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+    bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+    camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+
+    facility_1.register_vehicle(cruz)
+    facility_1.register_vehicle(bolt)
+    facility_1.register_vehicle(camaro)
+    
+    expect(facility_1.collected_fees).to eq(325)
+  end
+
+  it 'can register vehicles at DMV branches with plates' do
+    facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+    facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
+  
+    cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+    bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+    camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+
+    facility_1.register_vehicle(cruz)
+    facility_1.register_vehicle(bolt)
+    facility_1.register_vehicle(camaro)
+
+    expect(facility_1.plate_type_for_vehicle(cruz)).to eq(@plate_type=:regular)
+    expect(facility_1.plate_type_for_vehicle(bolt)).to eq(@plate_type=:ev)
+    expect(facility_1.plate_type_for_vehicle(camaro)).to eq(@plate_type=:antique)
   end
 
 
