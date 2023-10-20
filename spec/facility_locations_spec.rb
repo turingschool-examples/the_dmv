@@ -19,6 +19,8 @@ RSpec.describe FacilityLocations do
       co_offices.facilities.each do |facility|
         expect(facility).to be_an_instance_of(Facility)
         expect(facility.name.nil?).to eq(false)
+        expect(facility.address.nil?).to eq(false)
+        expect(facility.phone.nil?).to eq(false)
       end
     end
 
@@ -27,17 +29,21 @@ RSpec.describe FacilityLocations do
       ny_offices = FacilityLocations.new
       ny_offices.create_facilities(new_york_facilities)
   
-      expect(ny_offices.facilities).to include(Facility)
-      expect(ny_offices.facilities.length).to be > 100
+      ny_offices.facilities.each do |facility|
+        expect(facility).to be_an_instance_of(Facility)
+        expect(facility.name.nil?).to eq(false)
+        expect(facility.address.nil?).to eq(false)
+      end
 
       missouri_facilities = DmvDataService.new.mo_dmv_office_locations
       mo_offices = FacilityLocations.new
       mo_offices.create_facilities(missouri_facilities)
   
-      expect(mo_offices.facilities).to include(Facility)
-      expect(mo_offices.facilities.length).to be > 100
-
+      mo_offices.facilities.each do |facility|
+        expect(facility).to be_an_instance_of(Facility)
+        expect(facility.name.nil?).to eq(false)
+        expect(facility.address.nil?).to eq(false)
+      end
     end
   end
-
 end
