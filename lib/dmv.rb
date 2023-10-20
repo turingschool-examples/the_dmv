@@ -1,5 +1,9 @@
-class Dmv
+require './lib/facility'
+require './lib/dmv'
 
+class Dmv
+attr_reader :facilities
+attr_accessor :facilities
   def initialize
     @facilities = []
   end
@@ -9,8 +13,9 @@ class Dmv
   end
 
   def facilities_offering_service(service)
-    @facilities.find do |facility|
+    @facilities.find_all do |facility|
       facility.services.include?(service)
     end
   end
 end
+
