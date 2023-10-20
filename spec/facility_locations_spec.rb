@@ -27,14 +27,14 @@ RSpec.describe FacilityLocations do
       ny_offices.create_facilities(new_york_facilities)
   
       expect(ny_offices.facilities).to include(Facility)
-      expect(ny_offices.facilities.length).to be > 1
+      expect(ny_offices.facilities.length).to be > 100
 
       missouri_facilities = DmvDataService.new.mo_dmv_office_locations
       mo_offices = FacilityLocations.new
-      mo_offices.create_facilities(new_york_facilities)
+      mo_offices.create_facilities(missouri_facilities)
   
       expect(mo_offices.facilities).to include(Facility)
-      expect(mo_offices.facilities.length).to be > 1
+      expect(mo_offices.facilities.length).to be > 100
 
     end
   end
