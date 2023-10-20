@@ -20,4 +20,5 @@ class Vehicle
   def electric_vehicle?
     @engine == :ev
   end
+
 end
