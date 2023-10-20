@@ -42,13 +42,6 @@ class Facility
     @registered_vehicles
   end
 
-  #NEED TO ADD $25 PER ANTIQUE, 200 PER EV, AND 100 PER NORMAL VEHICLE
-  #SET PLATE TO :REGULAR, :ANTIQUE, :OR EV ON SUCCESSFUL REGISTRATION
-  #def collect_fees(fee_amount)
-  #  @collected_fees += fee_amount
-  #return @collected_fees
-  #end
-
   def collected_fees
     @collected_fees
   end
