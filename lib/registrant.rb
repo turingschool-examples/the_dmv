@@ -9,6 +9,10 @@ class Registrant
     @permit = permit  
   end
 
+  def permit?
+    @permit == true
+  end
+  
   def earn_permit
     @permit = true
   end
