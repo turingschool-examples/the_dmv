@@ -4,6 +4,10 @@ class Dmv
     @facilities = []
   end
 
+  def facilities
+    @facilities
+  end
+
   def add_facility(facility)
     @facilities << facility
   end
