@@ -1,4 +1,5 @@
 class Dmv
+  attr_accessor :facilities
 
   def initialize
     @facilities = []
