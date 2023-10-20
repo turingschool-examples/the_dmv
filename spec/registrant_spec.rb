@@ -34,4 +34,5 @@ RSpec.describe Registrant do
       expect(@registrant_2.permit?).to eq(true)
     end
   end
+
 end

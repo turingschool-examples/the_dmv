@@ -22,4 +22,13 @@ class Facility
     else
     end
   end
+
+  def administer_written_test
+    if @services.include?("New Drivers License")
+      
+    else
+      false
+    end
+  end
+
 end

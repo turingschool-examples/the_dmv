@@ -3,6 +3,7 @@ require 'spec_helper'
 RSpec.describe Facility do
   before(:each) do
     @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+    @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
   end
 
@@ -65,4 +66,12 @@ RSpec.describe Facility do
       expect(facility_2.register_vehicle(bolt)).to eq(nil)
     end
   end
+
+  describe '#administer_written_test' do
+    it 'can tell if a facility offers the service or not' do
+      
+      expect(@facility.administer_written_test).to eq(false)
+    end
+  end
+
 end
