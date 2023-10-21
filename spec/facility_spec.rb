@@ -1,4 +1,6 @@
 require 'spec_helper'
+require 'faraday'
+require 'json'
 require 'pry'
 require './lib/dmv'
 require './lib/facility'
@@ -149,8 +151,9 @@ RSpec.describe Facility do
       missouri_facilities = DmvDataService.new.mo_dmv_office_locations
 
       facility_list.create_facility(colorado_facilities)
-      binding.pry
-      expect(facility_new.create_facility(colorado_facilities)).to be_a(Array)
+      facility_list.create_facility(new_york_facilities)
+      facility_list.create_facility(missouri_facilities)
+      
+      expect(facility_list.create_facility(colorado_facilities)).to be_a(Array)
     end
-
 end

@@ -1,5 +1,7 @@
 require 'pry'
 require 'date'
+require 'faraday'
+require 'json'
 require './lib/dmv'
 require './lib/vehicle'
 require './lib/facility'
@@ -96,13 +98,35 @@ class Facility
 
   def create_facility(list)
     nf_arr = []
-    list.each do |omv|
-      new_omv = {
-        name: omv[:dmv_office],
-        address: omv[:address_li], #+ ", " + omv[:address__1],
-        phone: omv[:phone]
-    }
-    nf_arr << Facility.new(new_omv)
+    if list.count == 5 #CO
+      list.each do |omv|
+        new_omv = {
+          name: omv[:dmv_office],
+          address: omv[:address_li], #+ ", " + omv[:address__1],
+          phone: omv[:phone]
+        }
+        nf_arr << Facility.new(new_omv)
+      end
+    elsif list.count == 172 #NY
+      list.each do |omv|
+        new_omv = {
+          name: omv[:office_name],
+          address: omv[:street_address_line_1],
+          phone: omv[:public_phone_number]
+        }
+        nf_arr << Facility.new(new_omv)
+      end
+    elsif list.count == 179 #MO
+      list.each do |omv|
+        new_omv = {
+          name: omv[:name],
+          address: omv[:address1],
+          phone: omv[:phone]
+        }
+        nf_arr << Facility.new(new_omv)
+      end
+    else
+      p "UNKNOWN DATA SET"
     end
     return nf_arr
   end
