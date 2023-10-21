@@ -31,6 +31,7 @@ RSpec.describe Vehicle do
       expect(@cruz.electric_vehicle?).to eq(false)
       expect(@bolt.electric_vehicle?).to eq(true)
       expect(@camaro.electric_vehicle?).to eq(false)
+
     end
   end
 end

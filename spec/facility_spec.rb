@@ -7,7 +7,7 @@ require './lib/vehicle'
 
 RSpec.describe Facility do
   before(:each) do
-    facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+    @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
 
     end
   end
@@ -63,7 +63,7 @@ RSpec.describe Facility do
       facility_1.register_vehicle(cruz)
       facility_1.register_vehicle(bolt)
       facility_1.register_vehicle(camaro)
-
+      binding.pry
       expect(facility_1.collected_fees).to eq(325)
     end
 
@@ -100,7 +100,7 @@ RSpec.describe Facility do
       facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
       facility_1.add_service('Written Test')
       facility_1.add_service('Road Test')
-      # facility_1.add_service('Renew License')
+      facility_1.add_service('Renew License')
       registrant_1 = Registrant.new('Bruce', 18, true)
       registrant_2 = Registrant.new('Penny', 16)
       registrant_2.earn_permit
@@ -108,11 +108,12 @@ RSpec.describe Facility do
 
       facility_1.administer_written_test(registrant_1)
       facility_1.administer_road_test(registrant_1)
+      facility_1.renew_drivers_license(registrant_1)
       facility_1.administer_written_test(registrant_2)
       facility_1.administer_road_test(registrant_2)
       facility_1.administer_written_test(registrant_3)
       facility_1.administer_road_test(registrant_3)
-      binding.pry
+
       expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
   end
 end

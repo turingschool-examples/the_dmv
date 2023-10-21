@@ -27,7 +27,7 @@ class Facility
   def add_service(service)
     @services << service
   end
-
+  #refactor
   def register_vehicle(car)
     if services.find {|service| service.include?('Vehicle Registration')}
     current_time = DateTime.now
