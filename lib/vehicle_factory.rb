@@ -5,24 +5,19 @@ require 'pry'
 
 class VehicleFactory
   attr_accessor
-  def initialize
-
-
+    def initialize
   end
 
   def create_vehicles(source)
     nc_arr = []
-    new_car = {
-    vin: source[0][:vin_1_10],
-    year: source[0][:model_year],
-    make: source[0][:make],
-    model: source[0][:model],
-    engine: :ev,
-    registration_date: nil,
-    plate_type: nil
-    }
-   nc_arr << new_car.values
-   binding.pry
+    source.each do |car|
+      new_car = {
+        vin: car[:vin_1_10],
+        year: car[:model_year],
+        make: car[:make],
+        model: car[:model],
+        engine: :ev}
+      nc_arr << Vehicle.new(new_car)
+    end
   end
-
 end

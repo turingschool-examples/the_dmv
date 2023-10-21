@@ -63,7 +63,7 @@ RSpec.describe Facility do
       facility_1.register_vehicle(cruz)
       facility_1.register_vehicle(bolt)
       facility_1.register_vehicle(camaro)
-
+      binding.pry
       expect(facility_1.collected_fees).to eq(325)
     end
 
@@ -113,7 +113,7 @@ RSpec.describe Facility do
       facility_1.administer_road_test(registrant_2)
       facility_1.administer_written_test(registrant_3)
       facility_1.administer_road_test(registrant_3)
-      binding.pry
+
       expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
   end
 end
