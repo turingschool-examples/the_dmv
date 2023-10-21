@@ -63,7 +63,7 @@ RSpec.describe Facility do
       facility_1.register_vehicle(cruz)
       facility_1.register_vehicle(bolt)
       facility_1.register_vehicle(camaro)
-      binding.pry
+      
       expect(facility_1.collected_fees).to eq(325)
     end
 
@@ -115,5 +115,24 @@ RSpec.describe Facility do
       facility_1.administer_road_test(registrant_3)
 
       expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
-  end
+    end
+
+    it "has access to DMV Colorado locations" do
+      colorado_facilities = DmvDataService.new.co_dmv_office_locations
+
+      expect(colorado_facilities).to be_a(Array)
+    end
+
+    it "has access to DMV New York locations" do
+      new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+
+      expect(new_york_facilities).to be_a(Array)
+    end
+
+    it "has access to DMV Missouri locations" do
+      missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+
+      expect(missouri_facilities).to be_a(Array)
+    end
+
 end

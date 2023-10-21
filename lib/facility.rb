@@ -4,6 +4,8 @@ require './lib/dmv'
 require './lib/vehicle'
 require './lib/facility'
 require './lib/registrant'
+require './lib/vehicle_factory'
+require './lib/dmv_data_service'
 
 class Facility
   attr_reader :name,
