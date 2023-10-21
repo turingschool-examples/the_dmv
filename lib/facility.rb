@@ -4,6 +4,8 @@ require './lib/dmv'
 require './lib/vehicle'
 require './lib/facility'
 require './lib/registrant'
+require './lib/vehicle_factory'
+require './lib/dmv_data_service'
 
 class Facility
   attr_reader :name,
@@ -90,5 +92,18 @@ class Facility
     else
       false
     end
+  end
+
+  def create_facility(list)
+    nf_arr = []
+    list.each do |omv|
+      new_omv = {
+        name: omv[:dmv_office],
+        address: omv[:address_li], #+ ", " + omv[:address__1],
+        phone: omv[:phone]
+    }
+    nf_arr << Facility.new(new_omv)
+    end
+    return nf_arr
   end
 end
