@@ -99,11 +99,11 @@ class Facility
     list.each do |omv|
       new_omv = {
         name: omv[:dmv_office],
-        address: omv[:address_li] + ", " + omv[:address__1],
+        address: omv[:address_li], #+ ", " + omv[:address__1],
         phone: omv[:phone]
     }
     nf_arr << Facility.new(new_omv)
-    binding.pry
     end
+    return nf_arr
   end
 end

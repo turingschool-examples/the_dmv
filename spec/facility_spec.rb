@@ -143,13 +143,13 @@ RSpec.describe Facility do
     end
 
     it "can create facility instances from DMV data" do
-      facility_new = Facility.new({})
+      facility_list = Facility.new({})
       colorado_facilities = DmvDataService.new.co_dmv_office_locations
       new_york_facilities = DmvDataService.new.ny_dmv_office_locations
       missouri_facilities = DmvDataService.new.mo_dmv_office_locations
 
-      facility_new.create_facility(colorado_facilities)
-      
+      facility_list.create_facility(colorado_facilities)
+      binding.pry
       expect(facility_new.create_facility(colorado_facilities)).to be_a(Array)
     end
 
