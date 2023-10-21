@@ -4,16 +4,12 @@ class FacilityFactory
   end
   # require 'pry'; binding.pry
   def create_facility(api_data)
-    api_data.map do |data|
-      # data[:dmv_data] != nil
+    facilities = api_data.map do |data|
       name = data[:dmv_office]
       address = "#{data[:address_li]} #{data[:address_1]} #{data[:city]} #{data[:state]} #{data[:zip]}"
-      phone = data{:phone}
-      # require 'pry'; binding.pry
-
-      
-      
-      Facility.new(name: name, address: address, phone: phone)
+      phone = data[:phone]
+      facility = Facility.new(name: name, address: address, phone: phone)
     end
+    require 'pry'; binding.pry
   end
 end

@@ -11,6 +11,6 @@ class VehicleFactory
       vehicle = Vehicle.new(engine: engine, vin: vin, year: model_year, make: make, model: model )
 
     end
-    require 'pry'; binding.pry
+    # require 'pry'; binding.pry
   end
 end
