@@ -9,7 +9,7 @@ attr_reader :facilities
   end
 
   def facilities_offering_service(service)
-    @facilities.find_all do |facility|
+    @facilities.find do |facility|
       facility.services.include?(service)
     end
   end
