@@ -93,4 +93,17 @@ class Facility
       false
     end
   end
+
+  def create_facility(list)
+    nf_arr = []
+    list.each do |omv|
+      new_omv = {
+        name: omv[:dmv_office],
+        address: omv[:address_li] + ", " + omv[:address__1],
+        phone: omv[:phone]
+    }
+    nf_arr << Facility.new(new_omv)
+    binding.pry
+    end
+  end
 end
