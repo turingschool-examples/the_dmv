@@ -30,6 +30,15 @@ RSpec.describe VehicleFactory do
 
     end
 
+  # describe 'EV Registrations - #most_popular_ev' do
+  #   it 'can iterate through the list and find the most popular make/model' do
+  #     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+  #     @factory.create_vehicles(wa_ev_registrations)
+
+
+  #     expect(@factory.most_popular_ev).to eq()
+  #   end
+
   end
 
 end

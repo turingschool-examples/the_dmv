@@ -44,4 +44,8 @@ class Vehicle
     end
   end
 
+  def most_popular_ev
+    
+  end
 end
+
