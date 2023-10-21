@@ -10,6 +10,6 @@ class FacilityFactory
       phone = data[:phone]
       facility = Facility.new(name: name, address: address, phone: phone)
     end
-    require 'pry'; binding.pry
+    # require 'pry'; binding.pry
   end
 end

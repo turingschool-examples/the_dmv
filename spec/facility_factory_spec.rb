@@ -13,6 +13,7 @@ RSpec.describe FacilityFactory do
       expect(facilities).to be_a(Array)
       expect(@Colorado[0][:dmv_office]).to be_a(String)
       expect(@Colorado[0][:address_li]).to be_a(String)
+      expect(@Colorado[0][:address__1]).to be_a(String)
       expect(@Colorado[0][:city]).to be_a(String)
     end
   end
