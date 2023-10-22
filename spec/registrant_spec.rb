@@ -36,7 +36,7 @@ RSpec.describe Registrant do
     registrant_2 = Registrant.new("Penny", 15)
 
     registrant_2.earn_permit
-    binding.pry
+   
     expect(registrant_2.permit?).to be true
   end
 end

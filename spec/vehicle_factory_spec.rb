@@ -22,7 +22,16 @@ RSpec.describe VehicleFactory do
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
 
     factory.create_vehicles(wa_ev_registrations)
-    
+
     expect(factory.create_vehicles(wa_ev_registrations)).to be_a(Array)
+  end
+
+  it "can find most popular vehicle in database" do
+    factory = VehicleFactory.new
+    wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+
+    factory.find_most_common(wa_ev_registrations)
+    binding.pry
+    expect(factory.find_most_common(wa_ev_registrations)).to be_a(Array)
   end
 end
