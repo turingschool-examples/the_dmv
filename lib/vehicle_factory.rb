@@ -32,7 +32,7 @@ attr_reader :vehicles
 
   def make_and_models
     make_and_model = Hash.new{|hsh,key| hsh[key] = []}
-    @vehicles.select! do |vehicle|
+    @vehicles.each do |vehicle|
       make_and_model[vehicle.make].push(vehicle.model)
     end
     make_and_model
@@ -55,6 +55,26 @@ attr_reader :vehicles
     else
       count
     end
+  end
+
+  def county_with_most_registered_vehicles
+    county_hash = Hash.new(0)
+    @vehicles.each do |vehicle|
+      county_hash[vehicle.county] += 1
+    end
+    county = 0
+    county_hash.each do |key, value|
+      while value > county
+        county = value
+      end
+    end
+    county_with_most_registered_vehicles = nil
+    county_hash.each do |key,value| 
+      if value == county then
+        county_with_most_registered_vehicles = key
+      end
+    end
+    county_with_most_registered_vehicles
   end
 
 end

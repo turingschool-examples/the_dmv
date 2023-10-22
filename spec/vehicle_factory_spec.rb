@@ -64,4 +64,13 @@ RSpec.describe VehicleFactory do
       expect(@factory.registered_vehicles_for_model_year("2025")).to eq(    "Year is too early for EVs or in the future")
     end
   end
+
+  describe '#county_with_most_registered_vehicles' do
+    it 'can list the county with the most registered vehicles' do
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      @factory.create_vehicles(wa_ev_registrations)
+
+      expect(@factory.county_with_most_registered_vehicles).to eq("King")
+    end
+  end
 end
