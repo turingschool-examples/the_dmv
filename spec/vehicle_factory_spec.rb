@@ -27,9 +27,29 @@ RSpec.describe VehicleFactory do
           expect(car.model.nil?).to eq(false)
           expect(car.engine.nil?).to eq(false)
         end
-
+      end
     end
 
+  describe '#make_and_models' do
+    it 'can make a hash of make and models with the list of vehicles created' do
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      @factory.create_vehicles(wa_ev_registrations)
+
+      expect(@factory.make_and_models).to be_an_instance_of(Hash)
+      expect(@factory.make_and_models.keys.include?("TESLA")).to be(true)
+      expect(@factory.make_and_models.keys.include?("NISSAN")).to be(true)
+      expect(@factory.make_and_models.keys.include?("TOYOTA")).to be(true)
+      expect(@factory.make_and_models.values).to be_an_instance_of(Array)
+    end
   end
 
+  describe 'EV Registrations - #most_popular_ev' do
+    it 'can iterate through the list and find the most popular make/model' do
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      @factory.create_vehicles(wa_ev_registrations)
+      @factory.most_popular_ev
+
+      expect(@factory.most_popular_ev).to eq("The most popular make and model is the NISSAN Leaf!")
+    end
+  end
 end

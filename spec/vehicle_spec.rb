@@ -47,4 +47,5 @@ RSpec.describe Vehicle do
       expect(@bolt.plate_type).to eq(:ev)
     end
   end
+
 end
