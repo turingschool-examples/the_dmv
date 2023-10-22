@@ -1,8 +1,9 @@
 
 class VehicleFactory
+  attr_accessor :most_popular_make_model
 
   def initialize
-    @most_popular_make_model
+    @most_popular_make_model = ""
   end
 
   def create_vehicles(input_api)
@@ -32,7 +33,7 @@ class VehicleFactory
         models_count[model] += 1
     end
 
-    @most_popular_make_model = models_count.sort_by { |model,number| number}.last[0]
+    @most_popular_make_model = (models_count.sort_by { |model,number| number}.last[0]).join
     created_vehicles
   end
 
