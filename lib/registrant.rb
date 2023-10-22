@@ -4,7 +4,7 @@ class Registrant
                   :permit
     def initialize(name, age, permit = false)
         @name = name
-        @age = name
+        @age = age
         @permit = permit
     end
 end
