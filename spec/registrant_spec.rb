@@ -25,11 +25,17 @@ RSpec.describe Registrant do
     end
 
     it "#name" do
-    expect(registrant_1).to be_an_instance_of(Registrant)
+    registrant_1 = Registrant.new('Bruce', 18, true )
 
     expect(registrant_1.name).to eq("Bruce")
     end
+
+    it "#age" do
+
+    end
 end
+
+
 
 
 
