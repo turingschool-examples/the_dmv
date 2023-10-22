@@ -37,5 +37,12 @@ it "has a method for most common county" do
   expect(factory_1.most_common_county).to eq("King")
 end
 
+it "has capability to us ny vehicle database" do
+  factory_1 = VehicleFactory.new
+  new_york_vehicle_registrations = DmvDataService.new.ny_state_registrations
+  factory_1.create_vehicles(new_york_vehicle_registrations)
 
+
+
+end
 end

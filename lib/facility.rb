@@ -8,7 +8,8 @@ class Facility
                 :services,
                 :hours, 
                 :registered_vehicles, 
-                :collected_fees
+                :collected_fees,
+                :holidays_closed
 
   def initialize(input)
     @name = input[:name]
@@ -18,6 +19,9 @@ class Facility
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
+    if input[:holidays_closed] != nil
+      @holidays_closed = input[:holidays_closed]
+    end
   end
 
   def add_service(service)

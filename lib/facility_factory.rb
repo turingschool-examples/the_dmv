@@ -45,6 +45,7 @@ class FacilityFactory
         input_hash[:address] = "#{facility_raw_info[:address1]}, #{facility_raw_info[:city]}, #{facility_raw_info[:state]} #{facility_raw_info[:zipcode]}"
         input_hash[:phone] = facility_raw_info[:phone]
         input_hash[:hours] = facility_raw_info[:daysopen]
+        input_hash[:holidays_closed] = facility_raw_info[:holidaysclosed]
         mo_total_facility_array << Facility.new(input_hash)
       end
     return mo_total_facility_array

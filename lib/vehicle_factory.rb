@@ -13,15 +13,32 @@ class VehicleFactory
 
   def create_vehicles(input_api)
     created_vehicles = []
-    input_api.each do |hash|
-      hash_final = {}
-      hash_final[:vin] = hash[:vin_1_10]
-      hash_final[:year] = hash[:model_year]
-      hash_final[:make] = hash[:make]
-      hash_final[:model] = hash[:model]
-      hash_final[:engine] = :ev
-      created_vehicles << Vehicle.new(hash_final)
+    if input_api.first[:state_of_residence] == "WA"
+      input_api.each do |hash|
+        hash_final = {}
+        hash_final[:vin] = hash[:vin_1_10]
+        hash_final[:year] = hash[:model_year]
+        hash_final[:make] = hash[:make]
+        hash_final[:model] = hash[:model]
+        hash_final[:engine] = :ev
+        created_vehicles << Vehicle.new(hash_final)
+      end
+    elsif input_api.first[:"state"] == "NY"
+      input_api.each do |hash|
+        if hash[:"record_type"] == "VEH"
+          hash_final = {}
+          hash_final[:vin] = hash[:vin]
+          hash_final[:year] = hash[:model_year]
+          hash_final[:make] = hash[:make]
+          hash_final[:model] = hash[:body_type]
+          hash_final[:engine] = hash[:fuel_type]
+          created_vehicles << Vehicle.new(hash_final)
+          require 'pry'; binding.pry
+        end
+      end
     end
+
+
   # find the most popular make/model
     all_makes_models = []
     created_vehicles.each do |vehicle|
@@ -70,18 +87,4 @@ class VehicleFactory
   def year_counter(given_year)
     @years[given_year]
   end
-
-  # def county_most_popular(input_api)
-  #   total_counties = []
-  #   input_api.each do |hash|
-  #   total_counties << hash[:county]
-  #   end
-  #   counties_count = Hash.new(0)
-  #   total_counties.each do |county|
-  #     counties_count[county] += 1
-  #   end
-  #   @most_common_county = counties_count.sort_by {|county, number| number}.last[0]
-  # end
-
-
 end

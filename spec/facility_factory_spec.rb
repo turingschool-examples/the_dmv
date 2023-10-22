@@ -37,4 +37,12 @@ RSpec.describe FacilityFactory do
     expect(facility_factory_1.create_facility(missouri_dmv_office_locations).first.hours).to eq("Monday-Friday - 9:00 to 5:00, Last Saturday  - 9:00 to 12:00")
   end
 
+  # it "can access the NY State Vehicle Registrations" do
+  #   facility_factory_1 = FacilityFactory.new
+  #   ny_state_registrations = DmvDataService.new.ny_state_registrations
+
+
+
+
+  # end
 end
