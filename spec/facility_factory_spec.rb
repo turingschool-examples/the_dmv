@@ -14,6 +14,7 @@ RSpec.describe FacilityFactory do
     expect(facility_factory_1.create_facility(colorado_dmv_office_locations)).to be_a Array
     expect(facility_factory_1.create_facility(colorado_dmv_office_locations).first).to be_a Facility
     expect(facility_factory_1.create_facility(colorado_dmv_office_locations).first.address).to eq("2855 Tremont Place, Suite 118, Denver, CO 80205")
+    expect(facility_factory_1.create_facility(colorado_dmv_office_locations).first.hours).to be_a String
   end
 
   it "can access the New York DMV facilities api" do
@@ -23,6 +24,7 @@ RSpec.describe FacilityFactory do
     expect(facility_factory_1.create_facility(new_york_dmv_office_locations)).to be_a Array
     expect(facility_factory_1.create_facility(new_york_dmv_office_locations).first).to be_a Facility
     expect(facility_factory_1.create_facility(new_york_dmv_office_locations).first.address).to eq("168-46 91ST AVE., 2ND FLR, JAMAICA, NY 11432")
+    expect(facility_factory_1.create_facility(new_york_dmv_office_locations).first.hours).to be_a String
   end
 
   it "can access the Missouri DMV facilities api" do
