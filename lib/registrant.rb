@@ -1,4 +1,5 @@
 class Registrant
+    # attr_accessor 
     def initialize(name, age, permit = false)
     end
 end

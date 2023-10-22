@@ -31,7 +31,9 @@ RSpec.describe Registrant do
     end
 
     it "#age" do
+    registrant_1 = Registrant.new('Bruce', 18, true )
 
+    expect(registrant_1.age).to eq(18)
     end
 end
 
