@@ -239,5 +239,80 @@ class VehicleFactory
 
     car_list_array.sort
   end
-end
 
+  def count_by_year(source)
+    arr_of_count = []
+      year2008 = 0
+      year2009 = 0
+      year2010 = 0
+      year2011 = 0
+      year2012 = 0
+      year2013 = 0
+      year2014 = 0
+      year2015 = 0
+      year2016 = 0
+      year2017 = 0
+      year2018 = 0
+      year2019 = 0
+      year2020 = 0
+      year2021 = 0
+      year2022 = 0
+      year2023 = 0
+
+    source.each do |car|
+      arr_of_count << car[:model_year]
+    end
+      arr_of_count.each do |year|
+          if year.include?("2008")
+            year2008 += 1
+          elsif year.include?("2009")
+            year2009 += 1
+          elsif year.include?("2010")
+            year2010 += 1
+          elsif year.include?("2011")
+            year2011 += 1
+          elsif year.include?("2012")
+            year2012 += 1
+          elsif year.include?("2013")
+            year2013 += 1
+          elsif year.include?("2014")
+            year2014 += 1
+          elsif year.include?("2015")
+            year2015 += 1
+          elsif year.include?("2016")
+            year2016 += 1
+          elsif year.include?("2017")
+            year2017 += 1
+          elsif year.include?("2018")
+            year2018 += 1
+          elsif year.include?("2019")
+            year2019 += 1
+          elsif year.include?("2020")
+            year2020 += 1
+          elsif year.include?("2021")
+            year2021 += 1
+          elsif year.include?("2022")
+            year2022 += 1
+          elsif year.include?("2023")
+            year2023 += 1
+      end
+    end
+      p "List of number of cars by year."
+      p "year2008 = #{year2008}"
+      p "year2009 = #{year2009}"
+      p "year2010 = #{year2010}"
+      p "year2011 = #{year2011}"
+      p "year2012 = #{year2012}"
+      p "year2013 = #{year2013}"
+      p "year2014 = #{year2014}"
+      p "year2015 = #{year2015}"
+      p "year2016 = #{year2016}"
+      p "year2017 = #{year2017}"
+      p "year2018 = #{year2018}"
+      p "year2019 = #{year2019}"
+      p "year2020 = #{year2020}"
+      p "year2021 = #{year2021}"
+      p "year2022 = #{year2022}"
+      p "year2023 = #{year2023}"
+  end
+end

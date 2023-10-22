@@ -31,7 +31,16 @@ RSpec.describe VehicleFactory do
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
 
     factory.find_most_common(wa_ev_registrations)
-    binding.pry
+
     expect(factory.find_most_common(wa_ev_registrations)).to be_a(Array)
+  end
+
+  it "can find number of vehicles by year" do
+    factory = VehicleFactory.new
+    wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+
+    factory.count_by_year(wa_ev_registrations)
+
+    expect(factory.count_by_year(wa_ev_registrations)).to be_a(String)
   end
 end
