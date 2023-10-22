@@ -2,14 +2,19 @@ require "date"
 
 
 class Facility
-  attr_accessor :name, :address, :phone, :services, :registered_vehicles, :collected_fees
-
-  # CurrentDate = Date.new(2023,10,19)
+  attr_accessor :name, 
+                :address, 
+                :phone, 
+                :services,
+                :hours, 
+                :registered_vehicles, 
+                :collected_fees
 
   def initialize(input)
     @name = input[:name]
     @address = input[:address]
     @phone = input[:phone]
+    @hours = input[:hours]
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
