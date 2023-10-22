@@ -35,7 +35,7 @@ RSpec.describe Facility do
       expect(@facility.registered_vehicles).to include(@cruz, @bolt)
     end
 
-    it "charges fees based on vehicle age" do
+    it "charges fees and assigns plate types based on vehicle type" do
       @facility.register_vehicle(@cruz)
 
       expect(@facility.collected_fees).to eq(100)
