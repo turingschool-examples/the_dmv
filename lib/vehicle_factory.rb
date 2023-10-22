@@ -5,7 +5,6 @@ class VehicleFactory
   end
 
   def create_vehicles(input_api)
-    require 'pry'; binding.pry
     created_vehicles = []
     input_api.each do |hash|
       hash_final = {}
