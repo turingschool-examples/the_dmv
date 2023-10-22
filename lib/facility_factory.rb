@@ -30,16 +30,16 @@ class FacilityFactory
       end
     return ny_total_facility_array
 
-    # elsif input_api.first[:state] == "MO"
-    #   input_api.each do |facility_raw_info|
-    #     input_hash = {}
-    #     input_hash[:name] = facility_raw_info[:name]
-    #     input_hash[:address] = "#{facility_raw_info[:address1]}, #{facility_raw_info[:city]}, #{facility_raw_info[:state]} #{facility_raw_info[:zipcode]}"
-    #     input_hash[:phone] = facility_raw_info[:phone]
-    #     mo_total_facility_array << Facility.new(input_hash)
-    #   end
-    # return mo_total_facility_array
-    # end
+    elsif input_api.first[:state] == "MO"
+      input_api.each do |facility_raw_info|
+        input_hash = {}
+        input_hash[:name] = facility_raw_info[:name]
+        input_hash[:address] = "#{facility_raw_info[:address1]}, #{facility_raw_info[:city]}, #{facility_raw_info[:state]} #{facility_raw_info[:zipcode]}"
+        input_hash[:phone] = facility_raw_info[:phone]
+        mo_total_facility_array << Facility.new(input_hash)
+      end
+    return mo_total_facility_array
+    end
 
   end
 
