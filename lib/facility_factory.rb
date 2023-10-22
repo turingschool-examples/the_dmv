@@ -40,7 +40,5 @@ class FacilityFactory
       end
     return mo_total_facility_array
     end
-
   end
-
 end

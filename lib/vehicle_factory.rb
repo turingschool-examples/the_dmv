@@ -2,6 +2,7 @@
 class VehicleFactory
 
   def initialize
+    @most_popular_make_model
   end
 
   def create_vehicles(input_api)
@@ -16,6 +17,23 @@ class VehicleFactory
       # require 'pry'; binding.pry
       created_vehicles << Vehicle.new(hash_final)
     end
+
+    all_makes_models = []
+
+    created_vehicles.each do |vehicle|
+      make_model = []
+      make_model << "#{vehicle.make}, #{vehicle.model}"
+      all_makes_models << make_model
+    end
+      
+    models_count = Hash.new(0)
+
+    all_makes_models.each do |model| 
+        models_count[model] += 1
+    end
+
+    @most_popular_make_model = models_count.sort_by { |model,number| number}.last[0]
     created_vehicles
   end
+
 end
