@@ -53,4 +53,21 @@ RSpec.describe Facility do
       expect(@camaro.plate_type).to eq(:antique)
     end
   end
+
+  describe "#administer_written_test" do
+    it "errors out if registrant is younger than 16, or if registrant lacks a permit" do
+      registrant_1 = Registrant.new("Bruce", 18, false)
+      registrant_2 = Registrant.new("Penny", 15, true)
+
+      expect(@facility.administer_written_test(registrant_1)).to eq("Error: Written tests can only be administered to registrants with a permit, and who are at least 16 years of age.")
+      expect(@facility.administer_written_test(registrant_2)).to eq("Error: Written tests can only be administered to registrants with a permit, and who are at least 16 years of age.")
+    end
+
+    it "administers written test if registrant is 16 or older, and has a permit" do
+      registrant = Registrant.new("Chrysanthemum", 16, true)
+      @facility.administer_written_test(registrant)
+      
+      expect(registrant.license_data[:written]).to eq true
+    end
+  end
 end

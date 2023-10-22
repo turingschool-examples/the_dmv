@@ -27,4 +27,12 @@ class Facility
       vehicle.plate_type = :regular
     end
   end
+
+  def administer_written_test(registrant)
+    if !registrant.permit? || registrant.age < 16
+      "Error: Written tests can only be administered to registrants with a permit, and who are at least 16 years of age."
+    else
+      registrant.license_data[:written] = true
+    end
+  end
 end
