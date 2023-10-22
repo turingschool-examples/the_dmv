@@ -52,4 +52,16 @@ RSpec.describe VehicleFactory do
       expect(@factory.most_popular_ev).to eq("The most popular make and model is the NISSAN Leaf!")
     end
   end
+
+  describe '#registered_vehicles_for_model_year' do
+    it 'can count the number of registered vehicles for a model year' do
+      wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+      @factory.create_vehicles(wa_ev_registrations)
+
+      expect(@factory.registered_vehicles_for_model_year("2013")).to eq(107)
+      expect(@factory.registered_vehicles_for_model_year(2013)).to eq("Error, try a string")
+      expect(@factory.registered_vehicles_for_model_year("12")).to eq("Year must be 4 characters long")
+      expect(@factory.registered_vehicles_for_model_year("2025")).to eq(    "Year is too early for EVs or in the future")
+    end
+  end
 end
