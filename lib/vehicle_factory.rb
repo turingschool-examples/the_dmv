@@ -33,13 +33,11 @@ class VehicleFactory
           hash_final[:model] = hash[:body_type]
           hash_final[:engine] = hash[:fuel_type]
           created_vehicles << Vehicle.new(hash_final)
-          require 'pry'; binding.pry
         end
       end
     end
 
-
-  # find the most popular make/model
+    # find the most popular make/model
     all_makes_models = []
     created_vehicles.each do |vehicle|
       make_model = []
@@ -53,7 +51,7 @@ class VehicleFactory
     end
     @most_popular_make_model = (models_count.sort_by { |model,number| number}.last[0]).join
     
-  #find count of registered vehicles for a given year
+    #find count of registered vehicles for a given year
     all_years = []
     created_vehicles.each do |vehicle|
       all_years << vehicle.year.to_i
@@ -67,7 +65,7 @@ class VehicleFactory
     @years = years_count
     @most_common_year = years_count.sort_by {|year, number| number}.last[0]
       
-  #calculates most common county attribute
+    #calculates most common county attribute
     total_counties = []
     input_api.each do |hash|
       total_counties << hash[:county]
@@ -79,7 +77,8 @@ class VehicleFactory
     end
 
     @most_common_county = counties_count.sort_by {|county, number| number}.last[0]
-  #last line of method return:
+    
+    #last line of method return:
     created_vehicles
   end
 
