@@ -37,4 +37,24 @@ attr_reader :vehicles
     end
     make_and_model
   end
+
+  def registered_vehicles_for_model_year(year)
+    count = 0
+    @vehicles.each do |vehicle|
+      if vehicle.year == year
+        count += 1
+      end
+    end
+
+    if year.is_a? Integer
+      "Error, try a string"
+    elsif year.length != 4
+      "Year must be 4 characters long"
+    elsif year.to_i < 2008 || year.to_i > 2023
+      "Year is too early for EVs or in the future"
+    else
+      count
+    end
+  end
+
 end
