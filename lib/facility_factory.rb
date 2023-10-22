@@ -31,10 +31,9 @@ class FacilityFactory
         if facility_raw_info[:saturday_beginning_hours] != nil
           input_hash[:hours] << ", Saturday #{facility_raw_info[:saturday_beginning_hours]} to #{facility_raw_info[:saturday_ending_hours]}"
         end
-
-        if facility_raw_info[:sunday_beginning_hours] != nil
-          input_hash[:hours] << ", Sunday #{facility_raw_info[:sunday_beginning_hours]} to #{facility_raw_info[:sunday_ending_hours]}"
-        end
+        # if facility_raw_info[:sunday_beginning_hours] != nil
+        #   input_hash[:hours] << ", Sunday #{facility_raw_info[:sunday_beginning_hours]} to #{facility_raw_info[:sunday_ending_hours]}"
+        # end
         ny_total_facility_array << Facility.new(input_hash)
       end
     return ny_total_facility_array
@@ -45,6 +44,7 @@ class FacilityFactory
         input_hash[:name] = facility_raw_info[:name]
         input_hash[:address] = "#{facility_raw_info[:address1]}, #{facility_raw_info[:city]}, #{facility_raw_info[:state]} #{facility_raw_info[:zipcode]}"
         input_hash[:phone] = facility_raw_info[:phone]
+        input_hash[:hours] = facility_raw_info[:daysopen]
         mo_total_facility_array << Facility.new(input_hash)
       end
     return mo_total_facility_array

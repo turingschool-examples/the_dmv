@@ -34,6 +34,7 @@ RSpec.describe FacilityFactory do
     expect(facility_factory_1.create_facility(missouri_dmv_office_locations)).to be_a Array
     expect(facility_factory_1.create_facility(missouri_dmv_office_locations).first).to be_a Facility
     expect(facility_factory_1.create_facility(missouri_dmv_office_locations).first.address).to eq("3164 TELEGRAPH ROAD, ST LOUIS, MO 63125")
+    expect(facility_factory_1.create_facility(missouri_dmv_office_locations).first.hours).to eq("Monday-Friday - 9:00 to 5:00, Last Saturday  - 9:00 to 12:00")
   end
 
 end
