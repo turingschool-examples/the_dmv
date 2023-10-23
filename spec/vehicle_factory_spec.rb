@@ -73,4 +73,23 @@ RSpec.describe VehicleFactory do
       expect(@factory.county_with_most_registered_vehicles).to eq("King")
     end
   end
+
+  describe 'second data source from NY' do
+    it 'can #create_vehicles with NY API' do
+      ny_registrations = DmvDataService.new.ny_registrations
+      @factory.create_vehicles(ny_registrations)
+
+      expect(@factory.vehicles).to include(Vehicle)
+      expect(@factory.vehicles.length).to be > 100
+
+      @factory.vehicles.each do |car|
+        expect(car).to be_an_instance_of(Vehicle)
+        expect(car.vin.nil?).to eq(false)
+        expect(car.year.nil?).to eq(false)
+        expect(car.make.nil?).to eq(false)
+        expect(car.engine.nil?).to eq(false)
+        expect(car.model).to eq("Model not listed")
+      end
+    end 
+  end
 end

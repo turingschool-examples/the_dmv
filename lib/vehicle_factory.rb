@@ -6,12 +6,27 @@ attr_reader :vehicles
   end
 
   def create_vehicles(api)
+    # Filter out the boats and other vehicles
+    api.select! do |vehicle|
+      if vehicle.values.include?("BOAT") == false && vehicle.values.include?("TRL") == false
+        vehicle
+      end
+    end
     api.each do |vehicle|
-      vehicle[:vin] = vehicle.delete :vin_1_10
-      vehicle[:year] = vehicle.delete :model_year
-      vehicle = Vehicle.new(vehicle)
-      vehicle.engine = :ev
-      @vehicles << vehicle
+      if vehicle[:vin].nil?
+        vehicle[:vin] = vehicle.delete :vin_1_10
+      end
+      if vehicle[:model] == nil
+        vehicle[:model] = "Model not listed"
+      end
+        vehicle[:year] = vehicle.delete :model_year
+      if vehicle[:fuel_type].nil? 
+        vehicle[:engine] = :ev
+      else
+        vehicle[:engine] = vehicle[:fuel_type]
+      end
+        vehicle = Vehicle.new(vehicle)
+        @vehicles << vehicle
     end
   end
 
@@ -30,14 +45,6 @@ attr_reader :vehicles
     "The most popular make and model is the #{make} #{model}!"
   end
 
-  def make_and_models
-    make_and_model = Hash.new{|hsh,key| hsh[key] = []}
-    @vehicles.each do |vehicle|
-      make_and_model[vehicle.make].push(vehicle.model)
-    end
-    make_and_model
-  end
-
   def registered_vehicles_for_model_year(year)
     count = 0
     @vehicles.each do |vehicle|
@@ -45,7 +52,6 @@ attr_reader :vehicles
         count += 1
       end
     end
-
     if year.is_a? Integer
       "Error, try a string"
     elsif year.length != 4
@@ -77,4 +83,12 @@ attr_reader :vehicles
     county_with_most_registered_vehicles
   end
 
+# Method for methods
+  def make_and_models
+    make_and_model = Hash.new{|hsh,key| hsh[key] = []}
+    @vehicles.each do |vehicle|
+      make_and_model[vehicle.make].push(vehicle.model)
+    end
+    make_and_model
+  end
 end
