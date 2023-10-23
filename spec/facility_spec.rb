@@ -134,4 +134,12 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data[:renew]).to eq(true)
     end
   end
+
+  describe '@hours attribute' do
+    it 'tracks the hours of facilities' do
+      @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600', hours: 'M-F: 7:30 AM until 5:00 PM'})
+
+      expect(@facility.hours).to eq('M-F: 7:30 AM until 5:00 PM')
+    end
+  end
 end

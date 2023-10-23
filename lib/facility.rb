@@ -1,5 +1,5 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
+  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees, :hours, :holidays_closed
 
   def initialize(facility_hash)
     @name = facility_hash[:name]
@@ -7,6 +7,8 @@ class Facility
     @address = facility_hash[:address]
 # require 'pry'; binding.pry if facility_hash[:phone] == nil
     @phone = facility_hash[:phone]
+    @hours = facility_hash[:hours]
+    @holidays_closed = facility_hash[:holidays_closed]
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
