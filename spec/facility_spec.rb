@@ -36,6 +36,7 @@ RSpec.describe Facility do
 
   describe '#register vehicle' do
     it 'registers regular vehicle' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       
       expect(@cruz.registration_date).to eq(Date.today)
@@ -43,6 +44,7 @@ RSpec.describe Facility do
     end
 
     it 'registers antique vehicle' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@camaro)
     
       expect(@camaro.registration_date).to eq(Date.today)
@@ -50,22 +52,24 @@ RSpec.describe Facility do
     end
 
     it 'registers ev vehicle' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@bolt)
 
       expect(@bolt.registration_date).to eq(Date.today)
       expect(@bolt.plate_type).to eq(:ev)
     end
 
-    xit 'updates facility after registration' do
+    it 'updates facility after registration' do
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
 
-      expect(@facility_1.registered_vehicles).to eq ([@cruz, @camero, @bolt]) #Why does this test fail?
+      expect(@facility_1.registered_vehicles).to eq ([@cruz, @camaro, @bolt]) #Why does this test fail?
       expect(@facility_1.collected_fees).to eq(325)
     end
 
-    xit 'prevents multi-facility registrations' do
+    it 'prevents registration if facility does not offer service' do
       expect(@facility_2.registered_vehicles).to eq ([])
       expect(@facility_2.services).to eq([])
       expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
