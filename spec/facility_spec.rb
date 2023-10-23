@@ -31,7 +31,7 @@ RSpec.describe Facility do
 
   describe '#register vehicles' do
     it 'returns vehicles registered by facility' do
-    expect(@facility_1.registerd_vehicles).to eq([])
+    expect(@facility_1.registered_vehicles).to eq([])
     end
   end
 
@@ -43,8 +43,15 @@ RSpec.describe Facility do
 
   describe '#register_vehicle' do
     it 'adds vehicle registration' do
-    @facility_1.register_vehicle(@cruz)
+    @facility_1.register_vehicles(@cruz)
     expect(@facility_1.registered_vehicles).to eq([@cruz])
     end
-  end
+
+    it 'Adds a registration date' do
+      @facility_1.register_vehicles(@cruz)
+    expect(@cruz.registration_date).to eq(Date.today)
+    end
+  end 
+
+  
 end

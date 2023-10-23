@@ -23,7 +23,8 @@ class Facility
     @collected_fees
   end
 
-  def register_vehicle(vehicle)
-    
+  def register_vehicles(vehicle)
+    @registered_vehicles << vehicle
+   vehicle.new_registration_date
   end
 end
