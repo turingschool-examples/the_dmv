@@ -25,6 +25,6 @@ class Facility
 
   def register_vehicles(vehicle)
     @registered_vehicles << vehicle
-   vehicle.new_registration_date
+   vehicle.new_registration_dateplate_type
   end
 end
