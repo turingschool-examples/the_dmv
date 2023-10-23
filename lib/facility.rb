@@ -43,4 +43,12 @@ class Facility
       registrant.license_data[:license] = true
     end
   end
+
+  def renew_drivers_license(registrant)
+    if !registrant.license_data[:license]
+      "Error: Registrant does not have a license to renew."
+    else
+      registrant.license_data[:renewed] = true
+    end
+  end
 end

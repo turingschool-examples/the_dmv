@@ -90,4 +90,24 @@ RSpec.describe Facility do
       expect(registrant_1.license_data[:license]).to eq true
     end
   end
+
+  describe "#renew_drivers_license" do
+    it "errors out if the registrant does not have a pre-existing license" do
+      registrant_1 = Registrant.new("Bruce", 18, true)
+
+      expect(@facility.renew_drivers_license(registrant_1)).to eq("Error: Registrant does not have a license to renew.")
+    end
+  
+    it "renews an existing drivers license" do
+      registrant_1 = Registrant.new("Bruce", 18, true)
+      @facility.administer_written_test(registrant_1)
+      @facility.administer_road_test(registrant_1)
+
+      expect(registrant_1.license_data[:renewed]).to eq false
+
+      @facility.renew_drivers_license(registrant_1)
+
+      expect(registrant_1.license_data[:renewed]).to eq true
+    end
+  end
 end
