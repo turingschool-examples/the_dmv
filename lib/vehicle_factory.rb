@@ -9,7 +9,6 @@ class VehicleFactory
       model = registration[:model]
 
       vehicle = Vehicle.new(engine: engine, vin: vin, year: model_year, make: make, model: model )
-
     end
     # require 'pry'; binding.pry
   end

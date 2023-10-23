@@ -21,8 +21,8 @@ class FacilityFactory
         address = "#{data[:address1]} #{data[:city]} #{data[:state]} #{data[:zipcode]} #{data[:county]}"
         phone = data[:phone]
       end
+      # require 'pry'; binding.pry
       facility = Facility.new(name: name, address: address, phone: phone)
     end
-    # require 'pry'; binding.pry
   end
 end
