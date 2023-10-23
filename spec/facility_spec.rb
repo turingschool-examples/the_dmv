@@ -107,7 +107,7 @@ RSpec.describe Facility do
   end
   
   it 'cannot administer written test w/o permit' do
-    registrant_2 = Registrant.new('Penny', 16)
+    registrant_2 = Registrant.new('Penny', 16 )
     
     expect(@facility_1.administer_written_test(registrant_2)).to eq(false)
     
@@ -118,7 +118,7 @@ RSpec.describe Facility do
   
   it 'can administer written test after earning permit' do
     @facility_1.add_service('Written Test')
-    registrant_2 = Registrant.new('Penny', 16)
+    registrant_2 = Registrant.new('Penny', 16 )
     registrant_2.earn_permit
     
     expect(@facility_1.administer_written_test(registrant_2)).to eq(true)
