@@ -30,7 +30,6 @@ RSpec.describe FacilityFactory do
       expect(@new_york_facilities[0][:street_address_line_1]).to be_a(String)
       expect(@new_york_facilities[0][:city]).to be_a(String)
       expect(@new_york_facilities[0][:state]).to be_a(String)
-      # require 'pry'; binding.pry
     end
 
     it 'shows Missouri data' do
