@@ -66,8 +66,28 @@ RSpec.describe Facility do
     it "administers written test if registrant is 16 or older, and has a permit" do
       registrant = Registrant.new("Chrysanthemum", 16, true)
       @facility.administer_written_test(registrant)
-      
+
       expect(registrant.license_data[:written]).to eq true
+    end
+  end
+
+  describe "#administer_road_test" do
+    it "errors out if a registrant has not passed a written test" do
+      registrant_1 = Registrant.new("Bruce", 18, true)
+      registrant_2 = Registrant.new("Penny", 15)
+
+      expect(@facility.administer_road_test(registrant_1)
+      ).to eq("Error: Road tests can only be administered to registrants who have passed a written test.")
+      expect(@facility.administer_road_test(registrant_2)
+      ).to eq("Error: Road tests can only be administered to registrants who have passed a written test.")
+    end
+
+    it "administers a road test if registrant passed a written test" do
+      registrant_1 = Registrant.new("Bruce", 18, true)
+      @facility.administer_written_test(registrant_1)
+      @facility.administer_road_test(registrant_1)
+
+      expect(registrant_1.license_data[:license]).to eq true
     end
   end
 end

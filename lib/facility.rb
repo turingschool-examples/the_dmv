@@ -35,4 +35,12 @@ class Facility
       registrant.license_data[:written] = true
     end
   end
+
+  def administer_road_test(registrant)
+    if !registrant.license_data[:written]
+      "Error: Road tests can only be administered to registrants who have passed a written test."
+    else
+      registrant.license_data[:license] = true
+    end
+  end
 end
