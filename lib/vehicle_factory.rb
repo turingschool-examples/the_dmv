@@ -1,6 +1,5 @@
 class VehicleFactory 
   def create_vehicles(registrations)
-   
    vehicles = registrations.map do |registration|
       engine = :ev
       vin = registration[:vin_1_10]
