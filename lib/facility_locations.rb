@@ -6,7 +6,7 @@ class FacilityLocations
   end
 
   def create_facilities(dmv_data)
-      dmv_data.each do |facility|
+      dmv_data.each do |facility| 
       old_name = facility.keys.select {|key| key.name.include?("name")}[0]
       if old_name == nil
         old_name = facility.keys.select {|key| key.name.include?("office")}[0]
@@ -14,6 +14,7 @@ class FacilityLocations
       old_address = facility.keys.select {|key| key.name.include?("address")}[0]
       old_phone = facility.keys.select {|key| key.name.include?("phone")}[0]
       # Check for hours of facilities
+      # require 'pry'; binding.pry if facility[:hours] == nil
       if facility.keys.select {|key| key.name.include?("hour")}.count > 1
       # Create an array of hashes
         hash_of_hours = facility.select {|key,value| key.name.include?("hour")}
@@ -26,9 +27,22 @@ class FacilityLocations
       else
         old_hours = facility.keys.select {|key| key.name.include?("hour")|| key.name.include?("daysopen")}[0]
       end
+      # require 'pry'; binding.pry if facility[:hours] == nil
       # Make a new hash for @hours
       if facility.has_key?(:hours) == false
         old_hours = facility.keys.select {|key| key.name.include?("hour")|| key.name.include?("daysopen")}[0]
+        facility[:hours] = facility.delete old_hours 
+      end
+      # Add in text for closed offices
+      # require 'pry'; binding.pry if facility[:hours] == nil
+      notice = nil
+      if facility[:hours] == nil
+        facility.select do |key, value|
+          if value != nil && (value.include?("CLOSED UNTIL") || value.include?("closed until"))
+          notice = value
+          end
+        end
+        facility[:hours] = notice
       end
       if facility.has_key?(:address) == false
         facility[:address] = facility.delete old_address
@@ -38,13 +52,6 @@ class FacilityLocations
       end
       if facility.has_key?(:phone) == false
         facility[:phone] = facility.delete old_phone  
-      end
-      if facility.has_key?(:hours) == false
-        facility[:hours] = facility.delete old_hours 
-      end
-      # Add in text for closed offices
-      if facility[:hours] == nil
-        facility[:hours] = facility[:located_in]
       end
       require 'pry'; binding.pry if facility[:hours] == nil
       facility = Facility.new(facility)
