@@ -35,7 +35,6 @@ attr_reader :vehicles
     make_and_models.values.flatten.each do |value|
       ev_counter[value] += 1
     end
-    require 'pry'; binding.pry
     model = ev_counter.key(ev_counter.values.sort[-1])
     make = nil
     make_and_models.each do |key, value|

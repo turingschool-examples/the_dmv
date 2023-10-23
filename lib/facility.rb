@@ -30,7 +30,7 @@ class Facility
       end
       if @services.include?("Vehicle Registration")
         @registered_vehicles << car
-    else
+      end
     end
   end
 
