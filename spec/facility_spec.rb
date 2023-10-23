@@ -34,6 +34,9 @@ RSpec.describe Facility do
     it 'can keep track of vehicles registered' do
       expect(@facility.registered_vehicles).to eq([])
     end
+
+    it 'changes the cost to register a vehicle depending on age'
+    
   end
 
   describe '#collected_fees' do

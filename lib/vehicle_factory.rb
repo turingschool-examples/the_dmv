@@ -31,11 +31,12 @@ attr_reader :vehicles
   end
 
   def most_popular_ev
-    tesla_counter = Hash.new(0)
+    ev_counter = Hash.new(0)
     make_and_models.values.flatten.each do |value|
-      tesla_counter[value] += 1
+      ev_counter[value] += 1
     end
-    model = tesla_counter.key(tesla_counter.values.sort[-1])
+    require 'pry'; binding.pry
+    model = ev_counter.key(ev_counter.values.sort[-1])
     make = nil
     make_and_models.each do |key, value|
       if value.include?(model)
@@ -83,7 +84,7 @@ attr_reader :vehicles
     county_with_most_registered_vehicles
   end
 
-# Method for methods
+# Method to make a hash of make, models
   def make_and_models
     make_and_model = Hash.new{|hsh,key| hsh[key] = []}
     @vehicles.each do |vehicle|
