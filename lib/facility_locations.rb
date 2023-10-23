@@ -7,14 +7,10 @@ class FacilityLocations
 
   def create_facilities(dmv_data)
       dmv_data.each do |facility| 
-      old_name = facility.keys.select {|key| key.name.include?("name")}[0]
-      if old_name == nil
-        old_name = facility.keys.select {|key| key.name.include?("office")}[0]
-      end
+      old_name = facility.keys.select {|key| key.name.include?("name") || key.name.include?("office")}[0]
       old_address = facility.keys.select {|key| key.name.include?("address")}[0]
       old_phone = facility.keys.select {|key| key.name.include?("phone")}[0]
       # Check for hours of facilities
-      # require 'pry'; binding.pry if facility[:hours] == nil
       if facility.keys.select {|key| key.name.include?("hour")}.count > 1
       # Create an array of hashes
         hash_of_hours = facility.select {|key,value| key.name.include?("hour")}
@@ -27,14 +23,12 @@ class FacilityLocations
       else
         old_hours = facility.keys.select {|key| key.name.include?("hour")|| key.name.include?("daysopen")}[0]
       end
-      # require 'pry'; binding.pry if facility[:hours] == nil
       # Make a new hash for @hours
       if facility.has_key?(:hours) == false
         old_hours = facility.keys.select {|key| key.name.include?("hour")|| key.name.include?("daysopen")}[0]
         facility[:hours] = facility.delete old_hours 
       end
       # Add in text for closed offices
-      # require 'pry'; binding.pry if facility[:hours] == nil
       notice = nil
       if facility[:hours] == nil
         facility.select do |key, value|
@@ -54,9 +48,20 @@ class FacilityLocations
         facility[:phone] = facility.delete old_phone  
       end
       require 'pry'; binding.pry if facility[:hours] == nil
+      holidays_closed(dmv_data)
       facility = Facility.new(facility)
       @facilities << facility
     end
   end
 
+  def holidays_closed(dmv_data)
+    dmv_data.each do |facility| 
+      old_holidaysclosed = facility.keys.select {|key| key.name.include?("holidaysclosed")}[0] 
+      # require 'pry'; binding.pry if facility.values.include?("117A NORTH MAIN",) || facility.values.include?("101 WEST 3RD STREET") || facility.values.include?("222")
+      if facility.has_key?(:holidays_closed) == false
+      facility[:holidays_closed] = facility.delete old_holidaysclosed
+      end
+      # require 'pry'; binding.pry if facility.keys.include?(:daysopen) && facility[:holidays_closed] == nil
+    end
+  end
 end

@@ -76,4 +76,23 @@ RSpec.describe FacilityLocations do
       end
     end
   end
+  
+  # Add @holidays_closed
+  describe '#holidays_closed' do
+    it 'can iterate through the data and find the holidays that are closed' do
+      missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+      mo_offices = FacilityLocations.new
+      mo_offices.create_facilities(missouri_facilities)
+      # 4 offices that have nil: 238 008 222 029, one is a repeat
+      nil_holidays_closed = 0
+      mo_offices.facilities.each do |facility|
+        if facility.holidays_closed == nil
+          nil_holidays_closed += 1
+        else 
+          expect(facility.holidays_closed).to be_an_instance_of(String)
+        end
+      end
+      expect(nil_holidays_closed).to eq(5)
+    end
+  end
 end
