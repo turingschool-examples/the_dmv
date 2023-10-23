@@ -3,17 +3,27 @@ class Facility
               :address, 
               :phone, 
               :services, 
-              :registerd_vehicles
+              :registered_vehicles,
+              :collected_fees
 
   def initialize(data)
     @name = data[:name]
     @address = data[:address]
     @phone = data[:phone]
     @services = []
-    @registerd_vehicles = []
+    @registered_vehicles = []
+    @collected_fees = 0
   end
 
   def add_service(service)
     @services << service
+  end
+
+  def collected_fees
+    @collected_fees
+  end
+
+  def register_vehicle(vehicle)
+    
   end
 end
