@@ -38,11 +38,10 @@ RSpec.describe Vehicle do
     end
   end
 
-  describe '#register vehicle' do
+  # it 'has a plate_type' do
+  #   @cruz.plate_type
 
-  it ' ' do
-  
-  end
-  
-  end
+  #   expect(@cruz.plate_type).to eq(regular)
+  # end
+
 end
