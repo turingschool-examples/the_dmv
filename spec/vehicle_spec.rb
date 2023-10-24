@@ -48,4 +48,11 @@ RSpec.describe Vehicle do
     end
   end
 
+
+  describe '#registration_date' do
+    it 'can access the @registration_date attribute and change the value to the date it is called' do
+      expect(@cruz.new_registration_date).to eq(Date.today)
+    end
+  end
+
 end

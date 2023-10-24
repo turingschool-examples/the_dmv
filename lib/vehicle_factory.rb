@@ -83,7 +83,7 @@ attr_reader :vehicles
     county_with_most_registered_vehicles
   end
 
-# Method to make a hash of make, models
+# Method to make a hash of [make, models]
   def make_and_models
     make_and_model = Hash.new{|hsh,key| hsh[key] = []}
     @vehicles.each do |vehicle|
