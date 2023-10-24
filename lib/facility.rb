@@ -41,38 +41,27 @@ class Facility
     @facility = self
     @registrant = registrant
 
-    # @registrant.license_data[:written] = true if (@facility.services.include?('Written Test') && @registrant.permit? && @registrant.age >= 16)
-    
-    if @facility.services.include?('Written Test') && @registrant.permit? && @registrant.age >= 16
-      @registrant.license_data[:written] = true
-      true
-    else
-      false
-    end
+    @registrant.license_data[:written] = true if @facility.services.include?('Written Test') && @registrant.permit? && @registrant.age >= 16
+
+    @registrant.license_data[:written]
   end
 
   def administer_road_test(registrant)
     @facility = self
     @registrant = registrant
 
-    if @facility.services.include?('Road Test') && @registrant.license_data[:written] == true
-      @registrant.license_data[:license] = true
-      true
-    else
-      false
-    end
+    @registrant.license_data[:license] = true if @facility.services.include?('Road Test') && @registrant.license_data[:written] == true
+    
+    @registrant.license_data[:license]
   end
 
   def renew_drivers_license(registrant)
     @facility = self
     @registrant = registrant
 
-    if @facility.services.include?('Renew License') && @registrant.license_data[:license] = true
-      @registrant.license_data[:renewed] = true
-      true
-    else
-      false
-    end
+    @registrant.license_data[:renewed] = true if @facility.services.include?('Renew License') && @registrant.license_data[:license] == true
+    
+    @registrant.license_data[:renewed]
   end
 
 end
