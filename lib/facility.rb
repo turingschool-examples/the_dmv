@@ -27,7 +27,7 @@ class Facility
 
   end
 # After they collect the fees they still need to tell the vehicle "here's the registration"
-  # *hint* I know registration and type of registration.   
+  # Add*hint* I know registration and type of registration.   
   # A vehicle’s plate_type should be set to :regular, :antique, or :ev upon successful registration.
 
 
