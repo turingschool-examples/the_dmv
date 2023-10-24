@@ -62,5 +62,4 @@ RSpec.describe VehicleFactory do
     expect(factory_wa.vehicle_instances).not_to eq([])
     expect(factory_wa.vehicle_instances.empty?).not_to eq(true)
   end
-
 end
