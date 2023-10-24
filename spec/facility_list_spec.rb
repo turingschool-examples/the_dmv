@@ -15,5 +15,9 @@ describe FacilityList do
         list.parse_facilities(co_facilities_data)
 
         expect(list.facilities.first).to be_a(Facility)
+        expect(list.facilities.first.name).not_to be_nil
+        expect(list.facilities.first.address).not_to be_nil
+        expect(list.facilities.first.phone).not_to be_nil
+        expect(list.facilities.first.services).not_to be_nil
     end
 end
