@@ -38,7 +38,7 @@ RSpec.describe Facility do
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
-  
+
   describe "facility can register vehicles" do 
     it "can register regular vehicle" do
       expect(@facility_1.registered_vehicles).to eq([])
@@ -46,9 +46,8 @@ RSpec.describe Facility do
       expect(@cruz.registered?).to eq(false)
 
       @facility_1.register_vehicle(@cruz)
-
       expect(@cruz.plate_type).to eq(:regular)
-      expect(@cruz.collected_fees).to eq(100)
+      expect(@facility_1.collected_fees).to eq(100)
       expect(@cruz.registration_date).to be_an_instance_of(Time)
       expect(@cruz.registered?).to eq(true)
     end
@@ -57,7 +56,7 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@camaro)
 
       expect(@camaro.plate_type).to eq(:antique)
-      expect(@camaro.collected_fees).to eq(25)
+      expect(@facility_1.collected_fees).to eq(25)
       expect(@camaro.registration_date).to be_an_instance_of(Time)
       expect(@camaro.registered?).to eq(true)
     end
@@ -66,7 +65,7 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@bolt)
 
       expect(@bolt.plate_type).to eq(:ev)
-      expect(@bolt.collected_fees).to eq(200)
+      expect(@facility_1.collected_fees).to eq(200)
       expect(@bolt.registration_date).to be_an_instance_of(Time)
       expect(@bolt.registered?).to eq(true)
     end
