@@ -135,8 +135,32 @@ RSpec.describe Facility do
   describe '@hours attribute' do
     it 'tracks the hours of facilities' do
       @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600', hours: 'M-F: 7:30 AM until 5:00 PM'})
+      @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
 
       expect(@facility.hours).to eq('M-F: 7:30 AM until 5:00 PM')
+      expect(@facility_2.holidays_closed).to eq(nil)
+    end
+  end
+
+  describe '@holidays_closed attribute' do
+    it 'shows the holidays closed if a hash has it included' do
+      @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600', hours: 'M-F: 7:30 AM until 5:00 PM', holidays_closed: 'Christmas and New Years'})
+      @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
+
+      expect(@facility.holidays_closed).to eq('Christmas and New Years')
+      expect(@facility_2.holidays_closed).to eq(nil)
+    end
+  end
+
+  describe '#collect_fees' do
+    it 'checks the plate type of a car and collects fees accordingly' do
+      @facility.add_service('Vehicle Registration')
+      @facility_2.add_service('Vehicle Registration')
+
+      expect(@facility.collect_fees(@cruz)).to eq(100)
+      expect(@facility.collect_fees(@bolt)).to eq(300)
+      expect(@facility.collect_fees(@camaro)).to eq(325)
+      expect(@facility_2.collect_fees(@bolt)).to eq(200)
     end
   end
 end

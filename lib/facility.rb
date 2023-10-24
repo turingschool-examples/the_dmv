@@ -21,16 +21,8 @@ class Facility
   def register_vehicle(car)
     if @services.include?("Vehicle Registration")
       car.new_registration_date
-      if car.plate_type == :antique
-        @collected_fees += 25
-      elsif car.plate_type == :ev
-        @collected_fees += 200
-      else
-        @collected_fees += 100
-      end
-      if @services.include?("Vehicle Registration")
-        @registered_vehicles << car
-      end
+      collect_fees(car)
+      @registered_vehicles << car
     end
   end
 
@@ -58,6 +50,17 @@ class Facility
       true
     else
       false
+    end
+  end
+
+  ################Helper Methods#############
+  def collect_fees(car)
+    if car.plate_type == :antique
+      @collected_fees += 25
+    elsif car.plate_type == :ev
+      @collected_fees += 200
+    else
+      @collected_fees += 100
     end
   end
 end

@@ -53,7 +53,7 @@ RSpec.describe VehicleFactory do
     end
   end
 
-  describe '#registered_evs_for_model_year' do
+  describe 'EV Registrations - #registered_evs_for_model_year' do
     it 'can count the number of registered evs for a model year' do
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
       @factory.create_vehicles(wa_ev_registrations)
@@ -96,7 +96,7 @@ RSpec.describe VehicleFactory do
       end
     end 
   end
-  
+
   describe '#sort_out_boats_and_trl' do
     it 'can sort out data from API to check if it is a motor vehicle or not' do
       ny_registrations = DmvDataService.new.ny_registrations
