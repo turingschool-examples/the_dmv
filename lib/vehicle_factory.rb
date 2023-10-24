@@ -31,8 +31,7 @@ class VehicleFactory
     return most_popular_make, most_popular_model
   end
 
-  #generic find methods
-
+  #generic find method
     def find_most_popular(count_hash)
       most_popular = nil
       max_count = 0
