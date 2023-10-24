@@ -1,5 +1,5 @@
 class Facility
-  attr_accessor :name, :address, :phone, :services, :facility, :registered_vehicles, :collected_fees
+  attr_reader :name, :address, :phone, :services, :facility, :registered_vehicles, :collected_fees
 
   def initialize(facility)
     @name = facility[:name]
@@ -24,9 +24,11 @@ class Facility
     else 
       @collected_fees += 100
     end
+
   end
 # After they collect the fees they still need to tell the vehicle "here's the registration"
-  #** I know registration and type of registration.   
+  # *hint* I know registration and type of registration.   
+  # A vehicle’s plate_type should be set to :regular, :antique, or :ev upon successful registration.
 
 
 
