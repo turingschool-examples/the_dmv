@@ -21,5 +21,12 @@ RSpec.describe VehicleFactory do
 
     expect(factory.create_vehicles(wa_ev_registrations)).to be_an_instance_of(Array)
   end
-
+  
+  #Iteration4
+  # it 'is a popularity contest' do
+  #   factory = VehicleFactory.new
+  #   wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+  #   #require 'pry'; binding.pry
+  #   factory.nada_surf(@make)
+  # end
 end
