@@ -26,6 +26,17 @@ RSpec.describe VehicleFactory do
     expect(factory.create_vehicles(wa_ev_registrations)).to be_a(Array)
   end
 
+  it "can make vehicles from NY registration data" do
+    factory = VehicleFactory.new
+    wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+    ny_registrations = DmvDataService.new.ny_registrations
+
+    factory.create_vehicles(wa_ev_registrations)
+    factory.create_vehicles(ny_registrations)
+    
+    expect(factory.create_vehicles(ny_registrations)).to be_a(Array)
+  end
+
   it "can find most popular vehicle in database" do
     factory = VehicleFactory.new
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations

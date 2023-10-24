@@ -175,7 +175,7 @@ RSpec.describe Facility do
       missouri_facilities = DmvDataService.new.mo_dmv_office_locations
 
       facility_list.holidays(missouri_facilities)
-      
+
       expect(facility_list.holidays(missouri_facilities)).to be_a(Array)
     end
 end

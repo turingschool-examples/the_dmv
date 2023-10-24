@@ -6,22 +6,38 @@ require 'json'
 require 'pry'
 
 class VehicleFactory
-  attr_accessor
+
     def initialize
   end
-
+# Most proud of this create_vehicles method:
   def create_vehicles(source)
-    nc_arr = []
-    source.each do |car|
-      new_car = {
-        vin: car[:vin_1_10],
-        year: car[:model_year],
-        make: car[:make],
-        model: car[:model],
-        engine: :ev}
-      nc_arr << Vehicle.new(new_car)
+    if source.find {|car| car[:state_of_residence] == "WA"}
+      nc_arr = []
+      source.each do |car|
+        new_car = {
+          vin: car[:vin_1_10],
+          year: car[:model_year],
+          make: car[:make],
+          model: car[:model],
+          engine: :ev}
+        nc_arr << Vehicle.new(new_car)
+      end
+      nc_arr
+    elsif source.find {|car| car[:state] == "NY"}
+      nc_arr = []
+      source.each do |car|
+        new_car = {
+          vin: car[:vin],
+          year: car[:model_year],
+          make: car[:make],
+          body_type: car[:body_type],
+          engine: :ev}
+        nc_arr << Vehicle.new(new_car)
+      end
+      nc_arr
+    else
+      "N/A"
     end
-    nc_arr
   end
 
   def find_most_common(source) # I plan to refactor and correct this!
