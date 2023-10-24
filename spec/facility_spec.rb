@@ -33,7 +33,7 @@ RSpec.describe Facility do
 
 
   describe "register vehicle" do
-    it "can register a vehicle" do
+    it "can register a vehicle that has plate_type and appropriate fees" do
       # CurrentDate = Date.new(2023,10,19)
       facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
       facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
@@ -42,26 +42,32 @@ RSpec.describe Facility do
       camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
       expect(facility_1.registered_vehicles).to eq([])
       expect(facility_1.collected_fees).to eq(0)
+
       facility_1.register_vehicle(cruz)
+      expect(facility_1.registered_vehicles).to eq([cruz])
       expect(cruz.registration_date).to eq(Date.today)
       expect(cruz.plate_type).to eq(:regular)
       expect(facility_1.collected_fees).to eq(100)
     end
 
-    it "can register another vehicle" do
-      # CurrentDate = Date.new(2023,10,19)
+    it "can register more vehicles wtih plate_type and 
+    collect fees and registration date" do
       facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
       facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
       camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+      
       facility_1.register_vehicle(camaro)
       expect(camaro.registration_date).to eq(Date.today)
       expect(camaro.plate_type).to eq(:antique)
+
       facility_1.register_vehicle(bolt)
       expect(bolt.registration_date).to eq(Date.today)
       expect(bolt.plate_type).to eq(:ev)
+
       facility_1.register_vehicle(cruz)
+
       expect(facility_1.registered_vehicles).to eq([camaro, bolt, cruz])
       expect(facility_1.collected_fees).to eq(325)
     end
@@ -74,6 +80,7 @@ RSpec.describe Facility do
       bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
       camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
       facility_1.register_vehicle(bolt)
+
       expect(facility_2.registered_vehicles).to eq([])
       expect(facility_2.services).to eq([])
       expect(facility_2.register_vehicle(bolt)).to eq(nil)
@@ -81,6 +88,7 @@ RSpec.describe Facility do
       expect(facility_2.collected_fees).to eq(0)
     end
   end
+  
     it "has an administer_written_test method that is selective based
       on facility services and age" do
       registrant_1 = Registrant.new('Bruce', 18, true )
@@ -177,7 +185,7 @@ RSpec.describe Facility do
         facility_1.administer_written_test(registrant_2)
         facility_1.administer_road_test(registrant_2)
         expect(facility_1.renew_drivers_license(registrant_1)).to eq(false)
-        expect(facility_1.add_service('Renew License')).to eq(["Written Test", "Road Test", "Renew License"])
+        expect(facility_1.add_service('Renew Drivers License')).to eq(["Written Test", "Road Test", "Renew Drivers License"])
         facility_1.add_service('Renew License')
         expect(facility_1.renew_drivers_license(registrant_1)).to eq(true)
         expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})

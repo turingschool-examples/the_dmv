@@ -11,6 +11,13 @@ class Facility
                 :collected_fees,
                 :holidays_closed
 
+
+  LIST_OF_SERVICES = ["New Drivers License", 
+                      "Renew Drivers License", 
+                      "Vehicle Registration", 
+                      "Written Test",
+                      "Road Test"]
+
   def initialize(input)
     @name = input[:name]
     @address = input[:address]
@@ -25,8 +32,10 @@ class Facility
   end
 
   def add_service(service)
-    @services << service
-    @services
+    if LIST_OF_SERVICES.include?(service)
+      @services << service
+      @services
+    end
   end
 
   def register_vehicle(vehicle)
@@ -63,7 +72,7 @@ class Facility
   end
 
   def renew_drivers_license(registrant)
-    if (@services.include?("Renew License")) && (registrant.license_data[:license] == true)
+    if (@services.include?("Renew Drivers License")) && (registrant.license_data[:license] == true)
       registrant.license_data[:renewed] = true
     end
     registrant.license_data[:renewed]

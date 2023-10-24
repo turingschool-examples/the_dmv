@@ -14,7 +14,7 @@ class Vehicle
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
-    @plate_type = plate_type
+    @plate_type = nil
     @registration_date = nil
     @registered = false
   end
