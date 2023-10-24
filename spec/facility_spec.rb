@@ -43,7 +43,12 @@ RSpec.describe Facility do
         expect(@facility_1.registered_vehicles).to eq([])
         expect(@facility_1.collected_fees).to eq(0)
         expect(@cruz.registered?).to eq(false)
+
         @facility_1.register_vehicle(@cruz)
+
+        # expect(@cruz.plate_type).to eq(:regular)
+        expect(@cruz.registration_date).to be_an_instance_of(Time)
+        require 'pry' ; binding.pry
         expect(@cruz.registered?).to eq(true)
       end
     end
