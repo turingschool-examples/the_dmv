@@ -28,8 +28,18 @@ class Vehicle
     @engine == :ev
   end
 
-  def registered?
+  def registered?    
     !!plate_type && !!registration_date
   end
+
+
+  #I've started working on this but am struggling with it.  This is where I told my pairing partner I need a break because I'm getting lost in everything.  
+  # I think I may have to ammednd the above method also?
+  
+  def new_registration_date
+    @registration_date = (Time.now)
+  end
+  
+
 
 end
