@@ -130,4 +130,60 @@ class Facility
     end
     return nf_arr
   end
+
+  def hours(source)
+    if source.find {|omv| omv[:state] == "CO"} #CO
+      hour_array = []
+      source.each do |omv|
+        office_hours = {
+          omv[:dmv_office] => omv[:hours]
+        }
+        hour_array << office_hours
+      end
+      hour_array
+    elsif source.find {|omv| omv[:state] == "NY"} #NY
+      hour_array = []
+      source.each do |omv|
+        office_hours = {
+          omv[:office_name] =>
+          [omv[:monday_beginning_hours],
+          omv[:monday_ending_hours],
+          omv[:tuesday_beginning_hours],
+          omv[:tuesday_ending_hours],
+          omv[:wednesday_beginning_hours],
+          omv[:wednesday_ending_hours],
+          omv[:thursday_beginning_hours],
+          omv[:thursday_ending_hours],
+          omv[:friday_beginning_hours],
+          omv[:friday_ending_hours]]
+        }
+        hour_array << office_hours
+      end
+      hour_array
+    elsif source.find {|omv| omv[:state] == "MO"} #MO
+      hour_array = []
+      source.each do |omv|
+        office_hours = {
+          omv[:name] => omv[:daysopen]
+        }
+        hour_array << office_hours
+      end
+      hour_array
+    end
+  end
+
+  def holidays(source)
+    if source.find {|omv| omv[:state] == "MO"} #MO
+      holiday_arr = []
+      source.each do |omv|
+        holiday_hash = {
+          omv[:name] => omv[:holidaysclosed]
+        }
+        holiday_arr << holiday_hash
+      end
+      holiday_arr
+    else
+      "Unknown"
+    end
+  end
 end

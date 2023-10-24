@@ -153,7 +153,29 @@ RSpec.describe Facility do
       facility_list.create_facility(colorado_facilities)
       facility_list.create_facility(new_york_facilities)
       facility_list.create_facility(missouri_facilities)
-      
+
       expect(facility_list.create_facility(colorado_facilities)).to be_a(Array)
+    end
+
+    it "can return the hours of operation" do
+      facility_list = Facility.new({})
+      colorado_facilities = DmvDataService.new.co_dmv_office_locations
+      new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+      missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+
+      facility_list.hours(colorado_facilities)
+
+      expect(facility_list.hours(colorado_facilities)).to be_a(Array)
+    end
+
+    it "can return holiday closure" do
+      facility_list = Facility.new({})
+      colorado_facilities = DmvDataService.new.co_dmv_office_locations
+      new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+      missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+
+      facility_list.holidays(missouri_facilities)
+      require 'pry'; binding.pry
+      expect(facility_list.holidays(missouri_facilities)).to be_a(Array)
     end
 end
