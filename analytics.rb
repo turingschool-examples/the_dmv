@@ -37,7 +37,13 @@ require "./lib/dmv_data_service.rb"
 
     # County with most registered vehicles
 
+    registration_counties = []
+    wa_ev_registrations.each do |registration|
+        registration_counties << registration[:county]
+    end
 
+    puts registration_counties.tally.sort_by(&:last).reverse.first
+    ## King County has the most vehicle registrations
 
 # Facilities:
     # Add in a few more helpful attributes.
