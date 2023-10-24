@@ -18,6 +18,8 @@ RSpec.describe FacilityFactory do
       expect(@Colorado[0][:address_li]).to be_a(String)
       expect(@Colorado[0][:address__1]).to be_a(String)
       expect(@Colorado[0][:city]).to be_a(String)
+      expect(@Colorado[0][:state]).to be_a(String)
+      expect(@Colorado[0][:state]).to eq("CO")
     end
     
     it 'shows us New York data' do
@@ -30,6 +32,7 @@ RSpec.describe FacilityFactory do
       expect(@new_york_facilities[0][:street_address_line_1]).to be_a(String)
       expect(@new_york_facilities[0][:city]).to be_a(String)
       expect(@new_york_facilities[0][:state]).to be_a(String)
+      expect(@new_york_facilities[0][:state]).to eq("NY")
     end
 
     it 'shows Missouri data' do
@@ -42,6 +45,7 @@ RSpec.describe FacilityFactory do
       expect(@missouri_facilities[0][:address1]).to be_a(String)
       expect(@missouri_facilities[0][:city]).to be_a(String)
       expect(@missouri_facilities[0][:state]).to be_a(String)
+      expect(@missouri_facilities[0][:state]).to eq("MO")
       # require 'pry'; binding.pry
     end
   end
