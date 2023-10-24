@@ -9,14 +9,22 @@ RSpec.describe Registrant do
 
   describe "initialize" do 
     it "initializes registrants" do
+      require 'pry' ; binding.pry
       expect(@registrant_1).to be_an_instance_of(Registrant)
       expect(@registrant_2).to be_an_instance_of(Registrant)
+      expect(@registrant_3).to be_an_instance_of(Registrant)
+
       expect(@registrant_1.name).to eq("Bruce")
       expect(@registrant_1.age).to eq(18)
       expect(@registrant_1.permit?).to eq(true)
+
       expect(@registrant_2.name).to eq("Penny")
-      expect(@registrant_2.age).to eq(15)
+      expect(@registrant_2.age).to eq(16)
       expect(@registrant_2.permit?).to eq(false)
+      
+      expect(@registrant_3.name).to eq("Tucker")
+      expect(@registrant_3.age).to eq(15)
+      expect(@registrant_3.permit?).to eq(false)
     end
     
     it "can call license_data" do
