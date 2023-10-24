@@ -19,6 +19,7 @@ describe FacilityList do
         expect(list.facilities.first.address).not_to be_nil
         expect(list.facilities.first.phone).not_to be_nil
         expect(list.facilities.first.services).not_to be_nil
+        expect(list.facilities.first.hours).not_to be_nil
     end
 
     it "creates facilities with NY API data" do
@@ -31,6 +32,7 @@ describe FacilityList do
         expect(list.facilities.first.address).not_to be_nil
         expect(list.facilities.first.phone).not_to be_nil
         expect(list.facilities.first.services).not_to be_nil
+        expect(list.facilities.first.hours).not_to be_nil
     end
 
     it "creates facilities with MO API data" do
@@ -43,5 +45,7 @@ describe FacilityList do
         expect(list.facilities.first.address).not_to be_nil
         expect(list.facilities.first.phone).not_to be_nil
         expect(list.facilities.first.services).not_to be_nil
+        expect(list.facilities.first.hours).not_to be_nil
+        expect(list.facilities.first.closed_holidays).not_to be_nil
     end
 end

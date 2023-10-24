@@ -1,5 +1,5 @@
 class Facility
-  attr_accessor :name, :address, :phone, :services, :registered_vehicles, :collected_fees
+  attr_accessor :name, :address, :phone, :services, :registered_vehicles, :collected_fees, :hours, :closed_holidays
 
   def initialize(facility_values)
     @name = facility_values[:name]
@@ -8,6 +8,8 @@ class Facility
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
+    @hours = nil
+    @closed_holidays = nil
   end
 
   def add_service(service)
