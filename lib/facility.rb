@@ -30,12 +30,13 @@ class Facility
       vehicle.plate_type = :regular
     end
   end
+
+  def administer_written_test
+    permit? == true
+    age >= 16
+  end
 end
 
-
-# After they collect the fees they still need to tell the vehicle "here's the registration"
-  # Add*hint* I know registration and type of registration.   
-  # A vehicle’s plate_type should be set to :regular, :antique, or :ev upon successful registration.
 
 
 

@@ -9,7 +9,6 @@ RSpec.describe Registrant do
 
   describe "initialize" do 
     it "initializes registrants" do
-      require 'pry' ; binding.pry
       expect(@registrant_1).to be_an_instance_of(Registrant)
       expect(@registrant_2).to be_an_instance_of(Registrant)
       expect(@registrant_3).to be_an_instance_of(Registrant)
@@ -21,7 +20,7 @@ RSpec.describe Registrant do
       expect(@registrant_2.name).to eq("Penny")
       expect(@registrant_2.age).to eq(16)
       expect(@registrant_2.permit?).to eq(false)
-      
+
       expect(@registrant_3.name).to eq("Tucker")
       expect(@registrant_3.age).to eq(15)
       expect(@registrant_3.permit?).to eq(false)
@@ -30,6 +29,14 @@ RSpec.describe Registrant do
     it "can call license_data" do
       expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+    end
+
+    it "can administer written test" do
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
+
+      facility_1.add_service('Written Test')
+
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
     end
   end
 
