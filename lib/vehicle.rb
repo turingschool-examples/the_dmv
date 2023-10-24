@@ -2,12 +2,12 @@ require 'date'
 require 'pry'
 
 class Vehicle
+  attr_accessor :plate_type
   attr_reader :vin,
               :year,
               :make,
               :model,
               :engine,
-              :plate_type,
               :registration_date
 
   def initialize(vehicle_details)
@@ -16,8 +16,8 @@ class Vehicle
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
-    @plate_type = vehicle_details[:plate_type]
-    @registration_date = vehicle_details[:registration_date]
+    @plate_type = nil
+    @registration_date = nil 
   end
 
   def antique?
@@ -31,15 +31,9 @@ class Vehicle
   def registered?    
     !!plate_type && !!registration_date
   end
-
-
-  #I've started working on this but am struggling with it.  This is where I told my pairing partner I need a break because I'm getting lost in everything.  
-  # I think I may have to ammednd the above method also?
   
   def new_registration_date
     @registration_date = (Time.now)
   end
-  
-
-
 end
+
