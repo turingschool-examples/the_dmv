@@ -24,7 +24,7 @@ class VehicleFactory
     nc_arr
   end
 
-  def find_most_common(source)
+  def find_most_common(source) # I plan to refactor and correct this!
     by_make = []
     by_model = []
     by_make_and_model = []
@@ -240,7 +240,7 @@ class VehicleFactory
     car_list_array.sort
   end
 
-  def count_by_year(source)
+  def count_by_year(source) # This as well.
     arr_of_count = []
       year2008 = 0
       year2009 = 0
