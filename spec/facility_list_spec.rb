@@ -8,4 +8,12 @@ describe FacilityList do
 
         expect(factory).to be_a FacilityList
     end
+
+    it "creates facilities with API data" do
+        list = FacilityList.new
+        co_facilities_data = DmvDataService.new.co_dmv_office_locations
+        list.parse_facilities(co_facilities_data)
+
+        expect(list.facilities.first).to be_a(Facility)
+    end
 end
