@@ -9,7 +9,10 @@ RSpec.describe VehicleFactory do
   end
 
   it 'creates vehicles' do
+    factory = VehicleFactory.new
+    wa_ev_registrations = DmvDataService.new.wa_ev_registrations
 
+    expect(factory.create_vehicles(wa_ev_registrations)).to be() # How do I write a test for this?
   end
 
 end
