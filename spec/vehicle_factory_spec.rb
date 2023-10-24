@@ -92,4 +92,17 @@ RSpec.describe VehicleFactory do
       end
     end 
   end
+
+
+# How do you test helper methods?  
+  describe '#sort_out_boats_and_trl' do
+    it 'can sort out data from API to check if it is a motor vehicle or not' do
+
+    end
+  end
+
+  describe '#check_for_year' do
+    it 'can check the year to make sure that it is a valid date' do
+    end
+  end
 end
