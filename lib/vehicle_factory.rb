@@ -44,7 +44,7 @@ attr_reader :vehicles
     "The most popular make and model is the #{make} #{model}!"
   end
 
-  def registered_vehicles_for_model_year(year)
+  def registered_evs_for_model_year(year)
     @count = 0
     @vehicles.each do |vehicle|
       if vehicle.year == year

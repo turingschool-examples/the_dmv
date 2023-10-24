@@ -53,15 +53,15 @@ RSpec.describe VehicleFactory do
     end
   end
 
-  describe '#registered_vehicles_for_model_year' do
-    it 'can count the number of registered vehicles for a model year' do
+  describe '#registered_evs_for_model_year' do
+    it 'can count the number of registered evs for a model year' do
       wa_ev_registrations = DmvDataService.new.wa_ev_registrations
       @factory.create_vehicles(wa_ev_registrations)
 
-      expect(@factory.registered_vehicles_for_model_year("2013")).to eq(107)
-      expect(@factory.registered_vehicles_for_model_year(2013)).to eq("Error, try a string")
-      expect(@factory.registered_vehicles_for_model_year("12")).to eq("Year must be 4 characters long")
-      expect(@factory.registered_vehicles_for_model_year("2025")).to eq(    "Year is too early for EVs or in the future")
+      expect(@factory.registered_evs_for_model_year("2013")).to eq(107)
+      expect(@factory.registered_evs_for_model_year(2013)).to eq("Error, try a string")
+      expect(@factory.registered_evs_for_model_year("12")).to eq("Year must be 4 characters long")
+      expect(@factory.registered_evs_for_model_year("2025")).to eq("Year is too early for EVs or in the future")
     end
   end
 
@@ -71,6 +71,11 @@ RSpec.describe VehicleFactory do
       @factory.create_vehicles(wa_ev_registrations)
 
       expect(@factory.county_with_most_registered_vehicles).to eq("King")
+
+      ny_registrations = DmvDataService.new.ny_registrations
+      ny_factory = VehicleFactory.new
+      ny_factory.create_vehicles(ny_registrations)
+      expect(ny_factory.county_with_most_registered_vehicles).to eq("SUFFOLK")
     end
   end
 
@@ -79,7 +84,6 @@ RSpec.describe VehicleFactory do
       ny_registrations = DmvDataService.new.ny_registrations
       @factory.create_vehicles(ny_registrations)
 
-      expect(@factory.vehicles).to include(Vehicle)
       expect(@factory.vehicles.length).to be > 100
 
       @factory.vehicles.each do |car|
@@ -92,17 +96,28 @@ RSpec.describe VehicleFactory do
       end
     end 
   end
-
-
-# How do you test helper methods?  
+  
   describe '#sort_out_boats_and_trl' do
     it 'can sort out data from API to check if it is a motor vehicle or not' do
+      ny_registrations = DmvDataService.new.ny_registrations
+      ny_registrations.select!{|hash| hash.values.include?("BOAT")}
+      expect(ny_registrations.count).to eq(166)
 
+      ny_registrations = DmvDataService.new.ny_registrations
+      @factory.sort_out_boats_and_trl(ny_registrations)
+      ny_registrations.select!{|hash| hash.values.include?("BOAT")}
+
+      expect(ny_registrations.count).to eq(0)
     end
   end
 
   describe '#check_for_year' do
     it 'can check the year to make sure that it is a valid date' do
+      expect(@factory.check_for_year(1937)).to eq("Error, try a string")
+      expect(@factory.check_for_year("1937")).to eq("Year is too early for EVs or in the future")
+      expect(@factory.check_for_year("203")).to eq("Year must be 4 characters long")
+      expect(@factory.check_for_year("abcd")).to eq("Year is too early for EVs or in the future")
+      expect(@factory.check_for_year("abc")).to eq("Year must be 4 characters long")
     end
   end
 end
