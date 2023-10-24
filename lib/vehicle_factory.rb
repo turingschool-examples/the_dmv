@@ -315,4 +315,14 @@ class VehicleFactory
       p "year2022 = #{year2022}"
       p "year2023 = #{year2023}"
   end
+
+  def most_in_county(source)
+    county_list = []
+    source.each do |car|
+      county_list << car[:county]
+    end
+#I found help on stack overflow to do build this, which makes a new Hash with the county name as key,
+    count_hash = county_list.inject(Hash.new(0)) { |county, count| county[count] += 1; county }# and count as the value.
+    p county_list.max_by { |quantity| count_hash[quantity] }# Finds max count of county, iterating thru Hash values.
+  end
 end

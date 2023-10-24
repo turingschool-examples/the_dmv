@@ -22,7 +22,7 @@ RSpec.describe VehicleFactory do
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
 
     factory.create_vehicles(wa_ev_registrations)
-    
+
     expect(factory.create_vehicles(wa_ev_registrations)).to be_a(Array)
   end
 
@@ -42,5 +42,14 @@ RSpec.describe VehicleFactory do
     factory.count_by_year(wa_ev_registrations)
 
     expect(factory.count_by_year(wa_ev_registrations)).to be_a(String)
+  end
+
+  it "can find the county with most registered" do
+    factory = VehicleFactory.new
+    wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+
+    factory.most_in_county(wa_ev_registrations)
+
+    expect(factory.most_in_county(wa_ev_registrations)).to be_a(String)
   end
 end
