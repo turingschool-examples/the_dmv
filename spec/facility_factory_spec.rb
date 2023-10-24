@@ -27,11 +27,27 @@ RSpec.describe FacilityFactory do
 
     expect(facility_factory.facility_instances).not_to eq(nil)
     expect(facility_factory.facility_instances.empty?).not_to eq(true)
-    binding.pry
+
     facility_factory.facility_instances.map do |facility|
       expect(facility).to be_an_instance_of(Facility)
     end
   end
 
+  it "can generate NY facilities" do
+    facility_factory = FacilityFactory.new
+    facilities_data = DmvDataService.new.ny_dmv_office_locations
+    facility_factory.create_facilities(facilities_data)
+
+    expect(facility_factory.create_facilities(facilities_data)).not_to eq(nil)
+  end
+  
+  it "can generate MO facilities" do
+    facility_factory = FacilityFactory.new
+    facilities_data = DmvDataService.new.mo_dmv_office_locations
+    facility_factory.create_facilities(facilities_data)
+    binding.pry
+    expect(facility_factory.create_facilities(facilities_data)).not_to eq(nil)
+  end
+  
 end
 
