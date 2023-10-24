@@ -1,20 +1,22 @@
 class VehicleFactory
 
-  def create_vehicles(dmv_data_service)
-    @vehicles = []
-    dds = DmvDataService.new
+  def initialize
+  end
 
-    dds.wa_ev_registrations.each do |registration|
-      @vin = [:vin_1_10]
-      @year = [:model_year]
-      @make = [:make]
-      @model = [:model]
+  def create_vehicles(registrations)
+    vehicles = []
 
-      new_vehicle = Vehicle.new({vin: @vin, year: @year, make: @make, model: @model, engine: :ev})
+    registrations.each do |registration|
+      vin = registration[:vin_1_10]
+      year = registration[:model_year]
+      make = registration[:make]
+      model = registration[:model]
 
-      @vehicles << new_vehicle
+      new_vehicle = Vehicle.new({vin: vin, year: year, make: make, model: model, engine: :ev})
+
+      vehicles << new_vehicle
     end
-    @vehicles
+    vehicles
   end
   
 end
