@@ -17,19 +17,25 @@ class Facility
   
   def register_vehicle(vehicle)
     registered_vehicles << vehicle
+    vehicle.new_registration_date
+    
     if vehicle.antique?
-      @collected_fees += 25
+      @collected_fees += 25 
+      vehicle.plate_type = :antique
     elsif vehicle.electric_vehicle?
       @collected_fees += 200
+      vehicle.plate_type = :ev
     else 
       @collected_fees += 100
+      vehicle.plate_type = :regular
     end
-
   end
+end
+
+
 # After they collect the fees they still need to tell the vehicle "here's the registration"
   # Add*hint* I know registration and type of registration.   
   # A vehicle’s plate_type should be set to :regular, :antique, or :ev upon successful registration.
 
 
 
-end
