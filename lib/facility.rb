@@ -96,9 +96,9 @@ class Facility
     end
   end
 
-  def create_facility(list)
+  def create_facility(list) #filter by something more permanent
     nf_arr = []
-    if list.count == 5 #CO
+    if list.count == 5 || list.find {|omv| omv[:state] == "CO"} #CO
       list.each do |omv|
         new_omv = {
           name: omv[:dmv_office],
@@ -107,21 +107,21 @@ class Facility
         }
         nf_arr << Facility.new(new_omv)
       end
-    elsif list.count == 172 #NY
-      list.each do |omv|
-        new_omv = {
-          name: omv[:office_name],
-          address: omv[:street_address_line_1],
-          phone: omv[:public_phone_number]
-        }
-        nf_arr << Facility.new(new_omv)
-      end
-    elsif list.count == 179 #MO
+    elsif list.count == 179 || list.find {|omv| omv[:state] == "MO"} #MO
       list.each do |omv|
         new_omv = {
           name: omv[:name],
           address: omv[:address1],
           phone: omv[:phone]
+        }
+        nf_arr << Facility.new(new_omv)
+      end
+    elsif list.count == 172 || list.find {|omv| omv[:state] == "NY"} #NY
+      list.each do |omv|
+        new_omv = {
+          name: omv[:office_name],
+          address: omv[:street_address_line_1],
+          phone: omv[:public_phone_number]
         }
         nf_arr << Facility.new(new_omv)
       end
