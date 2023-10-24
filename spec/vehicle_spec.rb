@@ -34,17 +34,20 @@ RSpec.describe Vehicle do
     end
   end
 
-  describe '#plate_type' do
-    it 'has a default of regular' do
-      expect(@cruz.plate_type).to eq(:regular)
+  describe '#new_plate_type' do
+    it 'reassigns the value of @plate_type' do
+      expect(@cruz.plate_type).to eq(nil)
+      expect(@cruz.new_plate_type).to eq(:regular)
     end
 
-    it 'is an antique if #antique? is true' do
-      expect(@camaro.plate_type).to eq(:antique)
+    it 'is assigns :antique if #antique? is true' do
+      expect(@camaro.plate_type).to eq(nil)
+      expect(@camaro.new_plate_type).to eq(:antique)
     end
 
-    it 'is an ev if #electric_vehicle? is true' do
-      expect(@bolt.plate_type).to eq(:ev)
+    it 'is assigns :ev if #electric_vehicle? is true' do
+      expect(@bolt.plate_type).to eq(nil)
+      expect(@bolt.new_plate_type).to eq(:ev)
     end
   end
 

@@ -8,6 +8,7 @@ class Vehicle
               :model,
               :engine,
               :registration_date,
+              :plate_type,
               :county
 
   def initialize(vehicle_details)
@@ -33,7 +34,8 @@ class Vehicle
     @engine == :ev
   end
 
-  def plate_type
+  # Change this method name
+  def new_plate_type
     if antique? == true
       @plate_type = :antique
       :antique
@@ -45,6 +47,5 @@ class Vehicle
       :regular
     end
   end
-
 end
 

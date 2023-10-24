@@ -55,9 +55,9 @@ class Facility
 
   ################Helper Methods#############
   def collect_fees(car)
-    if car.plate_type == :antique
+    if car.new_plate_type == :antique
       @collected_fees += 25
-    elsif car.plate_type == :ev
+    elsif car.new_plate_type == :ev
       @collected_fees += 200
     else
       @collected_fees += 100
