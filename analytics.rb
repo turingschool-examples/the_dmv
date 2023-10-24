@@ -48,6 +48,11 @@ require "./lib/dmv_data_service.rb"
 # Facilities:
     # Add in a few more helpful attributes.
     # What are the daily hours for each facility?
+
+    ## Added functionality to existing classes/tests
+
     # For the states that provide (Missouri), which holidays are they closed?
+
+    ## Added functionality to existing classes/tests
 # Vehicles:
     # Add in a second data source for vehicles and create some Vehicle objects from NY State Registration Data: https://data.ny.gov/resource/w4pv-hbkt.json
