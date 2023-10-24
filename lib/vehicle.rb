@@ -21,14 +21,4 @@ class Vehicle
     @engine == :ev
   end
 
-  # def plate_type
-  #   if antique?
-  #     @vehicle_details[:plate_type] = :antique
-  #   elsif electric_vehicle?
-  #     @vehicle_details[:plate_type] = :ev
-  #   else
-  #     @vehicle_details[:plate_type] = :regular
-  #   end
-  # end
-
 end
