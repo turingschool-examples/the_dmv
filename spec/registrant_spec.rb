@@ -8,7 +8,6 @@ RSpec.describe Registrant do
 
   describe "initialize" do 
     it "initializes registrants" do
-      require 'pry' ; binding.pry
       expect(@registrant_1).to be_an_instance_of(Registrant)
       expect(@registrant_2).to be_an_instance_of(Registrant)
       expect(@registrant_1.name).to eq("Bruce")
@@ -20,9 +19,8 @@ RSpec.describe Registrant do
     end
     
     it "can call license_data" do
-      require 'pry' ; binding.pry
-      expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-      expect(registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
 

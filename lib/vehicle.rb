@@ -2,6 +2,7 @@ require 'date'
 require 'pry'
 
 class Vehicle
+  attr_accessor :plate_type
   attr_reader :vin,
               :year,
               :make,
@@ -15,7 +16,8 @@ class Vehicle
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
-    @registration_date = vehicle_details[:registration_date]
+    @plate_type = nil
+    @registration_date = nil 
   end
 
   def antique?
@@ -25,4 +27,13 @@ class Vehicle
   def electric_vehicle?
     @engine == :ev
   end
+
+  def registered?    
+    !!plate_type && !!registration_date
+  end
+  
+  def new_registration_date
+    @registration_date = (Time.now)
+  end
 end
+
