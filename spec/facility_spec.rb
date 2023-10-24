@@ -60,6 +60,9 @@ RSpec.describe Facility do
 
     @facility_1.register_vehicle(@camaro)
     expect(@camaro.registration_date).to eq(Date.today)
+
+    @facility_1.register_vehicle(@bolt)
+    expect(@bolt.registration_date).to eq(Date.today)
     end
 
     it 'Adds a plate type' do
@@ -68,6 +71,9 @@ RSpec.describe Facility do
 
     @facility_1.register_vehicle(@camaro)
     expect(@camaro.plate_type).to eq(:antique)
+
+    @facility_1.register_vehicle(@bolt)
+    expect(@bolt.plate_type).to eq(:ev)
     end
 
     it 'add the collected fees' do
@@ -76,6 +82,9 @@ RSpec.describe Facility do
 
       @facility_1.register_vehicle(@camaro)
       expect(@facility_1.collected_fees).to eq(125)
+
+      @facility_1.register_vehicle(@bolt)
+      expect(@facility_1.collected_fees).to eq(325)
     end
   end 
 end
