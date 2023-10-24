@@ -29,62 +29,55 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#register vehicles' do
+  describe '#registered vehicles' do
     it 'returns vehicles registered by facility' do
-    expect(@facility_1.registered_vehicles).to eq([])
-    end
-  end
-
-  describe '#collected fees' do
-    it 'returns fees collected' do
-    expect(@facility_1.collected_fees).to eq(0)
+      expect(@facility_1.registered_vehicles).to eq([])
     end
   end
 
   describe '#register_vehicle' do
+    it 'can register a vehicle' do
+      @facility_1.add_service('Vehicle Registration')
+
+      expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
+    end
+
     it 'adds vehicle registration' do
-    @facility_1.register_vehicle(@cruz)
+      @facility_1.add_service('Vehicle Registration')
 
-    expect(@facility_1.registered_vehicles).to eq([@cruz])
+      expect(@cruz.registration_date).to eq(nil)
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_1.collected_fees).to eq(0)
 
-    @facility_1.register_vehicle(@camaro)
-    expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro])
-
-    @facility_1.register_vehicle(@bolt)
-    expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
-    end
-
-    it 'Adds a registration date' do
       @facility_1.register_vehicle(@cruz)
-    expect(@cruz.registration_date).to eq(Date.today)
 
-    @facility_1.register_vehicle(@camaro)
-    expect(@camaro.registration_date).to eq(Date.today)
-
-    @facility_1.register_vehicle(@bolt)
-    expect(@bolt.registration_date).to eq(Date.today)
-    end
-
-    it 'Adds a plate type' do
-    @facility_1.register_vehicle(@cruz)
-    expect(@cruz.plate_type).to eq(:regular)
-
-    @facility_1.register_vehicle(@camaro)
-    expect(@camaro.plate_type).to eq(:antique)
-
-    @facility_1.register_vehicle(@bolt)
-    expect(@bolt.plate_type).to eq(:ev)
-    end
-
-    it 'add the collected fees' do
-      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+      expect(@cruz.registration_date).to eq(Date.today)
+      expect(@cruz.plate_type).to eq(:regular)
       expect(@facility_1.collected_fees).to eq(100)
 
       @facility_1.register_vehicle(@camaro)
-      expect(@facility_1.collected_fees).to eq(125)
+
+      expect(@camaro.registration_date).to eq(Date.today)
+      expect(@camaro.plate_type).to eq(:antique)
 
       @facility_1.register_vehicle(@bolt)
+      expect(@bolt.registration_date).to eq(Date.today)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
       expect(@facility_1.collected_fees).to eq(325)
+
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.services).to eq([])
+      expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
     end
-  end 
+  end
+
+  it 'add the collected fees' do
+    @facility_1.add_service('Vehicle Registration')
+    @facility_1.register_vehicle(@cruz)
+    expect(@facility_1.collected_fees).to eq(100)
+  end
 end

@@ -20,24 +20,23 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    @registered_vehicles << vehicle
-    vehicle.new_registration_date
+    if @services.include?("Vehicle Registration") 
+      @registered_vehicles << vehicle 
+      vehicle.new_registration_date
+      determine_fee(vehicle)
+      @registered_vehicles
+    else
+      nil
+    end
+  end 
 
+  def determine_fee(vehicle)
     if vehicle.plate_type == :antique
       @collected_fees += 25
     elsif vehicle.plate_type == :ev
       @collected_fees += 200
     else
       @collected_fees += 100
-    end
-  end 
-
-  # def collected_fees
-  #   @collected_fees << collected_fees
-  #   if vehicle.plate_type == :antique
-  #     @collected_fees = 25
-      
-  # require 'pry'; binding.pry
-  #   end
-  # end
+    end 
+  end
 end
