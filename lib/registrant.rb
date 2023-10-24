@@ -1,23 +1,23 @@
-require '/lib/dmv'
-require '/lib/facility'
-require '/lib/vehicle'
-require '/lib/dmv_data_service'
-require '/lib/vehicle_factory'
+class Registrant
+  attr_reader :name, :age, :license_data
 
-Class Registrant
-  attr_reader :name, :age, :permit, :license_data
-
-  def initialize(name, age, permit)
+  def initialize(name, age, permit = false)
     @name = name
     @age = age
     @permit = permit
-    @license_data = {}
+    @license_data = {
+      written: false,
+      license: false,
+      renewed: false
+    }
   end
 
   def permit?
-    permit == true
+    @permit
   end
 
   def earn_permit
-    permit = true
+    @permit = true
   end
+
+end
