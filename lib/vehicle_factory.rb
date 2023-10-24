@@ -6,25 +6,41 @@ require 'json'
 require 'pry'
 
 class VehicleFactory
-  attr_accessor
+
     def initialize
   end
-
+# Most proud of this create_vehicles method:
   def create_vehicles(source)
-    nc_arr = []
-    source.each do |car|
-      new_car = {
-        vin: car[:vin_1_10],
-        year: car[:model_year],
-        make: car[:make],
-        model: car[:model],
-        engine: :ev}
-      nc_arr << Vehicle.new(new_car)
+    if source.find {|car| car[:state_of_residence] == "WA"}
+      nc_arr = []
+      source.each do |car|
+        new_car = {
+          vin: car[:vin_1_10],
+          year: car[:model_year],
+          make: car[:make],
+          model: car[:model],
+          engine: :ev}
+        nc_arr << Vehicle.new(new_car)
+      end
+      nc_arr
+    elsif source.find {|car| car[:state] == "NY"}
+      nc_arr = []
+      source.each do |car|
+        new_car = {
+          vin: car[:vin],
+          year: car[:model_year],
+          make: car[:make],
+          body_type: car[:body_type],
+          engine: :ev}
+        nc_arr << Vehicle.new(new_car)
+      end
+      nc_arr
+    else
+      "N/A"
     end
-    nc_arr
   end
 
-  def find_most_common(source)
+  def find_most_common(source) # I plan to refactor and correct this!
     by_make = []
     by_model = []
     by_make_and_model = []
@@ -240,7 +256,7 @@ class VehicleFactory
     car_list_array.sort
   end
 
-  def count_by_year(source)
+  def count_by_year(source) # This as well.
     arr_of_count = []
       year2008 = 0
       year2009 = 0
@@ -314,5 +330,15 @@ class VehicleFactory
       p "year2021 = #{year2021}"
       p "year2022 = #{year2022}"
       p "year2023 = #{year2023}"
+  end
+
+  def most_in_county(source)
+    county_list = []
+    source.each do |car|
+      county_list << car[:county]
+    end
+#I found help on stack overflow to do build this, which makes a new Hash with the county name as key,
+    count_hash = county_list.inject(Hash.new(0)) { |county, count| county[count] += 1; county }# and count as the value.
+    p county_list.max_by { |quantity| count_hash[quantity] }# Finds max count of county, iterating thru Hash values.
   end
 end

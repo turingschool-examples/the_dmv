@@ -96,9 +96,9 @@ class Facility
     end
   end
 
-  def create_facility(list)
+  def create_facility(list) #filter by something more permanent
     nf_arr = []
-    if list.count == 5 #CO
+    if list.count == 5 || list.find {|omv| omv[:state] == "CO"} #CO
       list.each do |omv|
         new_omv = {
           name: omv[:dmv_office],
@@ -107,16 +107,7 @@ class Facility
         }
         nf_arr << Facility.new(new_omv)
       end
-    elsif list.count == 172 #NY
-      list.each do |omv|
-        new_omv = {
-          name: omv[:office_name],
-          address: omv[:street_address_line_1],
-          phone: omv[:public_phone_number]
-        }
-        nf_arr << Facility.new(new_omv)
-      end
-    elsif list.count == 179 #MO
+    elsif list.count == 179 || list.find {|omv| omv[:state] == "MO"} #MO
       list.each do |omv|
         new_omv = {
           name: omv[:name],
@@ -125,9 +116,74 @@ class Facility
         }
         nf_arr << Facility.new(new_omv)
       end
+    elsif list.count == 172 || list.find {|omv| omv[:state] == "NY"} #NY
+      list.each do |omv|
+        new_omv = {
+          name: omv[:office_name],
+          address: omv[:street_address_line_1],
+          phone: omv[:public_phone_number]
+        }
+        nf_arr << Facility.new(new_omv)
+      end
     else
       p "UNKNOWN DATA SET"
     end
     return nf_arr
+  end
+
+  def hours(source)
+    if source.find {|omv| omv[:state] == "CO"} #CO
+      hour_array = []
+      source.each do |omv|
+        office_hours = {
+          omv[:dmv_office] => omv[:hours]
+        }
+        hour_array << office_hours
+      end
+      hour_array
+    elsif source.find {|omv| omv[:state] == "NY"} #NY
+      hour_array = []
+      source.each do |omv|
+        office_hours = {
+          omv[:office_name] =>
+          [omv[:monday_beginning_hours],
+          omv[:monday_ending_hours],
+          omv[:tuesday_beginning_hours],
+          omv[:tuesday_ending_hours],
+          omv[:wednesday_beginning_hours],
+          omv[:wednesday_ending_hours],
+          omv[:thursday_beginning_hours],
+          omv[:thursday_ending_hours],
+          omv[:friday_beginning_hours],
+          omv[:friday_ending_hours]]
+        }
+        hour_array << office_hours
+      end
+      hour_array
+    elsif source.find {|omv| omv[:state] == "MO"} #MO
+      hour_array = []
+      source.each do |omv|
+        office_hours = {
+          omv[:name] => omv[:daysopen]
+        }
+        hour_array << office_hours
+      end
+      hour_array
+    end
+  end
+
+  def holidays(source)
+    if source.find {|omv| omv[:state] == "MO"} #MO
+      holiday_arr = []
+      source.each do |omv|
+        holiday_hash = {
+          omv[:name] => omv[:holidaysclosed]
+        }
+        holiday_arr << holiday_hash
+      end
+      holiday_arr
+    else
+      "Unknown"
+    end
   end
 end
