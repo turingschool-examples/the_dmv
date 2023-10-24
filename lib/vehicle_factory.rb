@@ -1,10 +1,4 @@
 class VehicleFactory
-<<<<<<< Updated upstream
-=======
-
-  # def initialize
-  # end
->>>>>>> Stashed changes
 
   def create_vehicles(dmv_data_service)
     @vehicles = []
