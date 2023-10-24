@@ -9,8 +9,8 @@ RSpec.describe FacilityLocations do
     end
   end
 
-  describe '#Creating Objects from Multiple Data Sets & Analyzing Data' do
-    it 'can create facilities from external data sources' do
+  describe 'Creating Objects from Multiple Data Sets & Analyzing Data' do
+    it 'can #create_facilities from external data sources' do
       colorado = DmvDataService.new.co_dmv_office_locations
       co_offices = FacilityLocations.new
       co_offices.create_facilities(colorado)
@@ -19,12 +19,16 @@ RSpec.describe FacilityLocations do
       co_offices.facilities.each do |facility|
         expect(facility).to be_an_instance_of(Facility)
         expect(facility.name.nil?).to eq(false)
+        expect(facility.name).to be_an_instance_of(String)
         expect(facility.address.nil?).to eq(false)
+        expect(facility.address).to be_an_instance_of(Array)
+        expect(facility.address[-2][:state]).to eq("CO")
         expect(facility.phone.nil?).to eq(false)
+        expect(facility.phone).to be_an_instance_of(String)
       end
     end
 
-    it 'can create facilities from multiple data sources' do
+    it 'can #create_facilities from multiple data sources' do
       new_york_facilities = DmvDataService.new.ny_dmv_office_locations
       ny_offices = FacilityLocations.new
       ny_offices.create_facilities(new_york_facilities)
@@ -32,7 +36,11 @@ RSpec.describe FacilityLocations do
       ny_offices.facilities.each do |facility|
         expect(facility).to be_an_instance_of(Facility)
         expect(facility.name.nil?).to eq(false)
+        expect(facility.name).to be_an_instance_of(String)
         expect(facility.address.nil?).to eq(false)
+        expect(facility.address).to be_an_instance_of(Array)
+        expect(facility.address[-2][:state]).to eq("NY")
+        #Some offices in NY have numbers, some don't
       end
 
       missouri_facilities = DmvDataService.new.mo_dmv_office_locations
@@ -42,11 +50,15 @@ RSpec.describe FacilityLocations do
       mo_offices.facilities.each do |facility|
         expect(facility).to be_an_instance_of(Facility)
         expect(facility.name.nil?).to eq(false)
+        expect(facility.name).to be_an_instance_of(String)
         expect(facility.address.nil?).to eq(false)
+        expect(facility.address).to be_an_instance_of(Array)
+        expect(facility.address[-2][:state]).to eq("MO")
+        #Inconsisten phone number for offices
       end
     end
 
-    it 'can iterate through a hash and find the hours of operation' do
+    it 'can iterate through a hash and find the #hours of operation' do
       colorado = DmvDataService.new.co_dmv_office_locations
       co_offices = FacilityLocations.new
       co_offices.create_facilities(colorado)
@@ -77,7 +89,7 @@ RSpec.describe FacilityLocations do
     end
   end
   
-  # Add @holidays_closed
+  # Add @holidays_closed, MO is the only state with holidays_closed
   describe '#holidays_closed' do
     it 'can iterate through the data and find the holidays that are closed' do
       missouri_facilities = DmvDataService.new.mo_dmv_office_locations
