@@ -59,7 +59,7 @@ class Facility
     @facility = self
     @registrant = registrant
 
-    @registrant.license_data[:renewed] = true if @facility.services.include?('Renew License') && @registrant.license_data[:license] = true
+    @registrant.license_data[:renewed] = true if @facility.services.include?('Renew License') && @registrant.license_data[:license] == true
     
     @registrant.license_data[:renewed]
   end
