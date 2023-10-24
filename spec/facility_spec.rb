@@ -65,7 +65,7 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
 
-      expect(@facility_1.registered_vehicles).to eq ([@cruz, @camaro, @bolt]) #Why does this test fail?
+      expect(@facility_1.registered_vehicles).to eq ([@cruz, @camaro, @bolt])
       expect(@facility_1.collected_fees).to eq(325)
     end
 
