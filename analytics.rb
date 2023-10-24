@@ -6,11 +6,11 @@ require "./lib/dmv_data_service.rb"
 
 # EV Registrations:
 
-    # Find the most popular make/model registered
-
     factory = VehicleFactory.new
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     factory.create_vehicles(wa_ev_registrations)
+
+    # Find the most popular make/model registered
 
     vehicle_makes = []
     vehicle_models = []
@@ -27,7 +27,13 @@ require "./lib/dmv_data_service.rb"
 
     # Count of registered vehicle for a model year
 
+    registered_years = []
+    factory.vehicles.each do |vehicle|
+        registered_years << vehicle.year
+    end
 
+    puts registered_years.tally.sort
+    ## Displays number of vehicles for each model year
 
     # County with most registered vehicles
 
