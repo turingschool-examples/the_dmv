@@ -31,10 +31,10 @@ class Facility
     end
   end
 
-  def administer_written_test
-    permit? == true
-    age >= 16
-  end
+  # def administer_written_test
+  #   permit? == true
+  #   age >= 16
+  # end
 end
 
 

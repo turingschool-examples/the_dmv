@@ -31,13 +31,13 @@ RSpec.describe Registrant do
       expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
 
-    it "can administer written test" do
-      expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
+    # it "can administer written test" do
+    #   expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
 
-      facility_1.add_service('Written Test')
+    #   facility_1.add_service('Written Test')
 
-      expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
-    end
+    #   expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
+    # end
   end
 
   
