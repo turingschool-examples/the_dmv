@@ -37,21 +37,38 @@ RSpec.describe Facility do
 
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
+  end
+  
+  describe "facility can register vehicles" do 
+    it "can register regular vehicle" do
+      expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_1.collected_fees).to eq(0)
+      expect(@cruz.registered?).to eq(false)
 
-    describe "facility can register vehicles" do 
-      it "can register vehicle" do
-        expect(@facility_1.registered_vehicles).to eq([])
-        expect(@facility_1.collected_fees).to eq(0)
-        expect(@cruz.registered?).to eq(false)
+      @facility_1.register_vehicle(@cruz)
 
-        @facility_1.register_vehicle(@cruz)
-
-        # expect(@cruz.plate_type).to eq(:regular)
-        expect(@cruz.registration_date).to be_an_instance_of(Time)
-        require 'pry' ; binding.pry
-        expect(@cruz.registered?).to eq(true)
-      end
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@cruz.collected_fees).to eq(100)
+      expect(@cruz.registration_date).to be_an_instance_of(Time)
+      expect(@cruz.registered?).to eq(true)
     end
 
+    it "can register antique vehicle" do
+      @facility_1.register_vehicle(@camaro)
+
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@camaro.collected_fees).to eq(25)
+      expect(@camaro.registration_date).to be_an_instance_of(Time)
+      expect(@camaro.registered?).to eq(true)
+    end
+
+    it "can register ev vehicle" do
+      @facility_1.register_vehicle(@bolt)
+
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@bolt.collected_fees).to eq(200)
+      expect(@bolt.registration_date).to be_an_instance_of(Time)
+      expect(@bolt.registered?).to eq(true)
+    end
   end
 end
