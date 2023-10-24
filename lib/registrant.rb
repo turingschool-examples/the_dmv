@@ -4,7 +4,7 @@ class Registrant
                 :name,
                 :permit
 
-    def initialize(name, age, permit)
+    def initialize(name, age, permit = false)
         @name = name
         @age = age
         @license_data = {
@@ -12,12 +12,18 @@ class Registrant
             license: false,
             renewed: false
             }
-        @permit
+        @permit = permit
                
     end
 
     def permit?
         @permit == false?
+    end
+
+    def earn_permit
+        if @permit == false
+            @permit != false
+        end
     end
 
 end
