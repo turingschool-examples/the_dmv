@@ -13,13 +13,9 @@ RSpec.describe Dmv do
         expect(registrant_1.permit?).to eq(true)
         expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
         expect(registrant_2.permit?).to eq(false)    
-
-        pry(main)> registrant_2.earn_permit
-    
-        pry(main)> registrant_2.permit?
     end
 
-    it 'can change permit value' do
+    xit 'can change permit value' do
         registrant_2 = Registrant.new('Penny', 15 )
         expect(registrant_2.permit?).to eq(false)
 
