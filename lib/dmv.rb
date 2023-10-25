@@ -10,10 +10,10 @@ class Dmv
   end
 
   def facilities_offering_service(service)
-    finalized = false
+    finalized = []
     @facilities.each do |facility|
       if facility.services.include?(service)
-        finalized = true
+        finalized.append(facility)
       end
     end
     finalized
