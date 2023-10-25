@@ -1,18 +1,15 @@
 #require './lib/vehicle'
 
 class Registrant
-  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
-
-  def initialize(facility_details)
-    @name = facility_details[:name]
-    @address = facility_details[:address]
-    @phone = facility_details[:phone]
-    @services = []
-    @registered_vehicles = []
-    @collected_fees = 0
+  attr_reader :name, :age, :permit, :license_data
+  def initialize(name_input, age_input, permit_input = false)
+    @name = name_input
+    @age = age_input
+    @permit = permit_input
+    @license_data = {:written=>false, :license=>false, :renewed=>false}
   end
 
-  def add_service(service)
-    @services.append(service)
+  def permit?
+    @permit
   end
 end
