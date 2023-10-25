@@ -18,6 +18,6 @@ class Facility
 
   def register_vehicle(vehicle)
     @registered_vehicles.append(vehicle)
-    vehicle.set_registration_date = DateTime.now
+    vehicle.set_registration_date(DateTime.now)
   end
 end
