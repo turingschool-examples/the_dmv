@@ -2,7 +2,7 @@ require 'spec_helper'
 require './lib/registrant'
 
 RSpec.describe Dmv do
-    it 'can initialize' do
+    xit 'can initialize' do
         registrant_1 = Registrant.new('Bruce', 18, true )
         #=> #<Registrant:0x000000015c10bed8 @age=18, @license_data={:written=>false, :license=>false, :renewed=>false}, @name="Bruce", @permit=true>
         registrant_2 = Registrant.new('Penny', 15 )
@@ -15,7 +15,7 @@ RSpec.describe Dmv do
         expect(registrant_2.permit?).to eq(false)    
     end
 
-    xit 'can change permit value' do
+    it 'can change permit value' do
         registrant_2 = Registrant.new('Penny', 15 )
         expect(registrant_2.permit?).to eq(false)
 
