@@ -19,5 +19,14 @@ class Facility
   def register_vehicle(vehicle)
     @registered_vehicles.append(vehicle)
     vehicle.set_registration_date(DateTime.now)
+    if vehicle.plate_type == :antique
+      @collected_fees += 25
+    end
+    if vehicle.plate_type == :ev
+      @collected_fees += 200
+    end
+    if vehicle.plate_type == :regular
+      @collected_fees += 100
+    end
   end
 end
