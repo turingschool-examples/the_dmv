@@ -10,8 +10,12 @@ class Dmv
   end
 
   def facilities_offering_service(service)
-    @facilities.find do |facility|
-      facility.services.include?(service)
+    finalized = false
+    @facilities.each do |facility|
+      if facility.services.include?(service)
+        finalized = true
+      end
     end
+    finalized
   end
 end
