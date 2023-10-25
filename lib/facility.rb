@@ -15,4 +15,9 @@ class Facility
   def add_service(service)
     @services.append(service)
   end
+
+  def register_vehicle(vehicle)
+    @register_vehicles.append(vehicle)
+    vehicle.set_registration_date = DateTime.now
+  end
 end
