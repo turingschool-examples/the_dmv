@@ -1,11 +1,12 @@
 class Dmv
+  attr_reader :facilities
 
   def initialize
     @facilities = []
   end
 
   def add_facility(facility)
-    @facilities << facility
+    @facilities.append(facility)
   end
 
   def facilities_offering_service(service)
