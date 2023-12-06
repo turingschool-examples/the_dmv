@@ -54,5 +54,4 @@ RSpec.describe Facility do
       expect(facility_2.registered_vehicles).to eq ([])
     end
   end
-
 end
