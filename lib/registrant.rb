@@ -7,4 +7,6 @@ class Registrant
       @name = name
       @age = age
       @permit = permit
+   end
+   
 end
