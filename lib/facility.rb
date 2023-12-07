@@ -33,13 +33,18 @@ class Facility
   end
 
 
-  # def administer_road_test(registrant)
+  def administer_road_test(registrant)
+    if registrant.age >= 16 && @services.include?("Road Test") && registrant.permit? && registrant.license_data[:written] = true
+      registrant.license_data[:license] = true
+      true
+    else
+      false
+    end
+  end
 
-  # end
+  def renew_drivers_license
 
-  # def renew_drivers_license
-
-  # end
+  end
 
   def collect_fees(vehicle)
     if vehicle.antique?
