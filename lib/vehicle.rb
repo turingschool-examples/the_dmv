@@ -35,7 +35,7 @@ class Vehicle
     end
   end
 
-  def registration_date
-    @registration_date = time.now
+  def record_registration_date
+    @registration_date = Time.now
   end
 end
