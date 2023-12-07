@@ -14,5 +14,9 @@ describe Registrant do
       it 'has a name' do
          expect(@bruce.name).to eq "Bruce"
       end
+
+      it 'has an age' do
+         expect(@bruce.age).to eq 18
+      end
    end
 end
