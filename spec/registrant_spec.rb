@@ -10,5 +10,9 @@ describe Registrant do
       it 'exists' do
          expect(@bruce).to be_a Registrant
       end
+
+      it 'has a name' do
+         expect(@bruce.name).to eq "Bruce"
+      end
    end
 end
