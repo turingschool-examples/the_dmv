@@ -33,4 +33,14 @@ describe Registrant do
          expect(@bruce.license_data).to eq ({:written=>false, :license=>false, :renewed=>false})
       end
    end
+
+   describe '#earn_permit' do
+      it 'allow registrant to get permit' do
+         expect(@penny.permit?).to eq false
+
+         @penny.earn_permit
+
+         expect(@penny.permit?).to eq true
+      end
+   end
 end
