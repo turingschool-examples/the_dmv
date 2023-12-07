@@ -7,7 +7,7 @@ RSpec.describe Dmv do
     @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
     @facility_3 = Facility.new({name: 'DMV Northwest Branch', address: '3698 W. 44th Avenue Denver CO 80211', phone: '(720) 865-4600'})
   end
-
+ 
   describe '#initialize' do
     it 'can initialize' do
       expect(@dmv).to be_an_instance_of(Dmv)

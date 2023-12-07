@@ -17,7 +17,9 @@ class Facility
   def register_vehicle(vehicle)
     if @services.include?("Vehicle Registration")
       @registered_vehicle << vehicle
+      vehicle.car_registration_date
       collect_fees(vehicle)
+      @registration_date = vehicle.car_registration_date
     end
   end
 
@@ -29,6 +31,7 @@ class Facility
       false
     end
   end
+
 
   # def administer_road_test(registrant)
 
