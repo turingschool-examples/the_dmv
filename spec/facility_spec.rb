@@ -99,4 +99,25 @@ RSpec.describe Facility do
       expect(registrant_3.license_data[:license]).to eq (false)
     end
   end
+
+  describe '#renew_driver_license' do
+    it "renew driver license  for a registrant who earned driver license" do
+      facility_1.add_service('Renew License')
+      facility_1.add_service('Written Test')
+      facility_1.add_service('Road Test')
+      facility_1.administer_written_test(registrant_1)
+      facility_1.administer_road_test(registrant_1)
+      facility_1.renew_driver_license(registrant_1)
+      expect(facility_1.renew_driver_license(registrant_1)).to eq (true)
+      expect(registrant_1.license_data[:renewed]).to eq (true)
+    end
+
+    it "does not renew driver license for a registrant who didn't earned driver license" do
+      facility_1.add_service('Renew License')
+      facility_1.renew_driver_license(registrant_3)
+
+      expect(facility_1.renew_driver_license(registrant_3)).to eq (false)
+      expect(registrant_3.license_data[:renewed]).to eq (false)
+    end
+  end
 end
