@@ -1,7 +1,8 @@
 require './lib/vehicle'
+require './lib/registrant'
 
 class Facility
-  attr_reader :name, :address, :phone, :services, :collected_fees
+  attr_reader :name, :address, :phone, :services, :collected_fees, :registered_vehicles
 
   def initialize(input)
     @name = input[:name]
@@ -10,6 +11,7 @@ class Facility
     @services = []
     @collected_fees = 0
     @plate_type = {}
+    @registered_vehicles = []
   end
 
   def add_service(service)
@@ -25,4 +27,14 @@ class Facility
       @collected_fees += 100
     end
   end
+
+  def register_vehicle(vehicle)
+    if @services.include?('Vehicle Registration')
+      @registered_vehicles << vehicle
+    else
+      return
+    end
+  end
+
+
 end
