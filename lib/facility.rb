@@ -22,4 +22,24 @@ class Facility
   end
 
 
+
+
+  # def administer_road_test(registrant)
+
+  # end
+
+  # def renew_drivers_license
+
+  # end
+
+  def collect_fees(vehicle)
+    if vehicle.antique?
+      @collected_fees += 25
+    elsif vehicle.electric_vehicle?
+      @collected_fees += 200
+    else
+      @collected_fees += 100
+    end
+  end
+
 end
