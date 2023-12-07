@@ -13,16 +13,20 @@ describe Registrant do
 
       it 'has a name' do
          expect(@bruce.name).to eq "Bruce"
+
+         expect(@penny.name).to eq "Penny"
       end
 
       it 'has an age' do
          expect(@bruce.age).to eq 18
+
+         expect(@penny.age).to eq 15
       end
 
       it 'can have a permit' do 
-         expect(@bruce.permit).to eq true
+         expect(@bruce.permit?).to eq true
 
-         expect(@penny.permit).to eq false
+         expect(@penny.permit?).to eq false
       end
 
       it 'has license-data' do
