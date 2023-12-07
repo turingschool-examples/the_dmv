@@ -19,6 +19,7 @@ class Facility
 
   def register_vehicle(vehicle)
     vehicle.registration_date = Date.today
+    vehicle.plate_type = :regular
     @registered_vehicles << vehicle
   end
 end
