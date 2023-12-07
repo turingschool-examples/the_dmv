@@ -8,13 +8,13 @@ RSpec.describe VehicleFactory do
               {:make=>"Nissan", :model=>"Leaf", :vin_1_10=>"1N4BZ0CP2G", :model_year=> "2016"}]
       vehicles = factory.create_vehicles(data)
 
-      vehicles.zip(data) do |vehicle, vdata|
+      vehicles.zip(data) do |vehicle, vehicle_data|
         expect(vehicle).to be_a (Vehicle)
         expect(vehicle.engine).to eq (:ev)
-        expect(vehicle.year).to eq (vdata[:model_year])
-        expect(vehicle.make).to  eq (vdata[:make])
-        expect(vehicle.model).to  eq (vdata[:model])
-        expect(vehicle.vin).to  eq (vdata[:vin_1_10])
+        expect(vehicle.year).to eq (vehicle_data[:model_year])
+        expect(vehicle.make).to  eq (vehicle_data[:make])
+        expect(vehicle.model).to  eq (vehicle_data[:model])
+        expect(vehicle.vin).to  eq (vehicle_data[:vin_1_10])
       end
     end
   end
