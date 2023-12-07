@@ -30,7 +30,6 @@ class Facility
     end
   end
 
-
   # def administer_road_test(registrant)
 
   # end
