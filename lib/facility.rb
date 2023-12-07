@@ -42,8 +42,12 @@ class Facility
     end
   end
 
-  def renew_drivers_license
-
+  def renew_drivers_license(registrant)
+    if registrant.age >= 16 && @services.include?("Renew License") && registrant.license_data[:license] = true
+      registrant.license_data[:renewed] = true
+    else
+      false
+    end
   end
 
   def collect_fees(vehicle)
