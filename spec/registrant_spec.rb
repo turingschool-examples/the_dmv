@@ -26,7 +26,7 @@ describe Registrant do
       end
 
       it 'has license-data' do
-         expect(@bruce.license_data).to eq {:written=>false, :license=>false, :renewed=>false}
+         expect(@bruce.license_data).to eq ({:written=>false, :license=>false, :renewed=>false})
       end
    end
 end
