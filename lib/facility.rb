@@ -17,20 +17,38 @@ class Facility
   def register_vehicle(vehicle)
     if @services.include?("Vehicle Registration")
       @registered_vehicle << vehicle
+      vehicle.car_registration_date
       collect_fees(vehicle)
+      @registration_date = vehicle.car_registration_date
+    end
+  end
+
+  def administer_written_test(registrant)
+    if registrant.age >= 16 && @services.include?("Written Test") && registrant.permit?
+      registrant.license_data[:written] = true
+      true
+    else
+      false
     end
   end
 
 
+  def administer_road_test(registrant)
+    if registrant.age >= 16 && @services.include?("Road Test") && registrant.permit? && registrant.license_data[:written] = true
+      registrant.license_data[:license] = true
+      true
+    else
+      false
+    end
+  end
 
-
-  # def administer_road_test(registrant)
-
-  # end
-
-  # def renew_drivers_license
-
-  # end
+  def renew_drivers_license(registrant)
+    if registrant.age >= 16 && @services.include?("Renew License") && registrant.license_data[:license] = true
+      registrant.license_data[:renewed] = true
+    else
+      false
+    end
+  end
 
   def collect_fees(vehicle)
     if vehicle.antique?
