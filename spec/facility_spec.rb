@@ -7,7 +7,7 @@ RSpec.describe Facility do
   let(:bolt) { Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev}) }
   let(:camaro) { Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice}) }
   let(:registrant_1) { Registrant.new('Bruce', 18, true) }
-  let(:registrant_2) { Registrant.new('Penny', 15) }
+  let(:registrant_2) { Registrant.new('Penny', 16) }
   let(:registrant_3) { Registrant.new('Tucker', 15) }
 
   describe '#initialize' do
@@ -81,5 +81,22 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#administer_road_test' do
+    it "administer road test for a registrant who passed the written test" do
+      facility_1.add_service('Written Test')
+      facility_1.add_service('Road Test')
+      facility_1.administer_written_test(registrant_1)
 
+      expect(registrant_1.license_data[:license]).to eq (false)
+      expect(facility_1.administer_road_test(registrant_1)).to eq (true)
+      expect(registrant_1.license_data[:license]).to eq (true)
+    end
+
+    it "does not administer a road test to a registrant who haven't passed the written test" do
+      facility_1.add_service('Road Test')
+
+      expect(facility_1.administer_road_test(registrant_3)).to eq (false)
+      expect(registrant_3.license_data[:license]).to eq (false)
+    end
+  end
 end
