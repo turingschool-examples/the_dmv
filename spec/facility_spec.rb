@@ -45,12 +45,36 @@ RSpec.describe Facility do
       expect(cruz.registration_date).to eq(Date.today)
     end
 
-    it 'gives a vehicle default plate type of regular when registered' do
+    it 'gives a vehicle a plate type of :regular when registered as an :ice engine' do
       cruz = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
 
       @facility.register_vehicle(cruz)
 
       expect(cruz.plate_type).to eq(:regular)
     end
+
+    it 'gives a vehicle a plate type of :antique when registered if vehicle is over 25 years old' do
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+
+      @facility.register_vehicle(camaro)
+
+      expect(camaro.plate_type).to eq(:antique)
+    end
+
+    it 'gives a vehicle a plate type of :ev when registered if vehicle has :ev engine:' do
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+
+      @facility.register_vehicle(bolt)
+
+      expect(bolt.plate_type).to eq(:ev)
+    end
+
+    # it 'collects 100 dollars when registering a car with :regular plates' do
+    #   cruz = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+
+    #   @facility.register_vehicle(cruz)
+
+    #   expect(@facility.collected_fees).to eq(100)
+    # end
   end
 end
