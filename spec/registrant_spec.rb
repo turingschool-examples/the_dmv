@@ -18,5 +18,11 @@ describe Registrant do
       it 'has an age' do
          expect(@bruce.age).to eq 18
       end
+
+      it 'can have a permit' do 
+         expect(@bruce.permit).to eq true
+
+         expect(@penny.permit).to eq false
+      end
    end
 end
