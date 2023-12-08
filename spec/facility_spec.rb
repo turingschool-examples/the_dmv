@@ -241,7 +241,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#renew_drivers_license'
+  describe '#renew_drivers_license' do
     it 'can not renew drivers license unless it offers that service' do
       @facility_1.renew_drivers_license(@registrant_1)
 
