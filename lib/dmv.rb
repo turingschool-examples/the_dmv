@@ -16,3 +16,6 @@ class Dmv
     end
   end
 end
+
+
+# Error: find method only returns first value that fulfills the condition. The find_all method returns each facility object that fulfills the condition.
