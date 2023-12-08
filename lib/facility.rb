@@ -19,8 +19,8 @@ class Facility
     if services.include?('Vehicle Registration')
       create_plate(vehicle)
       register_fee(vehicle)
-      @registered_vehicles << vehicle 
       vehicle.registration_date = Date.today
+      @registered_vehicles << vehicle 
     else 
       nil 
     end  
