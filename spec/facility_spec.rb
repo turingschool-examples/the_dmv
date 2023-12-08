@@ -30,7 +30,7 @@ RSpec.describe Facility do
     end
 
     it 'can keep track of a vehicle it has registered' do
-      cruz = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
 
       @facility.register_vehicle(cruz)
 
@@ -38,7 +38,7 @@ RSpec.describe Facility do
     end
 
     it 'gives a vehicle a registration date when registered' do
-      cruz = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
 
       @facility.register_vehicle(cruz)
 
@@ -46,7 +46,7 @@ RSpec.describe Facility do
     end
 
     it 'gives a vehicle a plate type of :regular when registered as an :ice engine' do
-      cruz = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
 
       @facility.register_vehicle(cruz)
 
@@ -62,12 +62,39 @@ RSpec.describe Facility do
     end
 
     it 'gives a vehicle a plate type of :ev when registered if vehicle has :ev engine:' do
-      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
 
       @facility.register_vehicle(bolt)
 
       expect(bolt.plate_type).to eq(:ev)
     end
+  end
+
+  describe '#plate_maker' do
+    it 'makes an antique plate when vehicle is over 25 years old' do
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+
+      plate_maker(camaro)
+
+      expect(camaro.plate_type).to eq(:antique)
+    end
+
+    it 'makes an ev plate when vehicle is an ev engine' do
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
+
+      plate_maker(bolt)
+
+      expect(bolt.plate_type).to eq(:ev)
+    end
+
+    it 'makes a regular plate when a vehicle is newer than 25 years and is not an ev engine' do
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+
+      plate_maker(cruz)
+
+      expect(cruz.plate_type).to eq(:regular)
+    end
+  end
 
     # it 'collects 100 dollars when registering a car with :regular plates' do
     #   cruz = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
