@@ -1,4 +1,4 @@
-require 'spechelper'
+require 'spec_helper'
 
 RSpec.describe Registrant do
     describe '#initialize' do
