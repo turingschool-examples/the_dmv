@@ -63,5 +63,20 @@ describe Registrant do
          expect(facility_1.administer_road_test(@bruce)).to eq true
          expect(@bruce.license_data).to eq ({:written=>true, :license=>true, :renewed=>false})
       end
+
+      it 'can get their drivers license renewed' do
+         facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+         facility_1.add_service('Written Test')
+         expect(facility_1.administer_written_test(@bruce)).to eq true
+         expect(@bruce.license_data).to eq ({:written=>true, :license=>false, :renewed=>false})
+         
+         facility_1.add_service('Road Test')
+         expect(facility_1.administer_road_test(@bruce)).to eq true
+         expect(@bruce.license_data).to eq ({:written=>true, :license=>true, :renewed=>false})
+
+         facility_1.add_service('Renew License')
+         expect(facility_1.renew_drivers_license(@bruce)).to eq true
+         expect(@bruce.license_data).to eq ({:written=>true, :license=>true, :renewed=>true})
+      end
    end
 end
