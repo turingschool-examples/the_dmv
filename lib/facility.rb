@@ -13,19 +13,23 @@ class Facility
   def add_service(service)
     @services << service
   end
+ 
 
   def register_vehicle(vehicle)
-    vehicle.registration_date = Date.today
-    create_plate(vehicle)
-    vehicle.plate_type
-    @registered_vehicles << vehicle 
+    if services.include?('Vehicle Registration')
+      create_plate(vehicle)
+      register_fee(vehicle)
+      @registered_vehicles << vehicle 
+      vehicle.registration_date = Date.today
+    else 
+      nil 
+    end  
   end 
 
   def register_fee(vehicle)
-    case vehicle.plate_type
-    when :antique 
+    if vehicle.plate_type == :antique 
       @collected_fees += 25
-    when :ev 
+    elsif vehicle.plate_type == :ev 
       @collected_fees += 200 
     else 
       @collected_fees += 100
@@ -40,6 +44,7 @@ class Facility
       else 
         vehicle.plate_type = :regular
       end 
+      vehicle.plate_type
   end 
 
 end

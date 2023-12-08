@@ -34,9 +34,26 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([])
     end 
     
+    it 'facility provides the service needed' do 
+      expect(@facility_1.services).to eq([])
+
+      @facility_1.add_service('Vehicle Registration')
+
+      expect(@facility_1.services).to eq(['Vehicle Registration'])
+    end 
+
+    it 'does not provide service if the facility does not offer it' do
+      expect(@facility_1.services).to eq([])
+
+      @facility_1.add_service('Vehicle Registration')
+
+      expect(@facility_2.services).to eq([])
+    end 
+
     it 'can tell if a vehicle was registered' do 
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-
+      
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(cruz)
 
       expect(@facility_1.registered_vehicles).to eq([cruz])
@@ -45,6 +62,8 @@ RSpec.describe Facility do
     it 'can give a date a vehicle is registered' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
 
+            
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(cruz)
 
       expect(@facility_1.registered_vehicles.first.registration_date).to eq(Date.today)
@@ -69,21 +88,47 @@ RSpec.describe Facility do
     end 
   end 
 
-  describe '#register_fee(vehicle)' do 
+  describe '#collected_fees' do 
+    it 'starts with 0 collected fees' do 
+      expect(@facility_1.collected_fees).to eq(0)
+    end 
+
     it 'collects 100 for regular cars' do 
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       
-      @facility_1.register_vehicle(cruz)
-      @facility_1.register_fee(cruz) 
+            
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(cruz) 
 
       expect(@facility_1.collected_fees).to eq(100)
     end 
 
     it 'collects 200 for ev cars' do 
       bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+      
+            
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(bolt) 
 
-      @facility_1.register_vehicle(bolt)
-      @facility_1.register_fee(bolt) 
+      expect(@facility_1.collected_fees).to eq(200)
+    end 
+  end 
+
+  describe '#register_fee(vehicle)' do 
+    it 'collects 100 when registering car with :regular plates' do 
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      
+      @facility_1.create_plate(cruz)
+      @facility_1.register_fee(cruz)
+
+      expect(@facility_1.collected_fees).to eq(100)
+    end 
+
+    it 'collects 200 when registering car with :ev plates' do
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+
+      @facility_1.create_plate(bolt)
+      @facility_1.register_fee(bolt)
 
       expect(@facility_1.collected_fees).to eq(200)
     end 
