@@ -129,4 +129,17 @@ RSpec.describe Facility do
       expect(@facility_1.administer_road_test(@bruce)).to eq true
     end
   end
+
+  describe '#renew_drivers_license' do
+    it 'can renew license if offered that service' do
+      @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@bruce)
+      @facility_1.add_service('Road Test')
+      @facility_1.administer_road_test(@bruce)
+      expect(@facility_1.renew_drivers_license(@bruce)).to eq false
+
+      @facility_1.add_service('Renew License')
+      expect(@facility_1.renew_drivers_license(@bruce)).to eq true
+    end
+  end
 end
