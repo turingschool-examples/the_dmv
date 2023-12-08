@@ -8,7 +8,7 @@ class Vehicle
               :engine,
               :registration_date
 
-  vehicle_details = {:vin => :vin,
+  vehicle_details = {:vin => "vin",
   :year => :year,
   :make => :make,
   :model => :model,
