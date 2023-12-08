@@ -20,5 +20,4 @@ class OfficeLocations
         end
         dmv_facilities_array
     end
-
 end
