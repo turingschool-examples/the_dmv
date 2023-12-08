@@ -5,14 +5,22 @@ class Vehicle
               :year,
               :make,
               :model,
-              :engine
+              :engine,
+              :registration_date
 
+  vehicle_details = {:vin => :vin,
+  :year => :year,
+  :make => :make,
+  :model => :model,
+  :engine => :engine}
+  
   def initialize(vehicle_details)
     @vin = vehicle_details[:vin]
     @year = vehicle_details[:year]
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
+    @registration_date = nil
   end
 
   def antique?
