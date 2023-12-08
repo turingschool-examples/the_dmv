@@ -32,5 +32,10 @@ describe Registrant do
     end
   end
 
-  
+  describe '#permit' do
+    it 'doesnt have a permit by defult' do
+
+      expect(@registrant_2.permit?).to eq(false)
+    end
+  end
 end
