@@ -213,7 +213,5 @@ RSpec.describe Facility do
 
       expect(@registrant_3[:written]).to eq(false)
     end
-
-      
-
+  end
 end

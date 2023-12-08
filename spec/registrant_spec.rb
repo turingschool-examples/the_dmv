@@ -1,4 +1,4 @@
-require './lib/registrant.rb'
+require 'spechelper'
 
 RSpec.describe Registrant do
     describe '#initialize' do
