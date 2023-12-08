@@ -4,6 +4,7 @@ describe Registrant do
    before(:each) do
       @bruce = Registrant.new('Bruce', 18, true)
       @penny = Registrant.new('Penny', 15)
+      @tucker = Registrant.new('Tucker', 15)
    end
 
    describe 'initialize' do
