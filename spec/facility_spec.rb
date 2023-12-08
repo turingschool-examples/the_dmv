@@ -39,16 +39,20 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([cruz])
     end 
   
-    it 'can give a date a vehicle is registered'
+    it 'can give a date a vehicle is registered' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
 
       @facility_1.register_vehicle(cruz)
 
-      expect(@facility_1.registration_date).to eq(Date.today)
+      expect(@facility_1.registered_vehicles.first.registration_date).to eq(Date.today)
     end
   
     it 'can give a plate type' do 
-      
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+
+      @facility_1.register_vehicle(cruz)
+
+      expect(@facility_1.registered_vehicles.first.plate_type).to eq(:regular)
     end 
   end 
 end
