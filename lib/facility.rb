@@ -16,6 +16,11 @@ class Facility
   end
 
   def registered_vehicles
-    @registered_vehicles = []
+    @registered_vehicles ||= []
+  end
+
+  def register_vehicle(vehicle)
+    vehicle.registration_date = Date.today
+    @registered_vehicles << vehicle
   end
 end
