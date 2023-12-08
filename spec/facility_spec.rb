@@ -240,4 +240,37 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data[:license]).to eq(true)
     end
   end
+
+  describe '#renew_drivers_license'
+    it 'can not renew drivers license unless it offers that service' do
+      @facility_1.renew_drivers_license(@registrant_1)
+
+      expect(@registrant_1.license_data[:renewed]).to eq(false)
+    end
+
+    it 'can not renew drivers license unless registrant has passed both written and road test' do
+      @facility_1.add_service("Written Test")
+      @facility_1.add_service("Renew License")
+
+      @facility_1.administer_written_test(@registrant_1)
+
+      expect(@registrant_1.license_data[:written]).to eq(true)
+
+      @facility_1.renew_drivers_license(@registrant_1)
+
+      expect(@registrant_1.license_data[:renewed]).to eq(false)
+    end
+
+    it 'can renew a drivers license if it offers the service and the registrant has passed their road test' do
+      @facility_1.add_service("Written Test")
+      @facility_1.add_service("Renew License")
+      @facility_1.add_service("Road Test")
+
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+      @facility_1.renew_drivers_license(@registrant_1)
+
+      expect(@registrant_1.license_data[:renewed]).to eq(true)
+    end
+  end
 end
