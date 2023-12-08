@@ -19,6 +19,10 @@ class Facility
     @registered_vehicles ||= []
   end
 
+  def collected_fees
+    @collected_fees ||= 0
+  end
+
   def register_vehicle(vehicle)
     vehicle.registration_date = Date.today
     @registered_vehicles << vehicle
