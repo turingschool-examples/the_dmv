@@ -19,4 +19,23 @@ RSpec.describe Analytics do
 
     end
   end
+
+  describe '#count_registered_vehicles_by_model_year' do
+    it 'count the registered vehicles by model year' do
+      analytics = Analytics.new
+      ev_registration = [ {:model_year=>2020},
+                          {:model_year=>2020},
+                          {:model_year=>2020},
+                          {:model_year=>2021},
+                          {:model_year=>2021},
+                          {:model_year=>2022}
+                        ]
+
+      model_year_count = analytics.count_registered_vehicles_by_model_year(ev_registration)
+
+      expect(model_year_count[2020]).to eq (3)
+      expect(model_year_count[2021]).to eq (2)
+      expect(model_year_count[2022]).to eq (1)
+    end
+  end
 end
