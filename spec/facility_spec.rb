@@ -24,6 +24,32 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#plate_maker' do
+    it 'makes an antique plate when vehicle is over 25 years old' do
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+
+      @facility.plate_maker(camaro)
+
+      expect(camaro.plate_type).to eq(:antique)
+    end
+
+    it 'makes an ev plate when vehicle is an ev engine' do
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
+
+      @facility.plate_maker(bolt)
+
+      expect(bolt.plate_type).to eq(:ev)
+    end
+
+    it 'makes a regular plate when a vehicle is newer than 25 years and is not an ev engine' do
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+
+      @facility.plate_maker(cruz)
+
+      expect(cruz.plate_type).to eq(:regular)
+    end
+  end
+
   describe '#register_vehicle' do
     it 'starts with no registered vehicles' do
       expect(@facility.registered_vehicles).to eq([])
@@ -70,37 +96,71 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#plate_maker' do
-    it 'makes an antique plate when vehicle is over 25 years old' do
-      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
-
-      @facility.plate_maker(camaro)
-
-      expect(camaro.plate_type).to eq(:antique)
+  describe '#collected_fees'
+    it 'starts with no collected fees' do
+      expect(@facility.collected_fees).to eq(0)
     end
 
-    it 'makes an ev plate when vehicle is an ev engine' do
-      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
-
-      @facility.plate_maker(bolt)
-
-      expect(bolt.plate_type).to eq(:ev)
-    end
-
-    it 'makes a regular plate when a vehicle is newer than 25 years and is not an ev engine' do
+    it 'collects 100 dollars when registering a car with :regular plates' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
 
-      @facility.plate_maker(cruz)
+      @facility.register_vehicle(cruz)
 
-      expect(cruz.plate_type).to eq(:regular)
+      expect(@facility.collected_fees).to eq(100)
+    end
+
+    it 'collects 25 dollars when registering a car with :antique plates' do
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+
+      @facility.register_vehicle(camaro)
+
+      expect(@facility.collected_fees).to eq(25)
+    end
+
+    it 'collects 200 dollars when registering a car with :ev plates' do
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
+
+      @facility.register_vehicle(bolt)
+
+      expect(bolt.collected_fees).to eq(:200)
+    end
+
+    it 'can collects fees from multiple registrations' do
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+
+      @facility.register_vehicle(bolt)
+      @facility.register_vehicle(camaro)
+      @facility.register_vehicle(cruz)
+
+      expect(@facility.collected_fees).to eq(325)
     end
   end
 
-    # it 'collects 100 dollars when registering a car with :regular plates' do
-    #   cruz = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+  describe '#fee_collector' do
+    it 'collects 100 dollars when registering a car with :regular plates' do
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
 
-    #   @facility.register_vehicle(cruz)
+      @facility.fee_collector(cruz)
 
-    #   expect(@facility.collected_fees).to eq(100)
-    # end
+      expect(@facility.collected_fees).to eq(100)
+    end
+
+    it 'collects 25 dollars when registering a car with :antique plates' do
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+
+      @facility.fee_collector(camaro)
+
+      expect(@facility.collected_fees).to eq(25)
+    end
+
+    it 'collects 200 dollars when registering a car with :ev plates' do
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
+
+      @facility.register_vehicle(bolt)
+
+      expect(bolt.collected_fees).to eq(:200)
+    end
+  end
 end
