@@ -29,4 +29,11 @@ RSpec.describe Registrant do
             expect(@registrant_1.permit?).to eq (true)
         end
     end
+
+    describe '#earn_permit' do
+        it 'earned a permit' do
+            @registrant_2.earn_permit
+            expect(@registrant_2.permit?).to eq (true)
+        end
+    end
 end
