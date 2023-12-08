@@ -14,7 +14,7 @@ class Vehicle
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
-    @registration_date = registration_date
+    @registration_date = vehicle_details[:registration_date]
   end
 
   def antique?
@@ -27,4 +27,4 @@ class Vehicle
 end
 
 
-# First error: The test was expecting a registration_date method, but there was not method created in the Vehicle class
+# First error: The test was expecting a registration_date method, but there was not method created in the Vehicle class. the return value needed to be nil so I called registration date detail from the vehicle objects. The value equals nil since registration date key doesn't exit in vehicle details hash.
