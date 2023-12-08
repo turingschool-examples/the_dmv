@@ -1,5 +1,5 @@
-require 'pry'
 require 'spec_helper'
+require 'pry'
 
 RSpec.describe Facility do
   before(:each) do
@@ -35,4 +35,24 @@ RSpec.describe Facility do
             expect(@facility_1.registered_vehicles).to eq ([])
         end
     end
+
+    describe '#register_vehicle' do
+        it 'registers a vehicle' do
+
+            expect(@facility_1.register_vehicle(@cruz)).to eq ([@cruz])
+        end
+    end
+
+    describe '#collected_fees' do
+        it 'stores collected fees' do
+            expect(@facility_1.collected_fees).to eq(0)
+        end
+    end
+
+    # describe '#registration_date' do
+    # # Need to make registration date not equal nil
+    #     it 'has a registration date' do
+    #         expect(@cruz.registration_date).to be_a (Date)
+    #     end
+    # end
 end
