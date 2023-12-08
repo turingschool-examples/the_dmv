@@ -27,7 +27,7 @@ class Facility
     if @services.include?("Vehicle Registration")
       vehicle.registration_date = Date.today
       collect_fees(vehicle)
-      @registered_vehicles << vehicle
+      registered_vehicles << vehicle
     else
       nil
     end
