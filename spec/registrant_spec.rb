@@ -18,6 +18,9 @@ RSpec.describe Registrant do
         it "has a permit" do
             expect(@registrant_1.permit?).to eq(true)
             expect(@registrant_2.permit?).to eq(false)
+
+            @registrant_2.earn_permit
+            expect(@registrant_2.permit?).to eq(true)
         end
     end
 
@@ -28,4 +31,3 @@ RSpec.describe Registrant do
         end
     end
 end
-
