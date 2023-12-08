@@ -33,4 +33,13 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe '#registration_fee' do
+    it 'calculates registration fee' do
+
+      expect(@camaro.registration_fee(@camaro)).to eq(25)
+      expect(@bolt.registration_fee(@bolt)).to eq(200)
+      expect(@cruz.registration_fee(@cruz)).to eq (100)
+    end
+  end
 end
