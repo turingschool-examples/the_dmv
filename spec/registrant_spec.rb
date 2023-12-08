@@ -27,6 +27,6 @@ RSpec.describe Registrant do
 
     describe '#earn_permit' do
         it "can change permit status"
-        
-end
+        expect
+    end
 end
