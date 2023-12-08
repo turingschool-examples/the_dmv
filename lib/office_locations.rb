@@ -1,0 +1,3 @@
+class OfficeLocations
+
+end
