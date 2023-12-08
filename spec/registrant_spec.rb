@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe Registrant do
     before(:each) do
         @registrant_1 = Registrant.new('Bruce', 18, true )
-        @registrant_2 = Registrant.new('Penny', 15 )
+        @registrant_2 = Registrant.new('Penny', 15)
     end
 
     describe '#initialize' do
@@ -16,11 +16,12 @@ RSpec.describe Registrant do
       end
     end
     describe "#permit?" do
-        it can "tell if it has a permit"
-        expect(registrant_1.permit?).to eq (true)
-        expect(registrant_2.permit?).to eq (false)
+        it "can tell if it has a permit" do
+        expect(@registrant_1.permit?).to eq (true)
+        expect(@registrant_2.permit?).to eq (false)
+      end
     end
-    describe '#license_data'
-        it can "give license data"
-        expect(registrant_1.license_data).to eq
+#     describe '#license_data'
+#         it can "give license data"
+#         expect(registrant_1.license_data).to eq
 end
