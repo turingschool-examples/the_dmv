@@ -18,5 +18,9 @@ RSpec.describe do
         expect(factory.create_vehicles(wa_ev_registrations).first.engine).to eq(:ev)
         expect(factory.create_vehicles(wa_ev_registrations).first.registration_date).to eq(nil)
         expect(factory.create_vehicles(wa_ev_registrations).first.plate_type).to eq(nil)
+        expect(factory.create_vehicles(wa_ev_registrations).first.vin).not_to be(nil)
+        expect(factory.create_vehicles(wa_ev_registrations).first.year).not_to be(nil)
+        expect(factory.create_vehicles(wa_ev_registrations).first.make).not_to be(nil)
+        expect(factory.create_vehicles(wa_ev_registrations).first.model).not_to be(nil)
     end
 end
