@@ -50,13 +50,6 @@ RSpec.describe Facility do
 
       expect(@facility_1.registered_vehicles).to eq [@cruz, @bolt]
     end
-
-    it 'can change the vehicle plate once registered' do
-      @facility_1.add_service('Vehicle Registration')
-      @facility_1.register_vehicle(@cruz)
-
-      expect(@cruz.plate_type).to eq :regular
-    end
   end
 
   describe '#collected_fees' do
@@ -90,6 +83,15 @@ RSpec.describe Facility do
 
       @facility_1.register_vehicle(@bolt)
       expect(@facility_1.collected_fees).to eq 325
+    end
+  end
+
+  describe '#change_plate' do
+    it 'can change the vehicle plate once registered' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@cruz.plate_type).to eq :regular
     end
   end
 end
