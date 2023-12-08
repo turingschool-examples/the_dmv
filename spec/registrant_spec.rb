@@ -44,4 +44,14 @@ describe Registrant do
          expect(@penny.permit?).to eq true
       end
    end
+
+   describe 'can update its license data' do
+      it 'can administer a written test' do
+         facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+         expect(facility_1.administer_written_test(@bruce)).to eq false
+         facility_1.add_service('Written Test')
+         expect(facility_1.administer_written_test(@bruce)).to eq true
+         expect(@bruce.license_data).to eq ({:written=>true, :license=>false, :renewed=>false})
+      end
+   end
 end
