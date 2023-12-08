@@ -121,6 +121,12 @@ RSpec.describe Facility do
       expect(@facility_1.administer_written_test(@bruce)).to eq true
 
       expect(@facility_1.administer_road_test(@tucker)).to eq false
+      @tucker.earn_permit
+      expect(@facility_1.administer_road_test(@tucker)).to eq false
+
+      expect(@facility_1.administer_road_test(@bruce)).to eq false
+      @facility_1.add_service('Road Test')
+      expect(@facility_1.administer_road_test(@bruce)).to eq true
     end
   end
 end
