@@ -5,6 +5,7 @@ RSpec.describe Facility do
     @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
     @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
   end
+  
   describe '#initialize' do
     it 'can initialize' do
       expect(@facility_1).to be_an_instance_of(Facility)
@@ -19,9 +20,11 @@ RSpec.describe Facility do
   describe '#add service' do
     it 'can add available services' do
       expect(@facility_1.services).to eq([])
+      
       @facility_1.add_service('New Drivers License')
       @facility_1.add_service('Renew Drivers License')
       @facility_1.add_service('Vehicle Registration')
+      
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
@@ -46,13 +49,23 @@ RSpec.describe Facility do
 
       expect(@facility_1.registered_vehicles.first.registration_date).to eq(Date.today)
     end
-
-    it 'can give a plate type' do 
+  end 
+  
+  describe '#create_plate' do 
+    it 'can give a plate type :regular' do 
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
 
-      @facility_1.register_vehicle(cruz)
+      @facility_1.create_plate(cruz)
 
-      expect(@facility_1.registered_vehicles.first.plate_type(cruz)).to eq(:regular)
+      expect(cruz.plate_type).to eq(:regular)
+    end 
+
+    it 'can give a plate type :ev' do
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+
+      @facility_1.create_plate(bolt) 
+      
+      expect(bolt.plate_type).to eq(:ev)
     end 
   end 
 

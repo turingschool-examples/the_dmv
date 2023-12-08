@@ -16,12 +16,13 @@ class Facility
 
   def register_vehicle(vehicle)
     vehicle.registration_date = Date.today
-    vehicle.plate_type(vehicle)
+    create_plate(vehicle)
+    vehicle.plate_type
     @registered_vehicles << vehicle 
   end 
 
   def register_fee(vehicle)
-    case vehicle.plate_type(vehicle)
+    case vehicle.plate_type
     when :antique 
       @collected_fees += 25
     when :ev 
@@ -30,5 +31,15 @@ class Facility
       @collected_fees += 100
     end 
   end
+
+  def create_plate(vehicle)
+      if vehicle.antique? 
+        vehicle.plate_type = :antique
+      elsif vehicle.electric_vehicle?
+        vehicle.plate_type = :ev
+      else 
+        vehicle.plate_type = :regular
+      end 
+  end 
 
 end
