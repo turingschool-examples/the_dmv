@@ -23,4 +23,14 @@ describe Registrant do
       expect(@registrant_2.name).to eq("Penny")
     end
   end
+
+  describe '#age' do
+    it 'can read age' do
+
+      expect(@registrant_1.age).to eq(18)
+      expect(@registrant_2.age).to eq(15)
+    end
+  end
+
+  
 end
