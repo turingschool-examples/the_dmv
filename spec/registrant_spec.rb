@@ -11,6 +11,7 @@ RSpec.describe Registrant do
             expect(@registrant_1).to be_an_instance_of(Registrant)
             expect(@registrant_1.name).to eq("Bruce")
             expect(@registrant_1.age).to eq(18)
+            expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
         end
     end
 
@@ -21,13 +22,6 @@ RSpec.describe Registrant do
 
             @registrant_2.earn_permit
             expect(@registrant_2.permit?).to eq(true)
-        end
-    end
-
-    describe "#license data" do
-        it "can return license data" do
-            expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-            expect(@registrant_2.license_data).to eq ({:written=>false, :license=>false, :renewed=>false})
         end
     end
 end
