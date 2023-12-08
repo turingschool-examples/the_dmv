@@ -8,7 +8,7 @@ RSpec.describe Facility do
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
     @bruce = Registrant.new('Bruce', 18, true)
-    @penny = Registrant.new('Penny', 15)
+    @penny = Registrant.new('Penny', 16)
     @tucker = Registrant.new('Tucker', 15)
   end
 
@@ -103,6 +103,24 @@ RSpec.describe Facility do
       expect(@facility_1.administer_written_test(@bruce)).to eq false
       @facility_1.add_service('Written Test')
       expect(@facility_1.administer_written_test(@bruce)).to eq true
+      
+      expect(@facility_1.administer_written_test(@penny)).to eq false
+      @penny.earn_permit
+      expect(@facility_1.administer_written_test(@penny)).to eq true
+
+      expect(@facility_1.administer_written_test(@tucker)).to eq false
+      @tucker.earn_permit
+      expect(@facility_1.administer_written_test(@tucker)).to eq false    
+    end
+  end
+
+  describe '#administer_road_test' do
+    it 'can administer road test if offered that service' do
+      expect(@facility_1.administer_written_test(@bruce)).to eq false
+      @facility_1.add_service('Written Test')
+      expect(@facility_1.administer_written_test(@bruce)).to eq true
+
+      expect(@facility_1.administer_road_test(@tucker)).to eq false
     end
   end
 end
