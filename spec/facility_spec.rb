@@ -28,6 +28,12 @@ RSpec.describe Facility do
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
-
   
+  describe '#registered_vehicles' do
+    it 'starts as an empty array' do
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.registered_vehicles).to eq ([])
+      expect(@facility_2.registered_vehicles).to eq ([])
+    end
+  end
 end
