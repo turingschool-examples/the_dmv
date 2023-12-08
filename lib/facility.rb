@@ -27,7 +27,9 @@ class Facility
       @registered_vehicles << vehicle
     end
   end
-
+# could make vehicle class actually take care of this and have facility
+# just tell it to do that
+# would have to move tests and refactor those as well
   def plate_maker(vehicle)
     if vehicle.antique?
       vehicle.plate_type = :antique

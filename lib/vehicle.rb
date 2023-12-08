@@ -1,7 +1,8 @@
 require 'date'
 
 class Vehicle
-
+# challenge for refactoring: remove attr_accessor and create methods to 
+# change the necessary attributes here instead of other classes
   attr_accessor :registration_date,
                 :plate_type,
                 :vin,
