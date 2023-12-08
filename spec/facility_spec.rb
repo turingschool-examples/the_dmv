@@ -74,7 +74,7 @@ RSpec.describe Facility do
     it 'makes an antique plate when vehicle is over 25 years old' do
       camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
 
-      plate_maker(camaro)
+      @facility.plate_maker(camaro)
 
       expect(camaro.plate_type).to eq(:antique)
     end
@@ -82,7 +82,7 @@ RSpec.describe Facility do
     it 'makes an ev plate when vehicle is an ev engine' do
       bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
 
-      plate_maker(bolt)
+      @facility.plate_maker(bolt)
 
       expect(bolt.plate_type).to eq(:ev)
     end
@@ -90,7 +90,7 @@ RSpec.describe Facility do
     it 'makes a regular plate when a vehicle is newer than 25 years and is not an ev engine' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
 
-      plate_maker(cruz)
+      @facility.plate_maker(cruz)
 
       expect(cruz.plate_type).to eq(:regular)
     end
@@ -103,5 +103,4 @@ RSpec.describe Facility do
 
     #   expect(@facility.collected_fees).to eq(100)
     # end
-  end
 end
