@@ -12,6 +12,10 @@ class Registrant
   end
 
   def permit?
-    @permit 
+    @permit
+  end
+
+  def earn_permit
+    @permit = true
   end
 end
