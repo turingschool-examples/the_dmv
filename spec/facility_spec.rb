@@ -48,8 +48,7 @@ RSpec.describe Facility do
       expect(@facility_2.collected_fees).to eq(0)
     end
 
-    it "cannot register a vehicle at multiple facilities" do
-      @facility_1.register_vehicle(@bolt)
+    it "cannot complete registration if not offered at facility" do
       @facility_2.register_vehicle(@bolt)
 
       expect(facility_2.registered_vehicles).to eq([])
