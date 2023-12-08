@@ -8,11 +8,13 @@ class Facility
     @phone = facility_info[:phone]
     @services = []
   end
-
-  def add_services(service)
+# binding.pry
+  def add_service(service)
     @services << service
   end
 end
 
 
 # First error: Test shows that facility only has 1 argument passing which was a hash. The OG file had 3 arguments (name,address,phone). We need to put all of those arguments in one hash to create 1 argument.
+
+# Second error: Mispelling of 'service' in 'add-service' method
