@@ -32,10 +32,25 @@ describe Registrant do
     end
   end
 
-  describe '#permit' do
+  describe '#permit?' do
     it 'doesnt have a permit by defult' do
 
       expect(@registrant_2.permit?).to eq(false)
+    end
+  end
+
+  describe '#permit?' do
+    it 'can have a permit' do
+
+      expect(@registrant_1.permit?).to eq(true)
+    end
+  end
+
+  describe '#license_data' do
+    it 'returns the value of license data' do
+
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
 end
