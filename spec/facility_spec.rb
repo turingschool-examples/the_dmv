@@ -96,7 +96,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#collected_fees'
+  describe '#collected_fees' do
     it 'starts with no collected fees' do
       expect(@facility.collected_fees).to eq(0)
     end
@@ -122,7 +122,7 @@ RSpec.describe Facility do
 
       @facility.register_vehicle(bolt)
 
-      expect(bolt.collected_fees).to eq(:200)
+      expect(@facility.collected_fees).to eq(200)
     end
 
     it 'can collects fees from multiple registrations' do
@@ -142,6 +142,7 @@ RSpec.describe Facility do
     it 'collects 100 dollars when registering a car with :regular plates' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
 
+      @facility.plate_maker(cruz)
       @facility.fee_collector(cruz)
 
       expect(@facility.collected_fees).to eq(100)
@@ -150,6 +151,7 @@ RSpec.describe Facility do
     it 'collects 25 dollars when registering a car with :antique plates' do
       camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
 
+      @facility.plate_maker(camaro)
       @facility.fee_collector(camaro)
 
       expect(@facility.collected_fees).to eq(25)
@@ -158,9 +160,10 @@ RSpec.describe Facility do
     it 'collects 200 dollars when registering a car with :ev plates' do
       bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
 
-      @facility.register_vehicle(bolt)
+      @facility.plate_maker(bolt)
+      @facility.fee_collector(bolt)
 
-      expect(bolt.collected_fees).to eq(:200)
+      expect(@facility.collected_fees).to eq(200)
     end
   end
 end
