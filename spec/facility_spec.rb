@@ -52,7 +52,16 @@ RSpec.describe Facility do
 
       @facility_1.register_vehicle(cruz)
 
-      expect(@facility_1.registered_vehicles.first.plate_type).to eq(:regular)
+      expect(@facility_1.registered_vehicles.first.plate_type(cruz)).to eq(:regular)
+    end 
+  
+    it 'collects right fee amount' do 
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      
+      @facility_1.register_vehicle(cruz)
+      @facility_1.register_fee(cruz) 
+
+      expect(@facility_1.collected_fees).to eq(100)
     end 
   end 
 end

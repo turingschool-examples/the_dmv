@@ -1,5 +1,5 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles
+  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
   def initialize(hash)
     @name = hash[:name]
@@ -7,7 +7,7 @@ class Facility
     @phone = hash[:phone]
     @services = []
     @registered_vehicles = []
-    @collected_fees = []
+    @collected_fees = 0
   end
 
   def add_service(service)
@@ -21,9 +21,7 @@ class Facility
   end 
 
   def register_fee(vehicle)
-    plate_type = vehicle.plate_type
-
-    case plate_type 
+    case vehicle.plate_type(vehicle)
     when :antique 
       @collected_fees += 25
     when :ev 
@@ -32,6 +30,5 @@ class Facility
       @collected_fees += 100
     end 
   end
-
 
 end
