@@ -7,7 +7,7 @@ class Vehicle
               :model,
               :engine
 
-  def initialize(vehicle_details)
+  def initialize(vehicle_details) 
     @vin = vehicle_details[:vin]
     @year = vehicle_details[:year]
     @make = vehicle_details[:make]
@@ -22,4 +22,8 @@ class Vehicle
   def electric_vehicle?
     @engine == :ev
   end
+  def registration_date
+
+  end
+
 end
