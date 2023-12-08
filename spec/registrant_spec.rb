@@ -62,7 +62,7 @@ RSpec.describe Registrant do
             
             registrant_1.earn_permit
 
-            expect(registrant_2.permit?).to eq(true)
+            expect(registrant_1.permit?).to eq(true)
         end
     end
 end

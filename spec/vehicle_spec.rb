@@ -33,4 +33,10 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe '#registration_date' do
+    it 'can tell you the registration date of an ev' do
+      expect(@cruz.registration_date).to eq(nil)
+    end
+  end
 end
