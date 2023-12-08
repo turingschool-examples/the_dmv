@@ -38,4 +38,14 @@ class Analytics
     most_popular_model = model_count.max_by {|make,count| count}
     result = {most_popular_make: most_popular_make, most_popular_model: most_popular_model}
   end
+
+  def count_registered_vehicles_by_model_year(ev_registrations)
+    model_year_count = Hash.new(0)
+
+    ev_registrations.each do |registration|
+      model_year_count[registration[:model_year]] += 1
+    end
+
+    model_year_count
+  end
 end
