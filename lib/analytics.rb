@@ -48,4 +48,15 @@ class Analytics
 
     model_year_count
   end
+
+  def find_most_registered_county(ev_registrations)
+    county_count = Hash.new(0)
+
+    ev_registrations.each do |registration|
+      county_count[registration[:county]] += 1
+    end
+
+    most_registered_county = county_count.max_by{|county, count| count}
+    most_registered_county
+  end
 end
