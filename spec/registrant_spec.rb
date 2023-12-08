@@ -11,8 +11,16 @@ RSpec.describe Registrant do
         end 
     end 
 
-    describe 'permit?' do 
-        it "has a permit" do 
+    describe '#license_data' do 
+        it 'accesses hash data' do 
+            registrant_1 = Registrant.new('Bruce', 18, true)
+
+            expect(registrant_1.license_data).to eq ({written: false, license: false, renewed: false})
+        end 
+    end 
+    
+    describe '#permit?' do 
+        it 'has a permit' do 
             registrant_1 = Registrant.new('Bruce', 18, true)
             registrant_2 = Registrant.new('Penny', 15 ) 
 
@@ -21,5 +29,14 @@ RSpec.describe Registrant do
         end 
     end 
 
+    describe '#earn_permit' do 
+        it 'earns a permit' do 
+            registrant_2 = Registrant.new('Penny', 15 )
+
+            registrant_2.earn_permit 
+
+            expect(registrant_2.permit?).to eq true
+        end 
+    end 
 end 
 
