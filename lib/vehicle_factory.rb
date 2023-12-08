@@ -21,5 +21,4 @@ class VehicleFactory
         end
         wa_ev_vehicles_array
     end
-
 end
