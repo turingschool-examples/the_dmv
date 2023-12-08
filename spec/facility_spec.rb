@@ -133,4 +133,18 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(200)
     end 
   end 
+
+  describe '#administer_written_test(person)' do 
+    it 'does not administer a written' do 
+      expect(@facility_1.services).to eq([])
+
+      registrant_1 = Registrant.new('Bruce', 18, true )
+
+      @facility_1.administer_written_test(registrant_1)
+
+      expect(@facility_1.administer_written_test(registrant_1)).to eq(false)
+    end 
+  end 
+
+
 end

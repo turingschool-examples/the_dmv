@@ -47,4 +47,11 @@ class Facility
       vehicle.plate_type
   end 
 
+  def administer_written_test(person) 
+    if services.include?("Written Test")
+      true 
+    else 
+      false 
+    end 
+  end 
 end
