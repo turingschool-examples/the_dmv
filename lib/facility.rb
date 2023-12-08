@@ -6,6 +6,8 @@ class Facility
     @address = attributes[:address]
     @phone = attributes[:phone]
     @services = []
+    @registered_vehicles = []
+    @collected_fees = 0
   end
 
   def add_service(service)
