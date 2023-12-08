@@ -50,8 +50,27 @@ RSpec.describe Facility do
 
       expect(@facility_1.registered_vehicles).to eq [@cruz, @bolt]
     end
+  end
+
+  describe '#collected_fees' do
+    it 'start as 0' do
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.registered_vehicles).to eq ([])
+      expect(@facility_1.collected_fees).to eq 0
+    end
 
     it 'collects fees when registering vehicles' do
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.registered_vehicles).to eq ([])
+      expect(@facility_1.collected_fees).to eq 0
+
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.collected_fees).to eq 100
+    end
+  end 
+
+  describe '#collect_fees' do
+    it 'add different fees depending on the vehicle' do
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.registered_vehicles).to eq ([])
       expect(@facility_1.collected_fees).to eq 0
@@ -61,15 +80,9 @@ RSpec.describe Facility do
 
       @facility_1.register_vehicle(@camaro)
       expect(@facility_1.collected_fees).to eq 125
+
+      @facility_1.register_vehicle(@bolt)
+      expect(@facility_1.collected_fees).to eq 325
     end
   end
-
-  describe '#collected_fees' do
-    it 'start as 0' do
-      @facility_1.add_service('Vehicle Registration')
-      expect(@facility_1.registered_vehicles).to eq ([])
-      
-      expect(@facility_1.collected_fees).to eq 0
-    end
-  end 
 end
