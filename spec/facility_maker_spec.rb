@@ -147,7 +147,7 @@ RSpec.describe FacilityMaker do
 
             facility_creator.facility_maker
 
-            expect(facility_creator.new_facilities.first.class).to be_a(Facility)
+            expect(facility_creator.new_facilities.first).to be_a(Facility)
             expect(facility_creator.new_facilities.first.name).not_to eq(nil)
             expect(facility_creator.new_facilities.last.phone).not_to eq(nil)
             expect(facility_creator.new_facilities.last.address).not_to eq(nil)
@@ -157,7 +157,7 @@ RSpec.describe FacilityMaker do
 
             facility_creator_1.facility_maker
 
-            expect(facility_creator_1.new_facilities.first.class).to be_a(Facility)
+            expect(facility_creator_1.new_facilities.first).to be_a(Facility)
             expect(facility_creator_1.new_facilities.first.name).not_to eq(nil)
             expect(facility_creator_1.new_facilities.last.phone).not_to eq(nil)
             expect(facility_creator_1.new_facilities.last.address).not_to eq(nil)
@@ -167,7 +167,7 @@ RSpec.describe FacilityMaker do
 
             facility_creator_2.facility_maker
 
-            expect(facility_creator_2.new_facilities.first.class).to be_a(Facility)
+            expect(facility_creator_2.new_facilities.first).to be_a(Facility)
             expect(facility_creator_2.new_facilities.first.name).not_to eq(nil)
             expect(facility_creator_2.new_facilities.last.phone).not_to eq(nil)
             expect(facility_creator_2.new_facilities.last.address).not_to eq(nil)

@@ -61,5 +61,11 @@ class FacilityMaker
             @new_facilities << Facility.new(@new_facility_data)
         end
     end
+
+    def facility_maker
+        facility_maker_co
+        facility_maker_mo
+        facility_maker_ny
+    end
 end
 
