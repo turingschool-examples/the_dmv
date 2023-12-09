@@ -35,7 +35,18 @@ class Analyzer
 
     def count_by_model_year(year, vehicles)
         vehicles.count do |vehicle|
-            vehicle.year == year.to_s
+            vehicle.year.to_s == year.to_s
         end
+    end
+
+    def county_with_most_registrations(vehicles)
+        counties = []
+        vehicles.each do |vehicle|
+            counties << vehicle.county
+        end
+        counties = counties.tally.max_by do |county, count|
+            count
+        end
+        counties.first
     end
 end
