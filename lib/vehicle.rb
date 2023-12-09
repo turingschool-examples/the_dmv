@@ -1,3 +1,4 @@
+require './lib/facility'
 require 'date'
 
 class Vehicle
@@ -5,9 +6,9 @@ class Vehicle
               :year,
               :make,
               :model,
-              :engine,
-              :registration_date,
-              :plate_type
+              :engine
+
+  attr_accessor :registration_date, :plate_type
 
   def initialize(vehicle_details)
     @vin = vehicle_details[:vin]
@@ -27,11 +28,6 @@ class Vehicle
     @engine == :ev
   end
 
-  def  register_vehicle(vehicle)
-    @services.include?('Vehicle Registration')
-
-  end
-
 
   def registration_fee(vehicle)
     if vehicle.antique?
@@ -41,6 +37,11 @@ class Vehicle
     else
       100
     end
+  end
+
+  def register(date, plate_type)
+    @registration_date = date
+    @plate_type = plate_type
   end
 
 end
