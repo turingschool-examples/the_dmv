@@ -1,7 +1,7 @@
 class VehicleFactory
 
     def create_vehicles(source)
-        wa_ev_vehicles_array = []
+        @wa_ev_vehicles_array = []
         source.each do |vehicle_details|
                 vin = vehicle_details[:vin_1_10],
                 year = vehicle_details[:model_year],
@@ -17,8 +17,19 @@ class VehicleFactory
                     registration_date: nil,
                     plate_type: nil
                 })
-            wa_ev_vehicles_array << wa_ev_vehicle
+            @wa_ev_vehicles_array << wa_ev_vehicle
         end
-        wa_ev_vehicles_array
+        @wa_ev_vehicles_array
     end
+
+    def most_popular_make
+        array_grouped_by_make = @wa_ev_vehicles_array.group_by do |vehicle|
+            vehicle.make
+        end
+        most_popular_make = array_grouped_by_make.max_by do |pair, occurrences|
+            occurrences.size
+        end
+        most_popular_make.first
+    end    
+
 end
