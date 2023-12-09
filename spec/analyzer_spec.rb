@@ -89,4 +89,18 @@ RSpec.describe Analyzer do
             expect(analyzer.count_by_model_year(2012, vehicles)).to eq(2)
         end
     end
+
+    describe '#county_with_most_registrations(vehicles)' do
+        it 'can tell you the county with the most vehicle registrations' do
+            cruz_1 = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice, county: 'King'})
+            cruz_2 = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice, county: 'King'})
+            camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice, county: 'King'})
+            bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev, county: 'Queen'})
+            analyzer = Analyzer.new
+
+            vehicles = [cruz_1, cruz_2, camaro, bolt]
+
+            expect(analyzer.county_with_most_registrations(vehicles)).to eq('King')
+        end
+    end
 end
