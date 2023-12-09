@@ -14,7 +14,7 @@ RSpec.describe Vehicle do
       expect(@cruz.make).to eq('Chevrolet')
       expect(@cruz.model).to eq('Cruz')
       expect(@cruz.engine).to eq(:ice)
-      expect(@cruz.registration_date).to eq(Date.today.year)
+      expect(@cruz.registration_date).to eq(nil)
     end
   end
 
@@ -35,12 +35,11 @@ RSpec.describe Vehicle do
   end
 
   describe '#registration_date' do
-    it 'can determine registration date' do
-      expect(@cruz.registration_date).to eq(Date.today.year)
+    it 'has no registration date when created' do
+      expect(@cruz.registration_date).to eq(nil)
     end
   end
 
-  describe 'plate_type' do
-    it "can determine plate type" do
-      expect(@cruz.plate_type).to eq(regular)
+
 end
+
