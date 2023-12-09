@@ -41,9 +41,9 @@ class Facility
     end
   end
 
-  # def calculate_registration_fee(vehicle)
-  #   return 25 if vehicle.antique?
-  #   return 200 if vehicle.electric_vehicle?
-  #   100
-  # end
+  def calculate_registration_fee(vehicle)
+    return 25 if vehicle.antique?
+    return 200 if vehicle.electric_vehicle?
+    100
+  end
 end
