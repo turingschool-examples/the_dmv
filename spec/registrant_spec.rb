@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Registrant do
+RSpec.describe Registrant do
    before(:each) do
       @bruce = Registrant.new('Bruce', 18, true)
       @penny = Registrant.new('Penny', 15)
