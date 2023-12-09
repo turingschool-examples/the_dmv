@@ -14,7 +14,7 @@ RSpec.describe Vehicle do
       expect(@cruz.make).to eq('Chevrolet')
       expect(@cruz.model).to eq('Cruz')
       expect(@cruz.engine).to eq(:ice)
-      expect(@cruz.registration_date).to eq(nil)
+      expect(@cruz.registration_date).to eq()
     end
   end
 
@@ -33,4 +33,11 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe '#registration_date' do
+    it 'can determine registration date' do
+      expect(cruz.registration_date).to eq(date.time.now)
+      
+      
+    end
 end

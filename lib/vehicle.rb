@@ -22,8 +22,17 @@ class Vehicle
   def electric_vehicle?
     @engine == :ev
   end
-  def registration_date
 
+  def registration_date
+    date.time.now
+    
+  end
+
+  def plate_type{
+    :regular,
+    :antique,
+    :ev
+  }
   end
 
 end

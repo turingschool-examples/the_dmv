@@ -3,7 +3,7 @@ class Registrant
     def initialize(name, age, permit = false)
         @name = name
         @age = age
-        @permit = permit
+        @permit = permit #{:permit => false}
         @license_data = { 
         :written => false, 
         :license => false, 
