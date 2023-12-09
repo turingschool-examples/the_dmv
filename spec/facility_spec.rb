@@ -200,4 +200,19 @@ RSpec.describe Facility do
       expect(@facility_1.administer_written_test(registrant_2)).to eq(true)
     end 
   end 
+
+  describe '#administer_road_test(registrant)' do 
+    it 'will not administer road test if person did not pass written test' do 
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Written Test')
+      expect(@facility_1.services).to eq(['Road Test', 'Written Test'])
+
+      registrant_3 = Registrant.new('Tucker', 15 )
+      expect(@facility_1.administer_road_test(registrant_3)).to eq(false)
+
+      @facility_1.administer_written_test(registrant_3)
+
+      expect(@facility_1.administer_road_test(registrant_3)).to eq(false)
+    end 
+  end 
 end
