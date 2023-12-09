@@ -28,18 +28,18 @@ class Facility
     end
   end
 
-  # def set_plate_type(vehicle)
-  #   # vehicle.plate_type = plate_type
-  #   if vehicle.antique?
-  #     vehicle.plate_type = :antique
+  def set_plate_type(vehicle)
+    # vehicle.plate_type = plate_type
+    if vehicle.antique?
+      vehicle.plate_type = :antique
 
-  #   elsif vehicle.electric_vehicle?
-  #     vehicle.plate_type = :ev
+    elsif vehicle.electric_vehicle?
+      vehicle.plate_type = :ev
 
-  #   else
-  #     vehicle.plate_type = :regular
-  #   end
-  # end
+    else
+      vehicle.plate_type = :regular
+    end
+  end
 
   # def calculate_registration_fee(vehicle)
   #   return 25 if vehicle.antique?
