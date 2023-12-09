@@ -16,7 +16,13 @@ class OfficeLocations
         co_dmv_facilities_array = []
         source.each do |facility_information|
                 name = facility_information[:dmv_office],
-                address = facility_information[:address_li],
+                address = {
+                    street1: facility_information[:address_li],
+                    street2: facility_information[:address_1],
+                    city: facility_information[:city],
+                    state: facility_information[:state],
+                    zip_code: facility_information[:zip]
+                    },
                 phone = facility_information[:phone],
                 services = facility_information[:services_p]
             
@@ -37,7 +43,12 @@ class OfficeLocations
         ny_dmv_facilities_array = []
         source.each do |facility_information|
                 name = facility_information[:office_name],
-                address = facility_information[:street_address_line_1],
+                address = {
+                    street: facility_information[:street_address_line_1],
+                    city: facility_information[:city],
+                    state: facility_information[:state],
+                    zip_code: facility_information[:zip_code]
+                    },
                 phone = facility_information[:public_phone_number]
             
                 facility = Facility.new({
@@ -57,7 +68,12 @@ class OfficeLocations
     mo_dmv_facilities_array = []
         source.each do |facility_information|
                 name = facility_information[:name],
-                address = facility_information[:address1],
+                address = {
+                    street: facility_information[:address1],
+                    city: facility_information[:city],
+                    state: facility_information[:state],
+                    zip_code: facility_information[:zipcode]
+                    },
                 phone = facility_information[:phone],
                 services = facility_information[:additional_license_office_info]
             
