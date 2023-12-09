@@ -13,7 +13,16 @@ RSpec.describe VehicleFactory do
    describe '#create_vehicles' do
       it 'can create vehicles from dmv data service' do
          wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-         expect(@factory.create_vehicles(wa_ev_registrations)).to be_an Array         
+         @vehicles_array = @factory.create_vehicles(wa_ev_registrations)
+         
+         expect(@vehicles_array).to be_an Array
+         
+         expect(@vehicles_array).to all(be_a(Vehicle))
+         expect(@vehicles_array.first.make).not_to eq(nil)
+         expect(@vehicles_array.first.model).not_to eq(nil)
+         expect(@vehicles_array.first.year).not_to eq(nil) 
+         expect(@vehicles_array.first.vin).not_to eq(nil) 
+         expect(@vehicles_array.first.engine).not_to eq(nil) 
       end
    end   
 
