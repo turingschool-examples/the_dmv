@@ -139,4 +139,38 @@ RSpec.describe FacilityMaker do
             expect(facility_maker.new_facilities.last.collected_fees).to eq(0)
         end
     end
+
+    describe '#facility_maker' do
+        it 'can create facilities with MO, CO, or NY data sets' do
+            mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
+            facility_creator = FacilityMaker.new(mo_dmv_office_locations)
+
+            facility_creator.facility_maker
+
+            expect(facility_creator.new_facilities.first.class).to be_a(Facility)
+            expect(facility_creator.new_facilities.first.name).not_to eq(nil)
+            expect(facility_creator.new_facilities.last.phone).not_to eq(nil)
+            expect(facility_creator.new_facilities.last.address).not_to eq(nil)
+
+            ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
+            facility_creator_1 = FacilityMaker.new(ny_dmv_office_locations)
+
+            facility_creator_1.facility_maker
+
+            expect(facility_creator_1.new_facilities.first.class).to be_a(Facility)
+            expect(facility_creator_1.new_facilities.first.name).not_to eq(nil)
+            expect(facility_creator_1.new_facilities.last.phone).not_to eq(nil)
+            expect(facility_creator_1.new_facilities.last.address).not_to eq(nil)
+
+            co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+            facility_creator_2 = FacilityMaker.new(co_dmv_office_locations)
+
+            facility_creator_2.facility_maker
+
+            expect(facility_creator_2.new_facilities.first.class).to be_a(Facility)
+            expect(facility_creator_2.new_facilities.first.name).not_to eq(nil)
+            expect(facility_creator_2.new_facilities.last.phone).not_to eq(nil)
+            expect(facility_creator_2.new_facilities.last.address).not_to eq(nil)
+        end
+    end
 end
