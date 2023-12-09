@@ -32,4 +32,10 @@ class Analyzer
         @most_popular_vehicle << most_popular_model(vehicles).first
         @most_popular_vehicle
     end
+
+    def count_by_model_year(year, vehicles)
+        vehicles.count do |vehicle|
+            vehicle.year == year.to_s
+        end
+    end
 end

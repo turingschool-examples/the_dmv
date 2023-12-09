@@ -74,7 +74,7 @@ RSpec.describe Analyzer do
         end
     end
 
-    describe '#count_by_model_year(year)' do
+    describe '#count_by_model_year(year, vehicles)' do
         it 'can count vehicles registered by their model year' do
             cruz_1 = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
             cruz_2 = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
@@ -82,9 +82,11 @@ RSpec.describe Analyzer do
             bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
             analyzer = Analyzer.new
 
-            expect(analyzer.count_by_model_year(2019)).to eq(1)
-            expect(analyzer.count_by_model_year(1969)).to eq(1)
-            expect(analyzer.count_by_model_year(2012)).to eq(2)
+            vehicles = [cruz_1, cruz_2, camaro, bolt]
+
+            expect(analyzer.count_by_model_year(2019, vehicles)).to eq(1)
+            expect(analyzer.count_by_model_year(1969, vehicles)).to eq(1)
+            expect(analyzer.count_by_model_year(2012, vehicles)).to eq(2)
         end
     end
 end
