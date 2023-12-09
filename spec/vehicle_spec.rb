@@ -48,5 +48,40 @@ RSpec.describe Vehicle do
       expect(@cruz.plate_type).to eq :regular
     end
   end
-    
+  
+  describe '#change_plate_type' do
+    it 'change the vehicle plate to regular type when vehicle registered' do
+      @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@cruz.plate_type).to eq :regular   
+    end
+
+    it 'change the vehicle plate to ev type when vehicle registered' do
+      @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@bolt)
+
+      expect(@bolt.plate_type).to eq :ev   
+    end
+
+    it 'change the vehicle plate to antique type when vehicle registered' do
+      @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@camaro)
+
+      expect(@camaro.plate_type).to eq :antique  
+    end
+  end
+
+  describe '#register' do
+    it 'can register vehicle' do
+      @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@camaro)
+
+      expect(@camaro.registration_date).to eq (Date.today)
+    end
+  end
 end
