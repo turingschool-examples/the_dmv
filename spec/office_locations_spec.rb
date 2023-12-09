@@ -20,6 +20,17 @@ RSpec.describe OfficeLocations do
         expect(office_location.create_facility(missouri_facilities)).to be_a Array
     end
 
+    it "#daily_hours" do
+        office_location = OfficeLocations.new
+        co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+        new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+        missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+
+        expect(office_location.daily_hours(co_dmv_office_locations)).to be_a Hash
+        expect(office_location.daily_hours(new_york_facilities)).to be_a Hash 
+        expect(office_location.daily_hours(missouri_facilities)).to be_a Hash  
+    end
+
     it "has Colorado DMV information" do
         office_location = OfficeLocations.new
         co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations

@@ -10,8 +10,23 @@ class OfficeLocations
                 mo_create_facility(source)
             end
         end
-    end      
+    end
 
+    def daily_hours(source)
+        daily_hours = {}   
+            source.each do |facility|
+                if facility.keys.include?(:dmv_office)
+                daily_hours[facility[:dmv_office]] = facility[:hours]
+                elsif facility.keys.include?(:office_name)
+                daily_hours[facility[:dmv_office]] = facility[:hours]
+                elsif facility.keys.include?(:name)
+                daily_hours[facility[:name]] = facility[:hours]
+                end
+            end
+        daily_hours
+    end
+          
+      
     def co_create_facility(source)
         co_dmv_facilities_array = []
         source.each do |facility_information|
