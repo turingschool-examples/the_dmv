@@ -50,7 +50,6 @@ class Facility
 
   end
 end
-
 # First error: Test shows that facility only has 1 argument passing which was a hash. The first version had 3 arguments (name,address,phone). We need to put all of those arguments in one hash to create 1 argument.
 
 # Second error: Mispelling of 'service' in 'add-service' method
