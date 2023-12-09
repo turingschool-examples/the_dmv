@@ -25,7 +25,7 @@ class Facility
 
   def register_vehicle(vehicle)
     if @services.include?("Vehicle Registration")
-      vehicle.registration_date = Date.today
+      vehicle.register
       collect_fees(vehicle)
       change_plate(vehicle)
       registered_vehicles << vehicle
@@ -45,13 +45,7 @@ class Facility
   end
 
   def change_plate(vehicle)
-    if vehicle.antique?
-      vehicle.plate_type = :antique
-    elsif vehicle.electric_vehicle?
-      vehicle.plate_type = :ev
-    else
-      vehicle.plate_type = :regular
-    end
+    vehicle.change_plate_type
   end
 
   def administer_written_test(registrant)
