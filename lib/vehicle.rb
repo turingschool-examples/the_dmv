@@ -24,15 +24,24 @@ class Vehicle
   end
 
   def registration_date
-    date.time.now
+    Date.today.year
     
   end
 
-  def plate_type{
+  def plate_type(
     :regular,
     :antique,
+    :ev)
+  
+  if @engine == ice && registration_date = date.today.year > 25
+    :antique
+    #cost 25
+  elsif @engine == ice && registration_date = date.today.year < 25
+    :regular
+    #cost 100
+  else @engine == ev
     :ev
-  }
+    #cost 200
   end
 
 end
