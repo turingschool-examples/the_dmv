@@ -58,7 +58,7 @@ RSpec.describe FacilityMaker do
         it 'stores data from external source in all necessary keys' do
             ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
             facility_maker = FacilityMaker.new(ny_dmv_office_locations)
-            
+
             facility_maker.data_organizer_ny
 
             expect(facility_maker.new_facility_data[:name]).not_to eq(nil)
@@ -66,6 +66,7 @@ RSpec.describe FacilityMaker do
             expect(facility_maker.new_facility_data[:phone]).not_to eq(nil)
         end
     end
+
     describe '#facility_maker_ny' do
         it 'does not create New York facilities unless it recieves New York dmv data' do
             co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
