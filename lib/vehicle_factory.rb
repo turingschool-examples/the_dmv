@@ -32,4 +32,14 @@ class VehicleFactory
         most_popular_make.first
     end    
 
+    def most_popular_model
+        array_grouped_by_model = @wa_ev_vehicles_array.group_by do |vehicle|
+            vehicle.model
+        end
+        most_popular_model = array_grouped_by_model.max_by do |pair, occurrences|
+            occurrences.size
+        end
+        most_popular_model.first    
+    end
+
 end
