@@ -10,4 +10,11 @@ RSpec.describe VehicleFactory do
       end
    end
 
+   describe '#create_vehicles' do
+      it 'can create vehicles from dmv data service' do
+         wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+         expect(@factory.create_vehicles(wa_ev_registrations)).to be_an Array         
+      end
+   end   
+
 end
