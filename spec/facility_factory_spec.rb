@@ -12,8 +12,8 @@ RSpec.describe FacilityFactory do
 
    describe '#create_facilities' do
       it 'can create facilities from dmv data service' do
-         wa_ev_registrations = DmvDataService.new.wa_ev_registrations
-         expect(@factory.create_facilities(wa_ev_registrations)).to be_an Array         
+         colorado = DmvDataService.new.co_dmv_office_locations
+         expect(@factory.create_facilities(colorado)).to be_an Array         
       end
    end   
 
