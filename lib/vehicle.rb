@@ -1,5 +1,3 @@
-require 'date'
-
 class Vehicle
   attr_reader :vin,
               :year,
@@ -24,4 +22,14 @@ class Vehicle
   def electric_vehicle?
     @engine == :ev
   end
+
+  def registration_date(date = nil)
+      return nil if date.nil?
+      
+      formatted_date = DateTime.parse(date).strftime('%Y-%m-%d')
+      @registration_dates << formatted_date
+  rescue ArgumentError
+      puts "Invalid date format. Please provide a valid date."
+  end
 end
+
