@@ -1,10 +1,18 @@
 class OfficeLocations
 
-    def create_facility(source)
-        
-    end
+    # def create_facility(source)
+    #     source.each do |facility_information|
+    #         if facility_information.key?(:dmv_office)
+    #             co_create_facility
+    #         elsif facility_information.key?(:office_name)
+    #             ny_create_facility
+    #         else
+    #             mo_create_facility
+    #         end
+    #     end
+    # end
 
-    def co_create_facility
+    def co_create_facility(source)
         co_dmv_facilities_array = []
         source.each do |facility_information|
                 name = facility_information[:dmv_office],
@@ -25,7 +33,7 @@ class OfficeLocations
         co_dmv_facilities_array
     end
 
-    def ny_create_facility
+    def ny_create_facility(source)
         ny_dmv_facilities_array = []
         source.each do |facility_information|
                 name = facility_information[:office_name],
@@ -36,7 +44,7 @@ class OfficeLocations
                     name: name,
                     address: address,
                     phone: phone,
-                    services: []
+                    services: [],
                     registered_vehicle: [],
                     collected_fees: 0
                 })
@@ -45,7 +53,7 @@ class OfficeLocations
         ny_dmv_facilities_array
     end
 
-    def mo_create_facility
+    def mo_create_facility(source)
     mo_dmv_facilities_array = []
         source.each do |facility_information|
                 name = facility_information[:name],
@@ -65,5 +73,4 @@ class OfficeLocations
         end
         mo_dmv_facilities_array
     end
-
 end
