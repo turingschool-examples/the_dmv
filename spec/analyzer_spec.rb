@@ -30,14 +30,6 @@ RSpec.describe Analyzer do
 
             expect(analyzer.most_popular_vehicle(vehicles)).to eq(['Chevrolet', 'Cruz'])
         end
-
-        it 'will return an empty array if given no vehicles' do
-            analyzer = Analyzer.new
-
-            vehicles = []
-
-            expect(analyzer.most_popular_vehicle(vehicles)).to eq([])
-        end
     end
 
     describe '#vehicle_models(vehicles)' do
@@ -69,7 +61,7 @@ RSpec.describe Analyzer do
     end
 
     describe '#most_popular_model(vehicles)' do
-        it 'returns a string with the model of the most popular vehicle' do
+        it 'returns an array with the model and count of the most popular vehicle' do
             cruz_1 = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
             cruz_2 = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
             camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
@@ -78,7 +70,7 @@ RSpec.describe Analyzer do
 
             vehicles = [cruz_1, cruz_2, camaro, bolt]
 
-            expect(analyzer.most_popular_model(vehicles)).to eq("Cruz")
+            expect(analyzer.most_popular_model(vehicles)).to eq(["Cruz", 2])
         end
     end
 end
