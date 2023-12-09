@@ -52,9 +52,20 @@ class VehicleFactory
         end
         counts[model_year]
     end
-    # County with most registered vehicles
-    def county_with_most_vehicles
-        # use #create_vehicles to make a factory, search the [:county] or something
+
+    def county_with_most_vehicles(source)
+        grouped_by_county = source.group_by do |vehicle|
+            vehicle[:county]
+        end
+        #Use .transform_values to get the counts for the specified model year
+        counts = grouped_by_county.transform_values do |vehicles_by_county|
+            vehicles_by_county.size
+        end
+        max_pair = counts.max_by do |county, count|
+            count
+        end
+        most_vehicles_by_county = max_pair&.first
+        most_vehicles_by_county
     end
 
 end

@@ -64,17 +64,10 @@ RSpec.describe do
         expect(vehicle_factory.count_vehicles_for_model_year(2023)).to eq(2)
     end
 
-    xit "#county_with_most_vehicles" do
-        ev1 = { vin_1_10: "5YJ3E1EC6L", model_year: 2020, make: "TESLA", model: "Model 3" }
-        ev2 = { vin_1_10: "7SAYGDEE8P", model_year: 2023, make: "TESLA", model: "Model Y" }
-        ev3 = { vin_1_10: "1G1FZ6S0XK", model_year:  2023, make: "CHEVROLET", model: "Bolt EV" }
-        ev4 = { vin_1_10: "5YJ3E1EC6L", model_year: 2020, make: "TESLA", model: "Model 3" }
-        ev5 = { vin_1_10: "7SASADDFDF", model_year:  2020, make: "TESLA", model: "Model 3" }
-        ev_source_array = [ev1, ev2, ev3, ev4, ev5]
-        vehicle_factory = VehicleFactory.new
-        vehicles = vehicle_factory.create_vehicles(ev_source_array)
+    it "#county_with_most_vehicles" do
+        factory = VehicleFactory.new
+        wa_ev_registrations = DmvDataService.new.wa_ev_registrations
 
-        # add [:county]? sort by county => county_name frequency 
-         
+        expect(factory.county_with_most_vehicles(wa_ev_registrations)).to eq("King")
     end
 end
