@@ -14,7 +14,6 @@ class Facility
     @services << service
   end
  
-
   def register_vehicle(vehicle)
     if services.include?('Vehicle Registration')
       create_plate(vehicle)

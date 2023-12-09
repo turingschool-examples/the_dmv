@@ -9,7 +9,6 @@ class Vehicle
                 :registration_date,
                 :plate_type
                 
-
   def initialize(vehicle_details)
     @vin = vehicle_details[:vin]
     @year = vehicle_details[:year]
