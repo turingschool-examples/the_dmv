@@ -20,7 +20,11 @@ class Facility
     
     registered_vehicles << car if 
     @services.include?("Vehicle Registration")
-  end
+
+  
+  end 
+
+
 
 
 
