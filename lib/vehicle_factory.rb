@@ -42,4 +42,19 @@ class VehicleFactory
         most_popular_model.first    
     end
 
+    def count_vehicles_for_model_year(model_year)
+        array_grouped_by_year = @wa_ev_vehicles_array.group_by do |vehicle|
+            vehicle.year
+        end
+        #Use .transform_values to get the counts for the specified model year
+        counts = array_grouped_by_year.transform_values do |vehicles_for_model_year|
+            vehicles_for_model_year.size
+        end
+        counts[model_year]
+    end
+    # County with most registered vehicles
+    def county_with_most_vehicles
+        # use #create_vehicles to make a factory, search the [:county] or something
+    end
+
 end
