@@ -49,6 +49,12 @@ RSpec.describe Facility do
         end
     end
 
+    describe '#plate_type' do
+        it 'has a plate type' do
+            expect(@cruz.plate_type).to eq (:regular)
+        end
+    end
+
     # describe '#registration_date' do
     # # Need to make registration date not equal nil
     #     it 'has a registration date' do
