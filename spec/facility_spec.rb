@@ -133,4 +133,146 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(200)
     end 
   end 
+
+  describe '#administer_written_test(person)' do 
+    it 'does not administer a written if service is not provided' do 
+      expect(@facility_1.services).to eq([])
+
+      registrant_1 = Registrant.new('Bruce', 18, true )
+
+      @facility_1.administer_written_test(registrant_1)
+
+      expect(@facility_1.administer_written_test(registrant_1)).to eq(false)
+    end
+    
+    it 'administers a written test if service is provided' do 
+      expect(@facility_1.services).to eq([])
+
+      @facility_1.add_service('Written Test')
+
+      expect(@facility_1.services).to eq(['Written Test'])
+
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      @facility_1.administer_written_test(registrant_1)
+
+      expect(@facility_1.administer_written_test(registrant_1)).to eq(true)
+    end 
+
+    it 'does not administer test if person does not have a permit' do 
+      expect(@facility_1.services).to eq([])
+
+      @facility_1.add_service('Written Test')
+      expect(@facility_1.services).to eq(['Written Test'])
+      
+      registrant_2 = Registrant.new('Penny', 16 )
+      @facility_1.administer_written_test(registrant_2)
+
+      expect(@facility_1.administer_written_test(registrant_2)).to eq(false)
+    end 
+
+    it 'does not administer test if person is not old enough' do 
+      @facility_1.add_service('Written Test')
+      expect(@facility_1.services).to eq(['Written Test'])
+
+      registrant_3 = Registrant.new('Tucker', 15 )
+      @facility_1.administer_written_test(registrant_3)
+
+      expect(@facility_1.administer_written_test(registrant_3)).to eq(false)
+
+      registrant_3.earn_permit 
+
+      expect(@facility_1.administer_written_test(registrant_3)).to eq(false)
+    end 
+
+    it 'will administer test after a permit is earned' do 
+      expect(@facility_1.services).to eq([])
+
+      @facility_1.add_service('Written Test')
+      expect(@facility_1.services).to eq(['Written Test'])
+      
+      registrant_2 = Registrant.new('Penny', 16 )
+      @facility_1.administer_written_test(registrant_2)
+
+      expect(@facility_1.administer_written_test(registrant_2)).to eq(false)
+
+      registrant_2.earn_permit 
+
+      expect(@facility_1.administer_written_test(registrant_2)).to eq(true)
+    end 
+  end 
+
+  describe '#administer_road_test(registrant)' do 
+    it 'will only provide road test if service is provided and written test is true' do
+      @facility_1.add_service('Written Test')
+      expect(@facility_1.services).to eq(['Written Test'])
+
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      
+      @facility_1.administer_road_test(registrant_1)
+
+      expect(@facility_1.administer_road_test(registrant_1)).to eq(false)
+
+      @facility_1.add_service('Road Test')
+      expect(@facility_1.administer_road_test(registrant_1)).to eq(false)
+      
+      @facility_1.administer_written_test(registrant_1)
+      @facility_1.administer_road_test(registrant_1)
+
+      expect(@facility_1.administer_road_test(registrant_1)).to eq(true)
+    end 
+  
+    it 'will not administer road test if person did not pass written test' do 
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Written Test')
+      expect(@facility_1.services).to eq(['Road Test', 'Written Test'])
+
+      registrant_3 = Registrant.new('Tucker', 15 )
+      expect(@facility_1.administer_road_test(registrant_3)).to eq(false)
+
+      @facility_1.administer_written_test(registrant_3)
+
+      expect(@facility_1.administer_road_test(registrant_3)).to eq(false)
+    end 
+  end 
+
+  describe '#renew_drivers_license' do 
+    it 'has service to renew license' do 
+      expect(@facility_1.services).to eq([])
+
+      @facility_1.add_service('Renew License')
+
+      expect(@facility_1.services).to eq(['Renew License'])
+    end 
+
+    it 'will renew license if registrant has a license' do
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Renew License')
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      @facility_1.administer_written_test(registrant_1)
+      @facility_1.administer_road_test(registrant_1)
+
+      expect(@facility_1.renew_drivers_license(registrant_1)).to eq(true)
+    end 
+
+    it 'will not renew license if registrant has no license' do 
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Renew License')
+      registrant_3 = Registrant.new('Tucker', 15 )
+
+      expect(@facility_1.renew_drivers_license(registrant_3)).to eq(false)
+
+      @facility_1.administer_written_test(registrant_3)
+
+      expect(@facility_1.administer_written_test(registrant_3)).to eq(false)
+      
+      @facility_1.administer_road_test(registrant_3)
+
+      expect(@facility_1.administer_road_test(registrant_3)).to eq(false)
+      expect(@facility_1.renew_drivers_license(registrant_3)).to eq(false)
+    end 
+  end 
+      
+      
 end
