@@ -36,11 +36,11 @@ class Facility
 
   def collect_fees(vehicle)
     if vehicle.antique?
-      @collected_fees = collected_fees.to_i + 25
+      @collected_fees = collected_fees + 25
     elsif vehicle.electric_vehicle?
-      @collected_fees = collected_fees.to_i + 200
+      @collected_fees = collected_fees + 200
     else
-      @collected_fees = collected_fees.to_i + 100
+      @collected_fees = collected_fees + 100
     end
   end
 
@@ -68,25 +68,17 @@ class Facility
   end
 
   def administer_road_test(registrant)
-    if @services.include?('Road Test')
-      if registrant.license_data[:written] == true
-        registrant.license_data[:license] = true
-        true
-      else
-        false
-      end
+    if @services.include?('Road Test') && registrant.license_data[:written] == true
+      registrant.license_data[:license] = true
+      true
     else
       false
     end
   end
 
   def renew_drivers_license(registrant)
-    if @services.include?('Renew License')
-      if registrant.license_data[:license] == true
-        registrant.license_data[:renewed] = true
-      else 
-        false
-      end
+    if @services.include?('Renew License') && registrant.license_data[:license] == true
+      registrant.license_data[:renewed] = true
     else
       false
     end
