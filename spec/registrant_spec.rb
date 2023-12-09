@@ -1,4 +1,4 @@
-require './lib/registrant'
+require 'spec_helper'
 
 describe Registrant do
    before(:each) do
