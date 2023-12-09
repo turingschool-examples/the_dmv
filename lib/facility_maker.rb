@@ -33,14 +33,32 @@ class FacilityMaker
     def data_organizer_ny
         @dmv_data.each do |location_data|
             @new_facility_data[:name] = location_data[:office_name]
-            @new_facility_data[:address] = "#{location_data[:stree_address_line_1]} #{location_data[:city]} #{location_data[:state]} #{location_data[:zip_code]}"
+            @new_facility_data[:address] = "#{location_data[:street_address_line_1]} #{location_data[:city]} #{location_data[:state]} #{location_data[:zip_code]}"
                 if location_data[:public_phone_number] != nil
                     @new_facility_data[:phone] = location_data[:public_phone_number]
                 else
                     @new_facility_data[:phone] = "No Public Phone Number"
                 end
             @new_facilities << Facility.new(@new_facility_data)
-            @new_facilities.last.add_service(location_data[:services_p])
+        end
+    end
+
+    def facility_maker_mo
+        if @dmv_data.first[:state] == "MO"
+            data_organizer_mo
+        end
+    end    
+
+    def data_organizer_mo
+        @dmv_data.each do |location_data|
+            @new_facility_data[:name] = location_data[:name]
+            @new_facility_data[:address] = "#{location_data[:address1]} #{location_data[:city]} #{location_data[:state]} #{location_data[:zipcode]}"
+                if location_data[:phone] != nil
+                    @new_facility_data[:phone] = location_data[:phone]
+                else
+                    @new_facility_data[:phone] = "No Public Phone Number"
+                end
+            @new_facilities << Facility.new(@new_facility_data)
         end
     end
 end
