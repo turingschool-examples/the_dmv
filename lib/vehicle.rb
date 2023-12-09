@@ -35,13 +35,13 @@ class Vehicle
   
   if @engine == ice && registration_date = date.today.year > 25
     :antique
-    #cost 25
+    #collected_fees 25
   elsif @engine == ice && registration_date = date.today.year < 25
     :regular
-    #cost 100
+    #collected_fees 100
   else @engine == ev
     :ev
-    #cost 200
+    #collected_fees 200
   end
 
 end
