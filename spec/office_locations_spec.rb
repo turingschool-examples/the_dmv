@@ -9,6 +9,17 @@ RSpec.describe OfficeLocations do
         expect(office_location).to be_an_instance_of OfficeLocations
     end
 
+    it "#create_facility" do
+        office_location = OfficeLocations.new
+        co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+        new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+        missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+
+        expect(office_location.create_facility(co_dmv_office_locations)).to be_a Array
+        expect(office_location.create_facility(new_york_facilities)).to be_a Array
+        expect(office_location.create_facility(missouri_facilities)).to be_a Array
+    end
+
     it "has Colorado DMV information" do
         office_location = OfficeLocations.new
         co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
@@ -26,7 +37,6 @@ RSpec.describe OfficeLocations do
     it "has NY DMV information" do
         office_location = OfficeLocations.new
         new_york_facilities = DmvDataService.new.ny_dmv_office_locations
-
         expect(office_location.ny_create_facility(new_york_facilities)).to be_a Array
         expect(office_location.ny_create_facility(new_york_facilities).first).to be_instance_of Facility
         expect(office_location.ny_create_facility(new_york_facilities).first.name).not_to be nil

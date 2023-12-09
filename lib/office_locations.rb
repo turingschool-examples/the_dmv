@@ -1,5 +1,17 @@
 class OfficeLocations
 
+    def create_facility(source)
+        source.each do |facility|
+            if facility.keys.include?(:dmv_office)
+                co_create_facility(source)
+            elsif facility.keys.include?(:office_name)
+                ny_create_facility(source)
+            else facility.keys.include?(:name)
+                mo_create_facility(source)
+            end
+        end
+    end      
+
     def co_create_facility(source)
         co_dmv_facilities_array = []
         source.each do |facility_information|
