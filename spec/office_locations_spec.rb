@@ -27,7 +27,6 @@ RSpec.describe OfficeLocations do
         office_location = OfficeLocations.new
         new_york_facilities = DmvDataService.new.ny_dmv_office_locations
 
-        puts new_york_facilities
         expect(office_location.ny_create_facility(new_york_facilities)).to be_a Array
         expect(office_location.ny_create_facility(new_york_facilities).first).to be_instance_of Facility
         expect(office_location.ny_create_facility(new_york_facilities).first.name).not_to be nil
