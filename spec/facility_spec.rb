@@ -107,10 +107,27 @@ RSpec.describe Facility do
       expect(@facility_1.administer_written_test(@penny)).to eq false
       @penny.earn_permit
       expect(@facility_1.administer_written_test(@penny)).to eq true
+    end
+
+    it 'can administer written test if registrant has permit' do
+      @facility_1.add_service('Written Test')
+      expect(@facility_1.administer_written_test(@bruce)).to eq true
+      
+      expect(@facility_1.administer_written_test(@penny)).to eq false
+      @penny.earn_permit
+      expect(@facility_1.administer_written_test(@penny)).to eq true
+    end
+
+    it 'can administer written test if registrant is older than 16' do
+      @facility_1.add_service('Written Test')
+      
+      expect(@facility_1.administer_written_test(@penny)).to eq false
+      @penny.earn_permit
+      expect(@facility_1.administer_written_test(@penny)).to eq true
 
       expect(@facility_1.administer_written_test(@tucker)).to eq false
       @tucker.earn_permit
-      expect(@facility_1.administer_written_test(@tucker)).to eq false    
+      expect(@facility_1.administer_written_test(@tucker)).to eq false
     end
   end
 
@@ -120,13 +137,23 @@ RSpec.describe Facility do
       @facility_1.add_service('Written Test')
       expect(@facility_1.administer_written_test(@bruce)).to eq true
 
-      expect(@facility_1.administer_road_test(@tucker)).to eq false
-      @tucker.earn_permit
-      expect(@facility_1.administer_road_test(@tucker)).to eq false
-
       expect(@facility_1.administer_road_test(@bruce)).to eq false
       @facility_1.add_service('Road Test')
       expect(@facility_1.administer_road_test(@bruce)).to eq true
+    end
+
+    it 'can administer road test only if already passed written test' do
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      expect(@facility_1.administer_road_test(@penny)).to eq false
+      
+      expect(@facility_1.administer_written_test(@bruce)).to eq true
+      @penny.earn_permit
+      expect(@facility_1.administer_written_test(@penny)).to eq true
+
+      expect(@facility_1.administer_road_test(@bruce)).to eq true
+      expect(@facility_1.administer_road_test(@penny)).to eq true
+
     end
   end
 
