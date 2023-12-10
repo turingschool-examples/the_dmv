@@ -6,8 +6,8 @@ class Vehicle
               :make,
               :model,
               :engine,
-              :plate_type
-  attr_accessor :registration_date
+              :plate_type,
+              :registration_date
 
   def initialize(vehicle_details)
     @vin = vehicle_details[:vin]
@@ -35,5 +35,8 @@ class Vehicle
     else
       @plate_type = :regular
     end
+  end
+  def assign_registration_date(date)
+    @registration_date = date
   end
 end
