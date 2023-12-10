@@ -36,6 +36,11 @@ RSpec.describe Registrant do
         @registrant_1.pass_road_test
         expect(@registrant_1.license_data).to eq ({written: true, license: true, renewed: false})
     end
+    it "earns permit when it passes the road_test" do
+        @registrant_1.pass_written_test
+        @registrant_1.pass_road_test
+        expect(@registrant_1.permit?).to eq (true)
+    end
     it "can change license data when it renews the license" do
         @registrant_1.pass_written_test
         @registrant_1.pass_road_test
