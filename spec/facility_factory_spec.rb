@@ -14,7 +14,7 @@ RSpec.describe FacilityFactory do
             facility_factory =  FacilityFactory.new 
             colorado_facilities = DmvDataService.new.co_dmv_office_locations
 
-            expect(facility_factory.create_co_facility(colorado_facilities)).to be_an_instance_of(Facility)
+            expect(facility_factory.create_co_facilities(colorado_facilities).first).to be_an_instance_of(Facility)
         end 
     end 
 end 
