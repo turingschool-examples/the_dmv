@@ -19,4 +19,15 @@ RSpec.describe VehicleFactory do
             expect(factory.create_vehicles(wa_ev_registrations)).to be_a(Array)
         end
     end
+
+    describe '#create_vehicles_ny' do
+        it 'can create vehiles from NY external data' do
+            factory = VehicleFactory.new
+            ny_vehicle_registrations = DmvDataService.new.ny_vehicle_registrations 
+            
+            expect(factory.create_vehicles(ny_vehicle_registrations).first).to be_a(Vehicle)
+            expect(factory.create_vehicles(ny_vehicle_registrations).last).to be_a(Vehicle)
+            expect(factory.create_vehicles(ny_vehicle_registrations)).to be_a(Array)
+        end
+    end
 end
