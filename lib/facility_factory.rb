@@ -24,7 +24,6 @@ class FacilityFactory
                 details[:address] = (location[:address1].to_s)+" "+location[:city]+" "+location[:state]+" "+location[:zipcode]
                 details[:phone] = location[:phone]
                 facility = Facility.new(details)
-                facility.add_service(location[:additional_license_office_info])
             end
             @facilities << facility
         end
