@@ -39,6 +39,16 @@ RSpec.describe OfficeLocations do
         expect(mo_dmv_hours.keys.first).to eq("DEXTER")
     end
 
+    it "#holidays_closed" do
+        office_location = OfficeLocations.new
+        missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+
+        mo_closed_holidays = office_location.holidays_closed(missouri_facilities)
+    
+        expect(mo_closed_holidays).to be_a Array
+        expect(mo_closed_holidays.first).to include("Independence Day (07/04/22)")
+    end
+
     it "has Colorado DMV information" do
         office_location = OfficeLocations.new
         co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations

@@ -28,28 +28,26 @@ class OfficeLocations
     end
 
     def ny_daily_hours_hash(source)
-        ny_daily_hours = {}
-      
+    ny_daily_hours = {}
         source.each do |hash|
-          hash.each do |key, value|
-            if key.to_s.include?("hours")
-              ny_daily_hours[key] = value
+            hash.each do |key, value|
+                if key.to_s.include?("hours")
+                ny_daily_hours[key] = value
+                end
             end
-          end
-        end
-      
-        ny_daily_hours
-      end
-
-    
-
-    # "monday_beginning_hours":"7:30 AM","monday_ending_hours":"5:00 PM","tuesday_beginning_hours":"7:30 AM","tuesday_ending_hours":"5:00 PM","wednesday_beginning_hours":"7:30 AM","wednesday_ending_hours":"5:00 PM","thursday_beginning_hours":"7:30 AM","thursday_ending_hours":"5:00 PM","friday_beginning_hours":"7:30 AM","friday_ending_hours":"5:00 PM"
+        end      
+    ny_daily_hours
+    end
 
     def holidays_closed(source)
+        holidays_array = []
+        source.each do |mo_facility_information|
+            holidaysclosed = mo_facility_information[:holidaysclosed]
+            holidays_array << holidaysclosed
+        end
+        holidays_array
+    end 
 
-    end
-          
-      
     def co_create_facility(source)
         co_dmv_facilities_array = []
         source.each do |facility_information|
