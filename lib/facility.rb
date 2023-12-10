@@ -3,7 +3,6 @@ class Facility
 
   def initialize(hash)
     @name = hash[:name]
-    # require 'pry' ; binding.pry
     @address = hash[:address]
     @phone = hash[:phone]
     @services = []
@@ -31,7 +30,18 @@ class Facility
       @registered_vehicles << car
       @registered_vehicles
     end
-    # require 'pry' ; binding.pry
   end
-
+  
+  def administer_written_test(registrant)
+    if @services.include?('Written Test')
+      if registrant.permit? && registrant.age >= 16
+        registrant.license_data[:written] = true
+        registrant.license_data[:written]
+      else 
+        registrant.license_data[:written]
+      end
+    else 
+      false
+    end
+  end
 end
