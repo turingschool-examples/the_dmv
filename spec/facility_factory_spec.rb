@@ -37,5 +37,16 @@ RSpec.describe FacilityFactory do
 
             expect(facility_factory.create_ny_facilities(new_york_facilities).first).to be_an_instance_of(Facility)
         end
+
+        it 'can access the data' do 
+            facility_factory =  FacilityFactory.new 
+            new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+            
+            expect(facility_factory.create_ny_facilities(new_york_facilities).first.name).not_to be(nil)
+            expect(facility_factory.create_ny_facilities(new_york_facilities).first.address).not_to be(nil)
+            expect(facility_factory.create_ny_facilities(new_york_facilities).first.phone).not_to be(nil)
+            expect(facility_factory.create_ny_facilities(new_york_facilities).first.registered_vehicles).to eq([])
+            expect(facility_factory.create_ny_facilities(new_york_facilities).first.collected_fees).to eq(0)
+        end 
     end 
 end 

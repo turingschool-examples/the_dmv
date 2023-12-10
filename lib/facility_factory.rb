@@ -23,16 +23,14 @@ class FacilityFactory
         dmv_data.map do |facility_data|
             Facility.new(
             {
-            name: facility_data[:dmv_office],
+            name: facility_data[:office_name],
             address: {
-                street: facility_data[:address_li],
-                building: facility_data[:address__1],
+                street: facility_data[:street_address_1],
                 city: facility_data[:city],
                 state: facility_data[:state],
-                zip_code: facility_data[:zip]
+                zip_code: facility_data[:zip_code]
             },
-            phone: facility_data[:phone],
-            services: facility_data[:services_p],
+            phone: facility_data[:public_phone_number],
             registered_vehicles: [],
             collected_fees: 0 
             }) 
