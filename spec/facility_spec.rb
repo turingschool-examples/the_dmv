@@ -49,5 +49,12 @@ RSpec.describe Facility do
     end
   end
 
-  
+  describe '#register_vehicle(camaro)' do
+
+    it 'registers (camaro)' do
+      @facility_1.add_service('Vehicle Registration')
+
+      expect(@facility_1.register_vehicle(@camaro)).to eq(@facility_1.registered_vehicles)
+    end
+  end
 end
