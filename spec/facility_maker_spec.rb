@@ -5,7 +5,7 @@ RSpec.describe FacilityMaker do
         it 'creates a facility object' do
             co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
             facility_maker = FacilityMaker.new(co_dmv_office_locations)
-
+binding.pry
             expect(facility_maker).to be_a(FacilityMaker)
         end
     end
@@ -20,6 +20,7 @@ RSpec.describe FacilityMaker do
             expect(facility_maker.new_facility_data[:name]).not_to eq(nil)
             expect(facility_maker.new_facility_data[:address]).not_to eq(nil)
             expect(facility_maker.new_facility_data[:phone]).not_to eq(nil)
+            expect(facility_maker.new_facility_data[:hours]).not_to eq(nil)
         end
     end
     describe '#facility_maker_co' do
@@ -64,6 +65,7 @@ RSpec.describe FacilityMaker do
             expect(facility_maker.new_facility_data[:name]).not_to eq(nil)
             expect(facility_maker.new_facility_data[:address]).not_to eq(nil)
             expect(facility_maker.new_facility_data[:phone]).not_to eq(nil)
+            expect(facility_maker.new_facility_data[:hours]).not_to eq(nil)
         end
     end
 
@@ -107,6 +109,8 @@ RSpec.describe FacilityMaker do
             expect(facility_maker.new_facility_data[:name]).not_to eq(nil)
             expect(facility_maker.new_facility_data[:address]).not_to eq(nil)
             expect(facility_maker.new_facility_data[:phone]).not_to eq(nil)
+            expect(facility_maker.new_facility_data[:hours]).not_to eq(nil)
+            expect(facility_maker.new_facility_data[:holiday_closures]).not_to eq(nil)
         end
     end
 

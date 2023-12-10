@@ -10,6 +10,8 @@ class Facility
     @name = info[:name]
     @address = info[:address]
     @phone = info[:phone]
+    @hours = info[:hours]
+    @holiday_closures = info[:holiday_closures]
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
