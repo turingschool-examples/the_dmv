@@ -22,6 +22,8 @@ class Facility
       vehicle.plate_type = set_plate_type(vehicle)
       @registered_vehicles << vehicle
       @collected_fees += vehicle.registration_fee(vehicle)
+
+      # it will return this
       @registered_vehicles
     else
       nil
