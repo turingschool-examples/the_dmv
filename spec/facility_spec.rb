@@ -272,7 +272,5 @@ RSpec.describe Facility do
       expect(@facility_1.administer_road_test(registrant_3)).to eq(false)
       expect(@facility_1.renew_drivers_license(registrant_3)).to eq(false)
     end 
-  end 
-      
-      
+  end  
 end

@@ -6,6 +6,7 @@ RSpec.describe VehicleFactory do
             factory = VehicleFactory.new
 
             expect(factory).to be_an_instance_of(VehicleFactory)
+            expect(factory.created_vehicles).to eq([])
         end 
     end 
 
@@ -24,11 +25,14 @@ RSpec.describe VehicleFactory do
             expect(factory.create_vehicles(wa_ev_registrations).first.engine).to eq(:ev)
         end 
 
-        it 'has a vin number' do 
+        it 'can access vehicle data' do 
             factory = VehicleFactory.new
             wa_ev_registrations = DmvDataService.new.wa_ev_registrations
 
             expect(factory.create_vehicles(wa_ev_registrations).first.vin).not_to be(nil)
+            expect(factory.create_vehicles(wa_ev_registrations).first.year).not_to be(nil)
+            expect(factory.create_vehicles(wa_ev_registrations).first.make).not_to be(nil)
+            expect(factory.create_vehicles(wa_ev_registrations).first.model).not_to be(nil)
         end 
     end 
 end 
