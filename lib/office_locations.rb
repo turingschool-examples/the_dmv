@@ -16,14 +16,37 @@ class OfficeLocations
         daily_hours = {}   
             source.each do |facility|
                 if facility.keys.include?(:dmv_office)
-                daily_hours[facility[:dmv_office]] = facility[:hours]
+                    daily_hours[facility[:dmv_office]] = facility[:hours]
                 elsif facility.keys.include?(:office_name)
-                daily_hours[facility[:dmv_office]] = facility[:hours]
+                    name = facility[:office_name]
+                    daily_hours[name] = ny_daily_hours_hash(source)
                 elsif facility.keys.include?(:name)
-                daily_hours[facility[:name]] = facility[:hours]
+                    daily_hours[facility[:name]] = facility[:daysopen]
                 end
             end
         daily_hours
+    end
+
+    def ny_daily_hours_hash(source)
+        ny_daily_hours = {}
+      
+        source.each do |hash|
+          hash.each do |key, value|
+            if key.to_s.include?("hours")
+              ny_daily_hours[key] = value
+            end
+          end
+        end
+      
+        ny_daily_hours
+      end
+
+    
+
+    # "monday_beginning_hours":"7:30 AM","monday_ending_hours":"5:00 PM","tuesday_beginning_hours":"7:30 AM","tuesday_ending_hours":"5:00 PM","wednesday_beginning_hours":"7:30 AM","wednesday_ending_hours":"5:00 PM","thursday_beginning_hours":"7:30 AM","thursday_ending_hours":"5:00 PM","friday_beginning_hours":"7:30 AM","friday_ending_hours":"5:00 PM"
+
+    def holidays_closed(source)
+
     end
           
       

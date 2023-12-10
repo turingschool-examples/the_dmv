@@ -28,7 +28,15 @@ RSpec.describe OfficeLocations do
 
         expect(office_location.daily_hours(co_dmv_office_locations)).to be_a Hash
         expect(office_location.daily_hours(new_york_facilities)).to be_a Hash 
-        expect(office_location.daily_hours(missouri_facilities)).to be_a Hash  
+        expect(office_location.daily_hours(missouri_facilities)).to be_a Hash
+
+        co_dmv_hours = office_location.daily_hours(co_dmv_office_locations)
+        ny_dmv_hours = office_location.daily_hours(new_york_facilities)
+        mo_dmv_hours = office_location.daily_hours(missouri_facilities)
+
+        expect(co_dmv_hours.keys.first).to eq("DMV Tremont Branch")
+        expect(ny_dmv_hours.keys.first).to eq("IRONDEQUOIT")
+        expect(mo_dmv_hours.keys.first).to eq("DEXTER")
     end
 
     it "has Colorado DMV information" do
