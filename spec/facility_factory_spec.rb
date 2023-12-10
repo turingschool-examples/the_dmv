@@ -9,7 +9,7 @@ RSpec.describe FacilityFactory do
         end 
     end 
 
-    describe '#create_co_facility' do 
+    describe '#create_co_facilities' do 
         it 'is an object of Facility' do 
             facility_factory =  FacilityFactory.new 
             colorado_facilities = DmvDataService.new.co_dmv_office_locations
@@ -28,5 +28,14 @@ RSpec.describe FacilityFactory do
             expect(facility_factory.create_co_facilities(colorado_facilities).first.services).not_to be(nil)
             expect(facility_factory.create_co_facilities(colorado_facilities).first.phone).not_to be(nil)
         end 
+    end 
+
+    describe '#create_ny_facilities' do 
+        it 'is an object of Facility' do 
+            facility_factory =  FacilityFactory.new 
+            new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+
+            expect(facility_factory.create_ny_facilities(new_york_facilities).first).to be_an_instance_of(Facility)
+        end
     end 
 end 
