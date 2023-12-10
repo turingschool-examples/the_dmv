@@ -49,7 +49,18 @@ class Facility
     end
 
   end
+
+  def administer_written_test(registrant)
+    registrant.license_data[:written] = true
+    if registrant.permit? && registrant.age >= 16 && @services.include?("Written Test")
+      true
+    else
+      false
+    end
+  end
 end
+#NOTE: A facility must offer a service in order to perform it. Just because the DMV allows facilities to perform certain services, does not mean that every facility provides every service.
+
 # First error: Test shows that facility only has 1 argument passing which was a hash. The first version had 3 arguments (name,address,phone). We need to put all of those arguments in one hash to create 1 argument.
 
-# Second error: Mispelling of 'service' in 'add-service' method
+# Second error: Mispelling of 'service' in 'add-service'
