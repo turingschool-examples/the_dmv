@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'date'
 
 RSpec.describe Vehicle do
   before(:each) do
@@ -31,6 +32,15 @@ RSpec.describe Vehicle do
       expect(@cruz.electric_vehicle?).to eq(false)
       expect(@bolt.electric_vehicle?).to eq(true)
       expect(@camaro.electric_vehicle?).to eq(false)
+    end
+  end
+
+  describe '#registration_fee' do
+    it 'calculates registration fee' do
+
+      expect(@camaro.registration_fee(@camaro)).to eq(25)
+      expect(@bolt.registration_fee(@bolt)).to eq(200)
+      expect(@cruz.registration_fee(@cruz)).to eq (100)
     end
   end
 end
