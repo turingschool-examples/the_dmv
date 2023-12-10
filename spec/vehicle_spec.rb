@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'date'
 
 RSpec.describe Vehicle do
   before(:each) do
