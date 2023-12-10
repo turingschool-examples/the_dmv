@@ -28,7 +28,6 @@ class Vehicle
     @engine == :ev
   end
 
-
   def registration_fee(vehicle)
     if vehicle.antique?
       25
