@@ -1,4 +1,5 @@
 require './lib/vehicle'
+require './lib/registrant'
 
 class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
@@ -53,6 +54,14 @@ class Facility
 
     if @services.include?('Written Test') && registrant.permit?
       registrant.license_data[:written] = true
+    else
+      false
+    end
+  end
+
+  def administer_road_test(registrant)
+    if @services.include?('Road Test') && registrant.license_data[:written]
+      registrant.license_data[:license] = true
     else
       false
     end
