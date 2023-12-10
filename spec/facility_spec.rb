@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'date'
+require './lib/registrant'
 
 RSpec.describe Facility do
   before(:each) do
@@ -9,6 +10,8 @@ RSpec.describe Facility do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    @registrant_1 = Registrant.new("Bruce", 18, true )
+
   end
 
   describe '#initialize' do
@@ -65,6 +68,14 @@ RSpec.describe Facility do
       expect(@facility_1.set_plate_type(@cruz)).to eq(:regular)
       expect(@facility_1.set_plate_type(@bolt)).to eq(:ev)
       expect(@facility_1.set_plate_type(@camaro)).to eq(:antique)
+    end
+  end
+
+  describe '#administer_written_test' do
+    it 'returns if AWT is true' do
+      @facility_1.add_service('Written Test')
+
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
     end
   end
 end
