@@ -33,23 +33,13 @@ RSpec.describe Facility do
     end
   end
 
-  # describe 'can register a vehicle' do
-  #   it 'Greater than 25 years old are antique and cost $25' do
-  #     expect()
-      
-      
-  #     expect(@facility_1.register_vehicle).to eq
-  #   end
-  # end
-  
-  describe 'registered_vehicles' do
+  describe '#register_a_vehicle' do
     it 'can add a registered vehicle to list of registered vehicles' do
-      expect(@facility_1.registered_vehicles).to eq[]
-      @facility_1.register_vehicles[@cruz]
-      expect(@facility_1.registered_vehicles).to eq[@cruz]
-      @facility_1.registered_vehicles[@camaro]
-      expect(@facility_1.registered_vehicles).to eq[@cruz, @camaro]
-
+      expect(@facility_1.registered_vehicles).to eq([])
+      @facility_1.register_a_vehicle(@cruz)
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+      @facility_1.register_a_vehicle(@camaro)
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro])
     end
   end
 
