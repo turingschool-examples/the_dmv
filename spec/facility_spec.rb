@@ -78,12 +78,25 @@ RSpec.describe Facility do
 
       expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
     end
+
+
+    it 'returns if AWT is true' do
+      @facility_1.add_service('Written Test')
+
+        expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
+        expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
+    end
   end
 
-  it 'returns if AWT is true' do
-    @facility_1.add_service('Written Test')
+    describe '#administer_road_help' do
+    it 'returns license ture' do
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      @facility_1.administer_written_test(@registrant_1)
 
-      expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
-      expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
+    end
   end
+
+  
 end
