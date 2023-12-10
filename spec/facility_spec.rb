@@ -105,5 +105,14 @@ RSpec.describe Facility do
 
       expect(@facility_1.administer_road_test(@registrant_3)).to eq(true)
     end
+
+    it 'returns license false r2' do
+      @registrant_2.earn_permit
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      @facility_1.administer_written_test(@registrant_3)
+
+      expect(@facility_1.administer_road_test(@registrant_2)).to eq(false)
+    end
   end
 end
