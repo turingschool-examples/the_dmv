@@ -36,4 +36,22 @@ class FacilityFactory
             }) 
         end 
     end 
+   
+    def create_mo_facilities(dmv_data)
+        dmv_data.map do |facility_data|
+            Facility.new(
+            {
+            name: facility_data[:name],
+            address: {
+                street: facility_data[:address1],
+                city: facility_data[:city],
+                state: facility_data[:state],
+                zip_code: facility_data[:zipcode]
+            },
+            phone: facility_data[:phone],
+            registered_vehicles: [],
+            collected_fees: 0 
+            }) 
+        end 
+    end 
 end 
