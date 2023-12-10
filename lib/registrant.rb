@@ -5,11 +5,15 @@ class Registrant
     @name = name 
     @age = age 
     @permit = permit 
-    @license_data = details[:license_data] 
+    @license_data = {:written=>false, :license=>false, :renewed=>false}
   end
 
-  def method 
-    #text
+  def earn_permit
+    @permit = true 
+  end
+
+  def permit?
+    @permit
   end
 
 
