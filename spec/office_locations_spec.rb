@@ -9,6 +9,46 @@ RSpec.describe OfficeLocations do
         expect(office_location).to be_an_instance_of OfficeLocations
     end
 
+    it "#create_facility" do
+        office_location = OfficeLocations.new
+        co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+        new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+        missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+
+        expect(office_location.create_facility(co_dmv_office_locations)).to be_a Array
+        expect(office_location.create_facility(new_york_facilities)).to be_a Array
+        expect(office_location.create_facility(missouri_facilities)).to be_a Array
+    end
+
+    it "#daily_hours" do
+        office_location = OfficeLocations.new
+        co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+        new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+        missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+
+        expect(office_location.daily_hours(co_dmv_office_locations)).to be_a Hash
+        expect(office_location.daily_hours(new_york_facilities)).to be_a Hash 
+        expect(office_location.daily_hours(missouri_facilities)).to be_a Hash
+
+        co_dmv_hours = office_location.daily_hours(co_dmv_office_locations)
+        ny_dmv_hours = office_location.daily_hours(new_york_facilities)
+        mo_dmv_hours = office_location.daily_hours(missouri_facilities)
+
+        expect(co_dmv_hours.keys.first).to eq("DMV Tremont Branch")
+        expect(ny_dmv_hours.keys.first).to eq("IRONDEQUOIT")
+        expect(mo_dmv_hours.keys.first).to eq("DEXTER")
+    end
+
+    it "#holidays_closed" do
+        office_location = OfficeLocations.new
+        missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+
+        mo_closed_holidays = office_location.holidays_closed(missouri_facilities)
+    
+        expect(mo_closed_holidays).to be_a Array
+        expect(mo_closed_holidays.first).to include("Independence Day (07/04/22)")
+    end
+
     it "has Colorado DMV information" do
         office_location = OfficeLocations.new
         co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
@@ -26,8 +66,6 @@ RSpec.describe OfficeLocations do
     it "has NY DMV information" do
         office_location = OfficeLocations.new
         new_york_facilities = DmvDataService.new.ny_dmv_office_locations
-
-        puts new_york_facilities
         expect(office_location.ny_create_facility(new_york_facilities)).to be_a Array
         expect(office_location.ny_create_facility(new_york_facilities).first).to be_instance_of Facility
         expect(office_location.ny_create_facility(new_york_facilities).first.name).not_to be nil

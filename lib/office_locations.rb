@@ -1,16 +1,52 @@
 class OfficeLocations
 
-    # def create_facility(source)
-    #     source.each do |facility_information|
-    #         if facility_information.key?(:dmv_office)
-    #             co_create_facility
-    #         elsif facility_information.key?(:office_name)
-    #             ny_create_facility
-    #         else
-    #             mo_create_facility
-    #         end
-    #     end
-    # end
+    def create_facility(source)
+        source.each do |facility|
+            if facility.keys.include?(:dmv_office)
+                co_create_facility(source)
+            elsif facility.keys.include?(:office_name)
+                ny_create_facility(source)
+            else facility.keys.include?(:name)
+                mo_create_facility(source)
+            end
+        end
+    end
+
+    def daily_hours(source)
+        daily_hours = {}   
+            source.each do |facility|
+                if facility.keys.include?(:dmv_office)
+                    daily_hours[facility[:dmv_office]] = facility[:hours]
+                elsif facility.keys.include?(:office_name)
+                    name = facility[:office_name]
+                    daily_hours[name] = ny_daily_hours_hash(source)
+                elsif facility.keys.include?(:name)
+                    daily_hours[facility[:name]] = facility[:daysopen]
+                end
+            end
+        daily_hours
+    end
+
+    def ny_daily_hours_hash(source)
+    ny_daily_hours = {}
+        source.each do |hash|
+            hash.each do |key, value|
+                if key.to_s.include?("hours")
+                ny_daily_hours[key] = value
+                end
+            end
+        end      
+    ny_daily_hours
+    end
+
+    def holidays_closed(source)
+        holidays_array = []
+        source.each do |mo_facility_information|
+            holidaysclosed = mo_facility_information[:holidaysclosed]
+            holidays_array << holidaysclosed
+        end
+        holidays_array
+    end 
 
     def co_create_facility(source)
         co_dmv_facilities_array = []
