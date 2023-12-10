@@ -48,4 +48,13 @@ class Facility
     return 200 if vehicle.electric_vehicle?
     100
   end
+
+  def administer_written_test(registrant)
+
+    if @services.include?('Written Test') && registrant.permit?
+      registrant.license_data[:written] = true
+    else
+      false
+    end
+  end
 end
