@@ -70,4 +70,20 @@ describe Registrant do
       expect(@registrant_2.permit?).to eq(false)
     end
   end
+
+  describe '#AWT' do
+    it 'returns AWT true' do
+      @registrant_3.earn_permit
+      @facility_1.add_service('Written Test')
+
+      expect(@facility_1.administer_written_test(@registrant_3)).to eq(true)
+    end
+
+    it 'returns AWT false' do
+      @registrant_2.earn_permit
+      @facility_1.add_service('Written Test')
+
+      expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
+    end
+  end
 end
