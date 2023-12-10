@@ -45,7 +45,7 @@ RSpec.describe Vehicle do
     end
   end
   describe '#assign registration date' do
-    it 'can assign registration dates' do
+    it 'can be assigned registration dates' do
       @cruz.assign_registration_date(Date.today)
       expect(@cruz.registration_date).to eq(Date.today)
     end
