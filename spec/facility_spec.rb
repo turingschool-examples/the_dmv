@@ -13,6 +13,7 @@ RSpec.describe Facility do
     @registrant_1 = Registrant.new('Bruce', 18, true )
     @registrant_2 = Registrant.new('Penny', 16 )
     @registrant_3 = Registrant.new('Tucker', 15 )
+    @registrant_4 = Registrant.new('Sara', 27, false )
   end
 
   describe "#initialize" do
@@ -88,7 +89,6 @@ RSpec.describe Facility do
       expect(@registrant_3.age).to eq (15)
       expect(@registrant_3.permit?).to eq (false)
       expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
-      expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
       expect(@registrant_3.license_data).to eq ({written: false, license: false, renewed: false})
     end
     it "guarantees requirements to administer road test are met" do
@@ -105,15 +105,26 @@ RSpec.describe Facility do
     end
 
     it "guarantees requirements to renew a driver's license are met" do
-      @facility_1.add_service('Renew License')
+      
       @facility_1.add_service('Road Test')
       @facility_1.add_service('Written Test')
       
       @facility_1.administer_written_test(@registrant_1)
       @facility_1.administer_road_test(@registrant_1)
       @facility_1.renew_drivers_license(@registrant_1)
-      expect(@registrant_1.license_data).to eq ({written: true, license: true, renewed: true})
+      expect(@registrant_1.license_data).to eq ({written: true, license: true, renewed: false})
       
+      @facility_1.add_service('Renew License')
+
+      expect(@facility_1.administer_road_test(@registrant_4)).to eq(false)
+      expect(@facility_1.renew_drivers_license(@registrant_4)).to eq(false)
+      expect(@registrant_4.license_data).to eq ({written: false, license: false, renewed: false})
+
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+      @facility_1.renew_drivers_license(@registrant_1)
+      expect(@registrant_1.license_data).to eq ({written: true, license: true, renewed: true})
+
       expect(@facility_1.renew_drivers_license(@registrant_3)).to eq (false)
       expect(@registrant_3.license_data).to eq ({written: false, license: false, renewed: false})
       
