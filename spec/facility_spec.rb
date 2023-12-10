@@ -57,4 +57,14 @@ RSpec.describe Facility do
       expect(@facility_1.register_vehicle(@camaro)).to eq(@facility_1.registered_vehicles)
     end
   end
+
+  describe '#set_plate_type' do
+    it 'returns the plate type' do
+      @facility_1.registered_vehicles
+
+      expect(@facility_1.set_plate_type(@cruz)).to eq(:regular)
+      expect(@facility_1.set_plate_type(@bolt)).to eq(:ev)
+      expect(@facility_1.set_plate_type(@camaro)).to eq(:antique)
+    end
+  end
 end
