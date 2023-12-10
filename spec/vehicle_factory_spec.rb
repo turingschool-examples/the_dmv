@@ -10,21 +10,30 @@ RSpec.describe do
     end
 
     it "#create_vehicles" do
-    factory = VehicleFactory.new
-    ny_registrations = DmvDataService.new.ny_registrations
-
-    end
-
-    it "#ny_create_vehicles" do
         factory = VehicleFactory.new
         ny_registrations = DmvDataService.new.ny_registrations
         wa_ev_registrations = DmvDataService.new.wa_ev_registrations
 
 
+        expect(factory.create_vehicles(ny_registrations)).to be_a Array
+        expect(factory.create_vehicles(ny_registrations).first).to be_instance_of(Vehicle)
+        expect(factory.create_vehicles(wa_ev_registrations)).to be_a Array
+        expect(factory.create_vehicles(wa_ev_registrations).first).to be_instance_of(Vehicle)
+    end
+
+    it "#ny_create_vehicles" do
+        factory = VehicleFactory.new
+        ny_registrations = DmvDataService.new.ny_registrations
+
         expect(factory.ny_create_vehicles(ny_registrations)).to be_a Array
         expect(factory.ny_create_vehicles(ny_registrations).first).to be_instance_of(Vehicle)
-        expect(factory.wa_create_vehicles(wa_ev_registrations)).to be_a Array
-        expect(factory.wa_create_vehicles(wa_ev_registrations).first).to be_instance_of(Vehicle)        
+        expect(factory.ny_create_vehicles(ny_registrations).first.engine).to eq(nil)
+        expect(factory.ny_create_vehicles(ny_registrations).first.registration_date).to eq(nil)
+        expect(factory.ny_create_vehicles(ny_registrations).first.plate_type).to eq(nil)
+        expect(factory.ny_create_vehicles(ny_registrations).first.vin).not_to be(nil)
+        expect(factory.ny_create_vehicles(ny_registrations).first.year).not_to be(nil)
+        expect(factory.ny_create_vehicles(ny_registrations).first.make).not_to be(nil)
+        expect(factory.ny_create_vehicles(ny_registrations).first.model).not_to be(nil)
     end
 
     it "#wa_create_vehicles" do
