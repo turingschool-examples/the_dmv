@@ -138,6 +138,26 @@ RSpec.describe Facility do
   end
 
   describe "#EV analytics" do
+    it "can populate the ev vehicles registered" do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@tesla_1)
+      @facility_1.register_vehicle(@tesla_2)
+      expect(@facility_1.ev_vehicles_registered).to eq ([@bolt, @tesla_1, @tesla_2])
+    end
+
+    it "can populate the registered ev vehicle makes" do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@tesla_1)
+      @facility_1.register_vehicle(@tesla_2)
+      expect(@facility_1.reg_ev_vehicles_makes).to eq (["Chevrolet", "Tesla", "Tesla"])
+    end
+
     it "can return the most popular make registered in a facility" do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
@@ -145,10 +165,8 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@bolt)
       @facility_1.register_vehicle(@tesla_1)
       @facility_1.register_vehicle(@tesla_2)
-      #require 'pry'; binding.pry
-      expect(@facility_1.ev_registration_analytics).to eq ( "The most popular vehicle make registered in DMV Tremont Branch facility was Tesla")
-      
-      # expect(@facility_1.reg_ev_vehicles_make).to eq (["Chevrolet", "Tesla", "Tesla"])
+     #require 'pry'; binding.pry
+      expect(@facility_1.ev_registration_analytics).to eq ("The most popular vehicle make registered in DMV Tremont Branch facility was Tesla")
     end
   end
 end
