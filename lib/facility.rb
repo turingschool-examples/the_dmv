@@ -22,18 +22,22 @@ class Facility
   def register_vehicle (vehicle)
     if @services.include?('Vehicle Registration')
       @registered_vehicles << vehicle
-      if vehicle.antique?
-        @collected_fees += 25
-      elsif vehicle.engine == :ev
-        @collected_fees += 200
-      else
-        @collected_fees += 100
-      end
-      vehicle.assign_registration_date(Date.today)
-      @registered_vehicles
+      collect_fees(vehicle)
     else
       nil
     end
+  end
+
+  def collect_fees(vehicle)
+    if vehicle.antique?
+      @collected_fees += 25
+    elsif vehicle.engine == :ev
+      @collected_fees += 200
+    else
+      @collected_fees += 100
+    end
+    vehicle.assign_registration_date(Date.today)
+    @registered_vehicles
   end
 
   def administer_written_test (registrant)
