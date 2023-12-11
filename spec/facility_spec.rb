@@ -79,6 +79,7 @@ RSpec.describe Facility do
       @facility.administer_written_test(@registrant_1)
       expect(@facility.administer_road_test(@registrant_1)).to be(!false)
       expect(@registrant_1.license_data).to eq({:license=>!false, :renewed=>false, :written=>!false})
+      expect(@facility.renew_drivers_license(registrant_1)).to be (false)
     end
   end
 end
