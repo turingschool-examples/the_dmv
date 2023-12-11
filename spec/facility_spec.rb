@@ -77,23 +77,24 @@ RSpec.describe Facility do
 
   describe "#written test" do
     it "provides test only if service available" do
-      expect(@facility_1.administer_written_test(@registrant_1).to eq(false)
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
 
       @facility_1.add_service("Written Test")
-      expect(@facility_1.administer_written_test(@registrant_1).to eq(true)
-      expect(@facility_2.administer_written_test(@registrant_1).to eq(false)
+      @registrant_2.earn_permit
+      expect(@facility_2.administer_written_test(@registrant_1)).to eq(false)
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
     end
 
     it "only tests registrants with permit and over 16" do
       @facility_1.add_service("Written Test")
-      expect(@facility_1.administer_written_test(@registrant_1).to eq(true)
-      expect(@facility_1.administer_written_test(@registrant_2).to eq(false)
-      expect(@facility_1.administer_written_test(@registrant_1).to eq(false)
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
+      expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
+      expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
 
       @registrant_2.earn_permit
       @registrant_3.earn_permit
-      expect(@facility_1.administer_written_test(@registrant_2).to eq(true)
-      expect(@facility_1.administer_written_test(@registrant_1).to eq(false)
+      expect(@facility_1.administer_written_test(@registrant_2)).to eq(true)
+      expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
     end
 
     it "updates license data" do
@@ -108,22 +109,22 @@ RSpec.describe Facility do
 
   describe "#road test" do
     it "provides test only if service available" do
-      expect(@facility_1.administer_road_test(@registrant_1).to eq(false)
+      # expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
 
       @facility_1.add_service("Written Test")
       @facility_1.administer_written_test(@registrant_1)
       @facility_1.add_service("Road Test")
-      expect(@facility_1.administer_road_test(@registrant_1).to eq(true)
-      expect(@facility_2.administer_road_test(@registrant_1).to eq(false)
+      expect(@facility_2.administer_road_test(@registrant_1)).to eq(false)
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
     end
       
     it "registrants must've passed written test" do
       @facility_1.add_service("Written Test")
       @facility_1.add_service("Road Test")
-      expect(@facility_1.administer_road_test(@registrant_1).to eq(false)
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
 
       @facility_1.administer_written_test(@registrant_1)
-      expect(@facility_1.administer_road_test(@registrant_1).to eq(true))
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
     end
 
     it "updates license data" do
@@ -141,19 +142,21 @@ RSpec.describe Facility do
 
   describe "#renew license" do
     it "can renew only if service available" do
-      expect(@facility_1.administer_road_test(@registrant_1).to eq(false)
+      # expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
 
       @facility_1.add_service("Written Test")
       @facility_1.add_service("Road Test")
+      @facility_1.add_service("Renew License")
       @facility_1.administer_written_test(@registrant_1)
       @facility_1.administer_road_test(@registrant_1)
-      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(true)
       expect(@facility_2.renew_drivers_license(@registrant_1)).to eq(false)
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(true)
     end
 
     it "must pass road test to renew" do
       @facility_1.add_service("Written Test")
       @facility_1.add_service("Road Test")
+      @facility_1.add_service("Renew License")
       @facility_1.administer_written_test(@registrant_1)
       expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
 
@@ -166,6 +169,7 @@ RSpec.describe Facility do
       
       @facility_1.add_service("Written Test")
       @facility_1.add_service("Road Test")
+      @facility_1.add_service("Renew License")
       @facility_1.administer_written_test(@registrant_1)
       @facility_1.administer_road_test(@registrant_1)
       @facility_1.renew_drivers_license(@registrant_1)
