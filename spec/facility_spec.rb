@@ -10,6 +10,8 @@ RSpec.describe Facility do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    @tesla_1 = Vehicle.new ({vin: '1981598', year:2020, make:"Tesla", model:"Model 3", engine: :ev})
+    @tesla_2 = Vehicle.new ({vin: '251929492', year:2023, make:"Tesla", model:"Model Y", engine: :ev})
     @registrant_1 = Registrant.new('Bruce', 18, true )
     @registrant_2 = Registrant.new('Penny', 16 )
     @registrant_3 = Registrant.new('Tucker', 15 )
@@ -37,7 +39,8 @@ RSpec.describe Facility do
       @facility_1.add_service('New Drivers License')
       @facility_1.add_service('Renew Drivers License')
       @facility_1.add_service('Vehicle Registration')
-      expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+      expected = ['New Drivers License', 'Renew Drivers License', 'Vehicle Registration']
+      expect(@facility_1.services).to eq(expected)
     end
     it "can't execute services not available" do
     expect(@facility_2.services).to eq([])
@@ -132,6 +135,39 @@ RSpec.describe Facility do
       @facility_1.administer_road_test(@registrant_2)
       @facility_1.renew_drivers_license(@registrant_2)
       expect(@registrant_2.license_data).to eq ({written: true, license: true, renewed: true})
+    end
+  end
+
+  describe "#EV analytics" do
+    it "can populate the ev vehicles registered" do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@tesla_1)
+      @facility_1.register_vehicle(@tesla_2)
+      expect(@facility_1.ev_vehicles_registered).to eq ([@bolt, @tesla_1, @tesla_2])
+    end
+
+    it "can populate the registered ev vehicle makes" do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@tesla_1)
+      @facility_1.register_vehicle(@tesla_2)
+      expect(@facility_1.reg_ev_vehicles_makes).to eq (["Chevrolet", "Tesla", "Tesla"])
+    end
+
+    it "can return the most popular make registered in a facility" do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@tesla_1)
+      @facility_1.register_vehicle(@tesla_2)
+      expected = "The most popular vehicle make registered in DMV Tremont Branch facility was Tesla"
+      expect(@facility_1.ev_registration_analytics).to eq (expected)
     end
   end
 end
