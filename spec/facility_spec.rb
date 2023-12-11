@@ -39,7 +39,8 @@ RSpec.describe Facility do
       @facility_1.add_service('New Drivers License')
       @facility_1.add_service('Renew Drivers License')
       @facility_1.add_service('Vehicle Registration')
-      expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+      expected = ['New Drivers License', 'Renew Drivers License', 'Vehicle Registration']
+      expect(@facility_1.services).to eq(expected)
     end
     it "can't execute services not available" do
     expect(@facility_2.services).to eq([])
@@ -165,8 +166,8 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@bolt)
       @facility_1.register_vehicle(@tesla_1)
       @facility_1.register_vehicle(@tesla_2)
-     #require 'pry'; binding.pry
-      expect(@facility_1.ev_registration_analytics).to eq ("The most popular vehicle make registered in DMV Tremont Branch facility was Tesla")
+      expected = "The most popular vehicle make registered in DMV Tremont Branch facility was Tesla"
+      expect(@facility_1.ev_registration_analytics).to eq (expected)
     end
   end
 end
