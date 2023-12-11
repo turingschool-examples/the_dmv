@@ -35,8 +35,20 @@ RSpec.describe Vehicle do
   end
 
   describe '#registration_date' do
-    it 'can store the vehicle registration date' do
-      expect(@cruz.registration_date).to eq (nil)
+    it 'can register vehicles on a date' do
+      expect{(@cruz.registration_date).to eq(nil)}
+      @cruz.registration_date('2023-01-12')
+      expect{(@cruz.registration_date).to eq('2023-01-12')}
+      @camaro.registration_date('2023-01-12')
+      expect{(@camaro.registration_date).to eq('2023-01-12')}
+    end
+  end
+
+  describe '#plate_type' do
+    it "can assign plate type depending on vehicle type" do
+    expect(@cruz.plate_type).to eq(:regular)
+    expect(@camaro.plate_type).to eq(:antique)
+    expect(@bolt.plate_type).to eq(:ev)
     end
   end
 end
