@@ -24,7 +24,7 @@ class Facility
   def register_a_vehicle(registered_vehicle)
     @registered_vehicles << registered_vehicle
     
-    service_fee = case @plate_type
+    service_fee = case registered_vehicle.plate_type
                   when :antique
                     25
                   when :ev
@@ -39,14 +39,5 @@ class Facility
     @collected_fees += service_fee
   end
 end
-  # def collected_fees
-  #   if antique? == true
-  #     puts 25
-  #   elsif electric_vehicle == true
-  #     puts 200
-  #   else
-  #     100
-  #   end
-  # end
 
 
