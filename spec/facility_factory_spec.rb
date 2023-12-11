@@ -14,7 +14,6 @@ RSpec.describe FacilityFactory do
         expect(factory.create_facilitys(co_dmv_office_locations)[0].name).to eq("DMV Tremont Branch")
         expect(factory.create_facilitys(co_dmv_office_locations)[0].address).to eq("2855 Tremont Place")
         expect(factory.create_facilitys(co_dmv_office_locations)[0].phone).to eq("(720) 865-4600")
-        
     end 
 
     it 'can a have a new state ny' do
@@ -27,5 +26,13 @@ RSpec.describe FacilityFactory do
         expect(factory.create_facilitys(new_york_facilities)[0].phone).to eq("5857531604")
     end
 
-
+    it 'can have a new state mo' do
+        factory = FacilityFactory.new
+        missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+        expect(factory.create_facilitys(missouri_facilities)).to be_an Array
+        expect(factory.create_facilitys(missouri_facilities)[0]).to be_an_instance_of Facility 
+        expect(factory.create_facilitys(missouri_facilities)[0].name).to eq("DEXTER")
+        expect(factory.create_facilitys(missouri_facilities)[0].address).to eq("119 VINE ST")
+        expect(factory.create_facilitys(missouri_facilities)[0].phone).to eq("(573) 624-8808")
+    end
 end 
