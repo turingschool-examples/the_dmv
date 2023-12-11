@@ -29,7 +29,7 @@ class Facility
       else
         @collected_fees += 100
       end
-      vehicle.registration_date = Date.today
+      vehicle.assign_registration_date(Date.today)
       @registered_vehicles
     else
       nil
@@ -67,4 +67,21 @@ class Facility
       false
     end
   end  
+
+  def ev_registration_analytics 
+    @ev_vehicles_registered = []
+    @ev_vehicles_registered = @registered_vehicles.find_all do |vehicle|
+      vehicle.engine == :ev
+    end
+    @reg_ev_vehicles_makes = []
+    @ev_vehicles_registered.map do |vehicle|
+      @reg_ev_vehicles_makes << vehicle.make
+    end
+     most_popular_make = @reg_ev_vehicles_makes.max_by do |make|
+      @reg_ev_vehicles_makes.count(make)
+     end
+
+    "The most popular vehicle make registered in #{@name} facility was #{most_popular_make}"
+    
+  end
 end
