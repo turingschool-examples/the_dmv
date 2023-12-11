@@ -40,8 +40,8 @@ class Facility
       else 
         false
       end
-    else
-        false
+    # else
+    #     false
     end
   end
 end
