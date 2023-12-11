@@ -1,5 +1,6 @@
 require './lib/vehicle'
 require './lib/registrant'
+require './lib/dmv_data_service'
 
 class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
@@ -72,6 +73,19 @@ class Facility
       registrant.license_data[:renewed] = true
     else
       false
+    end
+  end
+
+  def state_facility(state_info)
+
+    if state_info.key?(:ny_name)
+      { name: state_info[:ny_name], address: state_info[:ny_address], phone: state_info[:ny_phone] }
+
+    elsif state_info.key?(:mo_name)
+      { name: state_info[:mo_name], address: state_info[:mo_address], phone: state_info[:mo_phone] }
+
+    else
+      state_info
     end
   end
 end
