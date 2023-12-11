@@ -11,6 +11,7 @@ RSpec.describe Registrant do
       expect(@registrant_1).to be_an_instance_of(Registrant) 
     end
 
+    # describe "#earn_permit"
     it "has attributes" do
       expect(@registrant_1.name).to eq("Bruce")
       expect(@registrant_1.age).to eq(18)
