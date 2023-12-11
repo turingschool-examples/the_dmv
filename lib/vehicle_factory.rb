@@ -1,5 +1,3 @@
-require './lib/dmv_data_service'
-
 class VehicleFactory
 
   def create_vehicles(vehicle_data_array)
