@@ -149,4 +149,22 @@ RSpec.describe Facility do
       expect(@facility_1.renew_drivers_license(@registrant_2)).to eq(false)
     end
   end
+
+  describe '#state_facility' do
+    it 'calls Newyork data' do
+
+      ny_data = { ny_name: "NY DMV Office", ny_address: "123 NY Street", ny_phone: "123-456-7890" }
+      expected = { name: "NY DMV Office", address: "123 NY Street", phone: "123-456-7890"}
+
+      expect(@facility_1.state_facility(ny_data)).to eq(expected)
+    end
+
+    it 'calls Missouri data' do
+
+      mo_data = { mo_name: "mo DMV Office", mo_address: "119 VINE ST", mo_phone: "573 624 8808" }
+      expected = { name: "mo DMV Office", address: "119 VINE ST", phone: "573 624 8808"}
+
+      expect(@facility_1.state_facility(mo_data)).to eq(expected)
+    end
+  end
 end
