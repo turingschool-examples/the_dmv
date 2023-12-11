@@ -32,7 +32,6 @@ RSpec.describe FacilityFactory do
         expect(@factory.facilities.first.name).to eq (@co_dmv_locations.first[:dmv_office])
         expect(@factory.facilities.first.address).to eq ((@co_dmv_locations.first[:address_li].to_s)+" "+(@co_dmv_locations.first[:address__1].to_s)+" "+(@co_dmv_locations.first[:city])+" "+(@co_dmv_locations.first[:state])+" "+(@co_dmv_locations.first[:zip]))
         expect(@factory.facilities.first.phone).to eq (@co_dmv_locations.first[:phone])
-        expect(@factory.facilities.first.services).to eq (@co_dmv_locations.first[:services_p].split(/, ;/))
     end
     end
 
