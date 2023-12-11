@@ -22,4 +22,9 @@ class Vehicle
   def electric_vehicle?
     @engine == :ev
   end
+
+  def registration_date
+    nil 
+  end
+
 end
