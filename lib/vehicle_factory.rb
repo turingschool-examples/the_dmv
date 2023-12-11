@@ -58,11 +58,11 @@ class VehicleFactory
     end
 
     def most_popular_make
-        array_grouped_by_make = @wa_ev_vehicles_array.group_by do |vehicle|
+        hash_grouped_by_make = @wa_ev_vehicles_array.group_by do |vehicle|
             vehicle.make
         end
-        most_popular_make = array_grouped_by_make.max_by do |pair, occurrences|
-            occurrences.size
+        most_popular_make = hash_grouped_by_make.max_by do |make, vehicles_array| # .max_by finds largest array
+            vehicles_array.size
         end
         most_popular_make.first
     end    
@@ -78,11 +78,11 @@ class VehicleFactory
     end
 
     def count_vehicles_for_model_year(model_year)
-        array_grouped_by_year = @wa_ev_vehicles_array.group_by do |vehicle|
+        hash_grouped_by_year = @wa_ev_vehicles_array.group_by do |vehicle|
             vehicle.year
         end
         #Use .transform_values to get the counts for the specified model year
-        counts = array_grouped_by_year.transform_values do |vehicles_for_model_year|
+        counts = hash_grouped_by_year.transform_values do |vehicles_for_model_year|
             vehicles_for_model_year.size
         end
         counts[model_year]
@@ -96,10 +96,10 @@ class VehicleFactory
         counts = grouped_by_county.transform_values do |vehicles_by_county|
             vehicles_by_county.size
         end
-        max_pair = counts.max_by do |county, count|
+        max_pair = counts.max_by do |county, count| # max_by returns an array
             count
         end
-        most_vehicles_by_county = max_pair&.first
+        most_vehicles_by_county = max_pair.first # attempts to access the first element of the pair if max_pair is not nil
         most_vehicles_by_county
     end
 
