@@ -23,22 +23,10 @@ class Facility
 
   def register_vehicle(vehicle)
     if @services.include?('Vehicle Registration')
-      vehicle.registration_date = Date.today
-      plate_maker(vehicle)
+      vehicle.add_registration_date(Date.today)
+      vehicle.plate_maker
       fee_collector(vehicle)
       @registered_vehicles << vehicle
-    end
-  end
-# could make vehicle class actually take care of this and have facility
-# just tell it to do that
-# would have to move tests and refactor those as well
-  def plate_maker(vehicle)
-    if vehicle.antique?
-      vehicle.plate_type = :antique
-    elsif vehicle.engine == :ev
-      vehicle.plate_type = :ev
-    else
-      vehicle.plate_type = :regular
     end
   end
 

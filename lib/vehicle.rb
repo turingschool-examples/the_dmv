@@ -3,14 +3,14 @@ require 'date'
 class Vehicle
 # challenge for refactoring: remove attr_accessor and create methods to 
 # change the necessary attributes here instead of other classes
-  attr_accessor :registration_date,
-                :plate_type,
-                :vin,
-                :year,
-                :make,
-                :model,
-                :engine,
-                :county
+  attr_reader :registration_date,
+              :plate_type,
+              :vin,
+              :year,
+              :make,
+              :model,
+              :engine,
+              :county
 
   def initialize(vehicle_details)
     @vin = vehicle_details[:vin]
@@ -29,5 +29,19 @@ class Vehicle
 
   def electric_vehicle?
     @engine == :ev
+  end
+
+  def add_registration_date(date)
+    @registration_date = date
+  end
+
+  def plate_maker
+    if antique?
+      @plate_type = :antique
+    elsif engine == :ev
+      @plate_type = :ev
+    else
+      @plate_type = :regular
+    end
   end
 end
