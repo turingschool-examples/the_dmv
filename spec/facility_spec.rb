@@ -29,17 +29,27 @@ RSpec.describe Facility do
       expect(@facility_1.services).to eq([])
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.services).to eq(['Vehicle Registration'])
+      
       expect(@facility_2.services).to eq([])
     end
   end
 
   describe '#register_a_vehicle' do
     it 'can add a registered vehicle to list of registered vehicles' do
+      @facility_1.add_service("Vehicle Registration")
       expect(@facility_1.registered_vehicles).to eq([])
       @facility_1.register_a_vehicle(@cruz)
       expect(@facility_1.registered_vehicles).to eq([@cruz])
+      
       @facility_1.register_a_vehicle(@camaro)
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro])
+      
+      @facility_1.register_a_vehicle(@bolt)
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+
+      expect(@facility_2.registered_vehicles).to eq([])
+      @facility_2.register_a_vehicle(@bolt)
+      expect(@facility_2.registered_vehicles).to eq([])
     end
   end
 
@@ -47,17 +57,15 @@ RSpec.describe Facility do
     it 'can collect fees from services performmed' do
       expect(@facility_1.collected_fees).to eq(0)
       @facility_1.collected_fees(100)
-      require 'pry'; binding.pry
       expect(@facility_1.collected_fees).to eq(100)
+      @facility_1.collected_fees(25)
+      expect(@facility_1.collected_fees).to eq(125)
+      @facility_1.collected_fees(200)
+      expect(@facility_1.collected_fees).to eq(325)
+
+      expect(@facility_2.collected_fees).to eq(0)
     end
   end
 
-
-
-  # describe 'registration_date' do
-  #   it 'can add a registration date' do
-  #     expect(@cruz.registration_date).to eq()
-  #   end
-  # end
 end
 

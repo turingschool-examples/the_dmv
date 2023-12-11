@@ -19,9 +19,12 @@ class Facility
 
   def add_service(service)
     @services << service
+    self
   end  
 
   def register_a_vehicle(registered_vehicle)
+    return nil unless @services.include?('Vehicle Registration')
+    
     @registered_vehicles << registered_vehicle
     
     service_fee = case registered_vehicle.plate_type
