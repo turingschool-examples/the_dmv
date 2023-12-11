@@ -1,4 +1,5 @@
 require './lib/vehicle'
+require './lib/registrant'
 
 class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
@@ -47,5 +48,30 @@ class Facility
     return 25 if vehicle.antique?
     return 200 if vehicle.electric_vehicle?
     100
+  end
+
+  def administer_written_test(registrant)
+
+    if @services.include?('Written Test') && registrant.permit?
+      registrant.license_data[:written] = true
+    else
+      false
+    end
+  end
+
+  def administer_road_test(registrant)
+    if @services.include?('Road Test') && registrant.license_data[:written]
+      registrant.license_data[:license] = true
+    else
+      false
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    if @services.include?('Renew License') && registrant.license_data[:license]
+      registrant.license_data[:renewed] = true
+    else
+      false
+    end
   end
 end

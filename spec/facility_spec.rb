@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'date'
+require './lib/registrant'
 
 RSpec.describe Facility do
   before(:each) do
@@ -9,6 +10,9 @@ RSpec.describe Facility do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    @registrant_1 = Registrant.new("Bruce", 18, true )
+    @registrant_2 = Registrant.new("Penny", 15 )
+    @registrant_3 = Registrant.new("Tucker", 16)
   end
 
   describe '#initialize' do
@@ -65,6 +69,84 @@ RSpec.describe Facility do
       expect(@facility_1.set_plate_type(@cruz)).to eq(:regular)
       expect(@facility_1.set_plate_type(@bolt)).to eq(:ev)
       expect(@facility_1.set_plate_type(@camaro)).to eq(:antique)
+    end
+  end
+
+  describe '#administer_written_test' do
+    it 'returns if AWT is true' do
+      @facility_1.add_service('Written Test')
+
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
+    end
+
+
+    it 'returns if AWT is true' do
+      @facility_1.add_service('Written Test')
+
+        expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
+        expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
+    end
+  end
+
+    describe '#administer_road_help' do
+    it 'returns license ture' do
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      @facility_1.administer_written_test(@registrant_1)
+
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
+    end
+
+    it 'returns license true r3' do
+      @registrant_3.earn_permit
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      @facility_1.administer_written_test(@registrant_3)
+
+      expect(@facility_1.administer_road_test(@registrant_3)).to eq(true)
+    end
+
+    it 'returns license false r2' do
+      @registrant_2.earn_permit
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      @facility_1.administer_written_test(@registrant_2)
+
+      expect(@facility_1.administer_road_test(@registrant_2)).to eq(false)
+    end
+  end
+
+  describe '#renew_drivers_license' do
+    it 'returns if registrant can renew drivers license' do
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Renew License')
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(true)
+    end
+
+    it 'returns if registrant can renew drivers license' do
+      @registrant_3.earn_permit
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Renew License')
+      @facility_1.administer_written_test(@registrant_3)
+      @facility_1.administer_road_test(@registrant_3)
+
+      expect(@facility_1.renew_drivers_license(@registrant_3)).to eq(true)
+    end
+
+    it 'returns if registrant can renew drivers license' do
+      @registrant_2.earn_permit
+      @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
+      @facility_1.add_service('Renew License')
+      @facility_1.administer_written_test(@registrant_2)
+      @facility_1.administer_road_test(@registrant_2)
+
+      expect(@facility_1.renew_drivers_license(@registrant_2)).to eq(false)
     end
   end
 end
