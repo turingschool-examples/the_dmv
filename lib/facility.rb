@@ -30,8 +30,18 @@ class Facility
         vehicle.plate_type = :regular
         end
       @registered_vehicles << vehicle
-      
-
+    end
+  end
+  def administer_written_test(registrant)
+    if registrant.permit? && registrant.age >= 16
+      if @services.include?('Written Test')
+        registrant.license_data[:written] = true
+        true
+      else 
+        false
+      end
+    else
+        false
     end
   end
 end
