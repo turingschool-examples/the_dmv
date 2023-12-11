@@ -66,6 +66,14 @@ class Facility
       false
     end
   end
+
+  def renew_drivers_license(registrant)
+    if  registrant.age >= 16 && registrant.permit? && registrant.license_data[:written] = true && registrant.license_data[:license] = true && @services.include?("Renew License")
+      registrant.license_data[:renewed] = true
+    else
+      false
+    end
+  end
 end
 #NOTE: A facility must offer a service in order to perform it. Just because the DMV allows facilities to perform certain services, does not mean that every facility provides every service.
 
