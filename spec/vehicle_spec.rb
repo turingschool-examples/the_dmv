@@ -43,4 +43,24 @@ RSpec.describe Vehicle do
       expect(@cruz.registration_fee(@cruz)).to eq (100)
     end
   end
+
+  describe Vehicle do
+    let(:vehicle) do
+      Vehicle.new(
+        engine: :ev,
+        make: "TOYOTA",
+        model: "Prius Plug-in",
+        vin: "JTDKN3DP8D",
+        year: "2013"
+      )
+    end
+
+    it 'creates a Vehicle with the correct attributes' do
+      expect(vehicle.engine).to eq(:ev)
+      expect(vehicle.make).to eq("TOYOTA")
+      expect(vehicle.model).to eq("Prius Plug-in")
+      expect(vehicle.vin).to eq("JTDKN3DP8D")
+      expect(vehicle.year).to eq("2013")
+    end
+  end
 end
