@@ -45,10 +45,10 @@ RSpec.describe Facility do
 
   describe 'collected_fees' do
     it 'can collect fees from services performmed' do
+      require 'pry'; binding.pry
       expect(@facility_1.collected_fees).to eq(0)
       @facility_1.collected_fees(100)
       expect(@facility_1.collected_fees).to eq(100)
-      @facility_1.collected_fees()
     end
   end
 
