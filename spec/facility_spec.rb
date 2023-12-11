@@ -95,6 +95,10 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@cruz)
 
       expect(@cruz.plate_type).to eq :regular
+
+      @facility_1.register_vehicle(@camaro)
+
+      expect(@camaro.plate_type).to eq :antique
     end
   end
 
@@ -167,6 +171,23 @@ RSpec.describe Facility do
 
       @facility_1.add_service('Renew License')
       expect(@facility_1.renew_drivers_license(@bruce)).to eq true
+    end
+
+    it 'can renew license if registrant already has their license' do
+      @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@bruce)
+      @facility_1.add_service('Road Test')
+      @facility_1.administer_road_test(@bruce)
+      @facility_1.add_service('Renew License')
+      
+      expect(@facility_1.renew_drivers_license(@bruce)).to eq true
+      expect(@facility_1.renew_drivers_license(@penny)).to eq false
+
+      @facility_1.administer_road_test(@penny)      
+      @penny.earn_permit
+      @facility_1.administer_written_test(@penny)
+      expect(@facility_1.administer_road_test(@penny)).to eq true
+      expect(@facility_1.renew_drivers_license(@penny)).to eq true
     end
   end
 end
