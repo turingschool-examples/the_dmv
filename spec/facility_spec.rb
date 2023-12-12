@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 RSpec.describe Facility do
-  let(:facility_1) { Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'}) }
-  let(:facility_2) { Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'}) }
+  let(:facility_1) { Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600', daily_hours: 'Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.'}) }
+  let(:facility_2) { Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600', daily_hours: 'Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.'}) }
   let(:cruz) { Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice}) }
   let(:bolt) { Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev}) }
   let(:camaro) { Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice}) }
@@ -17,6 +17,7 @@ RSpec.describe Facility do
       expect(facility_1.address).to eq('2855 Tremont Place Suite 118 Denver CO 80205')
       expect(facility_1.phone).to eq('(720) 865-4600')
       expect(facility_1.services).to eq([])
+      expect(facility_1.daily_hours).to eq ("Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.")
     end
   end
 
@@ -108,6 +109,7 @@ RSpec.describe Facility do
       facility_1.administer_written_test(registrant_1)
       facility_1.administer_road_test(registrant_1)
       facility_1.renew_driver_license(registrant_1)
+
       expect(facility_1.renew_driver_license(registrant_1)).to eq (true)
       expect(registrant_1.license_data[:renewed]).to eq (true)
     end
