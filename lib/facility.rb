@@ -3,7 +3,7 @@ require './lib/registrant'
 require './lib/dmv_data_service'
 
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
+  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees, :operating_hours, :holiday_closures
 
   def initialize(info)
     @name = info[:name]
@@ -12,6 +12,8 @@ class Facility
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
+    @operating_hours = info[:operating_hours] || {}
+    @holiday_closures = info[:holiday_closures] || []
   end
 
   def add_service(service)
@@ -87,5 +89,21 @@ class Facility
     else
       state_info
     end
+  end
+
+  def add_operating_hours(day, hours)
+    @operating_hours[day] = hours
+  end
+
+  def add_holiday_closure(holiday)
+    @holiday_closures << holiday unless @holiday_closures.include?(holiday)
+  end
+
+  def open_on_day?(day)
+    @operating_hours.key?(day)
+  end
+
+  def closed_on_holiday?(holiday)
+    @holiday_closures.include?(holiday)
   end
 end
