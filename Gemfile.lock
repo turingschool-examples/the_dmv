@@ -1,8 +1,10 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    base64 (0.2.0)
     diff-lcs (1.5.0)
-    faraday (2.7.2)
+    faraday (2.7.12)
+      base64
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
@@ -10,24 +12,23 @@ GEM
       rspec-core (~> 3.12.0)
       rspec-expectations (~> 3.12.0)
       rspec-mocks (~> 3.12.0)
-    rspec-core (3.12.0)
+    rspec-core (3.12.2)
       rspec-support (~> 3.12.0)
-    rspec-expectations (3.12.2)
+    rspec-expectations (3.12.3)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
-    rspec-mocks (3.12.2)
+    rspec-mocks (3.12.6)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
-    rspec-support (3.12.0)
+    rspec-support (3.12.1)
     ruby2_keywords (0.0.5)
 
 PLATFORMS
-  arm64-darwin-20
-  arm64-darwin-22
+  ruby
 
 DEPENDENCIES
   faraday
   rspec
 
 BUNDLED WITH
-   2.2.27
+   1.17.2
