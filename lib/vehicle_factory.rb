@@ -4,7 +4,7 @@ class VehicleFactory
         vehicles_array = []
         source.each do |vehicle|
             if vehicle.keys.include?(:dol_vehicle_id)
-                vehicles_array.concat(wa_create_vehicles(source))
+                vehicles_array.concat(wa_create_vehicles(source)) # .concat combining two arrays into a single array
             elsif vehicle.keys.include?(:reg_valid_date)
                 vehicles_array.concat(ny_create_vehicles(source))
             end
