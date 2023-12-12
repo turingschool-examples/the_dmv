@@ -7,6 +7,7 @@ class Analytics
         @facility = facility
         @ev_vehicles = []
         @reg_ev_vehicles_makes = []
+        @ev_modelyear = []
     end
 
     def ev_vehicles_registered
@@ -32,6 +33,20 @@ class Analytics
         ev_vehicles_registered
         reg_ev_vehicles_makes
         "The most popular vehicle make registered in #{@facility.name} facility was #{most_popular_make}"
+    end
+
+    def ev_modelyear
+        ev_model = String.new
+        ev_year = String.new
+        ev_vehicles_registered.map do |vehicle|
+            ev_model << vehicle.model 
+            ev_year << vehicle.year.to_s
+            @ev_modelyear << (@ev_model+"_"+@ev_year)
+        end
+        @ev_modelyear
+    end
+    def ev_modelyear_count
+        @ev_modelyear.tally
     end
 
 end
