@@ -27,7 +27,7 @@ RSpec.describe DmvDataService do
 
   describe '#ny_ev_registrations' do
     it 'can load new york ev registration data' do
-      expect(@dds.ny_ev_registrations.size).to be_an(Integer)
+      expect(@dds.ny_registrations.size).to be_an(Integer)
     end
   end
 
