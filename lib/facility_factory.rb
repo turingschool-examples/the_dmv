@@ -43,5 +43,9 @@ class FacilityFactory
     grouped_schedule.map { |hours, days| "#{days.join(', ')}: #{hours}"}
   end
 
-
+  def holidays_closed(mo_data)
+    mo_data.map do |facility_data|
+      facility_data[:holidaysclosed]
+    end
+  end
 end
