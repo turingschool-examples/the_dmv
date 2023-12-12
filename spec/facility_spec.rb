@@ -167,4 +167,32 @@ RSpec.describe Facility do
       expect(@facility_1.state_facility(mo_data)).to eq(expected)
     end
   end
+
+  describe '#add_operating_hours' do
+    it 'adds operating hours for a specific day' do
+      @facility.add_operating_hours('Monday', '9:00 AM - 5:00 PM')
+      expect(@facility.operating_hours['Monday']).to eq('9:00 AM - 5:00 PM')
+    end
+  end
+
+  describe '#add_holiday_closure' do
+    it 'adds a holiday to the closure list' do
+      @facility.add_holiday_closure('Independence Day')
+      expect(@facility.holiday_closures).to include('Independence Day')
+    end
+  end
+
+  describe '#open_on_day?' do
+    it 'returns true if the facility is open on the given day' do
+      @facility.add_operating_hours('Tuesday', '9:00 AM - 5:00 PM')
+      expect(@facility.open_on_day?('Tuesday')).to be true
+    end
+  end
+
+  describe '#closed_on_holiday?' do
+    it 'returns true if the facility is closed on the given holiday' do
+      @facility.add_holiday_closure('Christmas Day')
+      expect(@facility.closed_on_holiday?('Christmas Day')).to be true
+    end
+  end
 end
