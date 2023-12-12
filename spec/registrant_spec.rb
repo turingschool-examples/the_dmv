@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe Registrant do
    before(:each) do
       @bruce = Registrant.new('Bruce', 18, true)
-      @penny = Registrant.new('Penny', 15)
+      @penny = Registrant.new('Penny', 16)
       @tucker = Registrant.new('Tucker', 15)
    end
 
@@ -21,7 +21,7 @@ RSpec.describe Registrant do
       it 'has an age' do
          expect(@bruce.age).to eq 18
 
-         expect(@penny.age).to eq 15
+         expect(@penny.age).to eq 16
       end
 
       it 'can have a permit' do 
@@ -32,6 +32,8 @@ RSpec.describe Registrant do
 
       it 'has license-data' do
          expect(@bruce.license_data).to eq ({:written=>false, :license=>false, :renewed=>false})
+         
+         expect(@penny.license_data).to eq ({:written=>false, :license=>false, :renewed=>false})
       end
    end
 
@@ -42,6 +44,10 @@ RSpec.describe Registrant do
          @penny.earn_permit
 
          expect(@penny.permit?).to eq true
+         
+         @tucker.earn_permit
+
+         expect(@tucker.permit?).to eq true
       end
    end
 
@@ -51,6 +57,11 @@ RSpec.describe Registrant do
          facility_1.add_service('Written Test')
          expect(facility_1.administer_written_test(@bruce)).to eq true
          expect(@bruce.license_data).to eq ({:written=>true, :license=>false, :renewed=>false})
+
+         @penny.earn_permit
+         expect(@penny.permit?).to eq true
+         expect(facility_1.administer_written_test(@penny)).to eq true
+         expect(@penny.license_data).to eq ({:written=>true, :license=>false, :renewed=>false})
       end
 
       it 'can administer a road test' do
