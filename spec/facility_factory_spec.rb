@@ -35,4 +35,55 @@ RSpec.describe FacilityFactory do
         expect(factory.create_facilitys(missouri_facilities)[0].address).to eq("119 VINE ST")
         expect(factory.create_facilitys(missouri_facilities)[0].phone).to eq("(573) 624-8808")
     end
+
+    it 'should be able to construct a facility factory co' do 
+        factory = FacilityFactory.new
+        office_data = {
+            :dmv_office=> "Tampa",
+            :address_li=> "12907 conquistador loop",
+            :phone=> "(813)534-2977"
+        }
+        expect_hash = {
+            :name=> "Tampa",
+            :address=> "12907 conquistador loop",
+            :phone=> "(813)534-2977"
+        }
+
+        expect(factory.construct_co_facility_attr_helper(office_data)).to eq(expect_hash)
+
+    end
+
+    it 'should be able to construct a facility factory ny' do 
+        factory = FacilityFactory.new
+        office_data = {
+            :office_name=> "Miami",
+            :street_address_line_1=> "3428 Townhouse Ct",
+            :public_phone_number=> "(813)556-2525"
+        }
+        expect_hash = {
+            :name=> "Miami",
+            :address=> "3428 Townhouse Ct",
+            :phone=> "(813)556-2525"
+        }
+
+        expect(factory.construct_ny_facility_attr_helper(office_data)).to eq(expect_hash)
+    end 
+
+    it 'should be able to construct a facility factory mo' do
+        factory = FacilityFactory.new
+        office_data = {
+            :name=> "Clearwater",
+            :address1=> "7408 E Hillsborough Ave",
+            :phone=> "(813)524-4977"
+        }
+
+        expect_hash = {
+            :name=> "Clearwater",
+            :address=> "7408 E Hillsborough Ave",
+            :phone=> "(813)524-4977"
+        }
+
+        expect(factory.construct_mo_facility_attr_helper(office_data)).to eq(expect_hash)
+    end
+
 end 

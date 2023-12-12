@@ -182,7 +182,117 @@ RSpec.describe Facility do
       expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
     end
   end
+end
 
+describe 'helper methods' do
+  describe 'register vehicle helper' do
+    it 'should register antique car' do
+      facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      car = Vehicle.new({
+        :vin=> "2626277376262",
+        :year=> 1969,
+        :make=> "Tesla",
+        :model=> "model S",
+        :engine=> "ev"
+      })
+      facility.add_service("New car")
+      facility.register_vehicle_helper(car)
 
+      expect(facility.collected_fees).to eq(25)
+      expect(car.plate_type).to eq(:antique)
+    end
+
+    it 'should register electric vehicles' do
+      facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      car = Vehicle.new({
+        :vin=> "62737373",
+        :year=> 2019,
+        :make=> "Toyota",
+        :model=> "Corolla",
+        :engine=> :ev
+      })
+      facility.add_service("New car")
+      facility.register_vehicle_helper(car)
+
+      expect(facility.collected_fees).to eq(200)
+      expect(car.plate_type).to eq(:ev)
+    end 
+
+    it 'should register regular vehicles' do 
+      facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      car = Vehicle.new({
+        :vin=> "82772837",
+        :year=> 2018,
+        :make=> "Hyundai",
+        :model=> "Elantra",
+        :engine=> :regular
+      })
+      facility.add_service("New car")
+      facility.register_vehicle_helper(car)
+
+      expect(facility.collected_fees).to eq(100)
+      expect(car.plate_type).to eq(:regular)
+    end 
+
+    it 'should set registration date' do
+      facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      car = Vehicle.new({
+        :vin=> "82772837",
+        :year=> 2018,
+        :make=> "Hyundai",
+        :model=> "Elantra",
+        :engine=> :regular
+      })
+      facility.add_service("New car")
+      facility.set_registration_date(car)
+
+      expect(car.registration_date).to eq(Date.today)
+    end 
+  end
+
+  describe 'written test helper' do
+    it 'should have a written test' do
+      facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      registrant = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Carlos', 15)
+
+      facility.written_test_helper(registrant)
+      facility.written_test_helper(registrant_2)
+
+      expect(registrant.license_data[:written]).to eq true
+      expect(registrant_2.license_data[:written]).to eq false
+    end
+  end
+
+  describe 'road test helper' do 
+    it 'should have a road test' do
+      facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      registrant = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Carlos', 15)
+      registrant.license_data[:written] = true
+     
+      facility.road_test_helper(registrant)
+      facility.road_test_helper(registrant_2)
+
+      expect(registrant.license_data[:license]).to eq true
+      expect(registrant_2.license_data[:license]).to eq false
+    end
+  end 
+
+  describe 'renew license helper' do
+    it 'should have a renew drivers license test' do 
+      facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      registrant = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Carlos', 15)
+      registrant.license_data[:written] = true
+      registrant.license_data[:license] = true
+
+      facility.renew_drivers_license_helper(registrant)
+      facility.renew_drivers_license_helper(registrant_2)
+
+      expect(registrant.license_data[:renewed]).to eq true
+      expect(registrant_2.license_data[:renewed]).to eq false
+    end 
+  end
 end
 

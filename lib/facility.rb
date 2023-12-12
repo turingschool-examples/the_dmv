@@ -14,32 +14,62 @@ class Facility
     @services << service
   end
 
+  def register_vehicle_helper(car)
+    if car.antique?
+      @collected_fees += 25
+      car.plate_type = :antique
+    elsif car.electric_vehicle?
+      @collected_fees += 200
+      car.plate_type = :ev
+    else 
+      @collected_fees += 100
+      car.plate_type = :regular
+    end
+  end
+  
+  def set_registration_date(car)
+    car.registration_date = Date.today
+    @registered_vehicles << car
+  end 
+
   def register_vehicle(car)
     if @services.include?('Vehicle Registration')
-      if car.antique?
-        @collected_fees += 25
-        car.plate_type = :antique
-      elsif car.electric_vehicle?
-        @collected_fees += 200
-        car.plate_type = :ev
-      else 
-        @collected_fees += 100
-        car.plate_type = :regular
-      end
-      car.registration_date = Date.today
-      @registered_vehicles << car
+      register_vehicle_helper(car)
+      set_registration_date(car)
+
       @registered_vehicles
     end
+  end
+
+  def written_test_helper(registrant)
+    if registrant.permit? && registrant.age >= 16
+      registrant.license_data[:written] = true
+      registrant.license_data[:written]
+    else 
+      registrant.license_data[:written]
+    end
+  end
+
+  def road_test_helper(registrant)
+    if registrant.license_data[:written]
+      registrant.license_data[:license] = true
+    else
+      registrant.license_data[:license]
+    end
+  end
+
+  def renew_drivers_license_helper(registrant)
+    if registrant.license_data[:written] && registrant.license_data[:license]
+      registrant.license_data[:renewed] = true
+    else 
+      registrant.license_data[:renewed]
+    end
+
   end
   
   def administer_written_test(registrant)
     if @services.include?('Written Test')
-      if registrant.permit? && registrant.age >= 16
-        registrant.license_data[:written] = true
-        registrant.license_data[:written]
-      else 
-        registrant.license_data[:written]
-      end
+      written_test_helper(registrant)
     else 
       false
     end
@@ -47,11 +77,7 @@ class Facility
 
   def administer_road_test(registrant)
     if @services.include?('Road Test')
-      if registrant.license_data[:written]
-        registrant.license_data[:license] = true
-      else
-        registrant.license_data[:license]
-      end
+      road_test_helper(registrant)
     else
       false
     end
@@ -59,11 +85,7 @@ class Facility
 
   def renew_drivers_license(registrant)
     if @services.include?('Renew License')
-      if registrant.license_data[:written] && registrant.license_data[:license]
-        registrant.license_data[:renewed] = true
-      else 
-        registrant.license_data[:renewed]
-      end
+      renew_drivers_license_helper(registrant)
     else 
       false
     end
