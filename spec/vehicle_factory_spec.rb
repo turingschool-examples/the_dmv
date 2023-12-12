@@ -11,7 +11,7 @@ RSpec.describe VehicleFactory do
    end
 
    describe '#create_vehicles' do
-      it 'can create vehicles from dmv data service' do
+      it 'can create vehicles from WA dmv data service' do
          wa_ev_registrations = DmvDataService.new.wa_ev_registrations
          @vehicles_array = @factory.create_vehicles(wa_ev_registrations)
          
@@ -25,7 +25,7 @@ RSpec.describe VehicleFactory do
          expect(@vehicles_array.first.engine).not_to eq(nil) 
       end
 
-      it 'can create vehicles from dmv data service' do
+      it 'can create vehicles from NY dmv data service' do
          ny_state_registrations = DmvDataService.new.ny_state_registrations
          @vehicles_array_2 = @factory.create_vehicles(ny_state_registrations)
          
