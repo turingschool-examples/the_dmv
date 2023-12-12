@@ -7,15 +7,15 @@ class FacilityFactory
   def create_facility(facility_data)
     state = facility_data[:state]
     
-    facility_details = if state == "CO"
-                           create_co_facility(facility_data)
-                        elsif state == "NY"
-                           create_ny_facility(facility_data)
-                        elsif state == "MO"
-                           create_mo_facility(facility_data)
-                        else
-                           "Unsupported state: #{state}"
-                        end
+    if state == "CO"
+      facility_details = create_co_facility(facility_data)
+    elsif state == "NY"
+      facility_details = create_ny_facility(facility_data)
+    elsif state == "MO"
+      facility_details = create_mo_facility(facility_data)
+    else
+        "Unsupported state: #{state}"
+    end
     Facility.new(facility_details)
   end
  
