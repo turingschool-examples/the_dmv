@@ -1,22 +1,17 @@
 class VehicleFactory
-    attr_reader :vehicles
 
-    def initialize
-        @vehicles = []
-    end
+    def initialize; end
 
     def create_vehicles(registrations)
-        registrations.each do |registration|
-            attributes = {}
-            attributes[:vin] = registration[:vin_1_10]
-            attributes[:year] = registration[:model_year]
-            attributes[:make] = registration[:make]
-            attributes[:model] = registration[:model]
-            attributes[:engine] = :ev
-            vehicle = Vehicle.new(attributes)
-            @vehicles << vehicle
+        registrations.map do |registration|
+            Vehicle.new ({
+                vin: registration[:vin_1_10],
+                year: registration[:model_year],
+                make: registration[:make],
+                model: registration[:model],
+                engine: :ev
+        })
         end
-        @vehicles
     end
 
 end

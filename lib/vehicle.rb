@@ -36,6 +36,7 @@ class Vehicle
       @plate_type = :regular
     end
   end
+  
   def assign_registration_date(date)
     @registration_date = date
   end
