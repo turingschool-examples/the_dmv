@@ -1,5 +1,5 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :vehicle, :registered_vehicle, :collected_fees
+  attr_reader :name, :address, :phone, :services, :registered_vehicle, :collected_fees
 
   def initialize(facility_information)
     @name = facility_information[:name]
@@ -34,7 +34,7 @@ class Facility
 
 
   def administer_road_test(registrant)
-    if registrant.age >= 16 && @services.include?("Road Test") && registrant.permit? && registrant.license_data[:written] = true
+    if registrant.age >= 16 && @services.include?("Road Test") && registrant.permit? && registrant.license_data[:written] == true
       registrant.license_data[:license] = true
     else
       false
