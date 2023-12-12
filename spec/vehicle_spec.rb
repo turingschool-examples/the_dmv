@@ -40,6 +40,12 @@ RSpec.describe Vehicle do
     end
   end
 
+  describe '#add_registration_date' do
+    it 'can add a registration date to a vehicle' do
+      expect(@cruz.add_registration_date(Date.today)).to eq(@cruz.registration_date)
+    end
+  end
+
   describe '#plate_maker' do
     it 'makes an antique plate when vehicle is over 25 years old' do
       camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
