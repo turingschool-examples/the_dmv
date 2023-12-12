@@ -20,9 +20,12 @@ class Facility
   end
 
   def register_vehicle (vehicle)
-    return nil unless (@services.include?('Vehicle Registration'))
-      @registered_vehicles << vehicle
-      collect_fees(vehicle)
+    @services.include?('Vehicle Registration') ? register(vehicle) : nil
+  end
+
+  def register(vehicle)
+    @registered_vehicles << vehicle
+    collect_fees(vehicle)
   end
 
   def collect_fees(vehicle)
@@ -38,22 +41,27 @@ class Facility
   end
 
   def administer_written_test (registrant)
-    return false unless ((@services.include?('Written Test')) && 
+    status = ((@services.include?('Written Test')) && 
         (registrant.age >= 16))
-      registrant.pass_written_test
+    
+    registrant.pass_written_test if status == true
+    status
   end
 
   def administer_road_test (registrant)
-    return false unless ((@services.include?('Road Test')) && 
+    status =((@services.include?('Road Test')) && 
         (registrant.license_data[:written] == true))
-      registrant.pass_road_test
+    
+    registrant.pass_road_test if status == true
+    status
   end  
 
   def renew_drivers_license (registrant)
-    return false unless ((@services.include?('Renew License')) && 
+    status = (((@services.include?('Renew License')) && 
         (registrant.license_data[:written] == true) && 
-        (registrant.license_data[:license] == true))
+        (registrant.license_data[:license] == true))) 
       
-      registrant.renew_license
+    registrant.renew_license if status == true
+    status
   end  
 end
