@@ -29,8 +29,3 @@ attr_accessor :registration_date,
     @engine == :ev
   end
 end
-
-
-# First error: The test was expecting a registration_date method, but there was not method created in the Vehicle class. the return value needed to be nil so I called registration date detail from the vehicle objects. The value equals nil since registration date key doesn't exit in vehicle details hash.
-
-#hash with plate type as key and registration cost as value
