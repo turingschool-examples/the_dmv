@@ -48,6 +48,7 @@ RSpec.describe Facility_creator do
       expect(facility_creator.create_ny_facilities(new_york_facilities).first.collected_fees).to eq(0)
     end 
   end 
+  #at this point it's the same test over and over with different specifications
 
   describe '#create_mo_facilities' do 
     it 'is an object of Facility' do 
