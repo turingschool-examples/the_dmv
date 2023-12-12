@@ -278,5 +278,21 @@ describe 'helper methods' do
       expect(registrant_2.license_data[:license]).to eq false
     end
   end 
+
+  describe 'renew license helper' do
+    it 'should have a renew drivers license test' do 
+      facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      registrant = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Carlos', 15)
+      registrant.license_data[:written] = true
+      registrant.license_data[:license] = true
+
+      facility.renew_drivers_license_helper(registrant)
+      facility.renew_drivers_license_helper(registrant_2)
+
+      expect(registrant.license_data[:renewed]).to eq true
+      expect(registrant_2.license_data[:renewed]).to eq false
+    end 
+  end
 end
 
