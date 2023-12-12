@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 require './lib/facility'
 require './lib/facility_factory'
 require './lib/dmv_data_service'
@@ -16,5 +17,8 @@ RSpec.describe FacilityFactory do
         facilities2 = factory.create_facilities(missouri_facilities)
         expect(facilities1.first).to be_an_instance_of(Facility)
         expect(facilities2.first).to be_an_instance_of(Facility)
+        expect(facilities1.first.name).not_to eq(nil)
+        expect(facilities1.first.address).not_to eq(nil)
+        
     end
 end
