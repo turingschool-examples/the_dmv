@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+#start with negative tests to simplify process
 RSpec.describe Facility do
   before(:each) do
     @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
