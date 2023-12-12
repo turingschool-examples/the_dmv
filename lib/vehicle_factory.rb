@@ -13,6 +13,5 @@ class VehicleFactory
               engine: :ev
             })
         end
-        binding.pry
     end
 end
