@@ -35,8 +35,7 @@ RSpec.describe Facility do
   end
 
   describe "#vehicle registration" do
-  
-    it "lists registered vehicles" do
+      it "lists registered vehicles" do
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.registered_vehicles).to eq([])
         
@@ -109,7 +108,7 @@ RSpec.describe Facility do
 
   describe "#road test" do
     it "provides test only if service available" do
-      # expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
 
       @facility_1.add_service("Written Test")
       @facility_1.administer_written_test(@registrant_1)
@@ -142,7 +141,7 @@ RSpec.describe Facility do
 
   describe "#renew license" do
     it "can renew only if service available" do
-      # expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
+      expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
 
       @facility_1.add_service("Written Test")
       @facility_1.add_service("Road Test")
