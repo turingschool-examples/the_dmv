@@ -46,6 +46,10 @@ RSpec.describe Vehicle do
       @facility_1.register_vehicle(@cruz)
 
       expect(@cruz.plate_type).to eq :regular
+
+      @facility_1.register_vehicle(@camaro)
+
+      expect(@camaro.plate_type).to eq :antique
     end
   end
   
@@ -82,6 +86,10 @@ RSpec.describe Vehicle do
       @facility_1.register_vehicle(@camaro)
 
       expect(@camaro.registration_date).to eq (Date.today)
+
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@cruz.registration_date).to eq (Date.today)
     end
   end
 end
