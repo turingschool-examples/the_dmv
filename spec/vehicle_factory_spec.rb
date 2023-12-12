@@ -21,9 +21,22 @@ RSpec.describe VehicleFactory do
          expect(@vehicles_array.first.make).not_to eq(nil)
          expect(@vehicles_array.first.model).not_to eq(nil)
          expect(@vehicles_array.first.year).not_to eq(nil) 
-         expect(@vehicles_array.first.vin).not_to eq(nil) 
+         expect(@vehicles_array.first.vin_number).not_to eq(nil) 
          expect(@vehicles_array.first.engine).not_to eq(nil) 
       end
-   end   
 
+      it 'can create vehicles from dmv data service' do
+         ny_state_registrations = DmvDataService.new.ny_state_registrations
+         @vehicles_array_2 = @factory.create_vehicles(ny_state_registrations)
+         
+         expect(@vehicles_array_2).to be_an Array
+         
+         expect(@vehicles_array_2).to all(be_a(Vehicle))
+         expect(@vehicles_array_2.first.make).not_to eq(nil)
+         expect(@vehicles_array_2.first.model).not_to eq(nil)
+         expect(@vehicles_array_2.first.year).not_to eq(nil) 
+         expect(@vehicles_array_2.first.vin_number).not_to eq(nil) 
+         expect(@vehicles_array_2.first.engine).not_to eq(nil) 
+      end
+   end
 end
