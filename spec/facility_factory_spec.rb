@@ -21,5 +21,29 @@ RSpec.describe FacilityFactory do
     end
   end
 
+  describe '#daily_hours_ny' do
+    it 'create daily hours for NY facilities' do
+      factory = FacilityFactory.new
+      facility_data  =
+                { :monday_beginning_hours=>"8:30 AM",
+                  :monday_ending_hours=>"4:30 PM",
+                  :tuesday_beginning_hours=>"8:30 AM",
+                  :tuesday_ending_hours=>"4:30 PM",
+                  :wednesday_beginning_hours=>"8:30 AM",
+                  :wednesday_ending_hours=>"4:30 PM",
+                  :thursday_beginning_hours=>"8:30 AM",
+                  :thursday_ending_hours=>"4:30 PM",
+                  :friday_beginning_hours=>"8:30 AM",
+                  :friday_ending_hours=>"4:30 PM",
+                  :saturday_beginning_hours=>"CLOSED",
+                  :saturday_ending_hours=>"CLOSED"
+                }
+
+      daily_hours = factory.daily_hours_ny(facility_data)
+
+      expect(daily_hours).to eq ["M, T, W, Th, F: 8:30 AM-4:30 PM", "SAT: CLOSED"]
+    end
+  end
+
 
 end
