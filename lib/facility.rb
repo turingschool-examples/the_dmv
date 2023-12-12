@@ -1,8 +1,15 @@
 require './lib/vehicle'
 require './lib/registrant'
+require './lib/facility_factory'
 
 class Facility
-  attr_reader :name, :address, :phone, :services, :collected_fees, :registered_vehicles
+  attr_reader :name,
+              :address,
+              :phone,
+              :services,
+              :collected_fees,
+              :registered_vehicles,
+              :daily_hours
 
   def initialize(input)
     @name = input[:name]
@@ -12,6 +19,7 @@ class Facility
     @collected_fees = 0
     @plate_type = {}
     @registered_vehicles = []
+    @daily_hours = input[:daily_hours]
   end
 
   def add_service(service)
@@ -58,5 +66,5 @@ class Facility
 
     registrant.license_data[:renewed] = true
     true
-    end
+  end
 end
