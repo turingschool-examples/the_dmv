@@ -10,7 +10,7 @@ class VehicleFactory
                 make: registration[:make],
                 model: registration[:model],
                 engine: :ev,
-                county: registration[:county]
+                model: registration[:county]
         })
         end
     end
