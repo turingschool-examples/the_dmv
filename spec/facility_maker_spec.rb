@@ -5,7 +5,7 @@ RSpec.describe FacilityMaker do
         it 'creates a facility object' do
             co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
             facility_maker = FacilityMaker.new(co_dmv_office_locations)
-binding.pry
+
             expect(facility_maker).to be_a(FacilityMaker)
         end
     end
