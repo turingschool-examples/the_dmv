@@ -6,6 +6,7 @@ RSpec.describe VehicleFactory do
 before(:each) do
     @factory = VehicleFactory.new
     @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+    @ny_registrations = DmvDataService.new.ny_registrations
 end
 
     describe "#Initialize" do
@@ -33,6 +34,25 @@ end
             expect(@factory.create_vehicles(@wa_ev_registrations).last.model).to eq (@wa_ev_registrations.last[:model])
             expect(@factory.create_vehicles(@wa_ev_registrations).last.engine).to eq (:ev)
             expect(@factory.create_vehicles(@wa_ev_registrations).last.county).to eq ("King")
+        end
+    end
+
+    describe "#Creates a vehicles collection for NY locations" do
+        it "creates a collection with no empty values" do
+            expect(@factory.create_vehicles(@ny_registrations)).to be_an_instance_of (Array)
+            expect(@factory.create_vehicles(@ny_registrations).empty?).to eq(false)
+            expect(@factory.create_vehicles(@ny_registrations).flatten.include?(nil)).to eq(false)
+            
+            expect(@factory.create_vehicles(@ny_registrations)).to all(be_an_instance_of Vehicle)
+        end
+        it "assigns the attributes correctly" do
+            ny_vehicles = @factory.create_vehicles(@ny_registrations)
+            expect(ny_vehicles.first.first.vin).to eq (@ny_registrations[1][:"vin"])
+            expect(ny_vehicles.first.first.year).to eq (@ny_registrations[1][:"model_year"])
+            expect(ny_vehicles.first.first.make).to eq (@ny_registrations[1][:"make"])
+            expect(ny_vehicles.first.first.model).to eq (@ny_registrations[1][:"body_type"])
+            expect(ny_vehicles.first.first.engine).to eq (@ny_registrations[1][:"fuel_type"])
+            expect(ny_vehicles.first.first.county).to eq (@ny_registrations[1][:"county"])
         end
     end
 

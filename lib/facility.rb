@@ -2,6 +2,8 @@ class Facility
   attr_reader :name, 
               :address, 
               :phone, 
+              :daily_hours,
+              :observed_holidays,
               :services,
               :registered_vehicles,
               :collected_fees
@@ -10,6 +12,8 @@ class Facility
     @name = contact_info[:name]
     @address = contact_info[:address]
     @phone = contact_info[:phone]
+    @daily_hours = contact_info[:daily_hours]
+    @observed_holidays = contact_info[:observed_holidays]
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
