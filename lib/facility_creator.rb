@@ -2,6 +2,7 @@ class Facility_creator
     def create_co_facilities(dmv_data)
       dmv_data.map do |facility_data|
         #have to put it as an object here
+        #used map to change array
         Facility.new({
           name: facility_data[:dmv_office],
           address: {
