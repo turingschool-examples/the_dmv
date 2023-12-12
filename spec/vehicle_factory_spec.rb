@@ -26,11 +26,13 @@ end
             expect(@factory.create_vehicles(@wa_ev_registrations).first.make).to eq (@wa_ev_registrations.first[:make])
             expect(@factory.create_vehicles(@wa_ev_registrations).first.model).to eq (@wa_ev_registrations.first[:model])
             expect(@factory.create_vehicles(@wa_ev_registrations).first.engine).to eq (:ev)
+            expect(@factory.create_vehicles(@wa_ev_registrations).first.county).to eq ("King")
             expect(@factory.create_vehicles(@wa_ev_registrations).last.vin).to eq (@wa_ev_registrations.last[:vin_1_10])
             expect(@factory.create_vehicles(@wa_ev_registrations).last.year).to eq (@wa_ev_registrations.last[:model_year])
             expect(@factory.create_vehicles(@wa_ev_registrations).last.make).to eq (@wa_ev_registrations.last[:make])
             expect(@factory.create_vehicles(@wa_ev_registrations).last.model).to eq (@wa_ev_registrations.last[:model])
             expect(@factory.create_vehicles(@wa_ev_registrations).last.engine).to eq (:ev)
+            expect(@factory.create_vehicles(@wa_ev_registrations).last.county).to eq ("King")
         end
     end
 
