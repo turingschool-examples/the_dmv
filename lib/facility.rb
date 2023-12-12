@@ -47,27 +47,21 @@ class Facility
   end 
 
   def administer_written_test(registrant) 
-    if services.include?("Written Test") &&
-      registrant.age >= 16 && registrant.permit? 
-      registrant.license_data[:written] = true 
-    else 
-      false 
-    end 
+    services.include?("Written Test") &&
+    registrant.age >= 16 && 
+    registrant.permit? &&
+    (registrant.license_data[:written] = true) 
   end 
 
   def administer_road_test(registrant)
-    if services.include?("Road Test") && registrant.license_data[:written] 
-      registrant.license_data[:license] = true 
-    else 
-      false 
-    end 
+    services.include?("Road Test") && 
+    registrant.license_data[:written] &&
+    (registrant.license_data[:license] = true)
   end 
 
   def renew_drivers_license(registrant) 
-    if services.include?("Renew License") && registrant.license_data[:license] 
-      registrant.license_data[:license] = true 
-    else 
-      false 
-    end 
+    services.include?("Renew License") && 
+    registrant.license_data[:license] &&
+    (registrant.license_data[:license] = true)
   end 
 end
