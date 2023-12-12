@@ -20,4 +20,14 @@ class FacilityLocations
             })
         end
     end
+
+    def mo_dmv_offices(site)
+        site.map do |site_details|
+            Facility.new({
+            name: site_details[:name],
+            address: site_details.values_at(:address1, :city, :state, :zipcode).join(" "),
+            phone: site_details[:phone]
+            })
+        end
+    end
 end
