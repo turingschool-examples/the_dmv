@@ -40,6 +40,7 @@ class FacilityFactory
     schedule.each do |day, hour|
       grouped_schedule[hour] = grouped_schedule[hour] + [day]
     end
+
     grouped_schedule.map { |hours, days| "#{days.join(', ')}: #{hours}"}
   end
 
