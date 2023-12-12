@@ -46,7 +46,7 @@ RSpec.describe FacilityFactory do
   end
 
   describe "#holidays_closed_mo" do
-    it "return a string holidays that facilities in MO are closed" do
+    it "return holidays that facilities in MO are closed" do
       factory = FacilityFactory.new
       mo_data = [
                   { :holidaysclosed=>"Independence Day (07/04/22), Labor Day (09/05/22)" },
