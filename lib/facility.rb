@@ -5,7 +5,8 @@ class Facility
               :services, 
               :registration_dates,
               :registered_vehicles,
-              :collected_fees
+              :collected_fees,
+              :written_test
 
   def initialize(facility_info)
     @name = facility_info[:name]
@@ -15,11 +16,11 @@ class Facility
     @registration_dates = []
     @registered_vehicles = []
     @collected_fees = 0
+    @written_test = false
   end
 
   def add_service(service)
     @services << service
-    self
   end  
 
   def register_a_vehicle(registered_vehicle)
@@ -40,6 +41,14 @@ class Facility
 
   def collected_fees(service_fee = 0)
     @collected_fees += service_fee
+  end
+
+  def administer_written_test(registrant)
+      @written_test = true
+  end
+
+  def written_test
+    @written_test
   end
 end
 

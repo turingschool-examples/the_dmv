@@ -23,4 +23,8 @@ class Registrant
     def earn_permit
         @permit = true
     end
+
+    # def take_written_test
+    #     @written_test = true
+    # end
 end

@@ -7,6 +7,9 @@ RSpec.describe Facility do
     @cruz = Vehicle.new({ vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice })
     @bolt = Vehicle.new({ vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev })
     @camaro = Vehicle.new({ vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice })
+    @registrant_1 = Registrant.new({name: "Bruce", age: 18, permit: true})
+    @registrant_2 = Registrant.new({name: "Penny", age: 15, permit: false})
+    @registrant_3 = Registrant.new({name: "Tucker", age: 15, permit: false})
   end
 
   describe '#initialize' do
@@ -29,6 +32,9 @@ RSpec.describe Facility do
       expect(@facility_1.services).to eq([])
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.services).to eq(['Vehicle Registration'])
+      @facility_1.add_service('Written Test')
+      expect(@facility_1.services).to eq(['Vehicle Registration', 'Written Test'])
+
       
       expect(@facility_2.services).to eq([])
     end
@@ -50,10 +56,13 @@ RSpec.describe Facility do
       expect(@facility_2.registered_vehicles).to eq([])
       @facility_2.register_a_vehicle(@bolt)
       expect(@facility_2.registered_vehicles).to eq([])
+
+      @facility_1.add_service("Written Test")
+
     end
   end
 
-  describe 'collected_fees' do
+  describe '#collected_fees' do
     it 'can collect fees from services performmed' do
       expect(@facility_1.collected_fees).to eq(0)
       @facility_1.collected_fees(100)
@@ -67,5 +76,16 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#administer_written_test' do
+    it 'can adminster a written test to a registrant' do
+      # require 'pry'; binding.pry
+      @facility_1.add_service('Written Test')
+      # expect(@facility_1.administer_written_test(@registrant_1)).to be false
+      @facility_1.administer_written_test(@registrant_1)
+      expect(@facility_1.administer_written_test(@registrant_1)).to be true
+
+
+    end
+  end
 end
 
