@@ -9,7 +9,8 @@ class Facility
               :services,
               :collected_fees,
               :registered_vehicles,
-              :daily_hours
+              :daily_hours,
+              :holiday_closed
 
   def initialize(input)
     @name = input[:name]
@@ -20,6 +21,7 @@ class Facility
     @plate_type = {}
     @registered_vehicles = []
     @daily_hours = input[:daily_hours]
+    @holiday_closed = input[:holiday_closed]
   end
 
   def add_service(service)
