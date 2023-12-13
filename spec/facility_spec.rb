@@ -143,3 +143,64 @@ end
 
 # facility_2.collected_fees
 # 0
+
+
+# ------------------------------- 
+
+
+# Road Test
+
+facility_1.administer_road_test(registrant_3)
+false
+
+registrant_3.earn_permit
+
+facility_1.administer_road_test(registrant_3)
+false
+
+registrant_3.license_data
+{:written=>false, :license=>false, :renewed=>false}
+
+facility_1.administer_road_test(registrant_1)
+false
+
+facility_1.add_service('Road Test')
+["Written Test", "Road Test"]
+
+facility_1.administer_road_test(registrant_1)
+true
+
+registrant_1.license_data
+{:written=>true, :license=>true, :renewed=>false}
+
+facility_1.administer_road_test(registrant_2)
+true
+
+registrant_2.license_data
+{:written=>true, :license=>true, :renewed=>false}
+
+# Renew License
+
+facility_1.renew_drivers_license(registrant_1)
+false
+
+facility_1.add_service('Renew License')
+["Written Test", "Road Test", "Renew License"]
+
+facility_1.renew_drivers_license(registrant_1)
+true
+
+registrant_1.license_data
+{:written=>true, :license=>true, :renewed=>true}
+
+facility_1.renew_drivers_license(registrant_3)
+false
+
+registrant_3.license_data
+{:written=>false, :license=>false, :renewed=>false}
+
+facility_1.renew_drivers_license(registrant_2)
+true
+
+registrant_2.license_data
+{:written=>true, :license=>true, :renewed=>true}
