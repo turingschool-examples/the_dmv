@@ -5,8 +5,8 @@ RSpec.describe FacilityFactory do
     it 'create an array of facilities from a given data' do
       factory = FacilityFactory.new
       data = [
-              {:dmv_office=>"DMV Tremont Branch", :address=>"Suit 118 2855 Tremont Place", :phone=>"(720) 865-4600", :daysopen=>"Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m."},
-              {:dmv_office=>"DMV Northeast Branch", :address=>"Suit 101 4685 Peoria Street", :phone=>"(720) 865-4600", :daysopen=>"Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m."}
+              {:dmv_office=>"DMV Tremont Branch", :address=>"Suit 118 2855 Tremont Place", :phone=>"(720) 865-4600", :daysopen=>"Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.", :holidaysclosed=>"Independence Day (07/04/22), Labor Day (09/05/22)"},
+              {:dmv_office=>"DMV Northeast Branch", :address=>"Suit 101 4685 Peoria Street", :phone=>"(720) 865-4600", :daysopen=>"Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.", :holidaysclosed=>"Thanksgiving (11/24/22), Christmas Day Observed (12/26/22)"}
              ]
 
       facilities = factory.create_facilities(data, :dmv_office, :address, :phone, :daysopen)
@@ -17,6 +17,7 @@ RSpec.describe FacilityFactory do
         expect(facility.address).to eq (facility_data[:address])
         expect(facility.phone).to eq (facility_data[:phone])
         expect(facility.daily_hours).to eq (facility_data[:daysopen])
+        expect(facility.holiday_closed).to eq (facility_data[:holidaysclosed])
       end
     end
   end
@@ -45,15 +46,4 @@ RSpec.describe FacilityFactory do
     end
   end
 
-  describe "#holidays_closed" do
-    it "return holidays that facilities in MO are closed" do
-      factory = FacilityFactory.new
-      mo_data = [
-                  { :holidaysclosed=>"Independence Day (07/04/22), Labor Day (09/05/22)" },
-                  { :holidaysclosed=>"Thanksgiving (11/24/22), Christmas Day Observed (12/26/22)" }
-                ]
-
-      expect(factory.holidays_closed(mo_data)).to eq (["Independence Day (07/04/22), Labor Day (09/05/22)", "Thanksgiving (11/24/22), Christmas Day Observed (12/26/22)"])
-    end
-  end
 end
