@@ -7,6 +7,8 @@ class Vehicle
               :model,
               :engine,
               :registration_date
+  attr_accessor :plate_type
+
 
   vehicle_details = {:vin => :vin,
   :year => :year,
@@ -21,6 +23,8 @@ class Vehicle
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
     @registration_date = nil
+    @plate_type = nil
+    #@balance = 100
   end
 
   def antique?
