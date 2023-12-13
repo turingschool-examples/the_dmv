@@ -18,6 +18,7 @@ RSpec.describe Facility do
       expect(facility_1.phone).to eq('(720) 865-4600')
       expect(facility_1.services).to eq([])
       expect(facility_1.daily_hours).to eq ("Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.")
+      expect(facility_1.holiday_closed).to eq (nil)
     end
   end
 
