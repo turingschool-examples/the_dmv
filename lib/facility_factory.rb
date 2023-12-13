@@ -9,11 +9,20 @@ class FacilityFactory
         else
           daily_hours_ny(facility_data)
         end
+
+      holiday_closed =
+        if facility_data.key?(:holidaysclosed)
+          facility_data[:holidaysclosed]
+        else
+          nil
+        end
+
       Facility.new( {
         name: facility_data[name_key],
         address: facility_data[address_key],
         phone: facility_data[phone_key],
-        daily_hours: daily_hours
+        daily_hours: daily_hours,
+        holiday_closed: holiday_closed
         }
       )
     end
@@ -42,11 +51,5 @@ class FacilityFactory
     end
 
     grouped_schedule.map { |hours, days| "#{days.join(', ')}: #{hours}"}
-  end
-
-  def holidays_closed(mo_data)
-    mo_data.map do |facility_data|
-      facility_data[:holidaysclosed]
-    end
   end
 end
