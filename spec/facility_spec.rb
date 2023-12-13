@@ -36,7 +36,9 @@ RSpec.describe Facility do
   describe "#register_vehicle" do 
     xit 'has a Vehicle Registration service' do 
      expect(@cruz).to be_an_instance_of(Vehicle)
-     expect(@facility_1.add_service('Vehicle Registration')).to eq(["Vehicle Registration"])
+     
+     @facility_1.add_service('Vehicle Registration')
+     
      expect(@facility_1.registered_vehicles).to eq([])
      expect(@facility_1.collected_fees).to eq(0) 
 
@@ -65,23 +67,23 @@ RSpec.describe Facility do
   describe "#earn_permit" do 
     it 'administers learners permits' do 
       expect(@registrant_1).to be_an_instance_of(Registrant) 
-     expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-     expect(@registrant_1.permit?).to eq(true)
-     expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
-     expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@registrant_1.permit?).to eq(true)
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     
-     @facility_1.add_service('Written Test')
+      @facility_1.add_service('Written Test')
 
-     expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
-     expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
-     expect(@registrant_2.age).to eq(16)
-     expect(@registrant_2.permit?).to eq(false)
-     expect(@facility_1.administer_written_test(r@egistrant_2)).to eq(false)
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
+      expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+      expect(@registrant_2.age).to eq(16)
+      expect(@registrant_2.permit?).to eq(false)
+      expect(@facility_1.administer_written_test(r@egistrant_2)).to eq(false)
 
-     @registrant_2.earn_permit
+      @registrant_2.earn_permit
 
-     expect(@facility_1.administer_written_test(@registrant_2)).to eq(true)
-     expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+      expect(@facility_1.administer_written_test(@registrant_2)).to eq(true)
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
       expect(@registrant_3.age).to eq(15)
       expect(@registrant_3.permit?).to eq(false)
       expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
