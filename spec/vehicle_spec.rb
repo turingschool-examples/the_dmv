@@ -39,8 +39,15 @@ RSpec.describe Vehicle do
       expect{(@cruz.registration_date).to eq(nil)}
       @cruz.registration_date('2023-01-12')
       expect{(@cruz.registration_date).to eq('2023-01-12')}
+
+      expect{(@camaro.registration_date).to eq(nil)}
       @camaro.registration_date('2023-01-12')
       expect{(@camaro.registration_date).to eq('2023-01-12')}
+
+      expect{(@bolt.registration_date).to eq(nil)}
+      @bolt.registration_date('2023-01-12')
+      expect{(@bolt.registration_date).to eq('2023-01-12')}
+
     end
   end
 
