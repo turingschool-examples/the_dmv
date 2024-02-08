@@ -53,4 +53,10 @@ RSpec.describe Vehicle do # rubocop:disable Metrics/BlockLength
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe "#registration date" do
+    it "has a nil registration date by default" do
+      expect(@cruz.registration_date).to eq(nil)
+    end
+  end
 end
