@@ -1,3 +1,5 @@
+require 'pry'
+
 class Registrant
     attr_reader :name, 
                 :age, 
@@ -19,8 +21,6 @@ class Registrant
     end
 
     def earn_permit
-        if @permit == false
-            @permit = true
-        end
+        @permit = true
     end
 end
