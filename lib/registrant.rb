@@ -13,7 +13,8 @@ class Registrant
                          renewed: false
                         }
     end
-end
 
-@registrant_1 = Registrant.new('Bruce', 18, true)
-puts @registrant_1.license_data
+    def permit?
+        @permit
+    end
+end
