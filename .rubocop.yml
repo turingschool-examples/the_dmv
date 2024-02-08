@@ -11,3 +11,5 @@ Metrics/MethodLength:
   Max: 10
 Layout/FirstHashElementIndentation:
   EnforcedStyle: 'consistent'
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: 'consistent'
