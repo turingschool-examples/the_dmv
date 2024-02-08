@@ -1,3 +1,4 @@
+# Documentation for class Facility
 class Facility
   attr_reader :name, :address, :phone, :services
 

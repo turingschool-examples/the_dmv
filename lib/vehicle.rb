@@ -1,5 +1,6 @@
-require 'date'
+require "date"
 
+# Documentation for class Vehicle
 class Vehicle
   attr_reader :vin,
               :year,
