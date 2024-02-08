@@ -1,3 +1,3 @@
 # The DMV
 
-This is the starter repo for the BE Mod1 DMV project.
+This is my solution to the DMV project. I have added some configuration files and extra gems for linter/formatter/intellisense functionality.

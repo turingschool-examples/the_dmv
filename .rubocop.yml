@@ -1,0 +1,13 @@
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Layout/LineLength:
+  Max: 80
+AllCops:
+  Exclude:
+    - '**/sorbet'
+Style/StringLiterals:
+  EnforcedStyle: 'double_quotes'
+Metrics/MethodLength:
+  Max: 10
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: 'consistent'

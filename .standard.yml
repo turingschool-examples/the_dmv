@@ -1,0 +1,5 @@
+extend_config:
+  - ./.rubocop.yml
+ignore:
+  - '**/*':
+    - Layout
