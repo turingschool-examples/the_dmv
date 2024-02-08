@@ -17,4 +17,10 @@ class Registrant
     def permit?
         @permit
     end
+
+    def earn_permit
+        if @permit == false
+            @permit = true
+        end
+    end
 end
