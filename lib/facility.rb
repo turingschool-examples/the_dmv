@@ -2,9 +2,9 @@ class Facility
   attr_reader :name, :address, :phone, :services
 
   def initialize(branch_info)
-    @name = name
-    @address = address
-    @phone = phone
+    @name = branch_info[:name]
+    @address = branch_info[:address]
+    @phone = branch_info[:phone]
     @services = []
   end
 
