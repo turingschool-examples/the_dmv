@@ -24,6 +24,15 @@ RSpec.describe Registrant do
     end
   end
 
+  describe 'earn_permit' do
+    it 'can earn a permit' do
+      expect(@registrant_2.permit?).to be false
 
-  
+      @registrant_2.earn_permit
+
+      expect(@registrant_2.permit?).to be true
+    end
+  end
+
+
 end
