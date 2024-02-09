@@ -19,10 +19,6 @@ class Vehicle
     @plate_type = vehicle_details[:plate_type]
   end
 
-  def change_to_ev
-    @engine = :ev
-  end
-
   def antique?
     Date.today.year - @year > 25
   end

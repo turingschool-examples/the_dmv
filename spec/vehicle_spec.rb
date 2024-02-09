@@ -32,14 +32,6 @@ RSpec.describe Vehicle do
       expect(bolt.electric_vehicle?).to eq(true)
       expect(camaro.electric_vehicle?).to eq(false)
     end
-
-    it 'can change engine to electric' do
-      expect(cruz.engine).to eq(:ice)
-
-      cruz.change_to_ev
-
-      expect(cruz.engine).to eq(:ev)
-    end
   end
 
   describe 'vehicle registration' do
