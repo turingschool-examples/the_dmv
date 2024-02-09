@@ -81,5 +81,13 @@ RSpec.describe Registrant do
 
       expect(registrant_1.license_data[:license]).to be true
     end
+
+    it 'can check if the registrant has taken their written' do
+      expect(registrant_1.written?).to be false
+
+      registrant_1.take_written
+
+      expect(registrant_1.written?).to be true
+    end
   end
 end
