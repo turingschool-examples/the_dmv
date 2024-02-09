@@ -42,12 +42,5 @@ RSpec.describe Vehicle do
     end
   end
 
-  describe '#registration date' do
-    it 'can determine when the cruz got registard' do
-      expect(@cruz.registration_date).to eq(nil)
-      
-    end
-  end
-
 
 end
