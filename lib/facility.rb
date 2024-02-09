@@ -38,4 +38,32 @@ class Facility
       @collected_fees += 100
     end
   end
+
+  def has_service?(service)
+    services.include?(service)
+  end
+
+  def administer_written_test(registrant)
+    if has_service?('Written Test')
+      registrant.take_written
+    else
+      false
+    end
+  end
+
+  def administer_road_test(registrant)
+    if has_service?('Road Test')
+      registrant.take_road
+    else
+      false
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    if has_service?('Renew License')
+      registrant.renew_license
+    else
+      false
+    end
+  end
 end

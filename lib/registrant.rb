@@ -12,7 +12,42 @@ class Registrant
     permit
   end
 
+  def written?
+    license_data[:written]
+  end
+
+  def license?
+    license_data[:license]
+  end
+
   def earn_permit
     @permit = true
+  end
+
+  def take_written
+    if age > 15 && permit?
+      license_data[:written] = true
+      true
+    else
+      false
+    end
+  end
+
+  def take_road
+    if written?
+      license_data[:license] = true
+      true
+    else
+      false
+    end
+  end
+
+  def renew_license
+    if license?
+      license_data[:renewed] = true
+      true
+    else
+      false
+    end
   end
 end
