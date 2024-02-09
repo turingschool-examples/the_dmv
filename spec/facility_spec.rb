@@ -87,6 +87,31 @@ RSpec.describe Facility do
 
         end
 
+        describe '# collects fees' do
+
+            it 'collects fees (antique)' do
+                expect(@camaro.plate_type).to eq(nil)
+                @facility.add_service('Vehicle Registration')
+                @facility.register_vehicle(@camaro)
+                expect(@facility.collected_fees).to eq(25)
+            end
+
+            it 'collects fees (ev)' do
+                expect(@bolt.plate_type).to eq(nil)
+                @facility.add_service('Vehicle Registration')
+                @facility.register_vehicle(@bolt)
+                expect(@facility.collected_fees).to eq(200)
+            end
+
+            it 'collects  fees (regular)' do
+                expect(@cruz.plate_type).to eq(nil)
+                @facility.add_service('Vehicle Registration')
+                @facility.register_vehicle(@cruz)
+                expect(@facility.collected_fees).to eq(100)
+            end
+
+        end
+
     end
 
 end

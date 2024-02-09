@@ -37,6 +37,38 @@ RSpec.describe Vehicle do
             expect(@cruz.registration_date).to be_an_instance_of (Date)
         end
 
+        it 'updates plate type' do
+            expect(@cruz.registration_date).to eq(nil)
+            @facility.add_service('Vehicle Registration')
+            @facility.register_vehicle(@cruz)
+            expect(@cruz.registration_date).to be_an_instance_of (Date)
+        end
+
+        describe '# accumulates fees' do
+
+            it 'accumulates fees (antique)' do
+                expect(@camaro.plate_type).to eq(nil)
+                @facility.add_service('Vehicle Registration')
+                @facility.register_vehicle(@camaro)
+                expect(@camaro.fees).to eq(25)
+            end
+
+            it 'accumulates fees (ev)' do
+                expect(@bolt.plate_type).to eq(nil)
+                @facility.add_service('Vehicle Registration')
+                @facility.register_vehicle(@bolt)
+                expect(@bolt.fees).to eq(200)
+            end
+
+            it 'accumulates fees (regular)' do
+                expect(@cruz.plate_type).to eq(nil)
+                @facility.add_service('Vehicle Registration')
+                @facility.register_vehicle(@cruz)
+                expect(@cruz.fees).to eq(100)
+            end
+
+        end
+
     end
 
     describe '# antique?' do

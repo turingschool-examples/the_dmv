@@ -22,9 +22,6 @@ class Facility
         @services << service
     end
 
-    def collect_fees
-    end
-
     # A facility must include the service in order to perform it
 
     # Register a Vehicle
@@ -32,6 +29,7 @@ class Facility
         if @services.include? ("Vehicle Registration")
             vehicle.change_registration_date
             vehicle.update_plate_type
+            @collected_fees = vehicle.fees
             @registered_vehicles << vehicle
         end
     end
