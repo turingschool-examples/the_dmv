@@ -52,6 +52,20 @@ RSpec.describe Vehicle do
     it 'has no plate_type by default' do
       expect(@cruz.plate_type).to be nil
     end
-  end
 
+    it 'has a plate type assigned when registered (regular)' do
+      @cruz.register
+      expect(@cruz.plate_type).to eq (:regular)
+    end
+
+    it 'has a plate type assigned when registered (ev)' do
+      @bolt.register
+      expect(@bolt.plate_type).to eq (:regular)
+    end
+
+    it 'has a plate type assigned when registered (antique)' do
+      @camaro.register
+      expect(@camaro.plate_type).to eq (:regular)
+    end
+  end
 end
