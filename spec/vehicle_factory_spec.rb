@@ -10,4 +10,8 @@ RSpec.describe VehicleFactory do
   it 'has no vehicles by default' do
     expect(factory.vehicles).to be_empty
   end
+
+  it 'can parse registration data from JSON to create vehicles' do
+    expect(factory.create_vehicles(wa_ev_registrations)).to be_an(Array)
+  end
 end
