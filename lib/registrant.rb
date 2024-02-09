@@ -1,3 +1,5 @@
+require "./spec/spec_helper"
+
 # Documentation for class Registrant
 class Registrant
   attr_reader :name, :age, :permit

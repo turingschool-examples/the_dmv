@@ -1,3 +1,5 @@
+require "./spec/spec_helper"
+
 # Documentation for class Dmv
 class Dmv
   attr_reader :facilities

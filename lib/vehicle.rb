@@ -1,4 +1,4 @@
-require "date"
+require "./spec/spec_helper"
 
 # Documentation for class Vehicle
 class Vehicle
@@ -16,7 +16,7 @@ class Vehicle
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
-    @registration_data = vehicle_details[:registration_date]
+    @registration_date = vehicle_details[:registration_date]
     @plate_type = vehicle_details[:plate_type]
   end
 

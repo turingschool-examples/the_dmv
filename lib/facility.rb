@@ -1,4 +1,4 @@
-require "date"
+require "./spec/spec_helper"
 
 # Documentation for class Facility
 class Facility
