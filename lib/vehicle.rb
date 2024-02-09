@@ -40,4 +40,8 @@ class Vehicle
       @plate_type = :regular
     end
   end
+
+  def registered?
+    registration_date != nil
+  end
 end
