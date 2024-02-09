@@ -18,14 +18,4 @@ RSpec.describe VehicleFactory do
 
     expect(vehicles[0]).to be_an_instance_of(Vehicle)
   end
-
-  # it 'can change vehicles to :ev engine' do
-  #   vehicles = factory.create_vehicles(wa_ev_registrations)
-  
-  #   expect(factory.vehicles[0].engine).to eq(nil)
-  
-  #   factory.set_to_electric(vehicles)
-  
-  #   expect(factory.vehicles[0].engine).to eq(:ev)
-  # end
 end

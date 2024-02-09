@@ -13,11 +13,4 @@ class VehicleFactory
       Vehicle.new(vehicle_info)
     end
   end
-
-  # def set_to_electric(vehicles)
-  #   vehicles.map do |vehicle|
-  #     vehicle.change_to_ev
-  #   end
-  #   vehicles
-  # end
 end
