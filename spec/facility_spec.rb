@@ -40,7 +40,9 @@ RSpec.describe Facility do # rubocop:disable Metrics/BlockLength
     it "can initialize" do
       expect(@facility1).to be_an_instance_of(Facility)
       expect(@facility1.name).to eq("DMV Tremont Branch")
-      expect(@facility1.address).to eq("2855 Tremont Place Suite 118 Denver CO 80205")
+      expect(@facility1.address).to eq(
+        "2855 Tremont Place Suite 118 Denver CO 80205"
+      )
       expect(@facility1.phone).to eq("(720) 865-4600")
       expect(@facility1.services).to eq([])
       expect(@facility1.registered_vehicles).to eq([])
@@ -60,6 +62,20 @@ RSpec.describe Facility do # rubocop:disable Metrics/BlockLength
         "Renew Drivers License",
         "Vehicle Registration"
       ])
+    end
+  end
+
+  describe "#register vehicles" do
+    it "can register new vehicles" do
+      new_facility = @facility1
+      new_facility.register_vehicle(@cruz)
+      expect(new_facility.registered_vehicles).to eq([@cruz])
+    end
+    it "collects fees based on engine type" do
+      new_facility = @facility1
+      new_facility.register_vehicle(@cruz)
+      new_facility.register_vehicle(@bolt)
+      expect(new_facility.collected_fees).to eq(300)
     end
   end
 end

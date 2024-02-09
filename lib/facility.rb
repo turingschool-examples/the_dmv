@@ -15,4 +15,10 @@ class Facility
   def add_service(service)
     @services << service
   end
+
+  def register_vehicle(vehicle)
+    @registered_vehicles << vehicle
+    vehicle.registration_date = DateTime.now.strftime("%d/%m/%Y %H:%M")
+    @collected_fees += vehicle.electric_vehicle? ? 200 : 100
+  end
 end
