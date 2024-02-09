@@ -30,4 +30,14 @@ class Vehicle
   def register
     @registration_date = Date.today
   end
+
+  def get_plate
+    if antique?
+      @plate_type = :antique
+    elsif electric_vehicle?
+      @plate_type = :ev
+    else 
+      @plate_type = :regular
+    end
+  end
 end
