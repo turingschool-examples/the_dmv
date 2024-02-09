@@ -1,7 +1,7 @@
 require 'spec_helper.rb'
 
 RSpec.configure do |config|
-  config.formatter = :documentation
+    config.formatter = :documentation
 end
 
 RSpec.describe Registrant do
