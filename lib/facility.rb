@@ -1,8 +1,8 @@
 class Facility
-  attr_reader :name, 
-              :address, 
-              :phone, 
-              :services, 
+  attr_reader :name,
+              :address,
+              :phone,
+              :services,
               :registered_vehicles,
               :collected_fees
 
@@ -20,10 +20,13 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    registered_vehicles << vehicle
-    vehicle.update_registration_date
-    vehicle.update_plate_type
-    add_collected_fees(vehicle)
+    if vehicle.registered?
+    else
+      registered_vehicles << vehicle
+      vehicle.update_registration_date
+      vehicle.update_plate_type
+      add_collected_fees(vehicle)
+    end
   end
 
   def add_collected_fees(vehicle)
