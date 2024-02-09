@@ -3,3 +3,4 @@ extend_config:
 ignore:
   - '**/*':
     - Layout
+    - Style

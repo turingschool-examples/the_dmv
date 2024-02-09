@@ -3,7 +3,12 @@
 require "spec_helper"
 
 RSpec.describe Vehicle do # rubocop:disable Metrics/BlockLength
-  before(:each) do
+  before(:each) do # rubocop:disable Metrics/BlockLength
+    @facility = Facility.new({
+      name: "DMV Tremont Branch",
+      address: "2855 Tremont Place Suite 118 Denver CO 80205",
+      phone: "(720) 865-4600"
+    })
     @cruz = Vehicle.new({
       vin: "123456789abcdefgh",
       year: 2012,
@@ -51,6 +56,32 @@ RSpec.describe Vehicle do # rubocop:disable Metrics/BlockLength
       expect(@cruz.electric_vehicle?).to eq(false)
       expect(@bolt.electric_vehicle?).to eq(true)
       expect(@camaro.electric_vehicle?).to eq(false)
+    end
+  end
+
+  describe "#registration date" do
+    it "has a nil registration date by default" do
+      expect(@cruz.registration_date).to eq(nil)
+    end
+    it "gains a registration date when registered" do
+      cruz = @cruz
+      facility = @facility
+      facility.register_vehicle(cruz)
+      expect(cruz.registration_date).to eq(
+        DateTime.now.strftime("%d/%m/%Y %H:%M")
+      )
+    end
+    it "gains the correct plate type when registered" do
+      cruz = @cruz
+      bolt = @bolt
+      camaro = @camaro
+      facility = @facility
+      facility.register_vehicle(cruz)
+      facility.register_vehicle(bolt)
+      facility.register_vehicle(camaro)
+      expect(cruz.plate_type).to eq(:regular)
+      expect(bolt.plate_type).to eq(:ev)
+      expect(camaro.plate_type).to eq(:antique)
     end
   end
 end
