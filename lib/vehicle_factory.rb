@@ -8,6 +8,9 @@ class VehicleFactory
   def create_vehicles(data_service)
     @vehicles = data_service.map do |vehicle_info|
       Vehicle.new(vehicle_info)
+      vehicle_info[:engine] = :ev
+      vehicle_info[:year] = vehicle_info[:model_year]
+      vehicle_info[:vin] = vehicle_info[:vin_1_10]
     end
   end
 
