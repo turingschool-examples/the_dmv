@@ -16,7 +16,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#add service' do
+  describe '#add_service' do
     it 'can add available services' do
       expect(@facility.services).to eq([])
       @facility.add_service('New Drivers License')
@@ -26,65 +26,70 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#register vehicle' do
-    it 'can register a vehicle' do
-      @facility.add_service('Vehicle Registration')
-      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-
-      expect(cruz.registration_date).to be nil
-      expect(@facility.registered_vehicles).to eq []
-      expect(@facility.collected_fees).to eq 0
-
-      @facility.register_vehicle(cruz)
-
-      expect(@facility.registered_vehicles). to eq [cruz]
-    end
-  end 
-
-  describe '#register vehicle' do
-    it 'can register a vehicle' do
-      @facility.add_service('Vehicle Registration')
-      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-
-      expect(cruz.registration_date).to be nil
-      expect(@facility.registered_vehicles).to eq []
-      expect(@facility.collected_fees).to eq 0
-
-      @facility.register_vehicle(cruz)
-
-      expect(@facility.registered_vehicles). to eq [cruz]
-    end
-  end 
-
-  describe '#register vehicle' do
+  describe '#register_vehicle' do
     it 'cannot register a vehicle if the service is not present at the facility' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
 
       expect(@facility.services).to eq []
       expect(@facility.register_vehicle(cruz)). to eq nil
     end
-  end 
 
-  describe '#register vehicle' do
-    it 'collects a fee based on the vehicle' do
-      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
-      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    it 'can register a vehicle' do
       @facility.add_service('Vehicle Registration')
+
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
+
       @facility.register_vehicle(cruz)
 
-      expect(@facility.collected_fees).to eq 100
+      expect(@facility.registered_vehicles).to eq [cruz]
 
       @facility.register_vehicle(bolt)
 
-      expect(@facility.collected_fees).to eq 300
-
-      @facility.register_vehicle(camaro)
-      
-      expect(@facility.collected_fees).to eq 325
-
-
+      expect(@facility.registered_vehicles).to eq [cruz, bolt]
     end
   end 
+
+  describe '#collect_fee' do
+    before(:each) do
+      @facility.add_service('Vehicle Registration')
+      @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+      @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    end
+
+    it 'can collect a fee (regular)' do
+      @facility.collect_fee(@cruz)
+
+      expect(@facility.collected_fees).to eq 100
+    end
+
+    it 'can collect a fee (ev)' do
+      @facility.collect_fee(@bolt)
+
+      expect(@facility.collected_fees).to eq 200
+    end
+    
+    it 'can collect a fee (antique)' do
+      @facility.collect_fee(@camaro)
+      
+      expect(@facility.collected_fees).to eq 25
+    end
+
+    it 'can accumulate collected_fees' do
+      @facility.collect_fee(@cruz)
+
+      expect(@facility.collected_fees).to eq 100
+
+      @facility.collect_fee(@bolt)
+
+      expect(@facility.collected_fees).to eq 300
+
+      @facility.collect_fee(@camaro)
+
+      expect(@facility.collected_fees).to eq 325
+    end
+  end 
+
 
 end
