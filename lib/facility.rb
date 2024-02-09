@@ -21,5 +21,6 @@ class Facility
 
   def register_vehicle(vehicle)
     registered_vehicles << vehicle
+    vehicle.update_registration_date
   end
 end
