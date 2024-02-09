@@ -24,4 +24,14 @@ class Facility
       @registered_vehicles << vehicle
     end
   end
+
+  def collect_fee(vehicle)
+    if vehicle.electric_vehicle?
+      @collected_fees += 200
+    elsif vehicle.antique?
+      @collected_fees += 25
+    else 
+      @collected_fees += 100
+    end
+  end
 end
