@@ -45,10 +45,16 @@ RSpec.describe Vehicle do
 
     it 'can update its plate type' do
       expect(cruz.plate_type).to eq(nil)
+      expect(bolt.plate_type).to eq(nil)
+      expect(camaro.plate_type).to eq(nil)
 
-      cruz.register_vehicle
+      cruz.update_plate_type
+      bolt.update_plate_type
+      camaro.update_plate_type
 
       expect(cruz.plate_type).to eq(:regular)
+      expect(bolt.plate_type).to eq(:ev)
+      expect(camaro.plate_type).to eq(:antique)
     end
   end
 end
