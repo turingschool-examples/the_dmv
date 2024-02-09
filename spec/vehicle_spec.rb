@@ -71,5 +71,17 @@ RSpec.describe Vehicle do # rubocop:disable Metrics/BlockLength
         DateTime.now.strftime("%d/%m/%Y %H:%M")
       )
     end
+    it "gains the correct plate type when registered" do
+      cruz = @cruz
+      bolt = @bolt
+      camaro = @camaro
+      facility = @facility
+      facility.register_vehicle(cruz)
+      facility.register_vehicle(bolt)
+      facility.register_vehicle(camaro)
+      expect(cruz.plate_type).to eq(:regular)
+      expect(bolt.plate_type).to eq(:ev)
+      expect(camaro.plate_type).to eq(:antique)
+    end
   end
 end
