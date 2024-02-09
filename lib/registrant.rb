@@ -16,6 +16,8 @@ class Registrant
         }
     end
 
+    # Methods
+
     def permit?
         @permit
     end

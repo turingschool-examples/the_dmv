@@ -1,9 +1,5 @@
 require 'spec_helper.rb'
 
-RSpec.configure do |config|
-    config.formatter = :documentation
-end
-
 RSpec.describe Facility do
 
     before(:each) do
@@ -40,52 +36,21 @@ RSpec.describe Facility do
 
     end
 
-    describe '# registers vehicle' do
+    describe '# registers a vehicle' do
 
-        it 'will not register vehicle if does not have service' do
+        it 'will not register a vehicle if service is not included' do
             expect(@facility.registered_vehicles).to eq([])
             @facility.register_vehicle(@cruz)
             expect(@facility.registered_vehicles).to eq([])
         end
 
-        it 'will register vehicle does include service' do
+        it 'will register a vehicle if service is included' do
             expect(@facility.registered_vehicles).to eq([])
             @facility.add_service('Vehicle Registration')
             @facility.register_vehicle(@cruz)
             expect(@facility.registered_vehicles).to eq([@cruz])
         end
 
-        # it 'updates registration date' do
-        #     expect(@facility.registered_vehicles).to eq([])
-        #     @facility.add_service('Vehicle Registration')
-        #     @facility.register_vehicle(@cruz)
-        #     expect(@facility.registered_vehicles).to eq([@cruz])
-        # end
-
-        describe '# updates plate type' do
-
-            it 'updates plate type (antique)' do
-                expect(@camaro.plate_type).to eq(nil)
-                @facility.add_service('Vehicle Registration')
-                @facility.register_vehicle(@camaro)
-                expect(@camaro.plate_type).to eq(:antique)
-            end
-
-            it 'updates plate type (ev)' do
-                expect(@bolt.plate_type).to eq(nil)
-                @facility.add_service('Vehicle Registration')
-                @facility.register_vehicle(@bolt)
-                expect(@bolt.plate_type).to eq(:ev)
-            end
-
-            it 'updates plate type (regular)' do
-                expect(@cruz.plate_type).to eq(nil)
-                @facility.add_service('Vehicle Registration')
-                @facility.register_vehicle(@cruz)
-                expect(@cruz.plate_type).to eq(:regular)
-            end
-
-        end
 
         describe '# collects fees' do
 

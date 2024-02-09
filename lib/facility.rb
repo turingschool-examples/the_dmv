@@ -29,14 +29,10 @@ class Facility
         if @services.include? ("Vehicle Registration")
             vehicle.change_registration_date
             vehicle.update_plate_type
-            @collected_fees = vehicle.fees
+            @collected_fees += vehicle.fees
             @registered_vehicles << vehicle
         end
     end
-        # Vehicles 25 years or older are considered antique and cost $25 to register
-        # Electric Vehciles cost $200 to register
-        # All other vehicles cost $100 to register
-        # A vehicles's plate type should be set upon successful registration
 
     # Administer a Written Test
         # A written test can only be administered to registrants with a permit and are at least 16 years of age

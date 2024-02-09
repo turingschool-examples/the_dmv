@@ -1,9 +1,5 @@
 require 'spec_helper.rb'
 
-RSpec.configure do |config|
-  config.formatter = :documentation
-end
-
 RSpec.describe Vehicle do
 
     before(:each) do
@@ -24,43 +20,63 @@ RSpec.describe Vehicle do
             expect(@cruz.model).to eq('Cruz')
             expect(@cruz.engine).to eq(:ice)
             expect(@cruz.registration_date).to eq(nil)
+            expect(@cruz.plate_type).to eq(nil)
+            expect(@cruz.fees).to eq(0)
         end
 
     end
 
-    describe '# car registration' do
+    describe '# vehicle is registered' do
 
-        it 'registration date gets updated' do
+        it 'registration date is updated' do
             expect(@cruz.registration_date).to eq(nil)
             @facility.add_service('Vehicle Registration')
             @facility.register_vehicle(@cruz)
             expect(@cruz.registration_date).to be_an_instance_of (Date)
         end
 
-        it 'updates plate type' do
-            expect(@cruz.registration_date).to eq(nil)
-            @facility.add_service('Vehicle Registration')
-            @facility.register_vehicle(@cruz)
-            expect(@cruz.registration_date).to be_an_instance_of (Date)
+        describe '# plate type is updated' do
+
+            it 'plate type is updated (antique)' do
+                expect(@camaro.plate_type).to eq(nil)
+                @facility.add_service('Vehicle Registration')
+                @facility.register_vehicle(@camaro)
+                expect(@camaro.plate_type).to eq(:antique)
+            end
+
+            it 'plate type is updated (ev)' do
+                expect(@bolt.plate_type).to eq(nil)
+                @facility.add_service('Vehicle Registration')
+                @facility.register_vehicle(@bolt)
+                expect(@bolt.plate_type).to eq(:ev)
+            end
+
+            it 'plate type is updated (regular)' do
+                expect(@cruz.plate_type).to eq(nil)
+                @facility.add_service('Vehicle Registration')
+                @facility.register_vehicle(@cruz)
+                expect(@cruz.plate_type).to eq(:regular)
+            end
+
         end
 
-        describe '# accumulates fees' do
+        describe '# fees are collected' do
 
-            it 'accumulates fees (antique)' do
+            it 'fees are collected (antique)' do
                 expect(@camaro.plate_type).to eq(nil)
                 @facility.add_service('Vehicle Registration')
                 @facility.register_vehicle(@camaro)
                 expect(@camaro.fees).to eq(25)
             end
 
-            it 'accumulates fees (ev)' do
+            it 'fees are collected (ev)' do
                 expect(@bolt.plate_type).to eq(nil)
                 @facility.add_service('Vehicle Registration')
                 @facility.register_vehicle(@bolt)
                 expect(@bolt.fees).to eq(200)
             end
 
-            it 'accumulates fees (regular)' do
+            it 'fees are collected (regular)' do
                 expect(@cruz.plate_type).to eq(nil)
                 @facility.add_service('Vehicle Registration')
                 @facility.register_vehicle(@cruz)
@@ -71,7 +87,7 @@ RSpec.describe Vehicle do
 
     end
 
-    describe '# antique?' do
+    describe '# checks for antique' do
 
         it 'can determine if a vehicle is an antique' do
             expect(@cruz.antique?).to eq(false)
@@ -81,7 +97,7 @@ RSpec.describe Vehicle do
 
     end
 
-    describe '# electric_vehicle?' do
+    describe '# checks for electric?' do
 
         it 'can determine if a vehicle is an ev' do
             expect(@cruz.electric_vehicle?).to eq(false)
