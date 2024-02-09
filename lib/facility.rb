@@ -23,6 +23,7 @@ class Facility
     registered_vehicles << vehicle
     vehicle.update_registration_date
     vehicle.update_plate_type
+    add_collected_fees(vehicle)
   end
 
   def add_collected_fees(vehicle)
