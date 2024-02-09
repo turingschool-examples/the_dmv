@@ -12,7 +12,9 @@ RSpec.describe VehicleFactory do
   end
 
   it 'can parse registration data from JSON to create vehicles' do
-    expect(factory.create_vehicles(wa_ev_registrations)).to be_an(Array)
+    vehicles = factory.create_vehicles(wa_ev_registrations)
+
+    expect(vehicles[0]).to be_an_instance_of(Vehicle)
   end
 
   it 'can change vehicles to :ev engine' do
