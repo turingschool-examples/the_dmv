@@ -36,9 +36,19 @@ RSpec.describe Facility do
     end
 
     it 'will change the vehicles registration date to todays date' do
+      expect(cruz.registration_date).to eq(nil)
+
       facility_1.register_vehicle(cruz)
 
       expect(cruz.registration_date).to eq(Date.today)
+    end
+
+    it 'can update plate type when registering the vehicle based on the vehicles year made' do
+      expect(cruz.plate_type).to eq(nil)
+
+      facility_1.register_vehicle(cruz)
+
+      expect(cruz.plate_type).to eq(:regular)
     end
   end
 end
