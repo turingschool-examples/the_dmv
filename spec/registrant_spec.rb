@@ -2,7 +2,10 @@ require 'spec_helper'
 
 RSpec.describe Registrant do
   let(:registrant_1) { Registrant.new('Bruce', 18, true ) }
-  let(:registrant_2) { Registrant.new('Penny', 15) }
+  let(:registrant_2) { Registrant.new('Penny', 16) }
+  let(:registrant_3) { Registrant.new('Tucker', 15) }
+  let (:facility_1) { Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'}) }
+  let (:facility_2) { Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'}) }
   describe 'initialize' do
     it 'can initialize' do
       expect(registrant_1).to be_an_instance_of(Registrant)
@@ -17,7 +20,7 @@ RSpec.describe Registrant do
     it 'can have an age' do
       expect(registrant_1.age).to eq(18)
 
-      expect(registrant_2.age).to eq(15)
+      expect(registrant_2.age).to eq(16)
     end
 
     it 'has no permit by default' do
