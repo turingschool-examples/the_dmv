@@ -57,6 +57,18 @@ RSpec.describe Facility do
       
       expect(@facility.collected_fees).to eq 100
     end
+
+    it 'can assigns the proper plate when registering a vehicle' do
+      @facility.add_service('Vehicle Registration')
+
+      @facility.register_vehicle(@cruz)
+      @facility.register_vehicle(@bolt)
+      @facility.register_vehicle(@camaro)
+
+      expect(@cruz.plate_type).to eq :regular
+      expect(@bolt.plate_type).to eq :ev
+      expect(@camaro.plate_type).to eq :antique
+    end
   end 
 
   describe '#collect_fee' do
