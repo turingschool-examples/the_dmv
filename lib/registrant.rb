@@ -13,6 +13,10 @@ class Registrant
         }
     end
 
+    def permit?
+        @permit
+    end
+
     def earned_permit?
     end
 
