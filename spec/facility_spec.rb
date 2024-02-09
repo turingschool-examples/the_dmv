@@ -27,26 +27,35 @@ RSpec.describe Facility do
   end
 
   describe '#register_vehicle' do
-    it 'cannot register a vehicle if the service is not present at the facility' do
-      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+    before(:each) do
+      @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+      @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    end
 
+    it 'cannot register a vehicle if the service is not present at the facility' do
       expect(@facility.services).to eq []
-      expect(@facility.register_vehicle(cruz)). to eq nil
+      expect(@facility.register_vehicle(@cruz)). to eq nil
     end
 
     it 'can register a vehicle' do
       @facility.add_service('Vehicle Registration')
 
-      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
-      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
+      @facility.register_vehicle(@cruz)
 
-      @facility.register_vehicle(cruz)
+      expect(@facility.registered_vehicles).to eq [@cruz]
 
-      expect(@facility.registered_vehicles).to eq [cruz]
+      @facility.register_vehicle(@bolt)
 
-      @facility.register_vehicle(bolt)
+      expect(@facility.registered_vehicles).to eq [@cruz, @bolt]
+    end
 
-      expect(@facility.registered_vehicles).to eq [cruz, bolt]
+    it 'can collect a fee when registering a vehicle' do
+      @facility.add_service('Vehicle Registration')
+      
+      @facility.register_vehicle(@cruz)
+      
+      expect(@facility.collected_fees).to eq 100
     end
   end 
 
@@ -90,6 +99,5 @@ RSpec.describe Facility do
       expect(@facility.collected_fees).to eq 325
     end
   end 
-
 
 end
