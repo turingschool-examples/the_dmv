@@ -38,4 +38,8 @@ class Facility
       @collected_fees += 100
     end
   end
+
+  def has_service?(service)
+    services.include?(service)
+  end
 end
