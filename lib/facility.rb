@@ -50,4 +50,12 @@ class Facility
       false
     end
   end
+
+  def administer_road_test(registrant)
+    if has_service?('Road Test')
+      registrant.take_road
+    else
+      false
+    end
+  end
 end
