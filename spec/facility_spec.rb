@@ -34,5 +34,11 @@ RSpec.describe Facility do
 
       expect(facility_1.registered_vehicles).to eq([cruz])
     end
+
+    it 'will change the vehicles registration date to todays date' do
+      facility_1.register_vehicle(cruz)
+
+      expect(cruz.registration_date).to eq(Date.today)
+    end
   end
 end
