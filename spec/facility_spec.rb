@@ -151,7 +151,8 @@ RSpec.describe Facility do # rubocop:disable Metrics/BlockLength
       facility.add_service("Road Test")
       facility.add_service("Renew License")
       facility.administer_written_test(registrant)
-      facility.renew_drivers_license(registrant)
+      can_renew = facility.renew_drivers_license(registrant)
+      expect(can_renew).to eq(false)
       expect(registrant.license_data[:renewed]).to eq(false)
     end
     it "can renew licenses to those with a license" do
@@ -162,7 +163,8 @@ RSpec.describe Facility do # rubocop:disable Metrics/BlockLength
       facility.add_service("Renew License")
       facility.administer_written_test(registrant)
       facility.administer_road_test(registrant)
-      facility.renew_drivers_license(registrant)
+      can_renew = facility.renew_drivers_license(registrant)
+      expect(can_renew).to eq(true)
       expect(registrant.license_data[:renewed]).to eq(true)
     end
   end
