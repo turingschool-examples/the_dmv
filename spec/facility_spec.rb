@@ -50,7 +50,7 @@ RSpec.describe Facility do
    it 'collect fees' do
      expect(@facility.collected_fees).to eq(0)
    end
-
+  end
 
 
 end
