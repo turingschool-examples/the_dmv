@@ -13,4 +13,7 @@ class Registrant
         }
     end
 
+    def earned_permit?
+    end
+
 end
