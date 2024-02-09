@@ -31,10 +31,20 @@ class Facility
             vehicle.update_plate_type
             @collected_fees += vehicle.fees
             @registered_vehicles << vehicle
+        else
+            return false
         end
     end
 
     # Administer a Written Test
+    def administer_written_test(registrant)
+        if @services.include? ("Written Test")
+            registrant.are_written_eligible?
+        else
+            return false
+        end
+    end
+
         # A written test can only be administered to registrants with a permit and are at least 16 years of age
 
     # Administer a Road Test
