@@ -89,5 +89,14 @@ RSpec.describe Registrant do
 
       expect(registrant_1.written?).to be true
     end
+
+    it 'can check if the registrant has their license' do
+      expect(registrant_1.license?).to be false
+
+      registrant_1.take_written
+      registrant_1.take_road
+
+      expect(registrant_1.license?).to be true
+    end
   end
 end
