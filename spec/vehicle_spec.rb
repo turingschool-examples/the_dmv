@@ -53,19 +53,19 @@ RSpec.describe Vehicle do
       expect(@cruz.plate_type).to be nil
     end
 
-    it 'has a plate type assigned when registered (regular)' do
-      @cruz.register
+    it 'can have a plate type assigned (regular)' do
+      @cruz.get_plate
       expect(@cruz.plate_type).to eq (:regular)
     end
 
-    it 'has a plate type assigned when registered (ev)' do
-      @bolt.register
-      expect(@bolt.plate_type).to eq (:regular)
+    it 'can have a plate type assigned (ev)' do
+      @bolt.get_plate
+      expect(@bolt.plate_type).to eq (:ev)
     end
 
-    it 'has a plate type assigned when registered (antique)' do
-      @camaro.register
-      expect(@camaro.plate_type).to eq (:regular)
+    it 'can have a plate type assigned (antique)' do
+      @camaro.get_plate
+      expect(@camaro.plate_type).to eq (:antique)
     end
   end
 end
