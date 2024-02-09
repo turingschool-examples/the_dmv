@@ -3,7 +3,8 @@ class Facility
               :address, 
               :phone, 
               :services,
-              :collected_fees
+              :collected_fees,
+              :registered_vehicles
 
   def initialize(info)
     @name = info[:name]
@@ -11,9 +12,14 @@ class Facility
     @phone = info[:phone]
     @services = []
     @collected_fees = 0
+    @registered_vehicles = []
   end
 
   def add_service(service)
     @services << service
+  end
+
+  def register_vehicle(vehicle) 
+    @registered_vehicles << vehicle
   end
 end
