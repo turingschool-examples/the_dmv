@@ -44,7 +44,7 @@ RSpec.describe Registrant do
     end
   end
 
-  describe 'written test' do
+  describe 'test taking' do
     it 'can take (and pass) the written test only if they are 16 and have their permit; returns false otherwise' do
       expect(registrant_1.license_data[:written]).to be false
       expect(registrant_2.license_data[:written]).to be false
@@ -63,6 +63,23 @@ RSpec.describe Registrant do
       expect(registrant_1.license_data[:written]).to be true
       expect(registrant_2.license_data[:written]).to be false
       expect(registrant_3.license_data[:written]).to be false
+    end
+
+    it 'can take (and pass) the road test only if they have passed written; returns false otherwise' do
+      expect(registrant_1.license_data[:written]).to be false
+      expect(registrant_1.license_data[:license]).to be false
+
+      # to show it returns false if registrant doesn't have written
+      expect(registrant_1.take_road).to be false
+
+      registrant_1.take_written
+
+      expect(registrant_1.license_data[:written]).to be true
+
+      # to show it returns true if registrant has their written
+      expect(registrant_1.take_road).to be true
+
+      expect(registrant_1.license_data[:license]).to be true
     end
   end
 end
