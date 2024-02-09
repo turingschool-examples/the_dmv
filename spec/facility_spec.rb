@@ -38,6 +38,7 @@ RSpec.describe Facility do
 
       expect(@facility.services).to eq(['Vehicle Registration'])
     end
+    
   end
 
 
