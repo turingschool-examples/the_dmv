@@ -16,9 +16,14 @@ class Registrant
     # else 
     #   false
     # end
-
     @permit
   end
+
+  def earn_permit
+    @permit = true 
+  end
+
+
 
   
   
