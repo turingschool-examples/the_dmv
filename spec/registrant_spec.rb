@@ -7,4 +7,5 @@ RSpec.describe Registrant do
     it 'can initialize' do
       expect(registrant_1).to be_an_instance_of(Registrant) 
     end
+  end
 end
