@@ -20,6 +20,8 @@ class Facility
   end
 
   def register_vehicle(vehicle) 
-    @registered_vehicles << vehicle
+    if @services.include? 'Vehicle Registration'
+      @registered_vehicles << vehicle
+    end
   end
 end

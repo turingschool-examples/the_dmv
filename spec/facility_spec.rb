@@ -32,12 +32,36 @@ RSpec.describe Facility do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
 
       expect(cruz.registration_date).to be nil
-      expect(@facility.registered_vehicles).to be []
-      expect(@facility.collected_fees).to be 0
+      expect(@facility.registered_vehicles).to eq []
+      expect(@facility.collected_fees).to eq 0
 
       @facility.register_vehicle(cruz)
 
-      expect(@facility.registered_vehicles). to be [cruz]
+      expect(@facility.registered_vehicles). to eq [cruz]
+    end
+  end 
+
+  describe '#register vehicle' do
+    it 'can register a vehicle' do
+      @facility.add_service('Vehicle Registration')
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+
+      expect(cruz.registration_date).to be nil
+      expect(@facility.registered_vehicles).to eq []
+      expect(@facility.collected_fees).to eq 0
+
+      @facility.register_vehicle(cruz)
+
+      expect(@facility.registered_vehicles). to eq [cruz]
+    end
+  end 
+
+  describe '#register vehicle' do
+    it 'cannot register a vehicle if the service is not present at the facility' do
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+
+      expect(@facility.services).to eq []
+      expect(@facility.register_vehicle(cruz)). to eq nil
     end
   end 
 
