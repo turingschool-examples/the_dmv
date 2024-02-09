@@ -53,7 +53,7 @@ RSpec.describe DmvDataService do
 
     end
 
-    describe '#mo_dmv_office_locations' do
+    describe '# mo_dmv_office_locations' do
 
         it 'can load missouri dmv office locations' do
         expect(@dds.mo_dmv_office_locations.size).to be_an(Integer)
