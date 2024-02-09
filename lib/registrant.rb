@@ -12,6 +12,10 @@ class Registrant
     permit
   end
 
+  def written?
+    license_data[:written]
+  end
+
   def earn_permit
     @permit = true
   end
