@@ -31,6 +31,7 @@ class Facility
     def register_vehicle(vehicle)
         if @services.include? ("Vehicle Registration")
             vehicle.change_registration_date
+            vehicle.update_plate_type
             @registered_vehicles << vehicle
         end
     end
