@@ -18,4 +18,8 @@ class Registrant
   def earn_permit
     @permit = @age >= 16
   end
+
+  def permit?
+    @permit
+  end
 end
