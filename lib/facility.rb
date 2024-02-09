@@ -1,6 +1,6 @@
 class Facility
 
-    attr_reader :name
+    attr_reader :name,
                 :address, 
                 :phone, 
                 :services
