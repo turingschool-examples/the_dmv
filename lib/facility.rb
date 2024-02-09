@@ -23,6 +23,7 @@ class Facility
     if @services.include? 'Vehicle Registration'
       @registered_vehicles << vehicle
       collect_fee(vehicle)
+      vehicle.register
     end
   end
 
