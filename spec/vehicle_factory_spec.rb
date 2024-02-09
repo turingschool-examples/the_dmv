@@ -11,19 +11,21 @@ RSpec.describe VehicleFactory do
     expect(factory.vehicles).to be_empty
   end
 
-  it 'can parse registration data from JSON to create vehicles' do
+  it 'can parse registration data from JSON to create vehicles and change their engine to ev if it is nil' do
     vehicles = factory.create_vehicles(wa_ev_registrations)
+
+    expect(vehicles[5].engine).to eq(:ev)
 
     expect(vehicles[0]).to be_an_instance_of(Vehicle)
   end
 
-  it 'can change vehicles to :ev engine' do
-    vehicles = factory.create_vehicles(wa_ev_registrations)
+  # it 'can change vehicles to :ev engine' do
+  #   vehicles = factory.create_vehicles(wa_ev_registrations)
   
-    expect(factory.vehicles[0].engine).to eq(nil)
+  #   expect(factory.vehicles[0].engine).to eq(nil)
   
-    factory.set_to_electric(vehicles)
+  #   factory.set_to_electric(vehicles)
   
-    expect(factory.vehicles[0].engine).to eq(:ev)
-  end
+  #   expect(factory.vehicles[0].engine).to eq(:ev)
+  # end
 end
