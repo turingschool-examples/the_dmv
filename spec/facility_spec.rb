@@ -41,18 +41,25 @@ RSpec.describe Facility do
       expect(facility_1.has_service?('Written Test')).to be true
     end
 
-    it 'can administer written tests if it has that service' do
+    it 'can administer written tests if it has that service or returns false' do
       expect(registrant_1.license_data[:written]).to be false
 
       expect(facility_1.services).to be_empty
-      facility_1.administer_written_test(registrant_1)
+
+      # to show it returns false if facility doesn't have the service
+      expect(facility_1.administer_written_test(registrant_1)).to be false
 
       expect(registrant_1.license_data[:written]).to be false
 
       facility_1.add_service('Written Test')
       expect(facility_1.services).to eq(['Written Test'])
 
-      facility_1.administer_written_test(registrant_1)
+      # to show it returns true if facility does have the service and registrant is eligible to take written
+      expect(facility_1.administer_written_test(registrant_1)).to be true
+
+      # to show it returns false if facility does have the service but the registrant isn't eligible to take written
+      expect(facility_1.administer_written_test(registrant_2)).to be false
+
 
       expect(registrant_1.license_data[:written]).to be true
     end
@@ -127,6 +134,7 @@ RSpec.describe Facility do
 
       expect(facility_1.registered_vehicles).to eq([cruz])
       expect(facility_2.registered_vehicles).to be_empty
+
       # to show it can't be registered to facility 1 twice
       facility_1.register_vehicle(cruz)
 

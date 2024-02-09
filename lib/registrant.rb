@@ -17,6 +17,11 @@ class Registrant
   end
 
   def take_written
-    license_data[:written] = true if age > 15 && permit
+    if age > 15 && permit?
+      license_data[:written] = true
+      true
+    else
+      false
+    end
   end
 end

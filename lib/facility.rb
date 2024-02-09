@@ -44,6 +44,10 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    registrant.take_written if has_service?('Written Test')
+    if has_service?('Written Test')
+      registrant.take_written
+    else
+      false
+    end
   end
 end
