@@ -27,4 +27,12 @@ RSpec.describe Facility do
       expect(facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
+
+  describe 'registering vehicles' do
+    it 'can register vehicles' do
+      facility_1.register_vehicle(cruz)
+
+      expect(facility_1.registered_vehicles).to eq([cruz])
+    end
+  end
 end
