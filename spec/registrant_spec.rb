@@ -6,12 +6,25 @@ RSpec.describe Registrant do
     @registrant_2 = Registrant.new('Penny', 15 )
   end
 
-
   describe '#initialize' do
-    it 'exists' do
-    expect(@registrant_1).to be_an_instance_of(Registrant)
+   it 'exists' do
+      expect(@registrant_1).to be_an_instance_of(Registrant)
     end
   end
+
+  describe '#instance methods' do
+    it 'has a name' do
+      expect(@registrant_1.name).to eq("Bruce")
+    end
+  end
+
+  describe '#instance methods' do
+    it 'has an age' do
+      expect(@registrant_1.age).to eq(18)
+    end
+  end
+
+  
   
 
 
