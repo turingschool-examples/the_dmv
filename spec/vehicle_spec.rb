@@ -56,5 +56,13 @@ RSpec.describe Vehicle do
       expect(bolt.plate_type).to eq(:ev)
       expect(camaro.plate_type).to eq(:antique)
     end
+
+    it 'can check if it is registered' do
+      expect(cruz.registered?).to be false
+
+      facility_1.register_vehicle(cruz)
+
+      expect(cruz.registered?).to be true
+    end
   end
 end
