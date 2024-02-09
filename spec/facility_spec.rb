@@ -63,6 +63,33 @@ RSpec.describe Facility do
 
       expect(registrant_1.license_data[:written]).to be true
     end
+
+    it 'can administer road tests if it has that service and registrant has permit or it returns false' do
+      expect(registrant_1.license_data[:license]).to be false
+      expect(registrant_1.permit?).to be true
+
+
+      expect(facility_1.services).to be_empty
+
+      # to show it returns false if facility doesn't have the service
+      expect(facility_1.administer_road_test(registrant_1)).to be false
+
+      expect(registrant_1.license_data[:license]).to be false
+
+      facility_1.add_service('Road Test')
+      expect(facility_1.services).to eq(['Road Test'])
+
+      # to show it returns true if facility does have the service and registrant is eligible to take road test
+      expect(facility_1.administer_road_test(registrant_1)).to be true
+
+      expect(registrant_2.permit?).to be false
+
+      # to show it returns false if facility does have the service but the registrant isn't eligible to take road test
+      expect(facility_1.administer_road_test(registrant_2)).to be false
+
+
+      expect(registrant_1.license_data[:license]).to be true
+    end
   end
 
   describe 'registering vehicles' do
