@@ -41,4 +41,13 @@ class Registrant
       false
     end
   end
+
+  def renew_license
+    if license?
+      license_data[:renewed] = true
+      true
+    else
+      false
+    end
+  end
 end
