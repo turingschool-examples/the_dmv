@@ -6,4 +6,8 @@ class Registrant
         @age = age
         @license_data = hash[written:, license:, renewed:]
     end
+
+    def earn_permit
+        @permit = true
+    end
 end
