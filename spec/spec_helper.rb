@@ -7,4 +7,4 @@ require './lib/registrant'
 require './lib/vehicle_factory'
 RSpec.configure do |config|
   config.formatter = :documentation
-  end
+end
