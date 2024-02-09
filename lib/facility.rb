@@ -58,4 +58,12 @@ class Facility
       false
     end
   end
+
+  def renew_drivers_license(registrant)
+    if has_service?('Renew License')
+      registrant.renew_license
+    else
+      false
+    end
+  end
 end
