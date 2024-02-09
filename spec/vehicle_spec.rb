@@ -33,4 +33,18 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe '#registration_date' do
+    it 'has no registration date by default' do
+      expect(@cruz.registration_date).to eq nil
+    end
+
+    it 'has a registration date assigned when registered' do
+      @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      @facility.add_service('Vehicle Registration')
+      @facility.register_vehicle(@cruz)
+
+      expect(@cruz.registration_date).to be_a (Date)
+    end
+  end
 end
