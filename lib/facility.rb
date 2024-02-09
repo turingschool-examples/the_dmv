@@ -24,6 +24,7 @@ class Facility
       @registered_vehicles << vehicle
       collect_fee(vehicle)
       vehicle.register
+      vehicle.get_plate
     end
   end
 
