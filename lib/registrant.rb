@@ -28,4 +28,13 @@ class Registrant
       false
     end
   end
+
+  def take_road
+    if written?
+      license_data[:license] = true
+      true
+    else
+      false
+    end
+  end
 end
