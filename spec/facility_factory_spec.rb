@@ -6,4 +6,8 @@ RSpec.describe FacilityFactory do
   it 'exists' do
     expect(factory).to be_an_instance_of(FacilityFactory)
   end
+
+  it 'has no facilities by default' do
+    expect(factory.facilities).to be_empty
+  end
 end
