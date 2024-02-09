@@ -1,3 +1,5 @@
+# typed: ignore
+
 require "pry"
 require "./lib/dmv"
 require "./lib/facility"
@@ -6,3 +8,7 @@ require "./lib/dmv_data_service"
 require "./lib/registrant"
 require "./lib/vehicle_factory"
 require "date"
+require "rspec"
+RSpec.configure do |config|
+  config.formatter = :documentation
+end
