@@ -7,7 +7,11 @@ RSpec.describe Registrant do
   end
 
 
-  
+  describe '#initialize' do
+    it 'exists' do
+    expect(@registrant_1).to be_an_instance_of(Registrant)
+    end
+  end
   
 
 
