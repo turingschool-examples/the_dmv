@@ -42,4 +42,12 @@ class Registrant
         end
     end
 
+    def are_renew_eligible?
+        if @license_data[:license] == true
+            @license_data[:renewed] = true
+        else
+            return false
+        end
+    end
+
 end
