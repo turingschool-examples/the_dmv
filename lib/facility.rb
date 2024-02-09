@@ -42,4 +42,8 @@ class Facility
   def has_service?(service)
     services.include?(service)
   end
+
+  def administer_written_test(registrant)
+    registrant.take_written if has_service?('Written Test')
+  end
 end
