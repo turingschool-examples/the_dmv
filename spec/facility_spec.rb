@@ -38,8 +38,13 @@ RSpec.describe Facility do
 
       expect(@facility.services).to eq(['Vehicle Registration'])
     end
-    
   end
+  
+  describe '#add amount of registered vehicles' do
+   it 'Register vehicle' do
+     expect(@facility.registard_vehicles).to eq([])
+   end
+ end
 
 
 end
