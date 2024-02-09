@@ -33,4 +33,39 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe '#registration_date' do
+    it 'has no registration date by default' do
+      expect(@cruz.registration_date).to eq nil
+    end
+
+    it 'has a registration date assigned when registered' do
+      @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      @facility.add_service('Vehicle Registration')
+      @facility.register_vehicle(@cruz)
+
+      expect(@cruz.registration_date).to be_a (Date)
+    end
+  end
+
+  describe '#plate_type' do
+    it 'has no plate_type by default' do
+      expect(@cruz.plate_type).to be nil
+    end
+
+    it 'can have a plate type assigned (regular)' do
+      @cruz.get_plate
+      expect(@cruz.plate_type).to eq (:regular)
+    end
+
+    it 'can have a plate type assigned (ev)' do
+      @bolt.get_plate
+      expect(@bolt.plate_type).to eq (:ev)
+    end
+
+    it 'can have a plate type assigned (antique)' do
+      @camaro.get_plate
+      expect(@camaro.plate_type).to eq (:antique)
+    end
+  end
 end
