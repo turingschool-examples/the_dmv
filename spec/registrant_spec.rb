@@ -32,4 +32,12 @@ RSpec.describe Registrant do
       expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
   end
+
+  describe 'earning a permit' do
+    it 'can earn a permit' do
+      registrant_2.earn_permit
+    
+      expect(registrant_2.permit?).to be true
+    end
+  end
 end
