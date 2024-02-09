@@ -47,4 +47,11 @@ RSpec.describe Vehicle do
       expect(@cruz.registration_date).to be_a (Date)
     end
   end
+
+  describe '#plate_type' do
+    it 'has no plate_type by default' do
+      expect(@cruz.plate_type).to be nil
+    end
+  end
+
 end
