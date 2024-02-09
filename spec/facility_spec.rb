@@ -84,17 +84,34 @@ RSpec.describe Facility do
 
     describe '# administers a written test' do
 
-        it 'will not administer a test if service is not included' do
+        it 'will not administer a written test if service is not included' do
             expect(@facility.administer_written_test(@registrant_1)).to eq(false)
             @facility.administer_written_test(@registrant_1)
             expect(@facility.administer_written_test(@registrant_1)).to eq(false)
         end
 
-        it 'will administer a test if service is included' do
+        it 'will administer a written test if service is included' do
             expect(@facility.administer_written_test(@registrant_1)).to eq(false)
             @facility.add_service('Written Test')
             @facility.administer_written_test(@registrant_1)
             expect(@facility.administer_written_test(@registrant_1)).to eq(true)
+        end
+
+    end
+
+    describe '# administers a road test' do
+
+        it 'will not administer a road test if service is not included' do
+            expect(@facility.administer_road_test(@registrant_1)).to eq(false)
+            @facility.administer_road_test(@registrant_1)
+            expect(@facility.administer_road_test(@registrant_1)).to eq(false)
+        end
+
+        it 'will administer a road test if service is included' do
+            expect(@facility.administer_road_test(@registrant_1)).to eq(false)
+            @facility.add_service('Road Test')
+            @facility.administer_road_test(@registrant_1)
+            expect(@facility.administer_road_test(@registrant_1)).to eq(true)
         end
 
     end

@@ -45,9 +45,15 @@ class Facility
         end
     end
 
-        # A written test can only be administered to registrants with a permit and are at least 16 years of age
-
     # Administer a Road Test
+    def administer_road_test(registrant)
+        if @services.include? ("Road Test")
+            registrant.are_road_eligible?
+        else
+            return false
+        end
+    end
+
         # A road test can only be administered to registrants who have passed the written test
         # Registrants who qualify for the road test automatically earn a license
 

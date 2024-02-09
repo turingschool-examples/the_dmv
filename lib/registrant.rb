@@ -29,6 +29,16 @@ class Registrant
     def are_written_eligible?
         if @age >= 16 && @permit == true
             @license_data[:written] = true
+        else
+            return false
+        end
+    end
+
+    def are_road_eligible?
+        if @license_data[:written] = true
+            @license_data[:license] = true
+        else
+            return false
         end
     end
 
