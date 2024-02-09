@@ -1,3 +1,5 @@
+require "./spec/spec_helper"
+
 # Documentation for class Registrant
 class Registrant
   attr_reader :name, :age, :permit
@@ -15,5 +17,9 @@ class Registrant
 
   def earn_permit
     @permit = @age >= 16
+  end
+
+  def permit?
+    @permit
   end
 end

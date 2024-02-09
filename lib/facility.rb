@@ -1,4 +1,4 @@
-require "date"
+require "./spec/spec_helper"
 
 # Documentation for class Facility
 class Facility
@@ -32,9 +32,9 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    age = registrant.age
-    permit = registrant.permit
-    if @services.include?("Written Test") && age >= 16 && permit
+    if @services.include?("Written Test") &&
+       registrant.age >= 16 &&
+       registrant.permit?
       registrant.license_data[:written] = true
     else
       false
