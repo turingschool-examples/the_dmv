@@ -27,6 +27,17 @@ RSpec.describe Facility do
       expect(facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
 
+    it 'can check if it has a service' do
+      expect(facility_1.services).to be_empty
+
+      facility_1.add_service('Written Test')
+      facility_1.add_service('New Drivers License')
+
+      expect(facility_1.services).to eq(['Written Test', 'New Drivers License'])
+
+      expect(facility_1.has_service?('Written Test')).to be true
+    end
+
     it 'can administer written tests if it has that service' do
       expect(registrant_1.license_data[:written]).to be false
 
