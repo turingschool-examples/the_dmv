@@ -56,5 +56,21 @@ RSpec.describe Facility do
       expect(bolt.plate_type).to eq(:ev)
       expect(camaro.plate_type).to eq(:antique)
     end
+
+    it 'collect the appropriate fees when registering vehicles' do
+      expect(facility_1.collected_fees).to eq(0)
+
+      facility_1.register_vehicle(cruz)
+
+      expect(facility_1.collected_fees).to eq(100)
+
+      facility_1.register_vehicle(bolt)
+
+      expect(facility_1.collected_fees).to eq(300)
+
+      facility_1.register_vehicle(camaro)
+
+      expect(facility_1.collected_fees).to eq(325)
+    end
   end
 end
