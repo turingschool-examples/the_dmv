@@ -116,6 +116,7 @@ RSpec.describe Facility do
     before(:each) do
       @registrant_1 = Registrant.new('Bruce', 18, true)
       @registrant_2 = Registrant.new('Penny', 16)
+      @registrant_3 = Registrant.new('Tucker', 15)
     end
 
     it 'cannot administer a written test if the service is not present at facility' do
@@ -130,6 +131,13 @@ RSpec.describe Facility do
 
       expect(@registrant_1.license_data).to eq ({:written=>true, :license=>false, :renewed=>false})
       expect(@registrant_2.license_data).to eq ({:written=>false, :license=>false, :renewed=>false})
+    end
+
+    it 'cannot administer a written test if the registrant is younger than 16' do
+      @facility.add_service('Written Test')
+      @facility.administer_written_test(@registrant_3)
+
+      expect(@registrant_3.license_data).to eq ({:written=>false, :license=>false, :renewed=>false})
     end
 
     it 'can administer a written test and it changes the registrants license data' do
