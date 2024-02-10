@@ -21,7 +21,6 @@ class Facility
   end
   
   def register_vehicle(vehicle) 
-    
     if @services.include?('Vehicle Registration')
       vehicle.update_registration_date
       vehicle.assign_plate 
@@ -29,9 +28,7 @@ class Facility
       @registered_vehicles << vehicle
     else
       "Denied"
-
     end
-
   end
 
   def administer_written_test(registrant)

@@ -24,7 +24,10 @@ RSpec.describe Registrant do
     end
 
     it 'can take a written test if service offered' do
+      @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@registrant_1)
 
+      expect(@registrant_1.license_data[:written]).to eq(true)
     end
   end
 
