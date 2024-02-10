@@ -4,6 +4,7 @@ RSpec.describe Registrant do
   before(:each) do
     @registrant_1 = Registrant.new('Bruce', 18, true)
     @registrant_2 = Registrant.new('Penny', 15, false)
+    @registrant_3 = Registrant.new('Tucker', 15)
   end
   describe '#initalize' do
     it 'can initialize' do
@@ -17,14 +18,12 @@ RSpec.describe Registrant do
     end
   end
 
-  describe 'permit?' do
+  describe 'permit' do
     it 'can determine if a registrant has a permit' do
       expect(@registrant_1.permit?).to be true
       expect(@registrant_2.permit?).to be false
     end
-  end
 
-  describe 'earn_permit' do
     it 'can earn a permit' do
       expect(@registrant_2.permit?).to be false
 
