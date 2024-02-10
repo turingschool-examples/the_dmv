@@ -30,12 +30,16 @@ class Registrant
     end
 
     def written?
-        [:written]
+        @license_data[:written] == true
     end
 
     def pass_road_test
         if written?
             @license_data[:license] = true
         end
+    end
+
+    def license?
+        @license_data[:license] == true
     end
 end
