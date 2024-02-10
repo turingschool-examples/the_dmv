@@ -24,5 +24,4 @@ attr_accessor :registration_date, :plate_type
     @engine == :ev
   end
 
-
 end
