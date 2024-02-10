@@ -68,7 +68,8 @@ RSpec.describe Registrant do
     end
 
     it 'can renew license' do
-      @registrant_1.license_data[:license] => true
+      @registrant_1.license_data[:license] = true
+      @registrant_1.renew_license
       expect(@registrant_1.license_data[:renewed]).to be true
     end
   end

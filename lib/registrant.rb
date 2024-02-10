@@ -42,4 +42,10 @@ class Registrant
     def license?
         @license_data[:license]
     end
+
+    def renew_license
+        if license?
+            @license_data[:renewed] = true
+        end
+    end
 end
