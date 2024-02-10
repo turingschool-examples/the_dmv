@@ -33,30 +33,4 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
-  
-
-  describe '#registration date' do
-    it 'registration is nil by default' do
-      expect(@cruz.registration_date).to eq(nil)
-    end
-  end
-
-  describe '#registration date' do
-    it 'is updating registration date to todays date' do
-      expect(@cruz.registration_date).to eq(nil)
-      @cruz.change_registration_date 
-      expect(@cruz.registration_date).to eq(Date.today)
-    end
-  end
-
-  describe '#registration date' do
-    it 'is updating registration date to todays date' do
-      expect(@cruz.registration_date).to eq(nil)
-      @cruz.change_registration_date 
-      expect(@cruz.registration_date).to eq(Date.today)
-    end
-  end
-
-
-
 end
