@@ -6,7 +6,7 @@ class FacilityFactory
   end
 
   def create_facility(data_service)
-    data_service.map do |facility|
+    data_service.each do |facility|
       facility[:name] = facility[:dmv_office]
       facility[:address] = facility[:address_li]
       @facilities << Facility.new(facility)
