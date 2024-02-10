@@ -48,7 +48,16 @@ RSpec.describe VehicleFactory do # rubocop:disable Metrics/BlockLength
       end
       expect(total_make_count).to eq(@vehicle_factory.vehicles.count)
     end
-    # it "counts the number of vehicles for each model" do
-    # end
+    it "counts the number of vehicles for each model" do
+      @vehicle_factory.create_vehicles(@wa_ev_registrations, :ev)
+      makes_and_models_data = @vehicle_factory.retrieve_vehicle_makes_and_models
+      total_model_count = 0
+      makes_and_models_data.each_value do |make_data|
+        make_data.each_pair do |make, model|
+          total_model_count += model if make != :total
+        end
+      end
+      expect(total_model_count).to eq(@vehicle_factory.vehicles.count)
+    end
   end
 end
