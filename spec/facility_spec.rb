@@ -181,4 +181,30 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq ({written: true, license: true, renewed: false})
     end
   end
+
+  describe '#renew_license' do
+    before(:each) do
+      @registrant_1 = Registrant.new('Bruce', 18, true)
+      @registrant_2 = Registrant.new('Penny', 16)
+      @registrant_3 = Registrant.new('Tucker', 15)
+    end
+
+    it 'cannot renew license if the service is not present at facility' do
+      expect(@facility.renew_license(@registrant_1)).to eq nil
+    end
+
+    it 'cannot renew license if the registrant does not have a license' do      
+      @facility.renew_license(@registrant_1)
+      expect(@facility.renew_license(@registrant_1)).to eq nil
+      expect(@registrant_1.license_data).to eq ({written: false, license: false, renewed: false})
+    end
+
+    it 'can renew a license and it changes registrants license data' do
+      @registrant_1.license_data[:written] = true
+      @registrant_1.license_data[:license] = true
+      @facility.add_service('Renew License')
+      expect(@facility.renew_license(@registrant_1)).to eq true
+      expect(@registrant_1.license_data).to eq ({written: true, license: true, renewed: true})
+    end
+  end
 end
