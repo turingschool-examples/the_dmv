@@ -57,8 +57,7 @@ RSpec.describe Registrant do # rubocop:disable Metrics/BlockLength
   end
 
   it "can earn a permit" do
-    new_registrant = @registrant3
-    new_registrant.earn_permit
-    expect(new_registrant.permit?).to eq(true)
+    @registrant3.earn_permit
+    expect(@registrant3.permit?).to eq(true)
   end
 end

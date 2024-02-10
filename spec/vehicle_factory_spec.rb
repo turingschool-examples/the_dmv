@@ -4,7 +4,7 @@ require "rspec"
 require "./spec/spec_helper"
 require "./lib/vehicle_factory"
 
-RSpec.describe VehicleFactory do # rubocop:disable Metrics/BlockLength
+RSpec.describe VehicleFactory do
   before(:each) do
     @vehicle_factory = VehicleFactory.new
     @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
@@ -28,9 +28,8 @@ RSpec.describe VehicleFactory do # rubocop:disable Metrics/BlockLength
       ].each { |specification| expect(specification.nil?).to eq(false) }
     end
     it "can create an array of vehicles" do
-      vehicle_factory = @vehicle_factory
-      vehicle_factory.create_vehicles(@wa_ev_registrations, :ev)
-      expect(vehicle_factory.vehicles[0]).to be_an_instance_of(Vehicle)
+      @vehicle_factory.create_vehicles(@wa_ev_registrations, :ev)
+      expect(@vehicle_factory.vehicles[0]).to be_an_instance_of(Vehicle)
     end
   end
 end
