@@ -15,32 +15,32 @@ class FacilityFactory
   end
 
   def change_to_address_key(facility_info)
-    facility_info.each do |key, value|
-      if key == :address_li
-        value
-      elsif key == :street_address_line_1
-        value
-      end
+    if facility_info.has_key?(:address_li)
+      facility_info[:address_li]
+    elsif facility_info.has_key?(:street_address_line_1)
+      facility_info[:street_address_line_1]
+    elsif facility_info.has_key?(:address1)
+      facility_info[:address1]
     end
   end
 
   def change_to_name_key(facility_info)
-    facility_info.each do |key, value|
-      if key == :dmv_office
-        value
-      elsif key == :office_name
-        value
-      end
+    if facility_info.has_key?(:dmv_office)
+      facility_info[:dmv_office]
+    elsif facility_info.has_key?(:office_name)
+      facility_info[:office_name]
+    else
+      "#{facility_info[:city]}, #{facility_info[:state]} DMV"
     end
   end
 
   def change_to_phone_key(facility_info)
-    facility_info.each do |key, value|
-      if key == :phone
-        value
-      elsif key == :public_phone_number
-        value
-      end
+    if facility_info.has_key?(:phone)
+      facility_info[:phone]
+    elsif facility_info.has_key?(:public_phone_number)
+      facility_info[:public_phone_number]
+    else
+      'No number available.'
     end
   end
 end
