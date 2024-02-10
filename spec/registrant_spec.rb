@@ -36,6 +36,16 @@ RSpec.describe Registrant do
 
       expect(@registrant_2.license_data[:written]).to eq(false)
     end
+
+    it 'checks for written test before road test' do
+      @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.add_service('Road Test')
+      @facility_1.administer_road_test(@registrant_1)
+
+      expect(@registrant_1.license_data[:written]).to eq(true)
+      expect(@registrant_1.license_data[:license]).to eq(true)
+    end
   end
 
 end
