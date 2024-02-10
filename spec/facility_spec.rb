@@ -41,6 +41,26 @@ RSpec.describe Facility do # rubocop:disable Metrics/BlockLength
       permit: true
     })
   end
+  before(:all) do
+    @co_office = DmvDataService.new.co_dmv_office_locations[0]
+    @ny_office = DmvDataService.new.ny_dmv_office_locations[0]
+    @mo_office = DmvDataService.new.mo_dmv_office_locations[0]
+    @co_facility = Facility.new({
+      name: @co_office[:dmv_office],
+      address: @co_office[:address_li],
+      phone: @co_office[:phone]
+    })
+    @ny_facility = Facility.new({
+      name: @ny_office[:office_name],
+      address: @ny_office[:street_address_line_1], # rubocop:disable Naming/VariableNumber
+      phone: @ny_office[:public_phone_number]
+    })
+    @mo_facility = Facility.new({
+      name: @mo_office[:name],
+      address: @mo_office[:address1],
+      phone: @mo_office[:phone]
+    })
+  end
   describe "#initialize" do
     it "can initialize" do
       expect(@facility1).to be_an_instance_of(Facility)
@@ -153,9 +173,21 @@ RSpec.describe Facility do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  describe "# create facilities from external data" do
+  describe "#create facilities from external data" do
     it "can populate data from CO office locations" do
-      ""
+      expect(@co_facility.name.nil?).to eq(false)
+      expect(@co_facility.address.nil?).to eq(false)
+      expect(@co_facility.phone.nil?).to eq(false)
+    end
+    it "can populate data from NY office locations" do
+      expect(@ny_facility.name.nil?).to eq(false)
+      expect(@ny_facility.address.nil?).to eq(false)
+      expect(@ny_facility.phone.nil?).to eq(false)
+    end
+    it "can populate data from MO office locations" do
+      expect(@mo_facility.name.nil?).to eq(false)
+      expect(@mo_facility.address.nil?).to eq(false)
+      expect(@mo_facility.phone.nil?).to eq(false)
     end
   end
 end

@@ -8,7 +8,7 @@ class Facility
   def initialize(info)
     @name = info[:name]
     @address = info[:address]
-    @phone = info[:phone]
+    @phone = info[:phone].to_s
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
