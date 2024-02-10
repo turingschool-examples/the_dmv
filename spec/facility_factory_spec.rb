@@ -35,5 +35,16 @@ RSpec.describe FacilityFactory do
       expect(factory.facilities[0].name).not_to be(nil)
       expect(factory.facilities[0].phone).not_to be(nil)
     end
+
+    it 'can create facilities from Missouri' do
+      expect(factory.facilities).to be_empty
+
+      factory.create_facility(missouri_facilities)
+
+      expect(factory.facilities[0]).to be_an_instance_of(Facility)
+      expect(factory.facilities[0].address).not_to be(nil)
+      expect(factory.facilities[0].name).not_to be(nil)
+      expect(factory.facilities[0].phone).not_to be(nil)
+    end
   end
 end
