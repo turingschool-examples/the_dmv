@@ -112,4 +112,25 @@ RSpec.describe Facility do
     end
   end 
 
+  describe '#administer_written_test' do
+    before(:each) do
+      @registrant_1 = Registrant.new('Bruce', 18, true)
+      @registrant_2 = Registrant.new('Penny', 16)
+    end
+
+    it 'cannot administer a written test if the service is not present at facility' do
+      expect(@facility.administer_written_test(@registrant_1)).to eq nil
+      expect(@registrant_1.license_data).to eq {:written=>false, :license=>false, :renewed=>false}
+    end
+
+    it 'cannot administer a written test if the registrant does not have a permit' do
+      @facility.add_service('Written Test')
+      @facility.administer_written_test(@registrant_1)
+      @facility.administer_written_test(@registrant_2)
+
+      expect(@registrant_1.license_data).to eq {:written=>true, :license=>false, :renewed=>false}
+      expect(@registrant_2.license_data).to eq {:written=>false, :license=>false, :renewed=>false}
+    end
+
+  end
 end
