@@ -10,9 +10,7 @@ RSpec.describe Registrant do
     it 'can initialize' do
       expect(@registrant_1).to be_a(Registrant)
       expect(@registrant_2).to be_a(Registrant)
-    end
 
-    it 'has attributes' do
       expect(@registrant_1.name).to eq("Bruce")
       expect(@registrant_1.age).to eq(18)
       expect(@registrant_1.permit).to eq(true)
