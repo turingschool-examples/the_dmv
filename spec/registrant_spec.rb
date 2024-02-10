@@ -33,6 +33,23 @@ RSpec.describe Registrant do
     end
   end
 
-  # need to add in tests for helper methods pass_written_test and pass_road_test
 
+  describe 'written_test' do
+    before(:each) do
+      @registrant_1.earn_permit
+    end
+    
+    it 'can pass_written_test' do
+      @registrant_1.pass_written_test
+      
+      expect(@registrant_1.written?).to be true
+    end
+
+    it 'can pass_road_test' do
+      @registrant_1.pass_written_test
+      @registrant_1.pass_road_test
+
+      expect(@registrant_1.license?). to be true
+    end
+  end
 end
