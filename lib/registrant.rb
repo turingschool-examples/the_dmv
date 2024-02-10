@@ -16,16 +16,17 @@ class Registrant
         }
     end
 
-    # Methods
-
+    # Checks Permit
     def permit?
         @permit
     end
 
+    # Earns Permit
     def earn_permit
         @permit = true
     end
 
+    # Written Test Eligible
     def are_written_eligible?
         if @age >= 16 && @permit == true
             @license_data[:written] = true
@@ -34,6 +35,7 @@ class Registrant
         end
     end
 
+    # Road Test Eligible
     def are_road_eligible?
         if @license_data[:written] = true
             @license_data[:license] = true
@@ -42,6 +44,7 @@ class Registrant
         end
     end
 
+    # Can Renew License
     def are_renew_eligible?
         if @license_data[:license] == true
             @license_data[:renewed] = true

@@ -16,13 +16,10 @@ class Facility
         @collected_fees = 0
     end
 
-    # Methods
-
+    # Add Service
     def add_service(service)
         @services << service
     end
-
-    # A facility must include the service in order to perform it
 
     # Register a Vehicle
     def register_vehicle(vehicle)

@@ -22,12 +22,12 @@ class Vehicle
         @fees = 0
     end
 
-    # Methods
-
+    # Change Registration Date
     def change_registration_date
         @registration_date = Date.today
     end
 
+    # Update Plate Type
     def update_plate_type
         if antique?
             @plate_type = :antique
@@ -41,12 +41,12 @@ class Vehicle
         end
     end
 
-    # Special Instances
-
+    # Check if Antique
     def antique?
         Date.today.year - @year > 25
     end
 
+    # Check if Electric
     def electric_vehicle?
         @engine == :ev
     end
