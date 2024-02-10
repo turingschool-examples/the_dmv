@@ -49,4 +49,10 @@ class Facility
       registrant.pass_road_test
     end
   end
+
+  def renew_license(registrant)
+    if @services.include? 'Renew License'
+      registrant.renew_license
+    end
+  end
 end
