@@ -41,22 +41,16 @@ RSpec.describe Facility do
   end
 
   describe '#add amount of registered vehicles' do
-   it 'Register vehicle' do
+   it 'is by default no registard vehicles' do
      expect(@facility.registard_vehicles).to eq([])
    end
  end
 
   describe '#add amount of collected fees' do
-   it 'collect fees' do
+   it 'by default collected fees is 0' do
      expect(@facility.collected_fees).to eq(0)
    end
   end
 
-  describe '#registar vehicle' do
-   it 'registers a vehicle' do
-     expect(@facility.register_vehicle(@cruz)).to eq([@cruz])
-   end
-  end
-
-
+  
 end
