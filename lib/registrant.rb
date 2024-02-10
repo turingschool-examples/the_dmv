@@ -12,8 +12,7 @@ class Registrant
         @permit = permit
         @license_data = {written: false, 
                          license: false,
-                         renewed: false
-                        }
+                         renewed: false}
     end
 
     def permit?
@@ -22,5 +21,35 @@ class Registrant
 
     def earn_permit
         @permit = true
+    end
+
+    def pass_written_test
+        if permit? && @age >= 16
+            @license_data[:written] = true
+        end
+    end
+
+    def written?
+        @license_data[:written]
+    end
+
+    def pass_road_test
+        if written?
+            @license_data[:license] = true
+        end
+    end
+
+    def license?
+        @license_data[:license]
+    end
+
+    def renew_license
+        if license?
+            @license_data[:renewed] = true
+        end
+    end
+
+    def renewed?
+        @license_data[:renewed]
     end
 end

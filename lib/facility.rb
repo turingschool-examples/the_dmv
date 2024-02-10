@@ -37,4 +37,22 @@ class Facility
       @collected_fees += 100
     end
   end
+
+  def administer_written_test(registrant)
+    if @services.include? 'Written Test'
+      registrant.pass_written_test
+    end
+  end
+
+  def administer_road_test(registrant)
+    if @services.include? 'Road Test'
+      registrant.pass_road_test
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    if @services.include? 'Renew License'
+      registrant.renew_license
+    end
+  end
 end

@@ -112,4 +112,99 @@ RSpec.describe Facility do
     end
   end 
 
+  describe '#administer_written_test' do
+    before(:each) do
+      @registrant_1 = Registrant.new('Bruce', 18, true)
+      @registrant_2 = Registrant.new('Penny', 16)
+      @registrant_3 = Registrant.new('Tucker', 15)
+    end
+
+    it 'cannot administer a written test if the service is not present at facility' do
+      expect(@facility.administer_written_test(@registrant_1)).to eq nil
+      expect(@registrant_1.license_data).to eq ({written: false, license: false, renewed: false})
+    end
+
+    it 'cannot administer a written test if the registrant does not have a permit' do
+      @facility.add_service('Written Test')
+      @facility.administer_written_test(@registrant_1)
+      @facility.administer_written_test(@registrant_2)
+
+      expect(@registrant_1.license_data).to eq ({:written=>true, :license=>false, :renewed=>false})
+      expect(@registrant_2.license_data).to eq ({:written=>false, :license=>false, :renewed=>false})
+    end
+
+    it 'cannot administer a written test if the registrant is younger than 16' do
+      @facility.add_service('Written Test')
+      @registrant_3.earn_permit
+      @facility.administer_written_test(@registrant_3)
+
+      expect(@registrant_3.license_data).to eq ({:written=>false, :license=>false, :renewed=>false})
+    end
+
+    it 'can administer a written test and it changes the registrants license data' do
+      @facility.add_service('Written Test')
+      @facility.administer_written_test(@registrant_1)
+
+      expect(@facility.administer_written_test(@registrant_1)).to eq true
+      expect(@registrant_1.license_data).to eq ({:written=>true, :license=>false, :renewed=>false})
+
+      @registrant_2.earn_permit
+      @facility.administer_written_test(@registrant_2)
+
+      expect(@registrant_2.license_data[:written]).to eq true
+    end
+  end
+
+  describe '#administer_road_test' do
+    before(:each) do
+      @registrant_1 = Registrant.new('Bruce', 18, true)
+      @registrant_2 = Registrant.new('Penny', 16)
+      @registrant_3 = Registrant.new('Tucker', 15)
+      @facility.add_service('Written Test')
+    end
+
+    it 'cannot administer a road test if the service is not present at facility' do
+      expect(@facility.administer_road_test(@registrant_1)).to eq nil
+      expect(@registrant_1.license_data).to eq ({written: false, license: false, renewed: false})
+    end
+
+    it 'cannot administer a road test if the registrant has not passed the written test' do      
+      @facility.administer_written_test(@registrant_1)
+      expect(@facility.administer_road_test(@registrant_1)).to eq nil
+      expect(@registrant_1.license_data).to eq ({written: true, license: false, renewed: false})
+    end
+
+    it 'can administer a road test and it changes registrants license data' do
+      @facility.administer_written_test(@registrant_1)
+      @facility.add_service('Road Test')
+      expect(@facility.administer_road_test(@registrant_1)).to eq true
+      expect(@registrant_1.license_data).to eq ({written: true, license: true, renewed: false})
+    end
+  end
+
+  describe '#renew_license' do
+    before(:each) do
+      @registrant_1 = Registrant.new('Bruce', 18, true)
+      @registrant_2 = Registrant.new('Penny', 16)
+      @registrant_3 = Registrant.new('Tucker', 15)
+    end
+
+    it 'cannot renew license if the service is not present at facility' do
+      expect(@facility.renew_drivers_license(@registrant_1)).to eq nil
+    end
+
+    it 'cannot renew license if the registrant does not have a license' do      
+      @facility.renew_drivers_license(@registrant_1)
+      expect(@facility.renew_drivers_license(@registrant_1)).to eq nil
+      expect(@registrant_1.license_data).to eq ({written: false, license: false, renewed: false})
+    end
+
+    it 'can renew a license and it changes registrants license data' do
+      @registrant_1.license_data[:written] = true
+      @registrant_1.license_data[:license] = true
+      @facility.add_service('Renew License')
+      expect(@facility.renew_drivers_license(@registrant_1)).to eq true
+      expect(@registrant_1.license_data).to eq ({written: true, license: true, renewed: true})
+    end
+  end
 end
