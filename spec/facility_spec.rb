@@ -120,7 +120,7 @@ RSpec.describe Facility do
 
     it 'cannot administer a written test if the service is not present at facility' do
       expect(@facility.administer_written_test(@registrant_1)).to eq nil
-      expect(@registrant_1.license_data).to eq {:written=>false, :license=>false, :renewed=>false}
+      expect(@registrant_1.license_data).to eq ({written: false, license: false, renewed: false})
     end
 
     it 'cannot administer a written test if the registrant does not have a permit' do
@@ -128,9 +128,8 @@ RSpec.describe Facility do
       @facility.administer_written_test(@registrant_1)
       @facility.administer_written_test(@registrant_2)
 
-      expect(@registrant_1.license_data).to eq {:written=>true, :license=>false, :renewed=>false}
-      expect(@registrant_2.license_data).to eq {:written=>false, :license=>false, :renewed=>false}
+      expect(@registrant_1.license_data).to eq ({:written=>true, :license=>false, :renewed=>false})
+      expect(@registrant_2.license_data).to eq ({:written=>false, :license=>false, :renewed=>false})
     end
-
   end
 end

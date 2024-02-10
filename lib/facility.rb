@@ -37,4 +37,10 @@ class Facility
       @collected_fees += 100
     end
   end
+
+  def administer_written_test(registrant)
+    if @services.include? 'Written Test'
+      registrant.pass_written_test
+    end
+  end
 end
