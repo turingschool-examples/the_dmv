@@ -35,4 +35,27 @@ RSpec.describe Facility do
       expect(@facility_1.add_service('Vehicle Registration')).to eq(["Vehicle Registration"])
     end
   end
+
+  describe '#register_vehcle' do
+    it 'stores registered vehicles' do
+      expect(@cruz.registration_date).to eq(nil)
+      expect(@facility_1.registered_vehicles).to eq([])
+    end
+
+    it 'collects fees' do
+      expect(@facility_1.collected_fees).to eq(0)
+    end
+
+    it 'can register a vehicle' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+
+      expect(@cruz.registration_date).to eq(Date.today)
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+      expect(@facility_1.collected_fees).to eq(100)
+    end
+
+  end
+
 end
