@@ -1,9 +1,9 @@
 require 'pry'
 
 class VehicleFactory
-    attr_reader 
+    attr_reader :vehicles
 
     def initialize
-        
+        @vehicles = []
     end
 end
