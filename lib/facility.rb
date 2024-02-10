@@ -1,5 +1,8 @@
 class Facility
-  attr_reader :name, :address, :phone, :services
+  attr_reader :name, 
+              :address, 
+              :phone, 
+              :services
 
   def initialize(hash_data)
     @name = hash_data[:name]
@@ -11,4 +14,9 @@ class Facility
   def add_service(service)
     @services << service
   end
+  
+  def register_vehicle
+    @registration_date = Date.today
+  end
+
 end
