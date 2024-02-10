@@ -29,7 +29,7 @@ RSpec.describe Facility do
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
-
+  
   describe '#add service' do
     it 'can add vehicle registration' do
       expect(@facility.services).to eq([])
@@ -52,5 +52,34 @@ RSpec.describe Facility do
    end
   end
 
-  
+  describe '#registration date' do
+  it 'registration is nil by default' do
+    expect(@cruz.registration_date).to eq(nil)
+  end
+end
+
+describe '#registration date' do
+  it 'is updating registration date to todays date' do
+    expect(@cruz.registration_date).to eq(nil)
+    @cruz.change_registration_date 
+    expect(@cruz.registration_date).to eq(Date.today)
+  end
+end
+
+describe '#registration date' do
+  it 'is updating registration date to todays date' do
+    expect(@cruz.registration_date).to eq(nil)
+    @cruz.registration_date 
+    expect(@cruz.registration_date).to eq(Date.today)
+  end
+end
+
+describe '#registration date' do
+  it 'is updating the plate type' do
+    expect(@cruz.plate_type).to eq(nil)
+    @cruz.change_plate_type
+    expect(@cruz.change_plate_type).to eq(:regular)
+  end
+end
+
 end
