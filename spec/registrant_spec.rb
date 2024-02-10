@@ -33,5 +33,6 @@ RSpec.describe Registrant do
     end
   end
 
+  # need to add in tests for helper methods pass_written_test and pass_road_test
 
 end

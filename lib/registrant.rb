@@ -28,4 +28,14 @@ class Registrant
             @license_data[:written] = true
         end
     end
+
+    def written?
+        [:written]
+    end
+
+    def pass_road_test
+        if written?
+            @license_data[:license] = true
+        end
+    end
 end
