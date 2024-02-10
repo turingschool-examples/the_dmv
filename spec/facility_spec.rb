@@ -160,11 +160,18 @@ RSpec.describe Facility do
       @registrant_1 = Registrant.new('Bruce', 18, true)
       @registrant_2 = Registrant.new('Penny', 16)
       @registrant_3 = Registrant.new('Tucker', 15)
+      @facility.add_service('Written Test')
     end
 
     it 'cannot administer a road test if the service is not present at facility' do
       expect(@facility.administer_road_test(@registrant_1)).to eq nil
       expect(@registrant_1.license_data).to eq ({written: false, license: false, renewed: false})
+    end
+
+    it 'cannot administer a road test if the registrant has not passed the written test' do      
+      @facility.administer_written_test(@registrant_1)
+      expect(@facility.administer_road_test(@registrant_1)).to eq nil
+      expect(@registrant_1.license_data).to eq ({written: true, license: false, renewed: false})
     end
   end
 end
