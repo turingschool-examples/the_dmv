@@ -125,7 +125,7 @@ RSpec.describe Facility do # rubocop:disable Metrics/BlockLength
       can_get_license = facility.administer_road_test(registrant)
       expect(can_get_license).to eq(false)
     end
-    it "does not give road tests to people who haven't completed the written test" do # rubocop:disable Layout/LineLength
+    it "no road tests for people who haven't completed the written test" do
       facility = @facility1
       registrant = @registrant
       facility.add_service("Written Test")

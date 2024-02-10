@@ -33,11 +33,11 @@ RSpec.describe Registrant do # rubocop:disable Metrics/BlockLength
   it "can be assigned a name, age, and permit" do
     expect(@registrant1.name).to eq("Bruce")
     expect(@registrant1.age).to eq(18)
-    expect(@registrant1.permit).to eq(true)
+    expect(@registrant1.permit?).to eq(true)
   end
 
   it "does not have a permit by default" do
-    expect(@registrant2.permit).to eq(false)
+    expect(@registrant2.permit?).to eq(false)
   end
 
   it "has not completed the written, road, or renewed criteria by default" do
@@ -59,6 +59,6 @@ RSpec.describe Registrant do # rubocop:disable Metrics/BlockLength
   it "can earn a permit" do
     new_registrant = @registrant3
     new_registrant.earn_permit
-    expect(new_registrant.permit).to eq(true)
+    expect(new_registrant.permit?).to eq(true)
   end
 end
