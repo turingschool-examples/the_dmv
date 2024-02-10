@@ -135,6 +135,7 @@ RSpec.describe Facility do
 
     it 'cannot administer a written test if the registrant is younger than 16' do
       @facility.add_service('Written Test')
+      @registrant_3.earn_permit
       @facility.administer_written_test(@registrant_3)
 
       expect(@registrant_3.license_data).to eq ({:written=>false, :license=>false, :renewed=>false})
@@ -151,6 +152,19 @@ RSpec.describe Facility do
       @facility.administer_written_test(@registrant_2)
 
       expect(@registrant_2.license_data[:written]).to eq true
+    end
+  end
+
+  describe '#administer_road_test' do
+    before(:each) do
+      @registrant_1 = Registrant.new('Bruce', 18, true)
+      @registrant_2 = Registrant.new('Penny', 16)
+      @registrant_3 = Registrant.new('Tucker', 15)
+    end
+
+    it 'cannot administer a road test if the service is not present at facility' do
+      expect(@facility.administer_road_test(@registrant_1)).to eq nil
+      expect(@registrant_1.license_data).to eq ({written: false, license: false, renewed: false})
     end
   end
 end
