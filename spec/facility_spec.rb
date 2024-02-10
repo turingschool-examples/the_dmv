@@ -190,12 +190,12 @@ RSpec.describe Facility do
     end
 
     it 'cannot renew license if the service is not present at facility' do
-      expect(@facility.renew_license(@registrant_1)).to eq nil
+      expect(@facility.renew_drivers_license(@registrant_1)).to eq nil
     end
 
     it 'cannot renew license if the registrant does not have a license' do      
-      @facility.renew_license(@registrant_1)
-      expect(@facility.renew_license(@registrant_1)).to eq nil
+      @facility.renew_drivers_license(@registrant_1)
+      expect(@facility.renew_drivers_license(@registrant_1)).to eq nil
       expect(@registrant_1.license_data).to eq ({written: false, license: false, renewed: false})
     end
 
@@ -203,7 +203,7 @@ RSpec.describe Facility do
       @registrant_1.license_data[:written] = true
       @registrant_1.license_data[:license] = true
       @facility.add_service('Renew License')
-      expect(@facility.renew_license(@registrant_1)).to eq true
+      expect(@facility.renew_drivers_license(@registrant_1)).to eq true
       expect(@registrant_1.license_data).to eq ({written: true, license: true, renewed: true})
     end
   end

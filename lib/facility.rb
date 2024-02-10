@@ -50,7 +50,7 @@ class Facility
     end
   end
 
-  def renew_license(registrant)
+  def renew_drivers_license(registrant)
     if @services.include? 'Renew License'
       registrant.renew_license
     end
