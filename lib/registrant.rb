@@ -30,7 +30,7 @@ class Registrant
     end
 
     def written?
-        @license_data[:written] == true
+        @license_data[:written]
     end
 
     def pass_road_test
@@ -40,6 +40,6 @@ class Registrant
     end
 
     def license?
-        @license_data[:license] == true
+        @license_data[:license]
     end
 end

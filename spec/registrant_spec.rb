@@ -18,7 +18,7 @@ RSpec.describe Registrant do
     end
   end
 
-  describe 'permit' do
+  describe 'earn_a_permit' do
     it 'can determine if a registrant has a permit' do
       expect(@registrant_1.permit?).to be true
       expect(@registrant_2.permit?).to be false
@@ -33,23 +33,32 @@ RSpec.describe Registrant do
     end
   end
 
-
-  describe 'written_test' do
+  describe 'pass_written_test' do
     before(:each) do
       @registrant_1.earn_permit
     end
     
     it 'can pass_written_test' do
+      expect(@registrant_1.written?).to be false
+      
       @registrant_1.pass_written_test
       
       expect(@registrant_1.written?).to be true
     end
+  end
 
-    it 'can pass_road_test' do
+  describe 'pass_road_test' do
+    before(:each) do
+      @registrant_1.earn_permit
       @registrant_1.pass_written_test
+    end
+    it 'can pass_road_test' do
+      expect(@registrant_1.license?).to be false
+
       @registrant_1.pass_road_test
 
-      expect(@registrant_1.license?). to be true
+      expect(@registrant_1.license?).to be true
     end
   end
+
 end
