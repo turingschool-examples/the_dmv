@@ -59,7 +59,7 @@ RSpec.describe VehicleFactory do # rubocop:disable Metrics/BlockLength
       end
       expect(total_model_count).to eq(@vehicle_factory.vehicles.count)
     end
-    it "counts the number of vehicles for each model year" do
+    it "counts the number of vehicles for each model year (must be nonzero)" do
       @vehicle_factory.create_vehicles(@wa_ev_registrations, :ev)
       makes_and_models_data = @vehicle_factory.retrieve_vehicle_makes_and_models
       makes_and_models_data.each_value do |model|
@@ -70,6 +70,35 @@ RSpec.describe VehicleFactory do # rubocop:disable Metrics/BlockLength
         end
         expect(total_in_model_year).to eq(model[:total])
       end
+    end
+    it "counts the number of cars in each county (must be nonzero)" do
+      @vehicle_factory.create_vehicles(@wa_ev_registrations, :ev)
+      vehicle_county_data = @vehicle_factory.retrieve_vehicle_counties
+      total_vehicles = 0
+      total_counties = 0
+      vehicle_county_data.each_value do |num_in_county|
+        total_vehicles += num_in_county
+        expect(num_in_county > 0).to eq(true)
+        total_counties += 1
+      end
+      expect(total_counties > 0).to eq(true)
+      expect(total_vehicles).to eq(@vehicle_factory.vehicles.count)
+    end
+    it "finds the county with the most vehicles" do
+      @vehicle_factory.create_vehicles(@wa_ev_registrations, :ev)
+      vehicle_county_data = @vehicle_factory.retrieve_vehicle_counties
+      top_county = {
+        county: nil,
+        quantity: 0
+      }
+      vehicle_county_data.each do |county, registered_vehicles|
+        if registered_vehicles > top_county[:quantity]
+          top_county[:county] = county
+          top_county[:quantity] = registered_vehicles
+        end
+      end
+      expect(top_county[:county]).to be_an_instance_of(String)
+      expect(top_county[:quantity] > 0).to eq(true)
     end
   end
 end
