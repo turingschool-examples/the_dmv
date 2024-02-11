@@ -29,7 +29,7 @@ class Facility
             @collected_fees += vehicle.fees
             @registered_vehicles << vehicle
         else
-            return false
+            return nil
         end
     end
 
