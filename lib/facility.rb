@@ -7,13 +7,15 @@ class Facility
               :collected_fees
 
   def initialize(hash_data)
-    @name = hash_data[:name]
-    @address = hash_data[:address]
-    @phone = hash_data[:phone]
+    hash_data.each do |dmv|
+    dmv[:name] = dmv[:office_name]
+    dmv[:address] = dmv[:address]
+    dmv[:phone] = dmv[:public_phone_number]
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
     @fees = {antique: 25, ev: 200, regular: 100}
+    end
   end
 
   def add_service(service)
