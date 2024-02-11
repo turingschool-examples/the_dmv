@@ -34,9 +34,9 @@ RSpec.describe VehicleFactory do # rubocop:disable Metrics/BlockLength
   end
 
   describe "#vehicle registration data" do # rubocop:disable Metrics/BlockLength
-    it "initializes with nil empty data set" do
+    it "initializes with empty data set" do
       @vehicle_factory.vehicle_data.each_value do |value|
-        expect(value).to eq(nil)
+        expect(value).to eq({})
       end
     end
     it "creates hashes with consolidated vehicle data" do
