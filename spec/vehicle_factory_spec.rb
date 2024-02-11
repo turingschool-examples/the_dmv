@@ -115,5 +115,11 @@ RSpec.describe VehicleFactory do # rubocop:disable Metrics/BlockLength
         expect(hash.keys.empty?).to eq(false)
       end
     end
+    it "creates a text file with all vehicle data" do
+      @vehicle_factory.create_vehicles(@wa_ev_registrations, :ev)
+      @vehicle_factory.consolidate_all_vehicle_data
+      @vehicle_factory.write_vehicle_data_to_text_file
+      expect(File.zero?("vehicle_data")).to eq(false)
+    end
   end
 end
