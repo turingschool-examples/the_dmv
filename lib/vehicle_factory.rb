@@ -10,7 +10,6 @@ class VehicleFactory
       makes: {},
       counties: {}
     }
-    @vehicle_data.default = 0
   end
 
   def create_vehicle_hash(vehicle_info, engine_type)
@@ -40,15 +39,30 @@ class VehicleFactory
     }
   end
 
-  def retrieve_vehicle_makes_and_models # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Layout/LineLength,Metrics/MethodLength,Metrics/AbcSize
+  def retrieve_vehicle_makes_and_models
     @vehicles.each do |vehicle|
-      if @vehicle_data[vehicle.make].zero?
-        @vehicle_data[vehicle.make] =
-          { vehicle.make => { vehicle.model => { vehicle.year.to_s => 1 } } }
-      elsif @vehicle_data[vehicle.make][vehicle.model].zero?
-        @vehicle_data[vehicle.make][vehicle.model] = { vehicle.year.to_s => 1 }
+      if @vehicle_data[:makes][vehicle.make].nil?
+        @vehicle_data[:makes][vehicle.make] = { vehicle.model => { vehicle.year.to_s => 1 } }
+      elsif @vehicle_data[:makes][vehicle.make][vehicle.model].nil?
+        @vehicle_data[:makes][vehicle.make][vehicle.model] = { vehicle.year.to_s => 1 }
+      elsif @vehicle_data[:makes][vehicle.make][vehicle.model][vehicle.year.to_s].nil?
+        @vehicle_data[:makes][vehicle.make][vehicle.model][vehicle.year.to_s] = 1
       else
-        @vehicle_data[vehicle.make][vehicle.model][vehicle.year.to_s] += 1
+        @vehicle_data[:makes][vehicle.make][vehicle.model][vehicle.year.to_s] += 1
+      end
+    end
+    add_vehicle_data_totals
+  end
+  # rubocop:enable Layout/LineLength,Metrics/MethodLength,Metrics/AbcSize
+
+  def add_vehicle_data_totals
+    @vehicle_data[:makes].each_value do |make|
+      make.each_value do |model|
+        model[:total] = 0
+        model.each_value do |model_year|
+          model[:total] += model_year
+        end
       end
     end
   end
