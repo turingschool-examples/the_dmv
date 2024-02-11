@@ -40,4 +40,6 @@ class VehicleFactory
   def retrieve_vehicle_counties; end
 
   def consolidate_all_vehicle_data; end
+
+  def write_vehicle_data_to_text_file; end
 end
