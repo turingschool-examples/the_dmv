@@ -1,82 +1,113 @@
-# NOTE: A facility must offer a service in order to perform it. Just because the DMV allows facilities to perform certain services, does not mean that every facility provides every service.
+#Written Test
 
-<!-- pry(main)> facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
-#=> #<Facility:0x000000010e5ad5e8 @address="2855 Tremont Place Suite 118 Denver CO 80205", @name="DMV Tremont Branch", @phone="(720) 865-4600", @services=[]>
+pry(main)> registrant_1.license_data
+#=> {:written=>false, :license=>false, :renewed=>false}
 
-pry(main)> facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
-#=> #<Facility:0x000000010e5ad480 @address="4685 Peoria Street Suite 101 Denver CO 80239", @name="DMV Northeast Branch", @phone="(720) 865-4600", @services=[]>
+pry(main)> registrant_1.permit?
+#=> true
 
-pry(main)> cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-#=> #<Vehicle:0x0000000135a48b08 @engine=:ice, @make="Chevrolet", @model="Cruz", @plate_type=nil, @registration_date=nil, @vin="123456789abcdefgh", @year=2012>
+pry(main)> facility_1.administer_written_test(registrant_1)
+#=> false
 
-pry(main)> bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
-#=> #<Vehicle:0x0000000125832180 @engine=:ev, @make="Chevrolet", @model="Bolt", @plate_type=nil, @registration_date=nil, @vin="987654321abcdefgh", @year=2019>
+pry(main)> registrant_1.license_data
+#=> {:written=>false, :license=>false, :renewed=>false}
 
-pry(main)> camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
-#=> #<Vehicle:0x0000000135adb610 @engine=:ice, @make="Chevrolet", @model="Camaro", @plate_type=nil, @registration_date=nil, @vin="1a2b3c4d5e6f", @year=1969>
+pry(main)> facility_1.add_service('Written Test')
+#=> ["Written Test"]
 
-pry(main)> facility_1.add_service('Vehicle Registration')
-#=> ["Vehicle Registration"]
+pry(main)> facility_1.administer_written_test(registrant_1)
+#=> true
 
-pry(main)> cruz.registration_date
-#=> nil
+pry(main)> registrant_1.license_data
+#=> {:written=>true, :license=>false, :renewed=>false}
 
-pry(main)> facility_1.registered_vehicles
-#=> []
+pry(main)> registrant_2.age
+#=> 16
 
-pry(main)> facility_1.collected_fees
-#=> 0
+pry(main)> registrant_2.permit?
+#=> false
 
-pry(main)> facility_1.register_vehicle(cruz)
-#=> [#<Vehicle:0x0000000135a48b08...>] -->
+pry(main)> facility_1.administer_written_test(registrant_2)
+#=> false
 
-<!-- pry(main)> cruz.registration_date
-#=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
+pry(main)> registrant_2.earn_permit
 
-pry(main)> cruz.plate_type
-#=> :regular
+pry(main)> facility_1.administer_written_test(registrant_2)
+#=> true
 
-pry(main)> facility_1.registered_vehicles
-#=> [#<Vehicle:0x0000000135a48b08...>]
+pry(main)> registrant_2.license_data
+#=> {:written=>true, :license=>false, :renewed=>false}
 
-pry(main)> facility_1.collected_fees
-#=> 100 -->
+pry(main)> registrant_3.age
+#=> 15
 
-<!-- pry(main)> facility_1.register_vehicle(camaro)
-#=> [#<Vehicle:0x0000000135a48b08...>, #<Vehicle:0x0000000135adb610...>]
+pry(main)> registrant_3.permit?
+#=> false
 
-pry(main)> camaro.registration_date
-#=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
+pry(main)> facility_1.administer_written_test(registrant_3)
+#=> false
 
-pry(main)> camaro.plate_type
-#=> :antique
+pry(main)> registrant_3.earn_permit
 
-pry(main)> facility_1.register_vehicle(bolt)
-#=> [#<Vehicle:0x0000000135a48b08...>, #<Vehicle:0x0000000135adb610...>, #<Vehicle:0x0000000125832180...>]
+pry(main)> facility_1.administer_written_test(registrant_3)
+#=> false
 
-pry(main)> bolt.registration_date
-#=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
+pry(main)> registrant_3.license_data
+#=> {:written=>false, :license=>false, :renewed=>false}
 
-pry(main)> bolt.plate_type
-#=> :ev
+# Road Test
 
-pry(main)> facility_1.registered_vehicles
-#=> [#<Vehicle:0x0000000135a48b08...>, #<Vehicle:0x0000000135adb610...>, #<Vehicle:0x0000000125832180...>]
+pry(main)> facility_1.administer_road_test(registrant_3)
+#=> false
 
-pry(main)> facility_1.collected_fees
-#=> 325 -->
+pry(main)> registrant_3.earn_permit
 
-pry(main)> facility_2.registered_vehicles
-#=> []
+pry(main)> facility_1.administer_road_test(registrant_3)
+#=> false
 
-pry(main)> facility_2.services
-#=> []
+pry(main)> registrant_3.license_data
+#=> {:written=>false, :license=>false, :renewed=>false}
 
-pry(main)> facility_2.register_vehicle(bolt)
-#=> nil
+pry(main)> facility_1.administer_road_test(registrant_1)
+#=> false
 
-pry(main)> facility_2.registered_vehicles
-#=> []
+pry(main)> facility_1.add_service('Road Test')
+#=> ["Written Test", "Road Test"]
 
-pry(main)> facility_2.collected_fees
-#=> 0
+pry(main)> facility_1.administer_road_test(registrant_1)
+#=> true
+
+pry(main)> registrant_1.license_data
+#=> {:written=>true, :license=>true, :renewed=>false}
+
+pry(main)> facility_1.administer_road_test(registrant_2)
+#=> true
+
+pry(main)> registrant_2.license_data
+#=> {:written=>true, :license=>true, :renewed=>false}
+
+# Renew License
+
+pry(main)> facility_1.renew_drivers_license(registrant_1)
+#=> false
+
+pry(main)> facility_1.add_service('Renew License')
+#=> ["Written Test", "Road Test", "Renew License"]
+
+pry(main)> facility_1.renew_drivers_license(registrant_1)
+#=> true
+
+pry(main)> registrant_1.license_data
+#=> {:written=>true, :license=>true, :renewed=>true}
+
+pry(main)> facility_1.renew_drivers_license(registrant_3)
+#=> false
+
+pry(main)> registrant_3.license_data
+#=> {:written=>false, :license=>false, :renewed=>false}
+
+pry(main)> facility_1.renew_drivers_license(registrant_2)
+#=> true
+
+pry(main)> registrant_2.license_data
+#=> {:written=>true, :license=>true, :renewed=>true}
