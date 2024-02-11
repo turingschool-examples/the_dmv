@@ -15,9 +15,11 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    vehicle.registration_date = Date.today
-    collect_fees(vehicle)
-    @registered_vehicles << vehicle
+    if !vehicle.registration_date
+        vehicle.registration_date = Date.today
+        collect_fees(vehicle)
+        @registered_vehicles << vehicle
+    end
   end
 
   def collect_fees(vehicle)
