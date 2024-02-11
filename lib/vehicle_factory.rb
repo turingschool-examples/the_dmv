@@ -7,10 +7,8 @@ class VehicleFactory
   def initialize
     @vehicles = []
     @vehicle_data = {
-      makes: nil,
-      models: nil,
-      model_years: nil,
-      counties: nil
+      makes: {},
+      counties: {}
     }
   end
 

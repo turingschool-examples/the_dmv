@@ -108,5 +108,12 @@ RSpec.describe VehicleFactory do # rubocop:disable Metrics/BlockLength
       expect(top_county[:county]).to be_an_instance_of(String)
       expect(top_county[:quantity] > 0).to eq(true)
     end
+    it "consolidates all vehicle data into a single hash" do
+      @vehicle_factory.create_vehicles(@wa_ev_registrations, :ev)
+      @vehicle_factory.consolidate_all_vehicle_data
+      @vehicle_factory.vehicle_data.each_value do |hash|
+        expect(hash.keys.empty?).to eq(false)
+      end
+    end
   end
 end
