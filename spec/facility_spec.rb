@@ -8,7 +8,7 @@ RSpec.describe Facility do
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
     @registrant_1 = Registrant.new('Bruce', 18, true )
-    @registrant_2 = Registrant.new('Penny', 15 )
+    @registrant_2 = Registrant.new('Penny', 16 )
     @registrant_3 = Registrant.new('Tucker', 15 )
   end
   describe '#initialize' do
@@ -112,6 +112,13 @@ RSpec.describe Facility do
       @facility.add_service('Written Test')
       expect(@facility.administer_written_test(@registrant_1)).to eq(true)
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+     
+      expect(@registrant_2.age).to eq(16)
+      expect(@registrant_2.permit?).to eq(false)
+      expect(@facility.administer_written_test(@registrant_2)).to eq(false)
+      @registrant_2.earn_permit
+      expect(@facility.administer_written_test(@registrant_2)).to eq(true)
+      expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
       
 
     end
