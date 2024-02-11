@@ -10,6 +10,7 @@ class VehicleFactory
       makes: {},
       counties: {}
     }
+    @vehicle_data.default = 0
   end
 
   def create_vehicle_hash(vehicle_info, engine_type)
@@ -39,35 +40,17 @@ class VehicleFactory
     }
   end
 
-  def retrieve_vehicle_makes_and_models
-    # => {
-    #      make1: {
-    #       model1: {
-    #         year1: 1,
-    #         year2: 5,
-    #         ...
-    #       },
-    #       model2: {
-    #         year1: 1,
-    #         year2: 5,
-    #         ...
-    #       },
-    #       ...
-    #     },
-    #     make2: {
-    #       model1: {
-    #         year1: 1,
-    #         year2: 5,
-    #         ...
-    #       },
-    #       model2: {
-    #         year1: 1,
-    #         year2: 5,
-    #         ...
-    #       },
-    #       ...
-    #     }
-    #   }
+  def retrieve_vehicle_makes_and_models # rubocop:disable Metrics/AbcSize
+    @vehicles.each do |vehicle|
+      if @vehicle_data[vehicle.make].zero?
+        @vehicle_data[vehicle.make] =
+          { vehicle.make => { vehicle.model => { vehicle.year.to_s => 1 } } }
+      elsif @vehicle_data[vehicle.make][vehicle.model].zero?
+        @vehicle_data[vehicle.make][vehicle.model] = { vehicle.year.to_s => 1 }
+      else
+        @vehicle_data[vehicle.make][vehicle.model][vehicle.year.to_s] += 1
+      end
+    end
   end
 
   def retrieve_vehicle_model_years; end
