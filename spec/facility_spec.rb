@@ -70,7 +70,6 @@ RSpec.describe Facility do
       
    
       @facility.register_vehicle(@bolt)
-      require 'pry'; binding.pry
       expect(@facility.registered_vehicles).to eq([@cruz, @camaro, @bolt])
       expect(@bolt.registration_date).to eq(Date.today.year)
       expect(@bolt.plate_type).to eq(:ev)
