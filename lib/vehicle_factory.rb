@@ -31,9 +31,44 @@ class VehicleFactory
     end
   end
 
-  def retrieve_vehicle_data(vehicle); end
+  def retrieve_vehicle_data(vehicle)
+    {
+      make: vehicle.make,
+      model: vehicle.model,
+      year: vehicle.year
+    }
+  end
 
-  def retrieve_vehicle_makes_and_models; end
+  def retrieve_vehicle_makes_and_models
+    # => {
+    #      make1: {
+    #       model1: {
+    #         year1: 1,
+    #         year2: 5,
+    #         ...
+    #       },
+    #       model2: {
+    #         year1: 1,
+    #         year2: 5,
+    #         ...
+    #       },
+    #       ...
+    #     },
+    #     make2: {
+    #       model1: {
+    #         year1: 1,
+    #         year2: 5,
+    #         ...
+    #       },
+    #       model2: {
+    #         year1: 1,
+    #         year2: 5,
+    #         ...
+    #       },
+    #       ...
+    #     }
+    #   }
+  end
 
   def retrieve_vehicle_model_years; end
 
