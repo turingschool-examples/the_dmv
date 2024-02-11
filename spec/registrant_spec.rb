@@ -46,6 +46,16 @@ RSpec.describe Registrant do
       expect(@registrant_1.license_data[:written]).to eq(true)
       expect(@registrant_1.license_data[:license]).to eq(true)
     end
-  end
 
+    it 'checks for license before renewing license' do
+      @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.add_service('Road Test')
+      @facility_1.administer_road_test(@registrant_1)
+      @facility_1.addservice('Renew License')
+      @facility_1.renew_drivers_license(@registrant_1)
+
+      expect(@registrant_1.license_data[:renewed]).to eq(true)
+    end
+  end
 end
