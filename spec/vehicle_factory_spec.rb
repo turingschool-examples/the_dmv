@@ -33,7 +33,7 @@ RSpec.describe VehicleFactory do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  describe "#vehicle registration data" do
+  describe "#vehicle registration data" do # rubocop:disable Metrics/BlockLength
     it "initializes with nil empty data set" do
       @vehicle_factory.vehicle_data.each_value do |value|
         expect(value).to eq(nil)
@@ -53,11 +53,23 @@ RSpec.describe VehicleFactory do # rubocop:disable Metrics/BlockLength
       makes_and_models_data = @vehicle_factory.retrieve_vehicle_makes_and_models
       total_model_count = 0
       makes_and_models_data.each_value do |make_data|
-        make_data.each_pair do |make, model|
-          total_model_count += model if make != :total
+        make_data.except(:total).each_value do |model|
+          total_model_count += model[:total]
         end
       end
       expect(total_model_count).to eq(@vehicle_factory.vehicles.count)
+    end
+    it "counts the number of vehicles for each model year" do
+      @vehicle_factory.create_vehicles(@wa_ev_registrations, :ev)
+      makes_and_models_data = @vehicle_factory.retrieve_vehicle_makes_and_models
+      makes_and_models_data.each_value do |model|
+        total_in_model_year = 0
+        model.except(:total).each_value do |model_year_quantity|
+          total_in_model_year += model_year_quantity
+          expect(model_year_quantity > 0).to eq(true)
+        end
+        expect(total_in_model_year).to eq(model[:total])
+      end
     end
   end
 end
