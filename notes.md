@@ -1,6 +1,6 @@
 # NOTE: A facility must offer a service in order to perform it. Just because the DMV allows facilities to perform certain services, does not mean that every facility provides every service.
 
-pry(main)> facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+<!-- pry(main)> facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
 #=> #<Facility:0x000000010e5ad5e8 @address="2855 Tremont Place Suite 118 Denver CO 80205", @name="DMV Tremont Branch", @phone="(720) 865-4600", @services=[]>
 
 pry(main)> facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
@@ -28,9 +28,9 @@ pry(main)> facility_1.collected_fees
 #=> 0
 
 pry(main)> facility_1.register_vehicle(cruz)
-#=> [#<Vehicle:0x0000000135a48b08...>]
+#=> [#<Vehicle:0x0000000135a48b08...>] -->
 
-pry(main)> cruz.registration_date
+<!-- pry(main)> cruz.registration_date
 #=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
 
 pry(main)> cruz.plate_type
@@ -40,9 +40,9 @@ pry(main)> facility_1.registered_vehicles
 #=> [#<Vehicle:0x0000000135a48b08...>]
 
 pry(main)> facility_1.collected_fees
-#=> 100
+#=> 100 -->
 
-pry(main)> facility_1.register_vehicle(camaro)
+<!-- pry(main)> facility_1.register_vehicle(camaro)
 #=> [#<Vehicle:0x0000000135a48b08...>, #<Vehicle:0x0000000135adb610...>]
 
 pry(main)> camaro.registration_date
@@ -64,7 +64,7 @@ pry(main)> facility_1.registered_vehicles
 #=> [#<Vehicle:0x0000000135a48b08...>, #<Vehicle:0x0000000135adb610...>, #<Vehicle:0x0000000125832180...>]
 
 pry(main)> facility_1.collected_fees
-#=> 325
+#=> 325 -->
 
 pry(main)> facility_2.registered_vehicles
 #=> []
