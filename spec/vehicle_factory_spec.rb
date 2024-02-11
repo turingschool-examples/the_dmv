@@ -39,6 +39,14 @@ RSpec.describe VehicleFactory do # rubocop:disable Metrics/BlockLength
         expect(value).to eq(nil)
       end
     end
+    it "creates hashes with consolidated vehicle data" do
+      @vehicle_factory.create_vehicles(@wa_ev_registrations, :ev)
+      vehicle = @vehicle_factory.vehicles[0]
+      data = @vehicle_factory.retrieve_vehicle_data(vehicle)
+      data.each_value do |datum|
+        expect(datum.nil?).to eq(false)
+      end
+    end
     it "counts the number of vehicles for each make" do
       @vehicle_factory.create_vehicles(@wa_ev_registrations, :ev)
       makes_and_models_data = @vehicle_factory.retrieve_vehicle_makes_and_models

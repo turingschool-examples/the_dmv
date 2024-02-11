@@ -33,7 +33,7 @@ class VehicleFactory
     end
   end
 
-  def retrieve_vehicle_datum(vehicle); end
+  def retrieve_vehicle_data(vehicle); end
 
   def retrieve_vehicle_makes_and_models; end
 
@@ -41,5 +41,5 @@ class VehicleFactory
 
   def retrieve_vehicle_counties; end
 
-  def consolidate_vehicle_data; end
+  def consolidate_all_vehicle_data; end
 end
