@@ -12,13 +12,16 @@ class Facility
     @address = info[:address]
     @phone = info[:phone]
     @services = []
+
     @registered_vehicles = []
+
     @collected_fees = 0
   end
 
   def add_service(service)
     @services << service
   end
+
 
   def register_vehicle(vehicle)
     if !@services.include?('Vehicle Registration')
@@ -38,5 +41,5 @@ class Facility
       end
     end
         
-  end
+
 end
