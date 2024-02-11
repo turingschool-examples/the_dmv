@@ -80,7 +80,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe'#check facility and facility_1' do 
+  describe'#check facility and facility_2' do 
     it 'sees what is in the first facility' do 
       @facility.add_service('Vehicle Registration')
       @facility.register_vehicle(@cruz)
@@ -120,7 +120,10 @@ RSpec.describe Facility do
       expect(@facility.administer_written_test(@registrant_2)).to eq(true)
       expect(@registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
       
-
+      expect(@registrant_3.age).to eq(15)
+      expect(@registrant_3.permit?).to eq(false)
+      expect(@facility.administer_written_test(@registrant_3)).to eq(false)
+      expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
 
     
