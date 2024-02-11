@@ -38,4 +38,14 @@ RSpec.describe VehicleFactory do
       expect(make_counts[:TESLA]).to be_an_instance_of(Integer)
     end
   end
+
+  cribe '#count_vehicle_models' do
+    it ' can count how many of each model there is' do
+      factory.create_vehicles(wa_ev_registrations)
+
+      model_counts = factory.count_vehicle_models
+
+      expect(model_counts[:TESLA]).to be_an_instance_of(Integer)
+    end
+  end
 end
