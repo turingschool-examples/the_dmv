@@ -49,23 +49,40 @@ RSpec.describe VehicleFactory do # rubocop:disable Metrics/BlockLength
     end
     it "counts the number of vehicles for each make" do
       @vehicle_factory.create_vehicles(@wa_ev_registrations, :ev)
-      makes_and_models_data = @vehicle_factory.retrieve_vehicle_makes_and_models
-      total_make_count = 0
-      makes_and_models_data.each_value do |make_data|
-        total_make_count += make_data[:total]
+      @vehicle_factory.retrieve_vehicle_makes_and_models
+      makes = {}
+      @vehicle_factory.vehicle_data[:makes].each do |make, make_data|
+        makes[make] = 0
+        make_data.each_value do |model|
+          makes[make] += model[:total]
+        end
       end
-      expect(total_make_count).to eq(@vehicle_factory.vehicles.count)
+      total_vehicles = 0
+      makes.each_value do |vehicle_count|
+        total_vehicles += vehicle_count
+      end
+      expect(total_vehicles).to eq(@vehicle_factory.vehicles.count)
     end
     it "counts the number of vehicles for each model" do
       @vehicle_factory.create_vehicles(@wa_ev_registrations, :ev)
-      makes_and_models_data = @vehicle_factory.retrieve_vehicle_makes_and_models
-      total_model_count = 0
-      makes_and_models_data.each_value do |make_data|
-        make_data.except(:total).each_value do |model|
-          total_model_count += model[:total]
+      @vehicle_factory.retrieve_vehicle_makes_and_models
+      makes = {}
+      @vehicle_factory.vehicle_data[:makes].each do |make, make_data|
+        makes[make] = {}
+        make_data.each_value do |model|
+          makes[make][model] = 0
+          model.each_value do |year|
+            makes[make][model] += year[:total]
+          end
         end
       end
-      expect(total_model_count).to eq(@vehicle_factory.vehicles.count)
+      total_vehicles = 0
+      makes.each_value do |make|
+        make.each_value do |model|
+          total_vehicles += model
+        end
+      end
+      expect(total_vehicles).to eq(@vehicle_factory.vehicles.count)
     end
     it "counts the number of vehicles for each model year (must be nonzero)" do
       @vehicle_factory.create_vehicles(@wa_ev_registrations, :ev)

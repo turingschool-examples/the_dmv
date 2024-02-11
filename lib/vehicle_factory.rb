@@ -60,7 +60,7 @@ class VehicleFactory
     @vehicle_data[:makes].each_value do |make|
       make.each_value do |model|
         model[:total] = 0
-        model.each_value do |model_year|
+        model.except(:total).each_value do |model_year|
           model[:total] += model_year
         end
       end
