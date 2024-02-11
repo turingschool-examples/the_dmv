@@ -22,4 +22,12 @@ class VehicleFactory
     end
     makes
   end
+
+  def count_vehicle_models
+    models = Hash.new(0)
+    @vehicles.each do |car|
+      models[car.model.to_sym] += 1
+    end
+    models
+  end
 end

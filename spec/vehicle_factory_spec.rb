@@ -39,7 +39,7 @@ RSpec.describe VehicleFactory do
     end
   end
 
-  cribe '#count_vehicle_models' do
+  describe '#count_vehicle_models' do
     it ' can count how many of each model there is' do
       factory.create_vehicles(wa_ev_registrations)
 
