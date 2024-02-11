@@ -9,12 +9,10 @@ class VehicleFactory
                 year: registration[:model_year],
                 make: registration[:make],
                 model: registration[:model],
-                engine: :ev,
-                fees: nil
+                engine: :ev
             }
 
             vehicle = Vehicle.new(car_details)
-            vehicle.remove_fees
             vehicles_array << vehicle
         end
 

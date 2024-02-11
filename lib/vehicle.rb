@@ -50,9 +50,5 @@ class Vehicle
     def electric_vehicle?
         @engine == :ev
     end
-    
-    def remove_fees
-        remove_instance_variable(:@fees)
-    end
   
 end

@@ -20,12 +20,11 @@ RSpec.describe VehicleFactory do
 
     describe '# accurately returns data' do
 
-        it 'create_vehicles method returns array' do
-            expect(@factory.create_vehicles(@wa_ev_registrations)).to be_a Array
-        end
-
-        it 'create_vehicles method returns array of vehicle objects with specified values' do
+        it 'returns array of vehicle objects with specified values' do
             new_list = @factory.create_vehicles(@wa_ev_registrations)
+
+            expect(@factory.create_vehicles(@wa_ev_registrations)).to be_a Array
+
             new_list.each do |list_item|
                 expect(list_item).to be_an_instance_of Vehicle
                 expect(list_item.engine).to eq :ev
