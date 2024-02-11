@@ -20,7 +20,6 @@ RSpec.describe VehicleFactory do
       expect(vehicles.first.engine.class).to be(Symbol)
       expect(vehicles.first.make.class).to be(String)
       expect(vehicles.first.engine).to eq :ev
-      binding.pry
     end
   end
 end
