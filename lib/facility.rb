@@ -7,14 +7,12 @@ class Facility
               :collected_fees
               
 
-    def initialize(info)
+  def initialize(info)
     @name = info[:name]
     @address = info[:address]
     @phone = info[:phone]
     @services = []
-
     @registered_vehicles = []
-
     @collected_fees = 0
   end
 
@@ -40,6 +38,6 @@ class Facility
         @collected_fees += 100
       end
     end
-        
+  end     
 
 end
