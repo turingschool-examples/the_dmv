@@ -16,6 +16,11 @@ RSpec.describe VehicleFactory do
     it 'can create vehicles' do
       vehicles = @factory.create_vehicles(@wa_ev_registrations)
       expect(vehicles).to be_an_instance_of(Array)
+      expect(vehicles.first).to be_an_instance_of(Vehicle)
+      expect(vehicles.first.engine.class).to be(Symbol)
+      expect(vehicles.first.make.class).to be(String)
+      expect(vehicles.first.engine).to eq :ev
+      binding.pry
     end
   end
 end
