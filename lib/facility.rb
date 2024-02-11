@@ -6,6 +6,7 @@ class Facility
               :registered_vehicles,
               :collected_fees
               
+              
 
   def initialize(info)
     @name = info[:name]
@@ -38,6 +39,21 @@ class Facility
         @collected_fees += 100
       end
     end
-  end     
+  end  
+
+  def administer_written_test(registrant)
+    if @services.include?('Written Test') && registrant.age >= 16 && registrant.permit? == true
+      registrant.license_data[:written] = true
+    else
+      false
+    end
+  end
+
+
+
+
+    
+
+
 
 end
