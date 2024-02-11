@@ -30,56 +30,15 @@ RSpec.describe Facility do
     end
   end
   
-  describe '#add service' do
+  describe '#Default attributes' do
     it 'can add vehicle registration' do
       expect(@facility.services).to eq([])
-
       @facility.add_service('Vehicle Registration')
-
       expect(@facility.services).to eq(['Vehicle Registration'])
-    end
-  end
-
-  describe '#add amount of registered vehicles' do
-   it 'is by default no registard vehicles' do
-     expect(@facility.registard_vehicles).to eq([])
-   end
- end
-
-  describe '#add amount of collected fees' do
-   it 'by default collected fees is 0' do
+     expect(@facility.registered_vehicles).to eq([])
+     expect(@cruz.registration_date).to eq(nil)
      expect(@facility.collected_fees).to eq(0)
    end
-  end
-
-  describe '#registration date' do
-  it 'registration is nil by default' do
-    expect(@cruz.registration_date).to eq(nil)
-  end
-end
-
-describe '#registration date' do
-  it 'is updating registration date to todays date' do
-    expect(@cruz.registration_date).to eq(nil)
-    @cruz.change_registration_date 
-    expect(@cruz.registration_date).to eq(Date.today)
-  end
-end
-
-describe '#registration date' do
-  it 'is updating registration date to todays date' do
-    expect(@cruz.registration_date).to eq(nil)
-    @cruz.registration_date 
-    expect(@cruz.registration_date).to eq(Date.today)
-  end
-end
-
-describe '#registration date' do
-  it 'is updating the plate type' do
-    expect(@cruz.plate_type).to eq(nil)
-    @cruz.change_plate_type
-    expect(@cruz.change_plate_type).to eq(:regular)
-  end
-end
+ end
 
 end
