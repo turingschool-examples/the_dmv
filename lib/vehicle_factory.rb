@@ -12,5 +12,14 @@ class VehicleFactory
       vehicle_info[:vin] = vehicle_info[:vin_1_10]
       @vehicles << Vehicle.new(vehicle_info)
     end
+    @vehicles
+  end
+
+  def count_vehicle_makes
+    makes = Hash.new(0)
+    @vehicles.each do |car|
+      makes[car.make.to_sym] += 1
+    end
+    makes
   end
 end
