@@ -30,4 +30,16 @@ class VehicleFactory
     end
     models
   end
+
+  def most_popular_make
+    most_popular_make = nil
+    highest_count = 0
+    count_vehicle_makes.each do |key, value|
+      if value > highest_count
+        most_popular_make = key
+        highest_count = value
+      end
+    end
+    "The most popular make is #{most_popular_make} with a count of #{highest_count}."
+  end
 end
