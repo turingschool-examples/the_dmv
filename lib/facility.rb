@@ -3,15 +3,16 @@ class Facility
               :address, 
               :phone, 
               :services,
-              :registard_vehicles,
+              :registered_vehicles,
               :collected_fees
+              
 
     def initialize(info)
     @name = info[:name]
     @address = info[:address]
     @phone = info[:phone]
     @services = []
-    @registard_vehicles =[]
+    @registered_vehicles = []
     @collected_fees = 0
   end
 
@@ -19,7 +20,23 @@ class Facility
     @services << service
   end
 
-  def register_vehicle(car)
-    @registard_vehicles << car
+  def register_vehicle(vehicle)
+    if !@services.include?('Vehicle Registration')
+      nil
+    else
+      vehicle.registration_date = Date.today.year
+      @registered_vehicles << vehicle
+      if vehicle.antique?
+        vehicle.plate_type = :antique
+        @collected_fees += 25
+      elsif vehicle.electric_vehicle?
+        vehicle.plate_type = :ev
+        @collected_fees += 200
+      else 
+        vehicle.plate_type = :regular
+        @collected_fees += 100
+      end
+    end
+        
   end
 end
