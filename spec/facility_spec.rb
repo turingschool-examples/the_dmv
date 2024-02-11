@@ -67,8 +67,10 @@ RSpec.describe Facility do
   expect(@camaro.registration_date).to eq(Date.today.year)
   expect(@camaro.plate_type).to eq(:antique)
   expect(@facility.collected_fees).to eq(125)
-
-  @facility.register_vehicle(@bolt)
+  
+  
+  it 'Register bolt'
+    @facility.register_vehicle(@bolt)
      expect(@facility.registered_vehicles).to eq([@cruz, @camaro, @bolt])
      expect(@bolt.registration_date).to eq(Date.today.year)
      expect(@bolt.plate_type).to eq(:ev)
@@ -76,5 +78,13 @@ RSpec.describe Facility do
    end
  end
 
+ describe'#check facility and facility_1' do
+ it 'sees what is in the first facility' do
+   @facility.add_service('Vehicle Registration')
+   @facility.register_vehicle(@cruz)
+   @facility.register_vehicle(@camaro)
+   @facility.register_vehicle(@bolt)
+   expect(@facility.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+  end
 
 end
