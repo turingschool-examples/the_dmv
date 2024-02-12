@@ -11,6 +11,7 @@ class FacilityFactory
       facility[:address] = change_to_address_key(facility)
       facility[:phone] = change_to_phone_key(facility)
       facility[:hours] = change_to_hours_key(facility)
+      facility[:holidays_closed] = change_to_holidays_key(facility)
       @facilities << Facility.new(facility)
     end
   end
@@ -56,6 +57,16 @@ class FacilityFactory
       Friday: #{facility_info[:friday_beginning_hours]} - #{facility_info[:friday_ending_hours]}".delete("\n")
     elsif facility_info.has_key?(:daysopen)
       facility_info[:daysopen]
+    else
+      'Hours unavailable.'
+    end
+  end
+
+  def change_to_holidays_key(facility_info)
+    if facility_info.has_key?(:holidaysclosed)
+      facility_info[:holidaysclosed]
+    else
+      'Holiday schedule unavailable.'
     end
   end
 end
