@@ -6,6 +6,7 @@ class Vehicle
               :make,
               :model,
               :engine,
+              :county,
               :registration_date,
               :plate_type
 
@@ -15,6 +16,7 @@ class Vehicle
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
+    @county = vehicle_details[:county]
     @registration_date = vehicle_details[:date]
     @plate_type = vehicle_details[:plate_type]
   end
