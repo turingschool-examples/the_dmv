@@ -3,6 +3,7 @@ require 'spec_helper'
 RSpec.describe VehicleFactory do
   let (:factory) { VehicleFactory.new }
   let (:wa_ev_registrations) { DmvDataService.new.wa_ev_registrations }
+  let (:ny_registrations) { DmvDataService.new.ny_registrations }
   it 'exists' do
     expect(factory).to be_an_instance_of(VehicleFactory)
   end
@@ -20,12 +21,28 @@ RSpec.describe VehicleFactory do
   end
 
   describe '#create_vehicles' do
-    it 'can parse registration data from JSON to create vehicles and change their engine to ev if it is nil' do
+    it 'can create vehicles from wa_ev_registrations and correctly match the key values' do
       factory.create_vehicles(wa_ev_registrations)
 
+      expect(factory.vehicles[0]).to be_an_instance_of(Vehicle)
+      expect(factory.vehicles[0].vin).not_to be(nil)
+      expect(factory.vehicles[0].year).not_to be(nil)
+      expect(factory.vehicles[0].make).not_to be(nil)
+      expect(factory.vehicles[0].model).not_to be(nil)
       expect(factory.vehicles[0].engine).to eq(:ev)
+      expect(factory.vehicles[0].county).not_to be(nil)
+    end
+
+    it 'can create vehicles from ny_registrations and correctly match the key values' do
+      factory.create_vehicles(ny_registrations)
 
       expect(factory.vehicles[0]).to be_an_instance_of(Vehicle)
+      expect(factory.vehicles[0].vin).not_to be(nil)
+      expect(factory.vehicles[0].year).not_to be(nil)
+      expect(factory.vehicles[0].make).not_to be(nil)
+      expect(factory.vehicles[0].model).not_to be(nil)
+      expect(factory.vehicles[0].engine).not_to be(nil)
+      expect(factory.vehicles[0].county).not_to be(nil)
     end
   end
 
@@ -79,6 +96,7 @@ RSpec.describe VehicleFactory do
 
   describe '#most_popular_county' do
     it 'can return the most popular county and its count' do
+
       factory.create_vehicles(wa_ev_registrations)
 
       most_popular_string = factory.most_popular_county
