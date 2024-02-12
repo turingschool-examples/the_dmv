@@ -24,6 +24,7 @@ RSpec.describe FacilityFactory do
       expect(factory.facilities[0].name).not_to be(nil)
       expect(factory.facilities[0].phone).not_to be(nil)
       expect(factory.facilities[0].hours).not_to be(nil)
+      expect(factory.facilities[0].holidays_closed).not_to be(nil)
     end
 
     it 'can create facilities from New York' do
@@ -36,6 +37,7 @@ RSpec.describe FacilityFactory do
       expect(factory.facilities[0].name).not_to be(nil)
       expect(factory.facilities[0].phone).not_to be(nil)
       expect(factory.facilities[0].hours).not_to be(nil)
+      expect(factory.facilities[0].holidays_closed).not_to be(nil)
     end
 
     it 'can create facilities from Missouri' do
@@ -48,6 +50,7 @@ RSpec.describe FacilityFactory do
       expect(factory.facilities[0].name).not_to be(nil)
       expect(factory.facilities[0].phone).not_to be(nil)
       expect(factory.facilities[0].hours).not_to be(nil)
+      expect(factory.facilities[0].holidays_closed).not_to be(nil)
     end
   end
 end
