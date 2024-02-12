@@ -40,4 +40,19 @@ RSpec.describe Dmv do
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
+
+  describe '#create_facilities' do
+    before(:each) do
+      @co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+    end
+
+    it 'can create facilities from CO DMV data' do
+      facilities = @dmv.create_facilities(@co_dmv_office_locations)
+      expect(facilities).to be_an_instance_of(Array)
+      # expect(facilities.first).to be_an_instance_of(facilities
+      # expect(facilities.first.engine.class).to be(Symbol)
+      # expect(facilities.first.make.class).to be(String)
+      # expect(facilities.first.engine).to eq :ev
+    end
+  end
 end

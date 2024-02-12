@@ -14,4 +14,8 @@ class Dmv
       facility.services.include?(service)
     end
   end
+
+  def create_facilities(data_source)
+    @facilities << data_source
+  end
 end
