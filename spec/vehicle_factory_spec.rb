@@ -58,4 +58,12 @@ RSpec.describe VehicleFactory do
       expect(most_popular_string).to be_an_instance_of(String)
     end
   end
+
+  describe '#count_model_by_year' do
+    it 'can count the number of models for each year' do
+      factory.create_vehicles(wa_ev_registrations)
+
+      expect(factory.count_model_by_year("model s", 2015)).to be_an_instance_of(Integer)
+    end
+  end
 end
