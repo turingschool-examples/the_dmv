@@ -6,7 +6,8 @@ class Vehicle
               :make,
               :model,
               :engine,
-              :plate_type
+              :plate_type,
+              :registration_date
 
   def initialize(vehicle_details)
     @vin = vehicle_details[:vin]
@@ -15,6 +16,7 @@ class Vehicle
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
     @plate_type = vehicle_details[:plate_type]
+    @registration_date = nil
   end
 
   def antique?
@@ -23,5 +25,20 @@ class Vehicle
 
   def electric_vehicle?
     @engine == :ev
+  end
+
+  def update_registration_date
+    @registration_date = Date.today
+  end
+
+  def assign_plate
+    if antique?
+      @plate_type = :antique
+    elsif @engine == :ev
+      @plate_type = :ev
+    else
+      @plate_type = :regular
+    end
+
   end
 end
