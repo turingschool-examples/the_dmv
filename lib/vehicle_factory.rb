@@ -58,6 +58,18 @@ class VehicleFactory
     end
     counties
   end
+
+  def most_popular_county
+    most_popular_county = nil
+    highest_count = 0
+    count_vehicle_counties.each do |key, value|
+      if value > highest_count
+        most_popular_county = key
+        highest_count = value
+      end
+    end
+    "The most popular county is #{most_popular_county} with a count of #{highest_count} vehicles."
+  end
 end
 
 
