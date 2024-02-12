@@ -18,11 +18,11 @@ class FacilityFactory
 
   def change_to_address_key(facility_info)
     if facility_info.has_key?(:address_li)
-      facility_info[:address_li]
+      [facility_info[:address_li], ' ', facility_info[:address__1], ' ', facility_info[:city], ', ', facility_info[:state], ' ', facility_info[:zip]].join
     elsif facility_info.has_key?(:street_address_line_1)
-      facility_info[:street_address_line_1]
+      [facility_info[:street_address_line_1], ' ', facility_info[:city], ', ', facility_info[:state], ' ', facility_info[:zip_code]].join
     elsif facility_info.has_key?(:address1)
-      facility_info[:address1]
+      [facility_info[:address1], ' ', facility_info[:city], ', ', facility_info[:state], ' ', facility_info[:zipcode]].join
     end
   end
 
