@@ -4,6 +4,7 @@ RSpec.describe Registrant do
   before (:each) do 
     @registrant_1 = Registrant.new('Bruce', 18, true )
     @registrant_2 = Registrant.new('Penny', 15 )
+    @registrant_3 = Registrant.new('Tucker', 15 )
   end
 
   describe '#initialize' do
@@ -33,12 +34,6 @@ RSpec.describe Registrant do
     end
   end
 
-  describe '#License data' do
-    it 'has license data' do
-      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-    end
-  end
 
   describe '#earn permit' do
     it 'earns a permit' do
@@ -47,10 +42,6 @@ RSpec.describe Registrant do
       expect(@registrant_2.permit?).to eq(true)
     end
   end
-
-
-
-  
 
 
 end

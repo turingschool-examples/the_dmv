@@ -11,11 +11,6 @@ class Registrant
   end
 
   def permit?
-    # if @permit == true 
-    #   true
-    # else 
-    #   false
-    # end
     @permit
   end
 
