@@ -66,4 +66,14 @@ RSpec.describe VehicleFactory do
       expect(factory.count_model_by_year("model s", 2015)).to be_an_instance_of(Integer)
     end
   end
+
+  describe '#count_vehicle_counties' do
+    it 'can count the number of vehicles per county' do
+      factory.create_vehicles(wa_ev_registrations)
+
+      county_counts = factory.count_vehicle_counties
+
+      expect(county_counts['King']).to be_an_instance_of(Integer)
+    end
+  end
 end
