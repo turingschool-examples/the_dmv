@@ -47,12 +47,12 @@ RSpec.describe Dmv do
     end
 
     it 'can combine address data into a string' do
-      formatted_address = @dmv.format_address(@co_dmv_office_locations)
-
+      formatted_address = @dmv.format_address(@co_dmv_office_locations.first)
+      
       expect(formatted_address.class).to be (String)
     end 
 
-    xit 'can create facilities from CO DMV data' do
+    it 'can create facilities from CO DMV data' do
       facilities = @dmv.create_facilities(@co_dmv_office_locations)
 
       expect(facilities).to be_an_instance_of(Array)

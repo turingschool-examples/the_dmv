@@ -15,16 +15,23 @@ class Dmv
     end
   end
 
+  def format_address(dmv_site)
+    if dmv_site[:address__1].nil?
+      dmv_site[:address_li] + " " + dmv_site[:city] + " " + dmv_site[:state] + " " + dmv_site[:zip]
+    else 
+      dmv_site[:address_li] + " " + dmv_site[:address__1] + " " + dmv_site[:city] + " " + dmv_site[:state] + " " + dmv_site[:zip]
+    end
+  end
+
   def create_facilities(dmv_location_data)
     #go into the dmv_location_data array
     #with each dmv_site element (hash of location info)
     #reassign the various key/value pairs
     #create a new facility object with that data as the parameter)
     dmv_location_data.map do |dmv_site|
-
       dmv_facility_details = {
           name: dmv_site[:dmv_office], 
-          address: dmv_site[:address_li] + " " + dmv_site[:address__1] + " " + dmv_site[:city] + dmv_site[:state] + " " + dmv_site[:zip],
+          address: format_address(dmv_site),
           phone: dmv_site[:phone]
           # services: ... not sure how I can transfer in this data since the terms don't match exactly. Also is it needed?
         }
