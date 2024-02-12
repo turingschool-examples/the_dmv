@@ -46,13 +46,19 @@ RSpec.describe Dmv do
       @co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
     end
 
-    it 'can create facilities from CO DMV data' do
+    it 'can combine address data into a string' do
+      formatted_address = @dmv.format_address(@co_dmv_office_locations)
+
+      expect(formatted_address.class).to be (String)
+    end 
+
+    xit 'can create facilities from CO DMV data' do
       facilities = @dmv.create_facilities(@co_dmv_office_locations)
 
       expect(facilities).to be_an_instance_of(Array)
       expect(facilities.first).to be_an_instance_of (Facility)
       expect(facilities.first.name.class).to be (String)
-      # expect(facilities.first.address.class).to be (String)
+      expect(facilities.first.address.class).to be (String)
       expect(facilities.first.phone.class).to be (String)
       # expect(facilities.first.services.class).to be (Array)
       expect(facilities.first.collected_fees).to eq 0

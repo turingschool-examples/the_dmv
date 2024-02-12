@@ -21,11 +21,13 @@ class Dmv
     #reassign the various key/value pairs
     #create a new facility object with that data as the parameter)
     dmv_location_data.map do |dmv_site|
+
       dmv_facility_details = {
           name: dmv_site[:dmv_office], 
-          # address: dmv_site[:address_li] + dmv_site[:address__1] + dmv_site[:city] + dmv_site[:state] + dmv_site[:zip],
-          phone: dmv_site[:phone]}
-          # services: dmv_site[:model]
+          address: dmv_site[:address_li] + " " + dmv_site[:address__1] + " " + dmv_site[:city] + dmv_site[:state] + " " + dmv_site[:zip],
+          phone: dmv_site[:phone]
+          # services: ... not sure how I can transfer in this data since the terms don't match exactly. Also is it needed?
+        }
 
       Facility.new(dmv_facility_details)
     end
