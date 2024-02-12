@@ -76,4 +76,14 @@ RSpec.describe VehicleFactory do
       expect(county_counts['King']).to be_an_instance_of(Integer)
     end
   end
+
+  describe '#most_popular_county' do
+    it 'can return the most popular county and its count' do
+      factory.create_vehicles(wa_ev_registrations)
+
+      most_popular_string = factory.most_popular_county
+
+      expect(most_popular_string).to be_an_instance_of(String)
+    end
+  end
 end
