@@ -50,6 +50,14 @@ class VehicleFactory
     end
     number
   end
+
+  def count_vehicle_counties
+    counties = Hash.new(0)
+    @vehicles.each do |vehicle|
+      counties[vehicle.county] += 1
+    end
+    counties
+  end
 end
 
 
