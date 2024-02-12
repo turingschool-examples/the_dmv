@@ -48,11 +48,15 @@ RSpec.describe Dmv do
 
     it 'can create facilities from CO DMV data' do
       facilities = @dmv.create_facilities(@co_dmv_office_locations)
+
       expect(facilities).to be_an_instance_of(Array)
-      # expect(facilities.first).to be_an_instance_of(facilities
-      # expect(facilities.first.engine.class).to be(Symbol)
-      # expect(facilities.first.make.class).to be(String)
-      # expect(facilities.first.engine).to eq :ev
+      expect(facilities.first).to be_an_instance_of (Facility)
+      expect(facilities.first.name.class).to be (String)
+      # expect(facilities.first.address.class).to be (String)
+      expect(facilities.first.phone.class).to be (String)
+      # expect(facilities.first.services.class).to be (Array)
+      expect(facilities.first.collected_fees).to eq 0
+      expect(facilities.first.services).to eq []
     end
   end
 end
