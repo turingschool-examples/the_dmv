@@ -40,4 +40,54 @@ RSpec.describe Dmv do
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
+
+  describe '#create_facilities' do
+    before(:each) do
+      @co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
+      @ny_dmv_office_locations = DmvDataService.new.ny_dmv_office_locations
+      @mo_dmv_office_locations = DmvDataService.new.mo_dmv_office_locations
+    end
+    
+    it 'can combine address data into a string' do
+      formatted_address = @dmv.format_address(@co_dmv_office_locations.first)
+      
+      expect(formatted_address.class).to be (String)
+    end
+
+    it 'can create facilities from CO DMV data' do
+      co_facilities = @dmv.create_facilities(@co_dmv_office_locations)
+
+      expect(co_facilities).to be_an_instance_of(Array)
+      expect(co_facilities.first).to be_an_instance_of (Facility)
+      expect(co_facilities.first.name.class).to be (String)
+      expect(co_facilities.first.address.class).to be (String)
+      expect(co_facilities.first.phone.class).to be (String)
+      expect(co_facilities.first.collected_fees).to eq 0
+      expect(co_facilities.first.services).to eq []
+    end
+
+    it 'can create facilities from NY DMV data' do
+      ny_facilities = @dmv.create_facilities(@ny_dmv_office_locations)
+
+      expect(ny_facilities).to be_an_instance_of(Array)
+      expect(ny_facilities.first).to be_an_instance_of (Facility)
+      expect(ny_facilities.first.name.class).to be (String)
+      expect(ny_facilities.first.address.class).to be (String)
+      expect(ny_facilities.first.phone.class).to be (String)
+      expect(ny_facilities.first.collected_fees).to eq 0
+      expect(ny_facilities.first.services).to eq []
+    end
+
+    it 'can create facilities from MO DMV data' do
+      mo_facilities = @dmv.create_facilities(@mo_dmv_office_locations)
+
+      expect(mo_facilities).to be_an_instance_of(Array)
+      expect(mo_facilities.first).to be_an_instance_of (Facility)
+      expect(mo_facilities.first.name.class).to be (String)
+      expect(mo_facilities.first.address.class).to be (String)
+      expect(mo_facilities.first.phone.class).to be (String)
+      expect(mo_facilities.first.collected_fees).to eq 0
+      expect(mo_facilities.first.services).to eq []
+    end
+  end
 end
