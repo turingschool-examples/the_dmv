@@ -28,10 +28,10 @@ class Dmv
   def create_facilities(dmv_location_data)
     dmv_location_data.map do |dmv_site|
       dmv_facility_details = {
-          name: dmv_site[:dmv_office] || dmv_site[:office_name] || dmv_site[:name], 
-          address: format_address(dmv_site),
-          phone: dmv_site[:phone] || dmv_site[:public_phone_number]
-        }
+        name: dmv_site[:dmv_office] || dmv_site[:office_name] || dmv_site[:name], 
+        address: format_address(dmv_site),
+        phone: dmv_site[:phone] || dmv_site[:public_phone_number]
+      }
 
       Facility.new(dmv_facility_details)
     end
