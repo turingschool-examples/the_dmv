@@ -25,4 +25,30 @@ class DmvDataService
   def mo_dmv_office_locations
     @mo_dmv_office_locations ||= load_data("https://data.mo.gov/resource/835g-7keg.json")
   end
+
+  def ny_vehicle_registrations # rubocop:disable Metrics/MethodLength
+    @ny_registrations ||= load_data("https://data.ny.gov/resource/w4pv-hbkt.json")
+    ny_vehicle_registrations = []
+    @ny_registrations.each do |registration|
+      next unless registration[:record_type] == "VEH"
+
+      vehicle = {
+        vin_1_10: registration[:vin], # rubocop:disable Naming/VariableNumber
+        model_year: registration[:model_year],
+        make: registration[:make],
+        model: "not specified",
+        engine: registration[:fuel_type],
+        transaction_date: registration[:reg_valid_date],
+        plate_type: nil,
+        county: registration[:county]
+      }
+      vehicle[:engine] = if vehicle[:engine] == "ELECTRIC"
+                           :ev
+                         else
+                           :regular
+                         end
+      ny_vehicle_registrations.push(vehicle)
+    end
+    ny_vehicle_registrations
+  end
 end
