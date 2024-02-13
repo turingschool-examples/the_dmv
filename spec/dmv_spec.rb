@@ -68,6 +68,16 @@ RSpec.describe Dmv do
       expect(mo_name).to be_a String
     end
 
+    it 'can format phone data from various data sources' do
+      co_phone = @dmv.format_phone(@co_dmv_office_locations.first)
+      ny_phone = @dmv.format_phone(@ny_dmv_office_locations.first)
+      mo_phone = @dmv.format_phone(@mo_dmv_office_locations.first)
+      
+      expect(co_phone).to be_a String
+      expect(ny_phone).to be_a String
+      expect(mo_phone).to be_a String
+    end
+
     it 'can create facilities from CO DMV data' do
       co_facilities = @dmv.create_facilities(@co_dmv_office_locations)
 
