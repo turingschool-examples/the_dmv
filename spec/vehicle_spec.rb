@@ -6,6 +6,7 @@ RSpec.describe Vehicle do
   let (:cruz) { Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice}) }
   let (:bolt) { Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev}) }
   let (:camaro) { Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice}) }
+  
   describe '#initialize' do
     it 'can initialize' do
       expect(cruz).to be_an_instance_of(Vehicle)
@@ -35,26 +36,35 @@ RSpec.describe Vehicle do
   end
 
   describe 'vehicle registration' do
-    it 'can update its registration date to today' do
-      expect(cruz.registration_date).to eq(nil)
+    describe '#update_registration_date' do
+      it 'can update its registration date to today' do
+        expect(cruz.registration_date).to eq(nil)
 
-      cruz.update_registration_date
+        cruz.update_registration_date
 
-      expect(cruz.registration_date).to eq(Date.today)
+        expect(cruz.registration_date).to eq(Date.today)
+      end
     end
 
-    it 'can update its plate type' do
-      expect(cruz.plate_type).to eq(nil)
-      expect(bolt.plate_type).to eq(nil)
-      expect(camaro.plate_type).to eq(nil)
+    describe '#update_plate_type' do
+      it 'can update its plate type to antique, ev or regular' do
+        expect(cruz.plate_type).to eq(nil)
+        expect(bolt.plate_type).to eq(nil)
+        expect(camaro.plate_type).to eq(nil)
 
-      cruz.update_plate_type
-      bolt.update_plate_type
-      camaro.update_plate_type
+        expect(cruz.antique? || cruz.electric_vehicle?).to be false
+        cruz.update_plate_type
 
-      expect(cruz.plate_type).to eq(:regular)
-      expect(bolt.plate_type).to eq(:ev)
-      expect(camaro.plate_type).to eq(:antique)
+        expect(bolt.electric_vehicle?).to be true
+        bolt.update_plate_type
+
+        expect(camaro.antique?).to be true
+        camaro.update_plate_type
+
+        expect(cruz.plate_type).to eq(:regular)
+        expect(bolt.plate_type).to eq(:ev)
+        expect(camaro.plate_type).to eq(:antique)
+      end
     end
 
     it 'can check if it is registered' do
