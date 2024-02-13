@@ -152,19 +152,34 @@ RSpec.describe Facility do
   end
 
   describe '#register_vehicle' do
+    it 'cannot register a vehicle if it does not have the service' do
+      expect(facility_1.services).to be_empty
+
+      facility_1.register_vehicle(cruz)
+
+      expect(cruz.registered?).to be false
+    end
+
     it 'can register vehicles' do
+      facility_1.add_service('Vehicle Registration')
+
       facility_1.register_vehicle(cruz)
 
       expect(cruz.registered?).to be true
     end
 
     it 'will add the registered vehicle to registered_vehicles' do
+      facility_1.add_service('Vehicle Registration')
+
+
       facility_1.register_vehicle(cruz)
 
       expect(facility_1.registered_vehicles).to eq([cruz])
     end
 
     it 'will change the vehicles registration date to todays date' do
+      facility_1.add_service('Vehicle Registration')
+
       expect(cruz.registration_date).to eq(nil)
 
       facility_1.register_vehicle(cruz)
@@ -173,6 +188,8 @@ RSpec.describe Facility do
     end
 
     it 'can update plate type when registering the vehicle based on the vehicles year made' do
+      facility_1.add_service('Vehicle Registration')
+
       expect(cruz.plate_type).to eq(nil)
       expect(bolt.plate_type).to eq(nil)
       expect(camaro.plate_type).to eq(nil)
@@ -187,6 +204,9 @@ RSpec.describe Facility do
     end
 
     it 'cannot register a vehicle that is already registered' do
+      facility_1.add_service('Vehicle Registration')
+      facility_2.add_service('Vehicle Registration')
+
       expect(facility_1.registered_vehicles).to be_empty
       expect(facility_2.registered_vehicles).to be_empty
 
@@ -228,6 +248,8 @@ RSpec.describe Facility do
     end
 
     it 'collects the appropriate fees when registering vehicles' do
+      facility_1.add_service('Vehicle Registration')
+
       expect(facility_1.collected_fees).to eq(0)
 
       facility_1.register_vehicle(cruz)
