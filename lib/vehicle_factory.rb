@@ -7,7 +7,6 @@ class VehicleFactory
       vehicle_info[:year] = registration[:model_year].to_i
       vehicle_info[:make] = registration[:make]
       vehicle_info[:model] = registration[:model]
-# require 'pry'; binding.pry
       vehicle_info[:registration_date] = registration[:transaction_date]
 
       Vehicle.new(vehicle_info)
