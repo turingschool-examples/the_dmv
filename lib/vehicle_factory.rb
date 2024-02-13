@@ -7,13 +7,16 @@ class VehicleFactory
 
   def create_vehicles(data_service)
     data_service.each do |vehicle_info|
-      vehicle_info[:engine] = change_to_engine_key(vehicle_info)
-      vehicle_info[:year] = vehicle_info[:model_year]
-      vehicle_info[:vin] = change_to_vin_key(vehicle_info)
-      vehicle_info[:model] = change_to_model_key(vehicle_info)
-      @vehicles << Vehicle.new(vehicle_info)
+      formatted_vehicle_info = {
+        vin: change_to_vin_key(vehicle_info),
+        year: vehicle_info[:model_year],
+        make: vehicle_info[:make],
+        model: change_to_model_key(vehicle_info),
+        engine: change_to_engine_key(vehicle_info),
+        county: vehicle_info[:county]
+        }
+        @vehicles << Vehicle.new(formatted_vehicle_info)
     end
-    @vehicles
   end
 
   def change_to_engine_key(vehicle_info)
