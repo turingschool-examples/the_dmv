@@ -3,7 +3,7 @@ require "./spec/spec_helper"
 # Documentation for class Facility
 class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles,
-              :collected_fees
+              :collected_fees, :hours
 
   def initialize(info)
     @name = info[:name]
@@ -12,6 +12,7 @@ class Facility
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
+    @hours = info[:hours]
   end
 
   def add_service(service)

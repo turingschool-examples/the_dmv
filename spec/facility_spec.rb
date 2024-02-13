@@ -41,24 +41,36 @@ RSpec.describe Facility do # rubocop:disable Metrics/BlockLength
       permit: true
     })
   end
-  before(:all) do
+  before(:all) do # rubocop:disable Metrics/BlockLength
     @co_office = DmvDataService.new.co_dmv_office_locations[0]
     @ny_office = DmvDataService.new.ny_dmv_office_locations[0]
     @mo_office = DmvDataService.new.mo_dmv_office_locations[0]
+
+    p @mo_office
+
     @co_facility = Facility.new({
       name: @co_office[:dmv_office],
       address: @co_office[:address_li],
-      phone: @co_office[:phone]
+      phone: @co_office[:phone],
+      hours: @co_office[:hours]
     })
     @ny_facility = Facility.new({
       name: @ny_office[:office_name],
       address: @ny_office[:street_address_line_1], # rubocop:disable Naming/VariableNumber
-      phone: @ny_office[:public_phone_number]
+      phone: @ny_office[:public_phone_number],
+      hours: {
+        monday: "#{@ny_office[:monday_beginning_hours]} - #{@ny_office[:monday_ending_hours]}",
+        tuesday: "#{@ny_office[:tuesday_beginning_hours]} - #{@ny_office[:tuesday_ending_hours]}",
+        wednesday: "#{@ny_office[:wednesday_beginning_hours]} - #{@ny_office[:wednesday_ending_hours]}",
+        thursday: "#{@ny_office[:thursday_beginning_hours]} - #{@ny_office[:thursday_ending_hours]}",
+        friday: "#{@ny_office[:friday_beginning_hours]} - #{@ny_office[:friday_ending_hours]}"
+      }
     })
     @mo_facility = Facility.new({
       name: @mo_office[:name],
       address: @mo_office[:address1],
-      phone: @mo_office[:phone]
+      phone: @mo_office[:phone],
+      hours: "This office is closed until further notice."
     })
   end
   describe "#initialize" do
@@ -188,6 +200,14 @@ RSpec.describe Facility do # rubocop:disable Metrics/BlockLength
       expect(@mo_facility.name.nil?).to eq(false)
       expect(@mo_facility.address.nil?).to eq(false)
       expect(@mo_facility.phone.nil?).to eq(false)
+    end
+  end
+
+  describe "#gather more helpful attributes" do
+    it "can get the daily hours for each facility" do
+      expect(@co_facility.hours.nil?).to eq(false)
+      expect(@ny_facility.hours.nil?).to eq(false)
+      expect(@mo_facility.hours.nil?).to eq(false)
     end
   end
 end
