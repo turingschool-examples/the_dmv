@@ -72,6 +72,7 @@ RSpec.describe Vehicle do
     describe '#registered?' do
       it 'can check if it is registered' do
         expect(cruz.registered?).to be false
+        facility_1.add_service('Vehicle Registration')
 
         facility_1.register_vehicle(cruz)
 
