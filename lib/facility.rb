@@ -16,8 +16,6 @@ class Facility
     @fees = {antique: 25, ev: 200, regular: 100} 
   end
 
-  #helper method I couldnt figure out
-
   def add_service(service)
     @services << service
   end
