@@ -10,7 +10,7 @@ class Facility
 
   def initialize(info)
     @name = info[:name] || info[:dmv_office] || info[:office_name] 
-    @address = info[:address] || info[:address_li] || info[:street_address_line_1]
+    @address = info[:address] || info[:address_li] || info[:street_address_line_1] || info[:address1]
     @phone = info[:phone] || info[:public_phone_number] 
     @services = []
     @registered_vehicles = []
