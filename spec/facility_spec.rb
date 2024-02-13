@@ -49,4 +49,27 @@ RSpec.describe Facility do
       expect(@new_york_facilities.collected_fees).to eq(100)
     end
   end
+
+  describe '#register vehicle' do
+    it 'contains registery of vehicles' do
+      expect(@@new_york_facilities.registered_vehicles).to eq([])
+    end
+
+    it 'collects fees' do
+      expect(@@new_york_facilities.collected_fees).to eq(0)
+    end
+
+    it 'can register vehicles' do
+      day = Date.today
+     
+      @@new_york_facilities.add_service('Vehicle Registration')
+      expect(@@new_york_facilities.register_vehicle(@cruz)).to eq([@cruz])
+      expect(@cruz.registration_date).to eq(day)
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@@new_york_facilities.registered_vehicles).to eq([@cruz])
+      expect(@@new_york_facilities.collected_fees).to eq(100)
+    end
+
+  end
+
 end
