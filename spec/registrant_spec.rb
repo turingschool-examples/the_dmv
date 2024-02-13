@@ -6,7 +6,7 @@ RSpec.describe Registrant do
   let(:registrant_3) { Registrant.new('Tucker', 15) }
   let (:facility_1) { Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'}) }
   let (:facility_2) { Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'}) }
-  describe 'initialize' do
+  describe '#initialize' do
     it 'can initialize' do
       expect(registrant_1).to be_an_instance_of(Registrant)
     end
@@ -36,7 +36,7 @@ RSpec.describe Registrant do
     end
   end
 
-  describe 'earning a permit' do
+  describe '#earn_permit' do
     it 'can earn a permit' do
       registrant_2.earn_permit
 
@@ -44,7 +44,7 @@ RSpec.describe Registrant do
     end
   end
 
-  describe 'license data' do
+  describe 'take_written' do
     it 'can take (and pass) the written test only if they are 16 and have their permit; returns false otherwise' do
       expect(registrant_1.license_data[:written]).to be false
       expect(registrant_2.license_data[:written]).to be false
@@ -64,7 +64,9 @@ RSpec.describe Registrant do
       expect(registrant_2.license_data[:written]).to be false
       expect(registrant_3.license_data[:written]).to be false
     end
+  end
 
+  describe '#take_road' do
     it 'can take (and pass) the road test only if they have passed written; returns false otherwise' do
       expect(registrant_1.license_data[:written]).to be false
       expect(registrant_1.license_data[:license]).to be false
@@ -81,7 +83,9 @@ RSpec.describe Registrant do
 
       expect(registrant_1.license_data[:license]).to be true
     end
+  end
 
+  describe '#written?' do
     it 'can check if the registrant has taken their written' do
       expect(registrant_1.written?).to be false
 
@@ -89,7 +93,9 @@ RSpec.describe Registrant do
 
       expect(registrant_1.written?).to be true
     end
+  end
 
+  describe '#license?' do
     it 'can check if the registrant has their license' do
       expect(registrant_1.license?).to be false
 
@@ -98,7 +104,9 @@ RSpec.describe Registrant do
 
       expect(registrant_1.license?).to be true
     end
+  end
 
+  describe 'renew_license' do
     it 'can renew drivers license if it has a license; returns false otherwise' do
       expect(registrant_1.license_data[:license]).to be false
       expect(registrant_1.license_data[:renewed]).to be false
