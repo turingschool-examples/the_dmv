@@ -1,7 +1,7 @@
 class Facility
-  attr_reader :name, 
-              :address, 
-              :phone, 
+  attr_reader :dmv_name, 
+              :dmv_address, 
+              :dmv_phone, 
               :services,
               :registered_vehicles,
               :collected_fees
@@ -10,7 +10,6 @@ class Facility
     @dmv_name = dmv_name
     @dmv_address = dmv_address
     @dmv_phone = dmv_phone
-    require 'pry'; binding.pry
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
@@ -21,13 +20,13 @@ class Facility
   #helper method
   def create_facilities_api_data(hash_data)
       @dmv_name = hash_data.map do |dmv|
-      dmv[:name] = dmv[:office_name] || dmv[:dmv_office]
+      dmv[:name] = (dmv[:office_name] || dmv[:dmv_office]) || dmv[:name]
       end
       @dmv_address = hash_data.map do |dmv|
-      dmv[:address] = (dmv[:street_address_line_1] || dmv[:address_li])
+      dmv[:address] = (dmv[:street_address_line_1] || dmv[:address_li]) || dmv[:address1]
       end
       @dmv_phone = hash_data.map do |dmv|
-      dmv[:phone] = dmv[:public_phone_number] || dmv[:phone]
+      dmv[:phone] = (dmv[:public_phone_number] || dmv[:phone])
       end
   end
 
