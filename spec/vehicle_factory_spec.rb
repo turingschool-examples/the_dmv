@@ -1,6 +1,4 @@
-require './lib/vehicle'
-require './lib/vehicle_factory'
-require './lib/dmv_data_service'
+require './spec/spec_helper'
 
 RSpec.describe VehicleFactory do
   it "can create vehicles from registrations" do
@@ -10,10 +8,10 @@ RSpec.describe VehicleFactory do
     single_vehicle = all_vehicles.first
 
     expect(single_vehicle.vin).to eq("5YJSA1H2XF")
-    expect(single_vehicle.vin).to eq("5YJSA1H2XF")
-    expect(single_vehicle.vin).to eq("5YJSA1H2XF")
-    expect(single_vehicle.vin).to eq("5YJSA1H2XF")
-    expect(single_vehicle.vin).to eq("5YJSA1H2XF")
-    expect(single_vehicle.vin).to eq("5YJSA1H2XF")
+    expect(single_vehicle.year).to eq(2015)
+    expect(single_vehicle.make).to eq("TESLA")
+    expect(single_vehicle.model).to eq("Model S")
+    expect(single_vehicle.plate_type).to eq(:ev)
+    expect(single_vehicle.registration_date).to eq("2020-05-27T00:00:00.000")
   end
 end
