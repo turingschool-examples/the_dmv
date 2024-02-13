@@ -5,8 +5,6 @@ class Facility
               :services,
               :registered_vehicles,
               :collected_fees
-              
-              
 
   def initialize(info)
     @name = info[:name] || info[:dmv_office] || info[:office_name] 
@@ -20,7 +18,6 @@ class Facility
   def add_service(service)
     @services << service
   end
-
 
   def register_vehicle(vehicle)
     if !@services.include?('Vehicle Registration')
@@ -58,19 +55,10 @@ class Facility
   end
 
   def renew_drivers_license(registrant)
-     if @services.include?('Renew License') && registrant.license_data[:written] = true && registrant.license_data[:license] = true && registrant.age >= 16
+    if @services.include?('Renew License') && registrant.license_data[:written] = true && registrant.license_data[:license] = true && registrant.age >= 16
       registrant.license_data[:renewed] = true
-     else
+    else
       false
-     end
-
+    end
   end
-
-
-
-
-    
-
-
-
 end
