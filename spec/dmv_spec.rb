@@ -54,27 +54,27 @@ RSpec.describe Dmv do
     end 
 
     it 'can create facilities from CO DMV data' do
-      facilities = @dmv.create_facilities(@co_dmv_office_locations)
+      co_facilities = @dmv.create_facilities(@co_dmv_office_locations)
 
-      expect(facilities).to be_an_instance_of(Array)
-      expect(facilities.first).to be_an_instance_of (Facility)
-      expect(facilities.first.name.class).to be (String)
-      expect(facilities.first.address.class).to be (String)
-      expect(facilities.first.phone.class).to be (String)
-      expect(facilities.first.collected_fees).to eq 0
-      expect(facilities.first.services).to eq []
+      expect(co_facilities).to be_an_instance_of(Array)
+      expect(co_facilities.first).to be_an_instance_of (Facility)
+      expect(co_facilities.first.name.class).to be (String)
+      expect(co_facilities.first.address.class).to be (String)
+      expect(co_facilities.first.phone.class).to be (String)
+      expect(co_facilities.first.collected_fees).to eq 0
+      expect(co_facilities.first.services).to eq []
     end
 
     it 'can create facilities from NY DMV data' do
-      facilities = @dmv.create_facilities(@ny_dmv_office_locations)
+      ny_facilities = @dmv.create_facilities(@ny_dmv_office_locations)
 
-      expect(facilities).to be_an_instance_of(Array)
-      expect(facilities.first).to be_an_instance_of (Facility)
-      expect(facilities.first.name.class).to be (String)
-      expect(facilities.first.address.class).to be (String)
-      expect(facilities.first.phone.class).to be (String)
-      expect(facilities.first.collected_fees).to eq 0
-      expect(facilities.first.services).to eq []
+      expect(ny_facilities).to be_an_instance_of(Array)
+      expect(ny_facilities.first).to be_an_instance_of (Facility)
+      expect(ny_facilities.first.name.class).to be (String)
+      expect(ny_facilities.first.address.class).to be (String)
+      expect(ny_facilities.first.phone.class).to be (String)
+      expect(ny_facilities.first.collected_fees).to eq 0
+      expect(ny_facilities.first.services).to eq []
     end
   end
 end
