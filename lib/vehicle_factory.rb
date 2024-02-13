@@ -7,12 +7,41 @@ class VehicleFactory
 
   def create_vehicles(data_service)
     data_service.each do |vehicle_info|
-      vehicle_info[:engine] = :ev if vehicle_info[:engine] == nil
-      vehicle_info[:year] = vehicle_info[:model_year]
-      vehicle_info[:vin] = vehicle_info[:vin_1_10]
-      @vehicles << Vehicle.new(vehicle_info)
+        vehicle_info[:engine] = change_to_engine_key(vehicle_info)
+        vehicle_info[:year] = vehicle_info[:model_year]
+        vehicle_info[:vin] = change_to_vin_key(vehicle_info)
+        vehicle_info[:model] = change_to_model_key(vehicle_info)
+        @vehicles << Vehicle.new(vehicle_info)
     end
     @vehicles
+  end
+
+  def change_to_engine_key(vehicle_info)
+    if vehicle_info.has_key?(:electric_vehicle_type)
+      :ev
+    elsif vehicle_info[:fuel_type] == "GAS"
+      :gas
+    else
+      'Unavailable.'
+    end
+  end
+
+  def change_to_vin_key(vehicle_info)
+    if vehicle_info.has_key?(:vin)
+      vehicle_info[:vin]
+    elsif vehicle_info.has_key?(:vin_1_10)
+      vehicle_info[:vin_1_10]
+    else
+      'Unavailable.'
+    end
+  end
+
+  def change_to_model_key(vehicle_info)
+    if vehicle_info.has_key?(:model)
+      vehicle_info[:model]
+    else
+      'Unavailable.'
+    end
   end
 
   def count_vehicle_makes
@@ -71,19 +100,3 @@ class VehicleFactory
     "The most popular county is #{most_popular_county} with a count of #{highest_count} vehicles."
   end
 end
-
-
-
-  # I really wanted to make a hash where all the makes are keys with a value of all the models which in turn were hashes with values of each year which were hashes with a value of the count.
-  # def group_by_make
-  #   @vehicles.group_by do |vehicle|
-  #     vehicle.make
-  #   end
-  # end
-
-  # def group_by_make_model
-  #   by_make_model = {}
-  #   by_make_model = group_by_make.each do |make, vehicle|
-  #     vehicle.model
-  #   end
-  # end
