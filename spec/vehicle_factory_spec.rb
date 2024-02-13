@@ -13,6 +13,4 @@ RSpec.describe VehicleFactory do
       expect(vehicles).to be_a(Array)
     end
   end
-
-
 end
