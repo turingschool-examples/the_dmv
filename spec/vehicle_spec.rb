@@ -15,7 +15,9 @@ RSpec.describe Vehicle do
       expect(cruz.make).to eq('Chevrolet')
       expect(cruz.model).to eq('Cruz')
       expect(cruz.engine).to eq(:ice)
+      expect(cruz.county).to eq(nil)
       expect(cruz.registration_date).to eq(nil)
+      expect(cruz.plate_type).to eq(nil)
     end
   end
 
@@ -67,12 +69,14 @@ RSpec.describe Vehicle do
       end
     end
 
-    it 'can check if it is registered' do
-      expect(cruz.registered?).to be false
+    describe '#registered?' do
+      it 'can check if it is registered' do
+        expect(cruz.registered?).to be false
 
-      facility_1.register_vehicle(cruz)
+        facility_1.register_vehicle(cruz)
 
-      expect(cruz.registered?).to be true
+        expect(cruz.registered?).to be true
+      end
     end
   end
 end

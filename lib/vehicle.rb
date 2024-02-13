@@ -34,7 +34,7 @@ class Vehicle
   end
 
   def update_plate_type
-    @plate_type = 
+    @plate_type =
     case
     when antique?
       :antique
