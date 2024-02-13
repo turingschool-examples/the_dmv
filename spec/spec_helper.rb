@@ -9,6 +9,7 @@ require "./lib/registrant"
 require "./lib/vehicle_factory"
 require "date"
 require "rspec"
+require "json"
 RSpec.configure do |config|
   config.formatter = :documentation
 end

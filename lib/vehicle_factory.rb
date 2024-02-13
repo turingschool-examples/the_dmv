@@ -20,7 +20,8 @@ class VehicleFactory
       model: vehicle_info[:model],
       engine: engine_type,
       registration_date: vehicle_info[:transaction_date],
-      plate_type: nil
+      plate_type: nil,
+      county: vehicle_info[:county]
     }
   end
 
@@ -67,11 +68,25 @@ class VehicleFactory
     end
   end
 
-  def retrieve_vehicle_model_years; end
+  def retrieve_vehicle_counties
+    @vehicles.each do |vehicle|
+      county = vehicle.county
+      if @vehicle_data[:counties][county].nil?
+        @vehicle_data[:counties][county] = 1
+      else
+        @vehicle_data[:counties][county] += 1
+      end
+    end
+  end
 
-  def retrieve_vehicle_counties; end
+  def consolidate_all_vehicle_data
+    retrieve_vehicle_makes_and_models
+    retrieve_vehicle_counties
+  end
 
-  def consolidate_all_vehicle_data; end
-
-  def write_vehicle_data_to_text_file; end
+  def write_vehicle_data_to_text_file
+    File.open("vehicle_data.json", "w") do |file|
+      file.write(JSON.pretty_generate(vehicle_data))
+    end
+  end
 end

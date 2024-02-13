@@ -6,7 +6,8 @@ class Vehicle
               :year,
               :make,
               :model,
-              :engine
+              :engine,
+              :county
 
   attr_accessor :registration_date, :plate_type
 
@@ -18,6 +19,7 @@ class Vehicle
     @engine = vehicle_details[:engine]
     @registration_date = vehicle_details[:registration_date]
     @plate_type = vehicle_details[:plate_type]
+    @county = vehicle_details[:county]
   end
 
   def antique?
