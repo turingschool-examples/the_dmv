@@ -7,13 +7,16 @@ class VehicleFactory
 
   def create_vehicles(data_service)
     data_service.each do |vehicle_info|
-      vehicle_info[:engine] = change_to_engine_key(vehicle_info)
-      vehicle_info[:year] = vehicle_info[:model_year]
-      vehicle_info[:vin] = change_to_vin_key(vehicle_info)
-      vehicle_info[:model] = change_to_model_key(vehicle_info)
-      @vehicles << Vehicle.new(vehicle_info)
+      formatted_vehicle_info = {
+        vin: change_to_vin_key(vehicle_info),
+        year: vehicle_info[:model_year],
+        make: vehicle_info[:make],
+        model: change_to_model_key(vehicle_info),
+        engine: change_to_engine_key(vehicle_info),
+        county: vehicle_info[:county]
+        }
+        @vehicles << Vehicle.new(formatted_vehicle_info)
     end
-    @vehicles
   end
 
   def change_to_engine_key(vehicle_info)
@@ -63,10 +66,10 @@ class VehicleFactory
   def most_popular_make
     most_popular_make = nil
     highest_count = 0
-    count_vehicle_makes.each do |key, value|
-      if value > highest_count
-        most_popular_make = key
-        highest_count = value
+    count_vehicle_makes.each do |make, quantity|
+      if quantity > highest_count
+        most_popular_make = make
+        highest_count = quantity
       end
     end
     "The most popular make is #{most_popular_make} with a count of #{highest_count}."
@@ -91,10 +94,10 @@ class VehicleFactory
   def most_popular_county
     most_popular_county = nil
     highest_count = 0
-    count_vehicle_counties.each do |key, value|
-      if value > highest_count
-        most_popular_county = key
-        highest_count = value
+    count_vehicle_counties.each do |county, quantity|
+      if quantity > highest_count
+        most_popular_county = county
+        highest_count = quantity
       end
     end
     "The most popular county is #{most_popular_county} with a count of #{highest_count} vehicles."

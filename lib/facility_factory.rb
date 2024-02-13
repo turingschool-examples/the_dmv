@@ -6,13 +6,15 @@ class FacilityFactory
   end
 
   def create_facility(data_service)
-    data_service.each do |facility|
-      facility[:name] = change_to_name_key(facility)
-      facility[:address] = change_to_address_key(facility)
-      facility[:phone] = change_to_phone_key(facility)
-      facility[:hours] = change_to_hours_key(facility)
-      facility[:holidays_closed] = change_to_holidays_key(facility)
-      @facilities << Facility.new(facility)
+    data_service.each do |facility_info|
+      formatted_facility_info = {
+        name: change_to_name_key(facility_info),
+        address: change_to_address_key(facility_info),
+        phone: change_to_phone_key(facility_info),
+        hours: change_to_hours_key(facility_info),
+        holidays_closed: change_to_holidays_key(facility_info)
+        }
+        @facilities << Facility.new(formatted_facility_info)
     end
   end
 

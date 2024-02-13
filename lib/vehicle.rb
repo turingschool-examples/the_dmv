@@ -34,12 +34,14 @@ class Vehicle
   end
 
   def update_plate_type
-    if antique?
-      @plate_type = :antique
-    elsif electric_vehicle?
-      @plate_type = :ev
+    @plate_type =
+    case
+    when antique?
+      :antique
+    when electric_vehicle?
+      :ev
     else
-      @plate_type = :regular
+      :regular
     end
   end
 
