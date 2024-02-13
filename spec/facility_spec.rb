@@ -6,9 +6,9 @@ RSpec.describe Facility do
     let (:cruz) { Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice}) }
     let (:bolt) { Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev}) }
     let (:camaro) { Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice}) }
-    let(:registrant_1) { Registrant.new('Bruce', 18, true ) }
-    let(:registrant_2) { Registrant.new('Penny', 16) }
-    let(:registrant_3) { Registrant.new('Tucker', 15) }
+    let (:registrant_1) { Registrant.new('Bruce', 18, true ) }
+    let (:registrant_2) { Registrant.new('Penny', 16) }
+    let (:registrant_3) { Registrant.new('Tucker', 15) }
 
   describe '#initialize' do
     it 'can initialize' do
