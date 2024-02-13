@@ -1,21 +1,19 @@
 class Facility
-  attr_reader :name, 
-              :address, 
-              :phone, 
+  attr_reader :dmv_name, 
+              :dmv_address, 
+              :dmv_phone, 
               :services,
               :registered_vehicles,
               :collected_fees
 
-  def initialize(hash_data)
-    hash_data.each do |dmv|
-    dmv[:name] = dmv[:office_name]
-    dmv[:address] = dmv[:address]
-    dmv[:phone] = dmv[:public_phone_number]
+  def initialize(facility)
+    @dmv_name = ([:office_name] || [:dmv_office]) || [:name]
+    @dmv_address = ([:street_address_line_1] || [:address_li]) || [:address1]
+    @dmv_phone = [:public_phone_number] ||[:phone]
     @services = []
     @registered_vehicles = []
     @collected_fees = 0
-    @fees = {antique: 25, ev: 200, regular: 100}
-    end
+    @fees = {antique: 25, ev: 200, regular: 100} 
   end
 
   def add_service(service)

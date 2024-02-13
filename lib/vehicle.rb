@@ -39,6 +39,5 @@ class Vehicle
     else
       @plate_type = :regular
     end
-
   end
 end
