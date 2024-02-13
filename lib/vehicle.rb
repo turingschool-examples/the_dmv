@@ -1,5 +1,4 @@
 require 'date'
-
 class Vehicle
   attr_reader :vin,
               :year,
@@ -15,6 +14,7 @@ class Vehicle
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
+    @registration_date = vehicle_details[:registration_date]
   end
 
   def antique?
