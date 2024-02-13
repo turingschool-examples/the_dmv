@@ -13,14 +13,6 @@ RSpec.describe FacilityFactory do
       expect(@factory).to be_a(FacilityFactory)
       facilities = @factory.create_facilities(@co_dmv_office_locations)
       expect(facilities).to be_a(Array)
-      
-
-      # facilities.each do |facility|
-      #   expect(facility.address).to_not be nil
-      #   require 'pry'; binding.pry
-      #   expect(facility.name).to_not be nil
-      #   expect(facility.phone).to_not be nil
-      # end
     end
 
     it 'shows where the dmv offices are in New york' do 
@@ -34,6 +26,5 @@ RSpec.describe FacilityFactory do
       facilities = @factory.create_facilities(@missouri_facilities)
       expect(facilities).to be_a(Array)
     end
-
   end
 end
