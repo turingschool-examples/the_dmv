@@ -1,6 +1,6 @@
 require './lib/facility_factory'
 require './lib/facility'
-require './lib/DmvDataService'
+require './lib/dmv_data_service'
 
 RSpec.describe FacilityFactory do
     before(:each) do
@@ -14,14 +14,15 @@ RSpec.describe FacilityFactory do
         expect(@factory).to be_an_instance_of(FacilityFactory)
     end
 
-    it 'shows where ny locations are' do
-        expect(@factory.pull_facilities(@ny_facilities)).to eq()
+    it 'shows ny location data' do
+        expect(@factory.pull_facilities(@ny_facilities)).to be_an(Array)
+    end
 
+    it 'shows co location data' do 
+        expect(@factory.pull_facilities(@co_facilities)).to be_an(Array)
+    end
 
-
-
-
-
-
-
+    it 'shows mo location data' do
+        expect(@factory.pull_facilities(@mo_facilities)).to be_an(Array)
+    end
 end
