@@ -66,10 +66,10 @@ class VehicleFactory
   def most_popular_make
     most_popular_make = nil
     highest_count = 0
-    count_vehicle_makes.each do |key, value|
-      if value > highest_count
-        most_popular_make = key
-        highest_count = value
+    count_vehicle_makes.each do |make, quantity|
+      if quantity > highest_count
+        most_popular_make = make
+        highest_count = quantity
       end
     end
     "The most popular make is #{most_popular_make} with a count of #{highest_count}."
@@ -94,10 +94,10 @@ class VehicleFactory
   def most_popular_county
     most_popular_county = nil
     highest_count = 0
-    count_vehicle_counties.each do |key, value|
-      if value > highest_count
-        most_popular_county = key
-        highest_count = value
+    count_vehicle_counties.each do |county, quantity|
+      if quantity > highest_count
+        most_popular_county = county
+        highest_count = quantity
       end
     end
     "The most popular county is #{most_popular_county} with a count of #{highest_count} vehicles."
