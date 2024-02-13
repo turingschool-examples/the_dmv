@@ -38,7 +38,7 @@ RSpec.describe FacilityFactory do
                 colorado_list = @factory.create_facilities(@colorado_facilities)
 
                 expect(colorado_list[0].name).to eq "DMV Tremont Branch"
-                expect(colorado_list[0].address).to eq "2855 Tremont Place"
+                expect(colorado_list[0].address).to eq "2855 Tremont Place Suite 118, Denver, CO 80205"
                 expect(colorado_list[0].phone).to eq "(720) 865-4600"
             end
 
@@ -46,7 +46,7 @@ RSpec.describe FacilityFactory do
                 new_york_list = @factory.create_facilities(@new_york_facilities)
 
                 expect(new_york_list[0].name).to eq "IRONDEQUOIT"
-                expect(new_york_list[0].address).to eq "545 TITUS AVENUE"
+                expect(new_york_list[0].address).to eq "545 TITUS AVENUE, ROCHESTER, NY 14617"
                 expect(new_york_list[0].phone).to eq "5857531604"
             end
 
@@ -54,7 +54,7 @@ RSpec.describe FacilityFactory do
                 missouri_list = @factory.create_facilities(@missouri_facilities)
 
                 expect(missouri_list[2].name).to eq "CUBA"
-                expect(missouri_list[2].address).to eq "501 S FRANKLIN"
+                expect(missouri_list[2].address).to eq "501 S FRANKLIN, CUBA, MO 65453"
                 expect(missouri_list[2].phone).to eq "(573) 885-6829"
             end
 
