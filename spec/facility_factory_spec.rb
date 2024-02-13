@@ -9,11 +9,19 @@ RSpec.describe FacilityFactory do
     expect(factory).to be_an_instance_of(FacilityFactory)
   end
 
-  it 'has no facilities by default' do
-    expect(factory.facilities).to be_empty
+  describe 'storing facilities' do
+    it 'has no facilities by default' do
+      expect(factory.facilities).to be_empty
+    end
+
+    it 'can have facilities' do
+      factory.create_facility(colorado_facilities)
+
+      expect(factory.facilities).not_to be_empty
+    end
   end
 
-  describe 'creating facilities' do
+  describe '#create_facility' do
     it 'can create facilities from Colorado' do
       expect(factory.facilities).to be_empty
 
