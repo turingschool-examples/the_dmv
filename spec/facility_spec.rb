@@ -46,8 +46,6 @@ RSpec.describe Facility do # rubocop:disable Metrics/BlockLength
     @ny_office = DmvDataService.new.ny_dmv_office_locations[0]
     @mo_office = DmvDataService.new.mo_dmv_office_locations[0]
 
-    p @mo_office
-
     @co_facility = Facility.new({
       name: @co_office[:dmv_office],
       address: @co_office[:address_li],
