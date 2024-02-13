@@ -24,8 +24,7 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    if vehicle.registered?
-    else
+    unless vehicle.registered? || !services.include?('Vehicle Registration')
       registered_vehicles << vehicle
       vehicle.update_registration_date
       vehicle.update_plate_type
