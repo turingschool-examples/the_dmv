@@ -1,4 +1,5 @@
 require 'pry'
+require './lib/analytics'
 require './lib/dmv'
 require './lib/facility'
 require './lib/vehicle'

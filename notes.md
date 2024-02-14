@@ -1,53 +1,14 @@
-# Create Facility Objects from an External Data Source
+# Calculate some analytics about your existing data sets:
 
-Let’s do that again with different data! Similar to when you created Vehicle objects from the data about EV Registrations in Washington, you’ll create DMV Facility objects with data about DMV Facilities. Let’s start with Colorado. You can follow the same pattern as you did for vehicles to access the data.
+# EV Registrations:
+1. Find the most popular make/model registered
+2. Count of registered vehicle for a model year
+3. County with most registered vehicles
 
-DmvDataService.new.co_dmv_office_locations
+# Facilities:
+1. Add in a few more helpful attributes.
+2. What are the daily hours for each facility?
+3. For the states that provide (Missouri), which holidays are they closed?
 
-# The data should look something like this:
-
-pry(main)> DmvDataService.new.co_dmv_office_locations
-# => [{:the_geom=>{:type=>"Point", :coordinates=>[-104.97443112500002, 39.75525297420336]},
-#   :dmv_id=>"1",
-#   :dmv_office=>"DMV Tremont Branch",
-#   :address_li=>"2855 Tremont Place",
-#   :address__1=>"Suite 118",
-#   :city=>"Denver",
-#   :state=>"CO",
-#   :zip=>"80205",
-#   :phone=>"(720) 865-4600",
-#   :hours=>"Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.",
-#   :services_p=>"vehicle titles, registration, renewals;  VIN inspections",
-#   :parking_no=>"parking available in the lot at the back of the bldg (Glenarm Street)",
-#   :photo=>"images/Tremont.jpg",
-#   :address_id=>"175164",
-#   :":@computed_region_nku6_53ud"=>"1444"},
-#  {:the_geom=>{:type=>"Point", :coordinates=>[-104.84839592880655, 39.78135984611333]},
-#   :dmv_id=>"2",
-#   :dmv_office=>"DMV Northeast Branch",
-#   :address_li=>"4685 Peoria Street",
-#   :address__1=>"Suite 101",
-#   :location=>"Arie P. Taylor  Municipal Bldg",
-#   :city=>"Denver",
-#   :state=>"CO",
-#   :zip=>"80239",
-#   :phone=>"(720) 865-4600",
-#   :hours=>"Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.",
-#   :services_p=>"vehicle titles, registration, renewals;  VIN inspections",
-#   :parking_no=>"parking available in both the front and back of the bldg; also on Paris Street",
-#   :photo=>"images/Peoria.jpg",
-#   :address_id=>"11348",
-#   :":@computed_region_nku6_53ud"=>"1444"},
-#     ...}]
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~ 
-
-# Create Facility objects from Multiple Data Sources
-
-Cool! Now you can handle creating Facility objects from one data source. But what about another state? The fun thing about data is that every entity that manages a data set has their own rules. Refactor your code to allow for the creation of Facility objects from another data source - NY State DMV Facilities. You should be able to create objects from ALL provided data sources. This means that by changing your code to work for the New York dataset, it should also continue to work for the Colorado dataset. Once you have New York working, add in Missouri! We STRONGLY recommend doing one at a time. Make sure all your past tests for the previous dataset still pass when you’re done adding code for your new dataset.
-
-# You can access these data sets with the following code:
-
-new_york_facilities = DmvDataService.new.ny_dmv_office_locations
-
-missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+# Vehicles:
+1a. Add in a second data source for vehicles and create some Vehicle objects from NY State 1b. Registration Data: https://data.ny.gov/resource/w4pv-hbkt.json
