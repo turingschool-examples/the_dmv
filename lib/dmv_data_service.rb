@@ -3,7 +3,19 @@
 require "faraday"
 require "json"
 
-# Documentation for DmvDataService
+# DmvDataService class is used for generating vehicle registration data for WA,
+# and DMV office data for CO, NY, and MO.
+# Syntax:
+#
+# dmv_data_service = DmvDataService.new
+#
+# Methods:
+#
+# dmv_data_service.wa_ev_registrations
+# dmv_data_service.co_dmv_office_locations
+# dmv_data_service.ny_dmv_office_locations
+# dmv_data_service.mo_dmv_office_locations
+# dmv_data_service.ny_vehicle_registrations
 class DmvDataService
   def load_data(source)
     response = Faraday.get(source)

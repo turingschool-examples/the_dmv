@@ -136,7 +136,7 @@ RSpec.describe VehicleFactory do # rubocop:disable Metrics/BlockLength
     it "creates a json file with all vehicle data" do
       @vehicle_factory.create_vehicles(@wa_ev_registrations, :ev)
       @vehicle_factory.consolidate_all_vehicle_data
-      @vehicle_factory.write_vehicle_data_to_text_file
+      @vehicle_factory.write_vehicle_data_to_json_file
       expect(File.size?("vehicle_data.json").nil?).to eq(false)
     end
   end

@@ -1,6 +1,26 @@
 require "./spec/spec_helper"
 
-# Documentation for class Facility
+# The Facility class holds information about DMV facilities in a given state,
+# including the name, address, phone, hours, and services available. This class
+# has methods to register Vehicle objects, as well as issue written drivers
+# exams and road tests to Registrant objects.
+#
+# Syntax:
+#
+# facility = Facility.new({
+#   name: "John",
+#   address: "123 Main St",
+#   phone: "610-295-2954",
+#   hours: "MTWThF 8:00AM - 5:00PM"
+# })
+#
+# Methods:
+#
+# facility.add_service("service")
+# facility.register_vehicle(Vehicle.new(...))
+# facility.administer_written_test(Registrant.new(...))
+# facility.administer_road_test(Registrant.new(...))
+# facility.renew_drivers_license(Registrant.new(...))
 class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles,
               :collected_fees, :hours

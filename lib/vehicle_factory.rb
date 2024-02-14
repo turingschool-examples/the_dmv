@@ -1,6 +1,19 @@
 require "./spec/spec_helper"
 
-# Documentation for VehicleFactory class
+# The VehicleFactory class is the most important class for generating usable
+# data on vehicles registered in the states of CO, NY, and MO. It contains
+# an array of Vehicle objects containing all relevant data about that vehicle,
+# and is capable of generating a .json file displaying every make, model, and
+# model year for the past 1000 registrated vehicles in that state.
+#
+# Syntax:
+#
+# vehicle_factory = VehicleFactory.new
+#
+# Methods:
+#
+# vehicle_factory.consolidate_all_vehicle_data
+# vehicle_factory.write_vehicle_data_to_text_file
 class VehicleFactory
   attr_reader :vehicles, :vehicle_data
 
@@ -84,7 +97,7 @@ class VehicleFactory
     retrieve_vehicle_counties
   end
 
-  def write_vehicle_data_to_text_file
+  def write_vehicle_data_to_json_file
     File.open("vehicle_data.json", "w") do |file|
       file.write(JSON.pretty_generate(vehicle_data))
     end

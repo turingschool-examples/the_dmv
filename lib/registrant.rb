@@ -1,6 +1,16 @@
 require "./spec/spec_helper"
 
-# Documentation for class Registrant
+# The Registrant class represents a single person and their license data.
+# This includes their name, age, and whether they have a driving permit,
+# driver's license, and whether their license has been renewed.
+# Syntax:
+#
+# registrant = Registrant.new({name: "Bill", age: 18})
+#
+# Methods:
+#
+# registrant.earn_permit
+# registrant.permit?
 class Registrant
   attr_reader :name, :age, :permit
   attr_accessor :license_data
