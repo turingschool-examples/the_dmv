@@ -29,20 +29,10 @@ RSpec.describe Registrant do
     it "can check permit data default value" do
         expect(@registrant_2.permit?).to eq(false)
     end
-    
-    xit "" do
-        expect().to eq()
-    end
-    
-    xit "" do
-        expect().to eq()
-    end
 
-    xit "" do
-        expect().to eq()
-    end
-    
-    xit "" do
-        expect().to eq()
+    it "can earn a permit" do
+        @registrant_2.earn_permit
+
+        expect(@registrant_2.permit?).to eq(true)
     end
 end
