@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Registrant do
     before(:each) do
-        @registrant = Registrant.new({name: 'John Doe', age: 21, permit: true})
+        @registrant = Registrant.new('John Doe', 21, true)
     end
 
     describe '#initialize' do
@@ -16,7 +16,7 @@ RSpec.describe Registrant do
 
     describe '#has_license?' do
         it 'can check if a registrant has a permit' do
-            expect(@registrant.has_license?).to eq(false)
+            expect(@registrant.license_data[:license]).to eq(false)
         end
     end
 
