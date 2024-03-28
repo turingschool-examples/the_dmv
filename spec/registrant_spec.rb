@@ -27,4 +27,14 @@ RSpec.describe Registrant do
             expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
         end
     end
+
+    describe '#permit?' do
+        it 'has no permit by default' do
+            expect(@registrant_2.permit?).to be false
+        end
+
+        it 'has a permit if specified' do
+            expect(@registrant_1.permit?).to be true
+        end
+    end
 end
