@@ -1,5 +1,5 @@
 require 'spec_helper'
-require
+require 'pry'
 
 RSpec.describe Facility do
   before(:each) do
