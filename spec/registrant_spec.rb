@@ -37,4 +37,12 @@ RSpec.describe Registrant do
             expect(@registrant_1.permit?).to be true
         end
     end
+
+    describe '#earn_permit' do
+        it 'can change default permit value to true' do
+            expect(@registrant_2.permit?).to be false
+            @registrant_2.earn_permit
+            expect(@registrant_2.permit?).to be true
+        end
+    end
 end
