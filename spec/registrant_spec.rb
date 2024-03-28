@@ -22,13 +22,14 @@ RSpec.describe Registrant do
         expect(@registrant_1.permit?).to eq(true)
     end
 
-    xit "" do
-        expect().to eq()
+    it "checks registrant's license data" do
+        expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
     
-    xit "" do
-        expect().to eq()
+    it "can check permit data default value" do
+        expect(@registrant_2.permit?).to eq(false)
     end
+    
     xit "" do
         expect().to eq()
     end
