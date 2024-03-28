@@ -32,4 +32,10 @@ RSpec.describe Registrant do
             expect(@registrant.license_data).to eq({written: false, license: false, renewed: false})
         end
     end
+
+    describe 'has_permit?' do
+        it 'can check if a registrant has a permit' do
+            expect(@registrant.permit?).to eq(true)
+        end
+    end
 end
