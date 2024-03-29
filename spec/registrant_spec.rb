@@ -45,4 +45,14 @@ RSpec.describe Registrant do
             expect(@registrant_2.permit?).to be true
         end
     end
+
+    describe '#pass_written_test' do
+        it 'can change value of license_data[:written] to true' do
+            expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+
+            @registrant_1.pass_written_test
+
+            expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+        end
+    end
 end
