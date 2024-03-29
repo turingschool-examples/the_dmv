@@ -3,7 +3,8 @@ class Facility
               :address, 
               :phone,
               :services,
-              :registered_vehicles
+              :registered_vehicles,
+              :collected_fees
 
   def initialize(facility_details)
     @name = facility_details[:name]
@@ -11,6 +12,7 @@ class Facility
     @phone = facility_details[:phone]
     @services = []
     @registered_vehicles = []
+    @collected_fees = 0
   end
 
   def add_service(service)
@@ -20,6 +22,16 @@ class Facility
   def register_vehicle(vehicle)
     if @services.include?('Vehicle Registration')
       @registered_vehicles << vehicle
+    end
+  end
+
+  def collect_fees(vehicle)
+    if vehicle.antique?
+      @collected_fees += 25
+    elsif vehicle.electric_vehicle?
+      @collected_fees += 200
+    else
+      @collected_fees += 100
     end
   end
 end
