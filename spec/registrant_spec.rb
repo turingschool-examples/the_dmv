@@ -1,4 +1,4 @@
-require 'spec helper'
+require 'spec_helper'
 
 RSpec.describe Registrant do
     before(:each) do
@@ -6,7 +6,7 @@ RSpec.describe Registrant do
         @registrant_1 = Registrant.new('Bruce', 18, true)
         @registrant_2 = Registrant.new('Penny', 15 )
     end
-end
+
 
 describe '#initialize' do
     it 'can initialize' do
@@ -15,7 +15,6 @@ describe '#initialize' do
       expect(@registrant.age).to eq(age)
       expect(@registrant.permit).to be false
       expect(@registrant.license_date).to eq({:written => false, :license => false, :renewed => false})
-    end)
     end
   end
 
@@ -25,3 +24,4 @@ describe '#initialize' do
 
 #     end
 # end
+end
