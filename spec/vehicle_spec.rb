@@ -1,5 +1,9 @@
 require 'spec_helper'
 
+RSpec.configure do |config|
+  config.formatter = :documentation
+end
+
 RSpec.describe Vehicle do
   before(:each) do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
