@@ -84,6 +84,7 @@ RSpec.describe Facility do
     @facility_1.register_vehicle(@cruz)
     @facility_1.register_vehicle(@bolt)
     @facility_1.register_vehicle(@camaro)
+    # require 'pry'; binding.pry
 
     expect(@facility_1.registered_vehicles).to eq([@cruz, @bolt, @camaro])
   end
