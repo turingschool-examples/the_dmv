@@ -17,16 +17,28 @@ RSpec.describe Facility do
 
   describe '#add service' do
     it 'can add available services' do
-      expect(@facility.services).to eq([])
-      @facility.add_service('New Drivers License')
-      @facility.add_service('Renew Drivers License')
-      @facility.add_service('Vehicle Registration')
-      expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+      expect(@facility_1.services).to eq([])
+      @facility_1.add_service('New Drivers License')
+      @facility_1.add_service('Renew Drivers License')
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
 
   describe '#register vehicle' do
      it 'can register a vehicle' do
-        expect(facility_1.register_vehicle(cruz)).to eq([cruz])
+         cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+         @facility_1.add_service('Vehicle Registration')
+         expect(@facility_1.register_vehicle(cruz)).to eq([cruz])
+     end
+
+     it 'can record the registration date' do
+         current_time = DateTime.now
+         cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+         @facility_1.add_service('Vehicle Registration')
+         @facility_1.register_vehicle(cruz)
+         binding.pry
+         expect(cruz.registration_date).to eq(current_time.strftime "%d/%m/%Y")
+     end
   end
 end
