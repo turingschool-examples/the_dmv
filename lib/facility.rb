@@ -22,6 +22,7 @@ class Facility
   def register_vehicle(vehicle)
     if @services.include?('Vehicle Registration')
       @registered_vehicles << vehicle
+      collect_fees(vehicle)
     end
   end
 
