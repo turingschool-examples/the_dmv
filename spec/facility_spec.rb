@@ -48,16 +48,18 @@ RSpec.describe Facility do
       expect(@facility.registration_fee).to eq(100)
     end
 
-    it 'can change vehicle plate type' do
-      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-      @facility.register_vehicle(cruz)
-      expect(@facility.plate_type).to eq('regular')
-    end
-
     it 'updates collected fees' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       @facility.register_vehicle(cruz)
       expect(@facility.collected_fees).to eq(100)
+    end
+  end
+
+  describe 'update_plate_type' do
+    it 'can update plate type' do
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      
+      expect(@facility.update_plate_type).to eq('regular')
     end
   end
 end
