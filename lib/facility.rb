@@ -51,4 +51,12 @@ class Facility
   def set_registration_date(vehicle) #move to vehicle class - responsibilty of Vehicle object to change its own attributes
     vehicle.registration_date = Date.today
   end
+
+  def administer_written_test(registrant)
+    if @services.include?('Written Test') && (registrant.age >= 16 && registrant.permit?)
+      registrant.pass_written_test
+    else
+      false
+    end
+  end
 end
