@@ -21,22 +21,22 @@ class Facility
   end
 
   def registered_vehicles
-    @registered_vehicles = []
+    nil.to_a
+    @reg_array.to_a
   end
 
   def collected_fees
-    @collected_fees = 0 + @fee_sum.to_i
+    @collected_fees = 0 + @fees_charged.to_i
   end
 
   def register_vehicle(vehicle)
-    @registered_vehicles = []
-    @fee_sum = 0
+    @reg_array = []
+    @fees_charged = 0
      if @services.include?("Vehicle Registration")
       vehicle.registration_date = Date.today
-      fees_charged = {:antique => 25, :ev => 200, :regular => 100} 
-      @fee_sum += fees_charged[vehicle.plate_type]
-      @registered_vehicles << vehicle
-      @registered_vehicles
+      reg_fees = {:antique => 25, :ev => 200, :regular => 100} 
+      @fees_charged += reg_fees[vehicle.plate_type]
+      @reg_array.push(vehicle)
     end
   end
 
