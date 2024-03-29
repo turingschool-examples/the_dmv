@@ -30,7 +30,7 @@ RSpec.describe Facility do
   end
 
   describe '#register_vehicle' do
-    it 'can add registered vehicles instances to array' do
+    it 'can add registered vehicle instances to array' do
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.registered_vehicles).to be_empty
       @facility_1.register_vehicle(@cruz)
@@ -72,5 +72,25 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.collected_fees).to eq(325)
     end
+
+      describe '#set_plate_type helper' do
+        it 'sets correct plate type for antique vehicles' do
+          expect(@camaro.plate_type).to eq(nil)
+          @facility_1.set_plate_type(@camaro)
+          expect(@camaro.plate_type).to eq(:antique)
+        end
+
+        it 'sets correct plate type for electric vehicles' do
+          expect(@bolt.plate_type).to eq(nil)
+          @facility_1.set_plate_type(@bolt)
+          expect(@bolt.plate_type).to eq(:ev)
+        end
+
+        it 'sets correct plate type for regular vehicles' do
+          expect(@cruz.plate_type).to eq(nil)
+          @facility_1.set_plate_type(@cruz)
+          expect(@cruz.plate_type).to eq(:regular)
+        end
+      end
   end
 end
