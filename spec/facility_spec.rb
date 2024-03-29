@@ -69,4 +69,24 @@ RSpec.describe Facility do
          expect(@facility_1.collected_fees).to eq(200)
      end
   end
+
+  describe '#administer written test' do
+      it 'can administer a written test' do
+
+      end
+
+      it 'only administers written tests for registrans with a permit and are at least 16' do
+
+      end
+  end
+
+  describe '#administer a road test' do
+      it 'can administer a road test to those who have passed a written test' do
+          #test both those who have passes the road test and those who have not
+      end
+
+      it 'gives a license to all those who are allowed to take the road test' do
+
+      end
+  end
 end
