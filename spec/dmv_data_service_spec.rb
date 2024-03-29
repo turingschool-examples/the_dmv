@@ -1,4 +1,7 @@
 require 'spec_helper'
+RSpec.configure do |config|
+  config.formatter = :documentation
+end
 
 RSpec.describe DmvDataService do
   before(:each) do
