@@ -24,4 +24,12 @@ class Facility
         vehicle.registration_date = Date.today
         @registered_vehicles << vehicle if @services.find('Vehicle Registration')
     end
+
+    def collect_fees
+
+    end
+
+    def assign_plate
+
+    end
 end
