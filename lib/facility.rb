@@ -20,9 +20,8 @@ class Facility
     end
 
     def register_vehicle(vehicle)
-        # vehicle.registration_date = Date.today
+  #write a multi line if statement
+        vehicle.registration_date = Date.today
         @registered_vehicles << vehicle if @services.find('Vehicle Registration')
-        binding.pry
-        @registered_vehicles[0]:registration_date = Date.today
     end
 end
