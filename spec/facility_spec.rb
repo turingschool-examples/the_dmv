@@ -38,11 +38,31 @@ RSpec.describe Facility do
   end
 
   it "can register a vehicle" do
+    @facility_1.add_service("Vehicle Registration")
     expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
   end
 
+  it "will only register a vehicle if facility offers Vehicle Registration" do
+    @facility_1.add_service("Vehicle Registration")
+    expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
+  end
+
+  it "won't register a car if facility doesn't offer Vehicle Registration" do
+    expect(@facility_1.register_vehicle(@cruz)).to eq(nil)
+    expect(@facility_2.register_vehicle(@cruz)).to eq(nil)
+  end
+
   it "can create a registration date" do
+    @facility_1.add_service("Vehicle Registration")
     @facility_1.register_vehicle(@cruz)
     expect(@cruz.registration_date).to eq(Date.today)
   end
+
+  it "collects $25 for antique cars" do
+    @facility_1.add_service("Vehicle Registration")
+    @facility_1.register_vehicle(@camaro)
+
+    expect(@facility_1.collected_fees).to eq(25)
+  end
+
 end
