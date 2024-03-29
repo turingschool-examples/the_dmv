@@ -18,11 +18,17 @@ class Facility
   end
 
   def registered_vehicles
-  @registered_vehicles = []
+    @registered_vehicles = []
   end
 
   def collected_fees
-  @collected_fees = 0
+    @collected_fees = 0
+  end
+
+  def register_vehicle(vehicle)
+    @registered_vehicles = []
+    @collected_fees = 0
+    @registered_vehicles << vehicle
   end
 
 end
