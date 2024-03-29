@@ -119,5 +119,17 @@ RSpec.describe Facility do
           expect(@cruz.registration_date).to be_an_instance_of(Date)
         end
       end
+
+    it 'can set registration dates of vehicles once registered' do
+      expect(@camaro.registration_date).to eq(nil)
+      @facility_1.register_vehicle(@camaro)
+      expect(@camaro.registration_date).to be_an_instance_of(Date)
+      expect(@bolt.registration_date).to eq(nil)
+      @facility_1.register_vehicle(@bolt)
+      expect(@bolt.registration_date).to be_an_instance_of(Date)
+      expect(@cruz.registration_date).to eq(nil)
+      @facility_1.register_vehicle(@cruz)
+      expect(@cruz.registration_date).to be_an_instance_of(Date)
+    end
   end
 end
