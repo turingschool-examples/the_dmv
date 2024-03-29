@@ -7,6 +7,10 @@ RSpec.describe Registrant do
         expect(registrant_1).to be_instance_of(Registrant)
     end
 
-    
+    it "exists 2" do
+        registrant_2 = Registrant.new("Penny", 15)
+
+        expect(registrant_2).to be_instance_of(Registrant)
+    end
 
 end
