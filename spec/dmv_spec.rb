@@ -1,6 +1,11 @@
 require 'spec_helper'
 
+RSpec.configure do |config|
+  config.formatter = :documentation
+end
+
 RSpec.describe Dmv do
+
   before(:each) do
     @dmv = Dmv.new
     @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
@@ -32,12 +37,11 @@ RSpec.describe Dmv do
       @facility_2.add_service('Written Test')
       @facility_3.add_service('New Drivers License')
       @facility_3.add_service('Road Test')
-
       @dmv.add_facility(@facility_1)
       @dmv.add_facility(@facility_2)
       @dmv.add_facility(@facility_3)
-
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
+  
 end
