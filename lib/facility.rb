@@ -46,4 +46,8 @@ class Facility
       vehicle.plate_type = :regular
     end
   end
+
+  def set_registration_date(vehicle)
+    vehicle.registration_date = Date.today
+  end
 end
