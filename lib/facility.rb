@@ -28,6 +28,14 @@ class Facility
         end
     end
 
+    def administer_written_test(registrant)
+
+    end
+
+    def administer_road_test(registrant)
+
+    end
+
     def collect_fees(vehicle)
         if vehicle.antique?
             @collected_fees += 25
