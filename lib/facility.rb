@@ -23,8 +23,8 @@ class Facility
     if @services.include?('Vehicle Registration')
       @registered_vehicles << vehicle
       collect_fees(vehicle)
-      set_plate_type(vehicle)
-      set_registration_date(vehicle)
+      set_plate_type(vehicle) #vehicle.set_plate_type
+      set_registration_date(vehicle)#vehicle.set_registration_date
     end
   end
 
@@ -38,7 +38,7 @@ class Facility
     end
   end
 
-  def set_plate_type(vehicle)
+  def set_plate_type(vehicle) #move to vehicle class - responsibilty of Vehicle object to change its own attributes
     if vehicle.antique?
       vehicle.plate_type = :antique
     elsif vehicle.electric_vehicle?
@@ -48,7 +48,7 @@ class Facility
     end
   end
 
-  def set_registration_date(vehicle)
+  def set_registration_date(vehicle) #move to vehicle class - responsibilty of Vehicle object to change its own attributes
     vehicle.registration_date = Date.today
   end
 end
