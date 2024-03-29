@@ -79,14 +79,39 @@ RSpec.describe Facility do
     expect(@facility_1.collected_fees).to eq(100)
   end
 
+  it "will return sum of collected_fees after multiple registrations" do
+    @facility_1.add_service("Vehicle Registration")
+    @facility_1.register_vehicle(@cruz)
+    @facility_1.register_vehicle(@bolt)
+    @facility_1.register_vehicle(@camaro)
+
+    expect(@facility_1.collected_fees).to eq(325)
+  end
+
   it "stores all registered vehicles" do
     @facility_1.add_service("Vehicle Registration")
     @facility_1.register_vehicle(@cruz)
     @facility_1.register_vehicle(@bolt)
     @facility_1.register_vehicle(@camaro)
-    # require 'pry'; binding.pry
 
     expect(@facility_1.registered_vehicles).to eq([@cruz, @bolt, @camaro])
+  end
+
+  it "can sort vehicles into plate types once registered" do
+    @facility_1.add_service("Vehicle Registration")
+    @facility_1.register_vehicle(@cruz)
+    @facility_1.register_vehicle(@bolt)
+    @facility_1.register_vehicle(@camaro)
+
+    expect(@cruz.plate_type).to eq(:regular)
+    expect(@bolt.plate_type).to eq(:ev)
+    expect(@camaro.plate_type).to eq(:antique)
+  end
+
+  it "will assign nil plate_type for unregistered vehicles" do
+    @facility_1.add_service("Vehicle Registration")
+
+    expect(@cruz.plate_type).to eq(nil)
   end
 
 end

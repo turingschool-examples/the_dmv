@@ -1,4 +1,5 @@
 require 'date'
+require './lib/facility'
 
 class Vehicle
   attr_reader :vin,
@@ -28,12 +29,14 @@ class Vehicle
   end
 
   def plate_type
-    if antique?
+    if registration_date != nil
+      if antique?
       @plate_type = :antique
-    elsif electric_vehicle?
+      elsif electric_vehicle?
       @plate_type = :ev
-    else
+      else
       @plate_type = :regular
+      end
     end
   end
 end
