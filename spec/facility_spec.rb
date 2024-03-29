@@ -41,25 +41,36 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
     end
 
-    describe '#collect_fees helper' do
-      it 'has 0 collected fees to start' do
-        expect(@facility_1.collected_fees).to eq(0)
+      describe '#collect_fees helper' do
+        it 'has 0 collected fees to start' do
+          expect(@facility_1.collected_fees).to eq(0)
+        end
+
+        it 'collects correct amount for antique vehicles' do
+          @facility_1.collect_fees(@camaro)
+          expect(@facility_1.collected_fees).to eq(25)
+        end
+
+        it 'collects correct amount for electric vehicles' do
+          @facility_1.collect_fees(@bolt)
+          expect(@facility_1.collected_fees).to eq(200)
+        end
+
+        it 'collects correct amount for regular vehicles' do
+          @facility_1.collect_fees(@cruz)
+          expect(@facility_1.collected_fees).to eq(100)
+        end
       end
 
-      it 'collects correct amount for antique vehicles' do
-        @facility_1.collect_fees(@camaro)
-        expect(@facility_1.collected_fees).to eq(25)
-      end
-
-      it 'collects correct amount for electric vehicles' do
-        @facility_1.collect_fees(@bolt)
-        expect(@facility_1.collected_fees).to eq(200)
-      end
-
-      it 'collects correct amount for regular vehicles' do
-        @facility_1.collect_fees(@cruz)
-        expect(@facility_1.collected_fees).to eq(100)
-      end
+    it 'collects fees once vehicles are registered' do
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.collected_fees).to eq(0)
+      @facility_1.register_vehicle(@camaro)
+      expect(@facility_1.collected_fees).to eq(25)
+      @facility_1.register_vehicle(@bolt)
+      expect(@facility_1.collected_fees).to eq(225)
+      @facility_1.register_vehicle(@cruz)
+      expect(@facility_1.collected_fees).to eq(325)
     end
   end
 end
