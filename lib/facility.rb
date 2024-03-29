@@ -23,6 +23,7 @@ class Facility
     if @services.include?('Vehicle Registration')
       @registered_vehicles << vehicle
       collect_fees(vehicle)
+      set_plate_type(vehicle)
     end
   end
 
