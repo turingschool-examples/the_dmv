@@ -40,5 +40,33 @@ RSpec.describe Facility do
          @facility_1.register_vehicle(cruz)
          expect(cruz.registration_date).to eq(Date.today)
      end
+
+     it 'can determine correct plate type' do
+         cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+         @facility_1.add_service('Vehicle Registration')
+         @facility_1.register_vehicle(cruz)
+         expect(cruz.plate_type).to eq(regular)
+     end
+
+     it 'can register multiple plate types' do
+         camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+         @facility_1.add_service('Vehicle Registration')
+         @facility_1.register_vehicle(camaro)
+         expect(camaro.plate_type).to eq(antique)
+     end
+
+     it 'can charge registration fees' do
+         cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+         @facility_1.add_service('Vehicle Registration')
+         @facility_1.register_vehicle(cruz)
+         expect(cruz.collected_fees).to eq(100)
+     end
+
+     it 'can charge different amounts for different plate types' do
+         bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+         @facility_1.add_service('Vehicle Registration')
+         @facility_1.register_vehicle(bolt)
+         expect(@facility_1.collected_fees).to eq(300)
+     end
   end
 end
