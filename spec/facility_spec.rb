@@ -86,4 +86,46 @@ RSpec.describe Facility do
     end
   end
 
+  describe 'administer_written_test' do
+    it 'administer test and update license_data' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      @facility.add_service('Written Test')
+
+      @facility.administer_written_test(registrant_1)
+
+      expect(registrant_1.license_data[:written]).to eq(true)
+    end
+  end
+  #administer_written_test method
+  #change license data
+
+  describe 'administer_road_test' do
+    it 'administer test and update license_data' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      @facility.add_service('Written Test')
+
+      @facility.administer_written_test(registrant_1)
+      @facility.administer_road_test(registrant_1)
+
+      expect(registrant_1.license_data[:license]).to eq(true)
+    end
+  end
+  #administer_road_test
+  #change licence on license data true IF passed both^^
+
+  describe 'renew_drivers_license' do
+    it 'renew license if someone is a licensed driver' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      @facility.add_service('Written Test')
+
+      @facility.administer_written_test(registrant_1)
+      @facility.administer_road_test(registrant_1)
+      @facility.renew_drivers_license(registrant_1)
+      
+      expect(registrant_1.license_data[:renewed]).to eq(true)
+    end
+  end
+  #renew_drivers_license
+  #can renew if registrant has a license, check license data
+
 end

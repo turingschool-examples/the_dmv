@@ -38,9 +38,9 @@ class Facility
   end
 
   def update_plate_type(vehicle)
-    if Date.today.year - vehicle.year >= 25
+    if vehicle.antique?
       vehicle.plate_type = 'antique'
-    elsif vehicle.engine == :ev
+    elsif vehicle.electric_vehicle?
       vehicle.plate_type = 'electric'
     else
       vehicle.plate_type = 'regular'
@@ -48,9 +48,9 @@ class Facility
   end
 
   def registration_fee(vehicle)
-    if Date.today.year - vehicle.year > 25
+    if vehicle.antique?
       @collected_fees = 25
-    elsif vehicle.engine == :ev
+    elsif vehicle.electric_vehicle?
       @collected_fees = 200
     else
       @collected_fees = 100
