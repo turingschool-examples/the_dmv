@@ -27,9 +27,13 @@ RSpec.describe Facility do
   describe 'registered_vehicles' do
     it 'can list registered vehicles' do
       expect(@facility.registered_vehicles).to eq([])
+      @facility.add_service('Vehicle Registration')
+      
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+
       @facility.register_vehicle(cruz)
+      @facility.register_vehicle(bolt)
       expect(@facility.registered_vehicles).to eq([cruz, bolt])
     end
   end
@@ -58,8 +62,8 @@ RSpec.describe Facility do
   describe 'update_plate_type' do
     it 'can update plate type' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-      
-      expect(@facility.update_plate_type).to eq('regular')
+      @facility.update_plate_type
+      expect(@facility.plate_type).to eq('regular')
     end
   end
 end
