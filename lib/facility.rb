@@ -20,16 +20,35 @@ class Facility
     end
 
     def register_vehicle(vehicle)
-  #write a multi line if statement
+        if @services.find('Vehicle Registration')
+            collect_fees(vehicle)
+            assign_plate(vehicle)
+            assign_registration_date(vehicle)
+            @registered_vehicles << vehicle
+        end
+    end
+
+    def collect_fees(vehicle)
+        if vehicle.antique?
+            @collected_fees += 25
+        elsif vehicle.electric_vehicle?
+            @collected_fees += 200
+        else
+            @collected_fees += 100
+        end
+    end
+
+    def assign_plate(vehicle)
+        if vehicle.antique?
+            vehicle.plate_type = :antique
+        elsif vehicle.electric_vehicle?
+            vehicle.plate_type = :ev
+        else
+            vehicle.plate_type = :regular
+        end
+    end
+
+    def assign_registration_date(vehicle)
         vehicle.registration_date = Date.today
-        @registered_vehicles << vehicle if @services.find('Vehicle Registration')
-    end
-
-    def collect_fees
-
-    end
-
-    def assign_plate
-
     end
 end
