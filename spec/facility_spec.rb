@@ -60,41 +60,42 @@ RSpec.describe Facility do
     end
   end
 
-#   describe '#administer_written_test' do
-#     it 'can administer written test' do
+  describe '#administer_written_test' do
+    it 'can administer written test' do
 
-# #ask if do before each for following test work here.
-#       registrant_1 = Registrant.new('Bruce', 18, true )
-#       registrant_2 = Registrant.new('Penny', 16 )
-#       registrant_3 = Registrant.new('Tucker', 15 )
+#ask if do before each for following test work here.
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      registrant_2 = Registrant.new('Penny', 16 )
+      registrant_3 = Registrant.new('Tucker', 15 )
+      
 
-#       expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-#       expect(registrant_1.permit?).to eq(true)
-#    #check cannot administer test without service
-#       expect(@facility_1.administer_written_test(registrant_1)).to eq(false)
-#       expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-#       expect(@facility_1.add_service('Written Test')).to eq(["Written Test"])
-#    #can administer test after adding service
-#       expect(@facility_1.administer_written_test(registrant_1)).to eq(true)
-#       expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
-#    #testing second registrant that has no permit
-#       expect(registrant_2.age).to eq(16)
-#       expect(registrant_2.permit?).to eq(false)
-#       expect(@facility_1.administer_written_test(registrant_2)).to eq(false)
-#       registrant_2.earn_permit
-#       expect(@facility_1.administer_written_test(registrant_2)).to eq(true)
-#       expect(registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
-#    #testing registrant 3 that has no permit 
-#       expect(registrant_3.age).to eq(15)
-#       expect(registrant_3.permit?).to eq(false)
-#       expect(facility_1.administer_written_test(registrant_3)).to eq(false)
-#       registrant_3.earn_permit
-#    #testing registrant 3 that isn't old enough for written test
-#       expect(facility_1.administer_written_test(registrant_3)).to eq(false)
-#       expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-#       expect().to eq()
-#     end
-#   end
+      expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(registrant_1.permit?).to eq(true)
+   #check cannot administer test without service
+      expect(@facility_1.administer_written_test(registrant_1)).to eq(false)
+      expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect(@facility_1.add_service('Written Test')).to eq(@facility_1.services)
+   #can administer test after adding service
+      expect(@facility_1.administer_written_test(registrant_1)).to eq(true)
+      expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+   #testing second registrant that has no permit
+      expect(registrant_2.age).to eq(16)
+      expect(registrant_2.permit?).to eq(false)
+      expect(@facility_1.administer_written_test(registrant_2)).to eq(false)
+      registrant_2.earn_permit
+      expect(@facility_1.administer_written_test(registrant_2)).to eq(true)
+      expect(registrant_2.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+   #testing registrant 3 that has no permit 
+      expect(registrant_3.age).to eq(15)
+      expect(registrant_3.permit?).to eq(false)
+      expect(facility_1.administer_written_test(registrant_3)).to eq(false)
+      registrant_3.earn_permit
+   #testing registrant 3 that isn't old enough for written test
+      expect(facility_1.administer_written_test(registrant_3)).to eq(false)
+      expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+      expect().to eq()
+    end
+  end
 
 # does starting new describe block require new set up? (written test updating?)
 #   describe '#administer_road_test' do

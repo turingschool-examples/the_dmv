@@ -38,14 +38,18 @@ class Facility
     end
   end
 
-  # def administer_written_test(registrant)
-# #need to work on boolean logic sequencing to reduce code
-#     if @services.include("Written Test") && registrant.permit? && registrant.age >= 16
-#       registrant.license_data[:written] = true
-#     elsif registrant.permit? == false
-#       false
-
-#   end
+  def administer_written_test(registrant)
+    if @services.include?("Written Test")
+      if registrant.permit? == false
+        if registrant.age >= 16
+          registrant.license_data[:written] = true
+        else false
+        end
+      else false
+      end
+    else false
+    end
+  end
 
 #   def administer_road_test(registrant)
 # #boolean logic sequence with conditionals
