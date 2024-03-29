@@ -1,19 +1,21 @@
 class Registrant
-    attr_reader :name, :age, :permit
-
-    def initialize(name, age, permit)
+    attr_reader :name, :age, :permit, :license_data
+    def initialize(name, age, permit = nil)
         @name = name
         @age = age
-        @permit = permit
-        @license_data = {}
+        @permit = permit unless permit.nil? do
+        end
+        @license_data = {:written => false, :license => false, :renewed => false}
     end
 
     def permit?
-        if permit == true
-        return true
-        else 
+        if permit == nil
         return false
+        else 
+            permit == true
+        return true
         end
     end
 
+    
 end
