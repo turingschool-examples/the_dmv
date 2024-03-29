@@ -92,5 +92,18 @@ RSpec.describe Facility do
           expect(@cruz.plate_type).to eq(:regular)
         end
       end
+
+    it 'can set plate type of vehicles once registered' do
+      @facility_1.add_service('Vehicle Registration')
+      expect(@camaro.plate_type).to eq(nil)
+      @facility_1.register_vehicle(@camaro)
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@bolt.plate_type).to eq(nil)
+      @facility_1.register_vehicle(@bolt)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@cruz.plate_type).to eq(nil)
+      @facility_1.register_vehicle(@cruz)
+      expect(@cruz.plate_type).to eq(:regular)
+    end
   end
 end
