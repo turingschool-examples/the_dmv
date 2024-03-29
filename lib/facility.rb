@@ -24,6 +24,7 @@ class Facility
       @registered_vehicles << vehicle
       collect_fees(vehicle)
       set_plate_type(vehicle)
+      set_registration_date(vehicle)
     end
   end
 
