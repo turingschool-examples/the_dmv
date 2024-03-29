@@ -38,16 +38,25 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([])
       expect(@facility_1.collected_fees).to eq(0)
       expect(@facility_1.register_vehicle(@cruz)).to eq(@facility_1.registered_vehicles)
-#files tested only until here
-#need to find how to change registration_date of @cruz with facility #register_vehicle.
-# expect(@cruz.registration_date).to be_an_instance_of(Date)
+      expect(@cruz.registration_date).to be_an_instance_of(Date)
       expect(@cruz.plate_type).to eq(:regular)
 
-      # expect(@facility_1.registered_vehicles).to eq([@cruz])
-      # expect(@).to eq()
-      # expect(@).to eq()
-      # expect(@).to eq()
-      # expect(@).to eq()
+      expect(@facility_1.registered_vehicles).to eq([@cruz])
+      expect(@facility_1.collected_fees).to eq(100)
+      expect(@facility_1.register_vehicle(@camaro)).to eq(@facility_1.registered_vehicles)
+      expect(@camaro.registration_date).to be_instance_of(Date)
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@facility_1.register_vehicle(@bolt)).to eq(@facility_1.registered_vehicles)
+      expect(@bolt.registration_date).to be_an_instance_of(Date)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+      expect(@facility_1.collected_fees).to eq(325)
+    #check that facility_2 is unchanged after updated facilty_1
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.services).to eq([])
+      expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.collected_fees).to eq(0)
     end
   end
 
@@ -87,6 +96,7 @@ RSpec.describe Facility do
 #     end
 #   end
 
+# does starting new describe block require new set up? (written test updating?)
 #   describe '#administer_road_test' do
 #     it 'can administer road test' do
 #       registrant_1 = Registrant.new('Bruce', 18, true )
@@ -108,6 +118,24 @@ RSpec.describe Facility do
 #       expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
 #     end
 #   end
+
+# does starting new describe block require new set up? (written test and road test/license updating?)
+#     describe '#renew_license' do
+#       it 'can renew license' do
+
+#     #check cannot renew without service
+#       expect(facility_1.renew_drivers_license(registrant_1)).to eq(false)
+#       expect(facility_1.add_service('Renew License')).to eq(["Written Test", "Road Test", "Renew License"])
+#       expect(facility_1.renew_drivers_license(registrant_1)).to eq(true)
+#       expect(registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+#     #check 
+#       expect(facility_1.renew_drivers_license(registrant_3)).to eq(false)
+#       expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+#       expect(facility_1.renew_drivers_license(registrant_2)).to eq(true)
+#       expect(registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>true})
+#       end
+#     end
+
 
 
 end
