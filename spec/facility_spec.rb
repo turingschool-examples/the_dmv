@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'date'
 
 RSpec.describe Facility do
   before(:each) do
@@ -40,4 +41,8 @@ RSpec.describe Facility do
     expect(@facility_1.register_vehicle(@cruz)).to eq([@cruz])
   end
 
+  it "can create a registration date" do
+    @facility_1.register_vehicle(@cruz)
+    expect(@cruz.registration_date).to eq(Date.today)
+  end
 end
