@@ -17,5 +17,9 @@ class Registrant
         end
     end
 
-    
+    def earn_permit
+        if @permit == nil || @permit == false
+            return true
+        end
+    end
 end
