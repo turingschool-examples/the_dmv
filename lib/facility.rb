@@ -25,25 +25,17 @@ class Facility
   end
 
   def collected_fees
-    @collected_fees = 0
+    @collected_fees = 0 + @fee_sum.to_i
   end
 
   def register_vehicle(vehicle)
     @registered_vehicles = []
-    @collected_fees = 0
+    @fee_sum = 0
      if @services.include?("Vehicle Registration")
       vehicle.registration_date = Date.today
-      if vehicle.antique?
-        @collected_fees += 25
-      elsif vehicle.electric_vehicle?
-        @collected_fees += 200
-      else
-        @collected_fees += 100
-      end
+      fees_charged = {:antique => 25, :ev => 200, :regular => 100} 
+      @fee_sum += fees_charged[vehicle.plate_type]
       @registered_vehicles << vehicle
-      # fees_charged = {:antique => 25, :ev => 200, :regular => 100}
-      # @collected_fees += fees_charged[vehicle.plate_type]
-      # require 'pry';binding.pry
       @registered_vehicles
     end
   end

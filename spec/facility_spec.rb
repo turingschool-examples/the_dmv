@@ -58,11 +58,25 @@ RSpec.describe Facility do
     expect(@cruz.registration_date).to eq(Date.today)
   end
 
-  it "collects $25 for antique cars" do
+  it "collects $25 for antique vehicles" do
     @facility_1.add_service("Vehicle Registration")
     @facility_1.register_vehicle(@camaro)
 
     expect(@facility_1.collected_fees).to eq(25)
+  end
+
+  it "collects $200 for electric vehicles" do
+    @facility_1.add_service("Vehicle Registration")
+    @facility_1.register_vehicle(@bolt)
+
+    expect(@facility_1.collected_fees).to eq(200)
+  end
+
+  it "collects $100 for regular vehicles" do
+    @facility_1.add_service("Vehicle Registration")
+    @facility_1.register_vehicle(@cruz)
+
+    expect(@facility_1.collected_fees).to eq(100)
   end
 
 end
