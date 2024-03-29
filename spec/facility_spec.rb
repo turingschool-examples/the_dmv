@@ -41,7 +41,7 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
     end
 
-      describe '#collect_fees helper' do
+      describe '#collect_fees helper' do #can collect ...
         it 'has 0 collected fees to start' do
           expect(@facility_1.collected_fees).to eq(0)
         end
@@ -62,7 +62,7 @@ RSpec.describe Facility do
         end
       end
 
-    it 'collects fees once vehicles are registered' do
+    it 'collects fees once vehicles are registered' do #can collect ...
       @facility_1.add_service('Vehicle Registration')
       expect(@facility_1.collected_fees).to eq(0)
       @facility_1.register_vehicle(@camaro)
@@ -73,7 +73,7 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(325)
     end
 
-      describe '#set_plate_type helper' do
+      describe '#set_plate_type helper' do #can set ...
         it 'sets correct plate type for antique vehicles' do
           expect(@camaro.plate_type).to eq(nil)
           @facility_1.set_plate_type(@camaro)
@@ -105,5 +105,19 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@cruz)
       expect(@cruz.plate_type).to eq(:regular)
     end
+
+      describe '#set_registration_date helper' do
+        it 'can set correct registration date for each vehicle' do
+          expect(@camaro.registration_date).to eq(nil)
+          @facility_1.set_registration_date(@camaro)
+          expect(@camaro.registration_date).to be_an_instance_of(Date) #is this how to test?
+          expect(@bolt.registration_date).to eq(nil)
+          @facility_1.set_registration_date(@bolt)
+          expect(@bolt.registration_date).to be_an_instance_of(Date)
+          expect(@cruz.registration_date).to eq(nil)
+          @facility_1.set_registration_date(@cruz)
+          expect(@cruz.registration_date).to be_an_instance_of(Date)
+        end
+      end
   end
 end
