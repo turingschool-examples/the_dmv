@@ -9,6 +9,7 @@ class Facility
         @address = facility_hash[:address]
         @phone = facility_hash[:phone]
         @services = []
+        @collected_fees = 0
     end
 
     def add_service(service)
