@@ -9,6 +9,6 @@ RSpec.describe Registrant do
             expect(@registrant_1).to be_a(Registrant)
             expect(@registrant_1.name).to eq('Bruce')
             expect(@registrant_1.age).to be(18)
-            expect(@registrant_1.permit).to be(true)
+            expect(@registrant_1.permit?).to eq(true)
     end
 end

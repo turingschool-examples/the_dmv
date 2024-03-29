@@ -9,4 +9,8 @@ class Registrant
         @age = age
         @permit = permit
     end
+
+    def permit?
+       permit == true
+    end
 end
