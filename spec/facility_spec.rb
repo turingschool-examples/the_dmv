@@ -132,5 +132,17 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@cruz)
       expect(@cruz.registration_date).to be_an_instance_of(Date)
     end
+
+    describe 'Only facilities offering Vehicle Registration can perform service' do
+      it 'cannot register vehicles' do
+        expect(@facility_2.services).to be_empty
+        expect(@facility_2.registered_vehicles).to be_empty
+        expect(@facility_2.register_vehicle(@bolt)).to eq(nil)
+        expect(@bolt.registration_date).to eq(nil)
+        expect(@bolt.plate_type).to eq(nil)
+        expect(@facility_2.registered_vehicles).to be_empty
+        expect(@facility_2.collected_fees).to eq(0)
+      end
+    end
   end
 end
