@@ -41,29 +41,49 @@ RSpec.describe Facility do
   describe 'register_vehicle' do
     it 'can register a vehicle' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-      expect(@facility.register_vehicle(cruz)).to eq([cruz])
+
+      @facility.add_service('Vehicle Registration')
+      @facility.register_vehicle(cruz)
+
+      expect(@facility.registered_vehicles).to eq([cruz])
+      expect(@facility.collected_fees).to eq(100)
+      expect(cruz.plate_type).to eq("regular")
+      expect(cruz.registration_date).to eq(Date.today)
     end
   end
 
   describe 'registration_fee' do
-    it 'can calculate registration fee' do
+    it 'can calculate registration fee and update collected fees' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-      @facility.register_vehicle(cruz)
-      expect(@facility.registration_fee).to eq(100)
-    end
-
-    it 'updates collected fees' do
-      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-      @facility.register_vehicle(cruz)
+      @facility.registration_fee(cruz)
       expect(@facility.collected_fees).to eq(100)
     end
+
+    # it 'updates collected fees' do
+    #   cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+    #   @facility.register_vehicle(cruz)
+    #   expect(@facility.collected_fees).to eq(100)
+    # end
   end
 
   describe 'update_plate_type' do
     it 'can update plate type' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-      @facility.update_plate_type
-      expect(@facility.plate_type).to eq('regular')
+
+      @facility.update_plate_type(cruz)
+
+      expect(cruz.plate_type).to eq('regular')
     end
   end
+
+  describe 'update_registered_vehicles' do
+    it 'can update array of vehicles' do
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+
+      @facility.update_registered_vehicles(cruz)
+
+      expect(@facility.registered_vehicles).to eq([cruz])
+    end
+  end
+
 end
