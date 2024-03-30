@@ -115,7 +115,7 @@ RSpec.describe Facility do
       # end
   end
 
-  describe 'earn permit' do
+  describe 'permit necessary for written test' do
      it 'can only give written tests if registrant has a permit' do
          registrant_2 = Registrant.new('Penny', 16 )
          @facility_1.add_service('Written Test')
@@ -127,13 +127,6 @@ RSpec.describe Facility do
          expect(registrant_2.permit?).to eq(true)
          @facility_1.administer_written_test(registrant_2)
          expect(registrant_2.license_data[:written]).to eq(true)
-     end
-
-     it 'applicant must have taken the written test' do
-         registrant_2 = Registrant.new('Penny', 16 )
-         registrant_2.earn_permit
-
-         expect(registrant_2.permit?).to eq(true)
      end
   end
 end
