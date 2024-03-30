@@ -54,19 +54,11 @@ RSpec.describe Vehicle do
     end
   end
 
-    # describe '#set_registration_date helper' do
-  #   it 'can set correct registration date for each vehicle' do
-  #     expect(@camaro.registration_date).to eq(nil)
-  #     @facility_1.set_registration_date(@camaro)
-  #     expect(@camaro.registration_date).to be_an_instance_of(Date)
-
-  #     expect(@bolt.registration_date).to eq(nil)
-  #     @facility_1.set_registration_date(@bolt)
-  #     expect(@bolt.registration_date).to be_an_instance_of(Date)
-
-  #     expect(@cruz.registration_date).to eq(nil)
-  #     @facility_1.set_registration_date(@cruz)
-  #     expect(@cruz.registration_date).to be_an_instance_of(Date)
-  #   end
-  # end
+    describe '#set_registration_date' do
+    it 'can set correct a registration date' do
+      expect(@camaro.registration_date).to eq(nil)
+      @camaro.set_registration_date
+      expect(@camaro.registration_date).to be_an_instance_of(Date)
+    end
+  end
 end
