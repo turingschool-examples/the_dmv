@@ -107,7 +107,7 @@ RSpec.describe Facility do
       end
   end
 
-  describe 'permit necessary for written test' do
+  describe '#permit necessary for written test' do
      it 'can only give written tests if registrant has a permit' do
          registrant_2 = Registrant.new('Penny', 16 )
          @facility_1.add_service('Written Test')
@@ -117,8 +117,35 @@ RSpec.describe Facility do
 
          registrant_2.earn_permit
          expect(registrant_2.permit?).to eq(true)
+
          @facility_1.administer_written_test(registrant_2)
          expect(registrant_2.license_data[:written]).to eq(true)
      end
+  end
+
+  describe '#license renewal' do
+      it 'can renew a license' do
+          @facility_1.add_service('Written Test')
+          @facility_1.add_service('Road Test')
+          facility_1.add_service('Renew License')
+          registrant_1 = Registrant.new('Bruce', 18, true )
+          @facility_1.administer_written_test(registrant_1)
+          @facility_1.administer_road_test(registrant_1)
+
+          expect(registrant_1.license_data[:renewed]).to eq(false)
+
+          @facility_1.renew_license(registrant_1)
+
+          expect(registrant_1.license_data[:renewed]).to eq(true)
+      end
+
+      it 'will not renew if there is no license' do
+          facility_1.add_service('Renew License')
+          registrant_2 = Registrant.new('Penny', 16 )
+
+          @facility_1.renew_license(registrant_2)
+
+          expect(registrant_2.license_data[:renewed]).to eq(false)
+      end
   end
 end
