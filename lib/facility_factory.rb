@@ -10,4 +10,8 @@ class FacilityFactory
             Facility.new(facility_details)
         end
     end
+
+    def format_co_address(address_1, address_2, city, state, zip)
+        "#{address_1} #{address_2} #{city} #{state} #{zip}"
+    end
 end
