@@ -116,20 +116,24 @@ RSpec.describe Facility do
   end
 
   describe 'earn permit' do
-     it 'can give permits to registrants over 16 years old' do
+     it 'can only give written tests if registrant has a permit' do
          registrant_2 = Registrant.new('Penny', 16 )
          @facility_1.add_service('Written Test')
-         @facility_1.administer_written_test(registrant_1)
-         registrant_2.earn_permit
+         @facility_1.administer_written_test(registrant_2)
+         expect(registrant_2.permit?).to eq(false)
+         expect(registrant_2.license_data[:written]).to eq(false)
 
+         registrant_2.earn_permit
          expect(registrant_2.permit?).to eq(true)
+         @facility_1.administer_written_test(registrant_2)
+         expect(registrant_2.license_data[:written]).to eq(true)
      end
 
      it 'applicant must have taken the written test' do
          registrant_2 = Registrant.new('Penny', 16 )
          registrant_2.earn_permit
 
-         expect(registrant_2.permit?).to eq(false)
+         expect(registrant_2.permit?).to eq(true)
      end
   end
 end
