@@ -23,5 +23,16 @@ RSpec.describe VehicleFactory do
             expect(@factory.create_vehicles(@wa_ev_registrations).first).to be_an_instance_of(Vehicle)
             expect(@factory.create_vehicles(@wa_ev_registrations).last).to be_an_instance_of(Vehicle)
         end
+
+        it 'has correct data for first Vehicle instance created' do
+            first_vehicle = @factory.create_vehicles(@wa_ev_registrations).first
+            expect(first_vehicle.engine).to eq(:ev)
+            expect(first_vehicle.make).to eq('TESLA')
+            expect(first_vehicle.model).to eq('Model Y')
+            expect(first_vehicle.plate_type).to eq(:ev)
+            expect(first_vehicle.registration_date).to eq("2023-06-28T00:00:00.000")
+            expect(first_vehicle.vin).to eq("7SAYGDEE0P")
+            expect(first_vehicle.year).to eq(2023)
+        end
     end
 end
