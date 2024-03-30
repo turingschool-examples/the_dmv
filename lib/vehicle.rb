@@ -16,6 +16,7 @@ class Vehicle
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
     @registration_date = vehicle_details[:registration_date]
+    # @is_this_nil = vehicle_details[:experiment]
   end
 
   def antique?
