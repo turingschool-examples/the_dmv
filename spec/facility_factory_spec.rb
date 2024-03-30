@@ -5,10 +5,16 @@ RSpec.describe FacilityFactory do
         @factory = FacilityFactory.new
         @co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
     end
-    
+
     describe 'loads data' do
         it 'loads CO DMV data' do
             expect(@co_dmv_office_locations).to be_an_instance_of(Array)
+        end
+    end
+
+    describe '#initialize' do
+        it 'exists' do
+            expect(@factory).to be_an_instance_of(FacilityFactory)
         end
     end
 end
