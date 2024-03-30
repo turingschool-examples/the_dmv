@@ -87,4 +87,11 @@ RSpec.describe FacilityFactory do
             expect(@factory.format_co_address('address_1', 'address_2', 'city', 'state', 'zip')).to eq(expected)
         end
     end
+
+    describe '#format_ny_address' do
+        it 'has proper formatting for NY addresses' do
+            expected = 'address city state zip'
+            expect(@factory.format_co_address('address', 'city', 'state', 'zip')).to eq(expected)
+        end
+    end
 end
