@@ -45,4 +45,11 @@ RSpec.describe FacilityFactory do
             expect(facilities.first.phone).to be_a(String)
         end
     end
+
+    describe '#format_co_address' do
+        it 'has proper formatting for CO addresses' do
+            expected = 'address_1 address_2 city state zip'
+            expect(@factory.format_co_address('address_1', 'address_2', 'city', 'state', 'zip')).to eq(expected)
+        end
+    end
 end
