@@ -24,7 +24,7 @@ class Facility
       @registered_vehicles << vehicle
       collect_fees(vehicle)
       vehicle.set_plate_type
-      set_registration_date(vehicle)#vehicle.set_registration_date
+      vehicle.set_registration_date
     end
   end
 
@@ -36,10 +36,6 @@ class Facility
     else
       @collected_fees += 100
     end
-  end
-
-  def set_registration_date(vehicle) #move to vehicle class - responsibilty of Vehicle object to change its own attributes
-    vehicle.registration_date = Date.today
   end
 
   def administer_written_test(registrant)
