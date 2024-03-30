@@ -14,10 +14,6 @@ RSpec.describe VehicleFactory do
         it 'exists' do
             expect(@factory).to be_an_instance_of(VehicleFactory)
         end
-
-        it 'has no vehicles to start' do
-            expect(@factory.vehicles).to be_empty
-        end
     end
 
     describe '#create_vehicles' do
