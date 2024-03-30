@@ -4,7 +4,8 @@ class FacilityFactory
         facility_data.map do |facility|
             facility_details = {
                 name: facility[:dmv_office],
-                address: facility[:address_li],
+                address: format_co_address(facility[:address_li], facility[:address__1], 
+                facility[:city], facility[:state], facility[:zip]),
                 phone: facility[:phone]
             }
             Facility.new(facility_details)
