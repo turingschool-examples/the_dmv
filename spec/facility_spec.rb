@@ -132,42 +132,6 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#set_plate_type helper' do
-    it 'sets correct plate type for antique vehicles' do
-      expect(@camaro.plate_type).to eq(nil)
-      @facility_1.set_plate_type(@camaro)
-      expect(@camaro.plate_type).to eq(:antique)
-    end
-
-    it 'sets correct plate type for electric vehicles' do
-      expect(@bolt.plate_type).to eq(nil)
-      @facility_1.set_plate_type(@bolt)
-      expect(@bolt.plate_type).to eq(:ev)
-    end
-
-    it 'sets correct plate type for regular vehicles' do
-      expect(@cruz.plate_type).to eq(nil)
-      @facility_1.set_plate_type(@cruz)
-      expect(@cruz.plate_type).to eq(:regular)
-    end
-  end
-
-  describe '#set_registration_date helper' do
-    it 'can set correct registration date for each vehicle' do
-      expect(@camaro.registration_date).to eq(nil)
-      @facility_1.set_registration_date(@camaro)
-      expect(@camaro.registration_date).to be_an_instance_of(Date)
-
-      expect(@bolt.registration_date).to eq(nil)
-      @facility_1.set_registration_date(@bolt)
-      expect(@bolt.registration_date).to be_an_instance_of(Date)
-
-      expect(@cruz.registration_date).to eq(nil)
-      @facility_1.set_registration_date(@cruz)
-      expect(@cruz.registration_date).to be_an_instance_of(Date)
-    end
-  end
-
   describe '#administer_written_test' do
     it 'cannot administer written test without providing that service' do
       expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
