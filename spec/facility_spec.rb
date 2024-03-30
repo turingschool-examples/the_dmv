@@ -105,14 +105,6 @@ RSpec.describe Facility do
 
           expect(registrant_1.license_data[:license]).to eq(true)
       end
-
-      # it 'gives a license to all those who are allowed to take the road test' do
-      #     registrant_1 = Registrant.new('Bruce', 18, true )
-      #     @facility_1.add_service('Written Test')
-      #     @facility_1.add_service('Road Test')
-      #     @facility_1.administer_written_test(registrant_1)
-      #     @facility_1.administer_road_test(registrant_1)
-      # end
   end
 
   describe 'permit necessary for written test' do
