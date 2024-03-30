@@ -1,5 +1,9 @@
 require 'spec_helper'
 
+RSpec.configure do |config|
+  config.formatter = :documentation
+end
+
 RSpec.describe Vehicle do
   before(:each) do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
@@ -33,4 +37,33 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+    describe '#electric_vehicle?' do
+    it 'can determine if a vehicle is an ev' do
+      expect(@cruz.electric_vehicle?).to eq(false)
+      expect(@bolt.electric_vehicle?).to eq(true)
+      expect(@camaro.electric_vehicle?).to eq(false)
+    end
+  end
+
+  describe '#reg_date' do
+  it 'can set a registration date' do
+      @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      @facility.add_service('Vehicle Registration')
+      @facility.register_vehicle(@cruz)
+
+      expect(@cruz.set_registration_date(Date.today)).to eq(Date.today)
+    end
+  end
+
+  describe '#plate_type' do
+  it 'can set a plate_type' do
+      @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      @facility.add_service('Vehicle Registration')
+      @facility.register_vehicle(@cruz)
+
+      expect(@cruz.set_plate_type(:regular)).to eq(:regular)
+    end
+  end
+
 end
