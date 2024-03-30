@@ -24,7 +24,7 @@ RSpec.describe FacilityFactory do
     end
 
     describe '#create_facilities' do
-        describe 'creating CO facilities' do
+        describe 'creating CO facilities' do #make tests more specific
             it 'can use data to create new CO DMV Facility instances' do
                 facilities = @factory.create_facilities(@co_dmv_office_locations)
                 expect(facilities).to be_an_instance_of(Array)
@@ -52,7 +52,7 @@ RSpec.describe FacilityFactory do
             end
         end
 
-        describe 'creating NY facilities' do
+        describe 'creating NY facilities' do #make tests more specific
             it 'can use data to create new NY DMV Facility instances' do
                 facilities = @factory.create_facilities(@new_york_facilities)
                 expect(facilities).to be_an_instance_of(Array)
@@ -81,17 +81,10 @@ RSpec.describe FacilityFactory do
         end
     end
 
-    describe '#format_co_address' do
-        it 'has proper formatting for CO addresses' do
+    describe '#format_address' do
+        it 'has proper formatting for addresses' do
             expected = 'address_1 address_2 city state zip'
-            expect(@factory.format_co_address('address_1', 'address_2', 'city', 'state', 'zip')).to eq(expected)
-        end
-    end
-
-    describe '#format_ny_address' do
-        it 'has proper formatting for NY addresses' do
-            expected = 'address city state zip'
-            expect(@factory.format_ny_address('address', 'city', 'state', 'zip')).to eq(expected)
+            expect(@factory.format_address('address_1', 'address_2', 'city', 'state', 'zip')).to eq(expected)
         end
     end
 end
