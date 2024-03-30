@@ -28,6 +28,24 @@ class Facility
         end
     end
 
+    def administer_written_test(registrant)
+        if @services.find('Written Test') && registrant.age >= 16 && registrant.permit == true
+            registrant.license_data[:written] = true
+        end
+    end
+
+    def renew_license(registrant)
+        if @services.find('Renew License') && registrant.license_data[:license] == true
+            registrant.license_data[:renewed] = true
+        end
+    end
+
+    def administer_road_test(registrant)
+        if @services.find('Road Test') && registrant.license_data[:written] == true
+            registrant.license_data[:license] = true
+        end
+    end
+
     def collect_fees(vehicle)
         if vehicle.antique?
             @collected_fees += 25

@@ -21,7 +21,10 @@ RSpec.describe Registrant do
        expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
 
-    it "can earn a permit" do
-        expect(@registrant_2.earn_permit).to eq(true)
+    it "can earn a permit if have passed the written test and is over 16" do
+        @registrant_2.earn_permit
+        expect(@registrant_2.permit?).to eq(true)
     end
+
+    #write a test for the helper method permit?
 end
