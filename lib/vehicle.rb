@@ -5,10 +5,9 @@ class Vehicle
               :year,
               :make,
               :model,
-              :engine
-
-  attr_accessor :registration_date,
-                :plate_type
+              :engine,
+              :plate_type,
+              :registration_date
 
   def initialize(vehicle_details)
     @vin = vehicle_details[:vin]
@@ -27,4 +26,21 @@ class Vehicle
   def electric_vehicle?
     @engine == :ev
   end
+
+  #method to change plate type replace attr_accessor
+  def update_plate_type(vehicle)
+    if vehicle.antique?
+      @plate_type = 'antique'
+    elsif vehicle.electric_vehicle?
+      @plate_type = 'electric'
+    else
+      @plate_type = 'regular'
+    end
+  end
+
+  #method to change registration date
+  def update_registration_date
+    @registration_date = Date.today
+  end
+  
 end

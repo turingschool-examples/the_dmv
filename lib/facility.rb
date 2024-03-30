@@ -22,13 +22,12 @@ class Facility
   def register_vehicle(vehicle)
     if @services.include?('Vehicle Registration')
       registration_fee(vehicle)
-      # @collected_fees += registration_fee
-      vehicle.registration_date = Date.today
-      update_plate_type(vehicle)
+      vehicle.update_registration_date
+      vehicle.update_plate_type(vehicle)
       update_registered_vehicles(vehicle)
       
     else
-      nil
+      "Facility does not offer this service"
     end
   end
 
@@ -37,15 +36,15 @@ class Facility
 
   end
 
-  def update_plate_type(vehicle)
-    if vehicle.antique?
-      vehicle.plate_type = 'antique'
-    elsif vehicle.electric_vehicle?
-      vehicle.plate_type = 'electric'
-    else
-      vehicle.plate_type = 'regular'
-    end
-  end
+  # def update_plate_type(vehicle)
+  #   if vehicle.antique?
+  #     vehicle.plate_type = 'antique'
+  #   elsif vehicle.electric_vehicle?
+  #     vehicle.plate_type = 'electric'
+  #   else
+  #     vehicle.plate_type = 'regular'
+  #   end
+  # end
 
   def registration_fee(vehicle)
     if vehicle.antique?
@@ -56,5 +55,37 @@ class Facility
       @collected_fees = 100
     end
   end
-end
 
+  def administer_written_test(registrant)
+    if @services.include?('Written Test')
+      registrant.license_data[:written] = true
+    else
+      "Facility does not offer this service"
+    end
+  end
+
+  def administer_road_test(registrant)
+    if @services.include?('Driving Test') 
+      if registrant.license_data[:written] == true
+        return registrant.license_data[:license] = true
+      else
+        "applicant is not eligible for license"
+      end
+    else
+      "Facility does not offer this service"
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    if @services.include?('License Renewal') 
+      if registrant.license_data[:license] == true
+        return registrant.license_data[:renewed] = true
+      else
+        "applicant is not eligible for renewal"
+      end
+    else
+      "Facility does not offer this service"
+    end
+  end
+
+end

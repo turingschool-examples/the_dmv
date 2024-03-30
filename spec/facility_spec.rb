@@ -55,7 +55,9 @@ RSpec.describe Facility do
   describe 'registration_fee' do
     it 'can calculate registration fee and update collected fees' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+
       @facility.registration_fee(cruz)
+
       expect(@facility.collected_fees).to eq(100)
     end
 
@@ -70,7 +72,7 @@ RSpec.describe Facility do
     it 'can update plate type' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
 
-      @facility.update_plate_type(cruz)
+      cruz.update_plate_type(cruz)
 
       expect(cruz.plate_type).to eq('regular')
     end
@@ -96,13 +98,12 @@ RSpec.describe Facility do
       expect(registrant_1.license_data[:written]).to eq(true)
     end
   end
-  #administer_written_test method
-  #change license data
 
   describe 'administer_road_test' do
     it 'administer test and update license_data' do
       registrant_1 = Registrant.new('Bruce', 18, true )
       @facility.add_service('Written Test')
+      @facility.add_service('Driving Test')
 
       @facility.administer_written_test(registrant_1)
       @facility.administer_road_test(registrant_1)
@@ -110,13 +111,13 @@ RSpec.describe Facility do
       expect(registrant_1.license_data[:license]).to eq(true)
     end
   end
-  #administer_road_test
-  #change licence on license data true IF passed both^^
 
   describe 'renew_drivers_license' do
     it 'renew license if someone is a licensed driver' do
       registrant_1 = Registrant.new('Bruce', 18, true )
       @facility.add_service('Written Test')
+      @facility.add_service('Driving Test')
+      @facility.add_service('License Renewal')
 
       @facility.administer_written_test(registrant_1)
       @facility.administer_road_test(registrant_1)
@@ -125,7 +126,36 @@ RSpec.describe Facility do
       expect(registrant_1.license_data[:renewed]).to eq(true)
     end
   end
-  #renew_drivers_license
-  #can renew if registrant has a license, check license data
 
+  # FAILING TESTS DUE TO MISSING SERVICE
+
+  describe 'Facility does not offer this service' do
+    it 'returns message when service is not available' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      expect(@facility.administer_written_test(registrant_1)).to eq("Facility does not offer this service")
+    end
+  end
+
+  describe 'Facility does not offer this service' do
+    it 'returns message when service is not available' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      expect(@facility.administer_road_test(registrant_1)).to eq("Facility does not offer this service")
+    end
+  end
+
+  describe 'Facility does not offer this service' do
+    it 'returns message when service is not available' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      expect(@facility.renew_drivers_license(registrant_1)).to eq("Facility does not offer this service")
+    end
+  end
+
+  describe 'Facility does not offer this service' do
+    it 'returns message when service is not available' do
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      expect(@facility.register_vehicle(cruz)).to eq("Facility does not offer this service")
+    end
+  end
+
+  # TEST FOR FLIPPED EXPECTATION
 end
