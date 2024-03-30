@@ -127,7 +127,7 @@ RSpec.describe Facility do
       it 'can renew a license' do
           @facility_1.add_service('Written Test')
           @facility_1.add_service('Road Test')
-          facility_1.add_service('Renew License')
+          @facility_1.add_service('Renew License')
           registrant_1 = Registrant.new('Bruce', 18, true )
           @facility_1.administer_written_test(registrant_1)
           @facility_1.administer_road_test(registrant_1)
@@ -140,7 +140,7 @@ RSpec.describe Facility do
       end
 
       it 'will not renew if there is no license' do
-          facility_1.add_service('Renew License')
+          @facility_1.add_service('Renew License')
           registrant_2 = Registrant.new('Penny', 16 )
 
           @facility_1.renew_license(registrant_2)
