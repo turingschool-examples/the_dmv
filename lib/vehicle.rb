@@ -14,7 +14,7 @@ class Vehicle
         @year = vehicle_details[:model_year]
         @make = vehicle_details[:make]
         @model = vehicle_details[:model]
-        @engine = "EV"
+        @engine = vehicle_details[:engine]
         @registration_date = nil
         @plate_type = nil
     end

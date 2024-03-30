@@ -29,41 +29,41 @@ RSpec.describe Facility do
 
   describe '#register vehicle' do
      it 'can register a vehicle' do
-        cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+        cruz = Vehicle.new({vin_1_10: '123456789abcdefgh', model_year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
         @facility_1.add_service('Vehicle Registration')
         expect(@facility_1.register_vehicle(cruz)).to eq([cruz])
      end
 #test the sad path
      it 'can record the registration date' do
-         cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+         cruz = Vehicle.new({vin_1_10: '123456789abcdefgh', model_year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
          @facility_1.add_service('Vehicle Registration')
          @facility_1.register_vehicle(cruz)
          expect(cruz.registration_date).to eq(Date.today)
      end
 
      it 'can determine correct plate type' do
-         cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+         cruz = Vehicle.new({vin_1_10: '123456789abcdefgh', model_year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
          @facility_1.add_service('Vehicle Registration')
          @facility_1.register_vehicle(cruz)
          expect(cruz.plate_type).to eq(:regular)
      end
 
      it 'can register multiple plate types' do
-         camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+         camaro = Vehicle.new({vin_1_10: '1a2b3c4d5e6f', model_year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
          @facility_1.add_service('Vehicle Registration')
          @facility_1.register_vehicle(camaro)
          expect(camaro.plate_type).to eq(:antique)
      end
 
      it 'can charge registration fees' do
-         cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+         cruz = Vehicle.new({vin_1_10: '123456789abcdefgh', model_year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
          @facility_1.add_service('Vehicle Registration')
          @facility_1.register_vehicle(cruz)
          expect(@facility_1.collected_fees).to eq(100)
      end
 
      it 'can charge different amounts for different plate types' do
-         bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+         bolt = Vehicle.new({vin_1_10: '987654321abcdefgh', model_year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
          @facility_1.add_service('Vehicle Registration')
          @facility_1.register_vehicle(bolt)
          expect(@facility_1.collected_fees).to eq(200)
