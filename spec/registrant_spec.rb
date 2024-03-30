@@ -65,4 +65,14 @@ RSpec.describe Registrant do
             expect(@registrant_1.license_data).to eq({:written=>false, :license=>true, :renewed=>false})
         end
     end
+
+    describe '#drivers_license_renewal' do
+        it 'can change value of license_data[:renewed] to true' do
+            expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+
+            @registrant_1.drivers_license_renewal
+
+            expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>true})
+        end
+    end
 end
