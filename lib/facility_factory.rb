@@ -19,6 +19,14 @@ class FacilityFactory
                     phone: facility[:public_phone_number]
                 }
                 Facility.new(facility_details)
+            else facility[:state] == 'MO'
+                facility_details = {
+                    name: facility[:name],
+                    address: format_address(facility[:address1], facility[:address_2], 
+                    facility[:city], facility[:state], facility[:zipcode]),
+                    phone: facility[:phone]
+                }
+                Facility.new(facility_details)
             end
         end
     end
