@@ -66,6 +66,14 @@ RSpec.describe Facility do
   end
 
 
+  describe '#add_service' do
+    it 'can add a service' do
+      @facility.add_service('Written Test')
+
+      expect(@facility.services).to eq(['Written Test'])
+    end
+  end
+
   describe '#cost' do
   it 'can collect fees' do
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
@@ -87,5 +95,45 @@ RSpec.describe Facility do
     # binding.pry
     end
   end
+
+  describe '#administer_written_test' do
+    it 'can assign a written test to a registrant' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      
+      @facility.add_service('Written Test')
+      @facility.administer_written_test(registrant_1)
+
+      expect(registrant_1.license_data[:written]).to eq(true)
+    end
+
+    it 'will not assign a written test if facility does not offer the service' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      
+      @facility.administer_written_test(registrant_1)
+  
+      expect(registrant_1.license_data[:written]).to eq(false)
+      end
+  end
+
+  describe '#administer_road_test' do
+    it 'can assign a road test to a registrant' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      
+      @facility.add_service('Road Test')
+      @facility.administer_road_test(registrant_1)
+
+      expect(registrant_1.license_data[:license]).to eq(true)
+    end
+
+
+    it 'will not assign a written test if facility does not offer the service' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      
+      @facility.administer_road_test(registrant_1)
+
+      expect(registrant_1.license_data[:license]).to eq(false)
+    end
+  end
+
 end
 
