@@ -49,7 +49,7 @@ RSpec.describe Vehicle do
 
     it 'sets correct plate type for regular vehicles' do
       expect(@cruz.plate_type).to eq(nil)
-      @cruz.set_plate_type(@cruz)
+      @cruz.set_plate_type
       expect(@cruz.plate_type).to eq(:regular)
     end
   end
