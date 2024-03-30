@@ -5,4 +5,8 @@ RSpec.describe VehicleFactory do
         @factory = VehicleFactory.new
         @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     end
+
+    it 'loads data for WA EV registrations' do
+        expect(@wa_ev_registrations).to be_an_instance_of(Array)
+    end
 end
