@@ -106,7 +106,7 @@ RSpec.describe Facility do
       expect(registrant_1.license_data[:written]).to eq(true)
     end
 
-    it 'will not assign a written test if facility does not offer the service' do
+    it 'will not assign a written test if facility does not offer written tests' do
       registrant_1 = Registrant.new('Bruce', 18, true )
       
       @facility.administer_written_test(registrant_1)
@@ -126,12 +126,32 @@ RSpec.describe Facility do
     end
 
 
-    it 'will not assign a written test if facility does not offer the service' do
+    it 'will not assign a road test if facility does not offer road tests' do
       registrant_1 = Registrant.new('Bruce', 18, true )
       
       @facility.administer_road_test(registrant_1)
 
       expect(registrant_1.license_data[:license]).to eq(false)
+    end
+  end
+
+  describe '#_renew_drivers_license' do
+    it 'can assign a renewed drivers license to a registrant' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      
+      @facility.add_service('Renew License')
+      @facility.renew_drivers_license(registrant_1)
+
+      expect(registrant_1.license_data[:renewed]).to eq(true)
+    end
+
+
+    it 'will not assign a renewed drivers license if facility does not offer Renew License as a service' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      
+      @facility.renew_drivers_license(registrant_1)
+
+      expect(registrant_1.license_data[:renewed]).to eq(false)
     end
   end
 
