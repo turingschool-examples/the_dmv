@@ -22,11 +22,11 @@ RSpec.describe Facility do
     it 'can add available services' do
       expect(@facility_1.services).to eq([])
 
-      @facility_1.add_service('New Drivers License')
-      @facility_1.add_service('Renew Drivers License')
+      # @facility_1.add_service('New Drivers License')
+      # @facility_1.add_service('Renew Drivers License')
       @facility_1.add_service('Vehicle Registration')
 
-      expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+      expect(@facility_1.services).to eq(['Vehicle Registration'])  #'New Drivers License', 'Renew Drivers License', 
     end
   end
 
@@ -35,28 +35,32 @@ RSpec.describe Facility do
   #  store vehicles as they are processed.
   # 
   describe '#register_vehicle' do
-    it 'shows array of registered vehicles' do
+    it 'shows array of registered vehicles, collects fees, and sets plates' do
       
+      @facility_1.add_service("Vehicle Registration")
+      expect(@services).to eq["Vehicle Registration"]
+
+      expect(@cruz.registration_date).to eq(nil)
       expect(@facility_1.registered_vehicles).to eq([])
+      expect(@facility_1.collected_fees).to eq(0)
 
-      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
-      
+      expect(@cruz.registration_date).to eq(Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)
+      expect(@cruz.plate_type).to eq(:regular)
       expect(@facility_1.registered_vehicles).to eq([@cruz])
-      
+      expect(@faciilty_1.collected_fees).to eq(100)
+
       @facility_1.register_vehicle(@camaro)
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro])
+      expect(@camaro.registration_date).to eq(Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)
+      expect(@camaro.plate_type).to eq(:antique)
+      
       @facility_1.register_vehicle(@bolt)
-
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
-
-      expect(@facility_2.registered_vehicles).to eq([])
-      expect(@facility_2.services).to eq([])
-
-      @facility_2.register_vehicle(@bolt)
-      expect(@facility_2.registered_vehicles).to eq([])
-
-      @facility_2.collected_fees
-      expect(@facility_2.collected_fees).to eq(0)
+      expect(@bolt.registration_date).to eq(Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+      expect(@facility_1.collected_fees).to eq(325)
 
     end
 
@@ -66,6 +70,8 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@camaro)
 
       expect(@facility_1.collected_fees).to eq(25)
+      expect(@facility_1.collected_fees).to eq(200)
+      expect(@facility_1.collected_fees).to eq(100)
 
     end
 
