@@ -113,6 +113,14 @@ RSpec.describe Facility do
   
       expect(registrant_1.license_data[:written]).to eq(false)
       end
+
+    it 'will not assign a written test to anyone under the age of 16' do
+      registrant_3 = Registrant.new('Tucker', 15, true )
+      
+      @facility.administer_written_test(registrant_3)
+  
+      expect(registrant_3.license_data[:written]).to eq(false)
+      end
   end
 
   describe '#administer_road_test' do
