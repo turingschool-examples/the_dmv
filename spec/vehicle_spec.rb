@@ -14,6 +14,7 @@ RSpec.describe Vehicle do
       expect(@cruz.make).to eq('Chevrolet')
       expect(@cruz.model).to eq('Cruz')
       expect(@cruz.engine).to eq(:ice)
+      expect(@cruz.plate_type).to eq(nil)
       expect(@cruz.registration_date).to eq(nil)
     end
   end
@@ -33,4 +34,21 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe '#set_date' do
+    it 'applies timestamp to registered vehicles' do
+      expect(@cruz.registration_date).to eq(nil)
+      expect(@camaro.registration_date).to eq(nil)
+      expect(@bolt.registration_date).to eq(nil)
+
+      @cruz.set_date
+      @camaro.set_date
+      @bolt.set_date
+
+      expect(@cruz.registration_date).to eq(Date.today)
+      expect(@camaro.registration_date).to eq(Date.today)
+      expect(@bolt.registration_date).to eq(Date.today)
+    end
+  end
+
 end
