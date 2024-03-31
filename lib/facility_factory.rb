@@ -35,4 +35,8 @@ class FacilityFactory
     def format_address(address_1, address_2, city, state, zip)
         "#{address_1} #{address_2} #{city} #{state} #{zip}"
     end
+
+    def format_ny_hours(open, close)
+        "Weekdays: #{open} - #{close}, Closed Saturdays and Sundays"
+    end
 end
