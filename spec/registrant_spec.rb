@@ -7,8 +7,8 @@ end
 RSpec.describe Dmv do
   before(:each) do
     @dmv = Dmv.new
-    @registrant_1 = Registrant.new({name: 'Bruce', age: 18, permit: true})
-    @registrant_2 = Registrant.new({name: 'Penny', age: 15})
+    @registrant_1 = Registrant.new('Bruce', 18, true)
+    @registrant_2 = Registrant.new('Penny', 15)
   end
 
   describe '#initialize' do
