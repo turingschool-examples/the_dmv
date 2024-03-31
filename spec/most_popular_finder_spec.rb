@@ -11,5 +11,9 @@ RSpec.describe MostPopularFinder do
         it 'exists' do
             expect(@most_popular_finder).to be_an_instance_of(MostPopularFinder)
         end
+
+        it 'has a factory' do
+            expect(@most_popular_finder.factory).to be_an_instance_of(VehicleFactory)
+        end
     end
 end
