@@ -35,5 +35,20 @@ RSpec.describe Vehicle do
     end
   end
 
+  describe '#set_date' do
+    it 'applies timestamp to registered vehicles' do
+      expect(@cruz.registration_date).to eq(nil)
+      expect(@camaro.registration_date).to eq(nil)
+      expect(@bolt.registration_date).to eq(nil)
+
+      @cruz.set_date
+      @camaro.set_date
+      @bolt.set_date
+
+      expect(@cruz.registration_date).to eq(Date.today)
+      expect(@camaro.registration_date).to eq(Date.today)
+      expect(@bolt.registration_date).to eq(Date.today)
+    end
+  end
 
 end

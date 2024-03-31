@@ -19,10 +19,16 @@ class Facility
     @services << service
   end
 
+  # def registration_date(vehicle)
+  #   if services.include?("Vehicle Registration")
+  #     @registration_date << Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)
+  #   end
+  # end
+
   def register_vehicle(vehicle)
     if services.include?("Vehicle Registration")
-    
-    @registered_vehicles << vehicle
+      @registered_vehicles << vehicle
+      vehicle.set_date
       if  vehicle.antique? # If vehicle is older than 25 years, it is :antique
         @collected_fees += 25 # Add $25 to @collected_fees
         vehicle.set_plate(:antique)

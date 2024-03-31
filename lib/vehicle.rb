@@ -7,6 +7,7 @@ class Vehicle
               :make,
               :model,
               :engine,
+              :set_date,
               :plate_type,
               :registration_date
 
@@ -31,4 +32,9 @@ class Vehicle
   def set_plate(plate)    # This is a helper method - not defined in IP
     @plate_type = plate   # Add new test for this
   end
+
+  def set_date
+    @registration_date = Date.today
+  end
+
 end
