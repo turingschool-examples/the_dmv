@@ -17,7 +17,9 @@ class FacilityFactory
                     address: format_address(facility[:street_address_line_1], 
                     facility[:street_address_line_2], facility[:city], facility[:state], 
                     facility[:zip_code]),
-                    phone: facility[:public_phone_number]
+                    phone: facility[:public_phone_number],
+                    hours: format_ny_hours(facility[:monday_beginning_hours], 
+                    facility[:monday_ending_hours])
                 }
                 Facility.new(facility_details)
             else facility[:state] == 'MO'
