@@ -6,10 +6,17 @@ class FacilityFactory
 
   def create_facilities(registrations)
     registrations.map do |hash|
-      hash[:name] = hash.delete :dmv_office
-      hash[:address] = "#{hash[:address_li]}" + "#{hash[:address_1]}" + " #{hash[:city]}" + " #{hash[:state]}" + " #{hash[:zip]}"
-      hash[:services] = "Vehicle Registration" if hash[:services_p].include?("registration")
-
+      hash[:name] = 
+        if hash[:dmv_office]
+          hash.delete :dmv_office
+        elsif hash[:office_name]
+          hash.delete :office_name
+        end
+      hash[:address] = "#{hash[:address_li] }" + "#{hash[:office_name]}" + "#{hash[:address_1]}" + "#{hash[:street_address_line_1]}" + " #{hash[:city]}" + " #{hash[:state]}" + " #{hash[:zip]}" + "#{hash[:zip_code]}"
+      # hash[:phone] = hash.delete :phone_number
+      hash[:services] = if hash[:services_p]
+        "Vehicle Registration" if hash[:services_p].include?("registration")
+      end
       # hash[:services] = hash.delete hash[:services_p].map do |service|
       #   clean_services_data(service)
         # (".sub according services")
