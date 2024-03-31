@@ -5,7 +5,6 @@ RSpec.describe VehicleFactory do
         @factory = VehicleFactory.new
         @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
         @ny_vehicle_registrations = DmvDataService.new.ny_vehicle_registrations
-        binding.pry
     end
 
     it 'loads data for WA EV registrations' do
