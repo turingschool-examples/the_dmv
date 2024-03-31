@@ -8,7 +8,7 @@ class Facility
     @services = []
   end
 
-  def add_service(service)
-    @services << service
+  def add_service(service) # adds a service (passed as an arguement into the service parameter) 
+    @services << service # into the services instance variable, which is an array
   end
 end
