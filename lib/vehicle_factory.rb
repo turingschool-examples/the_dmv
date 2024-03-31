@@ -13,6 +13,8 @@ class VehicleFactory
     def format_data(vehicle_registrations)
         vehicle_registrations.map do |vehicle|
             vehicle[:engine] = :ev
+            vehicle[:vin] = vehicle.delete :vin_1_10
+            vehicle[:year] = vehicle.delete :model_year
         end
     end
 end
