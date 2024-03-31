@@ -7,8 +7,8 @@ class Facility
                 :registered_vehicles
 
     def initialize(facility_hash)
-        @name = facility_hash[:dmv_office]
-        @address = facility_hash[:address_li]
+        @name = facility_hash[:name]
+        @address = facility_hash[:address]
         @phone = facility_hash[:phone]
         @services = []
         @collected_fees = 0
