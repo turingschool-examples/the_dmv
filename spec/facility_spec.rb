@@ -83,6 +83,7 @@ RSpec.describe Facility do
 
     it 'can set registration dates of vehicles once registered' do
       @facility_1.add_service('Vehicle Registration')
+      
       expect(@camaro.registration_date).to eq(nil)
       @facility_1.register_vehicle(@camaro)
       expect(@camaro.registration_date).to be_an_instance_of(Date)
