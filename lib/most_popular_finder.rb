@@ -20,4 +20,12 @@ class MostPopularFinder
         end
         "#{model_year_count.first[0]} with #{model_year_count.first[1]} registrations"
     end
+
+    def most_popular_county_registered(vehicle_registrations)
+        county_count = Hash.new(0)
+        @factory.create_vehicles(vehicle_registrations).each do |vehicle|
+            county_count[vehicle.county] += 1
+        end
+        "#{county_count.first[0]} county with #{county_count.first[1]} registrations"
+    end
 end

@@ -9,7 +9,8 @@ class VehicleFactory
                 model: vehicle[:model],
                 engine: :ev,
                 registration_date: vehicle[:transaction_date],
-                plate_type: :ev
+                plate_type: :ev,
+                county: vehicle[:county]
             }
             Vehicle.new(vehicle_details)
         end

@@ -37,6 +37,7 @@ RSpec.describe MostPopularFinder do
     describe '#most_popular_county_registered' do
         it 'returns most popular county for WA EV registrations' do
             expect(@most_popular_finder.most_popular_county_registered(@wa_ev_registrations)).to be_a String
+            expect(@most_popular_finder.most_popular_county_registered(@wa_ev_registrations)).to eq('King county with 774 registrations')
         end
     end
 end
