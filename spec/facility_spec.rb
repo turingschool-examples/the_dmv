@@ -124,10 +124,12 @@ RSpec.describe Facility do
   end
 
   describe '#administer_road_test' do
-    it 'can assign a road test to a registrant' do
+    it 'can assign a road test to a registrant that completed the written test' do
       registrant_1 = Registrant.new('Bruce', 18, true )
       
+      @facility.add_service('Written Test')
       @facility.add_service('Road Test')
+      @facility.administer_written_test(registrant_1)
       @facility.administer_road_test(registrant_1)
 
       expect(registrant_1.license_data[:license]).to eq(true)
@@ -141,16 +143,41 @@ RSpec.describe Facility do
 
       expect(registrant_1.license_data[:license]).to eq(false)
     end
+
+    it 'will not assign a road_test if registrant has not passed the written test' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      
+      @facility.add_service('Road Test')
+      @facility.administer_road_test(registrant_1)
+
+      expect(registrant_1.license_data[:license]).to eq(false)
+    end
   end
 
   describe '#_renew_drivers_license' do
     it 'can assign a renewed drivers license to a registrant' do
       registrant_1 = Registrant.new('Bruce', 18, true )
       
+      @facility.add_service('Written Test')
+      @facility.add_service('Road Test')
       @facility.add_service('Renew License')
+
+      @facility.administer_written_test(registrant_1)
+      @facility.administer_road_test(registrant_1)
       @facility.renew_drivers_license(registrant_1)
 
       expect(registrant_1.license_data[:renewed]).to eq(true)
+    end
+
+    it 'can not assign a renewed drivers license to a registrant that has not completed the road test' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      
+      @facility.add_service('Written Test')
+      @facility.administer_written_test(registrant_1)
+      @facility.add_service('Renew License')
+      @facility.renew_drivers_license(registrant_1)
+
+      expect(registrant_1.license_data[:renewed]).to eq(false)
     end
 
 
