@@ -11,6 +11,7 @@ class Facility
     @address = facility_data[:address]
     @phone = facility_data[:phone]
     @services = [facility_data[:services]].compact
+    #services needs refactoring
     @registered_vehicles = []
     @collected_fees = 0
   end
