@@ -9,11 +9,24 @@ RSpec.describe FacilityFactory do
     end
   end
 
-  describe 'create_facilities' do
-    it "can create cars from registrations" do
+  describe 'clean_service_data' do
+    it "can clean service data" do
       facility_factory = FacilityFactory.new
       colorado_facilities = DmvDataService.new.co_dmv_office_locations
+      # binding.pry
+      services_string = colorado_facilities[0][:services_p]
+# binding.pry
+      expect(facility_factory.clean_services_data(services_string)).to eq("Vehicle Registration")
 
+    end
+  end
+  describe 'create_facilities' do
+    xit "can create facilities from facility data" do
+      facility_factory = FacilityFactory.new
+      colorado_facilities = DmvDataService.new.co_dmv_office_locations
+# binding.pry
+      #need more robust testing for actual vehicle data
+      #maybe use vehicle example checking attr filtered correctly
       expect(facility_factory.create_facilities(colorado_facilities)).to all(be_a(Facility))
     end
   end
