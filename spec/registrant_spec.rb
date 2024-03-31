@@ -21,5 +21,12 @@ RSpec.describe Dmv do
 
     end
   end
-  
+
+  describe '#permit?' do
+    it 'it can determine if registrant has a permit' do
+      expect(@registrant_1.permit?).to eq(true)
+      expect(@registrant_2.permit?).to eq(false)
+    end
+  end
+
 end
