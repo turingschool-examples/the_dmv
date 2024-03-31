@@ -20,9 +20,10 @@ RSpec.describe MostPopularFinder do
         expect(@wa_ev_registrations).to be_an_instance_of(Array)
     end
 
-    describe '#most_popular_make_registered' do
-        it 'returns most popular make for WA EV registrations' do
-            expect(@most_popular_finder.most_popular_make_registered(@wa_ev_registrations)).to be_a(String)
+    describe '#most_popular_vehicle_registered' do
+        it 'returns most popular vehicle for WA EV registrations' do
+            expect(@most_popular_finder.most_popular_vehicle_registered(@wa_ev_registrations)).to be_a(String)
+            expect(@most_popular_finder.most_popular_vehicle_registered(@wa_ev_registrations)).to eq('NISSAN Leaf')
         end
     end
 end
