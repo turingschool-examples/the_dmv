@@ -149,12 +149,11 @@ RSpec.describe FacilityFactory do
 
     describe '#format_mo_hours' do
         it 'has proper formatting for MO hours and holidays closed' do
-            expected = "Hours Open: Monday - Friday - 8:00 to 5:00, Last Saturday of the Month  - 8:00 to 12:00,
-            Closed: Monday - Friday from 1:00 to 1:30, HOLIDAYS CLOSED: Christmas Day (12/25/23),
-            New Year's Day (1/1/24), Martin Luther King Jr. Day (1/15/24), Lincoln's Birthday (2/12/24), 
-            President's Day (2/19/24), Truman's Birthday (5/8/24), Memorial Day (5/27/24), Juneteenth (6/19/24), 
-            Independence Day (7/4/24), Labor Day (9/2/24), Columbus Day (10/14/24), Veterans Day (11/11/24), 
-            Thanksgiving Day (11/28/24), Christmas Day (12/25/24)"
+            expected = "Hours Open: Monday - Friday - 8:00 to 5:00, Last Saturday of the Month  - 8:00 to 12:00, Closed: Monday - Friday from 1:00 to 1:30, HOLIDAYS CLOSED: Christmas Day (12/25/23), New Year's Day (1/1/24), 
+            Martin Luther King Jr. Day (1/15/24), Lincoln's Birthday (2/12/24), President's Day (2/19/24), 
+            Truman's Birthday (5/8/24), Memorial Day (5/27/24), Juneteenth (6/19/24), Independence Day (7/4/24), 
+            Labor Day (9/2/24), Columbus Day (10/14/24), Veterans Day (11/11/24), Thanksgiving Day (11/28/24), 
+            Christmas Day (12/25/24)"
 
             expect(@factory.format_mo_hours("Monday - Friday - 8:00 to 5:00, Last Saturday of the Month  - 8:00 to 12:00", 
             "Monday - Friday from 1:00 to 1:30", "Christmas Day (12/25/23), New Year's Day (1/1/24), 
