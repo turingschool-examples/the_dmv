@@ -30,6 +30,7 @@ RSpec.describe MostPopularFinder do
     describe '#most_popular_model_year_registered' do
         it 'returns count of most popular model year registered' do
             expect(@most_popular_finder.most_popular_model_year_registered(@wa_ev_registrations)).to be_a String
+            expect(@most_popular_finder.most_popular_model_year_registered(@wa_ev_registrations)).to eq('2023 with 131 registrations')
         end
     end
 end
