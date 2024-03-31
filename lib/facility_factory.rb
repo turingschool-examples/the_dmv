@@ -27,7 +27,8 @@ class FacilityFactory
                     name: facility[:name],
                     address: format_address(facility[:address1], facility[:address_2], 
                     facility[:city], facility[:state], facility[:zipcode]),
-                    phone: facility[:phone]
+                    phone: facility[:phone],
+                    hours: format_mo_hours(facility[:daysopen], facility[:daysclosed], facility[:holidaysclosed])
                 }
                 Facility.new(facility_details)
             end
