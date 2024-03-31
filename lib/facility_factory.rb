@@ -12,7 +12,18 @@ class FacilityFactory
     end
   end
 
+collect data
+update keys
+update name key
+update address
+  concatonate values
+  assign to address
 
+phone is already good
+update services from services_p
+  capitalize each
+
+build
   #class reference **********
 #   class Facility
 #     attr_reader :name,
