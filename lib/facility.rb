@@ -20,23 +20,22 @@ class Facility
   end
 
   def register_vehicle(vehicle)
+    if services.include?("Vehicle Registration")
+    
     @registered_vehicles << vehicle
-    if  vehicle.antique? # If vehicle is older than 25 years, it is :antique
-      @collected_fees += 25 # Add $25 to @collected_fees
-    elsif vehicle.electric_vehicle? # Elsif vehicle = EV
-      @collected_fees += 200    # Add $200 to @collected_fees
-    else  
-      @collected_fees += 100 # Else add $100 to @collected_fees
-    end
-
-    def plate_type(vehicle)
-      # if # vehicle.antique == true
-      #   # vehicle_details{} << antique: vehicle
-      # else 
-      #   # vehicle_details{} << regular: vehicle
-      # end
+      if  vehicle.antique? # If vehicle is older than 25 years, it is :antique
+        @collected_fees += 25 # Add $25 to @collected_fees
+        vehicle.set_plate(:antique)
+      elsif vehicle.electric_vehicle? # Elsif vehicle = EV
+        @collected_fees += 200    # Add $200 to @collected_fees
+        vehicle.set_plate(:ev)
+      else
+        @collected_fees += 100 # Else add $100 to @collected_fees
+        vehicle.set_plate(:regular)
+      end
     end
   end
+
 end
 
 # facility_1

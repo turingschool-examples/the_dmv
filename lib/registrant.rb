@@ -6,7 +6,7 @@ class Registrant
   def initialize(name, age, permit = false)
     @name = name
     @age = age
-    @permit = permit # Do I need a separate method to define this?
+    @permit = permit
     @license_data = {:written => false, :license => false, :renewed => false}
   end
 

@@ -21,9 +21,11 @@ RSpec.describe Facility do
   describe '#add_service' do
     it 'can add available services' do
       expect(@facility_1.services).to eq([])
+
       @facility_1.add_service('New Drivers License')
       @facility_1.add_service('Renew Drivers License')
       @facility_1.add_service('Vehicle Registration')
+
       expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
@@ -37,12 +39,22 @@ RSpec.describe Facility do
       
       expect(@facility_1.registered_vehicles).to eq([])
 
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
-    
+
       expect(@facility_1.registered_vehicles).to eq([@cruz])
+
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
+
+
     end
 
     it 'added $25 to @collected_fees for antique vehicle' do
+      
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@camaro)
 
       expect(@facility_1.collected_fees).to eq(25)
@@ -50,33 +62,35 @@ RSpec.describe Facility do
     end
 
     it 'added $200 to @collected_fees for EVs' do
+      
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@bolt)
 
       expect(@facility_1.collected_fees).to eq(200)
     end
 
     it 'added $100 to @collected_fees for any vehicle not antique/not EV' do
+      
+      @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
 
       expect(@facility_1.collected_fees).to eq(100)
     end
 
-    xit 'assigns an :antique plate type to the vehicle' do
-      # expect(@faciilty_1.plate_type).to eq(nil) ### Do I want this before/after?
+    it 'assigns plate type to the vehicle' do
+      expect(@cruz.plate_type).to eq(nil)
+      expect(@camaro.plate_type).to eq(nil)
+      expect(@bolt.plate_type).to eq(nil)
 
-      @facility_1.register_vehicle(@camaro) # Can I just do one of these with `vehicle`?
+      @facility_1.add_service('Vehicle Registration') # We're adding the service so we can register the vehicle
 
-      expect(@faciilty_1.plate_type).to eq(:antique)
-    end
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
 
-    xit 'assigns a :regular plate type to the vehicle' do
-      # expect(@faciilty_1.plate_type).to eq(nil) ### Do I want this before/after?
-
-      @facility_1.register_vehicle(@cruz) # Can I just do one of these with `vehicle`?
-      @facility_1.register_vehicle(@camaro) # Can I just do one of these with `vehicle`?
-
-      expect(@faciilty_1.plate_type).to eq(:regular)
-
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@bolt.plate_type).to eq(:ev)
     end
 
     # xit 'applies a time stamp' do

@@ -2,11 +2,12 @@ require 'date'
 require 'pry'
 
 class Vehicle
-  attr_reader :vin,
+  attr_reader :vin,         # getter methods are read only
               :year,
               :make,
               :model,
               :engine,
+              :plate_type,
               :registration_date
 
   def initialize(vehicle_details)
@@ -15,8 +16,8 @@ class Vehicle
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
     @engine = vehicle_details[:engine]
-    @registration_date = vehicle_details[:registration_date]
-    # @is_this_nil = vehicle_details[:experiment]
+    @plate_type = nil
+    @registration_date = nil
   end
 
   def antique?
@@ -25,5 +26,9 @@ class Vehicle
 
   def electric_vehicle?
     @engine == :ev
+  end
+
+  def set_plate(plate)    # This is a helper method - not defined in IP
+    @plate_type = plate   # Add new test for this
   end
 end
