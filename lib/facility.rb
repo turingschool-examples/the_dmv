@@ -49,6 +49,31 @@ class Facility
     @registered_vehicles.include?(vehicle)
   end
 
+  def administer_written_test(registrant)
+    if @services.include?('Written Test') && registrant.age >= 16 && registrant.permit == true
+      registrant.license_data[:written] = true
+    else
+      false
+    end
+  end
+
+  def administer_road_test(registrant) 
+    if @services.include?('Road Test') && (registrant.license_data[:written] == true)
+      registrant.license_data[:license] = true
+    else
+      false
+    end
+  end
+
+  def renew_drivers_license(registrant) 
+    if @services.include?('Renew License') && (registrant.license_data[:license] == true)
+      registrant.license_data[:renewed] = true
+    else
+      false
+    end
+  end
+
+
   # def collected_fees
   #     total_cost = 0
   #     @registered_vehicles.each do |key, vehicle_info|
