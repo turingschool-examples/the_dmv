@@ -7,7 +7,8 @@ class FacilityFactory
                     name: facility[:dmv_office],
                     address: format_address(facility[:address_li], facility[:address__1], 
                     facility[:city], facility[:state], facility[:zip]),
-                    phone: facility[:phone]
+                    phone: facility[:phone],
+                    hours: facility[:hours]
                 }
                 Facility.new(facility_details)
             elsif facility[:state] == 'NY'
