@@ -13,7 +13,7 @@ describe VehicleFactory do
         wa_ev_registrations = DmvDataService.new.wa_ev_registrations
         vehicles = @factory.create_vehicles(wa_ev_registrations)
         vehicle_1 = vehicles.first
-binding.pry
+
         expect(vehicles).to be_an(Array)
         expect(vehicle_1.model).to eq("Model Y")
         expect(vehicle_1.make).to eq("TESLA")

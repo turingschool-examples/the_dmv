@@ -3,8 +3,8 @@ require 'spec_helper'
 describe FacilityFactory do
     before do
         @facility_factory = FacilityFactory.new
-        @co_sample = [{:the_geom=>{:type=>"Point", :coordinates=>[-104.97443112500002, 39.75525297420336]},
-          :dmv_id=>"1",
+        @co_sample =
+          [{:dmv_id=>"1",
           :dmv_office=>"DMV Tremont Branch",
           :address_li=>"2855 Tremont Place",
           :address__1=>"Suite 118",
@@ -28,19 +28,19 @@ describe FacilityFactory do
        co_facility_locations = DmvDataService.new.co_dmv_office_locations
        co_facilities = @facility_factory.create_facilities(co_facility_locations)
        co_facility_1 = co_facilities.first
-binding.pry
+
        expect(co_facilities).to be_an(Array)
        expect(co_facilities).to all be_a(Facility)
        expect(co_facility_1.name).to be_a(String)
-       expect(co_facility_1.phone).to be(String)
-       expect(co_facility_1.address).to be(String)
+       expect(co_facility_1.phone).to be_a(String)
+       expect(co_facility_1.address).to be_a(String)
     end
 
     it 'formats the data correctly' do
-       formatted_facility = @co_sample.create_facilities
+       formatted_facility = @facility_factory.create_facilities(@co_sample)
 
-       expect(formatted_facility.name).to eq("DMV Tremont Branch")
-       expect(formatted_facility.address).to eq("2855 Tremont Place Suite 118 Denver CO 80305")
-       expect(formattted_facility.phone).to eq("(720) 865-4600")
+       expect(formatted_facility.first.name).to eq("DMV Tremont Branch")
+       expect(formatted_facility.first.address).to eq("2855 Tremont Place Suite 118 Denver CO 80205")
+       expect(formatted_facility.first.phone).to eq("(720) 865-4600")
     end
 end
