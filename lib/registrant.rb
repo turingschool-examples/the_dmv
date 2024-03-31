@@ -13,7 +13,9 @@ class Registrant
     end
 
     def earn_permit
+        if @age > 15
         @permit = true
+        end
     end
 
     def permit?

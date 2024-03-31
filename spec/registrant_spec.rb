@@ -8,7 +8,7 @@ end
 RSpec.describe Registrant do
     before(:each) do
         @registrant_1 = Registrant.new('Bruce', 18, true)
-        @registrant_2 = Registrant.new('Penny', 15)
+        @registrant_2 = Registrant.new('Penny', 16)
         @registrant_3 = Registrant.new('Tucker', 15 )
     end
 
@@ -19,14 +19,19 @@ RSpec.describe Registrant do
         end
     end
 
-    describe '#permit' do
+    describe '#earn_permit' do
         it 'allows a registrant to earn a permit' do
             @registrant_2.earn_permit
             expect(@registrant_2.permit).to eq(true)
         end
+
+        it 'will not give a permit to anyone less than 16 years old' do
+            @registrant_3.earn_permit
+            expect(@registrant_2.permit).to eq(false)
+        end
     end
 
-    describe "#permit" do
+    describe "#permit?" do
         it 'shows if someone has a permit' do
             expect(@registrant_1.permit?).to eq(true)
         end
@@ -41,12 +46,4 @@ RSpec.describe Registrant do
             expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
         end
     end
-
-    describe '#administer_written_test' do
-        it 'allows a registrant to earn a written test if facility provides' do
-            @facility.add_service('Written Test')
-            
-        end
-    end
-
 end
