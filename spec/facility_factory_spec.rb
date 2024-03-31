@@ -55,6 +55,12 @@ RSpec.describe FacilityFactory do
                 expect(facilities.first.phone).not_to eq(nil)
                 expect(facilities.first.phone).to be_a(String)
             end
+
+            it 'creates proper daily hours for the CO DMV Facility instances' do
+                facilities = @factory.create_facilities(@co_dmv_office_locations)
+                expect(facilities.first.hours).not_to eq(nil)
+                expect(facilities.first.hours).to be_a(String)
+            end
         end
 
         describe 'creating NY facilities' do
