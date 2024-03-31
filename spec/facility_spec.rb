@@ -37,8 +37,8 @@ RSpec.describe Facility do
   #NOTE: A facility must offer a service in order to perform it. 
   #Just because the DMV allows facilities to perform certain services, does not mean that every facility provides every service.
   
-  describe '#register a vehicle' do
-    it 'can add Vehicle Registration' do
+  describe '#vehicle registration empty until vehicles added' do
+    it 'can add service without adding vehicles' do
      @facility_1.add_service('Vehicle Registration')
      expect(@facility.services).to eq(["Vehicle Registration"])
      expect(@cruz.registration_date).to eq(nil)
@@ -46,14 +46,91 @@ RSpec.describe Facility do
      expect(@facility_1.collected_fees).to eq(0)
     end 
 
-    it 'can register a vehicle' do
+  describe '#register regular vehicle' do
+    it 'can register a regular vehicle' do
       @facility_1.register_vehicle(@cruz)
-      expect(@cruz.registration_date).to eq Date
-      expect(@cruz.plate_type).to eq[:regular] #look up if this should be parentheses
       expect(@facility_1.registered_vehicles).to eq([@cruz])
     end
 
-    it 'can collect fees' do
+    it 'can log a registration date' do
+      @facility_1.register_vehicle(@cruz)
+      expect(@cruz.registration_date).to eq Date
+    end
+
+    it 'can log a plate type' do
+      @facility_1.register_vehicle(@cruz)
+      expect(@cruz.plate_type).to eq[:regular] #look up if this should be parentheses
+    end 
+
+    it 'can collect fees on regular vehicle' do
+      @facility_1.register_vehicle(@cruz)
+        expect(@facility_1.collected_fees).to eq (100)
+    end
+  end
+
+  describe '#register antique vehicle' do
+    it 'can register an antique vehicle' do
+      @facility_1.register_vehicle(@camaro)
+      expect(@facility_1.registered_vehicles).to eq([@camaro])
+    end
+
+    it 'can log a registration date' do
+      @facility_1.register_vehicle(@camaro)
+      expect(@camaro.registration_date).to eq Date
+    end
+
+    it 'can log a plate type' do
+      @facility_1.register_vehicle(@camaro)
+      expect(@camaro.plate_type).to eq[:antique] #look up if this should be parentheses
+    end 
+
+    it 'can collect fees on an antique vehicle' do
+      @facility_1.register_vehicle(@camaro)
+        expect(@facility_1.collected_fees).to eq (25)
+    end
+  end
+
+  describe '#register EV vehicle' do
+    it 'can register an EV' do
+      @facility_1.register_vehicle(@bolt)
+      expect(@facility_1.registered_vehicles).to eq(@bolt)
+    end
+
+    it 'can log a registration date' do
+      @facility_1.register_vehicle(@bolt)
+      expect(@bolt).registration_date).to eq Date
+    end
+
+    it 'can log a plate type' do
+      @facility_1.register_vehicle(@bolt)
+      expect(@bolt.plate_type).to eq[:ev] #look up if this should be parentheses
+    end 
+
+    it 'can collect fees on an EV' do
+      @facility_1.register_vehicle(@bolt)
+        expect(@facility_1.collected_fees).to eq (200)
+    end
+  end
+
+  describe '#check registered vehicles' do
+    it 'can collect fees on an EV' do
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+      expect(@facility_1.collected_fees).to eq (325)
+  end
+
+  describe '#check another facility' do
+    it 'has no registrations if registration services unavailable' do
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.services).to eq([])
+      @facility_2.register_vehicle(@bolt)
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_1.collected_fees).to eq(0)
+    end
+
+end
+
       #if
         #antique $25 fee
         #EV $200 fee
@@ -78,4 +155,4 @@ RSpec.describe Facility do
       #if road test == pass && earn license
 
 
-end
+
