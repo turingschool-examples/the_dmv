@@ -29,7 +29,7 @@ RSpec.describe FacilityFactory do
     end
 
     describe '#create_facilities' do
-        describe 'creating CO facilities' do #make tests more specific
+        describe 'creating CO facilities' do
             it 'can use data to create new CO DMV Facility instances' do
                 facilities = @factory.create_facilities(@co_dmv_office_locations)
                 expect(facilities).to be_an_instance_of(Array)
@@ -57,7 +57,7 @@ RSpec.describe FacilityFactory do
             end
         end
 
-        describe 'creating NY facilities' do #make tests more specific
+        describe 'creating NY facilities' do
             it 'can use data to create new NY DMV Facility instances' do
                 facilities = @factory.create_facilities(@new_york_facilities)
                 expect(facilities).to be_an_instance_of(Array)
@@ -85,7 +85,7 @@ RSpec.describe FacilityFactory do
             end
         end
 
-        describe 'creating MO facilities' do #make tests more specific
+        describe 'creating MO facilities' do
             it 'can use data to create new MO DMV Facility instances' do
                 facilities = @factory.create_facilities(@missouri_facilities)
                 expect(facilities).to be_an_instance_of(Array)
