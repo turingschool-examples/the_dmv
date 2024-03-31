@@ -114,6 +114,14 @@ RSpec.describe Facility do
       expect(registrant_1.license_data[:written]).to eq(false)
       end
 
+      it 'will not assign a written test if registrant does not have a permit' do
+        registrant_2 = Registrant.new('Penny', 16)
+        
+        @facility.administer_written_test(registrant_2)
+    
+        expect(registrant_2.license_data[:written]).to eq(false)
+        end
+
     it 'will not assign a written test to anyone under the age of 16' do
       registrant_3 = Registrant.new('Tucker', 15, true )
       
