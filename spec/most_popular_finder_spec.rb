@@ -33,4 +33,10 @@ RSpec.describe MostPopularFinder do
             expect(@most_popular_finder.most_popular_model_year_registered(@wa_ev_registrations)).to eq('2023 with 131 registrations')
         end
     end
+
+    describe '#most_popular_county_registered' do
+        it 'returns most popular county for WA EV registrations' do
+            expect(@most_popular_finder.most_popular_county_registered(@wa_ev_registrations)).to be_a String
+        end
+    end
 end
