@@ -26,4 +26,10 @@ RSpec.describe MostPopularFinder do
             expect(@most_popular_finder.most_popular_vehicle_registered(@wa_ev_registrations)).to eq('NISSAN Leaf')
         end
     end
+
+    describe '#most_popular_model_year_registered' do
+        it 'returns count of most popular model year registered' do
+            expect(@most_popular_finder.most_popular_model_year_registered(@wa_ev_registrations)).to be_a String
+        end
+    end
 end
