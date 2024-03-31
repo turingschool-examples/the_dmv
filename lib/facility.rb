@@ -23,8 +23,14 @@ class Facility
   def register_vehicle(vehicle)
     @registered_vehicles << vehicle
     vehicle.registered
+    if vehicle.plate_type == :antique
+      @collected_fees += 25
+    elsif vehicle.plate_type == :ev
+      @collected_fees += 200
+    else
+      @collected_fees += 100
+    end
     
-    #I need to assign a plate_type to the vehicle class
   end
 
 end

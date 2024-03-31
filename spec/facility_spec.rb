@@ -57,61 +57,61 @@ RSpec.describe Facility do
 
     it 'can log a plate type' do
       @facility_1.register_vehicle(@cruz)
-      expect(@cruz.plate_type).to eq[:regular] #look up if this should be parentheses
+      expect(@cruz.plate_type).to eq(:regular)
     end 
 
-    xit 'can collect fees on regular vehicle' do
+    it 'can collect fees on regular vehicle' do
       @facility_1.register_vehicle(@cruz)
         expect(@facility_1.collected_fees).to eq (100)
     end
   end
 
   describe '#register antique vehicle' do
-    xit 'can register an antique vehicle' do
+    it 'can register an antique vehicle' do
       @facility_1.register_vehicle(@camaro)
       expect(@facility_1.registered_vehicles).to eq([@camaro])
     end
 
-    xit 'can log a registration date' do
+    it 'can log a registration date' do
       @facility_1.register_vehicle(@camaro)
       expect(@camaro.registration_date).to eq(Date.today)
     end
 
-    xit 'can log a plate type' do
+    it 'can log a plate type' do
       @facility_1.register_vehicle(@camaro)
-      expect(@camaro.plate_type).to eq[:antique] #look up if this should be parentheses
+      expect(@camaro.plate_type).to eq(:antique)
     end 
 
-    xit 'can collect fees on an antique vehicle' do
+    it 'can collect fees on an antique vehicle' do
       @facility_1.register_vehicle(@camaro)
         expect(@facility_1.collected_fees).to eq(25)
     end
   end
 
   describe '#register EV vehicle' do
-    xit 'can register an EV' do
+    it 'can register an EV' do
       @facility_1.register_vehicle(@bolt)
-      expect(@facility_1.registered_vehicles).to eq(@bolt)
+      expect(@facility_1.registered_vehicles).to eq([@bolt])
     end
 
-    xit 'can log a registration date' do
+    it 'can log a registration date' do
       @facility_1.register_vehicle(@bolt)
       expect(@bolt.registration_date).to eq(Date.today)
     end
 
-    xit 'can log a plate type' do
+    it 'can log a plate type' do
       @facility_1.register_vehicle(@bolt)
-      expect(@bolt.plate_type).to eq[:ev] #look up if this should be parentheses
+      expect(@bolt.plate_type).to eq(:ev) #look up if this should be parentheses
     end 
 
-    xit 'can collect fees on an EV' do
+    it 'can collect fees on an EV' do
       @facility_1.register_vehicle(@bolt)
         expect(@facility_1.collected_fees).to eq(200)
     end
   end
 
   describe '#check registered vehicles' do
-    xit 'can collect fees on an EV' do
+    it 'can collect fees on an EV' do
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
@@ -120,11 +120,11 @@ RSpec.describe Facility do
   end
 
   describe '#check another facility' do
-    xit 'has no registrations if registration services unavailable' do
+    it 'has no registrations if registration services unavailable' do
       expect(@facility_2.registered_vehicles).to eq([])
       expect(@facility_2.services).to eq([])
       @facility_2.register_vehicle(@bolt)
-      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility_2.registered_vehicles).to eq([@bolt])
       expect(@facility_1.collected_fees).to eq(0)
     end
   end

@@ -29,12 +29,13 @@ class Vehicle
 
   def registered
     @registration_date = Date.today
-    if @antique? true
-      plate_type = :antique
-    elsif @electric_vehicle? true
-      plate_type = :ev
+    #assign value to plate_type depending on conditions
+    if antique?
+      @plate_type = :antique
+    elsif @engine == :ev
+      @plate_type = :ev
     else
-      plate_type = :regular
+      @plate_type = :regular
     end
   end
 
