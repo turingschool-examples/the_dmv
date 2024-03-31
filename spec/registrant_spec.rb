@@ -29,4 +29,10 @@ RSpec.describe Dmv do
     end
   end
 
+  describe '#earn_permit' do
+  it 'it can change whether registrant has a permit' do
+    expect(@registrant_1.earn_permit).to eq(true)
+    expect(@registrant_2.earn_permit).to eq(true)
+  end
+end
 end
