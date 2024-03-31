@@ -3,6 +3,21 @@ require 'spec_helper'
 describe FacilityFactory do
     before do
         @facility_factory = FacilityFactory.new
+        @co_sample = [{:the_geom=>{:type=>"Point", :coordinates=>[-104.97443112500002, 39.75525297420336]},
+          :dmv_id=>"1",
+          :dmv_office=>"DMV Tremont Branch",
+          :address_li=>"2855 Tremont Place",
+          :address__1=>"Suite 118",
+          :city=>"Denver",
+          :state=>"CO",
+          :zip=>"80205",
+          :phone=>"(720) 865-4600",
+          :hours=>"Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.",
+          :services_p=>"vehicle titles, registration, renewals;  VIN inspections",
+          :parking_no=>"parking available in the lot at the back of the bldg (Glenarm Street)",
+          :photo=>"images/Tremont.jpg",
+          :address_id=>"175164",
+          :":@computed_region_nku6_53ud"=>"1444"}]
     end
 
     it 'is an instance of FacilityFactory' do
@@ -13,9 +28,19 @@ describe FacilityFactory do
        co_facility_locations = DmvDataService.new.co_dmv_office_locations
        co_facilities = @facility_factory.create_facilities(co_facility_locations)
        co_facility_1 = co_facilities.first
-
+binding.pry
        expect(co_facilities).to be_an(Array)
-       expect(co_facility_1.name).to eq("DMV Tremont Branch")
-       expect(co_facility_1.phone).to eq("(720) 865-4600")
+       expect(co_facilities).to all be_a(Facility)
+       expect(co_facility_1.name).to be_a(String)
+       expect(co_facility_1.phone).to be(String)
+       expect(co_facility_1.address).to be(String)
+    end
+
+    it 'formats the data correctly' do
+       formatted_facility = @co_sample.create_facilities
+
+       expect(formatted_facility.name).to eq("DMV Tremont Branch")
+       expect(formatted_facility.address).to eq("2855 Tremont Place Suite 118 Denver CO 80305")
+       expect(formattted_facility.phone).to eq("(720) 865-4600")
     end
 end
