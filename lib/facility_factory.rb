@@ -41,4 +41,8 @@ class FacilityFactory
     def format_ny_hours(open, close)
         "Weekdays: #{open} - #{close}, Closed Saturdays and Sundays"
     end
+
+    def format_mo_hours(open, closed, holidays_closed)
+        "Hours Open: #{open}, Closed: #{closed}, HOLIDAYS CLOSED: #{holidays_closed}"
+    end
 end
