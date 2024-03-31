@@ -91,7 +91,7 @@ RSpec.describe FacilityFactory do
             end
 
             it 'creates proper daily hours for the NY DMV Facility instances' do
-                facilities = @factory.create_facilities(@co_dmv_office_locations)
+                facilities = @factory.create_facilities(@new_york_facilities)
                 expect(facilities.first.hours).not_to eq(nil)
                 expect(facilities.first.hours).to be_a(String)
                 expect(facilities.first.hours).to eq('Weekdays: 7:30 AM - 5:00 PM, Closed Saturdays and Sundays')
