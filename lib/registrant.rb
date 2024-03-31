@@ -15,7 +15,8 @@ class Registrant
     end
 
     def earn_permit
-        @permit = true if @permit!= true # checks if permit is not equal to true, if it is, then it changes it to true
+        @permit = true if @permit != true || @permit = true 
+        # checks if permit is not equal to true, if it is, then it changes it to true
     end
 
 
