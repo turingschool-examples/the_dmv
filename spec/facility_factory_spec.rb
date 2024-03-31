@@ -89,6 +89,13 @@ RSpec.describe FacilityFactory do
                 expect(facilities.first.phone).not_to eq(nil)
                 expect(facilities.first.phone).to be_a(String)
             end
+
+            it 'creates proper daily hours for the NY DMV Facility instances' do
+                facilities = @factory.create_facilities(@co_dmv_office_locations)
+                expect(facilities.first.hours).not_to eq(nil)
+                expect(facilities.first.hours).to be_a(String)
+                expect(facilities.first.hours).to eq('Weekdays: 7:30 AM - 5:00 PM, Closed Saturdays and Sundays')
+            end
         end
 
         describe 'creating MO facilities' do
@@ -124,6 +131,13 @@ RSpec.describe FacilityFactory do
         it 'has proper formatting for addresses' do
             expected = 'address_1 address_2 city state zip'
             expect(@factory.format_address('address_1', 'address_2', 'city', 'state', 'zip')).to eq(expected)
+        end
+    end
+
+    describe '#format_ny_hours' do
+        it 'has proper formatting for NY hours' do
+            expected = 'Weekdays: 7:30 AM - 5:00 PM, Closed Saturdays and Sundays'
+            expect(@factory.format_ny_hours('7:30 AM', '5:00 PM')).to eq(expected)
         end
     end
 end
