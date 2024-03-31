@@ -15,29 +15,29 @@ RSpec.describe Facility do
   end
   
   describe '#initialize' do
-    xit 'can initialize' do
-      expect(@facility).to be_an_instance_of(Facility)
-      expect(@facility.name).to eq('DMV Tremont Branch')
-      expect(@facility.address).to eq('2855 Tremont Place Suite 118 Denver CO 80205')
-      expect(@facility.phone).to eq('(720) 865-4600')
-      expect(@facility.services).to eq([])
+    it 'can initialize' do
+      expect(@facility_1).to be_an_instance_of(Facility)
+      expect(@facility_1.name).to eq('DMV Tremont Branch')
+      expect(@facility_1.address).to eq('2855 Tremont Place Suite 118 Denver CO 80205')
+      expect(@facility_1.phone).to eq('(720) 865-4600')
+      expect(@facility_1.services).to eq([])
     end
   end
 
   describe '#add service' do
-    xit 'can add available services' do
-      expect(@facility.services).to eq([])
-      @facility.add_service('New Drivers License')
-      @facility.add_service('Renew Drivers License')
-      @facility.add_service('Vehicle Registration')
-      expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+    it 'can add available services' do
+      expect(@facility_1.services).to eq([])
+      @facility_1.add_service('New Drivers License')
+      @facility_1.add_service('Renew Drivers License')
+      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
   
   describe '#vehicle registration empty until vehicles added' do
-    xit 'can add service without adding vehicles' do
+    it 'can add service without adding vehicles' do
      @facility_1.add_service('Vehicle Registration')
-     expect(@facility.services).to eq(["Vehicle Registration"])
+     expect(@facility_1.services).to eq(["Vehicle Registration"])
      expect(@cruz.registration_date).to eq(nil)
      expect(@facility_1.registered_vehicles).to eq([])
      expect(@facility_1.collected_fees).to eq(0)
@@ -45,17 +45,17 @@ RSpec.describe Facility do
   end
 
   describe '#register regular vehicle' do
-    xit 'can register a regular vehicle' do
+    it 'can register a regular vehicle' do
       @facility_1.register_vehicle(@cruz)
       expect(@facility_1.registered_vehicles).to eq([@cruz])
     end
 
-    xit 'can log a registration date' do
+    it 'can log a registration date' do
       @facility_1.register_vehicle(@cruz)
-      expect(@cruz.registration_date).to eq Date
+      expect(@cruz.registration_date).to eq(Date.today)
     end
 
-    xit 'can log a plate type' do
+    it 'can log a plate type' do
       @facility_1.register_vehicle(@cruz)
       expect(@cruz.plate_type).to eq[:regular] #look up if this should be parentheses
     end 
@@ -74,7 +74,7 @@ RSpec.describe Facility do
 
     xit 'can log a registration date' do
       @facility_1.register_vehicle(@camaro)
-      expect(@camaro.registration_date).to eq Date
+      expect(@camaro.registration_date).to eq(Date.today)
     end
 
     xit 'can log a plate type' do
@@ -84,7 +84,7 @@ RSpec.describe Facility do
 
     xit 'can collect fees on an antique vehicle' do
       @facility_1.register_vehicle(@camaro)
-        expect(@facility_1.collected_fees).to eq (25)
+        expect(@facility_1.collected_fees).to eq(25)
     end
   end
 
@@ -96,7 +96,7 @@ RSpec.describe Facility do
 
     xit 'can log a registration date' do
       @facility_1.register_vehicle(@bolt)
-      expect(@bolt.registration_date).to eq Date
+      expect(@bolt.registration_date).to eq(Date.today)
     end
 
     xit 'can log a plate type' do
@@ -106,7 +106,7 @@ RSpec.describe Facility do
 
     xit 'can collect fees on an EV' do
       @facility_1.register_vehicle(@bolt)
-        expect(@facility_1.collected_fees).to eq (200)
+        expect(@facility_1.collected_fees).to eq(200)
     end
   end
 
@@ -115,7 +115,7 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
-      expect(@facility_1.collected_fees).to eq (325)
+      expect(@facility_1.collected_fees).to eq(325)
     end
   end
 
