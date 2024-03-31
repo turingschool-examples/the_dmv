@@ -41,14 +41,4 @@ class Vehicle
         :regular
       end
   end
-
-  # def collect_fee(vehicle)
-  #   if vehicle.antique?
-  #     25
-  #   elsif vehicle.electric_vehicle?
-  #     200
-  #   else
-  #     100
-  #   end
-  # end
 end
