@@ -19,4 +19,10 @@ RSpec.describe MostPopularFinder do
     it 'loads data for WA EV registrations' do
         expect(@wa_ev_registrations).to be_an_instance_of(Array)
     end
+
+    describe '#most_popular_make_registered' do
+        it 'returns most popular make for WA EV registrations' do
+            expect(@most_popular_finder.most_popular_make_registered(@wa_ev_registrations)).to be_a(String)
+        end
+    end
 end
