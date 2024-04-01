@@ -4,10 +4,18 @@ class VehicleFactory
     end
 
     def create_vehicles(vehicle_registrations)
+        format_data(vehicle_registrations)
         vehicle_registrations.map do |vehicle|
             Vehicle.new(vehicle)
         end
     end
-end
 
-# I just need the engine type, make, model, vin, and year
+    def format_data(vehicle_registrations)
+        vehicle_registrations.map do |vehicle|
+            vehicle[:engine] = :ev
+
+            vehicle[:vin] = vehicle.delete :vin_1_10
+            vehicle[:year] = vehicle.delete :model_year
+        end
+    end
+end
