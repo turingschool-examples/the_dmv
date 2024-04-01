@@ -28,4 +28,12 @@ class Registrant
     @permit = true
   end
 
+  def written_test_complete
+    @license_data[:written] = true
+  end
+
+  def road_test_complete
+    @license_data[:license] = true
+  end
+  
 end
