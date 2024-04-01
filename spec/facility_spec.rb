@@ -176,6 +176,37 @@ RSpec.describe Facility do
     expect(@registrant_1.license_data[:license]).to eq(true)
   end
 
-  
+  it "won't renew license if service isn't offered" do
+    expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
+  end
+
+  it "won't renew license if written and road tests aren't passed" do
+    @facility_1.add_service("Written Test")
+    @facility_1.add_service("Road Test")
+    @facility_1.add_service("Renew License")
+
+    expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
+  end
+
+  it "will administer test if written and road tests are passed" do
+    @facility_1.add_service("Written Test")
+    @facility_1.add_service("Road Test")
+    @facility_1.add_service("Renew License")
+    @facility_1.administer_written_test(@registrant_1)
+    @facility_1.administer_road_test(@registrant_1)
+
+    expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(true)
+  end
+
+  it "will update renewal status to true when renewed" do
+    @facility_1.add_service("Written Test")
+    @facility_1.add_service("Road Test")
+    @facility_1.add_service("Renew License")
+    @facility_1.administer_written_test(@registrant_1)
+    @facility_1.administer_road_test(@registrant_1)
+    @facility_1.renew_drivers_license(@registrant_1)
+
+    expect(@registrant_1.license_data[:renewed]).to eq(true)
+  end
 
 end
