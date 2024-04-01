@@ -10,11 +10,11 @@ class Registrant
 
 
     def permit?
-        !permit
+        @permit
     end
 
     def earn_permit
-        permit == true
+        @permit = true
     end
 
 
