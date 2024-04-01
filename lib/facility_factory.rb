@@ -16,12 +16,13 @@ class FacilityFactory
       end
 
       hash[:address] = "#{hash[:address_li] }" + "#{hash[:office_name]}" + "#{hash[:address_1]}" + "#{hash[:street_address_line_1]}" + "#{hash[:address1]}" " #{hash[:city]}" + " #{hash[:state]}" + " #{hash[:zip]}" + "#{hash[:zip_code]}" + "#{hash[:zipcode]}"
-      # should be a better way to filter address but currently works, not scalable
+      # should be a better way to filter address but currently works
+      # hard to scale for more data sources
       # maybe a key condition and accumulator 
       hash[:services] = if hash[:services_p]
         "Vehicle Registration" if hash[:services_p].include?("registration")
       end
-
+      #if searching for services the return will at least return nil
       Facility.new(hash)
     end
   end
