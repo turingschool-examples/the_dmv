@@ -19,7 +19,27 @@ describe FacilityFactory do
             :address_id=>"175164",
             :":@computed_region_nku6_53ud"=>"1444"}]
         @ny_sample =
-
+        [{:office_name=>"JAMAICA",
+          :office_type=>"DISTRICT OFFICE",
+          :public_phone_number=>"7189666155",
+          :street_address_line_1=>"168-46 91ST AVE., 2ND FLR",
+          :city=>"JAMAICA",
+          :state=>"NY",
+          :zip_code=>"11432",
+          :monday_beginning_hours=>"7:30 AM",
+          :monday_ending_hours=>"5:00 PM",
+          :tuesday_beginning_hours=>"7:30 AM",
+          :tuesday_ending_hours=>"5:00 PM",
+          :wednesday_beginning_hours=>"7:30 AM",
+          :wednesday_ending_hours=>"5:00 PM",
+          :thursday_beginning_hours=>"7:30 AM",
+          :thursday_ending_hours=>"5:00 PM",
+          :friday_beginning_hours=>"7:30 AM",
+          :friday_ending_hours=>"5:00 PM",
+          :georeference=>{:type=>"Point", :coordinates=>[-73.791443647, 40.707575521]},
+          :":@computed_region_yamh_8v7k"=>"196",
+          :":@computed_region_wbg7_3whc"=>"1216",
+          :":@computed_region_kjdx_g34t"=>"2137"}]
     end
 
     it 'is an instance of FacilityFactory' do
@@ -59,6 +79,9 @@ describe FacilityFactory do
     end
 
     it "formats NY data correctly" do
-
+        formatted_facility = @facility_factory.create_facilities(@ny_sample)
+        expect(formatted_facility.first.name).to eq("JAMAICA")
+        expect(formatted_facility.first.address).to eq("168-46 91ST AVE., 2ND FLR Jamaica NY 11432")
+        expect(formatted_facility.first.phone).to eq("7189666155")
     end
 end
