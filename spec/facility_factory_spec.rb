@@ -60,4 +60,3 @@ RSpec.describe FacilityFactory do
     end
   end
 end
-

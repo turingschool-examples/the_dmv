@@ -8,8 +8,8 @@ RSpec.describe Facility do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
-
   end
+
   describe '#initialize' do
     it 'can initialize' do
       expect(@facility).to be_an_instance_of(Facility)
@@ -40,7 +40,7 @@ RSpec.describe Facility do
       expect(@facility_1.register_vehicle(@cruz)).to eq(@facility_1.registered_vehicles)
       expect(@cruz.registration_date).to be_an_instance_of(Date)
       expect(@cruz.plate_type).to eq(:regular)
-
+#can register multiple vehicles
       expect(@facility_1.registered_vehicles).to eq([@cruz])
       expect(@facility_1.collected_fees).to eq(100)
       expect(@facility_1.register_vehicle(@camaro)).to eq(@facility_1.registered_vehicles)
