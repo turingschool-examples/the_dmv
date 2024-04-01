@@ -1,14 +1,24 @@
 class Facility
-  attr_reader :name, :address, :phone, :services
+  attr_reader :name, :address, :phone, :services, :registered_vehicles
 
   def initialize(facility_hash)
     @name = facility_hash[:name]
     @address = facility_hash[:address]
     @phone = facility_hash[:phone]
     @services = []
+    @registered_vehicles = []
   end
 
   def add_service(service)
     @services << service
+  end
+
+  def register_vehicle(vehicle)
+    @registered_vehicles << vehicle
+    vehicle.register(self)
+  end
+
+  def collected_fees
+    0
   end
 end
