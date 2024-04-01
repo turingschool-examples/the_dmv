@@ -13,6 +13,8 @@ class FacilityFactory
     def format_data(facilities)
         if facilities.first.has_key?(:dmv_office)
             co_format(facilities)
+        elsif facilities.first.has_key?(:address1)
+            mo_format(facilities)
         else
             ny_format(facilities)
         end
@@ -30,6 +32,12 @@ class FacilityFactory
             facility[:name] = facility.delete :office_name
             facility[:phone] = facility.delete :public_phone_number
             facility[:address] = facility.values_at(:street_address_line_1, :city, :state, :zip_code).join(" ")
+        end
+    end
+
+    def mo_format(facilities)
+        facilities.map do |facility|
+        facility[:address] = facility.values_at(:address1, :city, :state, :zipcode).join(" ")
         end
     end
 end
