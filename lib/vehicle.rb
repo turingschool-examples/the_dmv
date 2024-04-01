@@ -27,4 +27,9 @@ class Vehicle
   def registration_date
 
   end
+  
+  def register(facility)
+    @registration_date = Date.today
+    facility.add_service("Vehicle Registration")
+  end
 end
