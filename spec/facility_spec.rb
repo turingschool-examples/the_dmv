@@ -148,4 +148,34 @@ RSpec.describe Facility do
     expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
   end
 
+  it "won't administer road test if service isn't offered" do
+    expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
+  end
+
+  it "won't administer road test unless written test is completed" do
+    @facility_1.add_service("Written Test")
+    @facility_1.add_service("Road Test")
+
+    expect(@facility_1.administer_road_test(@registrant_1)).to eq(false)
+  end
+
+  it "will administer road test when conditions are met" do
+    @facility_1.add_service("Written Test")
+    @facility_1.add_service("Road Test")
+    @facility_1.administer_written_test(@registrant_1)
+    
+    expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
+  end
+
+  it "will update license status to true once road test is passed" do
+    @facility_1.add_service("Written Test")
+    @facility_1.add_service("Road Test")
+    @facility_1.administer_written_test(@registrant_1)
+    @facility_1.administer_road_test(@registrant_1)
+
+    expect(@registrant_1.license_data[:license]).to eq(true)
+  end
+
+  
+
 end
