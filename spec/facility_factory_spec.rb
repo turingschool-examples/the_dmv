@@ -71,7 +71,7 @@ describe FacilityFactory do
         ny_facilities = @facility_factory.create_facilities(new_york_facilities)
         ny_facility_1 = ny_facilities.first
 
-        expect(ny_facilities_facilities).to be_an(Array)
+        expect(ny_facilities).to be_an(Array)
         expect(ny_facilities).to all be_a(Facility)
         expect(ny_facility_1.name).to be_a(String)
         expect(ny_facility_1.phone).to be_a(String)
@@ -81,7 +81,7 @@ describe FacilityFactory do
     it "formats NY data correctly" do
         formatted_facility = @facility_factory.create_facilities(@ny_sample)
         expect(formatted_facility.first.name).to eq("JAMAICA")
-        expect(formatted_facility.first.address).to eq("168-46 91ST AVE., 2ND FLR Jamaica NY 11432")
+        expect(formatted_facility.first.address).to eq("168-46 91ST AVE., 2ND FLR JAMAICA NY 11432")
         expect(formatted_facility.first.phone).to eq("7189666155")
     end
 end
