@@ -1,4 +1,4 @@
-require 'vehicle'
+require './lib/vehicle'
 
 class VehicleFactory
     def create_vehicles(registration_data)
