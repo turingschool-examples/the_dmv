@@ -27,5 +27,13 @@ class VehicleFactory
         end
         year_counter
     end
+
+    def county_with_most_registered_vehicles(vehicles)
+        county_counter = Hash.new(0)
+        vehicles.each do |vehicle|
+            county_counter[vehicle.county] += 1
+        end
+        county_counter.max_by { |key, value| value }[0]
+    end
 end
 

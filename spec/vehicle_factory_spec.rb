@@ -43,4 +43,14 @@ RSpec.describe VehicleFactory do
         #figure out the expected return value
         end
     end
+
+    describe '#county_with_most_registered_vehicles' do
+        xit 'can return county with most registered vehicles' do
+        vehicles = @vehicle_factory.create_vehicles(@wa_ev_registrations)
+        
+        expect(@vehicle_factory.county_with_most_registered_vehicles(vehicles)).to eq()
+        #figure out the expected return value
+        end
     end
+
+end
