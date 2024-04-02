@@ -19,7 +19,7 @@ RSpec.describe Dmv do
   end
 
   describe '#add facilities' do
-    it 'can add available facilities' do
+    it 'can add facilities' do
       expect(@dmv.facilities).to eq([])
       @dmv.add_facility(@facility_1)
       expect(@dmv.facilities).to eq([@facility_1])
