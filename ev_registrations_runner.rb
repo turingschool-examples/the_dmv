@@ -21,4 +21,17 @@ end
 
 find_most_popular_vehicle(wa_ev_vehicles)
 
+# Count of registered vehicle for a model year
+
+def count_vehicles_by_year(vehicles, year)
+    vehicle_array = []
+    vehicles.each do |vehicle|
+        if vehicle.year == year
+            vehicle_array << vehicle
+        end
+    end
+    puts "There are #{vehicle_array.count} vehicles registered with the model year #{year}"
+end
+
+count_vehicles_by_year(wa_ev_vehicles, "2023")
 
