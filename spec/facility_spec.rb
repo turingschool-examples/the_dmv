@@ -131,31 +131,60 @@ RSpec.describe Facility do
 
   describe 'Facility does not offer this service' do
     it 'returns message when service is not available' do
+
       registrant_1 = Registrant.new('Bruce', 18, true )
+
       expect(@facility.administer_written_test(registrant_1)).to eq("Facility does not offer this service")
     end
   end
 
   describe 'Facility does not offer this service' do
     it 'returns message when service is not available' do
+
       registrant_1 = Registrant.new('Bruce', 18, true )
+
       expect(@facility.administer_road_test(registrant_1)).to eq("Facility does not offer this service")
     end
   end
 
   describe 'Facility does not offer this service' do
     it 'returns message when service is not available' do
+
       registrant_1 = Registrant.new('Bruce', 18, true )
+
       expect(@facility.renew_drivers_license(registrant_1)).to eq("Facility does not offer this service")
     end
   end
 
   describe 'Facility does not offer this service' do
     it 'returns message when service is not available' do
+
       cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+
       expect(@facility.register_vehicle(cruz)).to eq("Facility does not offer this service")
     end
   end
 
   # TEST FOR FLIPPED EXPECTATION
+
+  describe 'administer_road_test' do
+    it 'it DOES NOT allow road test if no written completed' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      @facility.add_service('Written Test')
+      @facility.add_service('Driving Test')
+
+      expect(@facility.administer_road_test(registrant_1)).to eq("applicant is not eligible for license")
+    end
+  end
+
+  # TEST FOR API DATA
+  describe 'can add from colorado data' do
+    it 'can add facilities from colorado data' do
+      co_facility = Facility.new(DmvDataService.new.co_dmv_office_locations)
+
+      co_facility.add_service(co_facility.services[0])
+      
+      expect(co_facility.services).to eq(['vehicle titles'])
+    end
+  end
 end
