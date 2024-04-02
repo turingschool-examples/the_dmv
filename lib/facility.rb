@@ -61,7 +61,7 @@ class Facility
   def administer_road_test(registrant)
     if @services.include?('Driving Test') 
       if registrant.license_data[:written] == true
-        return registrant.license_data[:license] = true
+        registrant.license_data[:license] = true
       else
         "applicant is not eligible for license"
       end
@@ -73,7 +73,7 @@ class Facility
   def renew_drivers_license(registrant)
     if @services.include?('License Renewal') 
       if registrant.license_data[:license] == true
-        return registrant.license_data[:renewed] = true
+        registrant.license_data[:renewed] = true
       else
         "applicant is not eligible for renewal"
       end
