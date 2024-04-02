@@ -33,7 +33,7 @@ RSpec.describe Facility do
         @facility_1.add_service('Vehicle Registration')
         expect(@facility_1.register_vehicle(cruz)).to eq([cruz])
      end
-#test the sad path
+
      it 'can record the registration date' do
          cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
          @facility_1.add_service('Vehicle Registration')
