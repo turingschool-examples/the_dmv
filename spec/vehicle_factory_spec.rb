@@ -32,6 +32,7 @@ RSpec.describe VehicleFactory do
 
             it 'has correct data for first Vehicle instance created' do
                 first_vehicle = @factory.create_vehicles(@wa_ev_registrations).first
+
                 expect(first_vehicle.engine).to eq(:ev)
                 expect(first_vehicle.make).to eq('TESLA')
                 expect(first_vehicle.model).to eq('Model Y')
@@ -39,6 +40,7 @@ RSpec.describe VehicleFactory do
                 expect(first_vehicle.registration_date).to eq("2023-06-28T00:00:00.000")
                 expect(first_vehicle.vin).to eq("7SAYGDEE0P")
                 expect(first_vehicle.year).to eq(2023)
+                expect(first_vehicle.county).to eq('King')
             end
         end
 
@@ -52,6 +54,7 @@ RSpec.describe VehicleFactory do
 
             it 'has correct data for first Vehicle instance created' do
                 first_vehicle = @factory.create_vehicles(@ny_vehicle_registrations).first
+                
                 expect(first_vehicle.engine).to eq('GAS')
                 expect(first_vehicle.make).to eq('STARC')
                 expect(first_vehicle.model).to eq('BOAT')
