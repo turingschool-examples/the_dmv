@@ -33,24 +33,44 @@ RSpec.describe Facility do
   end
 
   describe '#register vehicle' do
-    xit 'can register a vehicle and collect fees' do
+    it 'can register an antique vehicle, collect fees, and assign a license plate' do
       @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@camaro)
       expect(@facility_1.collected_fees).to eq (25)  
+      expect(@camaro.plate_type).to be (:antique)
     end
-    it 'can register another vehicle and collect fees' do
+    it 'can register a regular vehicle, collect fees, and assign a license plate' do
       @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
-      expect(@facility_1.collected_fees).to eq (100)  
+      expect(@facility_1.collected_fees).to eq (100)
+      expect(@cruz.plate_type).to be (:regular)  
     end
-    xit 'can register another vehicle and collect fees' do
+    it 'can register an electric vehicle, collect fees, and assign a license plate' do
       @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@bolt)
       expect(@facility_1.collected_fees).to eq (200)  
+      expect(@bolt.plate_type).to be (:ev)
     end
   end
+
+  describe 'collected fees' do
+    it 'can collect fees on multiple vehicle registrations' do
+      @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
+      @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+      
+      @facility_1.add_service('Vehicle Registration')
+      
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@bolt)
+      @facility_1.register_vehicle(@camaro)
+      expect(@facility_1.collected_fees).to eq (325)
+    end
+  end
+
+
 
 end
