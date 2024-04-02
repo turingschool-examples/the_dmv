@@ -31,17 +31,14 @@ class Vehicle
   def plate_type
     if @engine == :ev
       @plate_type = :ev
-    elsif  antique = Date.today.year - @year > 25
+    elsif antique?
       @plate_type = :antique
     else 
       @plate_type = :regular
     end
   end
-
-  # def registration_date(vehicle)
-  #   if vehicle.registered = true
-  #     Date.today.year
-  #   end
-  # end
   
+  def assign_date
+    @registration_date = Date.today.year
+  end
 end
