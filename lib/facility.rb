@@ -4,8 +4,7 @@ class Facility
               :address,
               :services,
               :collected_fees,
-              :registered_vehicles,
-              :administer_written_test
+              :registered_vehicles
 
   def initialize(facility_details)
     @name = facility_details[:name]
@@ -63,7 +62,12 @@ class Facility
     end
   end
 
-
+  def renew_drivers_license(registrant)
+    if services.include?("Renew License") && registrant.license_data[:license] == true
+      registrant.license_data[:renewed] = true
+    end
+    false
+  end
 end
 
 

@@ -216,7 +216,7 @@ RSpec.describe Facility do
     @facility_1.renew_drivers_license(@registrant_1)
     expect(@facility_1.renew_drivers_license(@registrant_1)).to be(false)
     
-    @facility_1.add_service('Renew License')
+    
     expect(@facility_1.add_service('Renew License')).to eq(["Written Test", "Road Test", "Renew License"])
     
     @facility_1.renew_drivers_license(@registrant_1)
