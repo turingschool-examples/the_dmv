@@ -24,14 +24,28 @@ find_most_popular_vehicle(wa_ev_vehicles)
 # Count of registered vehicle for a model year
 
 def count_vehicles_by_year(vehicles, year)
-    vehicle_array = []
+    year_array = []
     vehicles.each do |vehicle|
         if vehicle.year == year
-            vehicle_array << vehicle
+            year_array << vehicle
         end
     end
-    puts "There are #{vehicle_array.count} vehicles registered with the model year #{year}"
+    puts "There are #{year_array.count} vehicles registered with the model year #{year}."
 end
 
 count_vehicles_by_year(wa_ev_vehicles, "2023")
 
+# County with most registered vehicles
+
+def county_with_most_vehicles(vehicles)
+    county_array = []
+    vehicles.each do |vehicle|
+        county = vehicle.county
+        county_array << county
+    end
+    tallied = county_array.tally
+    sorted = tallied.sort_by {|_key, value| value}
+    puts "The county with the most registered vehicles is #{sorted.last[0]} county with #{sorted.last[1]} vehicles registered."
+end
+
+county_with_most_vehicles(wa_ev_vehicles)
