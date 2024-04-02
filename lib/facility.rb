@@ -8,7 +8,8 @@ class Facility
               :services,
               :registered_vehicles,
               :collected_fees,
-              :daily_hours
+              :daily_hours,
+              :holidays_closed
 
   def initialize(facility_info)
     @name = facility_info[:name]
@@ -18,6 +19,7 @@ class Facility
     @registered_vehicles = []
     @collected_fees = 0
     @daily_hours = facility_info[:daily_hours]
+    @holidays_closed = facility_info[:holidays_closed]
   end
 
   def add_service(service)
