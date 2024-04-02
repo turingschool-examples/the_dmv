@@ -1,0 +1,3 @@
+class FunFacts
+    
+end
