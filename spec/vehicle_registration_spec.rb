@@ -14,7 +14,4 @@ it "exists" do
     expect(camaro).to be_instance_of(Vehicle)
 end
 
-it "" do
-
-end
 end
