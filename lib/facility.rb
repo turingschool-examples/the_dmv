@@ -52,4 +52,17 @@ class Facility
     end
   end
 
+  def renew_drivers_license(registrant)
+    if @services.include?("Renew License") && registrant.license_data[:license] == true
+      registrant.renewed_drivers_license
+      true
+    else
+      false
+    end
+  end
+
+  #A license can only be renewed if the registrant
+  #has already passed the road test and earned 
+ #a license
+
 end
