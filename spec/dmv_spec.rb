@@ -10,11 +10,9 @@ RSpec.describe Dmv do
   end
 
   describe '#initialize' do
-    it 'can initialize' do
-      
+    it 'can initialize' do      
       expect(@dmv).to be_an_instance_of(Dmv)
-      expect(@dmv.facilities).to eq([])
-      
+      expect(@dmv.facilities).to eq([])    
     end
   end
 
@@ -22,6 +20,7 @@ RSpec.describe Dmv do
     it 'can add available facilities' do
       expect(@dmv.facilities).to eq([])
       @dmv.add_facility(@facility_1)
+      
       expect(@dmv.facilities).to eq([@facility_1])
     end
   end

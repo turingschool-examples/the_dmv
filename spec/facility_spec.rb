@@ -197,6 +197,5 @@ RSpec.describe Facility do
       expect(registrant_1.license_data[:renewed]).to eq(false)
     end
   end
-
 end
 

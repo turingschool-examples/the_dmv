@@ -41,6 +41,7 @@ class Facility
     vehicle.set_registration_date(Date.today)
     @collected_fees += cost
     @registered_vehicles << vehicle
+
     end
   end 
 
@@ -72,14 +73,5 @@ class Facility
       false
     end
   end
-
-
-  # def collected_fees
-  #     total_cost = 0
-  #     @registered_vehicles.each do |key, vehicle_info|
-  #       total_cost += vehicle_info[:cost]
-  #   end 
-  #   total_cost
-  # end
 
 end

@@ -1,9 +1,6 @@
 class VehicleFactory
 
-    # attr_reader :name
-
     def initialize
-        # @name = name
     end
 
     def create_vehicle(api)
