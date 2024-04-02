@@ -14,9 +14,15 @@ class Registrant
     @permit
   end
 
+    # this method doesn't take an argument
+    # how can I return false if a registrant does not satisfy the requirements?
   def earn_permit
-    @permit = true  
+    @permit = true
   end
+
+  # def written_test_pass
+  #   @license_data[:written] = true
+  # end
 
 end
 

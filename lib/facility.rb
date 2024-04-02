@@ -11,19 +11,13 @@ class Facility
     @phone = facility_details[:phone]
     @address = facility_details[:address]
     @services = []
-    @registered_vehicles = []
     @collected_fees = 0
+    @registered_vehicles = []
   end
 
   def add_service(service)
     @services << service
   end
-
-  # def registration_date(vehicle)
-  #   if services.include?("Vehicle Registration")
-  #     @registration_date << Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)
-  #   end
-  # end
 
   def register_vehicle(vehicle)
     if services.include?("Vehicle Registration")
@@ -42,7 +36,40 @@ class Facility
     end
   end
 
+
+
+# Administer a written test
+# A written test can only be administered to registrants with a permit and who are at least 16 years of age
+
+  def administer_written_test(registrant)
+    if services.include?("Written Test")
+      if registrant.permit? && registrant.age >= 16
+        registrant.license_data[:written] = true
+      else
+        false
+      end
+    else
+      false
+    end
+  end
+
+  def administer_road_test(registrant)
+    if services.include?("Road Test") 
+      registrant.permit? && registrant.age >= 16
+      registrant.license_data[:license] = true
+    else
+      false
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    if services.include?("Renew License") && registrant.license_data[:license] == true
+      registrant.license_data[:renewed] = true
+    end
+    false
+  end
 end
+
 
 # facility_1
   # Can administer written tests
