@@ -28,14 +28,17 @@ class Facility
         @collected_fees += 200 
         @registered_vehicles << vehicle
         vehicle.plate_type
+        vehicle.registration_date
       elsif vehicle.antique?   
         @collected_fees += 25
         @registered_vehicles << vehicle
         vehicle.plate_type
+        vehicle.registration_date
       else 
         @collected_fees += 200
         @registered_vehicles << vehicle
         vehicle.plate_type
+        vehicle.registration_date
       end
     end  
   end
