@@ -4,12 +4,16 @@ class Facility
               :phone, 
               :services,
               :registered_vehicles,
+              :hours,
+              :holidays_closed,
               :collected_fees
 
   def initialize(facility_hash)
     @name = facility_hash[:name]
     @address = facility_hash[:address]
     @phone = facility_hash[:phone]
+    @hours = facility_hash[:hours]
+    @holidays_closed = facility_hash[:holidaysclosed]
     @collected_fees = 0
     @services = []
     @registered_vehicles = []
