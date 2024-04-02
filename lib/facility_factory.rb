@@ -19,10 +19,8 @@ class FacilityFactory
 
       facility_data[:services] = if facility_data[:services_p]
         if facility_data[:services_p].include?("registration")
-          ["Vehicle Registration"]
+          "Vehicle Registration"
           end
-        else
-        []
         end
 
       Facility.new(facility_data)

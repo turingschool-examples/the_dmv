@@ -71,7 +71,6 @@ RSpec.describe Facility do
       registrant_1 = Registrant.new('Bruce', 18, true )
       registrant_2 = Registrant.new('Penny', 16 )
       registrant_3 = Registrant.new('Tucker', 15 )
-      
 
       expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
       expect(registrant_1.permit?).to eq(true)
@@ -132,6 +131,8 @@ RSpec.describe Facility do
       registrant_2 = Registrant.new('Penny', 16 )
       registrant_2.earn_permit
       @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(registrant_1)
+      @facility_1.administer_written_test(registrant_2)
 
       expect(@facility_1.administer_road_test(registrant_1)).to eq(false)
       expect(@facility_1.add_service('Road Test')).to eq(["Written Test", "Road Test"])
@@ -167,12 +168,12 @@ RSpec.describe Facility do
       registrant_2.earn_permit
       registrant_3.earn_permit
       @facility_1.add_service('Written Test')
+      @facility_1.add_service('Road Test')
       @facility_1.add_service('Renew License')
       @facility_1.administer_written_test(registrant_2)
       @facility_1.administer_written_test(registrant_3)
       @facility_1.administer_road_test(registrant_2)
       @facility_1.administer_road_test(registrant_3)
-
 
       expect(@facility_1.renew_drivers_license(registrant_3)).to eq(false)
       expect(registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})

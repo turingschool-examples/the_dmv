@@ -10,7 +10,7 @@ class Facility
     @name = facility_data[:name]
     @address = facility_data[:address]
     @phone = facility_data[:phone]
-    @services = facility_data[:services]
+    @services = [facility_data[:services]].compact
     @registered_vehicles = []
     @collected_fees = 0
   end
