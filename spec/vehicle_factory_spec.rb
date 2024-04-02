@@ -40,7 +40,6 @@ RSpec.describe VehicleFactory do
         vehicles = @vehicle_factory.create_vehicles(@wa_ev_registrations)
         
         expect(@vehicle_factory.counter_by_model_year(vehicles)).to eq({"2011" => 14, "2012" => 26, "2013" => 77, "2014" => 96, "2015" => 57, "2016" => 93, "2017" => 84, "2018" => 81, "2019" => 79, "2020" => 58, "2021" => 87, "2022" => 108, "2023" => 131, "2024" => 9})
-        #figure out the expected return value
         end
     end
 
