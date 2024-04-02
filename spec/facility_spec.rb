@@ -171,14 +171,17 @@ RSpec.describe Facility do
     end
   end
 
-  # TEST FOR API DATA
-  describe 'can add from colorado data' do
-    it 'can add facilities from colorado data' do
-      co_facility = Facility.new(DmvDataService.new.co_dmv_office_locations)
+  describe 'renew_drivers_license' do
+    it 'it DOES NOT renew license if someone is not a licensed driver' do
+      registrant_1 = Registrant.new('Bruce', 18, true )
+      @facility.add_service('Written Test')
+      @facility.add_service('Driving Test')
+      @facility.add_service('License Renewal')
 
-      co_facility.add_service(co_facility.services[0])
+      @facility.administer_written_test(registrant_1)
       
-      expect(co_facility.services).to eq(['vehicle titles'])
+      expect(@facility.renew_drivers_license(registrant_1)).to eq("applicant is not eligible for renewal")
     end
   end
+
 end
