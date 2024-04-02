@@ -15,8 +15,12 @@ class Registrant
   end
 
   def earn_permit
-    @permit = true  
+    @permit = true  # should there be functionality in here to check age >= 16? (if)
   end
+
+    # def written_test_pass
+    #   @license_data[:written] = true
+    # end
 
 end
 
