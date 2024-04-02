@@ -53,13 +53,6 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(200)
     end
 
-    it 'can collect fees' do
-      @facility_1.add_service('Vehicle Registration')
-      @facility_1.register_vehicle(@cruz)
-      
-      expect(@facility_1.collected_fees).to eq(200)
-    end
-
     it 'can determine if has a vehicles plate type' do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
