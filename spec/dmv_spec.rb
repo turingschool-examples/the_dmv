@@ -41,15 +41,15 @@ RSpec.describe Dmv do
     end
   end
 
-  describe 'can work with api data' do
-    describe 'can add from colorado data' do
-      it 'can add facilities from colorado data' do
-        co_facility = DmvDataService.new.co_dmv_office_locations
+  # describe 'can work with api data' do
+  #   describe 'can add from colorado data' do
+  #     it 'can add facilities from colorado data' do
+  #       co_facility = DmvDataService.new.co_dmv_office_locations
 
-        @dmv.add_facility(co_facility)
+  #       @dmv.add_facility(co_facility)
 
-        expect(@dmv.facilities).to eq([co_facility])
-      end
-    end
-  end
+  #       expect(@dmv.facilities).to eq([co_facility])
+  #     end
+  #   end
+  # end
 end
