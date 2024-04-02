@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'date'
 
 RSpec.configure do |config|
       config.formatter = :documentation
@@ -42,15 +43,19 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([])
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
 
-      expect(@facility_1.registered_vehicles).to eq([@cruz])
+
+      expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
     end
 
     it 'can collect fees' do
       @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
       @facility_1.register_vehicle(@cruz)
-      
-      expect(@facility_1.collected_fees).to eq(200)
+      expect(@facility_1.collected_fees).to eq(325)
     end
 
     it 'can determine if has a vehicles plate type' do
@@ -65,9 +70,14 @@ RSpec.describe Facility do
       expect(@camaro.plate_type).to eq(:antique)
     end
 
+    xit 'determine a registration date' do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+    
+      expect(@cruz.registration_date).to eq(Date.today.year)
+    end
+
   end
-
-
 
   # describe '#' do
   #   it '' do

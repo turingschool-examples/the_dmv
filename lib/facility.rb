@@ -24,18 +24,18 @@ class Facility
 
   def register_vehicle(vehicle) # add the registration date 6:46 pm
     if services.include?("Vehicle Registration")
-      if [:engine] == :ev
-        @collected_fees += 200 
-        @registered_vehicles << vehicle
-        vehicle.plate_type
-        vehicle.registration_date
-      elsif vehicle.antique?   
+      if vehicle.antique?
         @collected_fees += 25
         @registered_vehicles << vehicle
         vehicle.plate_type
         vehicle.registration_date
-      else 
-        @collected_fees += 200
+      elsif vehicle.electric_vehicle?    
+        @collected_fees += 200 
+        @registered_vehicles << vehicle
+        vehicle.plate_type
+        vehicle.registration_date
+      else
+        @collected_fees += 100
         @registered_vehicles << vehicle
         vehicle.plate_type
         vehicle.registration_date
