@@ -36,20 +36,19 @@ RSpec.describe VehicleFactory do
     end
 
     describe '#counter_by_model_year' do
-        xit 'can return count of vehicles by model year' do
+        it 'can return count of vehicles by model year' do
         vehicles = @vehicle_factory.create_vehicles(@wa_ev_registrations)
         
-        expect(@vehicle_factory.counter_by_model_year(vehicles)).to eq()
+        expect(@vehicle_factory.counter_by_model_year(vehicles)).to eq({"2011" => 14, "2012" => 26, "2013" => 77, "2014" => 96, "2015" => 57, "2016" => 93, "2017" => 84, "2018" => 81, "2019" => 79, "2020" => 58, "2021" => 87, "2022" => 108, "2023" => 131, "2024" => 9})
         #figure out the expected return value
         end
     end
 
     describe '#county_with_most_registered_vehicles' do
-        xit 'can return county with most registered vehicles' do
+        it 'can return county with most registered vehicles' do
         vehicles = @vehicle_factory.create_vehicles(@wa_ev_registrations)
         
-        expect(@vehicle_factory.county_with_most_registered_vehicles(vehicles)).to eq()
-        #figure out the expected return value
+        expect(@vehicle_factory.county_with_most_registered_vehicles(vehicles)).to eq('King')
         end
     end
 
