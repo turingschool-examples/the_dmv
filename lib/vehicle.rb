@@ -27,7 +27,6 @@ class Vehicle
     @engine == :ev
   end
 
-  #method to change plate type replace attr_accessor
   def update_plate_type(vehicle)
     if vehicle.antique?
       @plate_type = 'antique'
@@ -38,7 +37,6 @@ class Vehicle
     end
   end
 
-  #method to change registration date
   def update_registration_date
     @registration_date = Date.today
   end

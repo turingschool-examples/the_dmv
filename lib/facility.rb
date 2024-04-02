@@ -36,16 +36,6 @@ class Facility
 
   end
 
-  # def update_plate_type(vehicle)
-  #   if vehicle.antique?
-  #     vehicle.plate_type = 'antique'
-  #   elsif vehicle.electric_vehicle?
-  #     vehicle.plate_type = 'electric'
-  #   else
-  #     vehicle.plate_type = 'regular'
-  #   end
-  # end
-
   def registration_fee(vehicle)
     if vehicle.antique?
       @collected_fees = 25
