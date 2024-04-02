@@ -14,9 +14,11 @@ class FacilityGenerator
                 data[:name] = data[:office_name]
                 data.delete(:office_name)
                 data[:address] = "#{data[:street_address_line_1]}, #{data[:city]}, #{data[:state]} #{data[:zip_code]}"
+                data[:hours] = "Mon-Fri #{data[monday_beginning_hours]}-#{data[monday_ending_hours]}"
                 Facility.new(data)
             else data[:state] == 'MO'
                 data[:address] = "#{data[:address1]}, #{data[:city]}, #{data[:state]} #{data[:zipcode]}"
+                data[:hours] = data[:daysopen]
                 Facility.new(data)
             end
             # is key mapping more efficient than this?

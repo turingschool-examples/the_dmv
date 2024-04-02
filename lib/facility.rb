@@ -4,12 +4,16 @@ class Facility
               :phone, 
               :services,
               :registered_vehicles,
+              :hours,
+              :holidays_closed,
               :collected_fees
 
   def initialize(facility_hash)
     @name = facility_hash[:name]
     @address = facility_hash[:address]
     @phone = facility_hash[:phone]
+    @hours = facility_hash[:hours]
+    @holidays_closed = facility_hash[:holidaysclosed]
     @collected_fees = 0
     @services = []
     @registered_vehicles = []
@@ -35,16 +39,6 @@ class Facility
     @registered_vehicles << vehicle
 
   end
-
-  # def update_plate_type(vehicle)
-  #   if vehicle.antique?
-  #     vehicle.plate_type = 'antique'
-  #   elsif vehicle.electric_vehicle?
-  #     vehicle.plate_type = 'electric'
-  #   else
-  #     vehicle.plate_type = 'regular'
-  #   end
-  # end
 
   def registration_fee(vehicle)
     if vehicle.antique?

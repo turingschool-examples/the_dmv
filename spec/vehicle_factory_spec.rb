@@ -27,4 +27,29 @@ RSpec.describe VehicleFactory do
         end
     end
     
+    describe '#most_popular_makemodel' do
+        it 'can return most popular make/model' do
+        vehicles = @vehicle_factory.create_vehicles(@wa_ev_registrations)
+        
+        expect(@vehicle_factory.most_popular_makemodel(vehicles)).to eq("NISSAN Leaf")
+        end
     end
+
+    describe '#counter_by_model_year' do
+        it 'can return count of vehicles by model year' do
+        vehicles = @vehicle_factory.create_vehicles(@wa_ev_registrations)
+        
+        expect(@vehicle_factory.counter_by_model_year(vehicles)).to eq({"2011" => 14, "2012" => 26, "2013" => 77, "2014" => 96, "2015" => 57, "2016" => 93, "2017" => 84, "2018" => 81, "2019" => 79, "2020" => 58, "2021" => 87, "2022" => 108, "2023" => 131, "2024" => 9})
+        #figure out the expected return value
+        end
+    end
+
+    describe '#county_with_most_registered_vehicles' do
+        it 'can return county with most registered vehicles' do
+        vehicles = @vehicle_factory.create_vehicles(@wa_ev_registrations)
+        
+        expect(@vehicle_factory.county_with_most_registered_vehicles(vehicles)).to eq('King')
+        end
+    end
+
+end
