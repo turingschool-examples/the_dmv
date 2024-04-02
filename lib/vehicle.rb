@@ -1,4 +1,5 @@
 class Vehicle
+
     attr_reader :vin,
                 :year,
                 :make,
