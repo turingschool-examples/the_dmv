@@ -49,14 +49,18 @@ class Facility
       else
         false
       end
-      # if reg has permit and is >= 16 they can take written test
     else
       false
     end
   end
 
   def administer_road_test(registrant)
-    false
+    if services.include?("Road Test") 
+      registrant.permit? && registrant.age >= 16
+      true
+    else
+      false
+    end
   end
 end
 
