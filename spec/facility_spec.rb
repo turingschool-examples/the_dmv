@@ -22,7 +22,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#add service' do
+  describe '#add_service' do
     it 'can add available services' do
       expect(@facility_1.services).to eq([])
 
@@ -140,6 +140,7 @@ RSpec.describe Facility do
       expect(@registrant_1.age >= 16).to be true
 
       expect(@facility_1.administer_written_test(@registrant_1)).to be false
+      expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
 
     it 'can administer written test' do
@@ -160,6 +161,7 @@ RSpec.describe Facility do
       expect(@registrant_2.permit?).to be false
 
       expect(@facility_1.administer_written_test(@registrant_2)).to be false
+      expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
 
     it 'can administer written test once registrant has earned permit' do

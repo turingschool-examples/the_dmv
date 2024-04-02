@@ -32,6 +32,7 @@ RSpec.describe FacilityFactory do
         describe 'creating CO facilities' do
             it 'can use data to create new CO DMV Facility instances' do
                 facilities = @factory.create_facilities(@co_dmv_office_locations)
+
                 expect(facilities).to be_an_instance_of(Array)
                 expect(facilities.size).to be_an(Integer)
                 expect(facilities.first).to be_an_instance_of(Facility)
@@ -39,33 +40,42 @@ RSpec.describe FacilityFactory do
             end
 
             it 'creates proper name for the CO DMV Facility instances' do
-                facilities = @factory.create_facilities(@co_dmv_office_locations)
-                expect(facilities.first.name).not_to eq(nil)
-                expect(facilities.first.name).to be_a(String)
+                first_facility = @factory.create_facilities(@co_dmv_office_locations).first
+
+                expect(first_facility.name).not_to eq(nil)
+                expect(first_facility.name).to be_a(String)
+                expect(first_facility.name).to eq('DMV Tremont Branch')
             end
 
             it 'creates proper address for the CO DMV Facility instances' do
-                facilities = @factory.create_facilities(@co_dmv_office_locations)
-                expect(facilities.first.address).not_to eq(nil)
-                expect(facilities.first.address).to be_a(String)
+                first_facility = @factory.create_facilities(@co_dmv_office_locations).first
+
+                expect(first_facility.address).not_to eq(nil)
+                expect(first_facility.address).to be_a(String)
+                expect(first_facility.address).to eq('2855 Tremont Place Suite 118 Denver CO 80205')
             end
 
             it 'creates proper phone number for the CO DMV Facility instances' do
-                facilities = @factory.create_facilities(@co_dmv_office_locations)
-                expect(facilities.first.phone).not_to eq(nil)
-                expect(facilities.first.phone).to be_a(String)
+                first_facility = @factory.create_facilities(@co_dmv_office_locations).first
+
+                expect(first_facility.phone).not_to eq(nil)
+                expect(first_facility.phone).to be_a(String)
+                expect(first_facility.phone).to eq('(720) 865-4600')
             end
 
             it 'creates proper daily hours for the CO DMV Facility instances' do
-                facilities = @factory.create_facilities(@co_dmv_office_locations)
-                expect(facilities.first.hours).not_to eq(nil)
-                expect(facilities.first.hours).to be_a(String)
+                first_facility = @factory.create_facilities(@co_dmv_office_locations).first
+
+                expect(first_facility.hours).not_to eq(nil)
+                expect(first_facility.hours).to be_a(String)
+                expect(first_facility.hours).to eq('Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.')
             end
         end
 
         describe 'creating NY facilities' do
             it 'can use data to create new NY DMV Facility instances' do
                 facilities = @factory.create_facilities(@new_york_facilities)
+
                 expect(facilities).to be_an_instance_of(Array)
                 expect(facilities.size).to be_an(Integer)
                 expect(facilities.first).to be_an_instance_of(Facility)
@@ -73,34 +83,42 @@ RSpec.describe FacilityFactory do
             end
 
             it 'creates proper name for the NY DMV Facility instances' do
-                facilities = @factory.create_facilities(@new_york_facilities)
-                expect(facilities.first.name).not_to eq(nil)
-                expect(facilities.first.name).to be_a(String)
+                first_facility = @factory.create_facilities(@new_york_facilities).first
+
+                expect(first_facility.name).not_to eq(nil)
+                expect(first_facility.name).to be_a(String)
+                expect(first_facility.name).to eq('JAMAICA')
             end
 
             it 'creates proper address for the NY DMV Facility instances' do
-                facilities = @factory.create_facilities(@new_york_facilities)
-                expect(facilities.first.address).not_to eq(nil)
-                expect(facilities.first.address).to be_a(String)
+                first_facility = @factory.create_facilities(@new_york_facilities).first
+
+                expect(first_facility.address).not_to eq(nil)
+                expect(first_facility.address).to be_a(String)
+                expect(first_facility.address).to eq('168-46 91ST AVE., 2ND FLR  JAMAICA NY 11432')
             end
 
             it 'creates proper phone number for the NY DMV Facility instances' do
-                facilities = @factory.create_facilities(@new_york_facilities)
-                expect(facilities.first.phone).not_to eq(nil)
-                expect(facilities.first.phone).to be_a(String)
+                first_facility = @factory.create_facilities(@new_york_facilities).first
+
+                expect(first_facility.phone).not_to eq(nil)
+                expect(first_facility.phone).to be_a(String)
+                expect(first_facility.phone).to eq('7189666155')
             end
 
             it 'creates proper daily hours for the NY DMV Facility instances' do
-                facilities = @factory.create_facilities(@new_york_facilities)
-                expect(facilities.first.hours).not_to eq(nil)
-                expect(facilities.first.hours).to be_a(String)
-                expect(facilities.first.hours).to eq('Weekdays: 7:30 AM - 5:00 PM, Closed Saturdays and Sundays')
+                first_facility = @factory.create_facilities(@new_york_facilities).first
+
+                expect(first_facility.hours).not_to eq(nil)
+                expect(first_facility.hours).to be_a(String)
+                expect(first_facility.hours).to eq('Weekdays: 7:30 AM - 5:00 PM, Closed Saturdays and Sundays')
             end
         end
 
         describe 'creating MO facilities' do
             it 'can use data to create new MO DMV Facility instances' do
                 facilities = @factory.create_facilities(@missouri_facilities)
+
                 expect(facilities).to be_an_instance_of(Array)
                 expect(facilities.size).to be_an(Integer)
                 expect(facilities.first).to be_an_instance_of(Facility)
@@ -108,27 +126,34 @@ RSpec.describe FacilityFactory do
             end
 
             it 'creates proper name for the MO DMV Facility instances' do
-                facilities = @factory.create_facilities(@missouri_facilities)
-                expect(facilities.first.name).not_to eq(nil)
-                expect(facilities.first.name).to be_a(String)
+                first_facility = @factory.create_facilities(@missouri_facilities).first
+
+                expect(first_facility.name).not_to eq(nil)
+                expect(first_facility.name).to be_a(String)
+                expect(first_facility.name).to eq('NEVADA')
             end
 
             it 'creates proper address for the MO DMV Facility instances' do
-                facilities = @factory.create_facilities(@missouri_facilities)
-                expect(facilities.first.address).not_to eq(nil)
-                expect(facilities.first.address).to be_a(String)
+                first_facility = @factory.create_facilities(@missouri_facilities).first
+
+                expect(first_facility.address).not_to eq(nil)
+                expect(first_facility.address).to be_a(String)
+                expect(first_facility.address).to eq('409 E AUSTIN BLVD  NEVADA MO 64772')
             end
 
             it 'creates proper phone number for the MO DMV Facility instances' do
-                facilities = @factory.create_facilities(@missouri_facilities)
-                expect(facilities.first.phone).not_to eq(nil)
-                expect(facilities.first.phone).to be_a(String)
+                first_facility = @factory.create_facilities(@missouri_facilities).first
+
+                expect(first_facility.phone).not_to eq(nil)
+                expect(first_facility.phone).to be_a(String)
+                expect(first_facility.phone).to eq('(417) 448-5705')
             end
 
             it 'creates proper daily hours for the MO DMV Facility instances' do
-                facilities = @factory.create_facilities(@missouri_facilities)
-                expect(facilities.first.hours).not_to eq(nil)
-                expect(facilities.first.hours).to be_a(String)
+                first_facility = @factory.create_facilities(@missouri_facilities).first
+                
+                expect(first_facility.hours).not_to eq(nil)
+                expect(first_facility.hours).to be_a(String)
             end
         end
     end
