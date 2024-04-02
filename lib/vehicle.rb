@@ -24,5 +24,15 @@ class Vehicle
   def electric_vehicle?
     @engine == :ev
   end
+
+  def plate_type
+    if @engine == :ev
+      @plate_type = :ev
+    elsif vehicle.antique? 
+      @plate_type = :antique
+    else 
+      @plate_type = :regular
+    end
+  end
   
 end
