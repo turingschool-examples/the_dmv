@@ -176,4 +176,15 @@ RSpec.describe Facility do
       expect(@facility.administer_road_test(registrant_1)).to eq("applicant is not eligible for license")
     end
   end
+
+  # TEST FOR API DATA
+  describe 'can add from colorado data' do
+    it 'can add facilities from colorado data' do
+      co_facility = Facility.new(DmvDataService.new.co_dmv_office_locations)
+
+      co_facility.add_service(co_facility.services[0])
+      
+      expect(co_facility.services).to eq(['vehicle titles'])
+    end
+  end
 end

@@ -40,4 +40,16 @@ RSpec.describe Dmv do
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
+
+  describe 'can work with api data' do
+    describe 'can add from colorado data' do
+      it 'can add facilities from colorado data' do
+        co_facility = DmvDataService.new.co_dmv_office_locations
+
+        @dmv.add_facility(co_facility)
+
+        expect(@dmv.facilities).to eq([co_facility])
+      end
+    end
+  end
 end
