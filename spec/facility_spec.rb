@@ -197,7 +197,7 @@ RSpec.describe Facility do
       expect(@facility_1.administer_road_test(@registrant_1)).to be true
       expect(@registrant_1.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
 
-      @registrant_2.earn_permit #to instructors: this is an add-on to the IP, is that ok?
+      @registrant_2.earn_permit
       @facility_1.administer_written_test(@registrant_2)
       expect(@facility_1.administer_road_test(@registrant_2)).to be true
       expect(@registrant_2.license_data).to eq({:written=>true, :license=>true, :renewed=>false})
