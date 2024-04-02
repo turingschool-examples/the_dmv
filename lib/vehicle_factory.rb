@@ -1,4 +1,4 @@
-require 'vehicle'
+require './lib/vehicle'
 
 class VehicleFactory
     def create_vehicles(registration_data)
@@ -7,7 +7,8 @@ class VehicleFactory
                         year: vehicle[:model_year], 
                         make: vehicle[:make], 
                         model: vehicle[:model], 
-                        engine: :ev} )
+                        engine: :ev,
+                        county: vehicle[:county]} )
         end
     end
 end

@@ -1,4 +1,4 @@
-require 'facility'
+require './lib/facility'
 
 class FacilityGenerator
     def create_facilities(locations_data)
