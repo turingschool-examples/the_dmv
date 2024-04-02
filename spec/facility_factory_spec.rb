@@ -32,6 +32,5 @@ RSpec.describe FacilityFactory do
         mo_dmvs = DmvDataService.new.mo_dmv_office_locations
 
         expect(factory.create_mo_facility(mo_dmvs)).to be_an_instance_of(Array)
-        binding.pry
     end
 end
