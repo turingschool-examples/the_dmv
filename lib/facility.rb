@@ -1,4 +1,6 @@
 
+require 'date'
+
 class Facility
   attr_reader :name, 
               :address, 
@@ -28,17 +30,17 @@ class Facility
         @collected_fees += 25
         @registered_vehicles << vehicle
         vehicle.plate_type
-        vehicle.registration_date
+        vehicle.assign_date
       elsif vehicle.electric_vehicle?    
         @collected_fees += 200 
         @registered_vehicles << vehicle
         vehicle.plate_type
-        vehicle.registration_date
+        vehicle.assign_date
       else
         @collected_fees += 100
         @registered_vehicles << vehicle
         vehicle.plate_type
-        vehicle.registration_date
+        vehicle.assign_date
       end
     end  
   end

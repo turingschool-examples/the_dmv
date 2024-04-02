@@ -45,8 +45,7 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
-
-
+      
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
     end
 
@@ -64,13 +63,12 @@ RSpec.describe Facility do
       @facility_1.register_vehicle(@bolt)
       @facility_1.register_vehicle(@camaro)
       
-      
       expect(@cruz.plate_type).to eq(:regular)
       expect(@bolt.plate_type).to eq(:ev)
       expect(@camaro.plate_type).to eq(:antique)
     end
 
-    xit 'determine a registration date' do
+    it 'determines a registration date' do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@cruz)
     
