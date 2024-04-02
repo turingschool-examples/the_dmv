@@ -22,12 +22,12 @@ RSpec.describe Registrant do
     end
 
     describe "#can earn permit" do
-        it "can has a permit value" do
+        it "has a permit value" do
             expect(@registrant_1.permit?).to eq(true)
             expect(@registrant_2.permit?).to eq(false)  
         end
         
-        it "can earn permit" do
+        it "can earn a permit" do
             expect(@registrant_2.earn_permit).to eq(true)
             expect(@registrant_2.permit?).to eq(true)
         end
