@@ -24,7 +24,19 @@ RSpec.describe Registrant do
       expect(@registrant_2.permit?).to be false
       expect(@registrant_2.license_data).to eq({:written => false, :license => false, :renewed => false})
     end
-  end
+
+    describe '#initialize another registrant' do
+      it 'can initialize another registrant' do
+        @registrant_3 = Registrant.new('Tucker', 16)
+
+        expect(@registrant_3).to be_an_instance_of(Registrant)
+        expect(@registrant_3.name).to eq('Tucker')
+        expect(@registrant_3.age).to eq(16)
+        expect(@registrant_3.permit?).to be false
+        expect(@registrant_3.license_data).to eq({:written => false, :license => false, :renewed => false})
+      end
+    end
+   end
 
   describe 'earn_permit' do
       it 'can earn a permit' do
@@ -34,5 +46,13 @@ RSpec.describe Registrant do
         
         expect(@registrant_2.permit?).to be true      
       end
-  end
+
+      it 'can earn a permit' do
+        @registrant_3 = Registrant.new('Tucker', 16)
+
+        @registrant_3.earn_permit
+        
+        expect(@registrant_3.permit?).to be true      
+      end
+    end
 end
