@@ -41,10 +41,24 @@ RSpec.describe FacilityFactory do
       expect(offices[0].services).to eq([])
   end 
 
-  it 'can create facilities' do
+  it 'can create facilities for CO' do
     facility_factory = FacilityFactory.new
     co_dmv_office_locations = DmvDataService.new.co_dmv_office_locations
     expect(facility_factory.create_facilities(co_dmv_office_locations)).to all be_an_instance_of(Facility)
   end
 
+  xit 'can create facilities for NY' do
+    facility_factory = FacilityFactory.new
+    new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+    expect(facility_factory.create_facilities(co_dmv_office_locations)).to all be_an_instance_of(Facility)
+  end
+
+  xit 'can create facilities for MO' do
+    facility_factory = FacilityFactory.new
+    missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+    expect(facility_factory.create_facilities(co_dmv_office_locations)).to all be_an_instance_of(Facility)
+  end
+
 end
+
+

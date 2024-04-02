@@ -40,4 +40,12 @@ RSpec.describe Vehicle do
     end
   end
 
+  describe 'registered' do
+    it 'can update attributes' do
+      @bolt.registered
+      expect(@bolt.registration_date).to eq(Date.today)
+      expect(@bolt.plate_type).to eq(:ev)
+    end
+  end
+
 end
