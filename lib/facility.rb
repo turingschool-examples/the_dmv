@@ -38,7 +38,28 @@ class Facility
     else
     end
   end
+
+
+  def administer_written_test(registrant)
+    if @services.include?('Written Test')
+      if registrant.permit? == true && registrant.age >= 16
+        registrant.license_data[:written] = true
+        return true
+      else
+        return false
+      end
+    else
+      return false
+    end
+  end
+
 end
+
+# when i administer written test:
+# a registrant must have a permit and be at least 16.
+
+
+
 
 
 #  #I have access to facilities :name, 
