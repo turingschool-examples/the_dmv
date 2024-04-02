@@ -32,8 +32,6 @@ class Facility
     end
   end
 
-  #A written test can only be administered to registrants with a 
-  #permit and who are at least 16 years of age
   def administer_written_test(registrant)
     if @services.include?("Written Test") && registrant.age >= 16 && registrant.permit? == true
       registrant.written_test_complete
@@ -60,9 +58,5 @@ class Facility
       false
     end
   end
-
-  #A license can only be renewed if the registrant
-  #has already passed the road test and earned 
- #a license
 
 end
