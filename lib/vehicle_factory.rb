@@ -3,11 +3,11 @@ class VehicleFactory
   end
 
   def create_vehicles(registrations)
-    registrations.map do |hash|
-      hash[:year] = hash.delete :model_year
-      hash[:vin] = hash.delete :vin_1_10
-      hash[:engine] = :ev
-      Vehicle.new(hash)
+    registrations.map do |vehicle_data|
+      vehicle_data[:year] = vehicle_data.delete :model_year
+      vehicle_data[:vin] = vehicle_data.delete :vin_1_10
+      vehicle_data[:engine] = :ev
+      Vehicle.new(vehicle_data)
     end
   end
 end

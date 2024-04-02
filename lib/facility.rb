@@ -10,8 +10,7 @@ class Facility
     @name = facility_data[:name]
     @address = facility_data[:address]
     @phone = facility_data[:phone]
-    @services = [facility_data[:services]].compact
-    #services may need refactoring, will return nil if not found
+    @services = facility_data[:services]
     @registered_vehicles = []
     @collected_fees = 0
   end
