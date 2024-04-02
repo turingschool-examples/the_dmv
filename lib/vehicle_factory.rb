@@ -1,6 +1,6 @@
 class VehicleFactory
 
-    attr_reader :name
+    # attr_reader :name
 
     def initialize
         # @name = name
@@ -18,5 +18,4 @@ class VehicleFactory
             Vehicle.new(vehicle_details)
         end
     end
-
 end
