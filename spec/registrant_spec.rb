@@ -29,9 +29,7 @@ RSpec.describe Registrant do
       expect(registrant_3.age).to eq(15)
       expect(registrant_3.permit?).to eq false
       expect(registrant_3.license_data?).to eq ({:written=>false, :license=>false, :renewed=>false})
-
     end
-
   end
 
   describe '#permit?' do
@@ -44,6 +42,43 @@ RSpec.describe Registrant do
     end
   end
 
-  
+  describe '#license_data?' do
+    it 'can provide license data' do
+      registrant_3 = Registrant.new('Tucker', 15 )
+      expect(registrant_3.license_data?).to eq ({:written=>false, :license=>false, :renewed=>false})
+    end
+  end
+
+  describe '#earn_permit' do
+    it 'can earn permit' do
+      registrant_3 = Registrant.new('Tucker', 15 )
+      registrant_3.earn_permit
+      expect(registrant_3.permit).to be true
+    end
+  end
+
+  describe '#written_test_complete' do
+    it 'can update lisense data' do
+      registrant_3 = Registrant.new('Tucker', 15 )
+      registrant_3.written_test_complete
+      expect(registrant_3.license_data?).to eq ({:written=>true, :license=>false, :renewed=>false})
+    end
+  end
+
+  describe '#road_test_complete' do
+    it 'can update lisense data' do
+      registrant_3 = Registrant.new('Tucker', 15 )
+      registrant_3.road_test_complete
+      expect(registrant_3.license_data?).to eq ({:written=>false, :license=>true, :renewed=>false})
+    end
+  end
+
+  describe '#renewed_drivers_license' do
+    it 'can update lisense data' do
+      registrant_3 = Registrant.new('Tucker', 15 )
+      registrant_3.renewed_drivers_license
+      expect(registrant_3.license_data?).to eq ({:written=>false, :license=>false, :renewed=>true})
+    end
+  end
 
 end
