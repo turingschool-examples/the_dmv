@@ -9,7 +9,6 @@ RSpec.describe VehicleFactory do
 
     describe '#create vehicles' do
     it 'create a vehicle' do
-       # puts @factory.create_vehicles(@data_response)
         vehicle_1 = @factory.create_vehicles(@dds.wa_ev_registrations).first
         
         expect(vehicle_1).to be_an_instance_of(Vehicle)
@@ -27,8 +26,4 @@ RSpec.describe VehicleFactory do
 
         expect(registration_data.size).to eq(vehicles.size)
    end
-
-
-
-
 end
