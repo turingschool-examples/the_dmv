@@ -1,6 +1,7 @@
 class Dmv
 
   def initialize
+    
     @facilities = []
   end
 
