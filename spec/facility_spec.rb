@@ -70,6 +70,14 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq [@cruz, @camaro, @bolt]
       expect(@facility_1.collected_fees).to be 325
     end
+
+    it "will not register vehicle if service is not available at facility" do
+      expect(@facility_2.registered_vehicles).to eq []
+      expect(@facility_2.services).to eq []
+      expect(@facility_2.register_vehicle(@bolt)).to be nil
+      expect(@facility_2.registered_vehicles).to eq []
+      expect(@facility_2.collected_fees).to be 0
+    end
   end
 
 
