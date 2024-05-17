@@ -3,7 +3,6 @@ class Dmv
   def initialize
     @facilities = []
   end
-
   def add_facility(facility)
     @facilities << facility
   end
