@@ -30,4 +30,12 @@ class Facility
       @collected_fees += 100
     end
   end
+  
+  def administer_written_test(registrant)
+    if @services.include?('Written Test')
+      registrant.license_data[:written] = true if registrant.license_data[:written] == false 
+    else
+      return 'This facility does not offer written tests.'
+    end
+  end
 end

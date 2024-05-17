@@ -66,4 +66,24 @@ RSpec.describe Facility do
       p @facility.collected_fees
     end
   end
+
+  describe '#administer_written_test' do
+    it 'can administer a written test' do
+      registrant = Registrant.new('Bill', 25, true)
+      expect(@facility.services).to eq([])
+      expect(registrant.license_data[:written]).to eq(false)
+      @facility.add_service('Written Test')
+      @facility.administer_written_test(registrant)
+      expect(registrant.license_data[:written]).to eq(true)
+      p @facility
+    end
+
+    it 'can not administer a written test' do
+      registrant = Registrant.new('Bill', 25, true)
+      expect(@facility.services).to eq([])
+      expect(registrant.license_data[:written]).to eq(false)
+      expect(@facility.administer_written_test(registrant)).to eq('This facility does not offer written tests.')
+      p @facility
+    end
+  end
 end
