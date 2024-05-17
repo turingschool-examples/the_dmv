@@ -31,11 +31,12 @@ RSpec.describe Facility do
 
   describe "#register vehicle" do
     it "can register a :regular vehicle" do
+      expect(@facility_1.register_vehicle(@cruz)).to eq nil
       @facility_1.add_service('Vehicle Registration')
       expect(@cruz.registration_date).to be nil
       expect(@facility_1.registered_vehicles).to eq []
       expect(@facility_1.collected_fees).to be 0
-      expect(@facility_1.register_vehicle(@cruz)). to eq [@cruz]
+      expect(@facility_1.register_vehicle(@cruz)).to eq [@cruz]
       expect(@cruz.registration_date).to be_a Date
       expect(@cruz.plate_type).to eq :regular
       expect(@facility_1.registered_vehicles).to eq [@cruz]
@@ -43,10 +44,11 @@ RSpec.describe Facility do
     end
 
     it "can register an :antique vehicle" do
-
-
-
-
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@camaro)
+      expect(@camaro.registration_date).to be_a Date
+      expect(@camaro.plate_type).to eq :antique
+      expect(@facility_1.collected_fees).to be 25
     end
 
   end
