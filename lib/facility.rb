@@ -33,13 +33,17 @@ class Facility
       @collected_fees += 100
     elsif vehicle.plate_type == :antique
       @collected_fees += 25
+    else
+      @collected_fees += 200
     end
   end
 
   def assign_plate_type(vehicle)
-    if vehicle.antique? == false
+    if vehicle.engine == :ev
+      vehicle.plate_type = :ev
+    elsif vehicle.antique? == false
       vehicle.plate_type = :regular
-    elsif vehicle.antique? == true
+    else
       vehicle.plate_type = :antique
     end
   end

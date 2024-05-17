@@ -51,5 +51,19 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to be 25
     end
 
+    it "can register an :ev vehicle" do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@bolt)
+      expect(@bolt.plate_type).to be :ev
+      expect(@facility_1.collected_fees).to be 200
+    end
+
   end
+
+
+
+
+
+
+  
 end
