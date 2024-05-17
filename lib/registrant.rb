@@ -19,4 +19,13 @@ class Registrant
         @permit = permit
         @license_data = license_data
     end
+
+    def permit?
+        @permit
+    end
+
+    def earn_permit 
+        @permit = true if @permit == false
+        
+    end
 end
