@@ -17,6 +17,16 @@ class Facility
 end
 
 
+#registration_date
+#registered_vehicles
+#collected_fees
+#register_vehicle()
+#plate_type
+#add_service()
+#services
+
+
+
 # @facility_2
   # "New Driver's License"
   # "Road Test"
