@@ -34,11 +34,9 @@ class Facility
   def administer_written_test(registrant)
     if @services.include?('Written Test') != true
       return 'This facility does not offer written tests.'
-    end
-    if @services.include?('Written Test') && registrant.permit? == true && registrant.age >= 16
-      registrant.license_data[:written] = true  
-    end 
-    if @services.include?('Written Test') && registrant.age < 16
+    elsif @services.include?('Written Test') && registrant.permit? && registrant.age >= 16
+      registrant.license_data[:written] = true   
+    elsif @services.include?('Written Test') && registrant.age < 16
       return 'Registrant is too young to take the written test.'
     end
   end

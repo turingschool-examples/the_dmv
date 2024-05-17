@@ -7,7 +7,7 @@ RSpec.describe Registrant do
      expect(registrant).to be_an_instance_of(Registrant)
      expect(registrant.name).to eq('Bill')
      expect(registrant.age).to eq(25)
-     expect(registrant.permit).to eq(true)
+     expect(registrant.permit?).to eq(true)
     end
   end
 
@@ -21,9 +21,9 @@ RSpec.describe Registrant do
   describe '#earn_permit' do
     it 'can earn a permit' do
      registrant = Registrant.new('Bill', 15)
-     expect(registrant.permit).to eq(false)
+     expect(registrant.permit?).to eq(false)
      registrant.earn_permit
-     expect(registrant.permit).to eq(true)
+     expect(registrant.permit?).to eq(true)
     end
   end
 
