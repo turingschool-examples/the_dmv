@@ -20,28 +20,14 @@ RSpec.describe Registrant do
     expect(@registrant_2.permit?).to be false
   end
   
+  it "has license data hash with default values false" do
+    expect(@registrant_2.license_data).to eq ({written: false, license: false, renewed: false})
+  end
+
+  it "can earn a permit" do
+    @registrant_2.earn_permit
+
+    expect(@registrant_2.permit?).to be true
+  end
+
 end
-
-
-# registrant_1.permit?
-# #=> true
-
-# registrant_1.license_data
-# #=> {:written=>false, :license=>false, :renewed=>false}
-
-# registrant_2.name
-# #=> "Penny"
-
-# registrant_2.age
-# #=> 15
-
-# registrant_2.permit?
-# #=> false
-
-# registrant_2.license_data
-# #=> {:written=>false, :license=>false, :renewed=>false}
-
-# registrant_2.earn_permit
-
-# registrant_2.permit?
-# #=> true
