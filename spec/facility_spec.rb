@@ -89,16 +89,18 @@ RSpec.describe Facility do
         
         @facility_1.register_vehicle(@cruz)
         @facility_1.register_vehicle(@camaro)
+        @facility_1.register_vehicle(@bolt)
         
-        expect(@cruz.registration_date).to eq(date)
+
+        expect(@cruz.registration_date).to eq(Date.today)
         # pry(main)> cruz.registration_date
         # #=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
         
-        expect(@camaro.registration_date).to eq(date)
+        expect(@camaro.registration_date).to eq(Date.today)
         # pry(main)> camaro.registration_date
         # #=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
         
-        expect(@bolt.registration_date).to eq(date)
+        expect(@bolt.registration_date).to eq(Date.today)
         # pry(main)> bolt.registration_date
         # #=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
       end

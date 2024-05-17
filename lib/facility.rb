@@ -18,8 +18,9 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-
+    vehicle.set_date
   end
+
 
 end
 
