@@ -23,4 +23,47 @@ RSpec.describe Facility do
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
+
+  describe '#register_vehicle' do
+    it 'can register a vehicle' do
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+      expect(@facility.register_vehicles).to eq([])
+      @facility.register_vehicle(cruz)
+      expect(@facility.register_vehicles.length).to eq(1)
+      expect(@facility.register_vehicles[0].vin).to eq('123456789abcdefgh')
+      p @facility
+    end
+  end
+
+  describe '#calculate_fee' do
+    it 'can calculate the fee for a vehicle' do
+      cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+      @facility.register_vehicle(cruz)
+      expect(@facility.register_vehicles.length).to eq(1)
+      expect(@facility.collected_fees).to eq(0)
+      @facility.calculate_fee(cruz)
+      expect(@facility.collected_fees).to eq(100)
+      p @facility.collected_fees
+    end
+
+    it 'can calculate the fee for an electric vehicle' do
+      bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
+      @facility.register_vehicle(bolt)
+      expect(@facility.register_vehicles.length).to eq(1)
+      expect(@facility.collected_fees).to eq(0)
+      @facility.calculate_fee(bolt)
+      expect(@facility.collected_fees).to eq(200)
+      p @facility.collected_fees
+    end
+
+    it 'can calculate the fee for an antique vehicle' do
+      camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+      @facility.register_vehicle(camaro)
+      expect(@facility.register_vehicles.length).to eq(1)
+      expect(@facility.collected_fees).to eq(0)
+      @facility.calculate_fee(camaro)
+      expect(@facility.collected_fees).to eq(25)
+      p @facility.collected_fees
+    end
+  end
 end

@@ -33,4 +33,40 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe '#registration_date' do
+    it 'can parse the registration date' do
+      expect(@cruz.registration_date).to eq(nil)
+    end
+  end
+
+  describe '#register' do
+    it 'can register a vehicle' do
+      expect(@cruz.registration_date).to eq(nil)
+      @cruz.register
+      expect(@cruz.registration_date).to eq(Date.today)
+    end
+  end
+
+  describe '#regular?' do 
+    it 'can determine if a vehicle is regular' do
+      expect(@cruz.regular?).to eq(true)
+      expect(@bolt.regular?).to eq(false)
+      expect(@camaro.regular?).to eq(true)
+    end
+  end
+
+  describe '#set_plate_type' do
+    it 'can set the plate type' do
+      expect(@cruz.plate_type).to eq(nil)
+      expect(@bolt.plate_type).to eq(nil)
+      expect(@camaro.plate_type).to eq(nil)
+      @cruz.set_plate_type
+      @bolt.set_plate_type
+      @camaro.set_plate_type
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@bolt.plate_type).to eq(:ev)
+      expect(@camaro.plate_type).to eq(:antique)
+    end
+  end
 end
