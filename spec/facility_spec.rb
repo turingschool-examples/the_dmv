@@ -18,6 +18,7 @@ RSpec.describe Facility do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+  end
     
     describe '#initialize' do
       it 'can initialize' do
@@ -89,15 +90,15 @@ RSpec.describe Facility do
         @facility_1.register_vehicle(@cruz)
         @facility_1.register_vehicle(@camaro)
         
-        expect(@cruz.registration_date).to eq(<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>)
+        expect(@cruz.registration_date).to eq(date)
         # pry(main)> cruz.registration_date
         # #=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
         
-        expect(@camaro.registration_date).to eq(<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>)
+        expect(@camaro.registration_date).to eq(date)
         # pry(main)> camaro.registration_date
         # #=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
         
-        expect(@bolt.registration_date).to eq(<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>)
+        expect(@bolt.registration_date).to eq(date)
         # pry(main)> bolt.registration_date
         # #=> #<Date: 2023-01-12 ((2459957j,0s,0n),+0s,2299161j)>
       end
@@ -179,7 +180,6 @@ RSpec.describe Facility do
         # #=> :ev
       end
     end
-  end
 end            
 
 
