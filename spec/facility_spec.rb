@@ -19,10 +19,10 @@ RSpec.describe Facility do
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
   end
+  
+  describe '#initialize' do
+  it 'can initialize' do
     
-    describe '#initialize' do
-      it 'can initialize' do
-
         expect(@facility_1).to be_an_instance_of(Facility)
         expect(@facility_1.name).to eq('DMV Tremont Branch')
         expect(@facility_1.address).to eq('2855 Tremont Place Suite 118 Denver CO 80205')
@@ -42,15 +42,15 @@ RSpec.describe Facility do
 
       it "can have a vehicle" do
 
-        expect(@cruz).to eq({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+        expect(@cruz).to be_an_instance_of(Vehicle)
         # pry(main)> cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
         # #=> #<Vehicle:0x0000000135a48b08 @engine=:ice, @make="Chevrolet", @model="Cruz", @plate_type=nil, @registration_date=nil, @vin="123456789abcdefgh", @year=2012>
   
-        expect(@bolt).to eq({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
+        expect(@bolt).to be_an_instance_of(Vehicle)
         # pry(main)> bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
         # #=> #<Vehicle:0x0000000125832180 @engine=:ev, @make="Chevrolet", @model="Bolt", @plate_type=nil, @registration_date=nil, @vin="987654321abcdefgh", @year=2019>
   
-        expect(@camaro).to eq({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
+        expect(@camaro).to be_an_instance_of(Vehicle)
         # pry(main)> camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
         # #=> #<Vehicle:0x0000000135adb610 @engine=:ice, @make="Chevrolet", @model="Camaro", @plate_type=nil, @registration_date=nil, @vin="1a2b3c4d5e6f", @year=1969>
       end
@@ -59,7 +59,7 @@ RSpec.describe Facility do
     
     describe '#add service' do
       it 'can add available services' do
-
+        
         expect(@facility_1.services).to eq([])
         @facility_1.add_service('New Drivers License')
         @facility_1.add_service('Renew Drivers License')
@@ -67,7 +67,7 @@ RSpec.describe Facility do
         # pry(main)> facility_1.add_service('Vehicle Registration')
         # #=> ["Vehicle Registration"]
         expect(@facility_1.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
-
+        
         expect(@facility_2.registered_vehicles).to eq([])
         # pry(main)> facility_2.registered_vehicles
         # #=> []
