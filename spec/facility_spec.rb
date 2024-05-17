@@ -32,7 +32,7 @@ RSpec.describe Facility do
   describe "#register vehicle" do
     it "can register a :regular vehicle" do
       @facility_1.add_service('Vehicle Registration')
-      expect(cruz.registration_date).to be nil
+      expect(@cruz.registration_date).to be nil
       expect(@facility_1.registered_vehicles).to eq []
       expect(@facility_1.collected_fees).to be 0
       expect(@facility_1.register_vehicle(@cruz)). to eq [@cruz]
@@ -46,7 +46,7 @@ RSpec.describe Facility do
 
 
 
-      
+
     end
 
   end
