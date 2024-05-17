@@ -98,4 +98,52 @@ RSpec.describe Facility do
       expect(@facility.administer_written_test(registrant)).to eq('Registrant is too young to take the written test.')
     end
   end
+  
+  describe '#administer_road_test' do
+    it 'can administer a road test' do
+      registrant = Registrant.new('Bill', 25, true)
+      expect(@facility.services).to eq([])
+      expect(registrant.license_data[:written]).to eq(false)
+      @facility.add_service('Written Test')
+      @facility.administer_written_test(registrant)
+      expect(registrant.license_data[:written]).to eq(true)
+      @facility.add_service('Road Test')
+      @facility.administer_road_test(registrant)
+      expect(registrant.license_data[:license]).to eq(true)
+    end
+
+    it 'facility does not offer road test' do
+      registrant = Registrant.new('Bill', 25, true)
+      expect(@facility.services).to eq([])
+      @facility.administer_road_test(registrant)
+      expect(@facility.administer_road_test(registrant)).to eq('This facility does not offer road tests.')
+    end
+  end
+
+  describe '#renew_drivers_license'
+    it 'can renew drivers license' do
+      registrant = Registrant.new('Bill', 25, true)
+      expect(@facility.services).to eq([])
+      expect(registrant.license_data[:written]).to eq(false)
+      @facility.add_service('Written Test')
+      @facility.administer_written_test(registrant)
+      expect(registrant.license_data[:written]).to eq(true)
+      @facility.add_service('Road Test')
+      @facility.administer_road_test(registrant)
+      expect(registrant.license_data[:license]).to eq(true)
+      @facility.add_service('Renew License')
+      @facility.renew_drivers_license(registrant)
+      expect(registrant.license_data[:renew]).to eq(true)
+    end
+  
+    it 'can not renew drivers license' do
+      registrant = Registrant.new('Bill', 25, true)
+      expect(@facility.services).to eq([])
+      @facility.add_service('Written Test')
+      @facility.add_service('Road Test')
+      @facility.administer_written_test(registrant)
+      @facility.administer_road_test(registrant)
+      @facility.renew_drivers_license(registrant)
+      expect(@facility.renew_drivers_license(registrant)).to eq('This facility does not offer road tests.')
+    end
 end

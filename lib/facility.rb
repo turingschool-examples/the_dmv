@@ -40,4 +40,20 @@ class Facility
       return 'Registrant is too young to take the written test.'
     end
   end
+
+  def administer_road_test(registrant)
+    if @services.include?('Road Test') && registrant.license_data[:written] = true
+      registrant.license_data[:license] = true
+    elsif @services.include?('Road Test') != true
+      return 'This facility does not offer road tests.'
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    if @services.include?('Renew License') && registrant.license_data[:license] = true
+      registrant.license_data[:renew] = true
+    elsif @services.include?('Renew License') != true
+      return 'This facility does not offer road tests.'
+    end
+  end
 end
