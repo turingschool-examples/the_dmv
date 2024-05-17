@@ -46,6 +46,7 @@ RSpec.describe Facility do
     it "can register an :antique vehicle" do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@camaro)
+
       expect(@camaro.registration_date).to be_a Date
       expect(@camaro.plate_type).to eq :antique
       expect(@facility_1.collected_fees).to be 25
@@ -54,10 +55,21 @@ RSpec.describe Facility do
     it "can register an :ev vehicle" do
       @facility_1.add_service('Vehicle Registration')
       @facility_1.register_vehicle(@bolt)
+
+      expect(@bolt.registration_date).to be_a Date
       expect(@bolt.plate_type).to be :ev
       expect(@facility_1.collected_fees).to be 200
     end
 
+    it "can accumulate registered vehicles and collected fees" do
+      @facility_1.add_service('Vehicle Registration')
+      @facility_1.register_vehicle(@cruz)
+      @facility_1.register_vehicle(@camaro)
+      @facility_1.register_vehicle(@bolt)
+
+      expect(@facility_1.registered_vehicles).to eq [@cruz, @camaro, @bolt]
+      expect(@facility_1.collected_fees).to be 325
+    end
   end
 
 
@@ -65,5 +77,5 @@ RSpec.describe Facility do
 
 
 
-  
+
 end
