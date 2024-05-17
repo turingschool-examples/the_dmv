@@ -6,7 +6,7 @@ class DmvDataService
     response = Faraday.get(source)
     JSON.parse(response.body, symbolize_names: true)
   end
-
+  
   def wa_ev_registrations
     @wa_ev_registrations ||= load_data('https://data.wa.gov/resource/rpr4-cgyd.json')
   end
