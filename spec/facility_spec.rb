@@ -135,8 +135,6 @@ RSpec.describe Facility do
   end
 
   describe "#administer_road_test" do
-    #A road test can only be administered to registrants who have passed the written test
-    #For simplicity’s sake, Registrants who qualify for the road test automatically earn a license
     it "will not administer if facility does not offer" do
       expect(@facility_1.administer_road_test(@registrant_1)).to be false
       expect(@registrant_1.license_data).to eq ({written: false, license: false, renewed: false})
@@ -168,7 +166,30 @@ RSpec.describe Facility do
   end
 
   describe "#renew_drivers_license" do
-    # A license can only be renewed if the registrant has already passed the road test and earned a license
+    it "will renew if registrant has a license" do
+      @facility_1.add_service("Written Test")
+      @facility_1.add_service("Road Test")
+      @facility_1.add_service("Renew License")
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+      @facility_1.renew_drivers_license(@registrant_1)
+      @facility_1.administer_written_test(@registrant_2)
+      @facility_1.administer_road_test(@registrant_2)
+      @facility_1.renew_drivers_license(@registrant_2)
+
+      expect(@facility_1.services).to eq ["Written Test", "Road Test", "Renew License"]
+      expect(@registrant_1.license_data).to eq ({:written=>true, :license=>true, :renewed=>true})
+      expect(@registrant_2.license_data).to eq ({:written=>true, :license=>true, :renewed=>true})
+    end
+
+    it "will not renew if registrant does not have license" do
+      @facility_1.add_service("Written Test")
+      @facility_1.add_service("Road Test")
+      @facility_1.add_service("Renew License")
+      @facility_1.renew_drivers_license(@registrant_3)
+
+      expect(@registrant_3.license_data).to eq ({:written=>false, :license=>false, :renewed=>false})
+    end
   end
 
 
