@@ -137,6 +137,33 @@ RSpec.describe Facility do
   describe "#administer_road_test" do
     #A road test can only be administered to registrants who have passed the written test
     #For simplicity’s sake, Registrants who qualify for the road test automatically earn a license
+    it "will not administer if facility does not offer" do
+      expect(@facility_1.administer_road_test(@registrant_1)).to be false
+      expect(@registrant_1.license_data).to eq ({written: false, license: false, renewed: false})
+    end
+
+    it "will not administer if registrant has not passed written test" do
+      @facility_1.add_service("Road Test")
+      @facility_1.administer_written_test(@registrant_1)
+      @registrant_3.earn_permit
+      @facility_1.administer_road_test(@registrant_3)
+
+      expect(@registrant_1.license_data).to eq ({written: false, license: false, renewed: false})
+      expect(@registrant_3.license_data).to eq ({written: false, license: false, renewed: false})
+    end
+
+    it "will administer to registrant with passing written test" do
+      @facility_1.add_service("Written Test")
+      @facility_1.add_service("Road Test")
+      @facility_1.administer_written_test(@registrant_1)
+      @facility_1.administer_road_test(@registrant_1)
+
+      expect(@registrant_1.license_data).to eq ({written: true, license: true, renewed: false})
+
+      @facility_1.administer_written_test(@registrant_2)
+      @facility_1.administer_road_test(@registrant_2)
+
+      expect(@registrant_1.license_data).to eq ({written: true, license: true, renewed: false})
   end
 
   describe "#renew_drivers_license" do
