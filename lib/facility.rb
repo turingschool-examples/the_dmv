@@ -26,6 +26,7 @@ class Facility
       charge_fee(vehicle)
       @registered_vehicles << vehicle
     end
+    false
   end
 
   def charge_fee(vehicle)
@@ -51,4 +52,12 @@ class Facility
   def assign_registration_date(vehicle)
     vehicle.registration_date = Date.today
   end
+
+  def administer_written_test(registrant)
+    if @services.include?("Written Test") && registrant.age >= 16 && registrant.permit? == true
+      registrant.license_data[:written] = true
+    end
+    false
+  end
+
 end

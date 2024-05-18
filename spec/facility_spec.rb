@@ -34,12 +34,14 @@ RSpec.describe Facility do
 
   describe "#register vehicle" do
     it "can register a :regular vehicle" do
-      expect(@facility_1.register_vehicle(@cruz)).to eq nil
-      @facility_1.add_service('Vehicle Registration')
+      expect(@facility_1.register_vehicle(@cruz)).to eq false
+      @facility_1.add_service("Vehicle Registration")
       expect(@cruz.registration_date).to be nil
       expect(@facility_1.registered_vehicles).to eq []
       expect(@facility_1.collected_fees).to be 0
-      expect(@facility_1.register_vehicle(@cruz)).to eq [@cruz]
+
+      @facility_1.register_vehicle(@cruz)
+
       expect(@cruz.registration_date).to be_a Date
       expect(@cruz.plate_type).to eq :regular
       expect(@facility_1.registered_vehicles).to eq [@cruz]
@@ -47,7 +49,7 @@ RSpec.describe Facility do
     end
 
     it "can register an :antique vehicle" do
-      @facility_1.add_service('Vehicle Registration')
+      @facility_1.add_service("Vehicle Registration")
       @facility_1.register_vehicle(@camaro)
 
       expect(@camaro.registration_date).to be_a Date
@@ -56,7 +58,7 @@ RSpec.describe Facility do
     end
 
     it "can register an :ev vehicle" do
-      @facility_1.add_service('Vehicle Registration')
+      @facility_1.add_service("Vehicle Registration")
       @facility_1.register_vehicle(@bolt)
 
       expect(@bolt.registration_date).to be_a Date
@@ -65,7 +67,7 @@ RSpec.describe Facility do
     end
 
     it "can accumulate registered vehicles and collected fees" do
-      @facility_1.add_service('Vehicle Registration')
+      @facility_1.add_service("Vehicle Registration")
       @facility_1.register_vehicle(@cruz)
       @facility_1.register_vehicle(@camaro)
       @facility_1.register_vehicle(@bolt)
@@ -77,7 +79,7 @@ RSpec.describe Facility do
     it "will not register vehicle if service is not available at facility" do
       expect(@facility_2.registered_vehicles).to eq []
       expect(@facility_2.services).to eq []
-      expect(@facility_2.register_vehicle(@bolt)).to be nil
+      expect(@facility_2.register_vehicle(@bolt)).to be false
       expect(@facility_2.registered_vehicles).to eq []
       expect(@facility_2.collected_fees).to be 0
     end
@@ -93,22 +95,25 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq ({written: false, license: false, renewed: false})
       expect(@registrant_1.permit?).to eq true
 
-      @facility_1.add_service('Written Test')
+      @facility_1.add_service("Written Test")
       @facility_1.administer_written_test(@registrant_1)
       
       expect(@registrant_1.license_data).to eq ({written: true, license: false, renewed: false})
     end
 
     it "will not administer to registrant age 16 or older without a permit " do
-      @facility_1.add_service('Written Test')
+      @facility_1.add_service("Written Test")
       
       expect(@registrant_2.age).to be 16
       expect(@registrant_2.permit?).to be false
-      expect(@facility_1.administer_written_test(@registrant_2)).to be false
+
+      @facility_1.administer_written_test(@registrant_2)
+
+      expect(@registrant_2.license_data).to eq ({written: false, license: false, renewed: false})
     end
 
     it "can administer to registrant age 16 or older who has earned a permit" do
-      @facility_1.add_service('Written Test')      
+      @facility_1.add_service("Written Test")      
       @registrant_2.earn_permit      
       @facility_1.administer_written_test(@registrant_2)
       
@@ -116,6 +121,8 @@ RSpec.describe Facility do
     end
 
     it "will not administer to registrant age 15 or younger" do
+      @facility_1.add_service("Written Test")   
+
       expect(@registrant_3.age).to be 15
       expect(@registrant_3.permit?).to be false
       expect(@facility_1.administer_written_test(@registrant_3)).to be false
@@ -125,8 +132,6 @@ RSpec.describe Facility do
       expect(@facility_1.administer_written_test(@registrant_3)).to be false
       expect(@registrant_3.license_data).to eq ({written: false, license: false, renewed: false})
     end
-    # A written test can only be administered to registrants with a permit 
-    # and who are at least 16 years of age
   end
 
   describe "#administer_road_test" do
