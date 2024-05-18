@@ -164,6 +164,7 @@ RSpec.describe Facility do
       @facility_1.administer_road_test(@registrant_2)
 
       expect(@registrant_1.license_data).to eq ({written: true, license: true, renewed: false})
+    end
   end
 
   describe "#renew_drivers_license" do
