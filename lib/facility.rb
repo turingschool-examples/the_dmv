@@ -35,11 +35,9 @@ class Facility
         vehicle.set_plate_type(:regular)
       end
     end
-
-    ### Next up - collected_fees
   end
 
-
+  
 end
 
 
@@ -61,3 +59,13 @@ end
 # @facility_3
   # "New Drivers License"
   # "Road Test"
+
+#   Administer a written test
+# A written test can only be administered to registrants with a permit and who are at least 16 years of age
+# Administer a road test
+# A road test can only be administered to registrants who have passed the written test
+# For simplicity’s sake, Registrants who qualify for the road test automatically earn a license
+# Renew a driver’s license
+# A license can only be renewed if the registrant has already passed the road test and earned a license
+# NOTE: A facility must offer a service in order to perform it. Just because the DMV allows facilities to 
+  # perform certain services, does not mean that every facility provides every service.
