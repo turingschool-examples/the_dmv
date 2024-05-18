@@ -1,5 +1,9 @@
 require 'spec_helper'
 
+RSpec.configure do |config|
+  config.formatter = :documentation
+end
+
 RSpec.describe Facility do
   before(:each) do
     @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
@@ -21,6 +25,20 @@ RSpec.describe Facility do
       @facility.add_service('Renew Drivers License')
       @facility.add_service('Vehicle Registration')
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+    end
+  end
+  describe 'register_vehicles' do
+    it 'can register vehicles' do
+      @facility.register_vehicles(@vehicle)
+      expect(@facility.registered_vehicles).to eq([@vehicle])
+    end
+  end
+
+  describe 'collected_fees' do
+    it 'returns the total fees collected' do
+      allow(@vehicle).to receive(:year).and_return(2010)
+      @facility.register_vehicles(@vehicle)
+      expect(@facility.collected_fees).to eq(100)
     end
   end
 end

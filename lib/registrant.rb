@@ -12,10 +12,7 @@ class Registrant
     end
 
     def earn_permit
-        return true unless permit?
-        true
-    
-
+        @permit = true
     end
 
 
