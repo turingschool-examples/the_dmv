@@ -85,62 +85,45 @@ RSpec.describe Facility do
 
   describe "#administer_written_test" do
     it "can will not administer test if facility does not offer service" do
-      expect(@registrant_1.license_data).to eq ({written: false, license: false, renewed: false})
-      expect(@registrant_1.permit?).to eq true
       expect(@facility_1.administer_written_test(@registrant_1)).to be false
       expect(@registrant_1.license_data).to eq ({written: false, license: false, renewed: false})
     end
       
-    xit "can administer to registrant with permit and age over 16" do
-      facility_1.add_service('Written Test')
-      #=> ["Written Test"]
-      
-      facility_1.administer_written_test(registrant_1)
-      #=> true
-      
-      registrant_1.license_data
-      #=> {:written=>true, :license=>false, :renewed=>false}
-      
-      registrant_2.age
-      #=> 16
-      
-      registrant_2.permit?
-      #=> false
-      
-      facility_1.administer_written_test(registrant_2)
-      #=> false
-      
-      registrant_2.earn_permit
-      
-      facility_1.administer_written_test(registrant_2)
-      #=> true
-      
-      registrant_2.license_data
-      #=> {:written=>true, :license=>false, :renewed=>false}
-      
-      registrant_3.age
-      #=> 15
-      
-      registrant_3.permit?
-      #=> false
-      
-      facility_1.administer_written_test(registrant_3)
-      #=> false
-      
-      registrant_3.earn_permit
-      
-      facility_1.administer_written_test(registrant_3)
-      #=> false
-      
-      registrant_3.license_data
-      #=> {:written=>false, :license=>false, :renewed=>false}
-    
+    it "can administer to registrant with permit and age 16 or older" do
+      expect(@registrant_1.license_data).to eq ({written: false, license: false, renewed: false})
+      expect(@registrant_1.permit?).to eq true
 
+      @facility_1.add_service('Written Test')
+      @facility_1.administer_written_test(@registrant_1)
+      
+      expect(@registrant_1.license_data).to eq ({written: true, license: false, renewed: false})
+    end
 
+    it "will not administer to registrant age 16 or older without a permit " do
+      @facility_1.add_service('Written Test')
+      
+      expect(@registrant_2.age).to be 16
+      expect(@registrant_2.permit?).to be false
+      expect(@facility_1.administer_written_test(@registrant_2)).to be false
+    end
 
+    it "can administer to registrant age 16 or older who has earned a permit" do
+      @facility_1.add_service('Written Test')      
+      @registrant_2.earn_permit      
+      @facility_1.administer_written_test(@registrant_2)
+      
+      expect(@registrant_2.license_data).to eq ({written: true, license: false, renewed: false})
+    end
 
-
-
+    it "will not administer to registrant age 15 or younger" do
+      expect(@registrant_3.age).to be 15
+      expect(@registrant_3.permit?).to be false
+      expect(@facility_1.administer_written_test(@registrant_3)).to be false
+      
+      @registrant_3.earn_permit
+      
+      expect(@facility_1.administer_written_test(@registrant_3)).to be false
+      expect(@registrant_3.license_data).to eq ({written: false, license: false, renewed: false})
     end
     # A written test can only be administered to registrants with a permit 
     # and who are at least 16 years of age
