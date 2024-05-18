@@ -27,24 +27,24 @@ RSpec.describe Facility do
   end
   
   describe '#initialize' do
-  it 'can initialize' do
+    it 'can initialize' do
     
-        expect(@facility_1).to be_an_instance_of(Facility)
-        expect(@facility_1.name).to eq('DMV Tremont Branch')
-        expect(@facility_1.address).to eq('2855 Tremont Place Suite 118 Denver CO 80205')
-        expect(@facility_1.phone).to eq('(720) 865-4600')
-        expect(@facility_1.services).to eq([])
-        # pry(main)> facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
-        # #=> #<Facility:0x000000010e5ad5e8 @address="2855 Tremont Place Suite 118 Denver CO 80205", @name="DMV Tremont Branch", @phone="(720) 865-4600", @services=[]>
-        
-        expect(@facility_2).to be_an_instance_of(Facility)
-        expect(@facility_2.name).to eq('DMV Northeast Branch')
-        expect(@facility_2.address).to eq('4685 Peoria Street Suite 101 Denver CO 80239')
-        expect(@facility_2.phone).to eq('(720) 865-4600')
-        expect(@facility_2.services).to eq([])
-        # pry(main)> facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
-        # #=> #<Facility:0x000000010e5ad480 @address="4685 Peoria Street Suite 101 Denver CO 80239", @name="DMV Northeast Branch", @phone="(720) 865-4600", @services=[]>
-      end
+      expect(@facility_1).to be_an_instance_of(Facility)
+      expect(@facility_1.name).to eq('DMV Tremont Branch')
+      expect(@facility_1.address).to eq('2855 Tremont Place Suite 118 Denver CO 80205')
+      expect(@facility_1.phone).to eq('(720) 865-4600')
+      expect(@facility_1.services).to eq([])
+      # pry(main)> facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+      # #=> #<Facility:0x000000010e5ad5e8 @address="2855 Tremont Place Suite 118 Denver CO 80205", @name="DMV Tremont Branch", @phone="(720) 865-4600", @services=[]>
+      
+      expect(@facility_2).to be_an_instance_of(Facility)
+      expect(@facility_2.name).to eq('DMV Northeast Branch')
+      expect(@facility_2.address).to eq('4685 Peoria Street Suite 101 Denver CO 80239')
+      expect(@facility_2.phone).to eq('(720) 865-4600')
+      expect(@facility_2.services).to eq([])
+      # pry(main)> facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
+      # #=> #<Facility:0x000000010e5ad480 @address="4685 Peoria Street Suite 101 Denver CO 80239", @name="DMV Northeast Branch", @phone="(720) 865-4600", @services=[]>
+    end
 
       it "can have a vehicle" do
 
@@ -197,42 +197,37 @@ RSpec.describe Facility do
 
     describe "#written_test" do
       it "can administer a written test to registrant w/permit over 16" do
-        expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+        expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
         # pry(main)> registrant_1.license_data
         # #=> {:written=>false, :license=>false, :renewed=>false}
         
-        expect(registrant_1.permit?).to eq(true)
+        expect(@registrant_1.permit?).to eq(true)
         # pry(main)> registrant_1.permit?
         # #=> true
         
-        expect(facility_1.administer_written_test(registrant_1))
+        expect(@facility_1.administer_written_test(@registrant_1))
         # pry(main)> facility_1.administer_written_test(registrant_1)
         # #=> false
         
-        expect(registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+        expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
         # pry(main)> registrant_1.license_data
         # #=> {:written=>false, :license=>false, :renewed=>false}
         
-        expect(facility_1.add_service('Written Test')).to eq(["Written Test"])
+        expect(@facility_1.add_service('Written Test')).to eq(["Written Test"])
         # pry(main)> facility_1.add_service('Written Test')
         # #=> ["Written Test"]
         
-        expect(facility_1.administer_written_test(registrant_1)).to eq(true)
+        expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
         # pry(main)> facility_1.administer_written_test(registrant_1)
         # #=> true
         
-        expect(registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
+        expect(@registrant_1.license_data).to eq({:written=>true, :license=>false, :renewed=>false})
         # pry(main)> registrant_1.license_data
         # #=> {:written=>true, :license=>false, :renewed=>false}
       end
     end
   end
-  
-  
-
-
-  ##########################
-end            
+          
 # pry(main)> registrant_2.age
 # #=> 16
 
