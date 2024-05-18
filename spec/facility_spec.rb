@@ -7,6 +7,9 @@ RSpec.describe Facility do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    @registrant_1 = Registrant.new('Bruce', 18, true )
+    @registrant_2 = Registrant.new('Penny', 16 )
+    @registrant_3 = Registrant.new('Tucker', 15 )
   end
 
   describe '#initialize' do
@@ -80,10 +83,83 @@ RSpec.describe Facility do
     end
   end
 
+  describe "#administer_written_test" do
+    it "can will not administer test if facility does not offer service" do
+      expect(@registrant_1.license_data).to eq ({written: false, license: false, renewed: false})
+      expect(@registrant_1.permit?).to eq true
+      expect(@facility_1.administer_written_test(@registrant_1)).to be false
+      expect(@registrant_1.license_data).to eq ({written: false, license: false, renewed: false})
+    end
+      
+    xit "can administer to registrant with permit and age over 16" do
+      facility_1.add_service('Written Test')
+      #=> ["Written Test"]
+      
+      facility_1.administer_written_test(registrant_1)
+      #=> true
+      
+      registrant_1.license_data
+      #=> {:written=>true, :license=>false, :renewed=>false}
+      
+      registrant_2.age
+      #=> 16
+      
+      registrant_2.permit?
+      #=> false
+      
+      facility_1.administer_written_test(registrant_2)
+      #=> false
+      
+      registrant_2.earn_permit
+      
+      facility_1.administer_written_test(registrant_2)
+      #=> true
+      
+      registrant_2.license_data
+      #=> {:written=>true, :license=>false, :renewed=>false}
+      
+      registrant_3.age
+      #=> 15
+      
+      registrant_3.permit?
+      #=> false
+      
+      facility_1.administer_written_test(registrant_3)
+      #=> false
+      
+      registrant_3.earn_permit
+      
+      facility_1.administer_written_test(registrant_3)
+      #=> false
+      
+      registrant_3.license_data
+      #=> {:written=>false, :license=>false, :renewed=>false}
+    
 
 
 
 
+
+
+    end
+    # A written test can only be administered to registrants with a permit 
+    # and who are at least 16 years of age
+  end
+
+  describe "#administer_road_test" do
+    #A road test can only be administered to registrants who have passed the written test
+    #For simplicity’s sake, Registrants who qualify for the road test automatically earn a license
+  end
+
+  describe "#renew_drivers_license" do
+    # A license can only be renewed if the registrant has already passed the road test and earned a license
+  end
+
+
+  
+  
+  
+  
 
 
 end
