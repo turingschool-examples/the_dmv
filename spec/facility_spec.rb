@@ -170,7 +170,11 @@ RSpec.describe Facility do
     describe "#plate_type" do
       it "has a plate type" do
         @facility_1.add_service('Vehicle Registration')
+        @facility_1.register_vehicle(@cruz)
+        @facility_1.register_vehicle(@bolt)
+        @facility_1.register_vehicle(@camaro)
         
+
         expect(@cruz.plate_type).to eq(:regular)
         # pry(main)> cruz.plate_type
         # #=> :regular
