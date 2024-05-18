@@ -34,6 +34,7 @@ RSpec.describe Facility do
       expect(@facility_2.address).to eq('4685 Peoria Street Suite 101 Denver CO 80239')
       expect(@facility_2.phone).to eq('(720) 865-4600')
       expect(@facility_2.services).to eq([])
+     
     end
   end
 
@@ -43,9 +44,7 @@ RSpec.describe Facility do
       expect(@facility.services).to eq([])
       @facility.add_service('New Drivers License')
       @facility.add_service('Renew Drivers License')
-     
       @facility_1.add_service('New Drivers License')
-     
       @facility_1.add_service('Vehicle Registration')
       @facility_2.add_service('New Drivers License')
       @facility_2.add_service('Renew Drivers License')
@@ -86,11 +85,5 @@ RSpec.describe Facility do
       expect(@facility_1.collected_fees).to eq(325)
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt]) 
     end
-  end  
-    
-    
-
-
-
- 
+  end   
 end
