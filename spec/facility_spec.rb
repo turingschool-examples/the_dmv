@@ -139,13 +139,14 @@ RSpec.describe Facility do
     
     describe "#collected_fees" do
       it "can collect fees from registered vehicles if facility has added service" do
+        @facility_1.add_service('Vehicle Registration')
         
         expect(@facility_1.collected_fees).to eq(0)
         # pry(main)> facility_1.collected_fees
         # #=> 0
-        
+
         @facility_1.register_vehicle(@cruz)
-        
+
         expect(@facility_1.collected_fees).to eq(100)
         # pry(main)> facility_1.collected_fees
         # #=> 100

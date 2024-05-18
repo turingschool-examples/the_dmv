@@ -24,7 +24,16 @@ class Facility
       @registered_vehicles << vehicle # I don't understand why I have to add to @registered_vehicles
                                         # so it can set the date.
       vehicle.set_date
+      if vehicle.antique?
+        @collected_fees += 25
+      elsif vehicle.electric_vehicle?
+        @collected_fees += 200
+      else 
+        @collected_fees += 100
+      end
     end
+
+    ### Next up - collected_fees
   end
 
 
