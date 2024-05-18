@@ -5,6 +5,12 @@ RSpec.describe Vehicle do
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    @vehicle_factory = VehicleFactory.new
+    @registrations = [
+      {make: 'Tesla', model: 'Model S', vin_1_10: '5YJSA1CN', model_year: 2015},
+      {make: 'Tesla', model: 'Model 3', vin_1_10: '5YJ3E1EA', model_year: 2018},
+      {make: 'Tesla', model: 'Model X', vin_1_10: '5YJXCBEA', model_year: 2017}
+    ]
   end
   describe '#initialize' do
     it 'can initialize' do
