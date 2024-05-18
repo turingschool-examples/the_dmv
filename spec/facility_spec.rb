@@ -140,7 +140,7 @@ RSpec.describe Facility do
     describe "#collected_fees" do
       it "can collect fees from registered vehicles if facility has added service" do
         @facility_1.add_service('Vehicle Registration')
-        
+
         expect(@facility_1.collected_fees).to eq(0)
         # pry(main)> facility_1.collected_fees
         # #=> 0
@@ -153,7 +153,7 @@ RSpec.describe Facility do
         
         @facility_1.register_vehicle(@bolt)
         
-        expect(@facility_1.collected_fees).to eq(125)
+        expect(@facility_1.collected_fees).to eq(300)
         
         @facility_1.register_vehicle(@camaro)
         
@@ -169,6 +169,7 @@ RSpec.describe Facility do
     
     describe "#plate_type" do
       it "has a plate type" do
+        @facility_1.add_service('Vehicle Registration')
         
         expect(@cruz.plate_type).to eq(:regular)
         # pry(main)> cruz.plate_type
