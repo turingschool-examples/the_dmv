@@ -59,7 +59,7 @@ RSpec.describe Facility do
     
     describe '#add service' do
       it 'can add available services' do
-        
+
         expect(@facility_1.services).to eq([])
         @facility_1.add_service('New Drivers License')
         @facility_1.add_service('Renew Drivers License')
@@ -140,7 +140,7 @@ RSpec.describe Facility do
     describe "#collected_fees" do
       it "can collect fees from registered vehicles if facility has added service" do
         
-        expect(@facility_1.collected_fees).to eq([0])
+        expect(@facility_1.collected_fees).to eq(0)
         # pry(main)> facility_1.collected_fees
         # #=> 0
         

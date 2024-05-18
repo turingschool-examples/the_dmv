@@ -3,7 +3,7 @@ class Facility
               :phone, 
               :address, 
               :services,
-              :collected_fees
+              :collected_fees,
               :registered_vehicles
               
   def initialize(facility_info)
