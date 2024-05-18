@@ -26,7 +26,6 @@ class Facility
       charge_fee(vehicle)
       @registered_vehicles << vehicle
     end
-    false
   end
 
   def charge_fee(vehicle)
@@ -57,13 +56,17 @@ class Facility
     if @services.include?("Written Test") && registrant.age >= 16 && registrant.permit? == true
       registrant.license_data[:written] = true
     end
-    false
   end
 
   def administer_road_test(registrant)
     if @services.include?("Road Test") && registrant.license_data[:written] == true
       registrant.license_data[:license] = true
     end
-    false
+  end
+
+  def renew_drivers_license(registrant)
+    if @services.include?("Renew License") && registrant.license_data[:license] == true
+      registrant.license_data[:renewed] = true
+    end
   end
 end
