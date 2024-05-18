@@ -82,10 +82,11 @@ RSpec.describe Facility do
     
     describe "#registration_date" do
       it "can assign a registration date" do
-
         expect(@cruz.registration_date).to eq(nil)
         # pry(main)> cruz.registration_date
         # #=> nil
+
+        @facility_1.add_service('Vehicle Registration')
         
         @facility_1.register_vehicle(@cruz)
         @facility_1.register_vehicle(@camaro)
@@ -113,13 +114,13 @@ RSpec.describe Facility do
         # pry(main)> facility_1.registered_vehicles
         # #=> []
         
+        @facility_1.add_service('Vehicle Registration')
         @facility_1.register_vehicle(@cruz)
         
         expect(@facility_1.registered_vehicles).to eq([@cruz])
         # pry(main)> facility_1.registered_vehicles
         # #=> [#<Vehicle:0x0000000135a48b08...>]
-        
-        @facility_1.register_vehicle(@camarao)
+        @facility_1.register_vehicle(@camaro)
         
         expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro])
         # pry(main)> facility_1.register_vehicle(camaro)
@@ -130,7 +131,6 @@ RSpec.describe Facility do
         expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt])
         # pry(main)> facility_1.register_vehicle(bolt)
         # #=> [#<Vehicle:0x0000000135a48b08...>, #<Vehicle:0x0000000135adb610...>, #<Vehicle:0x0000000125832180...>]
-        
         expect(@facility_2.registered_vehicles).to eq([])
         # pry(main)> facility_2.registered_vehicles
         # #=> []

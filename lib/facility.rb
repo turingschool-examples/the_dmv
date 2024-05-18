@@ -18,7 +18,11 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    vehicle.set_date
+    if services.include?("Vehicle Registration") 
+      @registered_vehicles << vehicle # I don't understand why I have to add to @registered_vehicles
+                                        # so it can set the date.
+      vehicle.set_date
+    end
   end
 
 
