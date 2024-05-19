@@ -19,6 +19,7 @@ class Registrant
         @age = age
         @permit = permit
         @license_data = license_data
+        
     end
 
     def permit?
@@ -27,8 +28,10 @@ class Registrant
 
     def earn_permit 
         @permit = true if @permit == false
-        
     end
+
+    
+
 end
 
 # Administer a written test
