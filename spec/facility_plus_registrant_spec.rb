@@ -19,4 +19,22 @@ RSpec.describe Facility do
       expect(registrant.license_data[:written]).to eq(true)
     end
   end
+
+  describe '#administer_road_test' do
+    it 'returns true and updates license_data when license is earned' do
+      registrant = Registrant.new('John', 18)
+      @facility.add_service('Road Test')
+      expect(@facility.administer_road_test(registrant)).to eq(true)
+      expect(registrant.license_data[:license]).to eq(true)
+    end
+  end
+
+  describe '#renew_drivers_license' do
+    it 'returns true and updates license_data when license is renewed' do
+      registrant = Registrant.new('Rose', 21)
+      @facility.add_service('Renew License')
+      expect(@facility.renew_drivers_license(registrant)).to eq(true)
+      expect(registrant.license_data[:renewed]).to eq(true)
+    end
+  end
 end
