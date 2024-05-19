@@ -128,4 +128,21 @@ RSpec.describe Facility do
     end
   end
 
+  describe '#renew_license' do
+    it 'renews license' do
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
+      @facility_1.add_service('Renew License')
+      expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(true)
+      expect(@registrant_1.license_data[:renewed]).to eq(true)
+
+      expect(@facility_1.renew_drivers_license(@registrant_3)).to eq(false)
+      expect(@registrant_3.license_data[:renewed]).to eq(false)
+
+      expect(@facility_1.renew_drivers_license(@registrant_2)).to eq(false)
+      @registrant_2.earn_permit
+      expect(@facility_1.renew_drivers_license(@registrant_2)).to eq(true)
+      expect(@registrant_2.license_data[:renewed]).to eq(true)
+    end
+  end
+
 end
