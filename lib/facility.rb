@@ -7,6 +7,7 @@ class Facility
               :services, 
               :registered_vehicles, 
               :collected_fees
+              
 
   def initialize(info_hash)
     @name = info_hash[:name]
@@ -46,7 +47,7 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    return false if !@services.include?("Written Test")
+    return false if !@services.include?('Written Test')
     if registrant.permit? == true && registrant.age >= 16
       registrant.license_data[:written] = true 
     else 
@@ -54,7 +55,14 @@ class Facility
     end
   end
 
-  
+  def administer_road_test(registrant)
+    return false if !@services.include?('Road Test')
+    if registrant.permit? == true then 
+      registrant.license_data[:license] = true
+    else
+      false
+    end
+  end
 end
 
 
