@@ -23,4 +23,8 @@ RSpec.describe Facility do
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
+
+  describe '#registered_vehicles' do
+    it 'can register a vehicle' do
+      expect(@facility)
 end
