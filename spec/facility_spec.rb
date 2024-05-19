@@ -89,4 +89,33 @@ RSpec.describe Facility do
       expect(@facility_1.registered_vehicles).to eq([@cruz, @camaro, @bolt]) 
     end
   end   
+
+  describe '#administer_written_test' do
+    it 'administer a written test' do
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
+      @facility_1.add_service('Written Test')
+      expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
+      expect(@registrant_1.license_data[:written]).to eq(true)
+
+      expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
+      @registrant_2.earn_permit
+      expect(@facility_1.administer_written_test(@registrant_2)).to eq(true)
+      expect(@registrant_2.license_data[:written]).to eq(true)
+
+      expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
+      @registrant_3.earn_permit
+      expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
+      expect(@registrant_3.license_data[:written]).to eq(false)
+      end
+    end   
+  
+    # describe '#administer_road_test' do
+    # expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
+    # @registrant_3.earn_permit
+    # expect(@facility_1.administer_road_test(@registrant_3)).to eq(false)
+    # expect(@registrant_3.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+
+
+    end
+
 end
