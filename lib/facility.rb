@@ -30,13 +30,13 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    if @facility.facilities_offering_service("Register Vehicles") == true
+    if @facilities_offering_service("Register Vehicles") == true
 
       vehicle.registration_date = Date.today
 
       plate_type      
       
-      facility.registered_vehicles += [vehicle]
+      @registered_vehicles << vehicle
 
       facility.collected_fees += 100
     else
