@@ -3,6 +3,7 @@ class Registrant
                 :age,
                 :permit,
                 :license_data
+               
 
     def initialize(
         name, 
@@ -26,20 +27,6 @@ class Registrant
 
     def earn_permit 
         @permit = true if @permit == false
-        
     end
 end
 
-# Administer a written test
-# A written test can only be administered to registrants with a permit and 
-# who are at least 16 years of age
-
-# Administer a road test
-# A road test can only be administered to registrants who have passed 
-# the written test
-# For simplicity’s sake, Registrants who qualify for the road test 
-# automatically earn a license
-
-# Renew a driver’s license
-# A license can only be renewed if the registrant has already passed 
-# the road test and earned a license
