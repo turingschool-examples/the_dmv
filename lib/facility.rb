@@ -44,22 +44,20 @@ class Facility
       @registered_vehicles
     end
   end
+
+  def administer_written_test(registrant)
+    return false if !@services.include?("Written Test")
+    if registrant.permit? == true && registrant.age >= 16
+      registrant.license_data[:written] = true 
+    else 
+      false
+    end
+  end
+
+  
 end
 
 
 
 
 
-
-# Register a vehicle
-# Vehicles have the following rules:
-# Vehicles 25 years old or older are considered antique and cost $25 
-# to register / The vehicle.rb has a test for this and it is working for this
-# facility class
-
-# Electric Vehicles (EV) cost $200 to register / The vehicle.rb has a test for this
-# and it is available to this facility class
-
-# All other vehicles cost $100 to register
-# A vehicle’s plate_type should be set to :regular, :antique, or :ev 
-# upon successful registration

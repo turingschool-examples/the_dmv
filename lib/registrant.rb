@@ -3,6 +3,7 @@ class Registrant
                 :age,
                 :permit,
                 :license_data
+               
 
     def initialize(
         name, 
