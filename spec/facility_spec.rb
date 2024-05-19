@@ -6,14 +6,22 @@ end
 
 RSpec.describe Facility do
   before(:each) do
-    @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
-    @facility_1 = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
-    @facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
-    @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-    @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
-    @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    @facility_info = { name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600' }
+    @facility = Facility.new(@facility_info)
+    @registrant_1 = Registrant.new('Bruce', 18, true )
+    @registrant_2 = Registrant.new('Penny', 16 )
+    @registrant_3 = Registrant.new('Tucker', 15 )
+
+    # @registrant_with_permit { instance_double("Registrant", name: "Bruce", permit?: true, license_data: { written: false, license: false, renewed: false }) }
+    # @registrant_without_permit { instance_double("Registrant", name: "Penny", permit?: false, license_data: { written: false, license: false, renewed: false }) }
+
+    @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+    @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
+    @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice})
   end
-  describe '#initialize' do
+
+
+  describe 'initialize' do
     it 'can initialize' do
       expect(@facility).to be_an_instance_of(Facility)
       expect(@facility.name).to eq('DMV Tremont Branch')
@@ -23,15 +31,20 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#add_service' do
+
+
+  describe 'add_service' do
     it 'can add available services' do
       expect(@facility.services).to eq([])
       @facility.add_service('New Drivers License')
       @facility.add_service('Renew Drivers License')
       @facility.add_service('Vehicle Registration')
-      expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
+      @facility.add_service('Written Test')
+      expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration','Written Test'])
     end
   end
+
+
 
   describe 'register vehicle' do
     it 'registers a vehicle' do
@@ -39,6 +52,8 @@ RSpec.describe Facility do
       expect(@facility.registered_vehicles).to include(@cruz)
     end
   end
+
+
 
   describe 'registration date' do
     it 'sets the registration date to today' do
@@ -48,6 +63,8 @@ RSpec.describe Facility do
   end
 
   
+
+
   describe 'collected_fees' do
     it 'returns $25 for antique vehicles (25 years old or older)' do
       @facility.register_vehicle(@camaro)
@@ -64,6 +81,27 @@ RSpec.describe Facility do
       expect(@facility.collected_fees).to eq(100)
     end
   end
+
+  describe 'administer_written_test'do
+      it 'decides if the written test will be taken' do
+      expect(@facility.administer_written_test(@registrant_1)).to eq(true)
+      expect(@registrant_1.license_data[:written]).to eq(true)
+    end
+    
+    #Administer a written test
+    # A written test can only be administered to registrants with a permit and who are at least 16 years of age
+    # Administer a road test
+    # A road test can only be administered to registrants who have passed the written test
+    # For simplicity’s sake, Registrants who qualify for the road test automatically earn a license
+    # Renew a driver’s license
+    # A license can only be renewed if the registrant has already passed the road test and earned a license
+  
+
+
+  end
+
+
+
 
 
   
