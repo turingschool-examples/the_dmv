@@ -297,11 +297,18 @@ RSpec.describe Facility do    # refactor all tests (trim fat)
         # #=> false
         
         @facility_1.add_service("Written Test")
-
+        expect(@facility_1.administer_written_test(@registrant_1)).to eq(true)
+        expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
+        @registrant_2.earn_permit
+        expect(@facility_1.administer_written_test(@registrant_2)).to eq(true)
+        
         expect(@facility_1.add_service('Road Test')).to eq(["Written Test", "Road Test"])
         # pry(main)> facility_1.add_service('Road Test')
         # #=> ["Written Test", "Road Test"]
         
+        @facility_1.administer_road_test(@registrant_1)
+        # @facility_1.administer_road_test(@registrant_2)
+                
         expect(@facility_1.administer_road_test(@registrant_1)).to eq(true)
         # pry(main)> facility_1.administer_road_test(registrant_1)
         # #=> true
@@ -310,6 +317,7 @@ RSpec.describe Facility do    # refactor all tests (trim fat)
         # pry(main)> registrant_1.license_data
         # #=> {:written => true, :license => true, :renewed => false}
         
+
         expect(@facility_1.administer_road_test(@registrant_2)).to eq(true)
         # pry(main)> facility_1.administer_road_test(registrant_2)
         # #=> true
@@ -320,35 +328,62 @@ RSpec.describe Facility do    # refactor all tests (trim fat)
       end
     end
 
+    describe "#renew_drivers_license" do    # should be able to refactor tests with describe & cut down adding services each time, etc.
+                                            # really don't need all these tests
+      it "can renew a driver's license if registrant can pass road test" do
+
+        expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(false)
+        # pry(main)> facility_1.renew_drivers_license(registrant_1)
+        # #=> false
+        
+        @facility_1.add_service("Written Test")
+        @facility_1.add_service("Road Test")
+
+        expect(@facility_1.add_service('Renew License')).to eq(["Written Test", "Road Test", "Renew License"])
+        # pry(main)> facility_1.add_service('Renew License')
+        # #=> ["Written Test", "Road Test", "Renew License"]
+        
+        @facility_1.administer_written_test(@registrant_1)
+        @facility_1.administer_road_test(@registrant_1)
+        @facility_1.renew_drivers_license(@registrant_1)
+        
+        @registrant_2.earn_permit
+        @facility_1.administer_written_test(@registrant_2)
+        @facility_1.administer_road_test(@registrant_2)
+        @facility_1.renew_drivers_license(@registrant_2)
+
+
+
+        expect(@facility_1.renew_drivers_license(@registrant_1)).to eq(true)
+        # pry(main)> facility_1.renew_drivers_license(registrant_1)
+        # #=> true
+        
+        expect(@registrant_1.license_data).to eq({:written => true, :license => true, :renewed => true})
+        # pry(main)> registrant_1.license_data
+        # #=> {:written => true, :license => true, :renewed => true}
+        
+
+        expect(@facility_1.renew_drivers_license(@registrant_3)).to eq(false)
+        # pry(main)> facility_1.renew_drivers_license(registrant_3)
+        # #=> false
+        
+        expect(@registrant_3.license_data).to eq({:written => false, :license => false, :renewed => false})
+        # pry(main)> registrant_3.license_data
+        # #=> {:written => false, :license => false, :renewed => false}
+        
+        expect(@facility_1.renew_drivers_license(@registrant_2)).to eq(true)
+        # pry(main)> facility_1.renew_drivers_license(registrant_2)
+        # #=> true
+        
+        expect(@registrant_2.license_data).to eq({:written => true, :license => true, :renewed => true})
+        # pry(main)> registrant_2.license_data
+        # #=> {:written => true, :license => true, :renewed => true}
+      end
+    end
 end
 
 
 
-# # Renew License
-
-# pry(main)> facility_1.renew_drivers_license(registrant_1)
-# #=> false
-
-# pry(main)> facility_1.add_service('Renew License')
-# #=> ["Written Test", "Road Test", "Renew License"]
-
-# pry(main)> facility_1.renew_drivers_license(registrant_1)
-# #=> true
-
-# pry(main)> registrant_1.license_data
-# #=> {:written => true, :license => true, :renewed => true}
-
-# pry(main)> facility_1.renew_drivers_license(registrant_3)
-# #=> false
-
-# pry(main)> registrant_3.license_data
-# #=> {:written => false, :license => false, :renewed => false}
-
-# pry(main)> facility_1.renew_drivers_license(registrant_2)
-# #=> true
-
-# pry(main)> registrant_2.license_data
-# #=> {:written => true, :license => true, :renewed => true}
 
 
 
