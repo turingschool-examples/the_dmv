@@ -6,6 +6,7 @@ class Facility
     @phone = facilities_info[:phone]
     @services = []
     @registered_vehicles = []
+    @collected_fees = 0
   
   end
   def add_service(service)
@@ -14,42 +15,27 @@ class Facility
 
   def register_vehicle(vehicle)
     vehicle.registration_date = Date.today
-    
     @registered_vehicles << vehicle
-    
-    
+    vehicle
   end
   
-  # vehicle.plate_type = determine_plate_type(vehicle)
 
-  # registration_fee = calculate_registration_fee(vehicle)
-  # collect_fee(registration_fee)
+  def collected_fees
+    @registered_vehicles.sum { |vehicle| calculated_fees(vehicle) }
+
+  end
 
 
-  # def calculate_registration_fee(vehicle)
-  #   if vehicle.antique?
-  #     25
-  #   elsif vehicle.electric?
-  #     200
-  #   else
-  #     100
-  #   end
-  # end
+  def calculated_fees(vehicle)
+    if vehicle.antique?
+      25
+    elsif vehicle.electric?
+      200
+    else
+      100
+    end
+  end
 
-  # def determine_plate_type(vehicle)
-  #   if vehicle.antique?
-  #     :antique
-  #   elsif vehicle.electric?
-  #     :ev
-  #   else
-  #     :regular
-  #   end
-  # end
-
-  # def collect_fee(amount)
-  #   @collected_fees += amount
-  # end
- 
 end
  
 

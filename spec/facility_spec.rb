@@ -23,7 +23,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#add service' do
+  describe '#add_service' do
     it 'can add available services' do
       expect(@facility.services).to eq([])
       @facility.add_service('New Drivers License')
@@ -47,52 +47,24 @@ RSpec.describe Facility do
     end
   end
 
-  # describe 'plate type' do
-  #   it 'will determine plate type' do
-  #     expect(@cruz.plate_type).to eq(:regular)
-  #     expect(@bolt.plate_type).to eq(:ev)
-  #     expect(@camaro.plate_type).to eq(:antique)
-  #   end
-  # end
-  # describe 'register_vehicle' do
-  #   it 'registers a regular vehicle' do
-  #     vehicle = Vehicle.new(year: 2010, engine: :ice)
-  #     @facility.register_vehicle(vehicle)
-  #     expect(@facility.registered_vehicles).to include(vehicle)
-  #   end
+  
+  describe 'collected_fees' do
+    it 'returns $25 for antique vehicles (25 years old or older)' do
+      @facility.register_vehicle(@camaro)
+      expect(@facility.collected_fees).to eq(25)
+    end
 
-  #   it 'registers an antique vehicle' do
-  #     vehicle = Vehicle.new(year: 1995, engine: :ice)
-  #     @facility.register_vehicle(vehicle)
-  #     expect(@facility.registered_vehicles).to include(vehicle)
-  #     expect(vehicle.plate_type).to eq(:antique)
-  #   end
+    it 'returns $200 for electric vehicles' do
+      @facility.register_vehicle(@bolt)
+      expect(@facility.collected_fees).to eq(200)
+    end
 
-  #   it 'registers an electric vehicle' do
-  #     vehicle = Vehicle.new(year: 2022, engine: :ev)
-  #     @facility.register_vehicle(vehicle)
-  #     expect(@facility.registered_vehicles).to include(vehicle)
-  #     expect(vehicle.plate_type).to eq(:ev)
-  #   end
+    it 'returns $100 for all other vehicles' do
+      @facility.register_vehicle(@cruz)
+      expect(@facility.collected_fees).to eq(100)
+    end
+  end
 
-  # end
-
-  # describe 'collected_fees' do
-  #   it 'returns $25 for antique vehicles (25 years old or older)' do
-  #     vehicle = Vehicle.new(year: 1995, engine: :ice)
-  #     expect(@facility.collected_fees(vehicle)).to eq(25)
-  #   end
-
-  #   it 'returns $200 for electric vehicles' do
-  #     vehicle = Vehicle.new(year: 2020, engine: :ev)
-  #     expect(@facility.collected_fees(vehicle)).to eq(200)
-  #   end
-
-  #   it 'returns $100 for all other vehicles' do
-  #     vehicle = Vehicle.new(year: 2015, engine: :ice)
-  #     expect(@facility.collected_fees(vehicle)).to eq(100)
-  #   end
-  # end
 
   
 
