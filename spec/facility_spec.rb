@@ -202,33 +202,52 @@ RSpec.describe Facility do    # refactor all tests (trim fat)
         # pry(main)> registrant_1.license_data
         # #=> {:written => false, :license => false, :renewed => false}
         
-        expect(@registrant_2.license_data).to eq({:written => false, :license => false, :renewed => false})
-        # pry(main)> registrant_2.license_data
-        # #=> {:written => false, :license => false, :renewed => false}
-      
-        expect(@registrant_1.permit?).to eq(true)
-        # pry(main)> registrant_1.permit?
-        # #=> true
+        expect(@registrant_3.age).to eq(15)
+        # pry(main)> registrant_3.age
+        # #=> 15
         
         expect(@registrant_2.age).to eq(16)
         # pry(main)> registrant_2.age
         # #=> 16
+
+        expect(@registrant_3.permit?).to eq(false)
+        # pry(main)> registrant_3.permit?
+        # #=> false
+        
+        expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
+        # pry(main)> facility_1.administer_written_test(registrant_3)
+        # #=> false
+        
+        expect(@registrant_2.license_data).to eq({:written => false, :license => false, :renewed => false})
+        # pry(main)> registrant_2.license_data
+        # #=> {:written => false, :license => false, :renewed => false}
+        
+        expect(@registrant_1.permit?).to eq(true)
+        # pry(main)> registrant_1.permit?
+        # #=> true
         
         expect(@registrant_2.permit?).to eq(false)
         # pry(main)> registrant_2.permit?
         # #=> false
-
+        
         @registrant_2.earn_permit
         # pry(main)> registrant_2.earn_permit
+        
+        @registrant_3.earn_permit
+        # pry(main)> registrant_3.earn_permit
 
         expect(@facility_1.administer_written_test(@registrant_1)).to eq(false)
         # pry(main)> facility_1.administer_written_test(registrant_1)
         # #=> false
-
+        
         expect(@facility_1.administer_written_test(@registrant_2)).to eq(false)
         # pry(main)> facility_1.administer_written_test(registrant_2)
         # #=> false
         
+        expect(@facility_1.administer_written_test(@registrant_3)).to eq(false)
+        # pry(main)> facility_1.administer_written_test(registrant_3)
+        # #=> false
+
         expect(@facility_1.add_service('Written Test')).to eq(["Written Test"])
         # pry(main)> facility_1.add_service('Written Test')
         # #=> ["Written Test"]
@@ -248,6 +267,10 @@ RSpec.describe Facility do    # refactor all tests (trim fat)
         expect(@registrant_2.license_data).to eq({:written => true, :license => false, :renewed => false})
         # pry(main)> registrant_2.license_data
         # #=> {:written => true, :license => false, :renewed => false}
+        
+        expect(@registrant_3.license_data).to eq({:written => false, :license => false, :renewed => false})
+        # pry(main)> registrant_3.license_data
+        # #=> {:written => false, :license => false, :renewed => false}
       end
     end
 
@@ -256,22 +279,6 @@ RSpec.describe Facility do    # refactor all tests (trim fat)
 
 ##########################
 
-# pry(main)> registrant_3.age
-# #=> 15
-
-# pry(main)> registrant_3.permit?
-# #=> false
-
-# pry(main)> facility_1.administer_written_test(registrant_3)
-# #=> false
-
-# pry(main)> registrant_3.earn_permit
-
-# pry(main)> facility_1.administer_written_test(registrant_3)
-# #=> false
-
-# pry(main)> registrant_3.license_data
-# #=> {:written=>false, :license=>false, :renewed=>false}
 
 # # Road Test
 
