@@ -15,7 +15,7 @@ RSpec.describe Facility do
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
   end
-  
+ 
   
   describe '#initialize' do
     it 'can initialize' do
@@ -34,7 +34,6 @@ RSpec.describe Facility do
       expect(@facility_2.address).to eq('4685 Peoria Street Suite 101 Denver CO 80239')
       expect(@facility_2.phone).to eq('(720) 865-4600')
       expect(@facility_2.services).to eq([])
-     
     end
   end
 

@@ -1,7 +1,12 @@
 require 'date'
 
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
+  attr_reader :name,
+              :address, 
+              :phone, 
+              :services, 
+              :registered_vehicles, 
+              :collected_fees
 
   def initialize(info_hash)
     @name = info_hash[:name]
@@ -17,7 +22,6 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-   
     return nil if !@services.include?("Vehicle Registration")
     if vehicle.antique?
       vehicle.plate_type = :antique
@@ -39,7 +43,6 @@ class Facility
       @registered_vehicles << vehicle
       @registered_vehicles
     end
-
   end
 end
 
