@@ -19,8 +19,7 @@ RSpec.describe Facility do
     @registrant_2 = Registrant.new('Penny', 16)
     @registrant_3 = Registrant.new('Tucker', 15)
   end
- 
-  
+   
   describe '#initialize' do
     it 'can initialize' do
       expect(@facility).to be_an_instance_of(Facility)  
@@ -40,7 +39,6 @@ RSpec.describe Facility do
       expect(@facility_2.services).to eq([])
     end
   end
-
 
   describe '#add_service' do
     it 'can add available services' do

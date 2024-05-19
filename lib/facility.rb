@@ -23,7 +23,7 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    return nil if !@services.include?("Vehicle Registration")
+    return nil if !@services.include?('Vehicle Registration')
     if vehicle.antique?
       vehicle.plate_type = :antique
       @collected_fees += 25
