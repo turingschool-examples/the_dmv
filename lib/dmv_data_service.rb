@@ -1,3 +1,6 @@
+require './lib/vehicle'
+require './lib/vehicle_factory'
+
 require 'faraday'
 require 'json'
 
@@ -10,6 +13,9 @@ class DmvDataService
   def wa_ev_registrations
     @wa_ev_registrations ||= load_data('https://data.wa.gov/resource/rpr4-cgyd.json')
   end
+  # Why did calling `factory` produce this data set?
+
+
 
   def co_dmv_office_locations
     @co_dmv_office_locations ||= load_data('https://data.colorado.gov/resource/dsw3-mrn4.json')
