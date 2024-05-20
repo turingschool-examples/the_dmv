@@ -15,7 +15,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe '#add service' do
+  describe '#add_service' do
     it 'can add available services' do
       expect(@facility.services).to eq([])
       @facility.add_service('New Drivers License')
@@ -27,5 +27,15 @@ RSpec.describe Facility do
 
   describe '#registered_vehicles' do
     it 'can register a vehicle' do
-      expect(@facility)
+      expect(@facility.registered_vehicles).to eq([])
+      
+    end
+
+    it 'records registration date' do
+      @facility.register_vehicle(@vehicle)
+      expect(@vehicle.registration_date).to eq(Date.today)
+    end
+  end
+
+  
 end
