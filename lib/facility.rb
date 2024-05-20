@@ -23,13 +23,14 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    return nil if !@services.include?('Vehicle Registration')
+    return nil unless @services.include?('Vehicle Registration')
     if vehicle.antique?
       vehicle.plate_type = :antique
       @collected_fees += 25
       vehicle.registration_date = Date.today
       @registered_vehicles << vehicle
       @registered_vehicles
+      
     elsif
       vehicle.electric_vehicle?
       vehicle.plate_type = :ev
@@ -47,7 +48,7 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    return false if !@services.include?('Written Test')
+    return false unless @services.include?('Written Test')
     if registrant.permit? == true && registrant.age >= 16
       registrant.license_data[:written] = true 
     else 
@@ -56,7 +57,7 @@ class Facility
   end
 
   def administer_road_test(registrant)
-    return false if !@services.include?('Road Test')
+    return false unless @services.include?('Road Test')
     if registrant.permit? == true 
       registrant.license_data[:license] = true
     else
@@ -65,7 +66,7 @@ class Facility
   end
 
   def renew_drivers_license(registrant)
-    return false if !@services.include?('Renew License')
+    return false unless @services.include?('Renew License')
     if registrant.license_data[:written] == true && registrant.license_data[:license] = true
       registrant.license_data[:renewed] = true
     else
