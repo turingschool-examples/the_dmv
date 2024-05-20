@@ -6,6 +6,7 @@ class Facility
     @name = attributes[:name]
     @address = attributes[:address]
     @phone = attributes[:phone]
+    @hours = attributes[:hours]
     @services = attributes[:services] || []
     @collected_fees = 0
     @register_vehicles = []
