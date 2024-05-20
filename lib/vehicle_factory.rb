@@ -11,7 +11,11 @@ class VehicleFactory
       vin = vehicle_registration_hash[:vin_1_10]
       model = vehicle_registration_hash[:model]
       year = vehicle_registration_hash[:year]
-      @vehicles << Vehicle.new({vin: vin, make: make, model: model, year: year, engine: :ev})
+      @vehicles << Vehicle.new({vin: vin, 
+                                make: make, 
+                                model: model, 
+                                year: year, 
+                                engine: :ev})
     end
     @vehicles
   end
