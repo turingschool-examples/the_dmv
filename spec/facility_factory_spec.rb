@@ -42,15 +42,15 @@ RSpec.describe FacilityFactory do
     end
 
     it "can initialize" do
-      expect(@factory.factories).to eq []
+      expect(@factory.facilities).to eq []
     end
   end
 
-  describe "#create_factories" do
-    it "can create many factories" do
-      factories = @factory.create_factories(@co_dmv_office_locations)
+  describe "#create_facilities" do
+    it "can create many facilities" do
+      facilities = @factory.create_facilities(@co_dmv_office_locations)
 
-      expect(factories.count).to be 2
+      expect(facilities.count).to be 2
     end
   end
 

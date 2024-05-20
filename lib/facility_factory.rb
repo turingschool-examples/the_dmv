@@ -1,11 +1,11 @@
 class FacilityFactory
-  attr_reader :factories
+  attr_reader :facilities
 
   def initialize
-    @factories = []
+    @facilities = []
   end
 
-  def create_factories(dmv_locations_data)
+  def create_facilities(dmv_locations_data)
     dmv_locations_data.each do |dmv|
       name = dmv[:dmv_office]
       phone = dmv[:phone]
@@ -15,7 +15,7 @@ class FacilityFactory
                 dmv[:city] + " " +
                 dmv[:state] + " " +
                 dmv[:zip]
-      @factories << Facility.new({name: name,
+      @facilities << Facility.new({name: name,
                                   address: address, 
                                   phone: phone,
                                   services: services})
