@@ -2,6 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Vehicle do
   before(:each) do
+    @vehicle = Vehicle.new({vin:, year:, make:, model:, engine:})
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
@@ -19,7 +20,7 @@ RSpec.describe Vehicle do
   end
 
   describe '#antique?' do
-    xit 'can determine if a vehicle is an antique' do
+    it 'can determine if a vehicle is an antique' do
       expect(@cruz.antique?).to eq(false)
       expect(@bolt.antique?).to eq(false)
       expect(@camaro.antique?).to eq(true)
@@ -27,10 +28,13 @@ RSpec.describe Vehicle do
   end
 
   describe '#electric_vehicle?' do
-    xit 'can determine if a vehicle is an ev' do
+    it 'can determine if a vehicle is an ev' do
       expect(@cruz.electric_vehicle?).to eq(false)
       expect(@bolt.electric_vehicle?).to eq(true)
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+
+
 end

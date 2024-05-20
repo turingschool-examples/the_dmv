@@ -1,9 +1,11 @@
 class Facility
+  require 'date'
   attr_reader :name,
               :address,
               :phone,
               :services,
-              :registered_vehicles
+              :registered_vehicles,
+              :collected_fees
 
   def initialize(facility_info)
     @name = facility_info[:name]
@@ -18,7 +20,7 @@ class Facility
     @services << service
   end
 
-  def plate_type
+  def assign_plate_type(vehicle)
     if vehicle.antique? == true
       vehicle.plate_type = :antique
     elsif vehicle.electric_vehicle? == true
@@ -26,23 +28,31 @@ class Facility
     else 
       vehicle.plate_type = :regular
     end
+  end
+  
 
+  def fees_due(vehicle)
+    if vehicle.plate_type == :antique
+      @collected_fees += 25
+    elsif vehicle.plate_type == :ev
+      @collected_fees += 200
+    else
+      @collected_fees += 100
+    end
   end
 
   def register_vehicle(vehicle)
-    if @facilities_offering_service("Register Vehicles") == true
-
+    if @services.include?("Register Vehicles")
       vehicle.registration_date = Date.today
-
-      plate_type      
+      assign_plate_type(vehicle)
       
       @registered_vehicles << vehicle
-
-      facility.collected_fees += 100
+      fees_due(vehicle)
+      
     else
       print "This Facility Does Not Offer This Service"
-
     end
-
   end
+
+
 end
