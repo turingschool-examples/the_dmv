@@ -31,4 +31,15 @@ class FacilityGenerator
     }
     Facility.new(facility_ny)
   end
+
+  def mo_facility(data)
+    facility_mo = {
+        name: data[:name],
+        address: "#{data[:address1]}, #{data[:city]}, #{data[:state]} #{data[:zipcode]}",
+        phone: data[:phone],
+        hours: data[:daysopen],
+        services: data[:services]
+    }
+    Facility.new(facility_mo)
+  end
 end
