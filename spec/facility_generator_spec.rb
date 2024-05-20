@@ -28,13 +28,21 @@ RSpec.describe FacilityGenerator do
       expect(@fg.co_facility(@co[0]).phone).to eq("(720) 865-4600")
     end
 
-    describe '#ny_facility' do
-      it 'can create a NY facility and create a new instance of facility' do
-        expect(@fg.ny_facility(@ny[0])).to be_an_instance_of(Facility)
-        expect(@fg.ny_facility(@ny[0]).name).to eq("IRONDEQUOIT")
-        expect(@fg.ny_facility(@ny[0]).address).to eq("545 TITUS AVENUE, ROCHESTER, NY 14617")
-        expect(@fg.ny_facility(@ny[0]).phone).to eq("5857531604")
-      end
+  describe '#ny_facility' do
+    it 'can create a NY facility and create a new instance of facility' do
+      expect(@fg.ny_facility(@ny[0])).to be_an_instance_of(Facility)
+      expect(@fg.ny_facility(@ny[0]).name).to eq("IRONDEQUOIT")
+      expect(@fg.ny_facility(@ny[0]).address).to eq("545 TITUS AVENUE, ROCHESTER, NY 14617")
+      expect(@fg.ny_facility(@ny[0]).phone).to eq("5857531604")
     end
+  end
+  describe '#mo_facility' do
+    it 'can create a MO facility and create a new instance of facility' do
+      expect(@fg.mo_facility(@mo[0])).to be_an_instance_of(Facility)
+      expect(@fg.mo_facility(@mo[0]).name).to eq("NEVADA")
+      expect(@fg.mo_facility(@mo[0]).address).to eq("409 E AUSTIN BLVD, NEVADA, MO 64772")
+      expect(@fg.mo_facility(@mo[0]).phone).to eq("(417) 448-5705")
+    end
+  end
   end
 end
