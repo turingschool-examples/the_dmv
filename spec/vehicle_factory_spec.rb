@@ -76,6 +76,10 @@ RSpec.describe VehicleFactory do
     it "exists" do
       expect(@factory).to be_a VehicleFactory
     end
+
+    it "can initialize" do
+      expect(@factory.vehicles).to eq []
+    end
   end
 
   describe "#create_vehicles" do
