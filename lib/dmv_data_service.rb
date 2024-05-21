@@ -12,6 +12,7 @@ class DmvDataService
 
   def wa_ev_registrations
     @wa_ev_registrations ||= load_data('https://data.wa.gov/resource/rpr4-cgyd.json')
+    
   end
   # Why did calling `factory` produce this data set?
 
