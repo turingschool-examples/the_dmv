@@ -72,9 +72,14 @@ class Facility
 
     return false
   end
-# def renew_drivers_license(registrant)
-#   if@services.include?('Renew License')
-#     registrant.license_data[:renewed] = true
+  
+  def renew_drivers_license(registrant)
+    return false unless @services.include?('Renew License')
+    return false unless registrant.license_data[:written] && registrant.license_data[:license]
+    return false if registrant.license_data[:renewed]
+    registrant.license_data[:renewed] = true
+    true
+  end
 end
 
 # binding.pry

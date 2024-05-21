@@ -1,5 +1,7 @@
 class Dmv
 
+  attr_reader :facilities
+
   def initialize
     @facilities = []
   end
@@ -10,6 +12,8 @@ class Dmv
 
   def facilities_offering_service(service)
     
+    @matching_facilities = []
+    
     # Iterate over each Facility to determine
     # whether or not the passed "service" is
     # included in the list of "facility.services"
@@ -17,8 +21,12 @@ class Dmv
 
       # Return only "facilities" whether the below
       # condition is true
-      facility.services.include?(service)
+      if facility.services.include?(service)
+        @matching_facilities << facility
+      end
     end
+
+    return @matching_facilities
   end
 end
 

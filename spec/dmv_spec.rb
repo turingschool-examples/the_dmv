@@ -25,6 +25,8 @@ RSpec.describe Dmv do
 
   describe '#facilities_offering_service' do
     it 'can return list of facilities offering a specified Service' do
+      binding.pry
+    
       @facility_1.add_service('New Drivers License')
       @facility_1.add_service('Renew Drivers License')
       @facility_2.add_service('New Drivers License')
