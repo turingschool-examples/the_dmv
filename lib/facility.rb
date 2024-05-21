@@ -14,7 +14,7 @@ class Facility
   end
 
   def register_vehicle(vehicle)
-    return false unless @services.include?('Register Vehicle')
+    # return false unless @services.include?('Register Vehicle')
     vehicle.registration_date = Date.today
     @registered_vehicles << vehicle
     vehicle
@@ -38,7 +38,7 @@ class Facility
   end
 
   def administer_written_test(registrant)
-    return false unless @services.include?('Written Test')
+    # return false unless @services.include?('Written Test')
     if registrant.permit? && registrant.age >= 16
       registrant.license_data[:written] = true
       true
@@ -47,9 +47,9 @@ class Facility
     end
   end
 
-  
+
   def administer_road_test(registrant)
-    return false unless @services.include?('Road Test')
+    # return false unless @services.include?('Road Test')
       if registrant.license_data[:written] == true
         registrant.license_data[:license] = true
         true
@@ -62,17 +62,17 @@ class Facility
   end
 
   def renew_drivers_license(registrant)
-    return false unless @services.include?('Renew License')
-  
+    # return false unless @services.include?('Renew License')
+
     return false unless registrant.license_data[:written] && registrant.license_data[:license]
-  
+
     return false if registrant.license_data[:renewed]
-  
+
     registrant.license_data[:renewed] = true
     true
   end
   
 
-end
+end 
  
 

@@ -96,22 +96,21 @@ RSpec.describe Facility do
 
   describe 'renew drivers license' do
     it 'describes if a license can be renewed' do
-     
+        @registrant_1.license_data[:written] = true
+        @registrant_1.license_data[:license] = true
       
-      @registrant_1.license_data[:written] = true
-      @registrant_1.license_data[:license] = true
+        expect(@facility.renew_drivers_license(@registrant_1)).to eq(false)
       
-      expect(@facility.renew_drivers_license(@registrant_1)).to eq(false)
+        @registrant_1.license_data[:renewed] = false
       
-      @registrant_1.license_data[:renewed] = false
+        expect(@facility.renew_drivers_license(@registrant_1)).to eq(true)
       
-      expect(@facility.renew_drivers_license(@registrant_1)).to eq(true)
+        expect(@facility.renew_drivers_license(@registrant_3)).to eq(false)
       
-      expect(@facility.renew_drivers_license(@registrant_3)).to eq(false)
-      
-      expect(@facility.renew_drivers_license(@registrant_2)).to eq(false)
+        expect(@facility.renew_drivers_license(@registrant_2)).to eq(false)
     end
-  end
+end
+
 
 
 
