@@ -22,11 +22,11 @@ RSpec.describe VehicleFactory do
 
     example_2 = facility_factory.create_facilities(co_dmv_office_locations)
     
-    expect(example_2[0].state).to eq("CO")
+    expect(example_2[0].phone).to eq("(720) 865-4600")
 
     example_2.each do |facility|
       expect(facility).to be_an_instance_of(Facility)
-      expect(facility).to respond_to(:zip)
+      expect(facility).to respond_to(:services)
       expect(facility).to respond_to(:phone)
     end
   end
