@@ -4,6 +4,7 @@ require 'date'
 RSpec.describe Facility do
   before(:each) do
     @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+    @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
   end
   describe '#initialize' do
     it 'can initialize' do
@@ -28,12 +29,13 @@ RSpec.describe Facility do
   describe '#registered_vehicles' do
     it 'can register a vehicle' do
       expect(@facility.registered_vehicles).to eq([])
-      
+      @facility.register_vehicle(@cruz)
+      expect(@facility.registered_vehicles).to include(@cruz)
     end
 
     it 'records registration date' do
-      @facility.register_vehicle(@vehicle)
-      expect(@vehicle.registration_date).to eq(Date.today)
+      @facility.register_vehicle(@cruz)
+      expect(@cruz.registration_date).to eq(Date.today)
     end
   end
 
