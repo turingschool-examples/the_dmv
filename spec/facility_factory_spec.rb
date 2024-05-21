@@ -19,56 +19,45 @@ RSpec.describe VehicleFactory do
   it "can create facility objects from database" do
     facility_factory = FacilityFactory.new
     co_dmv_office_locations =  DmvDataService.new.co_dmv_office_locations
-
-    example_2 = facility_factory.create_facilities(co_dmv_office_locations)
     
-    expect(example_2[0].phone).to eq("(720) 865-4600")
-
-    example_2.each do |facility|
+    co_example = facility_factory.create_facilities(co_dmv_office_locations)
+    
+    expect(co_example[0].phone).to eq("(720) 865-4600")
+    
+    co_example.each do |facility|
       expect(facility).to be_an_instance_of(Facility)
       expect(facility).to respond_to(:services)
       expect(facility).to respond_to(:phone)
     end
   end
+    
+  it "can create facility objects from the NY database" do
+    facility_factory = FacilityFactory.new
+    new_york_facilities = DmvDataService.new.ny_dmv_office_locations
+    
+    ny_example = facility_factory.create_facilities(new_york_facilities)
+    
+    expect(ny_example[0].phone).to eq("5857531604")
+    
+    ny_example.each do |facility|
+      expect(facility).to be_an_instance_of(Facility)
+      expect(facility).to respond_to(:office_type)
+      expect(facility).to respond_to(:phone)    
+    end
+  end
+      
+  it "can create facility objects from the MO database" do
+    facility_factory = FacilityFactory.new
+    missouri_facilities = DmvDataService.new.mo_dmv_office_locations
+    
+    mo_example = facility_factory.create_facilities(missouri_facilities)
+
+    expect(mo_example[0].phone).to eq("(417) 448-5705")
+    
+    mo_example.each do |facility|
+      expect(facility).to be_an_instance_of(Facility)
+      expect(facility).to respond_to(:type)
+      expect(facility).to respond_to(:phone)
+    end
+  end
 end
-
-
-
-
-
-# DmvDataService.new.co_dmv_office_locations
-# The data should look something like this:
-
-# pry(main)> DmvDataService.new.co_dmv_office_locations
-# # => [{:the_geom=>{:type=>"Point", :coordinates=>[-104.97443112500002, 39.75525297420336]},
-# #   :dmv_id=>"1",
-# #   :dmv_office=>"DMV Tremont Branch",
-# #   :address_li=>"2855 Tremont Place",
-# #   :address__1=>"Suite 118",
-# #   :city=>"Denver",
-# #   :state=>"CO",
-# #   :zip=>"80205",
-# #   :phone=>"(720) 865-4600",
-# #   :hours=>"Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.",
-# #   :services_p=>"vehicle titles, registration, renewals;  VIN inspections",
-# #   :parking_no=>"parking available in the lot at the back of the bldg (Glenarm Street)",
-# #   :photo=>"images/Tremont.jpg",
-# #   :address_id=>"175164",
-# #   :":@computed_region_nku6_53ud"=>"1444"},
-# #  {:the_geom=>{:type=>"Point", :coordinates=>[-104.84839592880655, 39.78135984611333]},
-# #   :dmv_id=>"2",
-# #   :dmv_office=>"DMV Northeast Branch",
-# #   :address_li=>"4685 Peoria Street",
-# #   :address__1=>"Suite 101",
-# #   :location=>"Arie P. Taylor  Municipal Bldg",
-# #   :city=>"Denver",
-# #   :state=>"CO",
-# #   :zip=>"80239",
-# #   :phone=>"(720) 865-4600",
-# #   :hours=>"Mon, Tue, Thur, Fri  8:00 a.m.- 4:30 p.m. / Wed 8:30 a.m.-4:30 p.m.",
-# #   :services_p=>"vehicle titles, registration, renewals;  VIN inspections",
-# #   :parking_no=>"parking available in both the front and back of the bldg; also on Paris Street",
-# #   :photo=>"images/Peoria.jpg",
-# #   :address_id=>"11348",
-# #   :":@computed_region_nku6_53ud"=>"1444"},
-# #     ...}]

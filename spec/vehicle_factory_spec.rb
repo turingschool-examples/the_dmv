@@ -22,11 +22,11 @@ RSpec.describe VehicleFactory do
     factory = VehicleFactory.new
     wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     
-    example_1 = factory.create_vehicles(wa_ev_registrations)
+    wa_example = factory.create_vehicles(wa_ev_registrations)
     
-    expect(example_1[0].vin).to eq("1N4AZ1BV0R")
+    expect(wa_example[0].vin).to eq("1N4AZ1BV0R")
     
-    example_1.each do |vehicle|
+    wa_example.each do |vehicle|
       expect(vehicle).to be_an_instance_of(Vehicle)
       expect(vehicle).to respond_to(:vin)
       expect(vehicle).to respond_to(:year)
