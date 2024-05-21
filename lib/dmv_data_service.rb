@@ -1,7 +1,6 @@
 require 'faraday'
 require 'json'
 
-
 class DmvDataService
   def load_data(source)
     response = Faraday.get(source)
@@ -24,3 +23,10 @@ class DmvDataService
     @mo_dmv_office_locations ||= load_data('https://data.mo.gov/resource/835g-7keg.json')
   end
 end
+
+dmv_data_service = DmvDataService.new
+
+# Call the method co_dmv_office_locations on the instance
+co_dmv_offices = dmv_data_service.co_dmv_office_locations
+
+

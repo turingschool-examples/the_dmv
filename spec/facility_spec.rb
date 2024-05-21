@@ -96,31 +96,22 @@ RSpec.describe Facility do
 
   describe 'renew drivers license' do
     it 'describes if a license can be renewed' do
-      # Add necessary setup here, such as adding 'Renew License' service to the facility
      
       
-      # Set up the necessary conditions for renewing a license for registrant_1
       @registrant_1.license_data[:written] = true
       @registrant_1.license_data[:license] = true
       
-      # Ensure that initially, renewing the license for registrant_1 returns false
       expect(@facility.renew_drivers_license(@registrant_1)).to eq(false)
       
-      # Mark the license as not renewed for registrant_1
       @registrant_1.license_data[:renewed] = false
       
-      # Ensure that after adding the service and meeting all conditions, renewing the license for registrant_1 returns true
       expect(@facility.renew_drivers_license(@registrant_1)).to eq(true)
       
-      # Ensure that renewing the license for registrant_3 still returns false
       expect(@facility.renew_drivers_license(@registrant_3)).to eq(false)
       
-      # Ensure that renewing the license for registrant_2 returns false because registrant_2 has not passed both tests
       expect(@facility.renew_drivers_license(@registrant_2)).to eq(false)
     end
   end
-  
-
 
 
 
