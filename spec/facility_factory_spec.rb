@@ -22,6 +22,7 @@ RSpec.configure do |config|
             expect(@ffactory.create_facility(@colorado_facilities)[0]).to be_an_instance_of(Facility)
             expect(@ffactory.create_facility(@colorado_facilities)[0].name).to eq("DMV Tremont Branch")
             expect(@ffactory.create_facility(@colorado_facilities)[0].address).to eq("2855 Tremont Place  Denver CO 80205")
+            expect(@ffactory.create_facility(@colorado_facilities)[0].phone).to eq("(720) 865-4600")
             expect(@ffactory.create_facility(@colorado_facilities)[3].address).to eq("3100 S. Sheridan Blvd.  Denver CO 80227")
         end 
     end
@@ -32,6 +33,9 @@ RSpec.configure do |config|
             expect(@ffactory.create_facility(@ny_facilities)[0]).to be_an_instance_of(Facility)
             expect(@ffactory.create_facility(@ny_facilities)[0].name).to eq("IRONDEQUOIT")
             expect(@ffactory.create_facility(@ny_facilities)[0].address).to eq("545 TITUS AVENUE  ROCHESTER NY 14617")
+            expect(@ffactory.create_facility(@ny_facilities)[0].phone).to eq("5857531604")
+            expect(@ffactory.create_facility(@ny_facilities)[3].address).to eq("855 CENTRAL AVENUE  ALBANY NY 12206")
+            
         end
     end
 
@@ -41,6 +45,9 @@ RSpec.configure do |config|
             expect(@ffactory.create_facility(@mo_facilities)[0]).to be_an_instance_of(Facility)
             expect(@ffactory.create_facility(@mo_facilities)[0].name).to eq("NEVADA")
             expect(@ffactory.create_facility(@mo_facilities)[0].address).to eq("409 E AUSTIN BLVD NEVADA MO 64772")
+            expect(@ffactory.create_facility(@mo_facilities)[0].phone).to eq("(417) 448-5705")
+            expect(@ffactory.create_facility(@mo_facilities)[3].address).to eq("237 W MAIN WARSAW MO 65355")
+
         end
     end
     
