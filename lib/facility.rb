@@ -222,3 +222,73 @@ registrant_3.license_data = {:written=>false, :license=>false, :renewed=>false}
 facility_1.renew_drivers_license(registrant_2) = true
 
 registrant_2.license_data = {:written=>true, :license=>true, :renewed=>true}
+
+
+require './lib/vehicle' = true
+
+require './lib/vehicle_factory' = true
+
+require './lib/dmv_data_service' = true
+
+factory = VehicleFactory.new
+#=> #<VehicleFactory:0x000000011c854810>
+
+wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+  [{:electric_vehicle_type=>"Plug-in Hybrid Electric Vehicle (PHEV)",
+    :vin_1_10=>"JTDKN3DP8D",
+    :dol_vehicle_id=>"229686908",
+    :model_year=>"2013",
+    :make=>"TOYOTA",
+    :model=>"Prius Plug-in",
+    ...},
+    ...,
+    {:electric_vehicle_type=>"Plug-in Hybrid Electric Vehicle (PHEV)",
+     :vin_1_10=>"1G1RD6E47D",
+     :dol_vehicle_id=>"289314742",
+     :model_year=>"2013",
+     :make=>"CHEVROLET",
+     :model=>"Volt",
+     ...}]
+
+
+factory.create_vehicles(wa_ev_registrations)
+  @engine = :ev, 
+  @make = "TOYOTA", 
+  @model = "Prius Plug-in", 
+  @plate_type = nil, 
+  @registration_date = nil, 
+  @vin = "JTDKN3DP8D", 
+  @year ="2013",
+
+  @engine = :ev, 
+  @make = "TOYOTA", 
+  @model = "Prius Prime", 
+  @plate_type = nil, 
+  @registration_date = nil, 
+  @vin = "JTDKARFP9J", 
+  @year = "2018",
+
+  @engine = :ev, 
+  @make = "NISSAN", 
+  @model = "Leaf", 
+  @plate_type = nil, 
+  @registration_date = nil, 
+  @vin = "1N4AZ1CP0J", 
+  @year = "2018",
+
+  @engine = :ev, 
+  @make = "NISSAN", 
+  @model = "Leaf", 
+  @plate_type = nil, 
+  @registration_date = nil, 
+  @vin = "1N4AZ1CP0J", 
+  @year = "2018",
+
+  @engine = :ev, 
+  @make = "NISSAN", 
+  @model = "Leaf", 
+  @plate_type = nil, 
+  @registration_date = nil, 
+  @vin = "1N4AZ1CP0J", 
+  @year = "2018",
+   ...]
