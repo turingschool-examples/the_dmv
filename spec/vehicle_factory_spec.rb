@@ -30,9 +30,5 @@ RSpec.describe VehicleFactory do
         expect(@factory.create_vehicles(@wa_ev_registrations)[250].model).to eq("Model Y")
       
     end
-
-
-
-
 end
 
