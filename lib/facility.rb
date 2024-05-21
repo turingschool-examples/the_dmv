@@ -64,4 +64,31 @@ class Facility
       @registered_vehicles << vehicle
     end
   end
+  #Method create_from_data to create facilities from dmv_data_service
+  def self.create_from_data(data)
+    # Iterates over each element in the data array
+    data.map do |facility_record|
+      # Extracts relevant information from the facility_record and create a hash
+      facility_info = {
+        # Uses the value from the first available key for the facility name
+        name: facility_record[:dmv_office] || facility_record[:office_name] || facility_record[:name],
+        
+        # Constructs the address by combining multiple fields, ensuring to handle different possible key names
+        address: [
+          facility_record[:address_li] || facility_record[:street_address_line_1] || facility_record[:address1],
+          facility_record[:address__1] || facility_record[:street_address_line_2] || facility_record[:address2],
+          facility_record[:city],  # Add the city
+          facility_record[:state],  # Add the state
+          facility_record[:zip] || facility_record[:zip_code] || facility_record[:zipcode]  # Add the zip code
+        ].compact.join(', '),  # Remove any nil values and join with a comma and space
+        
+        # Uses the value from the first available key for the phone number
+        phone: facility_record[:phone] || facility_record[:public_phone_number]
+      }
+      
+      # Creates a new Facility object with the extracted information
+      Facility.new(facility_info)
+    end
+  end
+  
 end
