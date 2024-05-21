@@ -1,5 +1,6 @@
 class Facility
   require 'date'
+  require 'pry'
   attr_reader :name,
               :address,
               :phone,
@@ -20,6 +21,7 @@ class Facility
     @services << service
   end
 
+  # VEHICLE REGISTRATION
   def assign_plate_type(vehicle)
     if vehicle.antique? == true
       vehicle.plate_type = :antique
@@ -51,6 +53,44 @@ class Facility
       
     else
       print "This Facility Does Not Offer This Service"
+    end
+  end
+
+  #DRIVER'S LICENSE
+
+  #WRITTEN TEST
+
+  def drivers_license_test_prerequisites(registrant)
+    if registrant.permit? == true && registrant.age >= 16
+      true
+    end
+  end
+
+  def administer_written_test?(registrant)
+    if @services.include?("Written Test") && drivers_license_test_prerequisites(registrant) == true
+      registrant.license_data[:written] = true
+    else
+      registrant.license_data[:written] = false
+    end
+  end
+
+  #ROAD TEST
+
+  def administer_road_test?(registrant)
+    if  @services.include?("Road Test") && administer_written_test?(registrant) == true
+      registrant.license_data[:license] = true
+    else
+      false
+    end
+  end
+  
+  #RENEW LICENSE
+
+  def renew_drivers_license?(registrant)
+    if @services.include?("Renew License") && registrant.license_data[:license] = true
+      registrant.license_data[:renewed] = true
+    else
+      false
     end
   end
 
