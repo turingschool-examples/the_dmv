@@ -1,6 +1,7 @@
 require 'faraday'
 require 'json'
 
+
 class DmvDataService
   def load_data(source)
     response = Faraday.get(source)

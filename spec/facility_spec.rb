@@ -53,15 +53,12 @@ RSpec.describe Facility do
   end
 
 
-
   describe 'registration date' do
     it 'sets the registration date to today' do
       @facility.register_vehicle(@cruz)
       expect(@cruz.registration_date).to eq(Date.today)
     end
   end
-
-  
 
 
   describe 'collected_fees' do
@@ -81,12 +78,15 @@ RSpec.describe Facility do
     end
   end
 
+
   describe 'administer_written_test'do
       it 'decides if the written test will be taken' do
       expect(@facility.administer_written_test(@registrant_1)).to eq(true)
       expect(@registrant_1.license_data[:written]).to eq(true)
     end
   end
+
+  
   describe 'administer road test' do
     it 'decides if a road test will be taken' do
       @facility.administer_road_test(@registrant_1)
@@ -97,23 +97,29 @@ RSpec.describe Facility do
   describe 'renew drivers license' do
     it 'describes if a license can be renewed' do
       # Add necessary setup here, such as adding 'Renew License' service to the facility
-      @facility.add_service('Renew License')
-  
+     
+      
+      # Set up the necessary conditions for renewing a license for registrant_1
+      @registrant_1.license_data[:written] = true
+      @registrant_1.license_data[:license] = true
+      
       # Ensure that initially, renewing the license for registrant_1 returns false
       expect(@facility.renew_drivers_license(@registrant_1)).to eq(false)
-  
-      # Ensure that after adding the service, renewing the license for registrant_1 returns true
+      
+      # Mark the license as not renewed for registrant_1
+      @registrant_1.license_data[:renewed] = false
+      
+      # Ensure that after adding the service and meeting all conditions, renewing the license for registrant_1 returns true
       expect(@facility.renew_drivers_license(@registrant_1)).to eq(true)
-  
+      
       # Ensure that renewing the license for registrant_3 still returns false
       expect(@facility.renew_drivers_license(@registrant_3)).to eq(false)
-  
-      # Ensure that renewing the license for registrant_2 returns true
-      expect(@facility.renew_drivers_license(@registrant_2)).to eq(true)
-  
-      # Add more expectations if needed, such as checking registrant_1's license_data
+      
+      # Ensure that renewing the license for registrant_2 returns false because registrant_2 has not passed both tests
+      expect(@facility.renew_drivers_license(@registrant_2)).to eq(false)
     end
   end
+  
 
 
 
