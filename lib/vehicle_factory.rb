@@ -1,7 +1,11 @@
 class VehicleFactory 
+    def initialize
 
+    end
+   
     def create_vehicles(vehicle_raw_data)
         vehicle_raw_data.map do |vehicle| 
+       
             Vehicle.new(
                 {
                     vin: vehicle[:vin_1_10], 
@@ -11,7 +15,10 @@ class VehicleFactory
                     engine: :ev
                 }
             )
-        end           
+            
+        end 
+   
     end
+   
 end
 
