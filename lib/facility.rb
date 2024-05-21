@@ -9,11 +9,11 @@ class Facility
               :collected_fees
               
 
-  def initialize(info_hash)
+  def initialize(info_hash, services = [])
     @name = info_hash[:name]
     @address = info_hash[:address]
     @phone = info_hash[:phone]
-    @services = []
+    @services = services
     @registered_vehicles = []
     @collected_fees = 0
   end
