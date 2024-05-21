@@ -3,12 +3,6 @@ require './lib/vehicle'
 require './lib/vehicle_factory'
 require './lib/dmv_data_service'
 
-
-
-RSpec.configure do |config|
-  config.formatter = :documentation
-end
-
 RSpec.describe VehicleFactory do
   it "is an instance of the Vehicle class" do
     factory = VehicleFactory.new
