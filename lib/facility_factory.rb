@@ -2,13 +2,6 @@ class FacilityFactory
   def initialize
 
   end
-    # I can't recall exactly, but that could work if you use the proper hash key 
-    # formatting (instead of thinking it as renaming the unique keys, think of it 
-    # as assigning a new value to the keys you already set up)
-
-      # def address_helper
-
-
 
   def create_facilities(facility_database)
     if facility_database.first[:state] == "CO"
@@ -20,10 +13,7 @@ class FacilityFactory
     end
   end
 
-
   def build_co_facilities(facility_database)
-
-
     facility_database.map do |potential_facility|
       facility_deets = {}
       facility_deets[:name] = potential_facility[:dmv_office]
