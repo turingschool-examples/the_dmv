@@ -26,8 +26,10 @@ RSpec.describe VehicleFactory do
     
     co_example.each do |facility|
       expect(facility).to be_an_instance_of(Facility)
-      expect(facility).to respond_to(:services)
+      expect(facility).to respond_to(:name)
       expect(facility).to respond_to(:phone)
+      expect(facility).to respond_to(:address)
+      expect(facility).to respond_to(:services)
     end
   end
     
@@ -41,8 +43,10 @@ RSpec.describe VehicleFactory do
     
     ny_example.each do |facility|
       expect(facility).to be_an_instance_of(Facility)
-      expect(facility).to respond_to(:office_type)
-      expect(facility).to respond_to(:phone)    
+      expect(facility).to respond_to(:name)
+      expect(facility).to respond_to(:phone)
+      expect(facility).to respond_to(:address)
+      expect(facility).to respond_to(:services) 
     end
   end
       
@@ -56,8 +60,10 @@ RSpec.describe VehicleFactory do
     
     mo_example.each do |facility|
       expect(facility).to be_an_instance_of(Facility)
-      expect(facility).to respond_to(:type)
+      expect(facility).to respond_to(:name)
       expect(facility).to respond_to(:phone)
+      expect(facility).to respond_to(:address)
+      expect(facility).to respond_to(:services)
     end
   end
 end
