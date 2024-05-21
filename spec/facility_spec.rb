@@ -12,8 +12,6 @@ RSpec.describe Facility do
     @registrant_2 = Registrant.new('Penny', 16 )
     @registrant_3 = Registrant.new('Tucker', 15 )
 
-    # @registrant_with_permit { instance_double("Registrant", name: "Bruce", permit?: true, license_data: { written: false, license: false, renewed: false }) }
-    # @registrant_without_permit { instance_double("Registrant", name: "Penny", permit?: false, license_data: { written: false, license: false, renewed: false }) }
 
     @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice})
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev})
@@ -40,7 +38,8 @@ RSpec.describe Facility do
       @facility.add_service('Renew Drivers License')
       @facility.add_service('Vehicle Registration')
       @facility.add_service('Written Test')
-      expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration','Written Test'])
+      @facility.add_service ('Renew License')
+      expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration','Written Test','Renew License'])
     end
   end
 
@@ -87,19 +86,34 @@ RSpec.describe Facility do
       expect(@facility.administer_written_test(@registrant_1)).to eq(true)
       expect(@registrant_1.license_data[:written]).to eq(true)
     end
-    
-    #Administer a written test
-    # A written test can only be administered to registrants with a permit and who are at least 16 years of age
-    # Administer a road test
-    # A road test can only be administered to registrants who have passed the written test
-    # For simplicity’s sake, Registrants who qualify for the road test automatically earn a license
-    # Renew a driver’s license
-    # A license can only be renewed if the registrant has already passed the road test and earned a license
-  
-
-
+  end
+  describe 'administer road test' do
+    it 'decides if a road test will be taken' do
+      @facility.administer_road_test(@registrant_1)
+      expect(@registrant_1.license_data[:license]).to eq(false)
+    end
   end
 
+  describe 'renew drivers license' do
+    it 'describes if a license can be renewed' do
+      # Add necessary setup here, such as adding 'Renew License' service to the facility
+      @facility.add_service('Renew License')
+  
+      # Ensure that initially, renewing the license for registrant_1 returns false
+      expect(@facility.renew_drivers_license(@registrant_1)).to eq(false)
+  
+      # Ensure that after adding the service, renewing the license for registrant_1 returns true
+      expect(@facility.renew_drivers_license(@registrant_1)).to eq(true)
+  
+      # Ensure that renewing the license for registrant_3 still returns false
+      expect(@facility.renew_drivers_license(@registrant_3)).to eq(false)
+  
+      # Ensure that renewing the license for registrant_2 returns true
+      expect(@facility.renew_drivers_license(@registrant_2)).to eq(true)
+  
+      # Add more expectations if needed, such as checking registrant_1's license_data
+    end
+  end
 
 
 

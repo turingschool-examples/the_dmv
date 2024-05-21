@@ -43,7 +43,34 @@ class Facility
     else
       false
     end
-end
+  end
+  def administer_road_test(registrant)
+      if registrant.license_data[:written] == true
+        registrant.license_data[:license] = true
+        true
+    
+      else
+        false
+      end
+    
+    
+  end
+
+  def renew_drivers_license(registrant)
+    # Check if the facility offers the service for license renewal
+    return false unless @services.include?('Renew License')
+  
+    # Check if the registrant has passed both written and road tests
+    return false unless registrant.license_data[:written] && registrant.license_data[:license]
+  
+    # Check if the registrant's license is not already renewed
+    return false if registrant.license_data[:renewed]
+  
+    # Mark the license as renewed
+    registrant.license_data[:renewed] = true
+    true
+  end
+  
 
 end
  
