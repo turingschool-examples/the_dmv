@@ -24,5 +24,7 @@ class FacilityFactory
             end     
         Facility.new(facility_information)
         end 
+     
     end
+    
 end

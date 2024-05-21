@@ -15,7 +15,7 @@ class VehicleFactory
                     engine: :ev
                 }
             )
-            
+           
         end 
    
     end
