@@ -14,6 +14,7 @@ RSpec.describe Facility do
     @registrant_2 = Registrant.new('Penny', 16)
     @registrant_3 = Registrant.new('Tucker', 15)
   end
+
   describe '#initialize' do
     it 'can initialize' do
       expect(@facility).to be_an_instance_of(Facility)
@@ -119,7 +120,7 @@ RSpec.describe Facility do
       expect(@registrant_1.license_data).to eq({:written => true, :license => true, :renewed => false})
     end
 
-    it 'has renewed their license' do
+    it 'renews their license' do
       @facility_1.add_service("Written Test")
       @facility_1.add_service('Road Test')
       
