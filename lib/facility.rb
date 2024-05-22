@@ -94,6 +94,4 @@ class Facility
       false
     end
   end
-
-
 end
