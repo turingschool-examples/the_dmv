@@ -1,6 +1,7 @@
 class Dmv
 attr_reader :facilities
 
+  attr_reader :facilities
   def initialize
     @facilities = []
   end

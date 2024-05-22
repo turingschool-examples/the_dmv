@@ -5,7 +5,8 @@ class Vehicle
               :year,
               :make,
               :model,
-              :engine
+              :engine,
+              :registration_date
 
   attr_accessor :registration_date,
                 :plate_type
