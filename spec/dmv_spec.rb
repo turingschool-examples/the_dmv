@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'dmv.rb'
 
 RSpec.describe Dmv do
   before(:each) do
@@ -8,20 +9,20 @@ RSpec.describe Dmv do
     @facility_3 = Facility.new({name: 'DMV Northwest Branch', address: '3698 W. 44th Avenue Denver CO 80211', phone: '(720) 865-4600'})
   end
 
-  describe '#initialize' do
+  describe 'initialize' do
     it 'can initialize' do
       expect(@dmv).to be_an_instance_of(Dmv)
       expect(@dmv.facilities).to eq([])
     end
   end
 
-  describe '#add facilities' do
-    it 'can add available facilities' do
-      expect(@dmv.facilities).to eq([])
+    describe '#add facilities' do
+       it 'can add available facilities' do
+        expect(@dmv.facilities).to eq([])
       @dmv.add_facility(@facility_1)
       expect(@dmv.facilities).to eq([@facility_1])
+       end
     end
-  end
 
   describe '#facilities_offering_service' do
     it 'can return list of facilities offering a specified Service' do
