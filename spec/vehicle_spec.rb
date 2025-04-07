@@ -17,7 +17,6 @@ RSpec.describe Vehicle do
       expect(@cruz.registration_date).to eq(nil)
     end
   end
-
   describe '#antique?' do
     it 'can determine if a vehicle is an antique' do
       expect(@cruz.antique?).to eq(false)
