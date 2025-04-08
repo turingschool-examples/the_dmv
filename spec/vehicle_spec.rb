@@ -33,4 +33,16 @@ RSpec.describe Vehicle do
       expect(@camaro.electric_vehicle?).to eq(false)
     end
   end
+
+  describe 'set registration date' do
+    it 'can set its registration date' do
+      @cruz = Vehicle.new({vin: '123456789abcdefgh', year: 2012, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
+      
+      @cruz.registration_date!
+
+      expect(@cruz.registration_date).to eq(Date.new)
+
+
+    end
+  end
 end
