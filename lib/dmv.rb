@@ -1,5 +1,9 @@
+require 'pry'
 class Dmv
 
+  attr_reader :facilities
+  #binding.pry
+  
   def initialize
     @facilities = []
   end
@@ -9,7 +13,7 @@ class Dmv
   end
 
   def facilities_offering_service(service)
-    @facilities.find do |facility|
+    @facilities.find_all do |facility|
       facility.services.include?(service)
     end
   end
